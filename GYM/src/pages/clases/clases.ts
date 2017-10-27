@@ -15,8 +15,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ClasesPage {
 
+public items: Array<{titulo: string, img:string, instructor:string, fecha: string}>;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
+
+    private newFunction() {
+        return {};
+    }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClasesPage');
