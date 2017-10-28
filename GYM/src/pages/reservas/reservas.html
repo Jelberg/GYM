@@ -11,7 +11,6 @@
     </button>
     <ion-title>Reservas</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -21,7 +20,6 @@
           <ion-avatar item-start>
               <img src="../assets/imgs/clasesYoga.jpg">
           </ion-avatar>
-          <h1>24/10</h1>
           <h2>Yoga</h2>
           <h3>Estela Rodrigues</h3>
           <p>3:00 pm</p>
@@ -33,7 +31,6 @@
             <ion-avatar item-start>
                 <img src="../assets/imgs/clasesBoxeo.jpeg">
             </ion-avatar>
-          <h1>30/10</h1>
           <h2>Boxeo</h2>
           <h3>Jesus Rodriguez</h3>
           <p>3:00 pm</p>
@@ -54,7 +51,22 @@
                 </button>
               </ion-item>
             </ion-item>
-          
-       
       </ion-list>
 </ion-content>
+
+<!-- AUN NO SE SI FUNCIONA ...  ESTOY OFFLINE
+<ion-content>
+    <ion-list>-->
+        <!--  Hay que buscar la manera de eliminar el item o ocultarlo al eliminar la reserva
+        <ion-item *ngFor="let item of items">
+            <ion-avatar>
+                <img src="{{item.img}}" alt="">
+            </ion-avatar>
+            <h2>{{item.titulo}}</h1>
+            <h3>{{item.instructor}}</h3>
+            <p>{{item.fecha}}</p>
+            <button ion-button icon-only (click)="eliminarReserva(item.id)"><ion-icon name="trash"></ion-icon></button>
+        </ion-item>
+    </ion-list>
+</ion-content>
+-->
