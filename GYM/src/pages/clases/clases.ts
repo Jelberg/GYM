@@ -47,7 +47,7 @@ public items: Array<{id: number, titulo: string, descripion: string, img:string,
 
   // Deberia de hacer todo el proceso apra reservar una clase
   reservarClase(id: number){
-
+    console.log('Reserva Agregada');
   }
 
 */

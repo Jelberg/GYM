@@ -33,7 +33,7 @@ export class ReservasPage {
 
   Deberia eliminar la Reserva
   eliminarReserva(id: number){
-
+    console.log('Reserva Eliminada');
   }
   */
 
