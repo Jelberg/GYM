@@ -1,0 +1,125 @@
+<html>
+    <title>GIMNASIO</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size:16px;}
+.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1}
+.w3-color{background: #3CB371;}
+.w3-text-color{color: #3CB371;}
+.w3-button {border-radius: 12px}
+</style>
+<body>
+    
+    <!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-color w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:215px;font-weight:bold;" id="mySidebar"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft w3-hover-pale-green" style="width:100%;font-size:20px;text-align: justify;"> ↩</a>
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-button w3-hover-pale-green w3-margin-left">
+        <img src="Imagenes/inicio.png" style="width:30%">
+        <p><b>Home</b></p>
+    </a>
+    <a href="#instructores" onclick="w3_close()" class="w3-button w3-hover-pale-green w3-margin-left">
+        <img src="Imagenes/Instructor.png" style="width:30%">
+        <p><b>Instructores</b></p>
+        <hr style="width:120px;border:2px">
+    </a>
+    <a href="#entrenadores" onclick="w3_close()" class="w3-button w3-hover-pale-green w3-margin-left">
+        <img src="Imagenes/Entrenador.png" style="width:30%;margin-right:1px">
+        <p><b>Entrenadores</b></p>
+        <hr style="width:120px;border:2px">
+    </a>
+    <a href="#clases" onclick="w3_close()" class="w3-button w3-hover-pale-green w3-margin-left">
+        <img src="Imagenes/clase.png" style="width:35%;margin-left:1px">
+        <p><b>Clases</b></p>
+        <hr style="width:120px;border:2px">
+    </a>
+    <a href="#horarios" onclick="w3_close()" class="w3-button w3-hover-pale-green w3-margin-left">
+        <img src="Imagenes/horario.png" style="width:26%">
+        <p><b>Horarios</b></p>
+        <hr style="width:120px;border:2px">
+    </a> 
+  </div>
+</nav>
+        
+<!-- Top menu on small screens -->
+<header class=" w3-top w3-hide-large w3-color w3-xlarge w3-padding w3-margin-bottom">
+  <a href="javascript:void(0)" class="w3-button w3-color w3-hover-pale-green w3-margin-right" onclick="w3_open()">☰</a>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:275px;margin-right:60px;margin-bottom:50px">
+
+  <!-- Header -->
+  <div class="w3-container" id="showcase">
+    <img src="Imagenes/Logo Gimnasio.png" style=" margin-top:50px; width:50%;margin-left:-19px;margin-right:60px;">
+    <h1 class="w3-xxxlarge w3-text-color"><b>Gestión de Instructores.</b></h1>
+    <hr style="width:50px;border:5px solid #3CB371" class="w3-round">
+  </div>
+  
+  <!-- Rellenar -->
+<div class="w3-content">
+  <div class="w3-twothird w3-black w3-container" style="height:535px">
+    <div class="w3-padding-32 w3-padding-large">
+      <h1>Instructores</h1>
+      <form class="w3-container w3-card w3-padding-32 w3-white" action="/action_page.php" target="_blank">
+        <div class="w3-section">
+          <label>Name</label>
+          <input class="w3-input" style="width:100%;" type="text" required name="Name">
+        </div>
+        <div class="w3-section">
+          <label>Email</label>
+          <input class="w3-input" style="width:100%;" type="text" required name="Email">
+        </div>
+        <div class="w3-section">
+          <label>Message</label>
+          <input class="w3-input" style="width:100%;" type="text" required name="Message">
+        </div>
+        <div class="w3-row">
+            <div class="w3-col w3-left w3-container w3-white" style="width:60px"></div>
+            <div class="w3-col w3-right w3-container w3-white" style="width:50px"></div>
+            <div class="w3-resto">
+                <div class="btn-group">
+                <button type="submit" class=" w3-button w3-color w3-margin-bottom">Insertar</button>
+                <button type="submit" class=" w3-button w3-color w3-margin-bottom">Modificar</button>
+                <button type="submit" class=" w3-button w3-color w3-margin-bottom">Eliminar</button>
+                <button type="submit" class=" w3-button w3-color w3-margin-bottom">Consultar</button>
+                </div>
+            </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+// Script to open and close sidebar
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+</script>
+
+</body>
+</html>
