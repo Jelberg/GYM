@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Nav} from 'ionic-angular';
+/* AUN NO SE SI FUNCIONA -- ESTOY OFFLINE
+import ParticularPage from '../particular/partiular';
+*/
 
 /**
  * Generated class for the ClasesPage page.
@@ -39,8 +42,7 @@ public items: Array<{id: number, titulo: string, descripion: string, img:string,
 
   //Deberia de rootear al usuario desde la pagina de clases al darle a la clase de la que quiere ver el detalle
   goToParticularClase(id: number,titulo: string, descripcion: string img: string, isntructor: string, fecha:string){
-    ParticularPage particular: new ParticularPage(number, titulo, img, isntructor, fecha );
-    this.nav.setRoot(particular);
+    this.navCtrl.push(particularPage,{id: id, titulo:titulo, img:img, instructor:instructor, fecha:fecha});
   }
 
   // Deberia de hacer todo el proceso apra reservar una clase
