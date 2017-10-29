@@ -1,162 +1,229 @@
 <html>
-<title>GIMNASIO</title>
+<title>Gimnasio</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-<style>
-body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
-body {font-size:16px;}
-.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
-.w3-half img:hover{opacity:1}
-.w3-color{background: #3CB371;}
-.w3-text-color{color: #3CB371;}
-.w3-button {border-radius: 12px}
-</style>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+<link rel="stylesheet" href="./css/styles.css">
+
 <body>
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-color w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:215px;font-weight:bold;" id="mySidebar"><br>
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft w3-hover-pale-green" style="width:100%;font-size:20px;text-align: justify;"> ↩</a>
-  <div class="w3-bar-block">
-    <a href="index.html" onclick="w3_close()" class="w3-button w3-hover-pale-green w3-margin-left">
-        <img src="Imagenes/inicio.png" style="width:30%">
-        <p><b>Home</b></p>
-    </a>
-    <a href="Instructores.html" onclick="w3_close()" class="w3-button w3-hover-pale-green w3-margin-left">
-        <img src="Imagenes/Instructor.png" style="width:30%">
-        <p><b>Instructores</b></p>
-        <hr style="width:120px;border:2px">
-    </a>
-    <a href="#entrenadores" onclick="w3_close()" class="w3-button w3-hover-pale-green w3-margin-left">
-        <img src="Imagenes/Entrenador.png" style="width:30%;margin-right:1px">
-        <p><b>Entrenadores</b></p>
-        <hr style="width:120px;border:2px">
-    </a>
-    <a href="#clases" onclick="w3_close()" class="w3-button w3-hover-pale-green w3-margin-left">
-        <img src="Imagenes/clase.png" style="width:35%;margin-left:1px">
-        <p><b>Clases</b></p>
-        <hr style="width:120px;border:2px">
-    </a>
-    <a href="#horarios" onclick="w3_close()" class="w3-button w3-hover-pale-green w3-margin-left">
-        <img src="Imagenes/horario.png" style="width:26%">
-        <p><b>Horarios</b></p>
-        <hr style="width:120px;border:2px">
-    </a> 
-  </div>
-</nav>
-
-<!-- Top menu on small screens -->
-<header class=" w3-top w3-hide-large w3-color w3-xlarge w3-padding w3-margin-bottom">
-  <a href="javascript:void(0)" class="w3-button w3-color w3-hover-pale-green w3-margin-right" onclick="w3_open()">☰</a>
-</header>
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:275px;margin-right:60px;margin-bottom:50px">
-
-  <!-- Header -->
-  <div class="w3-container" id="showcase">
-    <img src="Imagenes/Logo Gimnasio.png" style=" margin-top:50px; width:50%;margin-left:-19px;margin-right:60px;">
-    <h1 class="w3-xxxlarge w3-text-color"><b>Gestiones.</b></h1>
-    <hr style="width:50px;border:5px solid #3CB371" class="w3-round">
-  </div>
-  
-  <!-- Photo grid (modal) -->
-  <div class="w3-row-padding">
-    <div class="w3-half">
-        <div class="w3-card-2">
-            <img src="Imagenes/instructor.jpg" style="width:100%" onclick="onClick(this)" alt="Instructor de gym">
-            <div class="w3-container">
-            <p><b>Instructor</b></p>
-            <p>Profesores encargados de asesorar a las personas acerca de su estado físico, mediante ejercicios aeróbicos, bailes, entre otros.</p>
-            </div>
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-color w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:215px;font-weight:bold;" id="mySidebar">
+        <br>
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft w3-hover-pale-green"
+            style="width:100%;font-size:20px;text-align: justify;"> ↩</a>
+        <div class="w3-bar-block">
+            <a href="index.html" onclick="w3_close()" class="menuIcon active">
+                <img src="Imagenes/inicio_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Home</b>
+                </p>
+            </a>
+            <a href="instructores/instructores.html" onclick="w3_close()" class="menuIcon">
+                <img src="Imagenes/Instructor_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Instructores</b>
+                </p>
+                <hr style="width:120px;border:2px">
+            </a>
+            <a href="entrenadores/entrenadores.html" onclick="w3_close()" class="menuIcon">
+                <img src="Imagenes/Entrenador_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Entrenadores</b>
+                </p>
+                <hr style="width:120px;border:2px">
+            </a>
+            <a href="clases/clases.html" onclick="w3_close()" class="menuIcon">
+                <img src="Imagenes/clase_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Clases</b>
+                </p>
+                <hr style="width:120px;border:2px">
+            </a>
+            <a href="horarios/horarios.html" onclick="w3_close()" class="menuIcon">
+                <img src="Imagenes/horario_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Horarios</b>
+                </p>
+                <hr style="width:120px;border:2px">
+            </a>
+            <a href="maquinas/maquinas.html" onclick="w3_close()" class="menuIcon">
+                <img src="Imagenes/Entrenador_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Máquinas</b>
+                </p>
+                <hr style="width:120px;border:2px">
+            </a>
+            <a href="rutinas/rutinas.html" onclick="w3_close()" class="menuIcon">
+                <img src="Imagenes/clase_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Rutinas</b>
+                </p>
+                <hr style="width:120px;border:2px">
+            </a>
         </div>
-        <div class="w3-card-2">
-            <img src="Imagenes/clases.jpg" style="width:100%" onclick="onClick(this)" alt="Clases del gym">
-            <div class="w3-container">
-            <p><b>Clases</b></p>
-            <p>Tipos de clases impartidas en el gimnasio.</p>
-            </div>
+    </nav>
+
+    <!-- Top menu on small screens -->
+    <header class=" w3-top w3-hide-large w3-color w3-xlarge w3-padding w3-margin-bottom">
+        <a href="javascript:void(0)" class="w3-button w3-color w3-hover-pale-green w3-margin-right" onclick="w3_open()">☰</a>
+    </header>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:275px;margin-right:60px;margin-bottom:50px">
+
+        <!-- Header -->
+        <div class="w3-container" id="showcase">
+            <img src="Imagenes/Logo Gimnasio.png" class="mainImg">
+            <h1 class="w3-xxxlarge w3-text-color">
+                <b>Gestiones.</b>
+            </h1>
+            <hr style="width:50px;border:5px solid #3CB371" class="w3-round">
         </div>
-    </div>
 
-    <div class="w3-half">
-        <div class="w3-card-2">
-            <img src="Imagenes/entrenador.jpg" style="width:100%" onclick="onClick(this)" alt="Entrenador de gym">
-            <div class="w3-container">
-                <p><b>Entrenador</b></p>
-                <p>Profesional de la salud encargado de enseñanza y prescripción de ejercicios físicos.</p>
-            </div>
+        <!-- Welcome -->
+        <div class="w3-container">
+            <h3 class="">
+                Bienvenido al sistema administrativo.
+            </h3>
+            <p>En esta aplicación podrá gestionar clases, instructores, máquinas y ejercicios del gimnasio.</p>
         </div>
-        <div class="w3-card-2">
-            <img src="Imagenes/horarios.jpg" style="width:100%" onclick="onClick(this)" alt="Horarios del gym">
-            <div class="w3-container">
-                <p><b>Horarios</b></p>
-                <p>Horarios correspondientes a las clases.</p>
-            </div>
-        </div> 
-    </div>
-  </div>
-      
-  <!-- Modal for full size images on click-->
-  <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
-    <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
-    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-      <img id="img01" class="w3-image">
-      <p id="caption"></p>
-    </div>
-  </div>
-  
-  <!-- Contact -->
-  <div class="w3-container" id="contact" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-color"><b>Contacto.</b></h1>
-    <hr style="width:50px;border:5px solid #3CB371" class="w3-round">
-    <p>Do you want us to style your home? Fill out the form and fill me in with the details :) We love meeting new people!</p>
-    <form action="/action_page.php" target="_blank">
-      <div class="w3-section">
-        <label>Name</label>
-        <input class="w3-input w3-border" type="text" name="Name" required>
-      </div>
-      <div class="w3-section">
-        <label>Email</label>
-        <input class="w3-input w3-border" type="text" name="Email" required>
-      </div>
-      <div class="w3-section">
-        <label>Message</label>
-        <input class="w3-input w3-border" type="text" name="Message" required>
-      </div>
-      <button type="submit" class="w3-button w3-block w3-padding-large w3-color w3-margin-bottom"><b>Send Message</b></button>
-    </form>  
-  </div>
 
-<!-- End page content -->
-</div>
-
-
-
-<script>
-// Script to open and close sidebar
-function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
-}
+        <hr>
  
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-}
+        <div class="row equal">
+            <div class="col-md-6 ">
+                <div class="homeItem">
+                    <a href="./instructores/instructores.html" style="text-decoration:none">
 
-// Modal Image Gallery
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
-}
-</script>
+                        <img src="Imagenes/instructor.jpg" style="width:100%" href="" alt="Instructor de gym">
+                        <div class="itemInfo">
+                            <p>
+                                <b>Instructores</b>
+                            </p>
+                            <p>Profesores encargados de asesorar a las personas acerca de su estado físico, mediante ejercicios
+                                aeróbicos, bailes, entre otros.</p>
+                        </div>
+
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="homeItem">
+                    <a href="./entrenadores/entrenadores.html" style="text-decoration:none">
+
+                        <img src="Imagenes/entrenador.jpg" style="width:100%" href="" alt="Clases del gym">
+                        <div class="itemInfo">
+                            <p>
+                                <b>Entrenadores</b>
+                            </p>
+                            <p>Profesional de la salud encargado de enseñanza y prescripción de ejercicios físicos.</p>
+                        </div>
+
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row equal">
+
+            <div class="col-md-6">
+                <div class="homeItem">
+
+                    <a href="./rutinas/rutinas.html" style="text-decoration:none">
+
+                        <img src="Imagenes/rutina.jpg" style="width:100%" href="" alt="Rutinas del gym">
+                        <div class="itemInfo">
+                            <p>
+                                <b>Rutinas</b>
+                            </p>
+                            <p>Rutinas de ejercicios para aumentar o definir para todos los músculos. Desarrolladas por profesionales
+                                ideales para principiantes, intermedios y avanzados.</p>
+                        </div>
+
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="homeItem">
+                    <a href="./maquinas/maquinas.html" style="text-decoration:none">
+
+                        <img src="Imagenes/equipos.jpg" style="width:100%" href="" alt="Equipos del gym">
+                        <div class="itemInfo">
+                            <p>
+                                <b>Máquinas</b>
+                            </p>
+                            <p>Equipos de alta calidad para que las personas pueden realizar una alta variedad de ejercicios
+                                y rutinas.</p>
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row equal">
+            <div class="col-md-6">
+                <div class="homeItem">
+                    <a href="./clases/clases.html" style="text-decoration:none">
+
+                        <img src="Imagenes/clases.jpg" style="width:100%" href="" alt="Clases del gym">
+                        <div class="itemInfo">
+                            <p>
+                                <b>Clases</b>
+                            </p>
+                            <p>Tipos de clases impartidas en el gimnasio.</p>
+                        </div>
+
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="homeItem">
+                    <a href="./horarios/horarios.html" style="text-decoration:none">
+
+                        <img src="Imagenes/horarios.jpg" style="width:100%" href="" alt="Instructor de gym">
+                        <div class="itemInfo">
+                            <p>
+                                <b>Horarios</b>
+                            </p>
+                            <p>Horarios correspondientes a las clases.</p>
+                        </div>
+
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- End page content -->
+    </div>
+
+
+
+    <script>
+        // Script to open and close sidebar
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
 
 </body>
+
 </html>
