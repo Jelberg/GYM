@@ -6,13 +6,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progreso-ejercicio';
+import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/seleccionar-progreso';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ProgresoEjercicioPage
+    SeleccionarProgresoPage
   ],
   imports: [
     BrowserModule,
@@ -22,7 +22,7 @@ import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progre
   entryComponents: [
     MyApp,
     HomePage,
-    ProgresoEjercicioPage
+    SeleccionarProgresoPage
   ],
   providers: [
     StatusBar,

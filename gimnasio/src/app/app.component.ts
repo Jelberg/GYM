@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progreso-ejercicio';
+import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/seleccionar-progreso';
 @Component({
   templateUrl: 'app.html'
 })
@@ -20,7 +20,7 @@ export class MyApp {
       a la que se accedera desde el menu lateral */
     this.pages = [
       { titulo: "Inicio", component: HomePage, icon: "home"},
-      { titulo: "Progreso", component: ProgresoEjercicioPage, icon: "stats"},
+      { titulo: "Progreso", component: SeleccionarProgresoPage, icon: "stats"},
     ];
 
     platform.ready().then(() => {
