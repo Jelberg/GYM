@@ -23,6 +23,7 @@
           <h2>Yoga</h2>
           <p>Inst: Estela Rodrigues</p>
           <p>24/10/2017  3:00 pm</p>
+          <p>Duracion: 60 min</p>          
           <button ion-button clear item-end>
             <ion-icon name="add-circle"></ion-icon>
           </button>
@@ -34,6 +35,7 @@
             <h2>Spinning</h2>
             <p>Inst: Maria Josefa</p>
             <p>26/10/2017  3:00 pm</p>
+            <p>Duracion: 60 min</p>
             <button ion-button clear item-end><ion-icon name="add-circle"></ion-icon></button>
           </ion-item>
           <ion-item>
@@ -43,6 +45,7 @@
               <h2>Defensa Personal</h2>
               <p>Inst: Pedro Alvarez</p>
               <p>28/10/2017  3:00 pm</p>
+              <p>Duracion: 60 min</p>
               <button ion-button clear item-end><ion-icon name="add-circle"></ion-icon></button>
             </ion-item>
             <ion-item>
@@ -52,6 +55,7 @@
                 <h2>Boxeo</h2>
                 <p>Inst: Jesus Rodriguez</p>
                 <p>30/10/2017  3:00 pm</p>
+                <p>Duracion: 60 min</p>
                 <button ion-button clear item-end><ion-icon name="add-circle"></ion-icon></button>
               </ion-item>
               <ion-item>
@@ -61,6 +65,7 @@
                   <h2>KickBoxing</h2>
                   <p>Inst: Marcos Rodriguez</p>
                   <p>07/11/2017  3:00 pm</p>
+                  <p>Duracion: 60 min</p>
                   <button ion-button clear item-end><ion-icon name="add-circle"></ion-icon></button>
                 </ion-item>
       </ion-list>
@@ -75,9 +80,9 @@
         </ion-thumbnail>
         <h2>{{item.titulo}}</h2>
         <p>{{item.instructor}}</p>
-        <p>{{item.fecha}}</p>-->
+        <p>{{item.fecha}}</p>
+        <p>Duracion: {{item.duracion}} min</p>-->
         <!-- Hay que buscar la forma de eliminar el boton de agregar al presioanrlo
-          
         <button ion-button clear item-end (click)="reservarClase(item.number) id="botonAgregarReserva-{{item.id}}"><ion-icon name="add-circle"></ion-icon></button>
     </ion-button>
   </ion-list>

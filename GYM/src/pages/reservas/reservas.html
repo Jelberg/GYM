@@ -22,7 +22,8 @@
           </ion-avatar>
           <h2>Yoga</h2>
           <h3>Estela Rodrigues</h3>
-          <p>3:00 pm</p>
+          <p>24/10/2017 3:00 pm</p>
+          <p>Duracion: 60 min</p>
           <button ion-button icon-only>
               <ion-icon name="trash"></ion-icon>
           </button>
@@ -33,7 +34,8 @@
             </ion-avatar>
           <h2>Boxeo</h2>
           <h3>Jesus Rodriguez</h3>
-          <p>3:00 pm</p>
+          <p>30/10/2017 3:00 pm</p>
+          <p>Duracion: 60 min</p>
           <button ion-button icon-only>
               <ion-icon name="trash"></ion-icon>
           </button>
@@ -46,6 +48,7 @@
                 <h2>KickBoxing</h2>
                 <h3>Marcos Rodriguez</h3>
                 <p>7/11/2017 3:00 pm</p>
+                <p>Duracion: 60 min</p>
                 <button ion-button icon-only>
                     <ion-icon name="trash"></ion-icon>
                 </button>
@@ -65,6 +68,7 @@
             <h2>{{item.titulo}}</h1>
             <h3>{{item.instructor}}</h3>
             <p>{{item.fecha}}</p>
+            <p>Duracion: {{item.duracion}} min</p>
             <button ion-button icon-only (click)="eliminarReserva(item.id)"><ion-icon name="trash"></ion-icon></button>
         </ion-item>
     </ion-list>
