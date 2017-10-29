@@ -4,6 +4,9 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+//Gráficos
+import { ChartsModule } from 'ng2-charts';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/seleccionar-progreso';
@@ -16,7 +19,8 @@ import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/se
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
