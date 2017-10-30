@@ -11,6 +11,7 @@ import {ClasesPage} from '../pages/clases/clases';
 import {ReservasPage} from '../pages/reservas/reservas';
 import {ClasesParticipadasPage} from '../pages/clases-participadas/clases-participadas';
 import {ComentarClasePage} from '../pages/comentar-clase/comentar-clase';
+import { ClaseParticularPage} from '../pages/clase-particular/clase-particular';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {ComentarClasePage} from '../pages/comentar-clase/comentar-clase';
     ClasesPage,
     ReservasPage,
     ClasesParticipadasPage,
-    ComentarClasePage
+    ComentarClasePage,
+    ClaseParticularPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import {ComentarClasePage} from '../pages/comentar-clase/comentar-clase';
     ClasesPage,
     ReservasPage,
     ClasesParticipadasPage,
-    ComentarClasePage
+    ComentarClasePage,
+    ClaseParticularPage
   ],
   providers: [
     StatusBar,

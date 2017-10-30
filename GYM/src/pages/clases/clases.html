@@ -9,7 +9,9 @@
       <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
-    <ion-title>Clases</ion-title>
+        <ion-item clase="buscador">
+            <ion-input placeholder="Buscar" type="text"></ion-input>
+          </ion-item>
   </ion-navbar>
 
 </ion-header>
@@ -17,6 +19,7 @@
 <ion-content padding>
     <ion-list>
         <ion-item>
+          <button ion-item (click)="goToClaseParticular()">
           <ion-thumbnail item-start>
             <img src="../assets/imgs/clasesYoga.jpg">
           </ion-thumbnail>
@@ -24,11 +27,11 @@
           <p>Inst: Estela Rodrigues</p>
           <p>24/10/2017  3:00 pm</p>
           <p>Duracion: 60 min</p>          
-          <button ion-button clear item-end>
-            <ion-icon name="add-circle" class="agregarClase" (click)="presentAlert()"></ion-icon>
           </button>
+          <button ion-button clear item-end><ion-icon name="add-circle" class="agregarClase" (click)="presentAlert()"></ion-icon></button>
         </ion-item>
         <ion-item>
+          <button ion-item (click)="goToClaseParticular()">
             <ion-thumbnail item-start>
               <img src="../assets/imgs/claseSpinning.jpg">
             </ion-thumbnail>
@@ -36,9 +39,11 @@
             <p>Inst: Maria Josefa</p>
             <p>26/10/2017  3:00 pm</p>
             <p>Duracion: 60 min</p>
+            </button>
             <button ion-button clear item-end><ion-icon name="add-circle" class="agregarClase" (click)="presentAlert()"></ion-icon></button>
           </ion-item>
           <ion-item>
+            <button ion-item (click)="goToClaseParticular()">
               <ion-thumbnail item-start>
                 <img src="../assets/imgs/clasesDefensaPersonal.jpeg">
               </ion-thumbnail>
@@ -46,9 +51,11 @@
               <p>Inst: Pedro Alvarez</p>
               <p>28/10/2017  3:00 pm</p>
               <p>Duracion: 60 min</p>
+              </button>
               <button ion-button clear item-end><ion-icon name="add-circle" class="agregarClase" (click)="presentAlert()"></ion-icon></button>
             </ion-item>
             <ion-item>
+              <button ion-item (click)="goToClaseParticular()">
                 <ion-thumbnail item-start>
                   <img src="../assets/imgs/clasesBoxeo.jpeg">
                 </ion-thumbnail>
@@ -56,9 +63,11 @@
                 <p>Inst: Jesus Rodriguez</p>
                 <p>30/10/2017  3:00 pm</p>
                 <p>Duracion: 60 min</p>
-                <button ion-button clear item-end><ion-icon name="add-circle" class="agregarClase" (click)="presentAlert()"></ion-icon></button>
+              </button>
+              <button ion-button clear item-end><ion-icon name="add-circle" class="agregarClase" (click)="presentAlert()"></ion-icon></button>
               </ion-item>
               <ion-item>
+                <button ion-item (click)="goToClaseParticular()">
                 <ion-thumbnail item-start>
                 <img src="../assets/imgs/claseKickboxing.png">
                 </ion-thumbnail>
@@ -66,6 +75,7 @@
                 <p>Inst: Marcos Rodriguez</p>
                 <p>07/11/2017  3:00 pm</p>
                 <p>Duracion: 60 min</p>
+                </button>
                 <button ion-button clear item-end><ion-icon name="add-circle" class="agregarClase" (click)="presentAlert()"></ion-icon></button>
               </ion-item>
       </ion-list>

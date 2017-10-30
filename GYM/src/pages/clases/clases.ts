@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Nav} from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import {ClaseParticularPage} from '../clase-particular/clase-particular';
 /* AUN NO SE SI FUNCIONA -- ESTOY OFFLINE
 import ParticularPage from '../particular/partiular';
 */
@@ -47,6 +48,9 @@ public items: Array<{id: number, titulo: string, descripion: string, img:string,
     });
     alert.present();
   }
+  goToClaseParticular(){
+    this.navCtrl.push(ClaseParticularPage);
+  }
 /*   AUN NO SE SI FUNCIONA -- ESTOY OFFLINE
 
   //Deberia de rootear al usuario desde la pagina de clases al darle a la clase de la que quiere ver el detalle
@@ -60,6 +64,8 @@ public items: Array<{id: number, titulo: string, descripion: string, img:string,
   }
 
 */
+
+
 
 
 }

@@ -8,6 +8,7 @@ import { ClasesPage } from '../pages/clases/clases';
 import { ReservasPage} from '../pages/reservas/reservas';
 import { ClasesParticipadasPage } from '../pages/clases-participadas/clases-participadas';
 import { ComentarClasePage } from '../pages/comentar-clase/comentar-clase';
+import { ClaseParticularPage} from '../pages/clase-particular/clase-particular';
 
 @Component({
   templateUrl: 'app.html'
