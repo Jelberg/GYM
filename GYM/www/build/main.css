@@ -25512,6 +25512,22 @@ ion-navbar.toolbar {
   min-height: calc(46px + constant(safe-area-inset-top));
 }
 
+page-clase-particular .imagenClase {
+  margin-right: 10px;
+}
+
+page-clase-particular .instructor {
+  font-size: 20px;
+}
+
+page-clase-particular .fecha {
+  font-size: 15px;
+}
+
+page-clase-particular .agregarClase {
+  left: 90px;
+}
+
 page-clases {
   /* AUN NO SE SI FUNCIONA ...  ESTOY OFFLINE
     // Ocultando boton de agregar reserva al presionar el boton, no creo que funcione bien
@@ -25519,6 +25535,10 @@ page-clases {
         display: none;
     }
     */
+}
+
+page-clases .item-ios {
+  background-color: #f7f7f7;
 }
 
 page-comentar-clase .imagen {

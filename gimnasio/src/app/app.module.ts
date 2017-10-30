@@ -15,6 +15,15 @@ import { BarraComponent } from '../components/barra/barra';
 
 import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progreso-ejercicio';
 
+//M05
+import { ClasesPage } from '../pages/FO_M05/clases/clases';
+import { ReservasPage } from '../pages/FO_M05/reservas/reservas';
+import { ClaseParticularPage} from '../pages/FO_M05/clase-particular/clase-particular';
+import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clases-participadas';
+import { ComentarClasePage} from '../pages/FO_M05/comentar-clase/comentar-clase';
+import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/realizar-valoracion';
+//FIN M05
+
 
 @NgModule({
   declarations: [
@@ -23,7 +32,13 @@ import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progre
     SeleccionarProgresoPage,
     LineaComponent,
     BarraComponent,
-    ProgresoEjercicioPage
+    ProgresoEjercicioPage,
+    ClasesPage,
+    ReservasPage,
+    ClaseParticularPage,
+    ClasesParticipadasPage,
+    ComentarClasePage,
+    RealizarValoracionPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +50,13 @@ import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progre
     MyApp,
     HomePage,
     SeleccionarProgresoPage,
-    ProgresoEjercicioPage
+    ProgresoEjercicioPage,
+    ClasesPage,
+    ClaseParticularPage,
+    ClasesParticipadasPage,
+    ComentarClasePage,
+    ReservasPage,
+    RealizarValoracionPage
   ],
   providers: [
     StatusBar,
