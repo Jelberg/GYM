@@ -1,5 +1,5 @@
 import { Component, ViewChild} from '@angular/core';
-import { Platform, Nav} from 'ionic-angular';
+import { Platform, Nav, MenuController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -16,7 +16,8 @@ export class MyApp {
   public rootPage:any;
   public pages: Array<{titulo: string, component: any, icon:string}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, menu:MenuController) {
+    menu.enable(true);
     this.rootPage = InicioPage;
     this.pages = [
       {titulo: 'Inicio',component:InicioPage, icon: 'home'},
