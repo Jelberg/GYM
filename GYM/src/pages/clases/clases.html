@@ -13,7 +13,7 @@
   </ion-navbar>
 
 </ion-header>
-
+<
 <ion-content padding>
     <ion-list>
         <ion-item>
@@ -59,19 +59,19 @@
                 <button ion-button clear item-end><ion-icon name="add-circle"></ion-icon></button>
               </ion-item>
               <ion-item>
-                  <ion-thumbnail item-start>
-                    <img src="../assets/imgs/claseKickboxing.png">
-                  </ion-thumbnail>
-                  <h2>KickBoxing</h2>
-                  <p>Inst: Marcos Rodriguez</p>
-                  <p>07/11/2017  3:00 pm</p>
-                  <p>Duracion: 60 min</p>
-                  <button ion-button clear item-end><ion-icon name="add-circle"></ion-icon></button>
-                </ion-item>
+                <ion-thumbnail item-start>
+                <img src="../assets/imgs/claseKickboxing.png">
+                </ion-thumbnail>
+                <h2>KickBoxing</h2>
+                <p>Inst: Marcos Rodriguez</p>
+                <p>07/11/2017  3:00 pm</p>
+                <p>Duracion: 60 min</p>
+                <button ion-button clear item-end><ion-icon name="add-circle"></ion-icon></button>
+              </ion-item>
       </ion-list>
 </ion-content>
 
-<!-- AUN NO SE SI FUNCIONA ...  ESTOY OFFLINE
+<!--
 <ion-content padding>
   <ion-list>
     <ion-button ion-item *ngFor="let item of items" (click)="goToParticularClase(item)">
@@ -83,7 +83,7 @@
         <p>{{item.fecha}}</p>
         <p>Duracion: {{item.duracion}} min</p>-->
         <!-- Hay que buscar la forma de eliminar el boton de agregar al presioanrlo
-        <button ion-button clear item-end (click)="reservarClase(item.number) id="botonAgregarReserva-{{item.id}}"><ion-icon name="add-circle"></ion-icon></button>
+        <ion-button ion-item clear item-end (click)="reservarClase(item.number)" id="botonAgregarReserva{{item.id}}"><ion-icon name="add-circle"></ion-icon></ion-button>
     </ion-button>
   </ion-list>
 </ion-content>
