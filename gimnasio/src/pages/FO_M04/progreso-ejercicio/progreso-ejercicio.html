@@ -5,26 +5,20 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar color="secondary">
     <ion-title>Progreso Ejercicios</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goToListaContactosPage()">
+        <ion-icon name='share'></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
-    <div> 
-        <b>Press de Banca</b>
-        <button ion-button color="secondary" outline icon-start (click)="goToListaContactosPage()">
-            <ion-icon name='share' is-active="false"></ion-icon>
-        </button>
-      </div> 
-      <br>
-
+  <h4 class="titulo">Press de banca</h4>
+  <br>
   <linea></linea>
-      <br>
+  <br>
   <button ion-button block color="secondary" (click)="goToSeleccionarEjercicioPage()">Seleccionar Ejercicio</button>
-
 </ion-content>
