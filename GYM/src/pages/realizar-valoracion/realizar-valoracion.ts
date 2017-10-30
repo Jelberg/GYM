@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ComentarClasePage } from '../comentar-clase/comentar-clase';
 
 /**
- * Generated class for the ClasesParticipadasPage page.
+ * Generated class for the RealizarValoracionPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,20 +10,16 @@ import { ComentarClasePage } from '../comentar-clase/comentar-clase';
 
 @IonicPage()
 @Component({
-  selector: 'page-clases-participadas',
-  templateUrl: 'clases-participadas.html',
+  selector: 'page-realizar-valoracion',
+  templateUrl: 'realizar-valoracion.html',
 })
-export class ClasesParticipadasPage {
+export class RealizarValoracionPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ClasesParticipadasPage');
-  }
-
-  goToComentar(){
-    this.navCtrl.push(ComentarClasePage);
+    console.log('ionViewDidLoad RealizarValoracionPage');
   }
 
 }

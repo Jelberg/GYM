@@ -38,7 +38,7 @@ export class ReservasPage {
   }
   */
 
-  presentAlert() {
+  presentAlert(id) {
     const alert = this.alertCtrl.create({
       title: 'Reserva',
       subTitle: 'Reserva Eliminada Satisfactoriamente',
