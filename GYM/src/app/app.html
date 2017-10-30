@@ -2,7 +2,7 @@
 <ion-menu [content]="NAV">
     <ion-content>
         <ion-list>
-            <button ion-item *ngFor="let page of pages" (click)="goToPage(page.component) menuClose">
+            <button ion-item *ngFor="let page of pages" (click)="goToPage(page.component)" munuClose>
                 <ion-icon item-left name="{{page.icon}}"></ion-icon>
                 {{page.titulo}}
             </button>
