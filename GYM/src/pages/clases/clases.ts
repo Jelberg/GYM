@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Nav} from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 /* AUN NO SE SI FUNCIONA -- ESTOY OFFLINE
 import ParticularPage from '../particular/partiular';
 */
@@ -20,7 +21,7 @@ export class ClasesPage {
 /* AUN NO SE SI FUNCIONA -- ESTOY OFFLINE
 public items: Array<{id: number, titulo: string, descripion: string, img:string, instructor:string, fecha: string, duracion: number}>;
 */
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     /*  AUN NO SE SI FUNCIONA -- ESTOY OFFLINE
     this.items = [
       {id: 1, titulo:"Yoga", descripion:"sbsdgsdsdfdsfsd dsdssdvsdvsda vsdsd s", img:"../assets/imgs/clasesYoga.jpg", instructor:"Estela Rodriguez", fecha:"24/10/2017 3:00 pm", duracion: 60},
@@ -38,6 +39,14 @@ public items: Array<{id: number, titulo: string, descripion: string, img:string,
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClasesPage');
   }
+  presentAlert() {
+    const alert = this.alertCtrl.create({
+      title: 'Clase',
+      subTitle: 'Clase Agregada Satisfactoriamente',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 /*   AUN NO SE SI FUNCIONA -- ESTOY OFFLINE
 
   //Deberia de rootear al usuario desde la pagina de clases al darle a la clase de la que quiere ver el detalle
@@ -51,4 +60,6 @@ public items: Array<{id: number, titulo: string, descripion: string, img:string,
   }
 
 */
+
+
 }

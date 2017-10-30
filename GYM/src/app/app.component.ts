@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { InicioPage } from '../pages/inicio/inicio';
 import { ClasesPage } from '../pages/clases/clases';
 import { ReservasPage} from '../pages/reservas/reservas';
+import { ClasesParticipadasPage } from '../pages/clases-participadas/clases-participadas';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,6 +24,7 @@ export class MyApp {
       {titulo: 'Inicio',component:InicioPage, icon: 'home'},
       {titulo: 'Clases',component:ClasesPage, icon: 'bicycle'},
       {titulo: 'Reservas',component:ReservasPage, icon: 'calendar'} ,
+      {titulo: 'Clases Participadas',component:ClasesParticipadasPage, icon: 'done-all'},
 
     ];
     platform.ready().then(() => {

@@ -9,13 +9,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {InicioPage} from '../pages/inicio/inicio';
 import {ClasesPage} from '../pages/clases/clases';
 import {ReservasPage} from '../pages/reservas/reservas';
+import {ClasesParticipadasPage} from '../pages/clases-participadas/clases-participadas';
 
 @NgModule({
   declarations: [
     MyApp,
     InicioPage,
     ClasesPage,
-    ReservasPage
+    ReservasPage,
+    ClasesParticipadasPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import {ReservasPage} from '../pages/reservas/reservas';
     MyApp,
     InicioPage,
     ClasesPage,
-    ReservasPage
+    ReservasPage,
+    ClasesParticipadasPage
   ],
   providers: [
     StatusBar,
