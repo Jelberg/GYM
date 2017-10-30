@@ -10,12 +10,20 @@ import { ChartsModule } from 'ng2-charts';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/seleccionar-progreso';
+import { LineaComponent } from '../components/linea/linea';
+import { BarraComponent } from '../components/barra/barra';
+
+import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progreso-ejercicio';
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    SeleccionarProgresoPage
+    SeleccionarProgresoPage,
+    LineaComponent,
+    BarraComponent,
+    ProgresoEjercicioPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +34,8 @@ import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/se
   entryComponents: [
     MyApp,
     HomePage,
-    SeleccionarProgresoPage
+    SeleccionarProgresoPage,
+    ProgresoEjercicioPage
   ],
   providers: [
     StatusBar,
