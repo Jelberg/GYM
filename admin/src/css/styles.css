@@ -1,0 +1,105 @@
+.sendButton {
+    color: white
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: "Poppins", sans-serif!important
+}
+
+a:hover {
+    text-decoration: none!important
+}
+
+body {
+    font-size: 16px;
+}
+
+.w3-half img {
+    margin-bottom: -6px;
+    margin-top: 16px;
+    opacity: 0.8;
+    cursor: pointer
+}
+
+.w3-half img:hover {
+    opacity: 1
+}
+
+.w3-color {
+    background: #3CB371;
+}
+
+.w3-text-color {
+    color: #3CB371;
+}
+
+.w3-button {
+    border-radius: 12px
+}
+
+
+/* SIDEBAR */
+
+.menuIcon {
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    width: 180px;
+    margin: 0;
+    margin-left: 0;
+    text-align: left;
+    padding: 3px 0px;
+    padding-left: 40px;
+    height: 50px;
+}
+
+.menuIcon:hover,
+.active {
+    border-bottom: 2px solid white
+}
+
+.menuImg {
+    position: absolute;
+    left: 0;
+    width: 30px;
+    top: 12px;
+}
+
+.menuText {
+    font-size: 16px;
+    margin-top: 12px;
+    color: white
+}
+
+#showcase {
+    position: relative
+}
+
+.mainImg {
+    position: absolute;
+    right: 0;
+    height: 70px;
+    top: 20px;
+}
+
+
+/* SIDEBAR */
+
+.homeItem {
+    border: 1px solid #3cb371;
+    margin-bottom: 15px;
+}
+
+.itemInfo {
+    padding: 15px;
+}
+
+.row.equal {
+    display: flex!important;
+    flex-wrap: wrap!important;
+  }
