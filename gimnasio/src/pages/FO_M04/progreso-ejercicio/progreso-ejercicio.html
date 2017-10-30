@@ -17,13 +17,13 @@
 
     <div> 
         <b>Press de Banca</b>
-        <button ion-button color="secondary" outline icon-start>
+        <button ion-button color="secondary" outline icon-start (click)="goToListaContactosPage()">
             <ion-icon name='share' is-active="false"></ion-icon>
         </button>
       </div> 
 
   <linea></linea>
 
-  <button ion-button full color="secondary" >Seleccionar Ejercicio</button>
+  <button ion-button full color="secondary" (click)="goToSeleccionarEjercicioPage()">Seleccionar Ejercicio</button>
 
 </ion-content>

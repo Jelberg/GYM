@@ -14,6 +14,8 @@ import { LineaComponent } from '../components/linea/linea';
 import { BarraComponent } from '../components/barra/barra';
 
 import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progreso-ejercicio';
+import { ListaEjerciciosPage } from '../pages/FO_M04/lista-ejercicios/lista-ejercicios';
+import { ListaContactosPage } from '../pages/FO_M04/lista-contactos/lista-contactos';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progre
     SeleccionarProgresoPage,
     LineaComponent,
     BarraComponent,
-    ProgresoEjercicioPage
+    ProgresoEjercicioPage,
+    ListaEjerciciosPage,
+    ListaContactosPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,9 @@ import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progre
     MyApp,
     HomePage,
     SeleccionarProgresoPage,
-    ProgresoEjercicioPage
+    ProgresoEjercicioPage,
+    ListaEjerciciosPage,
+    ListaContactosPage
   ],
   providers: [
     StatusBar,
