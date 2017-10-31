@@ -21,12 +21,15 @@ import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progre
 import { ListaEjerciciosPage } from '../pages/FO_M04/lista-ejercicios/lista-ejercicios';
 import { ListaContactosPage } from '../pages/FO_M04/lista-contactos/lista-contactos';
 import { ProgresoMedidasPage } from '../pages/FO_M04/ProgresoMedidas/progresomedidas'
-import { AgregarMedidasPage } from '../pages/FO_M04/ProgresoMedidas/agregarmedidas' ;
 import { ProgresoPesoPage } from '../pages/FO_M04/progreso-peso/progreso-peso'
 import { CambiarPesoPage } from '../pages/FO_M04/cambiar-peso/cambiar-peso'
 import { TabsPesoPage } from '../pages/FO_M04/tabs-peso/tabs-peso'
 import { ProgresoComentarioPage } from '../pages/FO_M04/progreso-comentario/progreso-comentario';
-import { TabsEjercicioPage } from '../pages/FO_M04/tabs-ejercicio/tabs-ejercicio'
+import { TabsEjercicioPage } from '../pages/FO_M04/tabs-ejercicio/tabs-ejercicio';
+//import { TabsMedidasPage } from '../pages/FO_M04/tabs-medidas/tabs-medidas';
+//import { CambiarMedidasPage } from '../pages/FO_M04/cambiar-medidas/cambiar-medidas';
+import { CambiaMedidaPage } from '../pages/FO_M04/cambia-medida/cambia-medida';
+import { TabMedidaPage } from '../pages/FO_M04/tab-medida/tab-medida';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,6 @@ import { TabsEjercicioPage } from '../pages/FO_M04/tabs-ejercicio/tabs-ejercicio
     LineaPesoComponent,
     ProgresoEjercicioPage,
     ProgresoMedidasPage,
-    AgregarMedidasPage,
     ProgresoEjercicioPage,
     ListaEjerciciosPage,
     ListaContactosPage,
@@ -47,7 +49,11 @@ import { TabsEjercicioPage } from '../pages/FO_M04/tabs-ejercicio/tabs-ejercicio
     CambiarPesoPage,
     ProgresoComentarioPage,
     TabsPesoPage,
-    TabsEjercicioPage
+    TabsEjercicioPage,
+    //TabsMedidasPage,
+    //CambiarMedidasPage,
+    CambiaMedidaPage,
+    TabMedidaPage
 
   ],
   imports: [
@@ -62,14 +68,17 @@ import { TabsEjercicioPage } from '../pages/FO_M04/tabs-ejercicio/tabs-ejercicio
     SeleccionarProgresoPage,
     ProgresoEjercicioPage,
     ProgresoMedidasPage,
-    AgregarMedidasPage,
     ListaEjerciciosPage,
     ListaContactosPage,
     ProgresoPesoPage,
     CambiarPesoPage,
     ProgresoComentarioPage,
     TabsPesoPage,
-    TabsEjercicioPage
+    TabsEjercicioPage,
+    //TabsMedidasPage,
+    //CambiarMedidasPage,
+    CambiaMedidaPage,
+    TabMedidaPage
   ],
   providers: [
     StatusBar,

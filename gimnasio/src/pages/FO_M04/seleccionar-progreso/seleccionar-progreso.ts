@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ProgresoEjercicioPage } from '../progreso-ejercicio/progreso-ejercicio';
-import { ProgresoMedidasPage } from '../ProgresoMedidas/progresomedidas';
+import { TabMedidaPage } from '../tab-medida/tab-medida';
 import { TabsPesoPage } from '../tabs-peso/tabs-peso';
 import { TabsEjercicioPage } from '../tabs-ejercicio/tabs-ejercicio';
 
@@ -31,7 +31,7 @@ export class SeleccionarProgresoPage {
     this.navCtrl.push(TabsEjercicioPage);
   }
   openProgresoMedidasPage(){
-    this.navCtrl.push(ProgresoMedidasPage);
+    this.navCtrl.push(TabMedidaPage);
   }
   openTabsPesoPage()
   {
