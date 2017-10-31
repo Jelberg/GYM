@@ -50,8 +50,6 @@ import { TabMedidaPage } from '../pages/FO_M04/tab-medida/tab-medida';
     ProgresoComentarioPage,
     TabsPesoPage,
     TabsEjercicioPage,
-    CambiarMedidasPage,
-    TabsMedidasPage,
     //TabsMedidasPage,
     //CambiarMedidasPage,
     CambiaMedidaPage,
@@ -77,16 +75,10 @@ import { TabMedidaPage } from '../pages/FO_M04/tab-medida/tab-medida';
     ProgresoComentarioPage,
     TabsPesoPage,
     TabsEjercicioPage,
-<<<<<<< HEAD
-    CambiarMedidasPage,
-    TabsMedidasPage,
-    
-=======
     //TabsMedidasPage,
     //CambiarMedidasPage,
     CambiaMedidaPage,
     TabMedidaPage
->>>>>>> a362253d52172f123fce0fe1a51cf69eb4f0fe33
   ],
   providers: [
     StatusBar,
