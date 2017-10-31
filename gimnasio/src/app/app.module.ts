@@ -23,7 +23,9 @@ import { ListaContactosPage } from '../pages/FO_M04/lista-contactos/lista-contac
 import { ProgresoMedidasPage } from '../pages/FO_M04/ProgresoMedidas/progresomedidas'
 import { AgregarMedidasPage } from '../pages/FO_M04/ProgresoMedidas/agregarmedidas' ;
 import { ProgresoPesoPage } from '../pages/FO_M04/progreso-peso/progreso-peso'
-
+import { CambiarPesoPage } from '../pages/FO_M04/cambiar-peso/cambiar-peso'
+import { TabsPesoPage } from '../pages/FO_M04/tabs-peso/tabs-peso'
+import { ProgresoComentarioPage } from '../pages/FO_M04/progreso-comentario/progreso-comentario';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,10 @@ import { ProgresoPesoPage } from '../pages/FO_M04/progreso-peso/progreso-peso'
     ProgresoEjercicioPage,
     ListaEjerciciosPage,
     ListaContactosPage,
-    ProgresoPesoPage
+    ProgresoPesoPage,
+    CambiarPesoPage,
+    ProgresoComentarioPage,
+    TabsPesoPage
 
   ],
   imports: [
@@ -58,7 +63,10 @@ import { ProgresoPesoPage } from '../pages/FO_M04/progreso-peso/progreso-peso'
     AgregarMedidasPage,
     ListaEjerciciosPage,
     ListaContactosPage,
-    ProgresoPesoPage
+    ProgresoPesoPage,
+    CambiarPesoPage,
+    ProgresoComentarioPage,
+    TabsPesoPage
   ],
   providers: [
     StatusBar,
