@@ -16,7 +16,7 @@ export class LineaMedidasComponent {
     {data: [12, 11, 10, 9, 10, 9, 11], label: 'Escapula'},
     {data: [16, 14, 15, 12, 13, 14, 13], label: 'Tricep'},
     {data: [9, 10, 11, 9, 9, 10, 11], label: 'Abdomen'},
-    {data: [14, 13, 12, 13, 14, 12, 12], label: 'Cuadriceps'},
+    {data: [14, 13, 12, 13, 14, 12, 12], label: 'Cuadricep'},
     
   ];
   public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];

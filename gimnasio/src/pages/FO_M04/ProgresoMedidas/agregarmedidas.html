@@ -7,36 +7,40 @@
 <ion-header>
 
   <ion-navbar color="secondary">
-    <ion-title>Agregar Medidas</ion-title>
+    <ion-title>Agregar Medidas </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name='send'></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
 
-<div class="row">
-  <div class="col col-50">
-   <ion-item>
-    <ion-label fixed>Escapula</ion-label>
-    <ion-input type="text" value=""></ion-input>
-  </ion-item>
-  </div>
-  <div class="col">
-     <ion-item>
-    <ion-label fixed>Tricep</ion-label>
-    <ion-input type="text" value=""></ion-input>
-  </ion-item>
-  </div>
-</div>
+<ion-list inset>
 
-<div class="row">
-  <div class="col col-50">
-    <ion-icon name="checkmark"></ion-icon>
-  </div>
-  <div class="col">
-    <ion-icon name="close"></ion-icon>
-  </div>
-</div>
+  <ion-item>
+    <ion-label>Escapula</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Tricep</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Abdominales</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Cuadricep</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+
+</ion-list>
 
 </ion-content>

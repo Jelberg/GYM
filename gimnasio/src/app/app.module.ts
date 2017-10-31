@@ -19,10 +19,9 @@ import { LineaMedidasComponent } from '../components/lineaMedidas/lineaMedidas';
 import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progreso-ejercicio';
 import { ListaEjerciciosPage } from '../pages/FO_M04/lista-ejercicios/lista-ejercicios';
 import { ListaContactosPage } from '../pages/FO_M04/lista-contactos/lista-contactos';
-
-import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progreso-ejercicio';
 import { ProgresoMedidasPage } from '../pages/FO_M04/ProgresoMedidas/progresomedidas'
 import { AgregarMedidasPage } from '../pages/FO_M04/ProgresoMedidas/agregarmedidas' ;
+
 
 @NgModule({
   declarations: [
@@ -31,12 +30,10 @@ import { AgregarMedidasPage } from '../pages/FO_M04/ProgresoMedidas/agregarmedid
     SeleccionarProgresoPage,
     LineaComponent,
     BarraComponent,
-
     LineaMedidasComponent,
     ProgresoEjercicioPage,
     ProgresoMedidasPage,
-    AgregarMedidasPage
-
+    AgregarMedidasPage,
     ProgresoEjercicioPage,
     ListaEjerciciosPage,
     ListaContactosPage
@@ -54,7 +51,7 @@ import { AgregarMedidasPage } from '../pages/FO_M04/ProgresoMedidas/agregarmedid
     SeleccionarProgresoPage,
     ProgresoEjercicioPage,
     ProgresoMedidasPage,
-    AgregarMedidasPage
+    AgregarMedidasPage,
     ListaEjerciciosPage,
     ListaContactosPage
   ],
