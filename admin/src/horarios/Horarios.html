@@ -8,6 +8,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
   crossorigin="anonymous">
 <link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
 
 
 <body>
@@ -144,29 +145,180 @@
                 <option value="3">Opción 3</option>
               </select>
             </div>
-            <div class="w3-third w3-padding-small">
-              <p>:</p>
-              <select class="w3-select w3-border" name="option">
-                <option value="" disabled selected>Seleccione Opción</option>
-                <option value="1">Opción 1</option>
-                <option value="2">Opción 2</option>
-                <option value="3">Opción 3</option>
-              </select>
+            <div class="w3-third w3-padding-large">
+                  <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-14 w3-margin-bottom myButton">Buscar</button>
             </div>
           </form>
 
         </div>
       </div>
-      <div class="w3-resto w3-blue-grey w3-container" style="height:730px">
-        <div class="w3-padding-64 w3-center">
-          <div class="w3-padding-64 w3-center">
-            <div class="w3-left-align w3-padding-large">
-
+      
+      <h1 class="w3-xxxlarge White-text-color">
+        <b>Clases y horarios</b>
+      </h1>
+      <div class="row">
+        <div class="content">
+            <div class="w3-row ">
+                <table bgcolor="#00FF00"  class="table table-bordered table-inverse">
+                    <thead>
+                        <tr>
+                            <th class="tablehead">ID</th>
+                            <th class="tablehead">Clase</th>
+                            <th class="tablehead">Dia</th>
+                            <th class="tablehead">Hora Inicio</th>
+                            <th class="tablehead">Hora Fin</th>
+                            <th class="tablehead">Instructor</th>
+                            <th class="tablehead tcenter">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>00001</td>
+                            <td>Yoga</td>
+                            <td>Martes</td>
+                            <td>09:00AM</td>
+                            <td>11:00AM</td>
+                            <td>Miguel</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00002</td>
+                          <td>TRX</td>
+                          <td>viernes</td>
+                          <td>07:00AM</td>
+                          <td>09:00AM</td>
+                          <td>Alfonso</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00005</td>
+                          <td>Insanity</td>
+                          <td>Jueves</td>
+                          <td>05:00PM</td>
+                          <td>08:00PM</td>
+                          <td>Juan</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00012</td>
+                          <td>Estiramientos</td>
+                          <td>Martes</td>
+                          <td>12:00PM</td>
+                          <td>03:00PM</td>
+                          <td>Miguel</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00014</td>
+                          <td>Boxeo</td>
+                          <td>Lunes</td>
+                          <td>07:00AM</td>
+                          <td>10:00AM</td>
+                          <td>Francisco</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00022</td>
+                          <td>Estiramientos</td>
+                          <td>Martes</td>
+                          <td>12:00PM</td>
+                          <td>03:00PM</td>
+                          <td>Miguel</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00002</td>
+                          <td>TRX</td>
+                          <td>viernes</td>
+                          <td>07:00AM</td>
+                          <td>09:00AM</td>
+                          <td>Alfonso</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00032</td>
+                          <td>Estiramientos</td>
+                          <td>Martes</td>
+                          <td>12:00PM</td>
+                          <td>03:00PM</td>
+                          <td>Miguel</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00016</td>
+                          <td>Insanity</td>
+                          <td>Jueves</td>
+                          <td>05:00PM</td>
+                          <td>08:00PM</td>
+                          <td>Juan</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00005</td>
+                          <td>Insanity</td>
+                          <td>Jueves</td>
+                          <td>05:00PM</td>
+                          <td>08:00PM</td>
+                          <td>Juan</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
+    </div>        
+              
+            
 
 
 
