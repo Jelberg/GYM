@@ -12,9 +12,13 @@ import { HomePage } from '../pages/home/home';
 import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/seleccionar-progreso';
 import { LineaComponent } from '../components/linea/linea';
 import { BarraComponent } from '../components/barra/barra';
+import { LineaMedidasComponent } from '../components/lineaMedidas/lineaMedidas';
+
+
 
 import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progreso-ejercicio';
-
+import { ProgresoMedidasPage } from '../pages/FO_M04/ProgresoMedidas/progresomedidas'
+import { AgregarMedidasPage } from '../pages/FO_M04/ProgresoMedidas/agregarmedidas' ;
 
 @NgModule({
   declarations: [
@@ -23,7 +27,10 @@ import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progre
     SeleccionarProgresoPage,
     LineaComponent,
     BarraComponent,
-    ProgresoEjercicioPage
+    LineaMedidasComponent,
+    ProgresoEjercicioPage,
+    ProgresoMedidasPage,
+    AgregarMedidasPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +42,9 @@ import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progre
     MyApp,
     HomePage,
     SeleccionarProgresoPage,
-    ProgresoEjercicioPage
+    ProgresoEjercicioPage,
+    ProgresoMedidasPage,
+    AgregarMedidasPage
   ],
   providers: [
     StatusBar,
