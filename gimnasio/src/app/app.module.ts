@@ -13,6 +13,7 @@ import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/se
 import { LineaComponent } from '../components/linea/linea';
 import { BarraComponent } from '../components/barra/barra';
 import { LineaMedidasComponent } from '../components/lineaMedidas/lineaMedidas';
+import { LineaPesoComponent } from '../components/linea-peso/linea-peso'
 
 
 
@@ -21,6 +22,7 @@ import { ListaEjerciciosPage } from '../pages/FO_M04/lista-ejercicios/lista-ejer
 import { ListaContactosPage } from '../pages/FO_M04/lista-contactos/lista-contactos';
 import { ProgresoMedidasPage } from '../pages/FO_M04/ProgresoMedidas/progresomedidas'
 import { AgregarMedidasPage } from '../pages/FO_M04/ProgresoMedidas/agregarmedidas' ;
+import { ProgresoPesoPage } from '../pages/FO_M04/progreso-peso/progreso-peso'
 
 
 @NgModule({
@@ -31,12 +33,14 @@ import { AgregarMedidasPage } from '../pages/FO_M04/ProgresoMedidas/agregarmedid
     LineaComponent,
     BarraComponent,
     LineaMedidasComponent,
+    LineaPesoComponent,
     ProgresoEjercicioPage,
     ProgresoMedidasPage,
     AgregarMedidasPage,
     ProgresoEjercicioPage,
     ListaEjerciciosPage,
-    ListaContactosPage
+    ListaContactosPage,
+    ProgresoPesoPage
 
   ],
   imports: [
@@ -53,7 +57,8 @@ import { AgregarMedidasPage } from '../pages/FO_M04/ProgresoMedidas/agregarmedid
     ProgresoMedidasPage,
     AgregarMedidasPage,
     ListaEjerciciosPage,
-    ListaContactosPage
+    ListaContactosPage,
+    ProgresoPesoPage
   ],
   providers: [
     StatusBar,

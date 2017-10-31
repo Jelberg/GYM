@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ProgresoEjercicioPage } from '../progreso-ejercicio/progreso-ejercicio';
 import { ProgresoMedidasPage } from '../ProgresoMedidas/progresomedidas'
+import { ProgresoPesoPage } from '../progreso-peso/progreso-peso'
+
 /**
  * Generated class for the SeleccionarProgresoPage page.
  *
@@ -29,6 +31,10 @@ export class SeleccionarProgresoPage {
   }
   openProgresoMedidasPage(){
     this.navCtrl.push(ProgresoMedidasPage);
+  }
+  openProgresoPesoPage()
+  {
+    this.navCtrl.push( ProgresoPesoPage );
   }
 
 }
