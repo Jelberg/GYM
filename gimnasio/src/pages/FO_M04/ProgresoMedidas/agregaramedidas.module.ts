@@ -3,8 +3,6 @@ import { IonicPageModule } from 'ionic-angular';
 import { AgregarMedidasPage } from '../ProgresoMedidas/agregarmedidas';
 import { ProgresoMedidasPage } from './progresomedidas';
 
-
-
 @NgModule({
   declarations: [
   	AgregarMedidasPage,
