@@ -26,8 +26,10 @@ import { CambiarPesoPage } from '../pages/FO_M04/cambiar-peso/cambiar-peso'
 import { TabsPesoPage } from '../pages/FO_M04/tabs-peso/tabs-peso'
 import { ProgresoComentarioPage } from '../pages/FO_M04/progreso-comentario/progreso-comentario';
 import { TabsEjercicioPage } from '../pages/FO_M04/tabs-ejercicio/tabs-ejercicio';
-import { TabsMedidasPage } from '../pages/FO_M04/tabs-medidas/tabs-medidas';
-import { CambiarMedidasPage } from '../pages/FO_M04/cambiar-medidas/cambiar-medidas';
+//import { TabsMedidasPage } from '../pages/FO_M04/tabs-medidas/tabs-medidas';
+//import { CambiarMedidasPage } from '../pages/FO_M04/cambiar-medidas/cambiar-medidas';
+import { CambiaMedidaPage } from '../pages/FO_M04/cambia-medida/cambia-medida';
+import { TabMedidaPage } from '../pages/FO_M04/tab-medida/tab-medida';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,10 @@ import { CambiarMedidasPage } from '../pages/FO_M04/cambiar-medidas/cambiar-medi
     TabsEjercicioPage,
     CambiarMedidasPage,
     TabsMedidasPage,
-    
+    //TabsMedidasPage,
+    //CambiarMedidasPage,
+    CambiaMedidaPage,
+    TabMedidaPage
 
   ],
   imports: [
@@ -72,9 +77,16 @@ import { CambiarMedidasPage } from '../pages/FO_M04/cambiar-medidas/cambiar-medi
     ProgresoComentarioPage,
     TabsPesoPage,
     TabsEjercicioPage,
+<<<<<<< HEAD
     CambiarMedidasPage,
     TabsMedidasPage,
     
+=======
+    //TabsMedidasPage,
+    //CambiarMedidasPage,
+    CambiaMedidaPage,
+    TabMedidaPage
+>>>>>>> a362253d52172f123fce0fe1a51cf69eb4f0fe33
   ],
   providers: [
     StatusBar,

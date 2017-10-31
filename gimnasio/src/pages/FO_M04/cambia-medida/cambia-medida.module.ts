@@ -1,16 +1,16 @@
-/*import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { TabsMedidasPage } from './tabs-medidas';
+import { CambiaMedidaPage } from './cambia-medida';
 
 import { SeleccionarProgresoPage } from '../seleccionar-progreso/seleccionar-progreso';
 
 @NgModule({
   declarations: [
-    TabsMedidasPage,
+    CambiaMedidaPage,
     SeleccionarProgresoPage
   ],
   imports: [
-    IonicPageModule.forChild(TabsMedidasPage),
+    IonicPageModule.forChild( CambiaMedidaPage ),
   ],
 })
-export class TabsMedidasPageModule {}*/
+export class CambiaMedidaPageModule {}

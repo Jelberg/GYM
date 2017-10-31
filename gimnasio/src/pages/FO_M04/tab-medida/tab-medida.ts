@@ -1,4 +1,4 @@
-/*import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProgresoMedidasPage } from '../ProgresoMedidas/progresomedidas';
 import { CambiaMedidaPage } from '../cambia-medida/cambia-medida';
@@ -6,16 +6,13 @@ import { ProgresoComentarioPage } from '../progreso-comentario/progreso-comentar
 
 @IonicPage()
 @Component({
-  selector: 'page-tabs-medidas',
-  templateUrl: 'tabs-medidas.html'
+  selector: 'page-tab-medida',
+  templateUrl: 'tab-medida.html'
 })
-export class TabsMedidasPage {
+export class TabMedidaPage {
 
   grafica: any = ProgresoMedidasPage;
-
-  medidas: any = CambiarMedidasPage;
   peso: any = CambiaMedidaPage;
-
   comentarios: any = ProgresoComentarioPage;
   constructor(public navCtrl: NavController, public navParams: NavParams)
   {
@@ -24,6 +21,6 @@ export class TabsMedidasPage {
   }
   ionViewDidLoad() 
   {
-    console.log('ionViewDidLoad TabsMedidasPage');
+    console.log('ionViewDidLoad TabMedidaPage');
   }
-}*/
+}
