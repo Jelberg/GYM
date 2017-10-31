@@ -12,6 +12,10 @@ usu_fecha_nac 		Date not null,
 CONSTRAINT pk_usu_id PRIMARY KEY (usu_id)
 );
 
+-- TABLAS DE FO_M06
+
+-- FIN TABLAS DE FO_M06
+
 -- TABLAS FOM05
 CREATE TABLE instructor
 (
@@ -51,7 +55,6 @@ CONSTRAINT pk_hc_id PRIMARY KEY (hc_id,pk_instructor,pk_clase)
 );
 
 -- FIN TABLAS FOM05
-
 
 -- TABLAS DE FO_M04
 
