@@ -48,8 +48,9 @@ import { CambiarMedidasPage } from '../pages/FO_M04/cambiar-medidas/cambiar-medi
     ProgresoComentarioPage,
     TabsPesoPage,
     TabsEjercicioPage,
+    CambiarMedidasPage,
     TabsMedidasPage,
-    CambiarMedidasPage
+    
 
   ],
   imports: [
@@ -71,8 +72,9 @@ import { CambiarMedidasPage } from '../pages/FO_M04/cambiar-medidas/cambiar-medi
     ProgresoComentarioPage,
     TabsPesoPage,
     TabsEjercicioPage,
+    CambiarMedidasPage,
     TabsMedidasPage,
-    CambiarMedidasPage
+    
   ],
   providers: [
     StatusBar,

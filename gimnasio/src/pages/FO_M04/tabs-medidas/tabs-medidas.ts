@@ -12,7 +12,7 @@ import { ProgresoComentarioPage } from '../progreso-comentario/progreso-comentar
 export class TabsMedidasPage {
 
   grafica: any = ProgresoMedidasPage;
-  peso: any = CambiarMedidasPage;
+  medidas: any = CambiarMedidasPage;
   comentarios: any = ProgresoComentarioPage;
   constructor(public navCtrl: NavController, public navParams: NavParams)
   {
