@@ -14,9 +14,20 @@
 
 
 <ion-content padding>
-      <div class="tituloContenedor"><p class="titulo">Yoga</p></div> 
+      <div class="tituloContenedor">
+        <p class="titulo">Yoga</p>
+        <p class="texto-h2">Estela Rodrigues</p>
+      </div> 
       <img src="../../assets/imgs/clasesYoga.jpg" class="imagen">
+      <p class="texto-h2">Valoracion de la clase</p>
       <ion-list>
+          <ion-item>
+            
+              <ion-range min="1" max="10" pin="true" [(ngModel)]="contrast" color="secondary">
+                <ion-icon range-left small name="star-outline"></ion-icon>
+                <ion-icon range-right name="star-outline"></ion-icon>
+              </ion-range>
+            </ion-item>
             <ion-item>
               <ion-label floating>Comentario</ion-label>
               <ion-input type="textarea" ></ion-input>

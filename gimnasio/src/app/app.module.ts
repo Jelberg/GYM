@@ -21,6 +21,7 @@ import { ReservasPage } from '../pages/FO_M05/reservas/reservas';
 import { ClaseParticularPage} from '../pages/FO_M05/clase-particular/clase-particular';
 import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clases-participadas';
 import { ComentarClasePage} from '../pages/FO_M05/comentar-clase/comentar-clase';
+import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class'
 import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/realizar-valoracion';
 //FIN M05
 
@@ -38,7 +39,8 @@ import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/reali
     ClaseParticularPage,
     ClasesParticipadasPage,
     ComentarClasePage,
-    RealizarValoracionPage
+    RealizarValoracionPage,
+    TabCalendarClassPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,8 @@ import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/reali
     ClasesParticipadasPage,
     ComentarClasePage,
     ReservasPage,
-    RealizarValoracionPage
+    RealizarValoracionPage,
+    TabCalendarClassPage
   ],
   providers: [
     StatusBar,
