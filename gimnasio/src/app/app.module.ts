@@ -26,6 +26,7 @@ import { ProgresoPesoPage } from '../pages/FO_M04/progreso-peso/progreso-peso'
 import { CambiarPesoPage } from '../pages/FO_M04/cambiar-peso/cambiar-peso'
 import { TabsPesoPage } from '../pages/FO_M04/tabs-peso/tabs-peso'
 import { ProgresoComentarioPage } from '../pages/FO_M04/progreso-comentario/progreso-comentario';
+import { TabsEjercicioPage } from '../pages/FO_M04/tabs-ejercicio/tabs-ejercicio'
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ProgresoComentarioPage } from '../pages/FO_M04/progreso-comentario/prog
     ProgresoPesoPage,
     CambiarPesoPage,
     ProgresoComentarioPage,
-    TabsPesoPage
+    TabsPesoPage,
+    TabsEjercicioPage
 
   ],
   imports: [
@@ -66,7 +68,8 @@ import { ProgresoComentarioPage } from '../pages/FO_M04/progreso-comentario/prog
     ProgresoPesoPage,
     CambiarPesoPage,
     ProgresoComentarioPage,
-    TabsPesoPage
+    TabsPesoPage,
+    TabsEjercicioPage
   ],
   providers: [
     StatusBar,
