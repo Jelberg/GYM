@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { ProgresoEjercicioPage } from '../progreso-ejercicio/progreso-ejercicio';
 /**
  * Generated class for the SeleccionarProgresoPage page.
  *
@@ -20,6 +21,10 @@ export class SeleccionarProgresoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SeleccionarProgresoPage');
+  }
+
+  openProgresoEjercicioPage(){
+    this.navCtrl.push(ProgresoEjercicioPage);
   }
 
 }
