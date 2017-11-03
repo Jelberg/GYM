@@ -4,6 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
 <ion-header>
   <ion-navbar color="secondary">
       <button ion-button menuToggle>
@@ -15,7 +16,7 @@
   </ion-navbar>
 
 </ion-header>
-<
+<!--
 <ion-content padding>
 <h2>31 de Octubre</h2>
     <ion-list>
@@ -23,7 +24,7 @@
           <button ion-item (click)="goToClaseParticular()">
           <!--ion-thumbnail item-start>
             <img src="../../assets/imgs/clasesYoga.jpg">
-          </ion-thumbnail-->
+          </ion-thumbnail--><!--
           <h1>3:00 pm</h1>
           <h2>Yoga</h2>
           <p>Estela Rodrigues</p>
@@ -36,7 +37,7 @@
           <button ion-item (click)="goToClaseParticular()">
             <!--ion-thumbnail item-start>
               <img src="../../assets/imgs/claseSpinning.jpg">
-            </ion-thumbnail-->
+            </ion-thumbnail--><!--
             <h1>4:00 pm</h1>
             <h2>Spinning</h2>
             <p>Maria Josefa</p>
@@ -52,7 +53,7 @@
             <button ion-item (click)="goToClaseParticular()">
               <!--ion-thumbnail item-start>
                 <img src="../../assets/imgs/clasesDefensaPersonal.jpeg">
-              </ion-thumbnail-->
+              </ion-thumbnail--><!--
               <h1>6:00 pm</h1>
               <h2>Defensa Personal</h2>
               <p>Pedro Alvarez</p>
@@ -65,21 +66,20 @@
              
       </ion-list>
 </ion-content>
+-->
 
-<!--
 <ion-content padding>
   <ion-list>
-    <ion-button ion-item *ngFor="let item of items" (click)="goToParticularClase(item)">
-      <ion-thumbnail item-start>
-        <img src="{{item.img}}" alt="">
-        </ion-thumbnail>
-        <h2>{{item.titulo}}</h2>
+    <ion-item *ngFor="let item of items">
+      <button ion-item (click)="goToClaseParticular(item.id,item.titulo,item.descripcion,item.img,item.instructor,item.fecha,item.duracion)">
+        <!--ion-thumbnail item-start>
+          <img src="../../assets/imgs/clasesDefensaPersonal.jpeg">
+        </ion-thumbnail-->
+        <h1>{{item.titulo}}</h1>
         <p>{{item.instructor}}</p>
-        <p>{{item.fecha}}</p>
-        <p>Duracion: {{item.duracion}} min</p>-->
-        <!-- Hay que buscar la forma de eliminar el boton de agregar al presioanrlo
-        <ion-button ion-item clear item-end (click)="reservarClase(item.number)" id="botonAgregarReserva{{item.id}}"><ion-icon name="add-circle"></ion-icon></ion-button>
-    </ion-button>
+        <p>Duracion: {{item.duracion}} min</p>
+        </button>
+        <button ion-button clear item-end><ion-icon name="add" class="agregarClase" (click)="presentAlert()"></ion-icon></button>
+    </ion-item>
   </ion-list>
 </ion-content>
--->
