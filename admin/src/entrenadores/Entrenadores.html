@@ -6,186 +6,204 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="../css/styles.css">
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-  crossorigin="anonymous">
+    crossorigin="anonymous">
 <link rel="stylesheet" href="./style.css">
-
+<link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
 
 <body>
 
-  <!-- Sidebar/menu -->
-  <!-- Sidebar/menu -->
-  <nav class="w3-sidebar w3-color w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:215px;font-weight:bold;" id="mySidebar">
-    <br>
-    <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft w3-hover-pale-green"
-      style="width:100%;font-size:20px;text-align: justify;"> ↩</a>
-    <div class="w3-bar-block">
-      <a href="../index.html" onclick="w3_close()" class="menuIcon ">
-        <img src="../Imagenes/inicio_white.png" class="menuImg">
-        <p class="menuText">
-          <b>Home</b>
-        </p>
-      </a>
-      <a href="../instructores/instructores.html" onclick="w3_close()" class="menuIcon">
-        <img src="../Imagenes/Instructor_white.png" class="menuImg">
-        <p class="menuText">
-          <b>Instructores</b>
-        </p>
-        <hr style="width:120px;border:2px">
-      </a>
-      <a href="../entrenadores/entrenadores.html" onclick="w3_close()" class="menuIcon active">
-        <img src="../Imagenes/Entrenador_white.png" class="menuImg ">
-        <p class="menuText">
-          <b>Entrenadores</b>
-        </p>
-        <hr style="width:120px;border:2px">
-      </a>
-      <a href="../clases/clases.html" onclick="w3_close()" class="menuIcon">
-        <img src="../Imagenes/clase_white.png" class="menuImg">
-        <p class="menuText">
-          <b>Clases</b>
-        </p>
-        <hr style="width:120px;border:2px">
-      </a>
-      <a href="../horarios/horarios.html" onclick="w3_close()" class="menuIcon ">
-        <img src="../Imagenes/horario_white.png" class="menuImg">
-        <p class="menuText">
-          <b>Horarios</b>
-        </p>
-        <hr style="width:120px;border:2px">
-      </a>
-      <a href="../maquinas/maquinas.html" onclick="w3_close()" class="menuIcon">
-        <img src="../Imagenes/Entrenador_white.png" class="menuImg">
-        <p class="menuText">
-          <b>Máquinas</b>
-        </p>
-        <hr style="width:120px;border:2px">
-      </a>
-      <a href="../rutinas/rutinas.html" onclick="w3_close()" class="menuIcon">
-        <img src="../Imagenes/clase_white.png" class="menuImg">
-        <p class="menuText">
-          <b>Rutinas</b>
-        </p>
-        <hr style="width:120px;border:2px">
-      </a>
-    </div>
-  </nav>
-
-  <!-- Top menu on small screens -->
-  <header class=" w3-top w3-hide-large w3-color w3-xlarge w3-padding w3-margin-bottom">
-    <a href="javascript:void(0)" class="w3-button w3-color w3-hover-pale-green w3-margin-right" onclick="w3_open()">☰</a>
-  </header>
-
-  <!-- Overlay effect when opening sidebar on small screens -->
-  <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-  <!-- !PAGE CONTENT! -->
-  <div class="w3-main" style="margin-left:275px;margin-right:60px;margin-bottom:50px">
-
-    <!-- Header -->
-    <div class="w3-container" id="showcase">
-      <img src="../Imagenes/Logo Gimnasio.png" class="mainImg">
-      <h1 class="w3-xxxlarge w3-text-color">
-        <b>Gestión de Entrenadores.</b>
-      </h1>
-      <hr style="width:50px;border:5px solid #3CB371" class="w3-round">
-    </div>
-
-    <!-- Rellenar -->
-    <div class="w3-row ">
-      <div class="w3-twothird w3-teal w3-container" style="height:950px">
-        <div class="w3-padding-32 w3-padding-large">
-          <h1>Entrenadores</h1>
-          <form class="w3-container w3-card w3-padding-32 w3-white" action="/action_page.php" target="_blank">
-            <div class="w3-section">
-              <label>Id:</label>
-              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Id">
-            </div>
-            <div class="w3-section">
-              <label>Nombre Completo:</label>
-              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Nombre Completo">
-            </div>
-            <div class="w3-section">
-              <label>Fecha de Nacimiento:</label>
-              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Fecha de Nacimiento">
-            </div>
-            <div class="w3-section">
-              <label>Sexo:</label>
-              <div class="w3-row ">
-                <div class="w3-half w3-container" style="height:60px">
-                  <p>
-                    <input class="w3-radio" type="radio" name="gender" value="masculino" checked>
-                    <label>Masculino</label>
-                  </p>
-                </div>
-                <div class="w3-half w3-container" style="height:60px">
-                  <p>
-                    <input class="w3-radio" type="radio" name="gender" value="femenino">
-                    <label>Femenino</label>
-                  </p>
-                  <p>
-                </div>
-
-              </div>
-            </div>
-            <div class="w3-section">
-              <label>Correo Electrónico:</label>
-              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Correo Electrónico">
-            </div>
-            <div class="w3-section">
-              <label>Historial:</label>
-              <input class="w3-input w3-padding-64 w3-border" style="width:100%;" type="text" required name="Historial">
-            </div>
-            <div class="w3-section">
-              <label>Foto:</label>
-              <div class="w3-padding-16 w3-center">
-                <input type="file" accept="image/*">
-              </div>
-            </div>
-          </form>
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-color w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:215px;font-weight:bold;" id="mySidebar">
+        <br>
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft w3-hover-pale-green"
+            style="width:100%;font-size:20px;text-align: justify;"> ↩</a>
+        <div class="w3-bar-block">
+            <a href="../index.html" onclick="w3_close()" class="menuIcon">
+                <img src="../Imagenes/inicio_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Home</b>
+                </p>
+            </a>
+            <a href="../instructores/instructores.html" onclick="w3_close()" class="menuIcon">
+                <img src="../Imagenes/Instructor_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Instructores</b>
+                </p>
+                <hr style="width:120px;border:2px">
+            </a>
+            <a href="../entrenadores/entrenadores.html" onclick="w3_close()" class="menuIcon">
+                <img src="../Imagenes/Entrenador_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Entrenadores</b>
+                </p>
+                <hr style="width:120px;border:2px">
+            </a>
+            <a href="../clases/clases.html" onclick="w3_close()" class="menuIcon">
+                <img src="../Imagenes/clase_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Clases</b>
+                </p>
+                <hr style="width:120px;border:2px">
+            </a>
+            <a href="../horarios/horarios.html" onclick="w3_close()" class="menuIcon">
+                <img src="../Imagenes/horario_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Horarios</b>
+                </p>
+                <hr style="width:120px;border:2px">
+            </a>
+            <a href="../equipamiento/equipamiento.html" onclick="w3_close()" class="menuIcon">
+                <img src="../Imagenes/Entrenador_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Equipamiento</b>
+                </p>
+                <hr style="width:120px;border:2px">
+            </a>
+            <a href="../ejercicios/ejercicios.html" onclick="w3_close()" class="menuIcon active">
+                <img src="../Imagenes/clase_white.png" class="menuImg">
+                <p class="menuText">
+                    <b>Ejercicios</b>
+                </p>
+                <hr style="width:120px;border:2px">
+            </a>
         </div>
-      </div>
-      <div class="w3-quarter w3-blue-grey w3-container" style="height:950px">
-        <div class="w3-padding-64 w3-center">
-          <div class="w3-padding-64 w3-center">
-            <div class="w3-left-align w3-padding-large">
-              <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom ">Insertar</button>
-              <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom">Modificar</button>
-              <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom">Eliminar</button>
-              <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom">Consultar</button>
-            </div>
-          </div>
+    </nav>
+
+    <!-- Top menu on small screens -->
+    <header class=" w3-top w3-hide-large w3-color w3-xlarge w3-padding w3-margin-bottom">
+        <a href="javascript:void(0)" class="w3-button w3-color w3-hover-pale-green w3-margin-right" onclick="w3_open()">☰</a>
+    </header>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:275px;margin-right:60px;margin-bottom:50px">
+
+        <!-- Header -->
+        <div class="w3-container" id="showcase">
+            <img src="../Imagenes/Logo Gimnasio.png" class="mainImg">
+            <h1 class="w3-xxxlarge w3-text-color">
+                <b>Gestión de Entrenadores.</b>
+            </h1>
+            <hr style="width:50px;border:5px solid #3CB371" class="w3-round">
         </div>
-      </div>
+
+        <!-- Rellenar -->
+        <div class="row">
+            <p style="font-size:18px">En esta sección podrá gestionar todo lo relacionado a los datos de los entrenadores del gimnasio.
+            </p>
+            <a href="./gest_Entrenadores.html">
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Agregar Entrenador</button>
+            </a>
+            <a href="./gest_Entrenadores.html">
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Consultar Entrenador</button>
+            </a>
+            <label>Introduzca Correo:</label>
+            <input class="w3-input w3-border" style="width:30%;" type="text" required name="Correo">
+        </div>
+        <div class="row">
+            <div class="content">
+                <div class="w3-row ">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="tablehead">Nombre</th>
+                                <th class="tablehead">Edad</th>
+                                <th class="tablehead">Correo Electronico</th>
+                                <th class="tablehead tcenter">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alejandro González</td>
+                                <td>32</td>
+                                <td>agonzalezz3@gmail.com</td>
+                                <td class="tcenter">
+                                    <a href="./gest_Instructores.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Gabriel Diaz</td>
+                                <td>28</td>
+                                <td>gd2433@hotmail.com</td>
+                                <td class="tcenter">
+                                    <a href="./gest_Instructores.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Iliana Contreras</td>
+                                <td>29</td>
+                                <td>icontreras12@gmail.com</td>
+                                <td class="tcenter">
+                                    <a href="./gest_Instructores.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Jose Hernandez</td>
+                                <td>38</td>
+                                <td>jhs.12@gmail.com</td>
+                                <td class="tcenter">
+                                    <a href="./gest_Instructores.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Fernanda Torres</td>
+                                <td>28</td>
+                                <td>fernandat_8@gmail.com</td>
+                                <td class="tcenter">
+                                    <a href="./gest_Instructores.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </td>
+                            </tr> 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
+    <script>
+        // Script to open and close sidebar
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+        }
 
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
 
-
-
-  </div>
-  <script>
-    // Script to open and close sidebar
-    function w3_open() {
-      document.getElementById("mySidebar").style.display = "block";
-      document.getElementById("myOverlay").style.display = "block";
-    }
-
-    function w3_close() {
-      document.getElementById("mySidebar").style.display = "none";
-      document.getElementById("myOverlay").style.display = "none";
-    }
-
-    // Modal Image Gallery
-    function onClick(element) {
-      document.getElementById("img01").src = element.src;
-      document.getElementById("modal01").style.display = "block";
-      var captionText = document.getElementById("caption");
-      captionText.innerHTML = element.alt;
-    }
-  </script>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-    crossorigin="anonymous"></script>
+        // Modal Image Gallery
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
 
 </body>
 
