@@ -8,6 +8,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
 <link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
 
 <body>
 
@@ -51,17 +52,17 @@
                 </p>
                 <hr style="width:120px;border:2px">
             </a>
-            <a href="../maquinas/maquinas.html" onclick="w3_close()" class="menuIcon">
+            <a href="../equipamiento/equipamiento.html" onclick="w3_close()" class="menuIcon">
                 <img src="../Imagenes/Entrenador_white.png" class="menuImg">
                 <p class="menuText">
-                    <b>Máquinas</b>
+                    <b>Equipamiento</b>
                 </p>
                 <hr style="width:120px;border:2px">
             </a>
-            <a href="../rutinas/rutinas.html" onclick="w3_close()" class="menuIcon active">
+            <a href="../ejercicios/ejercicios.html" onclick="w3_close()" class="menuIcon active">
                 <img src="../Imagenes/clase_white.png" class="menuImg">
                 <p class="menuText">
-                    <b>Rutinas</b>
+                    <b>Ejercicios</b>
                 </p>
                 <hr style="width:120px;border:2px">
             </a>
@@ -83,74 +84,85 @@
         <div class="w3-container" id="showcase">
             <img src="../Imagenes/Logo Gimnasio.png" class="mainImg">
             <h1 class="w3-xxxlarge w3-text-color">
-                <b>Gestión de Instructores.</b>
+                <b>Gestión de Ejercicios.</b>
             </h1>
             <hr style="width:50px;border:5px solid #3CB371" class="w3-round">
         </div>
 
         <!-- Rellenar -->
+
         <div class="w3-row ">
-            <div class="w3-twothird w3-teal w3-container" style="height:750px">
+            <div class="w3-twothird w3-teal w3-container" style="height:800px">
                 <div class="w3-padding-32 w3-padding-large">
-                    <h1>Instructores</h1>
-                    <form class="w3-container w3-card w3-padding-32 w3-white" action="/action_page.php" target="_blank">
+                    <h1>Agregar/Editar ejercicio</h1>
+
+                    <p style="font-size:18px">En esta sección podrá agregar y editar los ejercicios que se ejecutarán en las máquinas y equipos del gimnasio.</p>
+
+                    <hr>
+
+                    <form class="w3-container w3-card w3-padding-32 w3-white" action="/action_page.php" target="_blank"> 
                         <div class="w3-section">
-                            <label>Id:</label>
-                            <input class="w3-input w3-border" style="width:100%;" type="text" required name="Id">
-                        </div>
-                        <div class="w3-section">
-                            <label>Nombre Completo:</label>
+                            <label>Nombre del ejercicio:</label>
                             <input class="w3-input w3-border" style="width:100%;" type="text" required name="Nombre Completo">
                         </div>
                         <div class="w3-section">
-                            <label>Fecha de Nacimiento:</label>
-                            <input class="w3-input w3-border" style="width:100%;" type="text" required name="Fecha de Nacimiento">
+                            <label>Equipamiento:</label>
+                            <select class="form-control" id="sel1">
+                                <option>Elíptica</option>
+                                <option>Pesas 10kg</option>
+                                <option>Paralelas</option>
+                                <option>Peck deck</option>
+                            </select>
                         </div>
                         <div class="w3-section">
-                            <label>Sexo:</label>
-                            <div class="w3-row ">
-                                <div class="w3-half w3-container" style="height:60px">
-                                    <p>
-                                        <input class="w3-radio" type="radio" name="gender" value="male" checked>
-                                        <label>Masculino</label>
-                                    </p>
-                                </div>
-                                <div class="w3-half w3-container" style="height:60px">
-                                    <p>
-                                        <input class="w3-radio" type="radio" name="gender" value="female">
-                                        <label>Femenino</label>
-                                    </p>
-                                    <p>
-                                </div>
+                            <label>Grupo muscular:</label>
+                            <input class="w3-input w3-border" style="width:100%;" type="text" required name="Nombre Completo">
+                            <div class="row">
+                                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton myB2 leftie">Agregar grupo</button>
+                            </div>
 
-                            </div>
                         </div>
-                        <div class="w3-section">
-                            <label>Correo Electrónico:</label>
-                            <input class="w3-input w3-border" style="width:100%;" type="text" required name="Correo Electrónico">
-                        </div>
-                        <div class="w3-section">
-                            <label>Foto:</label>
-                            <div class="w3-padding-16 w3-center">
-                                <input type="file" accept="image/*">
-                            </div>
+
+                        <div class="w3-section ">
+                            <label>Grupo muscular agregado:</label>
+                            <ul class="withScroll">
+                                <li>Abdominales
+                                    <i class="fa fa-times" aria-hidden="true" style="margin-left: 15px;cursor:pointer;color:#f44336"></i>
+                                </li>
+                                <li>Triceps
+                                    <i class="fa fa-times" aria-hidden="true" style="margin-left: 15px;cursor:pointer;color:#f44336"></i>
+                                </li>
+                                <li>Pectorales
+                                    <i class="fa fa-times" aria-hidden="true" style="margin-left: 15px;cursor:pointer;color:#f44336"></i>
+                                </li>
+                                <li>Espalda
+                                    <i class="fa fa-times" aria-hidden="true" style="margin-left: 15px;cursor:pointer;color:#f44336"></i>
+                                </li>
+                            </ul>
+
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="w3-quarter w3-blue-grey w3-container" style="height:750px">
+            <div class="w3-quarter w3-blue-grey w3-container" style="height:800px">
                 <div class="w3-padding-64 w3-center">
                     <div class="w3-padding-64 w3-center">
                         <div class="w3-left-align w3-padding-large">
-                            <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom ">Insertar</button>
-                            <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom">Modificar</button>
-                            <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom">Eliminar</button>
-                            <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom">Consultar</button>
+                            <a href="./ejercicios.html">
+                                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton myB2">Guardar/Editar</button>
+                            </a>
+                            <!--   <a href="">
+                                    <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom">Editar</button>
+                                </a> -->
+                            <a href="./ejercicios.html">
+                                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton myB2">Volver</button>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
 
 
 

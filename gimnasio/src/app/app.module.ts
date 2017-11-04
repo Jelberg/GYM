@@ -9,14 +9,12 @@ import { ChartsModule } from 'ng2-charts';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+//M04
 import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/seleccionar-progreso';
 import { LineaComponent } from '../components/linea/linea';
 import { BarraComponent } from '../components/barra/barra';
 import { LineaMedidasComponent } from '../components/lineaMedidas/lineaMedidas';
 import { LineaPesoComponent } from '../components/linea-peso/linea-peso'
-
-
-
 import { ProgresoEjercicioPage } from '../pages/FO_M04/progreso-ejercicio/progreso-ejercicio';
 import { ListaEjerciciosPage } from '../pages/FO_M04/lista-ejercicios/lista-ejercicios';
 import { ListaContactosPage } from '../pages/FO_M04/lista-contactos/lista-contactos';
@@ -30,6 +28,17 @@ import { TabsEjercicioPage } from '../pages/FO_M04/tabs-ejercicio/tabs-ejercicio
 //import { CambiarMedidasPage } from '../pages/FO_M04/cambiar-medidas/cambiar-medidas';
 import { CambiaMedidaPage } from '../pages/FO_M04/cambia-medida/cambia-medida';
 import { TabMedidaPage } from '../pages/FO_M04/tab-medida/tab-medida';
+//FIN M04
+//M05
+import { ClasesPage } from '../pages/FO_M05/clases/clases';
+import { ReservasPage } from '../pages/FO_M05/reservas/reservas';
+import { ClaseParticularPage} from '../pages/FO_M05/clase-particular/clase-particular';
+import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clases-participadas';
+import { ComentarClasePage} from '../pages/FO_M05/comentar-clase/comentar-clase';
+import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/realizar-valoracion';
+//FIN M05
+
+
 
 @NgModule({
   declarations: [
@@ -53,8 +62,14 @@ import { TabMedidaPage } from '../pages/FO_M04/tab-medida/tab-medida';
     //TabsMedidasPage,
     //CambiarMedidasPage,
     CambiaMedidaPage,
-    TabMedidaPage
-
+    TabMedidaPage,
+    ProgresoEjercicioPage,
+    ClasesPage,
+    ReservasPage,
+    ClaseParticularPage,
+    ClasesParticipadasPage,
+    ComentarClasePage,
+    RealizarValoracionPage
   ],
   imports: [
     BrowserModule,
@@ -78,7 +93,13 @@ import { TabMedidaPage } from '../pages/FO_M04/tab-medida/tab-medida';
     //TabsMedidasPage,
     //CambiarMedidasPage,
     CambiaMedidaPage,
-    TabMedidaPage
+    TabMedidaPage,
+    ClasesPage,
+    ClaseParticularPage,
+    ClasesParticipadasPage,
+    ComentarClasePage,
+    ReservasPage,
+    RealizarValoracionPage
   ],
   providers: [
     StatusBar,
