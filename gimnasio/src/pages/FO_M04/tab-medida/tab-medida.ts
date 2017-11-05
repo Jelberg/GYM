@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProgresoMedidasPage } from '../ProgresoMedidas/progresomedidas';
 import { CambiaMedidaPage } from '../cambia-medida/cambia-medida';
 import { ProgresoComentarioPage } from '../progreso-comentario/progreso-comentario';
+import { ListaContactosPage } from '../lista-contactos/lista-contactos';
 
 @IonicPage()
 @Component({
@@ -22,5 +23,8 @@ export class TabMedidaPage {
   ionViewDidLoad() 
   {
     console.log('ionViewDidLoad TabMedidaPage');
+  }
+  goToListaContactosPage(){
+    this.navCtrl.push(ListaContactosPage);
   }
 }

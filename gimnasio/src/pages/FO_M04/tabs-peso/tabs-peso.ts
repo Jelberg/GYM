@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProgresoPesoPage } from '../progreso-peso/progreso-peso';
 import { CambiarPesoPage } from '../cambiar-peso/cambiar-peso';
 import { ProgresoComentarioPage } from '../progreso-comentario/progreso-comentario';
+import { ListaContactosPage } from '../lista-contactos/lista-contactos';
 
 @IonicPage()
 @Component({
@@ -22,5 +23,8 @@ export class TabsPesoPage {
   ionViewDidLoad() 
   {
     console.log('ionViewDidLoad TabsPesoPage');
+  }
+  goToListaContactosPage(){
+    this.navCtrl.push(ListaContactosPage);
   }
 }
