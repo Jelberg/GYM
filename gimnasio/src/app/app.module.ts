@@ -75,7 +75,20 @@ import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/reali
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      tabsPlacement:'bottom',
+      platforms:{
+        android:{
+          tabsPlacement:'top'
+        },
+        ios:{
+          tabsPlacement:'top'
+        },
+        windows:{
+          tabsPlacement:'top'
+        }
+      }
+  }),
     ChartsModule
   ],
   bootstrap: [IonicApp],

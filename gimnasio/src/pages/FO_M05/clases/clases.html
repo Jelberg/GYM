@@ -10,7 +10,7 @@
       <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-item clase="buscador">
+        <ion-item clase="buscador" >
             <ion-input placeholder="Buscar" type="text"></ion-input>
           </ion-item>
   </ion-navbar>
@@ -69,17 +69,22 @@
 -->
 
 <ion-content padding>
+  <h2>31 de Octubre</h2>
   <ion-list>
     <ion-item *ngFor="let item of items">
-      <button ion-item (click)="goToClaseParticular(item.id,item.titulo,item.descripcion,item.img,item.instructor,item.fecha,item.duracion)">
+      <button ion-item (click)="goToClaseParticular(item.id,item.titulo,item.descripcion,item.img,item.instructor,item.fecha,item.duracion,item.hora,item.cupos)">
         <!--ion-thumbnail item-start>
           <img src="../../assets/imgs/clasesDefensaPersonal.jpeg">
         </ion-thumbnail-->
-        <h1>{{item.titulo}}</h1>
+        <h1>{{item.hora}}</h1>
+        <h2>{{item.titulo}}</h2>
         <p>{{item.instructor}}</p>
         <p>Duracion: {{item.duracion}} min</p>
+        <p>{{item.cupos}}</p>
         </button>
-        <button ion-button clear item-end><ion-icon name="add" class="agregarClase" (click)="presentAlert()"></ion-icon></button>
+        <button ion-button clear item-end>
+          <ion-icon name="add" (click)="presentAlert()"></ion-icon>
+        </button>
     </ion-item>
   </ion-list>
 </ion-content>
