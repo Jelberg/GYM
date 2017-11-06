@@ -15,14 +15,17 @@ public class Progreso_Peso {
     private int _id;
     private int _peso;
     private LocalDate _fechaP;
+    private String _sobrenombre;
     
     public Progreso_Peso(){    
     }
 
-    public Progreso_Peso(int id, int peso, LocalDate fechaP){
+    public Progreso_Peso(int id, int peso, LocalDate fechaP,
+    String sobrenombre){
         this._id = id;
         this._peso = peso;
         this._fechaP = fechaP;
+        this._sobrenombre = sobrenombre;
     }
     /**
      * @return the _id
@@ -64,6 +67,20 @@ public class Progreso_Peso {
      */
     public void setFechaP(LocalDate _fechaP) {
         this._fechaP = _fechaP;
+    }
+
+    /**
+     * @return the _sobrenombre
+     */
+    public String getSobrenombre() {
+        return _sobrenombre;
+    }
+
+    /**
+     * @param _sobrenombre the _sobrenombre to set
+     */
+    public void setSobrenombre(String _sobrenombre) {
+        this._sobrenombre = _sobrenombre;
     }
     
     

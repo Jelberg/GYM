@@ -5,56 +5,51 @@
  */
 package Servicios;
 
-import Dominio.*;
-import Dominio.Progreso_Medida;
+import Dominio.Progreso_Peso;
+import Dominio.Sql;
+import Excepciones.ParameterNullException;
+import Validaciones.ValidationWS;
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import Validaciones.ValidationWS;
-import Excepciones.ParameterNullException;
-import com.google.gson.reflect.TypeToken;
-import java.lang.ProcessBuilder.Redirect.Type;
-import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
-import java.util.Map;
-import javax.ws.rs.DELETE;
-import static javax.ws.rs.HttpMethod.POST;
-import javax.ws.rs.POST;
-
 
 /**
  *
  * @author marvian
  */
-@Path("/F0M04_Progreso_Medida")
-public class FOM04_Progreso_Medida {
+@Path("/F0M04_Progreso_Peso")
+public class FOM04_Progreso_Peso {
     
     private Connection conn = Sql.getConInstance();
     //Atributo que se utiliza para transformar a formado JSON las consultas.
     private Gson gson = new Gson();
     private String response;
-    private ArrayList<Progreso_Medida> jsonArray;
+    private ArrayList<Progreso_Peso> jsonArray;
+    
     
     /**
      * Funcion que recibe como parametros la fecha y el sobrenombre del usuario
-     * para hacer la consulta de las medidas registradas por el usuario durante
-     * esa fecha.
-     * @param fecha Fecha del mes en que se quiere obtener las medidas.
+     * para hacer la consulta del peso registrado por el usuario en esa fecha.
+     * @param fecha Fecha del mes en que se quiere obtener el peso.
      * Debe ser en formato yyyy-mm-dd
      * @param sobrenombre Indica el nombre del usuario
-     * @return Devuelve las medidas en formato json
+     * @return Devuelve el peso ingresado en formato json
      */
     @GET
-    @Path("/getProgresoM")
+    @Path("/getProgresoP")
     @Produces("aplicacion/json")
     public String getProgresoM(@QueryParam("fecha") String fecha,
                                 @QueryParam("sobrenombre") String sobrenombre){
@@ -65,7 +60,7 @@ public class FOM04_Progreso_Medida {
                 put("fecha", fecha);
             }});
 
-            String query = "SELECT * FROM fo_m04_get_progresoM(?, ?)";
+            String query = "SELECT * FROM fo_m04_get_progresoP(?, ?)";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
             st.setDate(1, Date.valueOf(fecha));
@@ -73,10 +68,8 @@ public class FOM04_Progreso_Medida {
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
-                jsonArray.add(new Progreso_Medida());
-                jsonArray.get(jsonArray.size() - 1).setMedida(rs.getInt("medida"));
-                jsonArray.get(jsonArray.size() - 1).setTipo(rs.getString("tipo"));
-            
+                jsonArray.add(new Progreso_Peso());
+                jsonArray.get(jsonArray.size() - 1).setPeso(rs.getInt("peso"));
             }
             response = gson.toJson(jsonArray);
         }
@@ -95,18 +88,18 @@ public class FOM04_Progreso_Medida {
     
     /**
      * Metodo que recibe como parametros la fecha del mes 
-     * correspondiente a la fecha a eliminar y el nombre del usuario 
-     * para eliminar las medidas de ese mes.
-     * @param fecha Indica la fecha correspondiente a las medidas.
+     * correspondiente al peso a eliminar y el nombre correspondiente
+     * al usuario
+     * @param fecha Indica la fecha correspondiente al peso.
      * @param sobrenombre Indica el nombre del usuario.
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
     @DELETE
-    @Path("/eliminarMedidas")
+    @Path("/eliminarPeso")
     @Produces("aplicacion/json")
-    public String eliminaMedidas(@QueryParam("fecha") String fecha,
-                             @QueryParam("sobrenombre") String sobrenombre) {
+    public String eliminaPeso(@QueryParam("fecha") String fecha,
+                              @QueryParam("sobrenombre") String sobrenombre) {
 
         Map<String, String> response = new HashMap<String, String>();
         try{
@@ -115,12 +108,12 @@ public class FOM04_Progreso_Medida {
                 put("sobrenombre", sobrenombre);
                 put("fecha", fecha);
             }});
-            String query = "SELECT fo_m04_elimina_medidas(?, ?)";
+            String query = "SELECT fo_m04_elimina_peso(?, ?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setString(1, fecha);
             st.setString(2, sobrenombre);
             ResultSet rs = st.executeQuery();
-            response.put("data", "Se elimino las medidas");
+            response.put("data", "Se elimino el peso");
 
         }
         catch(SQLException e) {
@@ -134,20 +127,75 @@ public class FOM04_Progreso_Medida {
             return gson.toJson(response);
 
         }
-        
-        
     }
     
     /**
-     * Funcion obtiene las medidas por un usuario en los ultimos 12 meses.
+     * Funcion obtiene el peso de un usuario correspondiente a cada 
+     * semana del mes.
      * @param sobrenombre Indica el nombre del usuario.
-     * @return Devuelve un json con la informacion de las medidas
+     * @return Devuelve un json con la informacion del peso
      * relacionada con el mes correspondiente
      */
     @GET
-    @Path("/getMedidasDelAno")
+    @Path("/getPesoDelMes")
+    @Produces("application/json")
+    public String getPesoDelMes(@QueryParam("sobrenombre") String sobrenombre){
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("sobrenombre", sobrenombre);
+            }});
+
+            String query = "select * from fo_m04_get_peso_mes(?, ?, ?)";
+            jsonArray = new ArrayList<>();
+            ResultSet rs;
+            LocalDate fecha = LocalDate.now();
+            Date day;
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setString(1, sobrenombre);
+
+            for (int i=0; i<=3; i++){
+                day = Date.valueOf(fecha);
+                st.setDate(2,day);
+                st.setDate(3,day);
+                rs = st.executeQuery();
+                jsonArray.add(new Progreso_Peso());
+                jsonArray.get(jsonArray.size() - 1).setFechaP(fecha);
+                if (rs.wasNull()){
+                    jsonArray.get(jsonArray.size() - 1).setPeso(0);
+                }
+                while (rs.next()){
+                    jsonArray.get(jsonArray.size() - 1).setPeso(rs.getInt("peso"));
+                }
+
+                if (i < 6) {
+                    fecha = fecha.minusWeeks(1);
+                }
+            }
+            response = gson.toJson(jsonArray);
+        }
+        catch (SQLException e) {
+            response = e.getMessage();
+        }
+        catch (ParameterNullException e){
+            response = e.getMessage();
+        }
+        finally {
+            Sql.bdClose(conn);
+            return response;
+        }
+    }
+
+    
+    /**
+     * Funcion obtiene el peso de un usuario en los ultimos 12 meses.
+     * @param sobrenombre Indica el nombre del usuario.
+     * @return Devuelve un json con la informacion del peso
+     * relacionada con el mes correspondiente
+     */
+    @GET
+    @Path("/getPesoDelAno")
     @Produces("aplicacion/json")
-    public String getMedidasDelAno(@QueryParam("sobrenombre") String sobrenombre){
+    public String getPesodelMes(@QueryParam("sobrenombre") String sobrenombre){
 
         try {
 
@@ -155,7 +203,7 @@ public class FOM04_Progreso_Medida {
                 put("sobrenombre", sobrenombre);
             }});
 
-            String query = "select * from m04_get_medidas_ano(?, ?, ?)";
+            String query = "select * from m04_get_peso_ano(?, ?, ?)";
             ResultSet rs;
             jsonArray = new ArrayList<>();
             LocalDate fecha = LocalDate.now();
@@ -176,16 +224,16 @@ public class FOM04_Progreso_Medida {
                 }
 
                 rs = st.executeQuery();
-                jsonArray.add(new Progreso_Medida());
+                jsonArray.add(new Progreso_Peso());
                 if (rs.wasNull()) {
-                    jsonArray.get(jsonArray.size() - 1).setMedida(0);
-                    jsonArray.get(jsonArray.size() - 1).setFechaM(fechaInicio.toLocalDate());
+                    jsonArray.get(jsonArray.size() - 1).setPeso(0);
+                    jsonArray.get(jsonArray.size() - 1).setFechaP(fechaInicio.toLocalDate());
                 }
                 else {
 
                     while (rs.next()) {
-                        jsonArray.get(jsonArray.size() - 1).setMedida(rs.getInt("medida"));
-                        jsonArray.get(jsonArray.size() - 1).setFechaM(fechaInicio.toLocalDate());
+                        jsonArray.get(jsonArray.size() - 1).setPeso(rs.getInt("peso"));
+                        jsonArray.get(jsonArray.size() - 1).setFechaP(fechaInicio.toLocalDate());
                     }
                 }
             }
@@ -204,50 +252,5 @@ public class FOM04_Progreso_Medida {
     }
     
     
-    /**
-     * Funcion que perimite ingresar varios alimentos que consumio el usuario
-     * @param jsonDiet Indica los alimentos que se insertaran en formato json, el json debe tener la estructura
-     *                  de un arreglo de un objeto Diet(_calorie, _food, _moment, _username) convertido en  json
-     * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
-     */
-    @POST
-    @Path("/insertaMedidas")
-    @Produces("aplicacion/json")
-    public String insertaMedidas(@QueryParam("Progreso_Medida") String jsonDiet){
-
-        Map<String, String> response = new HashMap<String, String>();
-        try {
-            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("Progreso_Medida", jsonDiet);
-            }});
-
-            String query = "select * from fo_m04_inserta_medidas(?, ?, ?, ?)";
-            PreparedStatement st = conn.prepareStatement(query);
-            java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
-            
-            Progreso_Medida[] medida  = gson.fromJson(jsonDiet, type);
-
-            for (int i = 0; i < medida.length; i++) {
-                st.setInt(1, medida[i].getMedida());
-                st.setString(2, medida[i].getTipo());
-                /*st.setLocalDate(3, medida[i].getFechaM());*/
-                st.setString(4, medida[i].getSobrenombre());
-                st.executeQuery();
-            }
-
-            response.put("data", "Se insertaron las medidas");
-        }
-        catch (SQLException e){
-            response.put("error", e.getMessage());
-        }
-        catch (ParameterNullException e) {
-            response.put("error", e.getMessage());
-        }
-        finally {
-            Sql.bdClose(conn);
-            return gson.toJson(response);
-        }
-
-    }
     
 }

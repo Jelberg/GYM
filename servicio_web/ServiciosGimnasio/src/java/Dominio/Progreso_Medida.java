@@ -16,16 +16,18 @@ public class Progreso_Medida {
     private int _medida;
     private String _tipo;
     private LocalDate _fechaM;
+    private String _sobrenombre;
     
     public Progreso_Medida(){
     }
     
     public Progreso_Medida(int id, int medida, String tipo, 
-    LocalDate fechaM){
+    LocalDate fechaM, String sobrenombre){
         this._id = id;
         this._medida = medida;
         this._tipo = tipo;
         this._fechaM = fechaM;
+        this._sobrenombre = sobrenombre;
     }
 
     /**
@@ -83,6 +85,21 @@ public class Progreso_Medida {
     public void setFechaM(LocalDate _fechaM) {
         this._fechaM = _fechaM;
     }
+
+    /**
+     * @return the _sobrenombre
+     */
+    public String getSobrenombre() {
+        return _sobrenombre;
+    }
+
+    /**
+     * @param _sobrenombre the _sobrenombre to set
+     */
+    public void setSobrenombre(String _sobrenombre) {
+        this._sobrenombre = _sobrenombre;
+    }
+    
     
     
     
