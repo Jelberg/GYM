@@ -57,7 +57,7 @@ CONSTRAINT pk_hc_id PRIMARY KEY (hc_id,pk_instructor,pk_clase)
 
 CREATE TABLE MEDIDA(
 	med_id		serial  not null,
-	med_id		varchar(20) unique not null
+	med_tipo	varchar(20) unique not null
 CONSTRAINT pk_med_id PRIMARY KEY (med_id)
 
 );
