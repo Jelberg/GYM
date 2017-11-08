@@ -5,9 +5,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/seleccionar-progreso';
-import { ClasesPage } from '../pages/FO_M05/clases/clases';
+//import { ClasesPage } from '../pages/FO_M05/clases/clases';
 import { ReservasPage } from '../pages/FO_M05/reservas/reservas';
 import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clases-participadas';
+import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class'
+
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +27,7 @@ export class MyApp {
     this.pages = [
       { titulo: "Inicio", component: HomePage, icon: "home"},
       { titulo: "Progreso", component: SeleccionarProgresoPage, icon: "stats"},
-      {titulo: 'Clases',component:ClasesPage, icon: 'bicycle'},
+      {titulo: 'Clases',component:TabCalendarClassPage, icon: 'bicycle'},
       {titulo: 'Reservas',component:ReservasPage, icon: 'calendar'} ,
       {titulo: 'Clases Participadas',component:ClasesParticipadasPage, icon: 'done-all'},
     ];
