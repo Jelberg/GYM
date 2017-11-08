@@ -9,8 +9,8 @@ BEGIN
         FROM usuario inner join  progreso_medida on usu_id = fk_usuario inner join medida on fk_medida = med_id
         WHERE usu_cedula = usuario_CI AND pm_fecha = fecha)
    LOOP
-    medida = var_r.pm_medida
-    tipo = var_r.med_tipo
+    medida = var_r.pm_medida;
+    tipo = var_r.med_tipo;
     RETURN NEXT;
    END LOOP;
 END; $$
@@ -18,7 +18,7 @@ END; $$
 
 
 --Este elimina las medidas correspondientes a esa fecha y a ese usuario
-CREATE OR REPLACE FUNTION fo_m04_elimina_medidas (usuario_CI int, fecha DATE)
+CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_CI int, fecha DATE)
 	RETURNS void AS $$
     DECLARE
     BEGIN
@@ -28,7 +28,7 @@ CREATE OR REPLACE FUNTION fo_m04_elimina_medidas (usuario_CI int, fecha DATE)
 LANGUAGE plpgsql;
 
 -- INSERTA MEDIDAS PERTENECIENTE A ESE USUARIO EN LA FECHA ACTUAL
-CREATE OR REPLACE fo_m04_inserta_medidas(
+CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
     fk_usuario INT,
     medida INT,
     tipo VARCHAR,
@@ -47,7 +47,7 @@ CREATE OR REPLACE fo_m04_inserta_medidas(
 --Falta la consulta de las medidas durante un ano
 
 -- Este devuelve los comentarios pertenencientes a ese progreso
-CREATE OR REPLACE fo_m04_get_comentariopromed( pm_id int)
+--CREATE OR REPLACE FUNCTION fo_m04_get_comentariopromed( pm_id int)
 
 
 
