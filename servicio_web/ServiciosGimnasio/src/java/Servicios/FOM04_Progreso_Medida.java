@@ -115,7 +115,7 @@ public class FOM04_Progreso_Medida {
                 put("sobrenombre", sobrenombre);
                 put("fecha", fecha);
             }});
-            String query = "SELECT fo_m04_elimina_medidas(?, ?)";
+                String query = "SELECT fo_m04_elimina_medidas(?, ?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setString(1, fecha);
             st.setString(2, sobrenombre);
@@ -206,8 +206,7 @@ public class FOM04_Progreso_Medida {
     
     /**
      * Funcion que perimite ingresar vario las medidas del usuario
-     * @param jsonMedida Indica las medidas que se insertaran en formato json, el json debe tener la estructura
-     * de un arreglo de un objeto Progreso_Medida(_calorie, _food, _moment, _username) convertido en  json
+     * @param jsonMedida Indica las medidas que se insertaran en formato json,
      * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
      */
     @POST
