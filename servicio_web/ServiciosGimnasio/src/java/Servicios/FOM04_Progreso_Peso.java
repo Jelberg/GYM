@@ -52,7 +52,7 @@ public class FOM04_Progreso_Peso {
      */
     @GET
     @Path("/getProgresoP")
-    @Produces("aplicacion/json")
+    @Produces("application/json")
     public String getProgresoM(@QueryParam("fecha") String fecha,
                                 @QueryParam("sobrenombre") String sobrenombre){
     
@@ -99,7 +99,7 @@ public class FOM04_Progreso_Peso {
      */
     @DELETE
     @Path("/eliminarPeso")
-    @Produces("aplicacion/json")
+    @Produces("application/json")
     public String eliminaPeso(@QueryParam("fecha") String fecha,
                               @QueryParam("sobrenombre") String sobrenombre) {
 
@@ -196,7 +196,7 @@ public class FOM04_Progreso_Peso {
      */
     @GET
     @Path("/getPesoDelAno")
-    @Produces("aplicacion/json")
+    @Produces("application/json")
     public String getPesodelMes(@QueryParam("sobrenombre") String sobrenombre){
 
         try {

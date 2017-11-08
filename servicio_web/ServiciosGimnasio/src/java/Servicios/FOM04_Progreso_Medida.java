@@ -55,9 +55,9 @@ public class FOM04_Progreso_Medida {
      */
     @GET
     @Path("/getProgresoM")
-    @Produces("aplicacion/json")
+    @Produces("application/json")
     public String getProgresoM(@QueryParam("fecha") String fecha,
-                                @QueryParam("sobrenombre") String sobrenombre){
+                                @QueryParam("sobrenombre") Integer sobrenombre){
     
         try{
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
@@ -65,11 +65,11 @@ public class FOM04_Progreso_Medida {
                 put("fecha", fecha);
             }});
 
-            String query = "SELECT * FROM fo_m04_get_progresoM(?, ?)";
+            String query = "SELECT * FROM fo_m04_get_progresom(?, ?)";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
-            st.setDate(1, Date.valueOf(fecha));
-            st.setString(2, sobrenombre);
+            st.setInt(1, sobrenombre);
+            st.setDate(2, Date.valueOf(fecha));
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
@@ -104,9 +104,9 @@ public class FOM04_Progreso_Medida {
      */
     @DELETE
     @Path("/eliminarMedidas")
-    @Produces("aplicacion/json")
-    public String eliminaMedidas(@QueryParam("fecha") String fecha,
-                             @QueryParam("sobrenombre") String sobrenombre) {
+    @Produces("application/json")
+    public String eliminaMedidas(@QueryParam("fecha") Date fecha,
+                             @QueryParam("sobrenombre") Integer sobrenombre) {
 
         Map<String, String> response = new HashMap<String, String>();
         try{
@@ -117,8 +117,8 @@ public class FOM04_Progreso_Medida {
             }});
                 String query = "SELECT fo_m04_elimina_medidas(?, ?)";
             PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, fecha);
-            st.setString(2, sobrenombre);
+            st.setInt(1, sobrenombre);
+            st.setDate(2, fecha);
             ResultSet rs = st.executeQuery();
             response.put("data", "Se elimino las medidas");
 
@@ -146,7 +146,7 @@ public class FOM04_Progreso_Medida {
      */
     @GET
     @Path("/getMedidasDelAno")
-    @Produces("aplicacion/json")
+    @Produces("application/json")
     public String getMedidasDelAno(@QueryParam("sobrenombre") String sobrenombre){
 
         try {
@@ -211,10 +211,10 @@ public class FOM04_Progreso_Medida {
      */
     @POST
     @Path("/insertaMedidas") //Revisar logica para hacer el bucle en el servicio
-    @Produces("aplicacion/json")
+    @Produces("application/json")
     public String insertaMedidas(@QueryParam("id_usuario") int id_usuario,
                                  @QueryParam("medida") int medida,
-                                 @QueryParam("tipo") String tipo,
+                                 @QueryParam("tipo_medida") int tipo_medida,
                                  @QueryParam("fecha") Date fecha ){
 
         Map<String, String> response = new HashMap<String, String>();
@@ -222,7 +222,7 @@ public class FOM04_Progreso_Medida {
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("id_usuario", id_usuario );
                 put("medida", medida );
-                put("tipo", tipo );
+                put("tipo_medida", tipo_medida );
                 put("fecha", fecha );
             }});
 
@@ -231,7 +231,7 @@ public class FOM04_Progreso_Medida {
             java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
                 st.setInt(1, id_usuario);
                 st.setInt(2, medida);
-                st.setString(3, tipo);
+                st.setInt(3, tipo_medida);
                 st.setDate(4, fecha);
                 
                 st.executeQuery();
