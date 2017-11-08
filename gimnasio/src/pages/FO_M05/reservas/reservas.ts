@@ -30,13 +30,12 @@ export class ReservasPage {
     console.log('ionViewDidLoad ReservasPage');
   }
 
-  /* AUN NO SE SI FUNCIONA ...  ESTOY OFFLINE
-
-  Deberia eliminar la Reserva
+ 
+  //Deberia eliminar la Reserva
   eliminarReserva(id: number){
     console.log('Reserva Eliminada');
   }
-  */
+  
 
   presentAlert(id) {
     const alert = this.alertCtrl.create({

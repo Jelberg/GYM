@@ -46,7 +46,7 @@ public items: Array<{id: number, titulo: string, descripion: string, img:string,
 
   //Deberia de rootear al usuario desde la pagina de clases al darle a la clase de la que quiere ver el detalle
   goToClaseParticular(id: number,titulo: string, descripcion: string,img: string, instructor: string, fecha:string, duracion: number){
-    this.navCtrl.push(ClaseParticularPage,{navControler:this.navCtrl, navParametros:this.navParams, alertControler:this.alertCtrl/*, id: id, titulo:titulo,descripcion:descripcion, img:img, instructor:instructor, fecha:fecha, duracion: duracion*/});
+    this.navCtrl.push(ClaseParticularPage,{navControler:this.navCtrl, navParametros:this.navParams, alertControler:this.alertCtrl});
   }
 
   // Deberia de hacer todo el proceso apra reservar una clase
