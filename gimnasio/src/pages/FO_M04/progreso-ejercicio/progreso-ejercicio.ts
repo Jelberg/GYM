@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { ListaEjerciciosPage } from '../lista-ejercicios/lista-ejercicios';
+import { ListaContactosPage } from '../lista-contactos/lista-contactos';
+
 /**
  * Generated class for the ProgresoEjercicioPage page.
  *
@@ -20,6 +23,14 @@ export class ProgresoEjercicioPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProgresoEjercicioPage');
+  }
+
+  goToListaContactosPage(){
+    this.navCtrl.push(ListaContactosPage);
+  }
+
+  goToSeleccionarEjercicioPage(){
+    this.navCtrl.push(ListaEjerciciosPage);
   }
 
 }

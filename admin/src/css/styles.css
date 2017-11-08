@@ -102,4 +102,31 @@ body {
 .row.equal {
     display: flex!important;
     flex-wrap: wrap!important;
-  }
+}
+
+.saveButton:hover {
+    color: #fff!important;
+    background-color: #009688!important;
+}
+
+.myButton {
+    float: right;
+    width: 200px;
+    border: 1px solid black;
+}
+
+.myButton:hover {
+    color: white!important;
+    background-color: #009688!important; 
+}
+
+.content {
+    height: calc(100vh - 280px);
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.tablehead {
+    color: white;
+    background: #009688;
+}
