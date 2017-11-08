@@ -179,13 +179,13 @@ public class FOM04_Progreso_Medida {
                 jsonArray.add(new Progreso_Medida());
                 if (rs.wasNull()) {
                     jsonArray.get(jsonArray.size() - 1).setMedida(0);
-                    jsonArray.get(jsonArray.size() - 1).setFechaM(fechaInicio.toLocalDate());
+                    jsonArray.get(jsonArray.size() - 1).setFechaM(fechaInicio);
                 }
                 else {
 
                     while (rs.next()) {
                         jsonArray.get(jsonArray.size() - 1).setMedida(rs.getInt("medida"));
-                        jsonArray.get(jsonArray.size() - 1).setFechaM(fechaInicio.toLocalDate());
+                        jsonArray.get(jsonArray.size() - 1).setFechaM(fechaInicio);
                     }
                 }
             }
@@ -205,35 +205,38 @@ public class FOM04_Progreso_Medida {
     
     
     /**
-     * Funcion que perimite ingresar varios alimentos que consumio el usuario
-     * @param jsonDiet Indica los alimentos que se insertaran en formato json, el json debe tener la estructura
-     *                  de un arreglo de un objeto Diet(_calorie, _food, _moment, _username) convertido en  json
+     * Funcion que perimite ingresar vario las medidas del usuario
+     * @param jsonMedida Indica las medidas que se insertaran en formato json, el json debe tener la estructura
+     * de un arreglo de un objeto Progreso_Medida(_calorie, _food, _moment, _username) convertido en  json
      * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
      */
     @POST
-    @Path("/insertaMedidas")
+    @Path("/insertaMedidas") //Revisar logica para hacer el bucle en el servicio
     @Produces("aplicacion/json")
-    public String insertaMedidas(@QueryParam("Progreso_Medida") String jsonDiet){
+    public String insertaMedidas(@QueryParam("id_usuario") int id_usuario,
+                                 @QueryParam("medida") int medida,
+                                 @QueryParam("tipo") String tipo,
+                                 @QueryParam("fecha") Date fecha ){
 
         Map<String, String> response = new HashMap<String, String>();
         try {
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("Progreso_Medida", jsonDiet);
+                put("id_usuario", id_usuario );
+                put("medida", medida );
+                put("tipo", tipo );
+                put("fecha", fecha );
             }});
 
             String query = "select * from fo_m04_inserta_medidas(?, ?, ?, ?)";
             PreparedStatement st = conn.prepareStatement(query);
             java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
-            
-            Progreso_Medida[] medida  = gson.fromJson(jsonDiet, type);
-
-            for (int i = 0; i < medida.length; i++) {
-                st.setInt(1, medida[i].getMedida());
-                st.setString(2, medida[i].getTipo());
-                /*st.setLocalDate(3, medida[i].getFechaM());*/
-                st.setString(4, medida[i].getSobrenombre());
+                st.setInt(1, id_usuario);
+                st.setInt(2, medida);
+                st.setString(3, tipo);
+                st.setDate(4, fecha);
+                
                 st.executeQuery();
-            }
+            
 
             response.put("data", "Se insertaron las medidas");
         }
@@ -249,5 +252,8 @@ public class FOM04_Progreso_Medida {
         }
 
     }
+    
+    
+    
     
 }
