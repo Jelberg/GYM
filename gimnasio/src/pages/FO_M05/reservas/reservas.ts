@@ -21,8 +21,8 @@ export class ReservasPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     this.items = [
       {id:1, titulo:"Yoga",img:"../../assets/imgs/clasesYoga.jpg", instructor:"Estela Rodrigues", fecha:"24/10/2017 3:00 pm", duracion:60},
-      {id:2, titulo:"Boceo",img:"../../assets/imgs/clasesBoxeo.jpg", instructor:"Jesus Rodriguez", fecha:"30/10/2017  3:00 pm", duracion:60},
-      {id:3, titulo:"KickBoxing",img:"../../assets/imgs/claseKickboxing.jpg", instructor:"Marcos Rodriguez", fecha:"7/11/2017 3:00 pm", duracion:60},
+      {id:2, titulo:"Boceo",img:"../../assets/imgs/clasesBoxeo.jpeg", instructor:"Jesus Rodriguez", fecha:"30/10/2017  3:00 pm", duracion:60},
+      {id:3, titulo:"KickBoxing",img:"../../assets/imgs/claseKickboxing.png", instructor:"Marcos Rodriguez", fecha:"7/11/2017 3:00 pm", duracion:60},
     ];
   }
 
