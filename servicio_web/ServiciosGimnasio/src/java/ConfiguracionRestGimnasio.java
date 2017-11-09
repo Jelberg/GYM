@@ -1,5 +1,9 @@
 
 import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+import java.util.HashSet;
+import java.util.Set;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,7 +15,8 @@ import javax.ws.rs.ApplicationPath;
  *
  * @author gilbert
  */
-@ApplicationPath("gimnasio")
-public class ConfiguracionRestGimnasio {
+@ApplicationPath("/")
+public class ConfiguracionRestGimnasio extends Application{
+    
     
 }
