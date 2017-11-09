@@ -22,13 +22,15 @@
   <ion-list>
     <ion-item-sliding *ngFor="let item of items">
       <ion-item >
-        <button ion-item (click)="goToClaseParticular(item.id,item.titulo,item.descripcion,item.img,item.instructor,item.fecha,item.duracion)">
+        <button ion-item (click)="goToClaseParticular(item.id,item.titulo,item.descripcion,item.img,item.instructor,item.fecha,item.duracion,this.disponibilidad,this.capacidad)">
         <!--<ion-thumbnail item-start>
           <img src="../../assets/imgs/clasesDefensaPersonal.jpeg">
         </ion-thumbnail>-->
         <h1>{{item.titulo }}</h1>
         <p>{{item.instructor}}</p>
         <p>Duracion: {{item.duracion}} min</p>
+        <p>Cap. {{item.capacidad}}</p>
+        <p>Disp. {{item.disponibilidad}}</p>
         </button> 
       </ion-item>
       <ion-item-options side="right ">

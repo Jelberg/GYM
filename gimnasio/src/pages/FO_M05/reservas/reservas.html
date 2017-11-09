@@ -92,19 +92,22 @@
         <!--  Hay que buscar la manera de eliminar el item o ocultarlo al eliminar la reserva-->
         <ion-item>
             <ion-grid>
-            <ion-row id="claseReservada">
-            <ion-col col-5>
-            <ion-avatar>
-                <img src="{{item.img}}" alt="" class="imagen">
-            </ion-avatar>
-            </ion-col>
-            <ion-col col-12>
-            <h2>{{item.titulo}}</h2>
-            <h3>{{item.instructor}}</h3>
-            <p>{{item.fecha}}</p>
-            <p>Duracion: {{item.duracion}} min</p>
-            </ion-col>
-            </ion-row>
+                <ion-row id="claseReservada">
+                    <!--
+                    <ion-col col-5>
+                        <ion-avatar>
+                            <img src="{{item.img}}" alt="" class="imagen">
+                        </ion-avatar>
+                    </ion-col>-->
+                    <ion-col col-12>
+                        <h2>{{item.titulo}}</h2>
+                        <h3>{{item.instructor}}</h3>
+                        <p>{{item.fecha}}</p>
+                        <p>Duracion: {{item.duracion}} min</p>
+                        <p>Cap. {{item.capacidad}}</p>
+                        <p>Disp. {{item.disponibilidad}}</p>
+                    </ion-col>
+                </ion-row>
             </ion-grid>
         </ion-item>
         <ion-item-options side="right ">

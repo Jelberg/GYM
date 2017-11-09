@@ -24,6 +24,7 @@ export class ClaseParticularPage {
   public fecha:string;
   public duracion:number;
   public capacidad:number;
+  public disponibilidad:number;
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController){  
 
     this.descripcion="sbsdgsdsdfdsfsd dsdssdvsdvsda vsdsd s";
@@ -31,6 +32,8 @@ export class ClaseParticularPage {
     this.instructor="Estela Rodriguez";
     this.fecha="24/10/2017 3:00 pm";
     this.duracion= 60;
+    this.capacidad=50;
+    this.disponibilidad=20;
   }
   
 
