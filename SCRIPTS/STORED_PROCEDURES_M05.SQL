@@ -32,12 +32,14 @@ language plpgsql
 --consultar toda la tabla de horario_clase en rango de 1 semana (entre lunes y sabado)
 --consultar tabla de horario de clase que ya se halla participado para los comentarios
 
---agregar usuario a la tabla horario clase que seria la participacion
-CREATE OR REPLACE FUNCTION M05_AGREGAR_PARTICIPACION(ID_USUARIO INT, ID_CLASE_HORARIO INT)
+--agregar usuario a la tabla horario clase que seria la participacion /	PROBADO
+CREATE OR REPLACE FUNCTION M05_AGREGAR_PARTICIPACION(ID_USUARIO INTEGER, ID_HC INTEGER)
 RETURNS VOID AS $$
 DECLARE 
 BEGIN 
-	UPDATE HORARIO_CLASE SET FK_USUARIO=ID_USUARIO WHERE HC_ID=ID_CLASE_HORARIO;
+	UPDATE HORARIO_CLASE 
+	SET FK_USUARIO=ID_USUARIO 
+	WHERE HC_ID = ID_HC ;
 END $$
 LANGUAGE PLPGSQL;
 
