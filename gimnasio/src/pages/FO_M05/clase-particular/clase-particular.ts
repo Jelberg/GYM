@@ -13,14 +13,29 @@ import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angul
   selector: 'page-clase-particular',
   templateUrl: 'clase-particular.html',
 })
+
+
+
 export class ClaseParticularPage {
+  public titulo:string;
+  public descripcion:string;
+  public img:string;
+  public instructor:string;
+  public fecha:string;
+  public duracion:number;
+  public capacidad:number;
+  public disponibilidad:number;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController){  
 
-  //public item:Array<{id:number, titulo:string, descripcion:string, img:string, instructor:string, fecha:string, duracion:number}>;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
-              /*public id:number, public titulo:string,public descripcion:string, public img:string, public instructor:string,public fecha:string, public duracion:number*/) {
-
+    this.descripcion="sbsdgsdsdfdsfsd dsdssdvsdvsda vsdsd s";
+    this.img="../assets/imgs/clasesYoga.jpg";
+    this.instructor="Estela Rodriguez";
+    this.fecha="24/10/2017 3:00 pm";
+    this.duracion= 60;
+    this.capacidad=50;
+    this.disponibilidad=20;
   }
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClaseParticularPage');
@@ -33,5 +48,4 @@ export class ClaseParticularPage {
     });
     alert.present();
   }
-
 }
