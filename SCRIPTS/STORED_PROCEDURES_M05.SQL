@@ -32,7 +32,7 @@ language plpgsql
 --consultar toda la tabla de horario_clase en rango de 1 semana (entre lunes y sabado)
 --consultar tabla de horario de clase que ya se halla participado para los comentarios
 
---agregar usuario a la tabla horario clase que seria la participacion /	PROBADO
+--AGREGAR USUARIO PARA QUE PARTICIPE EN LA CLASE
 CREATE OR REPLACE FUNCTION M05_AGREGAR_PARTICIPACION(ID_USUARIO INTEGER, ID_HC INTEGER)
 RETURNS VOID AS $$
 DECLARE 
@@ -43,7 +43,7 @@ BEGIN
 END $$
 LANGUAGE PLPGSQL;
 
---eliminar usuario de la tabla horario, restriccion tiene que ser que la fecha aun no halla pasado
+--ELIMINAR USUARIO DE LA PARTICIPACION
 CREATE OR REPLACE FUNCTION M05_ELIMINAR_PARTICIPACION(ID_USUARIO INT, ID_CLASE_HORARIO INT)
 RETURNS VOID AS $$
 DECLARE 
@@ -52,7 +52,7 @@ BEGIN
 END $$
 LANGUAGE PLPGSQL;
 
---agregar comentario y/o valoracion, es independiente ya que se encuentran ambos como atributo de tabla critica
+--AGREGAR CRITICA A LA CLASE 
 CREATE OR REPLACE FUNCTION M05_AGREGAR_CRITICA(FECHA DATE, COMENTARIO CHARACTER VARYING(400),VALORACION INT, REFERENCIA_HC INT)
 RETURNS VOID AS $$
 DECLARE 
@@ -61,7 +61,7 @@ BEGIN
 END $$
 LANGUAGE PLPGSQL;
 
---eliminar comentario y/o valoracion 
+--ELIMINAR CRITICA 
 CREATE OR REPLACE FUNCTION M05_ELIMINAR_CRITICA(ID_CRITICA INT)
 RETURNS VOID AS $$
 DECLARE 
