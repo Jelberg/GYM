@@ -26,6 +26,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import javax.ws.rs.Path;
+
 /**
  *
  * @author marvian
@@ -50,7 +52,7 @@ public class FOM04_Progreso_Peso {
      */
     @GET
     @Path("/getProgresoP")
-    @Produces("aplicacion/json")
+    @Produces("application/json")
     public String getProgresoM(@QueryParam("fecha") String fecha,
                                 @QueryParam("sobrenombre") String sobrenombre){
     
@@ -97,7 +99,7 @@ public class FOM04_Progreso_Peso {
      */
     @DELETE
     @Path("/eliminarPeso")
-    @Produces("aplicacion/json")
+    @Produces("application/json")
     public String eliminaPeso(@QueryParam("fecha") String fecha,
                               @QueryParam("sobrenombre") String sobrenombre) {
 
@@ -194,7 +196,7 @@ public class FOM04_Progreso_Peso {
      */
     @GET
     @Path("/getPesoDelAno")
-    @Produces("aplicacion/json")
+    @Produces("application/json")
     public String getPesodelMes(@QueryParam("sobrenombre") String sobrenombre){
 
         try {
@@ -250,7 +252,4 @@ public class FOM04_Progreso_Peso {
             return response;
         }
     }
-    
-    
-    
 }

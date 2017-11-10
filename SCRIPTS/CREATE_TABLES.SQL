@@ -57,7 +57,7 @@ CONSTRAINT pk_hc_id PRIMARY KEY (hc_id,pk_instructor,pk_clase)
 
 CREATE TABLE MEDIDA(
 	med_id		serial  not null,
-	med_id		varchar(20) unique not null
+	med_tipo	varchar(20) unique not null,
 CONSTRAINT pk_med_id PRIMARY KEY (med_id)
 
 );
@@ -66,11 +66,11 @@ CREATE TABLE PROGRESO_MEDIDA(
 	pm_id		serial not null,
 	pm_medida	integer,
 	pm_fecha	date not null,
-	pk_usuario	integer,
-	pk_medida	integer,
+	fk_usuario	integer,
+	fk_medida	integer,
 CONSTRAINT pk_pm_id PRIMARY KEY (pm_id),
 CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT fk_medida  FOREIGN KEY(fk_medida REFERENCES medida(med_id) ON DELETE CASCADE ON UPDATE CASCADE,	
+CONSTRAINT fk_medida  FOREIGN KEY(fk_medida) REFERENCES medida(med_id) ON DELETE CASCADE ON UPDATE CASCADE	
 
 );
 
@@ -78,13 +78,17 @@ CREATE TABLE PROGRESO_PESO(
 	pp_id		serial not null,
 	pp_peso		integer,	
 	pp_fecha	date not null,
+	fk_usuario	integer not null,
 CONSTRAINT pk_pp_id PRIMARY KEY (pp_id),
 CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE COMENTARIO(
-	com_id		serial not null;
+	com_id		serial not null,
 	com_mensaje	varchar(80),
+	fk_usuario	integer not null,
+	fk_pro_peso	integer,
+	fk_pro_medida	integer,
 CONSTRAINT pk_com_id PRIMARY KEY (com_id),
 CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT fk_pro_peso  FOREIGN KEY(fk_pro_peso) REFERENCES progreso_peso(pp_id) ON DELETE CASCADE ON UPDATE CASCADE,

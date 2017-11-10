@@ -15,7 +15,11 @@ import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angul
 })
 export class ClaseParticularPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  //public item:Array<{id:number, titulo:string, descripcion:string, img:string, instructor:string, fecha:string, duracion:number}>;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+              /*public id:number, public titulo:string,public descripcion:string, public img:string, public instructor:string,public fecha:string, public duracion:number*/) {
+
   }
 
   ionViewDidLoad() {

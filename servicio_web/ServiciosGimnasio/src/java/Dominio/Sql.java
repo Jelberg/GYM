@@ -10,7 +10,7 @@ public class Sql {
     private ResultSet _rs;
     private static String BD_USER = "gymucab";
     private static String BD_PASSWORD = "gymucab";
-    private static String BD_URL = "jdbc:postgresql://localhost/gymucabdb";
+    private static String BD_URL = "jdbc:postgresql://localhost/gimnasiobd";
     private static String BD_CLASS_FOR_NAME = "org.postgresql.Driver";
 
     /**
