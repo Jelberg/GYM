@@ -76,6 +76,7 @@ import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/reali
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp,{
       tabsPlacement:'bottom',
       platforms:{
