@@ -81,3 +81,16 @@ BEGIN
    END LOOP;
 END; $$
   LANGUAGE plpgsql;
+
+--FUNCION QUE INSERTA PROGRESO DE PESO DEL USUARIO, RECIBE EL ID DEL USUARIO Y EL PESO A REGISTRAR.
+CREATE OR REPLACE FUNCTION fo_m04_insert_progresop(id_usuario int, peso int)
+  RETURNS void	
+   AS $$
+DECLARE
+   fecha_actual	date;
+BEGIN
+	fecha_actual := current_date;
+	INSERT INTO PROGRESO_PESO ( PP_PESO, FK_USUARIO, PP_FECHA ) VALUES
+	( peso, id_usuario, fecha_actual );
+END; $$
+  LANGUAGE plpgsql;

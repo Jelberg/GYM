@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -43,12 +44,10 @@ public class FOM04_Progreso_Peso {
     
     
     /**
-     * Funcion que recibe como parametros la fecha y el sobrenombre del usuario
-     * para hacer la consulta del peso registrado por el usuario en esa fecha.
-     * @param fecha Fecha del mes en que se quiere obtener el peso.
-     * Debe ser en formato yyyy-mm-dd
-     * @param sobrenombre Indica el nombre del usuario
-     * @return Devuelve el peso ingresado en formato json
+     * Funcion que recibe como parametro el id del usuario
+     * para hacer la consulta del progreso de peso registrado.
+     * @param id_usuario Indica el identificador del usuario
+     * @return Devuelve un json con los ultimos registros de peso del usuario.
      */
     @GET
     @Path("/getProgresoP")
@@ -187,71 +186,44 @@ public class FOM04_Progreso_Peso {
             return response;
         }
     }
-/*
-    
+*/
     /**
-     * Funcion obtiene el peso de un usuario en los ultimos 12 meses.
-     * @param sobrenombre Indica el nombre del usuario.
-     * @return Devuelve un json con la informacion del peso
-     * relacionada con el mes correspondiente
+     * Funcion que se llama cuando el usuario desea agregar un nuevo registro
+     * de su peso. Recibe el id del usuario y el peso a registrar
+     * @param id_usuario identificador del usuario.
+     * @param peso peso a registrar por el usuario
+     * @return Mensaje sobre estatus de la peticion.
      */
-    /*
-    @GET
-    @Path("/getPesoDelAno")
+    @POST
+    @Path("/insertaProgresoPeso")
     @Produces("application/json")
-    public String getPesodelMes(@QueryParam("sobrenombre") String sobrenombre){
-
+    public String insertaPeso( @QueryParam ( "id_usuario" ) int id_usuario,
+                               @QueryParam ( "peso" ) int peso ){
+        Map<String, String> response = new HashMap<String, String>();
         try {
-
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("sobrenombre", sobrenombre);
+                put ( "id_usuario" , id_usuario );
+                put( "peso" , peso );
             }});
-
-            String query = "select * from m04_get_peso_ano(?, ?, ?)";
-            ResultSet rs;
-            jsonArray = new ArrayList<>();
-            LocalDate fecha = LocalDate.now();
-            fecha = fecha.with(TemporalAdjusters.firstDayOfMonth());
-            Date fechaInicio = Date.valueOf(fecha);
-            Date fechafin = Date.valueOf(fecha.with(TemporalAdjusters.lastDayOfMonth()));
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, sobrenombre);
-            st.setDate(2, fechaInicio);
-            st.setDate(3, fechafin);
-            for (int i = 0; i <= 11; i++) {
-                if (i > 0) {
-                    fecha = fecha.minusMonths(1);
-                    fechaInicio = Date.valueOf(fecha);
-                    fechafin = Date.valueOf(fecha.with(TemporalAdjusters.lastDayOfMonth()));
-                    st.setDate(2, fechaInicio);
-                    st.setDate(3, fechafin);
-                }
-
-                rs = st.executeQuery();
-                jsonArray.add(new Progreso_Peso());
-                if (rs.wasNull()) {
-                    jsonArray.get(jsonArray.size() - 1).setPeso(0);
-                    jsonArray.get(jsonArray.size() - 1).setFechaP(fechaInicio.toLocalDate());
-                }
-                else {
-
-                    while (rs.next()) {
-                        jsonArray.get(jsonArray.size() - 1).setPeso(rs.getInt("peso"));
-                        jsonArray.get(jsonArray.size() - 1).setFechaP(fechaInicio.toLocalDate());
-                    }
-                }
-            }
-            response = gson.toJson(jsonArray);
+            String query = "select * from fo_m04_insert_progresop(?,?);";
+            PreparedStatement st = conn.prepareStatement( query );
+            st.setInt( 1 , id_usuario );
+            st.setInt( 2 , peso );
+            st.executeQuery();
+            response.put( "data", "Se inserto correctamente." );
         }
-        catch (SQLException e) {
-            response = e.getMessage();
+        catch (SQLException e){
+            response.put( "error", e.getMessage() );
         }
-        catch (ParameterNullException e) {
-            response = e.getMessage();
+        catch ( ParameterNullException e ) {
+            response.put( "error" , e.getMessage() );
         }
         finally {
-            Sql.bdClose(conn);
-            return response;
+            Sql.bdClose( conn );
+            return gson.toJson( response );
         }
-    }*/
+    }
+    
+    
+    
 }
