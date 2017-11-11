@@ -5,9 +5,11 @@
  */
 package Servicios;
 
+import Dominio.Comentario;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import com.google.gson.Gson;
 
 /**
  *
@@ -18,8 +20,10 @@ public class FOM04_Progreso_Ejercicio {
     
     @GET
     @Path("/getDatoPrueba")
+    @Produces("application/json")
     public String getDatoPrueba(){
-        return "1";
+        Gson gson = new Gson();
+        Comentario c = new Comentario(1, "hola");
+        return gson.toJson(c);
     }
-    
 }
