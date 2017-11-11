@@ -49,5 +49,17 @@ CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
 -- Este devuelve los comentarios pertenencientes a ese progreso
 --CREATE OR REPLACE FUNCTION fo_m04_get_comentariopromed( pm_id int)
 
+--FUNCION QUE ACTUALZA MEDIDA DADOS: EL ID DEL USUARIO, FECHA DE EL PROGRESO, TIPO DE LA MEDIDA Y LA NUEVA MEDIDA.
+CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER, fecha DATE, tipo_medida VARCHAR, medida INTEGER)
+  RETURNS void
+   AS $$
+DECLARE
+    id_medida int;
+BEGIN
+    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE MED_TIPO = tipo_medida );
+    UPDATE PROGRESO_MEDIDA SET  PM_MEDIDA = medida
+    WHERE PM_FECHA = fecha and FK_USUARIO = id_usuario and FK_MEDIDA = id_medida;
+END; $$
+  LANGUAGE plpgsql;
 
 
