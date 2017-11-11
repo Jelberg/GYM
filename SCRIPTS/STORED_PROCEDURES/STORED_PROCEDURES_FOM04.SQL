@@ -62,19 +62,22 @@ BEGIN
 END; $$
   LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION fo_m04_get_progresop(id_usuario int, fecha DATE)
-  RETURNS TABLE(peso INT)
+--FUNCION QUE OBTIENE LOS ULTIMOS REGISTROS DEL PROGRESO DE UN USUARIO CON RESPECTO A SU PESO.
+CREATE OR REPLACE FUNCTION fo_m04_get_progresop(id_usuario int)
+  RETURNS TABLE(peso INT, fecha DATE, id INT)
    AS $$
 DECLARE
    var_r    record;
 BEGIN
-   FOR var_r IN(SELECT pp_peso
-        FROM usuario inner join  progreso_medida on usu_id = fk_usuario inner join medida on fk_medida = med_id
-        WHERE usu_cedula = usuario_CI AND pm_fecha = fecha)
+   FOR var_r IN(SELECT pp_peso, pp_fecha, pp_id
+        FROM progreso_peso 
+        WHERE fk_usuario = id_usuario 
+        order by pp_fecha DESC limit 6)
    LOOP
     peso = var_r.pp_peso;
+    fecha = var_r.pp_fecha;
+    id = var_r.pp_id;
     RETURN NEXT;
    END LOOP;
 END; $$
   LANGUAGE plpgsql;
-
