@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+//import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 /*
@@ -11,8 +12,14 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UserServiceProvider {
 
-  constructor(public http: Http) {
+  constructor(/*public http: Http,*/ private http: HttpClient) {
     console.log('Hello UserServiceProvider Provider');
+  }
+
+  //Funcion para probar Web Service
+  getDato(){
+    return this.http.get('http://localhost:8080/ServiciosGimnasio/FOM04_Progreso_Ejercicio/getDatoPrueba');
+    
   }
 
 }

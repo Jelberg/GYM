@@ -45,12 +45,12 @@ public class FOM04_Progreso_Medida {
     private ArrayList<Progreso_Medida> jsonArray;
     
     /**
-     * Funcion que recibe como parametros la fecha y el sobrenombre del usuario
+     * Funcion que recibe como parametros la fecha y el id del usuario
      * para hacer la consulta de las medidas registradas por el usuario durante
      * esa fecha.
      * @param fecha Fecha del mes en que se quiere obtener las medidas.
      * Debe ser en formato yyyy-mm-dd
-     * @param sobrenombre Indica el nombre del usuario
+     * @param id_usuario Identificador del usuario
      * @return Devuelve las medidas en formato json
      */
     @GET
@@ -95,10 +95,10 @@ public class FOM04_Progreso_Medida {
     
     /**
      * Metodo que recibe como parametros la fecha del mes 
-     * correspondiente a la fecha a eliminar y el nombre del usuario 
+     * correspondiente a la fecha a eliminar y el id del usuario 
      * para eliminar las medidas de ese mes.
      * @param fecha Indica la fecha correspondiente a las medidas.
-     * @param sobrenombre Indica el nombre del usuario.
+     * @param id_usuario Identificador del usuario.
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
@@ -203,11 +203,14 @@ public class FOM04_Progreso_Medida {
         }
     }
     
-    
     /**
-     * Funcion que perimite ingresar vario las medidas del usuario
-     * @param jsonMedida Indica las medidas que se insertaran en formato json,
-     * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
+     * Funcion que es llamada cuando el usuario desea insertar un nuevo registro
+     * de medidas.
+     * @param id_usuario Identificador del usuario.
+     * @param medida Canditdad de la medida a insertar.
+     * @param tipo_medida Tipo de la medida que se va a registrar.
+     * @param fecha Fecha del registro
+     * @return Devuelve un json con mensaje del estatus de la peticion.
      */
     @POST
     @Path("/insertaMedidas") //Revisar logica para hacer el bucle en el servicio
@@ -255,7 +258,16 @@ public class FOM04_Progreso_Medida {
     
     
     
- 
+    /**
+     * Funcion que es llamada cuando el usuario desea actualizar algun registro
+     * de medidas.
+     * @param id_usuario identificador del usuario.
+     * @param fecha Fecha en la que se inserto la medida
+     * @param tipo_medida Tipo de medida a actualizar.
+     * @param medida Cantidad de la medida a actualizar.
+     * @return Devuelve un json con un mensaje al usuario sobre el estatus
+     * de la peticion.
+     */
     @POST
     @Path("/actualizaMedida")
     @Produces("application/json")

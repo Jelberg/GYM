@@ -38,6 +38,7 @@ import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clase
 import { ComentarClasePage} from '../pages/FO_M05/comentar-clase/comentar-clase';
 import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class'
 import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/realizar-valoracion';
+import { UserServiceProvider } from '../providers/user-service/user-service';
 //FIN M05
 
 
@@ -122,7 +123,8 @@ import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/reali
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UserServiceProvider
   ]
 })
 export class AppModule {}
