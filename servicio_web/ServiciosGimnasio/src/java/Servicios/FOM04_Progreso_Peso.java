@@ -88,48 +88,42 @@ public class FOM04_Progreso_Peso {
     
     /**
      * Metodo que recibe como parametros la fecha del mes 
-     * correspondiente al peso a eliminar y el nombre correspondiente
+     * correspondiente al peso a eliminar y el id correspondiente
      * al usuario
      * @param fecha Indica la fecha correspondiente al peso.
-     * @param sobrenombre Indica el nombre del usuario.
+     * @param id_usuario Identificador del usuario.
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
-    /*
     @DELETE
     @Path("/eliminarPeso")
     @Produces("application/json")
-    public String eliminaPeso(@QueryParam("fecha") String fecha,
-                              @QueryParam("sobrenombre") String sobrenombre) {
-
+    public String eliminaPeso(@QueryParam( "fecha" ) String fecha,
+                              @QueryParam( "id_usuario" ) int id_usuario) {
         Map<String, String> response = new HashMap<String, String>();
         try{
-
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("sobrenombre", sobrenombre);
-                put("fecha", fecha);
+                put( "id_usuario" , id_usuario );
+                put( "fecha" , fecha );
             }});
-            String query = "SELECT fo_m04_elimina_peso(?, ?)";
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, fecha);
-            st.setString(2, sobrenombre);
+            String query = "SELECT fo_m04_elimina_progresop(?, ?)";
+            PreparedStatement st = conn.prepareStatement( query );
+            st.setInt( 1 , id_usuario);
+            st.setDate( 2 , Date.valueOf( fecha ) );
             ResultSet rs = st.executeQuery();
-            response.put("data", "Se elimino el peso");
-
+            response.put( "data" , "Se elimino el peso correctamente" );
         }
-        catch(SQLException e) {
-            response.put("error", e.getMessage());
+        catch( SQLException e ) {
+            response.put( "error" , e.getMessage() );
         }
-        catch (ParameterNullException e) {
-            response.put("error", e.getMessage());
+        catch ( ParameterNullException e ) {
+            response.put( "error" , e.getMessage() );
         }
         finally {
-            Sql.bdClose(conn);
-            return gson.toJson(response);
-
+            Sql.bdClose( conn );
+            return gson.toJson( response );
         }
     }
-    */
     /**
      * Funcion obtiene el peso de un usuario correspondiente a cada 
      * semana del mes.

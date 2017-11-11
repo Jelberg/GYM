@@ -94,3 +94,12 @@ BEGIN
 	( peso, id_usuario, fecha_actual );
 END; $$
   LANGUAGE plpgsql;
+--FUNCION QUE ELIMINA EL REGISTRO DE PESO DE UN USUARIO, RECIBE EL ID DEL USUARIO Y LA FECHA DEL REGISTRO.
+CREATE OR REPLACE FUNCTION fo_m04_elimina_progresop(id_usuario int, fecha date)
+  RETURNS void	
+   AS $$
+BEGIN
+	DELETE FROM PROGRESO_PESO
+	WHERE FK_USUARIO = id_usuario and PP_FECHA = fecha;
+END; $$
+  LANGUAGE plpgsql;
