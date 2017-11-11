@@ -23,7 +23,7 @@ CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_CI int, fecha DATE)
     DECLARE
     BEGIN
         DELETE FROM progreso_medida
-        WHERE pm_fecha = fecha and pk_usuario = usuario_CI;
+        WHERE pm_fecha = fecha and fk_usuario = usuario_CI;
     END; $$
 LANGUAGE plpgsql;
 
@@ -31,7 +31,7 @@ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
     fk_usuario INT,
     medida INT,
-    tipo VARCHAR,
+    tipo INT,
     fecha DATE)
   RETURNS void
    AS $$
@@ -40,7 +40,7 @@ CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
     BEGIN
 	fecha_actual  := current_date;
         INSERT INTO progreso_medida (pm_medida,pm_fecha, fk_usuario, fk_medida) VALUES
-        ( medida , fecha_actual , fk_usuario , medida );
+        ( medida , fecha_actual , fk_usuario , tipo );
     END; $$
   LANGUAGE plpgsql;
 

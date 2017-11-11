@@ -1,53 +1,62 @@
-CREATE USER gymucab PASSWORD 'gymucab';
-ALTER ROLE gymucab WITH SUPERUSER;
-CREATE DATABASE GIMNASIOBD WITH OWNER gymucab;
-
-create table usuario( 
-usu_id  		serial ,
-usu_cedula  		integer not null,
-usu_nombre  		varchar(10) not null,
-usu_apellido 		varchar(10) not null,
-usu_sexo 		char not null,
-usu_fecha_nac 		Date not null,
-CONSTRAINT pk_usu_id PRIMARY KEY (usu_id)
+CREATE USER GYMUCAB PASSWORD 'GYMUCAB';
+ALTER ROLE GYMUCAB WITH SUPERUSER;
+CREATE DATABASE GIMNASIOBD WITH OWNER GYMUCAB;
+ 
+CREATE TABLE USUARIO(
+USU_ID                  	SERIAL ,
+USU_CEDULA                  	INTEGER NOT NULL,
+USU_NOMBRE                	VARCHAR(10) NOT NULL,
+USU_APELLIDO               	VARCHAR(10) NOT NULL,
+USU_SEXO           	CHAR NOT NULL,
+USU_FECHA_NAC          	DATE NOT NULL,
+CONSTRAINT PK_USU_ID PRIMARY KEY (USU_ID)
 );
-
--- TABLAS FOM05
-CREATE TABLE instructor
+ 
+-- M05
+CREATE TABLE INSTRUCTOR
 (
-  ins_id 		serial NOT NULL,
-  ins_nombre 		character varying(10) NOT NULL,
-  ins_apellido 		character varying(10) NOT NULL,
-  ins_fecha_nac 	date NOT NULL,
-  ins_sexo 		character(1) NOT NULL,
-  ins_correo 		character varying(20) NOT NULL,
-  ins_foto 		bytea,
-  CONSTRAINT instructor_pkey PRIMARY KEY (ins_id) 
+ INS_ID                  	SERIAL NOT NULL,
+ INS_NOMBRE                 	CHARACTER VARYING(10) NOT NULL,
+ INS_APELLIDO                	CHARACTER VARYING(10) NOT NULL,
+ INS_FECHA_NAC   DATE NOT NULL,
+ INS_SEXO            	CHARACTER(1) NOT NULL,
+ INS_CORREO                 	CHARACTER VARYING(20) NOT NULL,
+ INS_FOTO            	BYTEA,
+ CONSTRAINT INSTRUCTOR_PKEY PRIMARY KEY (INS_ID)
 );
-
-CREATE TABLE clase
+ 
+CREATE TABLE CLASE
 (
-  cla_id 		serial NOT NULL,
-  cla_nombre 		character varying(10) NOT NULL,
-  cla_descripcion 	character varying(300) NOT NULL,
-  CONSTRAINT clase_pkey PRIMARY KEY (cla_id) 
+ CLA_ID                 	SERIAL NOT NULL,
+ CLA_NOMBRE                	CHARACTER VARYING(10) NOT NULL,
+ CLA_DESCRIPCION       	CHARACTER VARYING(300) NOT NULL,
+ CONSTRAINT CLASE_PKEY PRIMARY KEY (CLA_ID)
+);
+ 
+CREATE TABLE HORARIO_CLASE(
+HC_ID                           SERIAL NOT NULL,
+HC_FECHA           		DATE NOT NULL,
+HC_CAPACIDAD              	INTEGER  NOT NULL,
+HC_HORA_INICIO   		TIME NOT NULL,
+HC_HORA_FIN                 	TIME NOT NULL,
+HC_DURACION               	TIME,
+FK_USUARIO                   	INTEGER,
+FK_INSTRUCTOR           	INTEGER ,
+FK_CLASE            		INTEGER ,
+CONSTRAINT FK_USUARIO  FOREIGN KEY(FK_USUARIO) REFERENCES USUARIO(USU_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_INSTRUCTOR  FOREIGN KEY(FK_INSTRUCTOR) REFERENCES INSTRUCTOR(INS_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_CLASE_USUARIO  FOREIGN KEY(FK_CLASE) REFERENCES CLASE(CLA_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_HC_ID PRIMARY KEY (HC_ID)
 );
 
-
-CREATE TABLE horario_clase(
-hc_id  			serial not null,
-hc_fecha 		date not null,
-hc_capacidad 		integer  not null,
-hc_hora_inicio 	time not null,
-hc_hora_fin 		time not null,
-hc_duracion		integer,
-fk_usuario		integer,
-pk_instructor		integer,
-pk_clase		integer,
-CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT pk_instructor  FOREIGN KEY(pk_instructor) REFERENCES instructor(ins_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT pk_clase_usuario  FOREIGN KEY(pk_clase) REFERENCES clase(cla_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT pk_hc_id PRIMARY KEY (hc_id,pk_instructor,pk_clase) 
+CREATE TABLE CRITICA(
+CRI_ID			SERIAL NOT NULL,
+CRI_FECHA		DATE NOT NULL,
+CRI_COMENTARIO		CHARACTER VARYING(400),
+CRI_VALORACION		INTEGER,
+FK_HC_ID		INTEGER,
+CONSTRAINT FK_HC_ID FOREIGN KEY (FK_HC_ID) REFERENCES HORARIO_CLASE(HC_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_CRI_ID PRIMARY KEY (CRI_ID)
 );
 
 -- FIN TABLAS FOM05
@@ -87,8 +96,8 @@ CREATE TABLE COMENTARIO(
 	com_id		serial not null,
 	com_mensaje	varchar(80),
 	fk_usuario	integer not null,
-	fk_pro_peso	integer not null,
-	fk_pro_medida	integer not null,
+	fk_pro_peso	integer,
+	fk_pro_medida	integer,
 CONSTRAINT pk_com_id PRIMARY KEY (com_id),
 CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT fk_pro_peso  FOREIGN KEY(fk_pro_peso) REFERENCES progreso_peso(pp_id) ON DELETE CASCADE ON UPDATE CASCADE,

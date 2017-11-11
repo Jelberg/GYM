@@ -11,12 +11,23 @@
   </ion-navbar>
 
 </ion-header>
-
+<!--
+<ion-content padding>
+<img src="../../../assets/imgs/clasesYoga.jpg" class="imagenClase">
+<p class="instructor">Inst. Estela Rodriguez</p>
+<p class="fecha">24/10/2017</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis semper augue in egestas. Aliquam sit amet nulla condimentum, volutpat ex sodales, feugiat nisi. Praesent facilisis lorem erat, bibendum dignissim ex placerat in. Fusce tempus nisi vitae eleifend porttitor. Praesent et lacinia tortor. Sed semper tempus ultricies.</p>
+<p>Duracion: 60 min</p>
+<button ion-button block class="agregarClase" (click)="presentAlert()">Reservar</button>
+</ion-content>
+-->
 
 <ion-content padding>
-  <img src="../../assets/imgs/clasesYoga.jpg" alt="" class="imagenClase">
-  <p class="instructor">Inst. Estela Rodriguez</p>
-  <p class="fecha">24/10/2017 3:00 pm</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis ornare nunc, vel sagittis risus. Vestibulum et faucibus turpis, dictum blandit erat. In efficitur tortor nec purus tincidunt, ultrices congue ex placerat. Nam augue nisi, egestas sed fermentum fermentum, ullamcorper eget mauris. In facilisis tempor urna. Vestibulum quis dapibus libero. Nulla tristique ex vel magna consequat gravida. Maecenas volutpat volutpat nunc, quis lacinia neque lobortis vitae. Donec luctus ex ac arcu rutrum, at ultricies turpis venenatis. Integer ultricies lobortis ipsum eu cursus. Ut placerat diam ut lacus auctor ullamcorper.</p>
-  <button ion-button full block class="agregarClase" (click)="presentAlert()">Reservar</button>
+      <img src="{{img}}" class="imagenClase">
+      <p class="instructor">Inst. {{instructor}}</p>
+      <p class="fecha">{{fecha}}</p>
+      <p>{{descripcion}}</p>
+      <p>Duracion: {{duracion}} min</p>
+      <p>Cap. {{capacidad}} Disp. {{disponibilidad}}</p>
+      <button ion-button item-end class="agregarClase" (click)="presentAlert()">Reservar</button>
 </ion-content>
