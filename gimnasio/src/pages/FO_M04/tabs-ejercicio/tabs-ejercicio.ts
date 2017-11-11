@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProgresoEjercicioPage } from '../progreso-ejercicio/progreso-ejercicio';
 import { ProgresoComentarioPage } from '../progreso-comentario/progreso-comentario';
 import { ListaContactosPage } from '../lista-contactos/lista-contactos';
+import { ListaEjerciciosPage } from '../lista-ejercicios/lista-ejercicios';
 
 @IonicPage()
 @Component({
@@ -25,5 +26,9 @@ export class TabsEjercicioPage {
 
   goToListaContactosPage(){
     this.navCtrl.push(ListaContactosPage);
+  }
+
+  goToListaEjerciciosPage(){
+    this.navCtrl.push(ListaEjerciciosPage);
   }
 }
