@@ -256,6 +256,9 @@ public class FOM04_Progreso_Medida {
     
     
  
+    @POST
+    @Path("/actualizaMedida")
+    @Produces("application/json")
     public String actualizaMedida( @QueryParam ( "id_usuario" ) int id_usuario,
                                    @QueryParam ( "fecha" ) String fecha, 
                                    @QueryParam ( "tipo_medida" ) String tipo_medida,
