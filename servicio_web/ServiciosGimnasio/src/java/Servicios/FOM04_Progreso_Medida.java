@@ -255,4 +255,39 @@ public class FOM04_Progreso_Medida {
     
     
     
+ 
+    public String actualizaMedida( @QueryParam ( "id_usuario" ) int id_usuario,
+                                   @QueryParam ( "fecha" ) String fecha, 
+                                   @QueryParam ( "tipo_medida" ) String tipo_medida,
+                                   @QueryParam ( "medida" ) int medida){
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put ( "id_usuario" , id_usuario );
+                put( "fecha" , fecha );
+                put( "tipo_medida" , tipo_medida );
+                put( "medida" , medida );
+            }});
+            String query = "select * from fo_m04_act_medida(?,?,?,?);";
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1, id_usuario);
+            st.setDate(2, Date.valueOf(fecha));
+            st.setString(3, tipo_medida);
+            st.setInt(4, medida);
+            st.executeQuery();
+            response.put("data", "Se actualizo correctamente.");
+        }
+        catch (SQLException e){
+            response.put("error", e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            Sql.bdClose(conn);
+            return gson.toJson(response);
+        }
+        
+    }   
+    
 }
