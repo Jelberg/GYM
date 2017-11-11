@@ -57,18 +57,18 @@ public class FOM04_Progreso_Medida {
     @Path("/getProgresoM")
     @Produces("application/json")
     public String getProgresoM(@QueryParam("fecha") String fecha,
-                                @QueryParam("sobrenombre") Integer sobrenombre){
+                                @QueryParam("id_usuario") Integer id_usuario){
     
         try{
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("sobrenombre", sobrenombre);
+                put("id_usuario", id_usuario);
                 put("fecha", fecha);
             }});
 
             String query = "SELECT * FROM fo_m04_get_progresom(?, ?)";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, sobrenombre);
+            st.setInt(1, id_usuario);
             st.setDate(2, Date.valueOf(fecha));
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
@@ -106,18 +106,18 @@ public class FOM04_Progreso_Medida {
     @Path("/eliminarMedidas")
     @Produces("application/json")
     public String eliminaMedidas(@QueryParam("fecha") Date fecha,
-                             @QueryParam("sobrenombre") Integer sobrenombre) {
+                             @QueryParam("id_usuario") Integer id_usuario) {
 
         Map<String, String> response = new HashMap<String, String>();
         try{
 
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("sobrenombre", sobrenombre);
+                put("id_usuario", id_usuario);
                 put("fecha", fecha);
             }});
                 String query = "SELECT fo_m04_elimina_medidas(?, ?)";
             PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, sobrenombre);
+            st.setInt(1, id_usuario);
             st.setDate(2, fecha);
             ResultSet rs = st.executeQuery();
             response.put("data", "Se elimino las medidas");

@@ -62,4 +62,19 @@ BEGIN
 END; $$
   LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION fo_m04_get_progresop(id_usuario int, fecha DATE)
+  RETURNS TABLE(peso INT)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT pp_peso
+        FROM usuario inner join  progreso_medida on usu_id = fk_usuario inner join medida on fk_medida = med_id
+        WHERE usu_cedula = usuario_CI AND pm_fecha = fecha)
+   LOOP
+    peso = var_r.pp_peso;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
 

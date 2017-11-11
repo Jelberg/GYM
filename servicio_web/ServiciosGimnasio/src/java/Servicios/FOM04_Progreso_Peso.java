@@ -53,25 +53,24 @@ public class FOM04_Progreso_Peso {
     @GET
     @Path("/getProgresoP")
     @Produces("application/json")
-    public String getProgresoM(@QueryParam("fecha") String fecha,
-                                @QueryParam("sobrenombre") String sobrenombre){
+    public String getProgresoP( @QueryParam( "id_usuario" ) int id_usuario ){
     
         try{
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("sobrenombre", sobrenombre);
-                put("fecha", fecha);
+                put("id_usuario", id_usuario);
             }});
 
-            String query = "SELECT * FROM fo_m04_get_progresoP(?, ?)";
+            String query = "SELECT * FROM fo_m04_get_progresop(?)";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
-            st.setDate(1, Date.valueOf(fecha));
-            st.setString(2, sobrenombre);
+            st.setInt( 1 , id_usuario );
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
-            while(rs.next()){
-                jsonArray.add(new Progreso_Peso());
-                jsonArray.get(jsonArray.size() - 1).setPeso(rs.getInt("peso"));
+            while( rs.next() ){
+                jsonArray.add( new Progreso_Peso() );
+                jsonArray.get( jsonArray.size() - 1 ).setPeso( rs.getInt( "peso" ) );
+                jsonArray.get( jsonArray.size() - 1 ).setFechaP(rs.getDate( "fecha" ) );
+                jsonArray.get( jsonArray.size() - 1 ).setId( rs.getInt( "id" ) );
             }
             response = gson.toJson(jsonArray);
         }
@@ -97,6 +96,7 @@ public class FOM04_Progreso_Peso {
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
+    /*
     @DELETE
     @Path("/eliminarPeso")
     @Produces("application/json")
@@ -130,7 +130,7 @@ public class FOM04_Progreso_Peso {
 
         }
     }
-    
+    */
     /**
      * Funcion obtiene el peso de un usuario correspondiente a cada 
      * semana del mes.
@@ -138,6 +138,7 @@ public class FOM04_Progreso_Peso {
      * @return Devuelve un json con la informacion del peso
      * relacionada con el mes correspondiente
      */
+    /*
     @GET
     @Path("/getPesoDelMes")
     @Produces("application/json")
@@ -186,7 +187,7 @@ public class FOM04_Progreso_Peso {
             return response;
         }
     }
-
+/*
     
     /**
      * Funcion obtiene el peso de un usuario en los ultimos 12 meses.
@@ -194,6 +195,7 @@ public class FOM04_Progreso_Peso {
      * @return Devuelve un json con la informacion del peso
      * relacionada con el mes correspondiente
      */
+    /*
     @GET
     @Path("/getPesoDelAno")
     @Produces("application/json")
@@ -251,5 +253,5 @@ public class FOM04_Progreso_Peso {
             Sql.bdClose(conn);
             return response;
         }
-    }
+    }*/
 }
