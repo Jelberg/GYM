@@ -45,6 +45,8 @@ export class ProgresoMedidasPage {
 
       while ( i < data.length ){
 
+        this.listaFecha[i] = data[i]._fechaP;
+
         if (data[i]._tipo = 1) {
         	this.listaTipoEscapula[posicionEscapula] = data[i]._medida;
         	posicionEscapula++;
@@ -67,7 +69,10 @@ export class ProgresoMedidasPage {
 
         i++;
       }
-       this.setLine();
+      this.setLine( this.listaTipoEscapula = []);
+      this.setLine( this.listaTipoTricep = []);
+      this.setLine( this.listaTipoAbdomen = [])
+       this.setLine( this.listaTipoCuadricep = []);
     });
   }
 
@@ -94,19 +99,22 @@ export class ProgresoMedidasPage {
   public lineChartLegend:boolean = false;
   public lineChartType:string = 'line';
 
-  setLine(){
-    this.lineChartData = [];
-    //this.lineChartLabels = [];
-    let arreglomedida: any = [];
-    let arreglotipoEscapula: any = [];
+  setLine(listatipo = []){
 
-    for ( let medida of this.listaMedida ) {
-      arreglomedida.push(medida);
+    this.lineChartData = [];
+    let arreglo: any = [];
+    let arregloFecha: any = []
+
+    for ( let medida of listatipo ) {
+      arreglo.push(medida);
+    }
+    for ( let fecha of this.listaFecha ){
+      arregloFecha.push( fecha );
     }
     
     this.lineChartData.push({
       label: 'Medida',
-      data: arreglomedida
+      data: arreglo
     });
     
   }
