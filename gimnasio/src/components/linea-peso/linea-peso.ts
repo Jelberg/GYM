@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 
 @Component({
   selector: 'linea-peso',
@@ -6,10 +7,35 @@ import { Component } from '@angular/core';
 })
 export class LineaPesoComponent
 {
+  
+  userService: UserServiceProvider;
+  listaPeso = [];
+  listaFecha = [];
+  getProgreso(){
+    let urlPeticion: string = "F0M04_Progreso_Peso/getProgresoP?id_usuario=1";
+    this.userService.getDato( urlPeticion ).subscribe(data => {
+      let i: number = 0;
+      while ( i < data.length ){
+        this.listaPeso[i] = data[i]._peso;
+        this.listaFecha[i] = data[i]._fechaP;
+        i++;
+      }
+      console.log( this.listaFecha );
+      console.log( this.listaPeso );
+    });
+    //luego de => se agrega a la lista, tipo asi: => this.listaProgresos
+  }
+  /*userService: UserServiceProvider;
+  listaProgresos = [];
+  public getProgreso(){
+    let urlPeticion: string = "F0M04_Progreso_Peso/getProgresoP?id_usuario=1";
+    this.userService.getDato( urlPeticion ).subscribe( data => this.listaProgresos = data );
+  }*/
+
 	public lineChartData:Array<any> = [
-    {data: [40,50, 60, 62, 66, 70, 50, 60, 70, 80, 90, 100], label: 'Peso'}
+    {data: this.listaPeso, label: 'Peso'}
   ];
-  public lineChartLabels:Array<any> = ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4'];
+  public lineChartLabels:Array<any> = this.listaFecha;
   public lineChartOptions:any = {
     responsive: true
   };
@@ -45,5 +71,8 @@ export class LineaPesoComponent
   public chartHovered(e:any):void {
     console.log(e);
   }	
+  public llenado():void{
+
+  }
 	
 }

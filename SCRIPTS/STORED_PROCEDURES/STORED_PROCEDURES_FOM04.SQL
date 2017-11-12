@@ -49,5 +49,67 @@ CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
 -- Este devuelve los comentarios pertenencientes a ese progreso
 --CREATE OR REPLACE FUNCTION fo_m04_get_comentariopromed( pm_id int)
 
+--FUNCION QUE ACTUALZA MEDIDA DADOS: EL ID DEL USUARIO, FECHA DE EL PROGRESO, TIPO DE LA MEDIDA Y LA NUEVA MEDIDA.
+CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER, fecha DATE, tipo_medida VARCHAR, medida INTEGER)
+  RETURNS void
+   AS $$
+DECLARE
+    id_medida int;
+BEGIN
+    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE MED_TIPO = tipo_medida );
+    UPDATE PROGRESO_MEDIDA SET  PM_MEDIDA = medida
+    WHERE PM_FECHA = fecha and FK_USUARIO = id_usuario and FK_MEDIDA = id_medida;
+END; $$
+  LANGUAGE plpgsql;
 
+--FUNCION QUE OBTIENE LOS ULTIMOS REGISTROS DEL PROGRESO DE UN USUARIO CON RESPECTO A SU PESO.
+CREATE OR REPLACE FUNCTION fo_m04_get_progresop(id_usuario int)
+  RETURNS TABLE(peso INT, fecha DATE, id INT)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT pp_peso, pp_fecha, pp_id
+        FROM progreso_peso 
+        WHERE fk_usuario = id_usuario 
+        order by pp_fecha DESC limit 6)
+   LOOP
+    peso = var_r.pp_peso;
+    fecha = var_r.pp_fecha;
+    id = var_r.pp_id;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
 
+--FUNCION QUE INSERTA PROGRESO DE PESO DEL USUARIO, RECIBE EL ID DEL USUARIO Y EL PESO A REGISTRAR.
+CREATE OR REPLACE FUNCTION fo_m04_insert_progresop(id_usuario int, peso int)
+  RETURNS void	
+   AS $$
+DECLARE
+   fecha_actual	date;
+BEGIN
+	fecha_actual := current_date;
+	INSERT INTO PROGRESO_PESO ( PP_PESO, FK_USUARIO, PP_FECHA ) VALUES
+	( peso, id_usuario, fecha_actual );
+END; $$
+  LANGUAGE plpgsql;
+--FUNCION QUE ELIMINA EL REGISTRO DE PESO DE UN USUARIO, RECIBE EL ID DEL USUARIO Y LA FECHA DEL REGISTRO.
+CREATE OR REPLACE FUNCTION fo_m04_elimina_progresop(id_usuario int, fecha date)
+  RETURNS void	
+   AS $$
+BEGIN
+	DELETE FROM PROGRESO_PESO
+	WHERE FK_USUARIO = id_usuario and PP_FECHA = fecha;
+END; $$
+  LANGUAGE plpgsql;
+--FUNCION QUE ACTUALIZA EL REGISTRO DE PESO DE UN USUARIO, RECIBE EL ID DEL USUARIO, LA FECHA DEL REGISTRO Y EL NUEVO PESO.
+CREATE OR REPLACE FUNCTION fo_m04_act_progresop(id_usuario int, fecha date, peso int)
+  RETURNS void	
+   AS $$
+BEGIN
+	UPDATE PROGRESO_PESO
+	SET PP_PESO = peso
+	WHERE FK_USUARIO = id_usuario AND PP_FECHA = fecha;
+END; $$
+  LANGUAGE plpgsql;
