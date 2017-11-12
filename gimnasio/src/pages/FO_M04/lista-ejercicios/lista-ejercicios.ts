@@ -29,8 +29,11 @@ export class ListaEjerciciosPage {
   }
 
   getListaEjercicios(){
-    let urlPeticion: string = "F0M03_Rutina/getEjerciciosRealizados?idUsuario=1";
-    this.userService.getDato( urlPeticion ).subscribe(data => console.log(data));
+    let urlPeticion: string = "FOM03_Rutina/getEjerciciosRealizados?idUsuario=1";
+    this.userService.getDato( urlPeticion ).subscribe(data => this.listaEjercicios = data);
+    console.log(this.listaEjercicios);
+    console.log(11111);
+  
     //luego de => se agrega a la lista, tipo asi: => this.listaProgresos
   }
 
