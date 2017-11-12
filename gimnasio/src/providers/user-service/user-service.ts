@@ -28,6 +28,11 @@ export class UserServiceProvider {
     .map( this.datosMapa )
     .do( this.p ) 
   }
+  deleteDato ( urlComplementaria: string ){
+    return this.http.delete( this.URL+urlComplementaria, null )
+    .map( this.datosMapa )
+    .do( this.p )  
+  }
   public getURL(): string {
     return this.URL;
   }

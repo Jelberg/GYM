@@ -43,4 +43,7 @@ export class CambiarPesoPage {
     });
     toast.present();
   }
+  public editarPeso(){
+    console.log("Hola");
+  }
 }
