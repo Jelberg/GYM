@@ -37,7 +37,20 @@ public class FOM04_Comentario {
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Comentario> jsonArray;
+  
     
+    
+    @GET
+    @Path("/getDatoPrueba")
+    @Produces("application/json")
+    public String getDatoPrueba(){
+    
+    Gson gson = new Gson();
+    Comentario c= new Comentario(1,"hola");
+    return gson.toJson(c);
+    
+    }
+
     /**
      * Funcion que recibe como parametro el id del progreso correspondiente a medidas
      * @param idProgreso del cual se quiere saber los comentarios
