@@ -12,14 +12,17 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UserServiceProvider {
 
-  constructor(/*public http: Http,*/ private http: HttpClient) {
+  constructor(/*public http2: Http,*/ private http: HttpClient) {
     console.log('Hello UserServiceProvider Provider');
   }
 
   //Funcion para probar Web Service
   getDato(){
-    return this.http.get('http://localhost:8080/ServiciosGimnasio/FOM04_Progreso_Ejercicio/getDatoPrueba');
     
+    var url = 'http://localhost:8080/ServiciosGimnasio/FOM04_Progreso_Ejercicio/getDatoPrueba';
+    var response = this.http.get<JSON>(url);
+    debugger;
+    return response;
   }
 
 }

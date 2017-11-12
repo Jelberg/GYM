@@ -25,21 +25,24 @@ export class ProgresoEjercicioPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              public userService : UserServiceProvider) {
+              private userService : UserServiceProvider) {
   }
 
   ionViewDidLoad() {
+    debugger;
     //console.log('ionViewDidLoad ProgresoEjercicioPage');
-    this.userService.getDato().subscribe(
+    /* this.userService.getDato().subscribe(
       (data) => {
+        console.log('Asignando data del json');
         this.dato = data;
         
       },
       (error) =>{
         console.error(error);
       }
-    )
-    
+    ) */
+    this.dato = this.userService.getDato();
+    console.log('Asignando data del json');
   }
 
   goToListaContactosPage(){
