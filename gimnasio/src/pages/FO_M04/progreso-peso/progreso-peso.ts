@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserServiceProvider } from '../../../providers/user-service/user-service';
 
 @IonicPage()
 @Component({
@@ -8,14 +9,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProgresoPesoPage {
 
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams)
+  listaProgresos = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+              private userService: UserServiceProvider)
   {
-  	
+  	this.getProgreso();
 
   }
   ionViewDidLoad() 
   {
     console.log('ionViewDidLoad ProgresoPesoPage');
+    
   }
+  getProgreso(){
+    let urlPeticion: string = "F0M04_Progreso_Peso/getProgresoP?id_usuario=1";
+    this.userService.getDato( urlPeticion ).subscribe(data => console.log(data));
+    //luego de => se agrega a la lista, tipo asi: => this.listaProgresos
+  }
+
 }

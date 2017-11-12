@@ -29,9 +29,8 @@ export class ProgresoEjercicioPage {
   }
 
   ionViewDidLoad() {
-    debugger;
     //console.log('ionViewDidLoad ProgresoEjercicioPage');
-    /* this.userService.getDato().subscribe(
+    /*this.userService.getDato().subscribe(
       (data) => {
         console.log('Asignando data del json');
         this.dato = data;
@@ -40,9 +39,8 @@ export class ProgresoEjercicioPage {
       (error) =>{
         console.error(error);
       }
-    ) */
-    this.dato = this.userService.getDato();
-    console.log('Asignando data del json');
+    )*/
+    
   }
 
   goToListaContactosPage(){
