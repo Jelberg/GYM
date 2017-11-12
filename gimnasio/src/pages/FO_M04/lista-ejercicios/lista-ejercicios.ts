@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserServiceProvider } from '../../../providers/user-service/user-service';
+import { TabsEjercicioPage } from '../tabs-ejercicio/tabs-ejercicio';
 
 /**
  * Generated class for the ListaEjerciciosPage page.
@@ -30,11 +31,21 @@ export class ListaEjerciciosPage {
 
   getListaEjercicios(){
     let urlPeticion: string = "FOM03_Rutina/getEjerciciosRealizados?idUsuario=1";
-    this.userService.getDato( urlPeticion ).subscribe(data => this.listaEjercicios = data);
-    console.log(this.listaEjercicios);
-    console.log(11111);
-  
-    //luego de => se agrega a la lista, tipo asi: => this.listaProgresos
+     this.userService.getDato( urlPeticion ).subscribe(data => {
+        let i: number = 0;
+        console.log('El tamaño de data es: ' + data.length);
+        while ( i < data.length ){
+          console.log('data[i] es: ' + data[i] );
+          this.listaEjercicios[i] = data[i];
+          console.log('listaEjercicios[i] es: ' + this.listaEjercicios[i] );
+          console.log('El tamaño de listaEjercicios es: ' + this.listaEjercicios.length );
+          i++;
+        }
+      }); 
+  }
+
+  itemSelected(listaEjercicios){
+    this.navCtrl.push(TabsEjercicioPage);
   }
 
 }

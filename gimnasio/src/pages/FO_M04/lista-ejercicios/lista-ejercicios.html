@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<!-- <ion-content padding>
   <ion-content>
     <ion-item-group>
       <ion-list no-lines>
@@ -23,4 +23,12 @@
       </ion-list>
     </ion-item-group>
   </ion-content>
+</ion-content> -->
+
+<ion-content>
+  <ion-list >
+    <button ion-item *ngFor="let listaEjercicios of listaEjercicios" (click)="itemSelected(listaEjercicios)">
+      {{ listaEjercicios }}
+    </button>
+  </ion-list>
 </ion-content>
