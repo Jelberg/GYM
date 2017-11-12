@@ -86,7 +86,7 @@ public class PruebaMedidas {
     @Test
     public void pruebaEliminaMedida(){
         Gson gson = new Gson();
-        Date fecha = new Date(2012, 10, 12);
+        String fecha = "2012-10-12";
         _progresoMedida = new FOM04_Progreso_Medida();
         //String respuesta = _progresoMedida.eliminaMedidas(fecha, 9999);
         //assertNotNull( respuesta );
