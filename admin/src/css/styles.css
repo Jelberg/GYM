@@ -130,3 +130,11 @@ body {
     color: white;
     background: #009688;
 }
+
+select {
+    Color: black!important;
+    }
+
+.saveButton{
+    border: 1px solid black;
+    }

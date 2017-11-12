@@ -25,13 +25,14 @@ export class ProgresoEjercicioPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              public userService : UserServiceProvider) {
+              private userService : UserServiceProvider) {
   }
 
   ionViewDidLoad() {
     //console.log('ionViewDidLoad ProgresoEjercicioPage');
     /*this.userService.getDato().subscribe(
       (data) => {
+        console.log('Asignando data del json');
         this.dato = data;
         
       },
