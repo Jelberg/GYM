@@ -10,13 +10,13 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-input name="nuevoPeso" [ngModel]="nuevoPeso" type="number" placeholder="Tu Peso"></ion-input>
+    <ion-input name="nuevoPeso" [(ngModel)]="nuevoPeso" type="number" placeholder="Tu Peso"></ion-input>
   </ion-item>
   <ion-grid>
     <ion-row style="text-align: center;">
       <ion-col> 
       <div>
-        <ion-icon (Click)="cargarPeso()" name="md-checkmark" color="secondary" class="botones"></ion-icon>
+        <ion-icon (click)="cargarPeso()" name="md-checkmark" color="secondary" class="botones"></ion-icon>
       </div>
       </ion-col>
       <ion-col>              

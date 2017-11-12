@@ -25,6 +25,8 @@ export class UserServiceProvider {
   }
   postDato ( urlComplementaria: string ) {
     return this.http.post ( this.URL+urlComplementaria, null, null )
+    .map( this.datosMapa )
+    .do( this.p ) 
   }
   public getURL(): string {
     return this.URL;
