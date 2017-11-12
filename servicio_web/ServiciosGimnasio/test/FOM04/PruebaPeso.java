@@ -38,7 +38,7 @@ public class PruebaPeso {
         String insertPersonaPrueba = "INSERT INTO USUARIO ( usu_id, usu_cedula, usu_nombre, "
                 + "usu_apellido, usu_sexo, usu_fecha_nac ) VALUES (2222, 2222, "
                 + "'Prueba', 'Prueba', 'M', '1994-10-10' )";
-        String insertPeso = "INSERT INTO PROGRESO_PESO (pp_id, pp_peso, pm_fecha, "
+        String insertPeso = "INSERT INTO PROGRESO_PESO (pp_id, pp_peso, pp_fecha, "
                 + "fk_usuario) VALUES ( 2222, 69, '2017-10-10', 2222)";
        
         try {
