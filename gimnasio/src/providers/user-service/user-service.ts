@@ -21,9 +21,10 @@ export class UserServiceProvider {
   getDato( urlComplementaria: string ){
     return this.http.get( this.URL+urlComplementaria )
     .map( this.datosMapa )
-    .do( this.p )
-
-    
+    .do( this.p ) 
+  }
+  postDato ( urlComplementaria: string ) {
+    return this.http.post ( this.URL+urlComplementaria, null, null )
   }
   public getURL(): string {
     return this.URL;
