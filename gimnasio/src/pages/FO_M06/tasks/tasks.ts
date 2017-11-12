@@ -18,9 +18,6 @@ export class TasksPage {
 
   constructor(public navCtrl: NavController,
               public modalCtrl: ModalController,
-              public user: User,
-              public db: DynamoDB) {
-
     this.refreshTasks();
   }
 
