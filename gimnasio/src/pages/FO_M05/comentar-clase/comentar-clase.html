@@ -14,16 +14,27 @@
 
 
 <ion-content padding>
-      <div class="tituloContenedor"><p class="titulo">Yoga</p></div> 
-      <img src="../../assets/imgs/clasesYoga.jpg" class="imagen">
+      <div class="tituloContenedor">
+        <p class="titulo">Yoga</p>
+        <p class="texto-h2">Estela Rodrigues</p>
+      </div> 
+      <img src="../../assets/imgs//entrenadoryoga.jpg">
+      <p class="texto-h2">Valoracion de la clase</p>
       <ion-list>
+          <ion-item>
+            
+              <ion-range min="0" max="10" pin="true" [(ngModel)]="contrast" color="secondary">
+                <ion-icon range-left small name="star-outline"></ion-icon>
+                <ion-icon range-right name="star-outline"></ion-icon>
+              </ion-range>
+            </ion-item>
             <ion-item>
               <ion-label floating>Comentario</ion-label>
               <ion-input type="textarea" ></ion-input>
             </ion-item>
           
             <ion-item>
-              <button ion-button class="botonEnviar" (click)="enviarComentario()">Enviar</button>
+              <button ion-button block class="botonEnviar" (click)="enviarComentario()">Enviar</button>
             </ion-item>
           </ion-list>
 </ion-content>

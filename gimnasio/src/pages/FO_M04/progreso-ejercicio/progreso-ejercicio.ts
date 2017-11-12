@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserServiceProvider } from '../../../providers/user-service/user-service'
+
+import { ListaEjerciciosPage } from '../lista-ejercicios/lista-ejercicios';
+import { ListaContactosPage } from '../lista-contactos/lista-contactos';
 
 /**
  * Generated class for the ProgresoEjercicioPage page.
@@ -15,11 +19,35 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProgresoEjercicioPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  //dato: any;
+  dato 
+ 
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public userService : UserServiceProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProgresoEjercicioPage');
+    //console.log('ionViewDidLoad ProgresoEjercicioPage');
+    /*this.userService.getDato().subscribe(
+      (data) => {
+        this.dato = data;
+        
+      },
+      (error) =>{
+        console.error(error);
+      }
+    )*/
+    
+  }
+
+  goToListaContactosPage(){
+    this.navCtrl.push(ListaContactosPage);
+  }
+
+  goToSeleccionarEjercicioPage(){
+    this.navCtrl.push(ListaEjerciciosPage);
   }
 
 }
