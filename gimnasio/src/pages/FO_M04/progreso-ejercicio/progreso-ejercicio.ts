@@ -30,7 +30,7 @@ export class ProgresoEjercicioPage {
 
   ionViewDidLoad() {
     //console.log('ionViewDidLoad ProgresoEjercicioPage');
-    this.userService.getDato().subscribe(
+    /*this.userService.getDato().subscribe(
       (data) => {
         this.dato = data;
         
@@ -38,7 +38,7 @@ export class ProgresoEjercicioPage {
       (error) =>{
         console.error(error);
       }
-    )
+    )*/
     
   }
 

@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import {HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 //Gráficos
 import { ChartsModule } from 'ng2-charts';
@@ -77,7 +77,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    HttpModule,
     IonicModule.forRoot(MyApp,{
       tabsPlacement:'bottom',
       platforms:{
