@@ -48,7 +48,7 @@ public class BOM02_instructor {
      */
     @GET
     @Path("/getInstructor")
-    @Produces("aplicacion/json")
+    @Produces("application/json")
     public String getInstructor(@QueryParam("correo") String correo){
          try{
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
@@ -98,7 +98,7 @@ public class BOM02_instructor {
      */
     @POST
     @Path("/insertaInstructor")
-    @Produces("aplicacion/json")
+    @Produces("application/json")
     public String insertaInstructor(@QueryParam("nombre") String nombre,
                                     @QueryParam("apellido") String apellido,
                                     @QueryParam("fecha_nac") Date fecha_nac,
@@ -148,7 +148,7 @@ public class BOM02_instructor {
      */
     @POST
     @Path("/modificaInstructor")
-    @Produces("aplicacion/json")
+    @Produces("application/json")
     public String modificarInstructor(@QueryParam("id") int id,
                                     @QueryParam("nombre") String nombre,
                                     @QueryParam("apellido") String apellido,
