@@ -21,7 +21,17 @@ export class UserServiceProvider {
   getDato( urlComplementaria: string ){
     return this.http.get( this.URL+urlComplementaria )
     .map( this.datosMapa )
-    .do( this.p )
+    .do( this.p ) 
+  }
+  postDato ( urlComplementaria: string ) {
+    return this.http.post ( this.URL+urlComplementaria, null, null )
+    .map( this.datosMapa )
+    .do( this.p ) 
+  }
+  deleteDato ( urlComplementaria: string ){
+    return this.http.delete( this.URL+urlComplementaria, null )
+    .map( this.datosMapa )
+    .do( this.p )  
   }
   public getURL(): string {
     return this.URL;
