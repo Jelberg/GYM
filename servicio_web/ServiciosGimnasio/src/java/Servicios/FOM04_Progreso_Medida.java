@@ -23,6 +23,7 @@ import Validaciones.ValidationWS;
 import Excepciones.ParameterNullException;
 import com.google.gson.reflect.TypeToken;
 import java.lang.ProcessBuilder.Redirect.Type;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Map;
@@ -148,6 +149,8 @@ public class FOM04_Progreso_Medida {
     @Path("/getMedidasDelAno")
     @Produces("application/json")
     public String getMedidasDelAno(@QueryParam("sobrenombre") String sobrenombre){
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
 
@@ -171,21 +174,21 @@ public class FOM04_Progreso_Medida {
                     fecha = fecha.minusMonths(1);
                     fechaInicio = Date.valueOf(fecha);
                     fechafin = Date.valueOf(fecha.with(TemporalAdjusters.lastDayOfMonth()));
-                    st.setDate(2, fechaInicio);
-                    st.setDate(3, fechafin);
+                    st.setString(2, sdf.format(fechaInicio));
+                    st.setString(3, sdf.format(fechafin));
                 }
 
                 rs = st.executeQuery();
                 jsonArray.add(new Progreso_Medida());
                 if (rs.wasNull()) {
                     jsonArray.get(jsonArray.size() - 1).setMedida(0);
-                    jsonArray.get(jsonArray.size() - 1).setFechaM(fechaInicio);
+                    jsonArray.get(jsonArray.size() - 1).setFechaM(sdf.format(fechaInicio));
                 }
                 else {
 
                     while (rs.next()) {
                         jsonArray.get(jsonArray.size() - 1).setMedida(rs.getInt("medida"));
-                        jsonArray.get(jsonArray.size() - 1).setFechaM(fechaInicio);
+                        jsonArray.get(jsonArray.size() - 1).setFechaM(sdf.format(fechaInicio));
                     }
                 }
             }
@@ -218,7 +221,7 @@ public class FOM04_Progreso_Medida {
     public String insertaMedidas(@QueryParam("id_usuario") int id_usuario,
                                  @QueryParam("medida") int medida,
                                  @QueryParam("tipo_medida") int tipo_medida,
-                                 @QueryParam("fecha") Date fecha ){
+                                 @QueryParam("fecha") String fecha ){
 
         Map<String, String> response = new HashMap<String, String>();
         try {
@@ -235,7 +238,7 @@ public class FOM04_Progreso_Medida {
                 st.setInt(1, id_usuario);
                 st.setInt(2, medida);
                 st.setInt(3, tipo_medida);
-                st.setDate(4, fecha);
+                st.setString(4, fecha);
                 
                 st.executeQuery();
             
@@ -286,7 +289,7 @@ public class FOM04_Progreso_Medida {
             String query = "select * from fo_m04_act_medida(?,?,?,?);";
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, id_usuario);
-            st.setDate(2, Date.valueOf(fecha));
+            st.setString(2,fecha);
             st.setString(3, tipo_medida);
             st.setInt(4, medida);
             st.executeQuery();
