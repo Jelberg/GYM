@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { TasksCreatePage } from '../tasks-create/tasks-create';
 
-import { DynamoDB, User } from '../../providers/providers';
 
 declare var AWS: any;
 
