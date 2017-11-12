@@ -106,7 +106,7 @@ public class FOM04_Progreso_Medida {
     @DELETE
     @Path("/eliminarMedidas")
     @Produces("application/json")
-    public String eliminaMedidas(@QueryParam("fecha") Date fecha,
+    public String eliminaMedidas(@QueryParam("fecha") String fecha,
                              @QueryParam("id_usuario") Integer id_usuario) {
 
         Map<String, String> response = new HashMap<String, String>();
@@ -119,7 +119,7 @@ public class FOM04_Progreso_Medida {
                 String query = "SELECT fo_m04_elimina_medidas(?, ?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, id_usuario);
-            st.setDate(2, fecha);
+            st.setDate(2, Date.valueOf(fecha));
             ResultSet rs = st.executeQuery();
             response.put("data", "Se elimino las medidas");
 
@@ -238,7 +238,7 @@ public class FOM04_Progreso_Medida {
                 st.setInt(1, id_usuario);
                 st.setInt(2, medida);
                 st.setInt(3, tipo_medida);
-                st.setString(4, fecha);
+                st.setDate(4, Date.valueOf(fecha));
                 
                 st.executeQuery();
             
@@ -289,7 +289,7 @@ public class FOM04_Progreso_Medida {
             String query = "select * from fo_m04_act_medida(?,?,?,?);";
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, id_usuario);
-            st.setString(2,fecha);
+            st.setDate(2,Date.valueOf(fecha));
             st.setString(3, tipo_medida);
             st.setInt(4, medida);
             st.executeQuery();
