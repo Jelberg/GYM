@@ -15,14 +15,14 @@ public class Progreso_Medida {
     private int _id;
     private int _medida;
     private String _tipo;
-    private Date _fechaM;
+    private String _fechaM;
     private String _sobrenombre;
     
     public Progreso_Medida(){
     }
     
     public Progreso_Medida(int id, int medida, String tipo, 
-    Date fechaM, String sobrenombre){
+    String fechaM, String sobrenombre){
         this._id = id;
         this._medida = medida;
         this._tipo = tipo;
@@ -75,14 +75,14 @@ public class Progreso_Medida {
     /**
      * @return the _fechaM
      */
-    public Date getFechaM() {
+    public String getFechaM() {
         return _fechaM;
     }
 
     /**
      * @param _fechaM the _fechaM to set
      */
-    public void setFechaM(Date _fechaM) {
+    public void setFechaM(String _fechaM) {
         this._fechaM = _fechaM;
     }
 
