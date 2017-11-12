@@ -31,7 +31,7 @@ public class PruebaMedidas {
         _conn = new Sql();
         String insertPersonaPrueba = "INSERT INTO USUARIO ( usu_id, usu_cedula, usu_nombre, "
                 + "usu_apellido, usu_sexo, usu_fecha_nac ) VALUES (9999, 9999, "
-                + "'Prueba', 'Prueba', 'M', '12-12-1990' )";
+                + "'Prueba', 'Prueba', 'M', '1990-12-12' )";
         String insertMedida = "INSERT INTO PROGRESO_MEDIDA (pm_id, pm_medida, pm_fecha, "
                 + "fk_usuario, fk_medida) VALUES ( 9999, 69, '2012-10-12', 9999, 4 )";
         
@@ -49,7 +49,7 @@ public class PruebaMedidas {
     }
     @After
     public void finalizarPruebas(){
-        String query = "SELECT fo_m04_elimina_medidas(9999, '12-10-2012')";
+        String query = "SELECT fo_m04_elimina_medidas(9999, '2012-12-10')";
         try {
 
             _rs = _conn.sql( query );
@@ -76,7 +76,7 @@ public class PruebaMedidas {
     @Test
     public void pruebaInsertaMedida(){
         Gson gson = new Gson();
-        Date fecha = new Date(2012, 11, 12);
+        String fecha = "2012-11-12";
         _progresoMedida = new FOM04_Progreso_Medida();
         String respuesta = _progresoMedida.insertaMedidas(9999, 67, 4, fecha);
         assertNotNull( respuesta );

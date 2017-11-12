@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 
 @Component({
   selector: 'linea-peso',
@@ -6,8 +7,15 @@ import { Component } from '@angular/core';
 })
 export class LineaPesoComponent
 {
+  /*userService: UserServiceProvider;
+  listaProgresos = [];
+  public getProgreso(){
+    let urlPeticion: string = "F0M04_Progreso_Peso/getProgresoP?id_usuario=1";
+    this.userService.getDato( urlPeticion ).subscribe( data => this.listaProgresos = data );
+  }*/
+
 	public lineChartData:Array<any> = [
-    {data: [40,50, 60, 62, 66, 70, 50, 60, 70, 80, 90, 100], label: 'Peso'}
+    {data: [ 40,50, 60, 62, 66, 70, 50, 60, 70, 80, 90, 100], label: 'Peso'}
   ];
   public lineChartLabels:Array<any> = ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4'];
   public lineChartOptions:any = {
@@ -45,5 +53,8 @@ export class LineaPesoComponent
   public chartHovered(e:any):void {
     console.log(e);
   }	
+  public llenado():void{
+
+  }
 	
 }

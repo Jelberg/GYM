@@ -5,6 +5,7 @@
  */
 package Dominio;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -14,13 +15,13 @@ import java.time.LocalDate;
 public class Progreso_Peso {
     private int _id;
     private int _peso;
-    private LocalDate _fechaP;
+    private Date _fechaP;
     private String _sobrenombre;
     
     public Progreso_Peso(){    
     }
 
-    public Progreso_Peso(int id, int peso, LocalDate fechaP,
+    public Progreso_Peso(int id, int peso, Date fechaP,
     String sobrenombre){
         this._id = id;
         this._peso = peso;
@@ -58,14 +59,14 @@ public class Progreso_Peso {
     /**
      * @return the _fechaP
      */
-    public LocalDate getFechaP() {
+    public Date getFechaP() {
         return _fechaP;
     }
 
     /**
      * @param _fechaP the _fechaP to set
      */
-    public void setFechaP(LocalDate _fechaP) {
+    public void setFechaP(Date _fechaP) {
         this._fechaP = _fechaP;
     }
 
