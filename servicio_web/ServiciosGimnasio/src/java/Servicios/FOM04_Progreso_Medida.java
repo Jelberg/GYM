@@ -23,6 +23,7 @@ import Validaciones.ValidationWS;
 import Excepciones.ParameterNullException;
 import com.google.gson.reflect.TypeToken;
 import java.lang.ProcessBuilder.Redirect.Type;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Map;
@@ -45,30 +46,30 @@ public class FOM04_Progreso_Medida {
     private ArrayList<Progreso_Medida> jsonArray;
     
     /**
-     * Funcion que recibe como parametros la fecha y el sobrenombre del usuario
+     * Funcion que recibe como parametros la fecha y el id del usuario
      * para hacer la consulta de las medidas registradas por el usuario durante
      * esa fecha.
      * @param fecha Fecha del mes en que se quiere obtener las medidas.
      * Debe ser en formato yyyy-mm-dd
-     * @param sobrenombre Indica el nombre del usuario
+     * @param id_usuario Identificador del usuario
      * @return Devuelve las medidas en formato json
      */
     @GET
     @Path("/getProgresoM")
     @Produces("application/json")
     public String getProgresoM(@QueryParam("fecha") String fecha,
-                                @QueryParam("sobrenombre") Integer sobrenombre){
+                                @QueryParam("id_usuario") Integer id_usuario){
     
         try{
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("sobrenombre", sobrenombre);
+                put("id_usuario", id_usuario);
                 put("fecha", fecha);
             }});
 
             String query = "SELECT * FROM fo_m04_get_progresom(?, ?)";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, sobrenombre);
+            st.setInt(1, id_usuario);
             st.setDate(2, Date.valueOf(fecha));
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
@@ -95,30 +96,30 @@ public class FOM04_Progreso_Medida {
     
     /**
      * Metodo que recibe como parametros la fecha del mes 
-     * correspondiente a la fecha a eliminar y el nombre del usuario 
+     * correspondiente a la fecha a eliminar y el id del usuario 
      * para eliminar las medidas de ese mes.
      * @param fecha Indica la fecha correspondiente a las medidas.
-     * @param sobrenombre Indica el nombre del usuario.
+     * @param id_usuario Identificador del usuario.
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
     @DELETE
     @Path("/eliminarMedidas")
     @Produces("application/json")
-    public String eliminaMedidas(@QueryParam("fecha") Date fecha,
-                             @QueryParam("sobrenombre") Integer sobrenombre) {
+    public String eliminaMedidas(@QueryParam("fecha") String fecha,
+                             @QueryParam("id_usuario") Integer id_usuario) {
 
         Map<String, String> response = new HashMap<String, String>();
         try{
 
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("sobrenombre", sobrenombre);
+                put("id_usuario", id_usuario);
                 put("fecha", fecha);
             }});
                 String query = "SELECT fo_m04_elimina_medidas(?, ?)";
             PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, sobrenombre);
-            st.setDate(2, fecha);
+            st.setInt(1, id_usuario);
+            st.setDate(2, Date.valueOf(fecha));
             ResultSet rs = st.executeQuery();
             response.put("data", "Se elimino las medidas");
 
@@ -148,6 +149,8 @@ public class FOM04_Progreso_Medida {
     @Path("/getMedidasDelAno")
     @Produces("application/json")
     public String getMedidasDelAno(@QueryParam("sobrenombre") String sobrenombre){
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
 
@@ -171,21 +174,21 @@ public class FOM04_Progreso_Medida {
                     fecha = fecha.minusMonths(1);
                     fechaInicio = Date.valueOf(fecha);
                     fechafin = Date.valueOf(fecha.with(TemporalAdjusters.lastDayOfMonth()));
-                    st.setDate(2, fechaInicio);
-                    st.setDate(3, fechafin);
+                    st.setString(2, sdf.format(fechaInicio));
+                    st.setString(3, sdf.format(fechafin));
                 }
 
                 rs = st.executeQuery();
                 jsonArray.add(new Progreso_Medida());
                 if (rs.wasNull()) {
                     jsonArray.get(jsonArray.size() - 1).setMedida(0);
-                    jsonArray.get(jsonArray.size() - 1).setFechaM(fechaInicio);
+                    jsonArray.get(jsonArray.size() - 1).setFechaM(sdf.format(fechaInicio));
                 }
                 else {
 
                     while (rs.next()) {
                         jsonArray.get(jsonArray.size() - 1).setMedida(rs.getInt("medida"));
-                        jsonArray.get(jsonArray.size() - 1).setFechaM(fechaInicio);
+                        jsonArray.get(jsonArray.size() - 1).setFechaM(sdf.format(fechaInicio));
                     }
                 }
             }
@@ -203,11 +206,14 @@ public class FOM04_Progreso_Medida {
         }
     }
     
-    
     /**
-     * Funcion que perimite ingresar vario las medidas del usuario
-     * @param jsonMedida Indica las medidas que se insertaran en formato json,
-     * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
+     * Funcion que es llamada cuando el usuario desea insertar un nuevo registro
+     * de medidas.
+     * @param id_usuario Identificador del usuario.
+     * @param medida Canditdad de la medida a insertar.
+     * @param tipo_medida Tipo de la medida que se va a registrar.
+     * @param fecha Fecha del registro
+     * @return Devuelve un json con mensaje del estatus de la peticion.
      */
     @POST
     @Path("/insertaMedidas") //Revisar logica para hacer el bucle en el servicio
@@ -215,7 +221,7 @@ public class FOM04_Progreso_Medida {
     public String insertaMedidas(@QueryParam("id_usuario") int id_usuario,
                                  @QueryParam("medida") int medida,
                                  @QueryParam("tipo_medida") int tipo_medida,
-                                 @QueryParam("fecha") Date fecha ){
+                                 @QueryParam("fecha") String fecha ){
 
         Map<String, String> response = new HashMap<String, String>();
         try {
@@ -232,7 +238,7 @@ public class FOM04_Progreso_Medida {
                 st.setInt(1, id_usuario);
                 st.setInt(2, medida);
                 st.setInt(3, tipo_medida);
-                st.setDate(4, fecha);
+                st.setDate(4, Date.valueOf(fecha));
                 
                 st.executeQuery();
             
@@ -254,5 +260,52 @@ public class FOM04_Progreso_Medida {
     
     
     
+    
+    /**
+     * Funcion que es llamada cuando el usuario desea actualizar algun registro
+     * de medidas.
+     * @param id_usuario identificador del usuario.
+     * @param fecha Fecha en la que se inserto la medida
+     * @param tipo_medida Tipo de medida a actualizar.
+     * @param medida Cantidad de la medida a actualizar.
+     * @return Devuelve un json con un mensaje al usuario sobre el estatus
+     * de la peticion.
+     */
+    @POST
+    @Path("/actualizaMedida")
+    @Produces("application/json")
+    public String actualizaMedida( @QueryParam ( "id_usuario" ) int id_usuario,
+                                   @QueryParam ( "fecha" ) String fecha, 
+                                   @QueryParam ( "tipo_medida" ) String tipo_medida,
+                                   @QueryParam ( "medida" ) int medida){
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put ( "id_usuario" , id_usuario );
+                put( "fecha" , fecha );
+                put( "tipo_medida" , tipo_medida );
+                put( "medida" , medida );
+            }});
+            String query = "select * from fo_m04_act_medida(?,?,?,?);";
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1, id_usuario);
+            st.setDate(2,Date.valueOf(fecha));
+            st.setString(3, tipo_medida);
+            st.setInt(4, medida);
+            st.executeQuery();
+            response.put("data", "Se actualizo correctamente.");
+        }
+        catch (SQLException e){
+            response.put("error", e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            Sql.bdClose(conn);
+            return gson.toJson(response);
+        }
+        
+    }   
     
 }

@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import {HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 //Gráficos
 import { ChartsModule } from 'ng2-charts';
@@ -38,6 +38,7 @@ import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clase
 import { ComentarClasePage} from '../pages/FO_M05/comentar-clase/comentar-clase';
 import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class'
 import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/realizar-valoracion';
+import { UserServiceProvider } from '../providers/user-service/user-service';
 //FIN M05
 
 
@@ -76,7 +77,7 @@ import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/reali
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    HttpModule,
     IonicModule.forRoot(MyApp,{
       tabsPlacement:'bottom',
       platforms:{
@@ -122,7 +123,8 @@ import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/reali
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UserServiceProvider
   ]
 })
 export class AppModule {}
