@@ -1,4 +1,359 @@
 <html>
+<<<<<<< HEAD
+<title>GIMNASIO</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="../css/styles.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+  crossorigin="anonymous">
+<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
+
+
+<body>
+
+  <!-- Sidebar/menu -->
+  <nav class="w3-sidebar w3-color w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:215px;font-weight:bold;" id="mySidebar">
+    <br>
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft w3-hover-pale-green"
+      style="width:100%;font-size:20px;text-align: justify;"> ↩</a>
+    <div class="w3-bar-block">
+      <a href="../index.html" onclick="w3_close()" class="menuIcon ">
+        <img src="../Imagenes/inicio_white.png" class="menuImg">
+        <p class="menuText">
+          <b>Home</b>
+        </p>
+      </a>
+      <a href="../instructores/instructores.html" onclick="w3_close()" class="menuIcon">
+        <img src="../Imagenes/Instructor_white.png" class="menuImg">
+        <p class="menuText">
+          <b>Instructores</b>
+        </p>
+        <hr style="width:120px;border:2px">
+      </a>
+      <a href="../entrenadores/entrenadores.html" onclick="w3_close()" class="menuIcon">
+        <img src="../Imagenes/Entrenador_white.png" class="menuImg">
+        <p class="menuText">
+          <b>Entrenadores</b>
+        </p>
+        <hr style="width:120px;border:2px">
+      </a>
+      <a href="../clases/clases.html" onclick="w3_close()" class="menuIcon">
+        <img src="../Imagenes/clase_white.png" class="menuImg">
+        <p class="menuText">
+          <b>Clases</b>
+        </p>
+        <hr style="width:120px;border:2px">
+      </a>
+      <a href="../horarios/horarios.html" onclick="w3_close()" class="menuIcon active">
+        <img src="../Imagenes/horario_white.png" class="menuImg">
+        <p class="menuText">
+          <b>Horarios</b>
+        </p>
+        <hr style="width:120px;border:2px">
+      </a>
+      <a href="../maquinas/maquinas.html" onclick="w3_close()" class="menuIcon">
+        <img src="../Imagenes/Entrenador_white.png" class="menuImg">
+        <p class="menuText">
+          <b>Máquinas</b>
+        </p>
+        <hr style="width:120px;border:2px">
+      </a>
+      <a href="../rutinas/rutinas.html" onclick="w3_close()" class="menuIcon">
+        <img src="../Imagenes/clase_white.png" class="menuImg">
+        <p class="menuText">
+          <b>Rutinas</b>
+        </p>
+        <hr style="width:120px;border:2px">
+      </a>
+    </div>
+  </nav>
+
+  <!-- Top menu on small screens -->
+  <header class=" w3-top w3-hide-large w3-color w3-xlarge w3-padding w3-margin-bottom">
+    <a href="javascript:void(0)" class="w3-button w3-color w3-hover-pale-green w3-margin-right" onclick="w3_open()">☰</a>
+  </header>
+
+  <!-- Overlay effect when opening sidebar on small screens -->
+  <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+  <!-- !PAGE CONTENT! -->
+  <div class="w3-main" style="margin-left:275px;margin-right:60px;margin-bottom:50px">
+
+    <!-- Header -->
+    <div class="w3-container" id="showcase">
+      <img src="../Imagenes/Logo Gimnasio.png" class="mainImg">
+      <h1 class="w3-xxxlarge w3-text-color">
+        <b>Gestión de Horarios.</b>
+      </h1>
+      <hr style="width:50px;border:5px solid #3CB371" class="w3-round">
+    </div>
+
+    <!-- Rellenar -->
+    <div class="w3-row ">
+      <div class="w3-resto w3-teal w3-container" style="height:430px">
+        <div class="w3-padding-32 w3-padding-large">
+          <h1>Horarios</h1>
+
+          <form class="w3-container w3-padding-large" action="/action_page.php">
+            <div class="w3-third w3-padding-small">
+              <p>Clase:</p>
+              <select class="w3-select w3-border" name="option">
+                <option value="" disabled selected>Seleccione Opción</option>
+                <option value="1">Opción 1</option>
+                <option value="2">Opción 2</option>
+                <option value="3">Opción 3</option>
+              </select>
+            </div>
+            <div class="w3-third w3-padding-small">
+              <p>Hora Inicio:</p>
+              <select class="w3-select w3-border" name="option">
+                <option value="" disabled selected>Seleccione Opción</option>
+                <option value="1">Opción 1</option>
+                <option value="2">Opción 2</option>
+                <option value="3">Opción 3</option>
+              </select>
+            </div>
+            <div class="w3-third w3-padding-small">
+              <p>Hora Fin:</p>
+              <select class="w3-select w3-border" name="option">
+                <option value="" disabled selected>Seleccione Opción</option>
+                <option value="1">Opción 1</option>
+                <option value="2">Opción 2</option>
+                <option value="3">Opción 3</option>
+              </select>
+            </div>
+          </form>
+
+          <form class="w3-container w3-padding-large" action="/action_page.php">
+            <div class="w3-third w3-padding-small">
+              <p>Instructor:</p>
+              <select class="w3-select w3-border" name="option">
+                <option value="" disabled selected>Seleccione Opción</option>
+                <option value="1">Opción 1</option>
+                <option value="2">Opción 2</option>
+                <option value="3">Opción 3</option>
+              </select>
+            </div>
+            <div class="w3-third w3-padding-small">
+              <p>Día:</p>
+              <select class="w3-select w3-border" name="option">
+                <option value="" disabled selected>Seleccione Opción</option>
+                <option value="1">Opción 1</option>
+                <option value="2">Opción 2</option>
+                <option value="3">Opción 3</option>
+              </select>
+            </div>
+            <div class="w3-third w3-padding-large">
+                  <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-14 w3-margin-bottom myButton">Buscar</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+      
+      <h1 class="w3-xxxlarge White-text-color">
+        <b>Clases y horarios</b>
+      </h1>
+      <div class="row">
+        <div class="content">
+            <div class="w3-row ">
+                <table bgcolor="#00FF00"  class="table table-bordered table-inverse">
+                    <thead>
+                        <tr>
+                            <th class="tablehead">ID</th>
+                            <th class="tablehead">Clase</th>
+                            <th class="tablehead">Dia</th>
+                            <th class="tablehead">Hora Inicio</th>
+                            <th class="tablehead">Hora Fin</th>
+                            <th class="tablehead">Instructor</th>
+                            <th class="tablehead tcenter">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>00001</td>
+                            <td>Yoga</td>
+                            <td>Martes</td>
+                            <td>09:00AM</td>
+                            <td>11:00AM</td>
+                            <td>Miguel</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00002</td>
+                          <td>TRX</td>
+                          <td>viernes</td>
+                          <td>07:00AM</td>
+                          <td>09:00AM</td>
+                          <td>Alfonso</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00005</td>
+                          <td>Insanity</td>
+                          <td>Jueves</td>
+                          <td>05:00PM</td>
+                          <td>08:00PM</td>
+                          <td>Juan</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00012</td>
+                          <td>Estiramientos</td>
+                          <td>Martes</td>
+                          <td>12:00PM</td>
+                          <td>03:00PM</td>
+                          <td>Miguel</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00014</td>
+                          <td>Boxeo</td>
+                          <td>Lunes</td>
+                          <td>07:00AM</td>
+                          <td>10:00AM</td>
+                          <td>Francisco</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00022</td>
+                          <td>Estiramientos</td>
+                          <td>Martes</td>
+                          <td>12:00PM</td>
+                          <td>03:00PM</td>
+                          <td>Miguel</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00002</td>
+                          <td>TRX</td>
+                          <td>viernes</td>
+                          <td>07:00AM</td>
+                          <td>09:00AM</td>
+                          <td>Alfonso</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00032</td>
+                          <td>Estiramientos</td>
+                          <td>Martes</td>
+                          <td>12:00PM</td>
+                          <td>03:00PM</td>
+                          <td>Miguel</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00016</td>
+                          <td>Insanity</td>
+                          <td>Jueves</td>
+                          <td>05:00PM</td>
+                          <td>08:00PM</td>
+                          <td>Juan</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>00005</td>
+                          <td>Insanity</td>
+                          <td>Jueves</td>
+                          <td>05:00PM</td>
+                          <td>08:00PM</td>
+                          <td>Juan</td>
+                            <td class="tcenter">
+                                <a href="./gest_equipamiento.html">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>        
+              
+            
+
+
+
+
+  </div>
+  <script>
+    // Script to open and close sidebar
+    function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+      document.getElementById("myOverlay").style.display = "block";
+    }
+
+    function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+      document.getElementById("myOverlay").style.display = "none";
+    }
+
+    // Modal Image Gallery
+    function onClick(element) {
+      document.getElementById("img01").src = element.src;
+      document.getElementById("modal01").style.display = "block";
+      var captionText = document.getElementById("caption");
+      captionText.innerHTML = element.alt;
+    }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+=======
     <title>GIMNASIO</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -91,161 +446,100 @@
         </div>
     
         <!-- Rellenar -->
-        <div class="w3-row ">
-          <div class="w3-resto w3-teal w3-container" style="height:430px">
-            <div class="w3-padding-32 w3-padding-large">
-              <h1>Horarios</h1>
-    
-              <form class="w3-container w3-padding-large" action="/action_page.php">
-                <div class="w3-third w3-padding-small">
-                  <p>Clase:</p>
-                  <select class="w3-select w3-border" name="option">
-                    <option value="" disabled selected>Seleccione Opción</option>
-                    <option value="1">Opción 1</option>
-                    <option value="2">Opción 2</option>
-                    <option value="3">Opción 3</option>
-                  </select>
+        <div class="row">
+            <p style="font-size:18px">En esta sección podrá gestionar todo lo relacionado con los horarios de las clases del gimnasio.
+            </p>
+            <a href="./gest_Horarios.html">
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Agregar Horario</button>
+            </a>
+            <a href="">
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Consultar Clase</button>
+            </a>
+            <label>Introduzca Nombre de la Clase:</label>
+            <input class="w3-input w3-border" style="width:30%;" type="text" required name="NombreClase">
+        </div>
+        <div class="row">
+            <div class="content">
+                <div class="w3-row ">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="tablehead">Clase</th>
+                                <th class="tablehead">Instructor</th>
+                                <th class="tablehead">Fecha</th>
+                                <th class="tablehead">Día</th>
+                                <th class="tablehead">Capacidad</th>
+                                <th class="tablehead">Hora Inicio</th>
+                                <th class="tablehead">Hora Fin</th>
+                                <th class="tablehead">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Yoga</td>
+                                <td>Pedro Pérez</td>
+                                <td>15/11/2017</td>
+                                <td>Lunes</td>
+                                <td>20</td>
+                                <td>7:00am</td>
+                                <td>8:00am</td>
+                                <td class="tcenter">
+                                    <a href="./gest_Horarios.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>TRX</td>
+                                <td>Pedro Pérez</td>
+                                <td>15/11/2017</td>
+                                <td>Lunes</td>
+                                <td>20</td>
+                                <td>7:00am</td>
+                                <td>8:00am</td>
+                                <td class="tcenter">
+                                    <a href="./gest_Horarios.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Insanity</td>
+                                <td>Pedro Pérez</td>
+                                <td>15/11/2017</td>
+                                <td>Lunes</td>
+                                <td>20</td>
+                                <td>7:00am</td>
+                                <td>8:00am</td>
+                                <td class="tcenter">
+                                    <a href="./gest_Horarios.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Estiramientos</td>
+                                <td>Pedro Pérez</td>
+                                <td>15/11/2017</td>
+                                <td>Lunes</td>
+                                <td>20</td>
+                                <td>7:00am</td>
+                                <td>8:00am</td>
+                                <td class="tcenter">
+                                    <a href="./gest_Horarios.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="w3-third w3-padding-small">
-                  <p>Hora Inicio:</p>
-                  <select class="w3-select w3-border" name="option">
-                    <option value="" disabled selected>Seleccione Opción</option>
-                    <option value="1">Opción 1</option>
-                    <option value="2">Opción 2</option>
-                    <option value="3">Opción 3</option>
-                  </select>
-                </div>
-                <div class="w3-third w3-padding-small">
-                  <p>Hora Fin:</p>
-                  <select class="w3-select w3-border" name="option">
-                    <option value="" disabled selected>Seleccione Opción</option>
-                    <option value="1">Opción 1</option>
-                    <option value="2">Opción 2</option>
-                    <option value="3">Opción 3</option>
-                  </select>
-                </div>
-              </form>
-    
-              <form class="w3-container w3-padding-large" action="/action_page.php">
-                <div class="w3-third w3-padding-small">
-                  <p>Instructor:</p>
-                  <select class="w3-select w3-border" name="option">
-                    <option value="" disabled selected>Seleccione Opción</option>
-                    <option value="1">Opción 1</option>
-                    <option value="2">Opción 2</option>
-                    <option value="3">Opción 3</option>
-                  </select>
-                </div>
-                <div class="w3-third w3-padding-small">
-                  <p>Día:</p>
-                  <select class="w3-select w3-border" name="option">
-                    <option value="" disabled selected>Seleccione Opción</option>
-                    <option value="1">Opción 1</option>
-                    <option value="2">Opción 2</option>
-                    <option value="3">Opción 3</option>
-                  </select>
-                </div>
-                <div class="w3-third w3-padding-32">
-                      <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Buscar</button>
-                </div>
-              </form>
-    
             </div>
-          </div>
-          
-          <div class="w3-resto w3-white w3-container" style="height:450px">
-            <div class="w3-padding-32 w3-center">
-                <div class="row">
-                  <div class="content">
-                      <div class="w3-row w3-white">
-                          <table bgcolor="#00FF00"  class="table table-bordered table-inverse">
-                              <thead>
-                                  <tr>
-                                      <th class="tablehead">Clase</th>
-                                      <th class="tablehead">Día</th>
-                                      <th class="tablehead">Hora Inicio</th>
-                                      <th class="tablehead">Hora Fin</th>
-                                      <th class="tablehead">Instructor</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  <tr>
-                                      <td>Yoga</td>
-                                      <td>Martes</td>
-                                      <td>09:00AM</td>
-                                      <td>11:00AM</td>
-                                      <td>Miguel</td>
-                                  </tr>
-                                  <tr>
-                                    <td>TRX</td>
-                                    <td>viernes</td>
-                                    <td>07:00AM</td>
-                                    <td>09:00AM</td>
-                                    <td>Alfonso</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Insanity</td>
-                                    <td>Jueves</td>
-                                    <td>05:00PM</td>
-                                    <td>08:00PM</td>
-                                    <td>Juan</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Estiramientos</td>
-                                    <td>Martes</td>
-                                    <td>12:00PM</td>
-                                    <td>03:00PM</td>
-                                    <td>Miguel</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Boxeo</td>
-                                    <td>Lunes</td>
-                                    <td>07:00AM</td>
-                                    <td>10:00AM</td>
-                                    <td>Francisco</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Estiramientos</td>
-                                    <td>Martes</td>
-                                    <td>12:00PM</td>
-                                    <td>03:00PM</td>
-                                    <td>Miguel</td>
-                                  </tr>
-                                  <tr>
-                                    <td>TRX</td>
-                                    <td>viernes</td>
-                                    <td>07:00AM</td>
-                                    <td>09:00AM</td>
-                                    <td>Alfonso</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Estiramientos</td>
-                                    <td>Martes</td>
-                                    <td>12:00PM</td>
-                                    <td>03:00PM</td>
-                                    <td>Miguel</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Insanity</td>
-                                    <td>Jueves</td>
-                                    <td>05:00PM</td>
-                                    <td>08:00PM</td>
-                                    <td>Juan</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Insanity</td>
-                                    <td>Jueves</td>
-                                    <td>05:00PM</td>
-                                    <td>08:00PM</td>
-                                    <td>Juan</td>
-                                  </tr>
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>     
-            </div>
-            </div>  
-          </div>
+        </div>
          
     
       </div>
@@ -277,3 +571,4 @@
     </body>
     
     </html>
+>>>>>>> develop

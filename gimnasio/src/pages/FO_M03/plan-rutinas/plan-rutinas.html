@@ -1,0 +1,99 @@
+<!--
+  Generated template for the PlanRutinasPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    
+      <ion-navbar color="secondary">
+    
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Rutinas</ion-title>
+      </ion-navbar>
+
+</ion-header>
+    
+    
+    <ion-content padding>
+    
+      <div class="plan">
+        <h1>Rutinas Plan {{ planID }}</h1>
+      </div>
+    
+      <ion-list>
+        <ion-item-sliding>
+          <ion-item (click)="goToEjercicios(1)" detail-push>
+            <ion-avatar item-start>
+              <img src="../assets/imgs/imgsM03/weightlifting.png">
+            </ion-avatar>
+            <h2>Rutina Pecho</h2>
+            <p>Día: Lunes</p>
+            <p>Ejercicios: 5</p>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button (click)="presentActionSheet()" color="calm">
+              <ion-icon name="md-share"></ion-icon>
+            </button>
+            <button ion-button (click)="modificarRutina()" color="energized">
+              <ion-icon name="md-create"></ion-icon>
+            </button>
+            <button ion-button (click)="ConfirmarEliminacion()" color="pomegranate">
+              <ion-icon name="md-trash"></ion-icon>
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+    
+        <ion-item-sliding>
+          <ion-item (click)="goToEjercicios(2)" detail-push>
+            <ion-avatar item-start>
+              <img src="../assets/imgs/imgsM03/weightlifting.png">
+            </ion-avatar>
+            <h2>Rutina Brazos</h2>
+            <p>Día: Miércoles</p>
+            <p>Ejercicios: 5</p>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button (click)="presentActionSheet()" color="calm">
+              <ion-icon name="md-share"></ion-icon>
+            </button>
+            <button ion-button (click)="modificarRutina()" color="energized">
+              <ion-icon name="md-create"></ion-icon>
+            </button>
+            <button ion-button (click)="ConfirmarEliminacion()" color="pomegranate">
+              <ion-icon name="md-trash"></ion-icon>
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+    
+        <ion-item-sliding>
+          <ion-item (click)="goToEjercicios(3)" detail-push>
+            <ion-avatar item-start>
+              <img src="../assets/imgs/imgsM03/weightlifting.png">
+            </ion-avatar>
+            <h2>Rutina Piernas</h2>
+            <p>Día: Viernes</p>
+            <p>Ejercicios: 5</p>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button (click)="presentActionSheet()" color="calm">
+              <ion-icon name="md-share"></ion-icon>
+            </button>
+            <button ion-button (click)="modificarRutina()" color="energized">
+              <ion-icon name="md-create"></ion-icon>
+            </button>
+            <button ion-button (click)="ConfirmarEliminacion()" color="pomegranate">
+              <ion-icon name="md-trash"></ion-icon>
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+      <ion-fab right bottom>
+          <button ion-fab color="secondary" (click)="modificarRutina()"><ion-icon name="add"></ion-icon></button>
+      </ion-fab>
+
+    </ion-content>
+    
