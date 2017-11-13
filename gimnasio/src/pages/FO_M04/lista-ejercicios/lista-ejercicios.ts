@@ -33,19 +33,16 @@ export class ListaEjerciciosPage {
     let urlPeticion: string = "FOM03_Rutina/getEjerciciosRealizados?idUsuario=1";
      this.userService.getDato( urlPeticion ).subscribe(data => {
         let i: number = 0;
-        console.log('El tamaño de data es: ' + data.length);
         while ( i < data.length ){
-          console.log('data[i] es: ' + data[i] );
           this.listaEjercicios[i] = data[i];
-          console.log('listaEjercicios[i] es: ' + this.listaEjercicios[i] );
-          console.log('El tamaño de listaEjercicios es: ' + this.listaEjercicios.length );
           i++;
         }
       }); 
   }
 
-  itemSelected(listaEjercicios){
-    this.navCtrl.push(TabsEjercicioPage);
+  itemSelected(listaEjercicios: string){
+    this.navCtrl.push(TabsEjercicioPage, {lista : listaEjercicios});
+    console.log('itemSelected, valor listaEjercicios ' + listaEjercicios);
   }
 
 }

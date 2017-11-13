@@ -19,28 +19,18 @@ import { ListaContactosPage } from '../lista-contactos/lista-contactos';
 })
 export class ProgresoEjercicioPage {
 
-  //dato: any;
-  dato 
- 
+  listaRecibida
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private userService : UserServiceProvider) {
+
+                //this.listaRecibida = navParams.get('listaRecibida');
+                this.listaRecibida = navParams.data;
   }
 
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad ProgresoEjercicioPage');
-    /*this.userService.getDato().subscribe(
-      (data) => {
-        console.log('Asignando data del json');
-        this.dato = data;
-        
-      },
-      (error) =>{
-        console.error(error);
-      }
-    )*/
-    
+    console.log('Ventana progreso ejercicio - Elemento recibido: '+ this.listaRecibida);
   }
 
   goToListaContactosPage(){
