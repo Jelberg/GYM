@@ -31,7 +31,7 @@ export class MyApp {
     this.pages = [
       {titulo: "Inicio", component: HomePage, icon: "home"},
       {titulo: "perfil", component: PerfilPage, icon: "person"},
-      {titulo: "amigos", component: PerfilPage, icon: "people"},
+      {titulo: "amigos", component: AmigosPage, icon: "people"},
       {titulo: "Progreso", component: SeleccionarProgresoPage, icon: "stats"},
       {titulo: 'Clases',component:TabCalendarClassPage, icon: 'bicycle'},
       {titulo: 'Reservas',component:ReservasPage, icon: 'calendar'} ,

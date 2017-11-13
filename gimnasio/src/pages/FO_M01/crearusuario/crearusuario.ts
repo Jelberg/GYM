@@ -14,10 +14,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'crearusuario.html',
 })
 export class CrearusuarioPage {
-
+  public editar: string = "true";
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
-
+  volver() {
+    this.navCtrl.pop();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad CrearusuarioPage');
   }

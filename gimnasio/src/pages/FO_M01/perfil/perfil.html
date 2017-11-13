@@ -12,10 +12,119 @@
 <ion-title>
  Perfil
 </ion-title>
+<ion-buttons end>
+  <button (click)="cerrarsesion()" id="bAtras" ion-button clear>
+    Cerrar Sesion
+  </button>
+</ion-buttons>
 </ion-navbar>
 </ion-header>
 
+<ion-content >
+  <h1>
+    <img class="circle-pic" src="../../assets/imgs/pequena.png" />
+  </h1>
 
-<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Datos Personales
+    </ion-card-header>
+   
 
+      <ion-grid>
+
+      <ion-row class="fila" align-items-center>
+        <ion-col id="lnombre">
+          Nombre:
+        </ion-col>
+        <ion-col>
+          <ion-item text-right >
+          <ion-label floating id="nombre" color="dark">
+          </ion-label>
+          <ion-input type="text" required [disabled]="editar">
+          </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class = "fila" align-items-center>
+
+        <ion-col id="lcorreo">
+          Correo:
+        </ion-col>
+
+        <ion-col col-9>
+          <ion-item text-right>
+            <ion-label floating id="correo" color="dark">
+            </ion-label>
+            <ion-input [disabled]="editar" type="email" required >  
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row class = "fila" align-items-center>
+        <ion-col id="ltelefono">
+          Telefono:
+        </ion-col>
+        <ion-col>
+          <ion-item text-right>
+            <ion-label floating id="telefono" color ="dark" >
+            </ion-label>
+            <ion-input [disabled]="editar" type="tel" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class = "fila" align-items-center>
+        <ion-col>
+          Fecha nac:
+        </ion-col>
+        <ion-col >
+            <ion-item text-right>
+                <ion-datetime color="dark" id="fechanac" [disabled]="editar" displayFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+              </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class = "fila" align-items-center>
+        <ion-col id="laltura">
+          Estatura(cm):
+        </ion-col>
+        <ion-col>
+          <ion-item text-right>
+            <ion-label floating id="estatura" color="dark">
+            </ion-label>
+            <ion-input [disabled]="editar" min=120 max=250 type="number" required>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class = "fila" align-items-center>
+        <ion-col id="lgenero">
+          Genero:
+        </ion-col>
+        <ion-col text-right>
+          <button text-right id="genero" ion-button clear color="dark" [disabled]="editar" (click)="cambiargenero()">
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+  </ion-card>
+  <div id="finalp">
+
+  </div>
+
+  <ion-fab right bottom>
+      <button ion-fab color="secondary" (click)="editarperfil()">
+          <ion-icon name="build" *ngIf="editar"></ion-icon>
+          <ion-icon name="checkmark" *ngIf="!editar"></ion-icon>
+      </button>
+  </ion-fab>
+ 
 </ion-content>
