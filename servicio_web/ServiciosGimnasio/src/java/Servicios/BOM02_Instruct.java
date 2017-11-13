@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +46,6 @@ private Connection conn = Sql.getConInstance();
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Instructor> jsonArray;
-
     /**
      * Funcion que recibe como parametro el correo del instructor 
      * @param correo del cual se quiere 
@@ -60,24 +60,25 @@ private Connection conn = Sql.getConInstance();
                 put("correo", correo);
             }});
 
-            String query = "SELECT * FROM bo_m02_get_instructor("+correo+");";
+            String query = "SELECT * FROM bo_m02_get_instructor( ? );";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
             st.setString(1, correo);
             ResultSet rs = st.executeQuery();
+            
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 jsonArray.add(new Instructor());
-                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("INS_ID"));
-                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("INS_NOMBRE"));
-                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("INS_APELLIDO"));
-                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("INS_FECHA_NAC"));
-                jsonArray.get(jsonArray.size() - 1).setSexo(rs.getInt("INS_SEXO"));
-                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("INS_CORREO"));
-                byte[] img = rs.getBytes("INS_FOTO");
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
+                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fechanac"));
+                jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("sexo")));
+                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
+                /*byte[] img = rs.getBytes("INS_FOTO");
                 ImageIcon image = new ImageIcon(img);
                 Image im = image.getImage();
-                jsonArray.get(jsonArray.size() - 1).setFoto(im);
+                jsonArray.get(jsonArray.size() - 1).setFoto(im);*/
                           
             }
             response = gson.toJson(jsonArray);
@@ -119,15 +120,9 @@ private Connection conn = Sql.getConInstance();
                 put("correo", correo );
             }});
 
-            String query = "select * from bo_m02_inserta_instructor(?, ?, ?, ?, ?)";
-            PreparedStatement st = conn.prepareStatement(query);
-            java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
-                st.setString(1, nombre);
-                st.setString(2, apellido);
-                st.setDate(3, fecha_nac);
-                st.setInt(4, sexo);
-                st.setString(5, correo);
-                
+            String query = "insert into instructor(ins_nombre, ins_apellido, ins_fecha_nac, ins_sexo, ins_correo) values("
+                    +nombre+", "+apellido+", "+fecha_nac+", "+sexo+", "+correo+")";
+            PreparedStatement st = conn.prepareStatement(query);              
                 st.executeQuery();
             
             response.put("data", "Se inserto el comentario");

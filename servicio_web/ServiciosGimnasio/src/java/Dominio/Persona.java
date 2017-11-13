@@ -17,7 +17,7 @@ public class Persona implements Serializable {
     private String nombre;
     private String apellido;    
     private Date fecha_nac;
-    private int sexo;
+    private String sexo;
     private String correo;
 
     public int getId() {
@@ -52,11 +52,11 @@ public class Persona implements Serializable {
         this.fecha_nac = fecha_nac;
     }
 
-    public int getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(int sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
