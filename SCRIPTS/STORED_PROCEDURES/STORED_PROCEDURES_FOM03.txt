@@ -28,7 +28,7 @@ END; $$
 DECLARE
    _ejercicios    record;
 BEGIN
-   FOR _ejercicios IN(select eje.eje_nombre from ejercicio as eje 
+   FOR _ejercicios IN(select  distinct(eje.eje_nombre) from ejercicio as eje 
 inner join ejercicio_maquina_equipo as eme on eje.eje_id= eme.fk_ejercicio 
 inner join trabajo_rutina as tr on tr.fk_eje_maq_equ1 = eme.eme_id 
 inner join rutina as rut on rut.rut_id=eme.fk_rutina 
