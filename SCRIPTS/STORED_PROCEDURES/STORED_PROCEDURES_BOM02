@@ -1,6 +1,6 @@
 ﻿------------------------------------------CLASE-------------------------------------------
 
---Función que devuelve la descripción de la clase consultada.
+--------------Función que devuelve la descripción de la clase consultada.
 
 CREATE OR REPLACE FUNCTION bo_m02_get_clase(nombreclase character varying)
   RETURNS TABLE(nombre character varying, descripcion character varying)
@@ -16,6 +16,40 @@ BEGIN
     descripcion = var_r.cla_descripcion;
     RETURN NEXT;
    END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+----------------------------Función que agrega una clase.
+
+CREATE OR REPLACE FUNCTION bo_m02_inserta_clase(idclase INT, 
+    nombreclase character varying,
+    descripcion character varying)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	INSERT INTO CLASE(CLA_ID,CLA_NOMBRE,CLA_DESCRIPCION) VALUES (idclase, nombreclase, descripcion);
+END $$
+  LANGUAGE plpgsql;
+
+----------------------------Función que elimina una clase.
+
+CREATE OR REPLACE FUNCTION bo_m02_elimina_clase(nombreclase character varying)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	DELETE FROM CLASE WHERE CLA_NOMBRE=nombreclase;
+END $$
+  LANGUAGE plpgsql;
+
+---------------------------Función que modifica datos de una clase.
+
+CREATE OR REPLACE FUNCTION bo_m02_modifica_clase(nombreclase character varying, descripcion character varying)
+  RETURNS void
+   AS $$
+DECLARE
+BEGIN
+    UPDATE CLASE SET (CLA_NOMBRE = nombreclase, CLA_DESCRIPCION = descripcion)
+    WHERE CLA_NOMBRE = nombreclase;
 END; $$
   LANGUAGE plpgsql;
 
