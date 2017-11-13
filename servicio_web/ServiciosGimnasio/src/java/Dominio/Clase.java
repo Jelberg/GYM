@@ -14,6 +14,15 @@ public class Clase {
     private String _nombre;
     private String _descripcion;
 
+    public Clase(int _id, String _nombre, String _descripcion) {
+        this._id = _id;
+        this._nombre = _nombre;
+        this._descripcion = _descripcion;
+    }
+    
+    public Clase(){
+    }
+
     public int getId() {
         return _id;
     }

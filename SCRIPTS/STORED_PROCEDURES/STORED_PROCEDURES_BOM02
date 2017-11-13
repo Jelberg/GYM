@@ -82,3 +82,32 @@ END; $$
   LANGUAGE plpgsql;
 
 -----------------------------------FIN INSTRUCTOR------------------------------------------
+
+-----------------------------------HORARIO_CLASE-------------------------------------------
+
+--------------Función que devuelve datos de (horario_clase) de la clase consultada.
+
+CREATE OR REPLACE FUNCTION bo_m02_get_horario_clase(nombreclaseconsulta character varying)
+  RETURNS TABLE(nombreclase character varying, instructor character varying, fecha date, 
+		dia character varying, capacidad int, hora_inicio time, hora_fin time)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT CLA_Nombre, INS_Nombre, HC_fecha, HC_dia, HC_capacidad, HC_hora_inicio, HC_hora_fin
+        FROM Horario_Clase, Clase, Instructor
+	WHERE  nombreclaseconsulta = CLA_Nombre and fk_Clase = CLA_id and fk_Instructor=INS_id)
+   LOOP
+    nombreclase = var_r.clas.CLA_nombre;
+    instructor= var_r.inst.INS_nombre;
+    fecha = var_r.horac.HC_fecha;
+    dia = var_r.horac.HC_dia;
+    capacidad = var_r.horac.HC_capacidad;
+    hora_inicio = var_r.horac.HC_hora_inicio;
+    hora_fin = var_r.horac.HC_hora_fin;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+----------------------------------FIN HORARIO_CLASE-----------------------------------------
