@@ -47,22 +47,22 @@ export class ProgresoMedidasPage {
 
         this.listaFecha[i] = data[i]._fechaP;
 
-        if (data[i]._tipo = 1) {
+        if (data[i]._tipo == "Escapula") {
         	this.listaTipoEscapula[posicionEscapula] = data[i]._medida;
         	posicionEscapula++;
         }
 
-        if (data[i]._tipo = 2) {
+        if (data[i]._tipo == "Tricep") {
         	this.listaTipoTricep[posicionTricep] = data[i]._medida;
         	posicionTricep++;
         }
 
-        if (data[i]._tipo = 3) {
+        if (data[i]._tipo == "Abdomen") {
         	this.listaTipoAbdomen[posicionAbdomen] = data[i]._medida;
         	posicionAbdomen++;
         }
 
-        if (data[i]._tipo = 4) {
+        if (data[i]._tipo == "Cuadricep") {
         	this.listaTipoCuadricep[posicionCuadrice] = data[i]._medida;
         	posicionCuadrice++;
         }
