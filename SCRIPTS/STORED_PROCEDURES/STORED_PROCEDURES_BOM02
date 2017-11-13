@@ -1,0 +1,20 @@
+--Función que devuelve la descripción de la clase consultada.
+
+CREATE OR REPLACE FUNCTION bo_m02_get_clase(nombreclase character varying)
+  RETURNS TABLE(nombre character varying, descripcion character varying)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT cla_nombre, cla_descripcion
+        FROM clase
+        WHERE cla_nombre = nombreclase)
+   LOOP
+    nombre = var_r.cla_nombre;
+    descripcion = var_r.cla_descripcion;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+  
+  
