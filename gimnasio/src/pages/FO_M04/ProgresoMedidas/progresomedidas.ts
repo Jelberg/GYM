@@ -74,9 +74,12 @@ export class ProgresoMedidasPage {
     });
   }
 
-  public lineChartData:Array<any> = [{
-    data: [6,8,10,12,14,16,18], label: "Medidas"
-  }];
+  public lineChartData:Array<any> = [
+  { data: [12, 11, 10, 9, 10, 9, 11], label: 'Escapula'},
+  { data: [16, 14, 15, 12, 13, 14, 13], label: 'Tricep'},
+  { data: [9, 10, 11, 9, 9, 10, 11], label: 'Abdomen'},
+  { data: [14, 13, 12, 13, 14, 12, 12], label: 'Cuadricep'},
+  ];
 
   public lineChartLabels:Array<any> = ["Enero", "Febrero", "Marzo", "Abril", "Mayo"];
   
@@ -127,11 +130,12 @@ export class ProgresoMedidasPage {
     for ( let fecha of this.listaTipoAbdomen ){
       arregloAbdomen.push( fecha );
     }
-    
-    this.lineChartData.push({
-      label: 'Tricep',
-      data: arregloTricep,
-    });
+    this.lineChartData.push([
+      {label: 'Tricep', data: arregloTricep },
+      {label: 'Abdomen', data: arregloAbdomen },
+      {label: 'Cuadricep', data: arregloCuadricep },
+      {label: 'Escapula', data: arregloEscapula },
+    ]);
     
   }
 
