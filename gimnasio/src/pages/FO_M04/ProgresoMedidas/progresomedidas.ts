@@ -14,7 +14,6 @@ import { ListaContactosPage } from '../lista-contactos/lista-contactos';
 
 export class ProgresoMedidasPage {
 
-  listaMedida = [];
   listaFecha = [];
   listaTipoEscapula = [];
   listaTipoTricep = [];
@@ -70,16 +69,17 @@ export class ProgresoMedidasPage {
         i++;
       }
       
-      this.setLineT();
+      this.setLineT();;
     });
   }
 
   public lineChartData:Array<any> = [
-  { data: [12, 11, 10, 9, 10, 9, 11], label: 'Escapula'},
-  { data: [16, 14, 15, 12, 13, 14, 13], label: 'Tricep'},
-  { data: [9, 10, 11, 9, 9, 10, 11], label: 'Abdomen'},
-  { data: [14, 13, 12, 13, 14, 12, 12], label: 'Cuadricep'},
+  {data: [10,20,30,40,50], label: "Peso"},
+  {data: [60,70,80,60,70], label: "DOS"},
+  {data: [60,70,80,60,70], label: "TRES"},
+  {data: [60,70,80,60,70], label: "CUATRO"}
   ];
+
 
   public lineChartLabels:Array<any> = ["Enero", "Febrero", "Marzo", "Abril", "Mayo"];
   
@@ -106,7 +106,7 @@ export class ProgresoMedidasPage {
     }
   ];
 
-  public lineChartLegend:boolean = false;
+  public lineChartLegend:boolean = true;
 
   public lineChartType:string = 'line';
 
@@ -130,13 +130,13 @@ export class ProgresoMedidasPage {
     for ( let fecha of this.listaTipoAbdomen ){
       arregloAbdomen.push( fecha );
     }
-    this.lineChartData.push([
-      {label: 'Tricep', data: arregloTricep },
-      {label: 'Abdomen', data: arregloAbdomen },
-      {label: 'Cuadricep', data: arregloCuadricep },
+    this.lineChartData.push(
+
       {label: 'Escapula', data: arregloEscapula },
-    ]);
-    
+      {label: 'Tricep', data: arregloTricep },      
+      {label: 'Cuadricep', data: arregloCuadricep },            
+      {label: 'Abdomen', data: arregloAbdomen },
+    );
   }
 
   public chartClicked(e:any):void {
