@@ -50,7 +50,7 @@ public class BOM02_Entrenador {
    @GET
     @Path("/getEntrenador")
     @Produces("application/json")
-    public String getInstructor(@QueryParam("correo") String correo){
+    public String getEntrenador(@QueryParam("correo") String correo){
          try{
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("correo", correo);
