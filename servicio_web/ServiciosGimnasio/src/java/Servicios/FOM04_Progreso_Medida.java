@@ -75,7 +75,7 @@ public class FOM04_Progreso_Medida {
                 jsonArray.add(new Progreso_Medida());
                 jsonArray.get(jsonArray.size() - 1).setMedida(rs.getInt("medida"));
                 jsonArray.get(jsonArray.size() - 1).setTipo(rs.getString("tipo"));
-                jsonArray.get(jsonArray.size() - 1).setTipo(rs.getString("fecha"));
+                jsonArray.get(jsonArray.size() - 1).setFechaM(rs.getString("fecha"));
             
             }
             response = gson.toJson(jsonArray);
