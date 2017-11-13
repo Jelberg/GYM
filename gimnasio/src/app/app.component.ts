@@ -7,6 +7,10 @@ import { HomePage } from '../pages/home/home';
 import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/seleccionar-progreso';
 //import { ClasesPage } from '../pages/FO_M05/clases/clases';
 import { ReservasPage } from '../pages/FO_M05/reservas/reservas';
+import { AmigosPage } from '../pages/FO_M01/amigos/amigos';
+import { CrearusuarioPage } from '../pages/FO_M01/crearusuario/crearusuario';
+import { IniciarsesionPage } from '../pages/FO_M01/iniciarsesion/iniciarsesion';
+import { PerfilPage} from '../pages/FO_M01/perfil/perfil'
 import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clases-participadas';
 import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class'
 
@@ -26,6 +30,8 @@ export class MyApp {
       a la que se accedera desde el menu lateral */
     this.pages = [
       { titulo: "Inicio", component: HomePage, icon: "home"},
+      {titulo: "perfil", component: PerfilPage, icon: "person"},
+      {titulo: "amigos", component: PerfilPage, icon: "people"},
       { titulo: "Progreso", component: SeleccionarProgresoPage, icon: "stats"},
       {titulo: 'Clases',component:TabCalendarClassPage, icon: 'bicycle'},
       {titulo: 'Reservas',component:ReservasPage, icon: 'calendar'} ,
