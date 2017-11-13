@@ -1,4 +1,6 @@
-﻿--Función que devuelve la descripción de la clase consultada.
+﻿------------------------------------------CLASE-------------------------------------------
+
+--Función que devuelve la descripción de la clase consultada.
 
 CREATE OR REPLACE FUNCTION bo_m02_get_clase(nombreclase character varying)
   RETURNS TABLE(nombre character varying, descripcion character varying)
@@ -16,7 +18,11 @@ BEGIN
    END LOOP;
 END; $$
   LANGUAGE plpgsql;
-  
+
+---------------------------------------FIN CLASE-------------------------------------------
+
+--------------------------------------INSTRUCTOR-------------------------------------------
+
 -- funcion que devuelve instructor por correo
 
 CREATE OR REPLACE FUNCTION bo_m02_get_instructor(mail character varying)
@@ -40,3 +46,5 @@ BEGIN
    END LOOP;
 END; $$
   LANGUAGE plpgsql;
+
+-----------------------------------FIN INSTRUCTOR------------------------------------------
