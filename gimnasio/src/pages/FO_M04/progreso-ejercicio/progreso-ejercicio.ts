@@ -32,14 +32,14 @@ export class ProgresoEjercicioPage {
   }
 
 ionViewDidLoad() {
-  console.log(' ////////////////////////// ionviewload ////////////////////////////////////////////////////////////');
-  console.log('///////////////////////// IonViewDidLoad' + this.foo());
+  console.log('ionViewDidLoad ProgresoMedidasPage');
   }
 
 foo(){
-  console.log('#### peso[0]' + this.peso[0]);
-  console.log('#### repeticion[0]' + this.repeticion[0]);
-  console.log('#### mes[0]' + this.mes[0]);
+  this.lineChartData.push(
+    {label: 'Repeticiones', data: this.repeticion},
+    {label: 'Peso', data: this.peso},
+  );
 }
 
 getDatosEjercicio(){
@@ -52,9 +52,37 @@ getDatosEjercicio(){
         this.mes[i] = data[i].mes;
         i++;
       }
-      this.foo();
+      this.setLineT();
     }); 
 }
+
+setLineT(){
+  
+      this.lineChartData = [];
+      this.lineChartLabels = [];
+      let arregloPeso: any = [];
+      let arregloRepeticiones: any = [];
+      let arregloMeses: any = [];
+      for ( let datoPeso of this.peso ) {
+        arregloPeso.push(datoPeso);
+      }
+      for ( let datoRep of this.repeticion ){
+        arregloRepeticiones.push( datoRep );
+      }
+      for ( let datoMes of this.mes ){
+        arregloMeses.push( datoMes );
+        
+        //this.lineChartLabels.push(datoMes);
+        
+      }
+      this.lineChartLabels.push(arregloMeses);
+      console.log('#### Chart Labels: ' + this.lineChartLabels);
+      this.lineChartData.push(
+        {label: 'Peso', data: arregloPeso },
+        {label: 'Repeticiones', data: arregloRepeticiones },      
+      );
+      //this.lineChartLabels = arregloMeses;
+    }
 
 goToListaContactosPage(){
   this.navCtrl.push(ListaContactosPage);
@@ -65,11 +93,14 @@ goToSeleccionarEjercicioPage(){
 }
 
 public lineChartData:Array<any> = [
-  {data: [65, 59, 80, 81, 56, 55, 40], label: 'Repeticiones'},
-  {data: [28, 48, 40, 19, 86, 27, 90], label: 'Peso'},
+  {data: [10, 20, 30, 40, 50, 60, 70], label: 'Repeticiones'},
+  {data: [15, 25, 35, 45, 55, 65, 75], label: 'Peso'},
   
 ];
-public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+//public lineChartLabels:Array<any> = ['1', '2', '3', '4', '5', '6', '7'];
+public lineChartLabels:Array<any> = [
+  {data: [1, 2, 3, 4, 5, 6]}
+];
 public lineChartOptions:any = {
   responsive: true
 };
