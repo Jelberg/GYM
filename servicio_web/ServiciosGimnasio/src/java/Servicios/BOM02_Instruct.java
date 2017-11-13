@@ -12,6 +12,7 @@ import Excepciones.ParameterNullException;
 import Validaciones.ValidationWS;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -20,22 +21,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.ImageIcon;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
-import java.awt.Image;
-import javax.swing.ImageIcon;
+import javax.ws.rs.core.MediaType;
 
 /**
  * REST Web Service
  *
  * @author Miguel
  */
-
-public class BOM02_instructor {
-    private Connection conn = Sql.getConInstance();
+@Path("Instruct")
+public class BOM02_Instruct {
+private Connection conn = Sql.getConInstance();
     //Atributo que se utiliza para transformar a formado JSON las consultas.
     private Gson gson = new Gson();
     private String response;
@@ -47,7 +52,7 @@ public class BOM02_instructor {
      * @return Devuelve todos los datos del instructor
      */
     @GET
-    @Path("/getInstructor")
+    @Path("/getInstruct")
     @Produces("application/json")
     public String getInstructor(@QueryParam("correo") String correo){
          try{
@@ -89,22 +94,20 @@ public class BOM02_instructor {
         }
     
     }
-    
-    
     /**
      * Funcion que permite ingresar instructor
      * @param jsonMedida 
      * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
      */
     @POST
-    @Path("/insertaInstructor")
+    @Path("/insertaInstruct")
     @Produces("application/json")
-    public String insertaInstructor(@QueryParam("nombre") String nombre,
+    public String insertaInstruct(@QueryParam("nombre") String nombre,
                                     @QueryParam("apellido") String apellido,
                                     @QueryParam("fecha_nac") Date fecha_nac,
                                     @QueryParam("sexo") int sexo,
-                                    @QueryParam("correo") String correo,
-                                    @QueryParam("foto") Image foto){
+                                    @QueryParam("correo") String correo
+                                    ){
 
         Map<String, String> response = new HashMap<String, String>();
         try {
@@ -124,59 +127,6 @@ public class BOM02_instructor {
                 st.setDate(3, fecha_nac);
                 st.setInt(4, sexo);
                 st.setString(5, correo);
-                
-                st.executeQuery();
-            
-            response.put("data", "Se inserto el comentario");
-        }
-        catch (SQLException e){
-            response.put("error", e.getMessage());
-        }
-        catch (ParameterNullException e) {
-            response.put("error", e.getMessage());
-        }
-        finally {
-            Sql.bdClose(conn);
-            return gson.toJson(response);
-        }
-    }
-    
-    /**
-     * Funcion que permite modificar instructor
-     * @param jsonMedida 
-     * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
-     */
-    @POST
-    @Path("/modificaInstructor")
-    @Produces("application/json")
-    public String modificarInstructor(@QueryParam("id") int id,
-                                    @QueryParam("nombre") String nombre,
-                                    @QueryParam("apellido") String apellido,
-                                    @QueryParam("fecha_nac") Date fecha_nac,
-                                    @QueryParam("sexo") int sexo,
-                                    @QueryParam("correo") String correo,
-                                    @QueryParam("foto") Image foto){
-
-        Map<String, String> response = new HashMap<String, String>();
-        try {
-            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("id", id );
-                put("nombre", nombre );
-                put("apellido", apellido );
-                put("fecha_nac", fecha_nac );
-                put("sexo", sexo );
-                put("correo", correo );
-            }});
-
-            String query = "select * from bo_m02_modifica_instructor(?, ?, ?, ?, ?, ?)";
-            PreparedStatement st = conn.prepareStatement(query);
-            java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
-                st.setInt(1, id);
-                st.setString(2, nombre);
-                st.setString(3, apellido);
-                st.setDate(4, fecha_nac);
-                st.setInt(5, sexo);
-                st.setString(6, correo);
                 
                 st.executeQuery();
             
