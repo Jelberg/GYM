@@ -1,18 +1,50 @@
-<!--
-  Generated template for the IniciarsesionPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>iniciarsesion</ion-title>
+<ion-header >
+  <ion-navbar color="secondary">
+    <ion-title style="color:ionic link --pro-id ca32ab04;" style="text-align:center">Gimnasio</ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content padding >
 
-<ion-content padding>
+  <h1 style="text-align:center" >Iniciar Sesion</h1>
+
+  <p>
+      <ion-card >
+          
+            <ion-card-header>
+              Ingrese Cuenta
+            </ion-card-header>
+          
+            <ion-card-content>
+                <ion-list>
+                    
+                      <ion-item>
+                        <ion-label stacked>Usuario:</ion-label>
+                        <ion-input type="text"></ion-input>
+                      </ion-item>
+                    
+                      <ion-item>
+                        <ion-label stacked>Contraseña:</ion-label>
+                        <ion-input type="password"></ion-input>
+                        
+                      </ion-item>
+
+                    </ion-list>
+
+                    <button ion-button icon-left clear small color="secondary" (click)= "recoverPassword()">
+                        Olvide mi contraseña
+                      </button>
+                          <button ion-button icon-left block color="secondary" (click)="irahomeusuario()">
+                            <ion-icon name="checkmark"></ion-icon>
+                          </button>
+                          <button (click)="irapaginacrear()" ion-button icon-left clear small color="secondary" >
+                            Crear tu usuario
+                          </button>
+                        
+            </ion-card-content>
+          
+          </ion-card>
+  </p>
+
 
 </ion-content>
