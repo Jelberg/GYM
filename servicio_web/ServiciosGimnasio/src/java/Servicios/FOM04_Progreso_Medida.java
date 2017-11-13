@@ -57,26 +57,25 @@ public class FOM04_Progreso_Medida {
     @GET
     @Path("/getProgresoM")
     @Produces("application/json")
-    public String getProgresoM(@QueryParam("fecha") String fecha,
-                                @QueryParam("id_usuario") Integer id_usuario){
+    public String getProgresoM (@QueryParam("id_usuario") Integer id_usuario){
     
         try{
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("id_usuario", id_usuario);
-                put("fecha", fecha);
+               
             }});
 
-            String query = "SELECT * FROM fo_m04_get_progresom(?, ?)";
+            String query = "SELECT * FROM fo_m04_get_progresom(?)";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, id_usuario);
-            st.setDate(2, Date.valueOf(fecha));
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 jsonArray.add(new Progreso_Medida());
                 jsonArray.get(jsonArray.size() - 1).setMedida(rs.getInt("medida"));
                 jsonArray.get(jsonArray.size() - 1).setTipo(rs.getString("tipo"));
+                jsonArray.get(jsonArray.size() - 1).setTipo(rs.getString("fecha"));
             
             }
             response = gson.toJson(jsonArray);
