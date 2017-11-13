@@ -7,7 +7,8 @@ DECLARE
 BEGIN
    FOR var_r IN(SELECT pm_medida, med_tipo, pm_fecha
         FROM usuario inner join  progreso_medida on usu_id = fk_usuario inner join medida on fk_medida = med_id
-        WHERE usu_id = usuario_id )
+        WHERE usu_id = usuario_id
+	order by pm_fecha DESC limit 6 )
    LOOP
     medida = var_r.pm_medida;
     tipo = var_r.med_tipo;
@@ -112,5 +113,39 @@ BEGIN
 	UPDATE PROGRESO_PESO
 	SET PP_PESO = peso
 	WHERE FK_USUARIO = id_usuario AND PP_FECHA = fecha;
+END; $$
+  LANGUAGE plpgsql;
+
+
+--FUNCION QUE INSERTA LOS COMENTARIOS DE UN PROGRESO DEL USUARIO, RECIBE EL ID DEL USUARIO, EL PROGRESO.
+CREATE OR REPLACE FUNCTION from fo_m04_inserta_comentario(id_usuariopro int, id_usuariocom int, con_mensaje varchar,  pm_id int, pp_id int)
+  RETURNS void	
+   AS $$
+DECLARE
+   fecha_actual	date;
+BEGIN
+	fecha_actual := current_date;
+	INSERT INTO COMENTARIO ( com_mensaje, fk_usuariopro, fk_pro_peso, fk_pro_medida, fk_usuariocom, com_fecha  ) VALUES
+	( con_mesaje, id_usuariopro, pp_id, pm_id, id_usuariocom, fecha_actual);
+END; $$
+  LANGUAGE plpgsql;
+
+--Este solo devuelve los comentario de ese pogreso.
+CREATE OR REPLACE FUNCTION fo_m04_get_comentario(usuario_id int, fk_pro_peso int, fk_pro_medida, int)
+  RETURNS TABLE(com_mensaje varchar, usu_nombre varchar)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT com_mensaje, A.usu_nombre, 
+        FROM usuario inner join  comentario on usu_id = fk_usuariopro inner join A.usuario on A.usu_id = fk_usuariocom
+
+        WHERE usu_id = usuario_id  or fk_pro_peso = fk_pro_peso or fk_pro_medidas = fk_pro_medida
+	order by pm_fecha DESC limit 10 )
+   LOOP
+    comentario = var_r.com_mensaje;
+    usuariocom = var_r.A.usu_nombre;
+    RETURN NEXT;
+   END LOOP;
 END; $$
   LANGUAGE plpgsql;
