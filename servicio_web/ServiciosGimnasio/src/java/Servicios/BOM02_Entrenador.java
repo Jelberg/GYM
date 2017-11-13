@@ -68,7 +68,7 @@ public class BOM02_Entrenador {
                 jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("ENT_NOMBRE"));
                 jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("ENT_APELLIDO"));
                 jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("ENT_FECHA_NAC"));
-                jsonArray.get(jsonArray.size() - 1).setSexo(rs.getInt("ENT_SEXO"));
+                jsonArray.get(jsonArray.size() - 1).setSexo(rs.getString("ENT_SEXO"));
                 jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("ENT_CORREO"));
                 jsonArray.get(jsonArray.size() - 1).setHistorial(rs.getString("ENT_HISTORIAL"));
                 byte[] img = rs.getBytes("ENT_FOTO");
