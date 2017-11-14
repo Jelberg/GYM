@@ -120,12 +120,12 @@ private Connection conn = Sql.getConInstance();
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 jsonArray.add(new Instructor());
-                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
-                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
-                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
-                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fechanac"));
-                jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("sexo")));
-                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("INS_ID"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("INS_NOMBRE"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("INS_APELLIDO"));
+                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("INS_FECHA_NAC"));
+                jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("INS_SEXO")));
+                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("INS_CORREO"));
                 /*byte[] img = rs.getBytes("INS_FOTO");
                 ImageIcon image = new ImageIcon(img);
                 Image im = image.getImage();
