@@ -6,23 +6,20 @@
 package Servicios;
 
 
+import Dominio.Comentario;
 import com.google.gson.Gson;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import Dominio.Aerobico;
-import Dominio.Anaerobico;
-import Dominio.Comentario;
-import Dominio.Ejercicio;
 import Dominio.Rutina;
-import Dominio.Trabajo_Rutina;
 import Dominio.Sql;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import Excepciones.ParameterNullException;
+import Validaciones.ValidationWS;
 
 
 /**
@@ -39,7 +36,7 @@ public class FOM03_Rutina {
     private String response;
 
     
-  /*   @GET
+     @GET
     @Path("/getDatoPrueba")
     @Produces("application/json")
     public String getDatoPrueba(){
@@ -49,9 +46,9 @@ public class FOM03_Rutina {
     Comentario c= new Comentario(1,"Funciona");
     return gson.toJson(c);
     
-    }*/
+    }
     
-    /**
+      /**
      * Funcion que retorna una lista de rutinas dado el nombre del usuario.
      * @param idUsuario se recibe el id del usuario a consultar
      * @return Devuelve las rutinas de un usuario en formato JSON
@@ -62,10 +59,11 @@ public class FOM03_Rutina {
          public String getRutina( @QueryParam( "idUsuario" ) int idUsuario )
          {
             try{
-                      
+                ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("idUsuario", idUsuario);
+                 }});
                 String query = "Select * from FO_M03_get_rutina('"+idUsuario+"')";
                 this.jsonArray = new ArrayList<>();
-                System.out.println (query);
                 Statement st = conn.createStatement();
                 ResultSet rs = st.executeQuery(query);
                 
@@ -99,7 +97,6 @@ public class FOM03_Rutina {
                 Sql.bdClose(conn);
             }
         }
-         
          /*****************************************FUNCIONES PARA EL MODULO 4*********************************/
         
          

@@ -16,6 +16,18 @@ import { CrearusuarioPage } from '../pages/FO_M01/crearusuario/crearusuario';
 import { IniciarsesionPage } from '../pages/FO_M01/iniciarsesion/iniciarsesion';
 import { PerfilPage} from '../pages/FO_M01/perfil/perfil'
 // fin M01
+//M03 
+import { RutinaPage } from '../pages/FO_M03/rutina/rutina';
+import { TabsLogPage } from '../pages/FO_M03/tabs-log/tabs-log';
+import { TabsRutinaPage } from '../pages/FO_M03/tabs-rutina/tabs-rutina';
+import { ModificarRutinaPage } from '../pages/FO_M03/modificar-rutina/modificar-rutina';
+import { CompartirRutinaPage } from '../pages/FO_M03/compartir-rutina/compartir-rutina';
+import { PlanPage } from '../pages/FO_M03/plan/plan';
+import { WorkoutPlansPage } from '../pages/FO_M03/workout-plans/workout-plans';
+import { PlanRutinasPage } from '../pages/FO_M03/plan-rutinas/plan-rutinas';
+import { EjerciciosPage } from '../pages/FO_M03/ejercicios/ejercicios';
+//FIN M03
+
 //M04
 import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/seleccionar-progreso';
 import { LineaComponent } from '../components/linea/linea';
@@ -77,6 +89,13 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     CambiaMedidaPage,
     TabMedidaPage,
     ProgresoEjercicioPage,
+    RutinaPage,
+    ModificarRutinaPage,
+    TabsLogPage,
+    CompartirRutinaPage,
+    PlanPage,
+    WorkoutPlansPage,
+    PlanRutinasPage,
     ClasesPage,
     ReservasPage,
     ClaseParticularPage,
@@ -126,6 +145,13 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     //CambiarMedidasPage,
     CambiaMedidaPage,
     TabMedidaPage,
+    RutinaPage,
+    ModificarRutinaPage,
+    TabsLogPage,
+    CompartirRutinaPage,
+    PlanPage,
+    WorkoutPlansPage,
+    PlanRutinasPage,
     ClasesPage,
     ClaseParticularPage,
     ClasesParticipadasPage,
