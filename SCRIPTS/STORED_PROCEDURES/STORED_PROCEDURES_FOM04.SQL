@@ -1,4 +1,4 @@
---Este solo devuelve las medidas de ese usuario en esa fecha.
+﻿--Este solo devuelve las medidas de ese usuario en esa fecha.
 CREATE OR REPLACE FUNCTION fo_m04_get_progresoM(usuario_id int)
   RETURNS TABLE(medida INT, tipo character varying, fecha date)
    AS $$
@@ -118,7 +118,7 @@ END; $$
 
 
 --FUNCION QUE INSERTA LOS COMENTARIOS DE UN PROGRESO DEL USUARIO, RECIBE EL ID DEL USUARIO, EL PROGRESO.
-CREATE OR REPLACE FUNCTION from fo_m04_inserta_comentario(id_usuariopro int, id_usuariocom int, con_mensaje varchar,  pm_id int, pp_id int)
+CREATE OR REPLACE FUNCTION fo_m04_inserta_comentario(id_usuariopro int, id_usuariocom int, con_mensaje varchar,  pm_id int, pp_id int)
   RETURNS void	
    AS $$
 DECLARE
@@ -137,14 +137,14 @@ CREATE OR REPLACE FUNCTION fo_m04_get_comentarioprop(usuario_id int, fk_pro_peso
 DECLARE
    var_r    record;
 BEGIN
-   FOR var_r IN(SELECT com_mensaje, A.usu_nombre, 
+   FOR var_r IN(SELECT com_mensaje, A.usu_nombre
         FROM usuario inner join  comentario on usu_id = fk_usuariopro inner join A.usuario on A.usu_id = fk_usuariocom
 
         WHERE usu_id = usuario_id  and fk_pro_peso = fk_pro_peso 
 	order by pm_fecha DESC limit 10 )
    LOOP
-    comentario = var_r.com_mensaje;
-    usuariocom = var_r.A.usu_nombre;
+    com_mensaje = var_r.com_mensaje;
+    usu_nombre = var_r.A.usu_nombre;
     RETURN NEXT;
    END LOOP;
 END; $$
@@ -157,14 +157,14 @@ CREATE OR REPLACE FUNCTION fo_m04_get_comentarioprom(usuario_id int, fk_pro_medi
 DECLARE
    var_r    record;
 BEGIN
-   FOR var_r IN(SELECT com_mensaje, A.usu_nombre, 
+   FOR var_r IN(SELECT com_mensaje, A.usu_nombre
         FROM usuario inner join  comentario on usu_id = fk_usuariopro inner join A.usuario on A.usu_id = fk_usuariocom
 
         WHERE usu_id = usuario_id and fk_pro_medidas = fk_pro_medida
 	order by pm_fecha DESC limit 10 )
    LOOP
-    comentario = var_r.com_mensaje;
-    usuariocom = var_r.A.usu_nombre;
+    com_mensaje = var_r.com_mensaje;
+    usu_nombre = var_r.A.usu_nombre;
     RETURN NEXT;
    END LOOP;
 END; $$
@@ -177,13 +177,13 @@ CREATE OR REPLACE FUNCTION fo_m04_get_progresos()
 DECLARE
    var_r    record;
 BEGIN
-   FOR var_r IN(SELECT com_mensaje, usu_nombre, 
+   FOR var_r IN(SELECT com_mensaje, usu_nombre 
         FROM usuario inner join  comentario on usu_id = fk_usuariopro 
 
 	order by pm_fecha DESC limit 10 )
    LOOP
-    comentario = var_r.com_mensaje;
-    usuariocom = var_r.usu_nombre;
+    com_mensaje = var_r.com_mensaje;
+    usu_nombre = var_r.usu_nombre;
     RETURN NEXT;
    END LOOP;
 END; $$
