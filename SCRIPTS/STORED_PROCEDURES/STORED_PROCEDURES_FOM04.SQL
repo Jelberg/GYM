@@ -20,12 +20,15 @@ END; $$
 
 
 --Este elimina las medidas correspondientes a esa fecha y a ese usuario
-CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_CI int, fecha DATE)
+CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_id int, tipo_medida int)
 	RETURNS void AS $$
     DECLARE
+    id_medida int;
+    fecha_actual DATE;
     BEGIN
+	id_medida := ( SELECT MED_ID FROM MEDIDA WHERE MED_TIPO = tipo_medida AND EXTRACT(MONTH 	   fecha_actual) = ( SELECT EXTRACT(MONTH PM_FECHA) FROM MEDIDA  WHERE tipo_medida = 			tipo_medida) );
         DELETE FROM progreso_medida
-        WHERE pm_fecha = fecha and fk_usuario = usuario_CI;
+        WHERE med_id = id_medida and fk_usuario = usu_id;
     END; $$
 LANGUAGE plpgsql;
 
@@ -45,21 +48,19 @@ CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
     END; $$
   LANGUAGE plpgsql;
 
---Falta la consulta de las medidas durante un ano
 
--- Este devuelve los comentarios pertenencientes a ese progreso
---CREATE OR REPLACE FUNCTION fo_m04_get_comentariopromed( pm_id int)
 
 --FUNCION QUE ACTUALZA MEDIDA DADOS: EL ID DEL USUARIO, FECHA DE EL PROGRESO, TIPO DE LA MEDIDA Y LA NUEVA MEDIDA.
-CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER, fecha DATE, tipo_medida VARCHAR, medida INTEGER)
+CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER, medida INTEGER, tipo_medida VARCHAR,)
   RETURNS void
    AS $$
 DECLARE
     id_medida int;
+    fecha_actual DATE;
 BEGIN
-    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE MED_TIPO = tipo_medida );
+    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE MED_TIPO = tipo_medida AND EXTRACT(MONTH fecha_actual) = ( SELECT EXTRACT(MONTH PM_FECHA) FROM MEDIDA  WHERE tipo_medida = tipo_medida) );
     UPDATE PROGRESO_MEDIDA SET  PM_MEDIDA = medida
-    WHERE PM_FECHA = fecha and FK_USUARIO = id_usuario and FK_MEDIDA = id_medida;
+    WHERE FK_USUARIO = id_usuario and FK_MEDIDA = id_medida)
 END; $$
   LANGUAGE plpgsql;
 
@@ -170,7 +171,7 @@ END; $$
   LANGUAGE plpgsql;
 
 --Este solo devuelve todos los progresos sin importar de que progreso sea.
-CREATE OR REPLACE FUNCTION fo_m04_get_progresos()
+CREATE OR REPLACE FUNCTION fo_m04_get_progresoscompartidos()
   RETURNS TABLE(com_mensaje varchar, usu_nombre varchar)
    AS $$
 DECLARE

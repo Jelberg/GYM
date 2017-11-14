@@ -73,7 +73,7 @@ public class FOM04_Comentario {
             while(rs.next()){
                 jsonArray.add(new Comentario());
                 jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString("mensaje"));                
-                jsonArray.get(jsonArray.size() - 1).setUsuarioComentario(rs.getInt("usuariocomentario"));
+                jsonArray.get(jsonArray.size() - 1).setUsuarioComentario(rs.getInt("usuarioprogre"));
                           
             }
             response = gson.toJson(jsonArray);

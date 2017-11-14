@@ -105,20 +105,20 @@ public class FOM04_Progreso_Medida {
     @DELETE
     @Path("/eliminarMedidas")
     @Produces("application/json")
-    public String eliminaMedidas(@QueryParam("fecha") String fecha,
-                             @QueryParam("id_usuario") Integer id_usuario) {
+    public String eliminaMedidas(@QueryParam("id_usuario") Integer id_usuario,
+                                @QueryParam("tipo_medida") Integer tipo_medida) {
 
         Map<String, String> response = new HashMap<String, String>();
         try{
 
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("id_usuario", id_usuario);
-                put("fecha", fecha);
+                put("tipo_medida", tipo_medida);
             }});
                 String query = "SELECT fo_m04_elimina_medidas(?, ?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, id_usuario);
-            st.setDate(2, Date.valueOf(fecha));
+            st.setInt(2, tipo_medida);
             ResultSet rs = st.executeQuery();
             response.put("data", "Se elimino las medidas");
 
@@ -215,7 +215,7 @@ public class FOM04_Progreso_Medida {
      * @return Devuelve un json con mensaje del estatus de la peticion.
      */
     @POST
-    @Path("/insertaMedidas") //Revisar logica para hacer el bucle en el servicio
+        @Path("/insertaMedidas") //Revisar logica para hacer el bucle en el servicio
     @Produces("application/json")
     public String insertaMedidas(@QueryParam("id_usuario") int id_usuario,
                                  @QueryParam("medida") int medida,
@@ -271,23 +271,20 @@ public class FOM04_Progreso_Medida {
     @Path("/actualizaMedida")
     @Produces("application/json")
     public String actualizaMedida( @QueryParam ( "id_usuario" ) int id_usuario,
-                                   @QueryParam ( "fecha" ) String fecha, 
                                    @QueryParam ( "tipo_medida" ) String tipo_medida,
                                    @QueryParam ( "medida" ) int medida){
         Map<String, String> response = new HashMap<String, String>();
         try {
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put ( "id_usuario" , id_usuario );
-                put( "fecha" , fecha );
                 put( "tipo_medida" , tipo_medida );
                 put( "medida" , medida );
             }});
-            String query = "select * from fo_m04_act_medida(?,?,?,?);";
+            String query = "select * from fo_m04_act_medida(?,?,?);";
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, id_usuario);
-            st.setDate(2,Date.valueOf(fecha));
-            st.setString(3, tipo_medida);
-            st.setInt(4, medida);
+            st.setString(2, tipo_medida);
+            st.setInt(3, medida);
             st.executeQuery();
             response.put("data", "Se actualizo correctamente.");
         }

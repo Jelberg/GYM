@@ -33,9 +33,22 @@
       </ion-col>
       <ion-col>              
         <div>
-          <ion-icon name="md-close" color="danger" class="botones"></ion-icon>
+          <ion-icon name="md-close" color="danger" class="botones">        
+          </ion-icon>
+        </div>
+      </ion-col>
+      <ion-col>              
+        <div>
+          <ion-icon (click)="refrescaMedidas()" name="ios-refresh" color="primary" class="botones">    
+          </ion-icon>
         </div>
       </ion-col>
     </ion-row>
+    <ion-label color="primary" stacked>Elimina las medidas del mes</ion-label>
+    <div>
+       <ion-icon (click)="EliminarMedidas()" name="ios-trash" color="dark" class="botones">    
+        </ion-icon>          
+   </div>
+
   </ion-grid>
 </ion-content>
