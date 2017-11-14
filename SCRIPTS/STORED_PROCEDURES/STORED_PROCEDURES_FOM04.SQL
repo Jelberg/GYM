@@ -51,19 +51,23 @@ CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
 
 
 --FUNCION QUE ACTUALZA MEDIDA DADOS: EL ID DEL USUARIO, FECHA DE EL PROGRESO, TIPO DE LA MEDIDA Y LA NUEVA MEDIDA.
-CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER, medida INTEGER, tipo_medida VARCHAR,)
+CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER,tipo_medida VARCHAR, medida INTEGER )
   RETURNS void
    AS $$
 DECLARE
     id_medida int;
     fecha_actual DATE;
+    mes	int;
+    id_pm	int;
 BEGIN
-    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE MED_TIPO = tipo_medida AND EXTRACT(MONTH fecha_actual) = ( SELECT EXTRACT(MONTH PM_FECHA) FROM MEDIDA  WHERE tipo_medida = tipo_medida) );
+     fecha_actual := current_date;
+     mes := (select EXTRACT(MONTH FROM fecha_actual) );
+    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE med_tipo = tipo_medida  );
+    id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = id_usuario and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) );	
     UPDATE PROGRESO_MEDIDA SET  PM_MEDIDA = medida
-    WHERE FK_USUARIO = id_usuario and FK_MEDIDA = id_medida)
+    WHERE PM_ID = id_pm;
 END; $$
   LANGUAGE plpgsql;
-
 --FUNCION QUE OBTIENE LOS ULTIMOS REGISTROS DEL PROGRESO DE UN USUARIO CON RESPECTO A SU PESO.
 CREATE OR REPLACE FUNCTION fo_m04_get_progresop(id_usuario int)
   RETURNS TABLE(peso INT, fecha DATE, id INT)
