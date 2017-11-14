@@ -205,7 +205,7 @@ CONSTRAINT fk_pro_medida FOREIGN KEY(fk_pro_medida) REFERENCES progreso_medida(p
 
 -- TABLAS DE FO_M06
 
-CREATE TABLE ENTRENADOR (
+CREATE OR REPLACE TABLE ENTRENADOR (
 	ENT_ID serial not null,
 	ENT_nombre character varying (50) not null,
 	ENT_apellido character varying (50) not null,
