@@ -70,7 +70,7 @@ BEGIN
         FROM Horario_Clase, Clase, Instructor
 	WHERE  nombreclaseconsulta = CLA_Nombre and fk_Clase = CLA_id and fk_Instructor=INS_id)
    LOOP
-    nombreclase = var_r.CLA_nombre;
+    nombreclase = var_r.CLA_Nombre;
     instructor= var_r.INS_nombre;
     fecha = var_r.HC_fecha;
     dia = var_r.HC_dia;
