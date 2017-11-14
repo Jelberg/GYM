@@ -20,15 +20,20 @@ END; $$
 
 
 --Este elimina las medidas correspondientes a esa fecha y a ese usuario
-CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_id int, tipo_medida int)
+CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_id int, tipo_medida varchar)
 	RETURNS void AS $$
     DECLARE
     id_medida int;
     fecha_actual DATE;
+    mes	INT;
+    id_pm	INT;
     BEGIN
-	id_medida := ( SELECT MED_ID FROM MEDIDA WHERE MED_TIPO = tipo_medida AND EXTRACT(MONTH 	   fecha_actual) = ( SELECT EXTRACT(MONTH PM_FECHA) FROM MEDIDA  WHERE tipo_medida = 			tipo_medida) );
+	fecha_actual := current_date;
+	mes := (select EXTRACT(MONTH FROM fecha_actual) );
+	id_medida := ( SELECT MED_ID FROM MEDIDA WHERE med_tipo = tipo_medida  );
+	id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = usuario_id and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) );	
         DELETE FROM progreso_medida
-        WHERE med_id = id_medida and fk_usuario = usu_id;
+        WHERE pm_id = id_pm;
     END; $$
 LANGUAGE plpgsql;
 

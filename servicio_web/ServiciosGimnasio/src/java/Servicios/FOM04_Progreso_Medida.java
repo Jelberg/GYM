@@ -105,8 +105,8 @@ public class FOM04_Progreso_Medida {
     @DELETE
     @Path("/eliminarMedidas")
     @Produces("application/json")
-    public String eliminaMedidas(@QueryParam("id_usuario") Integer id_usuario,
-                                @QueryParam("tipo_medida") Integer tipo_medida) {
+    public String eliminaMedidas(@QueryParam("id_usuario") int id_usuario,
+                                @QueryParam("tipo_medida") String tipo_medida) {
 
         Map<String, String> response = new HashMap<String, String>();
         try{
@@ -118,7 +118,7 @@ public class FOM04_Progreso_Medida {
                 String query = "SELECT fo_m04_elimina_medidas(?, ?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, id_usuario);
-            st.setInt(2, tipo_medida);
+            st.setString(2, tipo_medida);
             ResultSet rs = st.executeQuery();
             response.put("data", "Se elimino las medidas");
 
