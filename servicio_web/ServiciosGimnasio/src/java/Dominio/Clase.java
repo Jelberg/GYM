@@ -22,8 +22,8 @@ public class Clase {
     private Date _horaFin;
     private int _capacidad;
 
+ 
     public Clase(){
-        
     }
 
     public Clase(int _id, String _nombre, String _descripcion, String _idInstructor, Date _fecha, Date _horaInicio, Date _horaFin, int _capacidad) {

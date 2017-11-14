@@ -229,9 +229,10 @@ CONSTRAINT fk_usuariocom  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON 
 
 -- TABLAS DE FO_M06
 
-CREATE TABLE ENTRENADOR (
+CREATE OR REPLACE TABLE ENTRENADOR (
 	ENT_ID serial not null,
 	ENT_nombre character varying (50) not null,
+	ENT_apellido character varying (50) not null,
 	ENT_fecha_nac date not null,
 	ENT_sexo char not null,
 	ENT_correo character varying (100) not null,
