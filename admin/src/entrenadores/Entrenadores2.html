@@ -90,13 +90,13 @@
 
         <!-- Rellenar -->
         <div class="row">
-            <p style="font-size:18px">En esta sección podrá gestionar todo lo relacionado a los datos de los entrenadores del gimnasio.
+            <p style="font-size:18px">En esta sección podrá gestionar todo lo relacionado a los turnos de los entrenadores del gimnasio.
             </p>
-            <a href="./gest_Entrenadores.html">
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Agregar Entrenador</button>
+            <a href="./gest2_entrenadores.html">
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Agregar Turno</button>
             </a>
             <a href="">
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Consultar Entrenador</button>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Consultar Turno</button>
             </a>
             <label>Introduzca Correo:</label>
             <input class="w3-input w3-border" style="width:30%;" type="text" required name="Correo">
@@ -107,19 +107,23 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th class="tablehead">Nombre</th>
-                                <th class="tablehead">Edad</th>
-                                <th class="tablehead">Correo Electronico</th>
+                                <th class="tablehead">Nombre Entrenador</th>
+                                <th class="tablehead">Día</th>
+                                <th class="tablehead">Turno Día</th>
+                                <th class="tablehead">Turno Tarde</th>
+                                <th class="tablehead">Turno Noche</th>
                                 <th class="tablehead tcenter">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Alejandro González</td>
-                                <td>32</td>
-                                <td>agonzalezz3@gmail.com</td>
+                                <td>Lunes</td>
+                                <td>7:00 a 12:00</td>
+                                <td>2:00 a 4:00</td>
+                                <td>null</td>
                                 <td class="tcenter">
-                                    <a href="./gest_entrenadores.html">
+                                    <a href="./gest2_entrenadores.html">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     </a>
                                     <i class="fa fa-trash" aria-hidden="true"></i>
@@ -127,10 +131,25 @@
                             </tr>
                             <tr>
                                 <td>Gabriel Diaz</td>
-                                <td>28</td>
-                                <td>gd2433@hotmail.com</td>
+                                <td>Lunes</td>
+                                <td>8:00 a 10:00</td>
+                                <td>3:00 a 6:00</td>
+                                <td>7:00 a 9:00</td>
                                 <td class="tcenter">
-                                    <a href="./gest_entrenadores.html">
+                                    <a href="./gest2_entrenadores.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Alejandro González</td>
+                                <td>Martes</td>
+                                <td>7:00 a 12:00</td>
+                                <td>2:00 a 4:00</td>
+                                <td>null</td>
+                                <td class="tcenter">
+                                    <a href="./gest2_entrenadores.html">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     </a>
                                     <i class="fa fa-trash" aria-hidden="true"></i>
@@ -138,10 +157,12 @@
                             </tr>
                             <tr>
                                 <td> Iliana Contreras</td>
-                                <td>29</td>
-                                <td>icontreras12@gmail.com</td>
+                                <td>Lunes</td>
+                                <td>7:00 a 12:00</td>
+                                <td>2:00 a 4:00</td>
+                                <td>null</td>
                                 <td class="tcenter">
-                                    <a href="./gest_entrenadores.html">
+                                    <a href="./gest2_entrenadores.html">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     </a>
                                     <i class="fa fa-trash" aria-hidden="true"></i>
@@ -149,10 +170,12 @@
                             </tr>
                             <tr>
                                 <td>Jose Hernandez</td>
-                                <td>38</td>
-                                <td>jhs.12@gmail.com</td>
+                                <td>Lunes</td>
+                                <td>7:00 a 12:00</td>
+                                <td>2:00 a 4:00</td>
+                                <td>null</td>
                                 <td class="tcenter">
-                                    <a href="./gest_entrenadores.html">
+                                    <a href="./gest2_entrenadores.html">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     </a>
                                     <i class="fa fa-trash" aria-hidden="true"></i>
@@ -160,15 +183,30 @@
                             </tr>
                             <tr>
                                 <td>Fernanda Torres</td>
-                                <td>28</td>
-                                <td>fernandat_8@gmail.com</td>
+                                <td>Lunes</td>
+                                <td>8:00 a 10:00</td>
+                                <td>3:00 a 6:00</td>
+                                <td>7:00 a 9:00</td>
                                 <td class="tcenter">
-                                    <a href="./gest_entrenadores.html">
+                                    <a href="./gest2_entrenadores.html">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                     </a>
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </td>
                             </tr> 
+                            <tr>
+                                <td> Iliana Contreras</td>
+                                <td>Martes</td>
+                                <td>7:00 a 12:00</td>
+                                <td>2:00 a 4:00</td>
+                                <td>null</td>
+                                <td class="tcenter">
+                                    <a href="./gest2_entrenadores.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
