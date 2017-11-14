@@ -56,7 +56,7 @@ public class BOM02_Entrenador {
                 put("correo", correo);
             }});
 
-            String query = "SELECT * FROM bo_m02_get_entrenador("+correo+");";
+            String query = "SELECT * FROM bo_m02_get_entrenadores( ? );";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
             st.setString(1, correo);
@@ -64,17 +64,17 @@ public class BOM02_Entrenador {
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 jsonArray.add(new Entrenador());
-                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("ENT_ID"));
-                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("ENT_NOMBRE"));
-                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("ENT_APELLIDO"));
-                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("ENT_FECHA_NAC"));
-                jsonArray.get(jsonArray.size() - 1).setSexo(rs.getString("ENT_SEXO"));
-                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("ENT_CORREO"));
-                jsonArray.get(jsonArray.size() - 1).setHistorial(rs.getString("ENT_HISTORIAL"));
-                byte[] img = rs.getBytes("ENT_FOTO");
-                ImageIcon image = new ImageIcon(img);
-                Image im = image.getImage();
-                jsonArray.get(jsonArray.size() - 1).setFoto(im);
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
+                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fechanac"));
+                jsonArray.get(jsonArray.size() - 1).setSexo(rs.getString("sexo"));
+                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
+                jsonArray.get(jsonArray.size() - 1).setHistorial(rs.getString("historial"));
+                //byte[] img = rs.getBytes("ENT_FOTO");
+                //ImageIcon image = new ImageIcon(img);
+                //Image im = image.getImage();
+                //jsonArray.get(jsonArray.size() - 1).setFoto(im);
                           
             }
             response = gson.toJson(jsonArray);

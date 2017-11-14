@@ -1,0 +1,87 @@
+------------------------------------------CLASE-------------------------------------------
+
+--------------Función que devuelve la descripción de la clase consultada.
+
+CREATE OR REPLACE FUNCTION bo_m02_get_clase(nombreclase character varying)
+  RETURNS TABLE(nombre character varying, descripcion character varying)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT cla_nombre, cla_descripcion
+        FROM clase
+        WHERE cla_nombre = nombreclase)
+   LOOP
+    nombre = var_r.cla_nombre;
+    descripcion = var_r.cla_descripcion;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+----------------------------Función que agrega una clase.
+
+CREATE OR REPLACE FUNCTION bo_m02_inserta_clase(idclase INT, 
+    nombreclase character varying,
+    descripcion character varying)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	INSERT INTO CLASE(CLA_ID,CLA_NOMBRE,CLA_DESCRIPCION) VALUES (idclase, nombreclase, descripcion);
+END $$
+  LANGUAGE plpgsql;
+
+----------------------------Función que elimina una clase.
+
+CREATE OR REPLACE FUNCTION bo_m02_elimina_clase(nombreclase character varying)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	DELETE FROM CLASE WHERE CLA_NOMBRE=nombreclase;
+END $$
+  LANGUAGE plpgsql;
+
+---------------------------Función que modifica datos de una clase.
+
+CREATE OR REPLACE FUNCTION bo_m02_modifica_clase(nombreclase character varying, descripcion character varying)
+  RETURNS void
+   AS $$
+DECLARE
+BEGIN
+    UPDATE CLASE SET (CLA_NOMBRE = nombreclase, CLA_DESCRIPCION = descripcion)
+    WHERE CLA_NOMBRE = nombreclase;
+END; $$
+  LANGUAGE plpgsql;
+
+---------------------------------------FIN CLASE-------------------------------------------
+
+-----------------------------------HORARIO_CLASE-------------------------------------------
+
+--------------Función que devuelve datos de (horario_clase) de la clase consultada.
+
+CREATE OR REPLACE FUNCTION bo_m02_get_horario_clase(nombreclaseconsulta character varying)
+  RETURNS TABLE(nombreclase character varying, instructor character varying, fecha date, 
+		dia character varying, capacidad int, hora_inicio time, hora_fin time)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT CLA_Nombre, INS_Nombre, HC_fecha, HC_dia, HC_capacidad, HC_hora_inicio, HC_hora_fin
+        FROM Horario_Clase, Clase, Instructor
+	WHERE  nombreclaseconsulta = CLA_Nombre and fk_Clase = CLA_id and fk_Instructor=INS_id)
+   LOOP
+    nombreclase = var_r.CLA_Nombre;
+    instructor= var_r.INS_nombre;
+    fecha = var_r.HC_fecha;
+    dia = var_r.HC_dia;
+    capacidad = var_r.HC_capacidad;
+    hora_inicio = var_r.HC_hora_inicio;
+    hora_fin = var_r.HC_hora_fin;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+
+
+----------------------------------FIN HORARIO_CLASE-----------------------------------------
