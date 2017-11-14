@@ -51,7 +51,7 @@ CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
 
 
 --FUNCION QUE ACTUALZA MEDIDA DADOS: EL ID DEL USUARIO, FECHA DE EL PROGRESO, TIPO DE LA MEDIDA Y LA NUEVA MEDIDA.
-CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER, medida INTEGER, tipo_medida VARCHAR,)
+CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER, medida INTEGER, tipo_medida VARCHAR)
   RETURNS void
    AS $$
 DECLARE
@@ -178,9 +178,8 @@ DECLARE
    var_r    record;
 BEGIN
    FOR var_r IN(SELECT com_mensaje, usu_nombre 
-        FROM usuario inner join  comentario on usu_id = fk_usuariopro 
-
-	order by pm_fecha DESC limit 10 )
+   FROM comentario com inner join usuario usu on usu.usu_id = com.fk_usuariopro 
+	order by pm_fecha DESC limit 10)
    LOOP
     com_mensaje = var_r.com_mensaje;
     usu_nombre = var_r.usu_nombre;
