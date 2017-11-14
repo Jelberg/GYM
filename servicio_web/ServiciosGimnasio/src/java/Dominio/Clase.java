@@ -22,17 +22,8 @@ public class Clase {
     private Date _horaFin;
     private int _capacidad;
 
-    public Clase(int _id, String _nombre, String _descripcion) {
-        this._id = _id;
-        this._nombre = _nombre;
-        this._descripcion = _descripcion;
-    }
-    
+ 
     public Clase(){
-    }
-
-    public int getId() {
-        return _id;
     }
 
     public Clase(int _id, String _nombre, String _descripcion, String _idInstructor, Date _fecha, Date _horaInicio, Date _horaFin, int _capacidad) {
