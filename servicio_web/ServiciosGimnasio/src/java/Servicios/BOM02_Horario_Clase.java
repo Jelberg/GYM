@@ -46,9 +46,9 @@ public class BOM02_Horario_Clase {
     
     /**
      * Funcion que recibe como parámetro el nombre de la clase,
-     * para consultarla y saber su descripción.
+     * para consultarla y saber varios datos.
      * @param nombreclaseconsulta Nombre de la clase.
-     * @return Devuelve la clase y su descripción en formato json
+     * @return Devuelve los datos de la clase y su horario en formato json
      */
     @GET
     @Path("/getHorario_Clase")
