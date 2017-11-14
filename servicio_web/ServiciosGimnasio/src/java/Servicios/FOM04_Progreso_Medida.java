@@ -57,26 +57,25 @@ public class FOM04_Progreso_Medida {
     @GET
     @Path("/getProgresoM")
     @Produces("application/json")
-    public String getProgresoM(@QueryParam("fecha") String fecha,
-                                @QueryParam("id_usuario") Integer id_usuario){
+    public String getProgresoM (@QueryParam("id_usuario") Integer id_usuario){
     
         try{
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("id_usuario", id_usuario);
-                put("fecha", fecha);
+               
             }});
 
-            String query = "SELECT * FROM fo_m04_get_progresom(?, ?)";
+            String query = "SELECT * FROM fo_m04_get_progresom(?)";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, id_usuario);
-            st.setDate(2, Date.valueOf(fecha));
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 jsonArray.add(new Progreso_Medida());
                 jsonArray.get(jsonArray.size() - 1).setMedida(rs.getInt("medida"));
                 jsonArray.get(jsonArray.size() - 1).setTipo(rs.getString("tipo"));
+                jsonArray.get(jsonArray.size() - 1).setFechaM(rs.getString("fecha"));
             
             }
             response = gson.toJson(jsonArray);
@@ -220,8 +219,7 @@ public class FOM04_Progreso_Medida {
     @Produces("application/json")
     public String insertaMedidas(@QueryParam("id_usuario") int id_usuario,
                                  @QueryParam("medida") int medida,
-                                 @QueryParam("tipo_medida") int tipo_medida,
-                                 @QueryParam("fecha") String fecha ){
+                                 @QueryParam("tipo_medida") int tipo_medida){
 
         Map<String, String> response = new HashMap<String, String>();
         try {
@@ -229,16 +227,14 @@ public class FOM04_Progreso_Medida {
                 put("id_usuario", id_usuario );
                 put("medida", medida );
                 put("tipo_medida", tipo_medida );
-                put("fecha", fecha );
             }});
 
-            String query = "select * from fo_m04_inserta_medidas(?, ?, ?, ?)";
+            String query = "select * from fo_m04_inserta_medidas(?, ?, ?)";
             PreparedStatement st = conn.prepareStatement(query);
             java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
                 st.setInt(1, id_usuario);
                 st.setInt(2, medida);
                 st.setInt(3, tipo_medida);
-                st.setDate(4, Date.valueOf(fecha));
                 
                 st.executeQuery();
             

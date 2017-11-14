@@ -12,16 +12,19 @@ import { ListaEjerciciosPage } from '../lista-ejercicios/lista-ejercicios';
 })
 export class TabsEjercicioPage {
 
+  listaRecibida
+
   grafica: any = ProgresoEjercicioPage;
   comentarios: any = ProgresoComentarioPage;
   constructor(public navCtrl: NavController, public navParams: NavParams)
   {
-  	
+  	this.listaRecibida = navParams.get('lista');
 
   }
   ionViewDidLoad() 
   {
     console.log('ionViewDidLoad TabsEjercicioPage');
+    console.log('tab ejercicio, elemento de lista recibido: ' + this.listaRecibida);
   }
 
   goToListaContactosPage(){

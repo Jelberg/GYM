@@ -67,7 +67,7 @@ public class PruebaMedidas {
     public void pruebaObtenerProgreso(){
         Gson gson = new Gson();
         _progresoMedida = new FOM04_Progreso_Medida();
-        String respuesta = _progresoMedida.getProgresoM( "2012-10-12" , 9999);
+        String respuesta = _progresoMedida.getProgresoM( 9999 );
         _arrayMedidas = new ArrayList<>();
         _arrayMedidas = gson.fromJson( respuesta, new TypeToken<List<Progreso_Medida>>(){}.getType());
         assertEquals( "Cuadricep", _arrayMedidas.get(0).getTipo() );

@@ -131,7 +131,7 @@ END; $$
   LANGUAGE plpgsql;
 
 --Este solo devuelve los comentario de ese pogreso peso.
-CREATE OR REPLACE FUNCTION fo_m04_get_comentarioprop(usuario_id int, fk_pro_peso int)
+CREATE OR REPLACE FUNCTION fo_m04_get_comentariopro(usuario_id int, fk_pro_peso int)
   RETURNS TABLE(com_mensaje varchar, usu_nombre varchar)
    AS $$
 DECLARE
@@ -151,7 +151,7 @@ END; $$
   LANGUAGE plpgsql;
 
 --Este solo devuelve los comentario de ese pogreso medida.
-CREATE OR REPLACE FUNCTION fo_m04_get_comentarioprom(usuario_id int, fk_pro_medida int)
+CREATE OR REPLACE FUNCTION fo_m04_get_comentario(usuario_id int, fk_pro_medida int)
   RETURNS TABLE(com_mensaje varchar, usu_nombre varchar)
    AS $$
 DECLARE
@@ -171,7 +171,7 @@ END; $$
   LANGUAGE plpgsql;
 
 --Este solo devuelve todos los progresos sin importar de que progreso sea.
-CREATE OR REPLACE FUNCTION fo_m04_get_progresos()
+CREATE OR REPLACE FUNCTION fo_m04_get_comentario()
   RETURNS TABLE(com_mensaje varchar, usu_nombre varchar)
    AS $$
 DECLARE
