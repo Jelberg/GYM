@@ -1,0 +1,94 @@
+--**************************************************FUNCIONES PARA EL WEB SERVICE******************************************
+-----Esta funcion devuelve las rutinas de un cliente con su dia y la cantidad de ejercicios
+
+CREATE OR REPLACE FUNCTION FO_M03_get_rutina(usuario_CI int)
+  RETURNS TABLE(nombre character varying, dia character varying, numEjerc int)
+   AS $$
+DECLARE
+   _rutinas    record;
+BEGIN
+   FOR _rutinas IN(SELECT r.rut_nombre, r.rut_dia
+        FROM rutina as r inner join  usuario as u on u.usu_id = r.fk_usuario
+        WHERE u.usu_cedula = usuario_CI)
+   LOOP
+    nombre = _rutinas.rut_nombre;
+    dia = _rutinas.rut_dia;
+  --  numEjerc= _rutinas.ejercicio;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+  
+  ---***********************************************RUTINAS PARA M04******************************************************
+
+-------Lista de ejercicios realizada por un usuario--------------------------------------------
+  CREATE OR REPLACE FUNCTION FO_M03_get_ejerciciosRealizados(idUsuario int)
+  RETURNS TABLE(nombre character varying)
+   AS $$
+DECLARE
+   _ejercicios    record;
+BEGIN
+   FOR _ejercicios IN(select  distinct(eje.eje_nombre) from ejercicio as eje 
+inner join ejercicio_maquina_equipo as eme on eje.eje_id= eme.fk_ejercicio 
+inner join trabajo_rutina as tr on tr.fk_eje_maq_equ1 = eme.eme_id 
+inner join rutina as rut on rut.rut_id=eme.fk_rutina 
+inner join usuario as usu on usu.usu_id= rut.fk_usuario where usu.usu_id= idUsuario )
+   LOOP
+    nombre = _ejercicios.eje_nombre;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+  
+  
+------Lista de ejercicios con peso promedio por mes de los ultimos 6 meses----------------------------------------
+CREATE OR REPLACE FUNCTION FO_M03_get_Ejercicios6meses( _idUsuario int, _ejercicio character varying )
+  RETURNS TABLE(mes int, repeticion int, peso numeric(7,2), unidad character varying)
+   AS $$
+DECLARE
+   _ejercicios    record;
+BEGIN
+   FOR _ejercicios IN(select Extract(Month from tr.tr_fecha) as mes, sum(ser.ser_repeticion) as repeticion,
+                    avg(ser.ser_peso) as peso, ser.ser_unidad as unidad from trabajo_rutina as tr 
+					inner join serie as ser on ser.fk_trabajo_rutina= tr.tr_id 
+					inner join ejercicio_maquina_equipo as eme on eme_id = tr.fk_eje_maq_equ1
+					inner join ejercicio as eje on eje.eje_id= eme.fk_ejercicio
+					inner join rutina as rut on eme.fk_rutina = rut.rut_id
+					inner join usuario as usu on usu.usu_id = rut.fk_usuario
+					where eje.eje_nombre= _ejercicio and usu.usu_id=_idUsuario 
+                    and (tr.tr_fecha >= (current_date - interval '6 month')) group by mes, ser.ser_unidad)
+   LOOP
+    mes = _ejercicios.mes;
+    repeticion = _ejercicios.repeticion;
+ 	peso = ROUND(_ejercicios.peso, 1);
+    unidad= _ejercicios.unidad;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;  
+
+
+ ------Lista de ejercicios con peso promedio por mes de los ultimos 5 años----------------------------------------
+CREATE OR REPLACE FUNCTION FO_M03_get_Ejercicios5anios( _idUsuario int, _ejercicio character varying )
+  RETURNS TABLE(mes int, repeticion int, peso decimal, unidad character varying)
+   AS $$
+DECLARE
+   _ejercicios    record;
+BEGIN
+   FOR _ejercicios IN(select Extract(Year from tr.tr_fecha) as mes, sum(ser.ser_repeticion) as repeticion, avg(ser.ser_peso) as peso, ser.ser_unidad as unidad from trabajo_rutina as tr 
+						inner join serie as ser on ser.fk_trabajo_rutina= tr.tr_id 
+						inner join ejercicio_maquina_equipo as eme on eme_id = tr.fk_eje_maq_equ1
+                        inner join ejercicio as eje on eje.eje_id= eme.fk_ejercicio
+                        inner join rutina as rut on eme.fk_rutina = rut.rut_id
+                        inner join usuario as usu on usu.usu_id = rut.fk_usuario
+                        where eje.eje_nombre= _ejercicio and usu.usu_id=_idUsuario 
+                        and (tr.tr_fecha >= (current_date - interval '5 year')) group by mes, ser.ser_unidad)
+   LOOP
+    mes = _ejercicios.mes;
+    repeticion = _ejercicios.repeticion;
+ 	peso = ROUND(_ejercicios.peso, 2);
+    unidad= _ejercicios.unidad;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;

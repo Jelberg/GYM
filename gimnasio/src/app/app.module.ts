@@ -3,13 +3,19 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import {HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 //Gráficos
 import { ChartsModule } from 'ng2-charts';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+//M01
+import { AmigosPage } from '../pages/FO_M01/amigos/amigos';
+import { CrearusuarioPage } from '../pages/FO_M01/crearusuario/crearusuario';
+import { IniciarsesionPage } from '../pages/FO_M01/iniciarsesion/iniciarsesion';
+import { PerfilPage} from '../pages/FO_M01/perfil/perfil'
+// fin M01
 //M04
 import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/seleccionar-progreso';
 import { LineaComponent } from '../components/linea/linea';
@@ -38,6 +44,7 @@ import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clase
 import { ComentarClasePage} from '../pages/FO_M05/comentar-clase/comentar-clase';
 import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class'
 import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/realizar-valoracion';
+import { UserServiceProvider } from '../providers/user-service/user-service';
 //FIN M05
 // M06
 import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/reservas-realizadas';
@@ -52,6 +59,10 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
   declarations: [
     MyApp,
     HomePage,
+    AmigosPage,
+    CrearusuarioPage,
+    IniciarsesionPage,
+    PerfilPage,
     SeleccionarProgresoPage,
     LineaComponent,
     BarraComponent,
@@ -87,7 +98,7 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    HttpModule,
     IonicModule.forRoot(MyApp,{
       tabsPlacement:'bottom',
       platforms:{
@@ -108,6 +119,10 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
   entryComponents: [
     MyApp,
     HomePage,
+    AmigosPage,
+    CrearusuarioPage,
+    IniciarsesionPage,
+    PerfilPage,
     SeleccionarProgresoPage,
     ProgresoEjercicioPage,
     ProgresoMedidasPage,
@@ -138,7 +153,8 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UserServiceProvider
   ]
 })
 export class AppModule {}
