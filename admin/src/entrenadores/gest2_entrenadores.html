@@ -8,8 +8,10 @@
 <link href="../asset/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
 
+
 <body>
 
+  <!-- Sidebar/menu -->
   <!-- Sidebar/menu -->
   <nav class="w3-sidebar w3-color w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:215px;font-weight:bold;" id="mySidebar">
     <br>
@@ -22,15 +24,15 @@
           <b>Home</b>
         </p>
       </a>
-      <a href="../instructores/instructores.html" onclick="w3_close()" class="menuIcon active">
+      <a href="../instructores/instructores.html" onclick="w3_close()" class="menuIcon">
         <img src="../Imagenes/Instructor_white.png" class="menuImg">
         <p class="menuText">
           <b>Instructores</b>
         </p>
         <hr style="width:120px;border:2px">
       </a>
-      <a href="../entrenadores/entrenadores.html" onclick="w3_close()" class="menuIcon">
-        <img src="../Imagenes/Entrenador_white.png" class="menuImg">
+      <a href="../entrenadores/entrenadores.html" onclick="w3_close()" class="menuIcon active">
+        <img src="../Imagenes/Entrenador_white.png" class="menuImg ">
         <p class="menuText">
           <b>Entrenadores</b>
         </p>
@@ -43,7 +45,7 @@
         </p>
         <hr style="width:120px;border:2px">
       </a>
-      <a href="../horarios/horarios.html" onclick="w3_close()" class="menuIcon">
+      <a href="../horarios/horarios.html" onclick="w3_close()" class="menuIcon ">
         <img src="../Imagenes/horario_white.png" class="menuImg">
         <p class="menuText">
           <b>Horarios</b>
@@ -82,66 +84,66 @@
     <div class="w3-container" id="showcase">
       <img src="../Imagenes/Logo Gimnasio.png" class="mainImg">
       <h1 class="w3-xxxlarge w3-text-color">
-        <b>Gestión de Instructores.</b>
+        <b>Gestión de Entrenadores.</b>
       </h1>
       <hr style="width:50px;border:5px solid #3CB371" class="w3-round">
     </div>
 
     <!-- Rellenar -->
     <div class="w3-row ">
-      <div class="w3-twothird w3-teal w3-container" style="height:660px">
+      <div class="w3-twothird w3-teal w3-container" style="height:400px">
         <div class="w3-padding-32 w3-padding-large">
-          <h1>Instructores</h1>
+          <h1>Turno de Entrenadores</h1>
           <form class="w3-container w3-card w3-padding-32 w3-white" action="/action_page.php" target="_blank">
-            
-            <div class="w3-section">
-              <label>Nombre Completo:</label>
-              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Nombre Completo">
+            <div class="w3-half w3-padding-small">
+              <label>Día:</label>
+              <select class="w3-select w3-border" name="option">
+                <option value="1">Lunes</option>
+                <option value="2">Martes</option>
+                <option value="3">Miércoles</option>
+                <option value="4">Jueves</option>
+                <option value="5">Viernes</option>
+                <option value="6">Sábado</option>
+                <option value="7">Domingo</option>
+              </select>
+            </div>
+            <div class="w3-half w3-padding-small">
+              <label>Turno:</label>
+              <select class="w3-select w3-border" name="option">
+                <option value="1">Mañana</option>
+                <option value="2">Tarde</option>
+                <option value="3">Noche</option>
+              </select>
             </div>
             <div class="w3-section">
-              <label>Fecha de Nacimiento:</label>
-              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Fecha de Nacimiento">
-            </div>
-            <div class="w3-section">
-              <label>Sexo:</label>
-              <div class="w3-row ">
-                <div class="w3-half w3-container" style="height:60px">
-                  <p>
-                    <input class="w3-radio" type="radio" name="gender" value="male" checked>
-                    <label>Masculino</label>
-                  </p>
-                </div>
-                <div class="w3-half w3-container" style="height:60px">
-                  <p>
-                    <input class="w3-radio" type="radio" name="gender" value="female">
-                    <label>Femenino</label>
-                  </p>
-                  <p>
-                </div>
-
+              <div class="w3-half w3-padding-small">
+                <label>Hora Inicio:</label>
+                <select class="w3-select w3-border" name="option">
+                  <option value="1">7:00 am</option>
+                  <option value="2">8:00 am</option>
+                  <option value="3">9:00 am</option>
+                </select>
               </div>
-            </div>
-            <div class="w3-section">
-              <label>Correo Electrónico:</label>
-              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Correo Electrónico">
-            </div>
-            <div class="w3-section">
-              <label>Foto:</label>
-              <div class="w3-padding-16 w3-center">
-                <input type="file" accept="image/*">
+              <div class="w3-half w3-padding-small">
+                <label>Hora Fin:</label>
+                <select class="w3-select w3-border" name="option">
+                  <option value="1">7:00 am</option>
+                  <option value="2">8:00 am</option>
+                  <option value="3">9:00 am</option>
+                </select>
               </div>
             </div>
           </form>
         </div>
       </div>
-      <div class="w3-quarter w3-blue-grey w3-container" style="height:660px">
+      <div class="w3-quarter w3-blue-grey w3-container" style="height:400px">
         <div class="w3-padding-64 w3-center">
-          <div class="w3-padding-64 w3-center">
+          <div class="w3-padding-32 w3-center">
             <div class="w3-left-align w3-padding-large">
                 <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Insertar</button>
                 <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Modificar</button>
                 <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Eliminar</button>
-              <a href="./Instructores.html">
+              <a  href="./Entrenadores2.html">
                 <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Consultar</button>
               </a>
             </div>
@@ -174,9 +176,8 @@
       captionText.innerHTML = element.alt;
     }
   </script>
-   <script src="../asset/js/jquery.min.js"></script>
-   <script src="../asset/js/bootstrap.min.js"></script>
-
+ <script src="../asset/js/jquery.min.js"></script>
+ <script src="../asset/js/bootstrap.min.js"></script>
 </body>
 
 </html>
