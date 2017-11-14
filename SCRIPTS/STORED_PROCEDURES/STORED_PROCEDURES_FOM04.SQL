@@ -33,8 +33,7 @@ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
     fk_usuario INT,
     medida INT,
-    tipo INT,
-    fecha DATE)
+    tipo INT)
   RETURNS void
    AS $$
     DECLARE
