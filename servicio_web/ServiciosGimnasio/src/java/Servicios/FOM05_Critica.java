@@ -26,15 +26,14 @@ import javax.ws.rs.Produces;
 public class FOM05_Critica {
     private Connection _conn = Sql.getConInstance();
     private Gson _gson = new Gson();
-    private ArrayList<Critica> _listaCriticas;
     private String result;
+    private ArrayList<Critica> jsonArray;
     
     
     @GET  
     @Produces("application/json")
     public String holaCriticas ()
     {
-        System.err.println("    este es en mensaje por consola  ");
         return "CRITICA FO-M05";
     }
     
@@ -47,27 +46,24 @@ public class FOM05_Critica {
     
     public String consultarCritica() throws SQLException
     {
-        String query = "Select * from CRITICA";
-        
         try
         {
-            Statement st = _conn.createStatement();           
-            ResultSet rs = st.executeQuery(query);
-            Critica resultado = new Critica();
-         
+            String query = "Select * from FOM05_LISTA_CRITICAS";
+            jsonArray = new ArrayList<>();
+            Statement st = _conn.createStatement();
+            ResultSet rs = st.executeQuery(query);  
+    
             while (rs.next())
             {    
-               
-                resultado.setId(rs.getInt("id"));
-                resultado.setFecha(rs.getDate("fecha"));
-                resultado.setComentario(rs.getString("comentario"));
-                resultado.setValoracion(rs.getInt("valoracion"));
-                resultado.setReferenciaHc(rs.getInt("referancia"));
-                
-                //  _listaCriticas.add(resultado);
+                jsonArray.add(new Critica());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setFecha(rs.getDate("fecha"));
+                jsonArray.get(jsonArray.size() - 1).setComentario(rs.getString("comentario"));
+                jsonArray.get(jsonArray.size() - 1).setValoracion(rs.getInt("valoracion"));
+                jsonArray.get(jsonArray.size() - 1).setReferenciaHc(rs.getInt("referencia"));
             }
-            //result = _gson.toJson(_listaCriticas);
-            return _gson.toJson(resultado);
+            result = _gson.toJson(jsonArray);
+            
         }
         catch (SQLException e)
         {
@@ -80,6 +76,7 @@ public class FOM05_Critica {
         finally
         {
             Sql.bdClose(_conn);
+            return result; //no deberia estar aqui
         }
     } 
 

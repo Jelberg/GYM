@@ -12,7 +12,12 @@ public class Sql {
     private static String BD_PASSWORD = "GYMUCAB";
     private static String BD_URL = "jdbc:postgresql://localhost/GIMNASIOBD";
     private static String BD_CLASS_FOR_NAME = "org.postgresql.Driver";
-
+    /*
+    private static String BD_USER = "postgres";
+    private static String BD_PASSWORD = "123";
+    private static String BD_URL = "jdbc:postgresql://localhost/postgres";
+    private static String BD_CLASS_FOR_NAME = "org.postgresql.Driver";
+*/
     /**
      * Metodo para devolver una unica instancia de la conexion (Singleton)
      * @return instancia de la conexion

@@ -3,7 +3,7 @@ drop function FOM05_llenar_duracion();
 
 
 
---*********************FUNCIONES PARA LOS TRIGGERS*******************************
+--*********************FUNCIONES PARA LOS TRIGGERS
 
 CREATE OR REPLACE FUNCTION FOM05_LLENAR_DURACION() 
 RETURNS TRIGGER AS $$
@@ -27,7 +27,7 @@ BEGIN
 END $$ 
 language plpgsql
 
---***************FUNCIONES QUE SE NECESITAN PARA EL WEB SERVICE********************
+--******FUNCIONES QUE SE NECESITAN PARA EL WEB SERVICE****
 
 --consultar toda la tabla de horario_clase en rango de 1 semana (entre lunes y sabado)
 --consultar tabla de horario de clase que ya se halla participado para los comentarios
@@ -69,3 +69,27 @@ BEGIN
 	DELETE FROM CRITICA WHERE CRI_ID=ID_CRITICA;
 END $$
 LANGUAGE PLPGSQL;
+
+
+--**********FUNCIONES PARA CRITICA*******
+CREATE OR REPLACE FUNCTION FOM05_LISTA_CRITICAS() 
+RETURNS TABLE (id int, fecha Date, comentario varchar ,valoracion int, referencia int ) AS
+$$
+DECLARE 
+var_r record;
+BEGIN
+for var_r in (Select * from CRITICA)
+
+loop
+	id:= var_r.CRI_ID;
+	fecha:= var_r.CRI_FECHA;
+	comentario:= var_r.CRI_COMENTARIO;
+	valoracion:= var_r.CRI_VALORACION;
+	referencia:= var_r.FK_HC_ID;
+	
+end loop;
+	return next;
+	
+END 
+$$ 
+language plpgsql

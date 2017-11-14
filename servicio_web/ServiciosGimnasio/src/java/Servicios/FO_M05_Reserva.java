@@ -7,7 +7,7 @@ package Servicios;
 
 import Dominio.Clase;
 import Dominio.Critica;
-import Dominio.Reserva;
+//import Dominio.Reserva;
 import Dominio.Sql;
 import com.google.gson.Gson;
 import java.sql.Connection;
@@ -20,13 +20,15 @@ import java.util.ArrayList;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 /**
  *
  * @author GESTION
  */
+
 public class FO_M05_Reserva {
-    
+/*    
     private Connection _conn = Sql.getConInstance();
     private Gson _gson = new Gson();
     private ArrayList<Reserva> _listaReservas;
@@ -79,7 +81,7 @@ public class FO_M05_Reserva {
             Sql.bdClose(_conn);
         }
     } 
-    
+    /*
     @GET
     
     @Path("/reservarClase")
@@ -91,7 +93,7 @@ public class FO_M05_Reserva {
             @QueryParam("hc_fecha") Date _fecha, @QueryParam("hc_dia") String _dia,
             @QueryParam("hc_capacidad") int _capacidad, @QueryParam("hc_hora_inicio") Date _hora_inicio,
             @QueryParam("hc_hora_fin") Date _hora_fin,@QueryParam("hc_status") String _status,
-            @QueryParam("hc_duracion") Date _duracion,@QueryParam("fk_clase") int _idClase) throws SQLException
+            @QueryParam("hc_duracion") Date _duracion,  @QueryParam("fk_clase") int _idClase) throws SQLException
     {
         String query = "insert into HORARIO_CLASE (hc_fecha,hc_dia,hc_capacidad,hc_hora_inicio,hc_hora_fin,hc_status,hc_duracion,fk_usuario,fk_instructor,fk_clase) "
                 + "values ('"+_fecha+"','"+_dia+"',"+_capacidad+",'"+_hora_inicio+"','"+_hora_fin+"','"+_status+"',"+_duracion+","+_idUsuario+","+_idInstructor+","+_idClase+")";
@@ -115,7 +117,8 @@ public class FO_M05_Reserva {
             Sql.bdClose(_conn);
         }
     } 
-    
+    */
+    /*
     @GET
     
     @Path("/verificarDisponibilidad")
@@ -165,5 +168,5 @@ public class FO_M05_Reserva {
         }
     } 
     
-    
+    */
 }
