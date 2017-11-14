@@ -1,4 +1,5 @@
 
+import Servicios.FOM05_Critica;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
@@ -18,5 +19,10 @@ import java.util.Set;
 @ApplicationPath("/")
 public class ConfiguracionRestGimnasio extends Application{
     
-    
+    @Override
+    public Set<Class<?>> getClasses(){
+        HashSet h = new HashSet<Class<?>>();
+        h.add( FOM05_Critica.class );
+        return h;
+    }
 }
