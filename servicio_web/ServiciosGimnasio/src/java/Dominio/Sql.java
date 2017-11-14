@@ -13,6 +13,7 @@ public class Sql {
     private static String BD_URL = "jdbc:postgresql://localhost/gimnasiobd"; 
     private static String BD_CLASS_FOR_NAME = "org.postgresql.Driver";
   /*  
+    //Metodo por defecto de la conexion a la bd que trae postgres
     private static String BD_USER = "postgres";
     private static String BD_PASSWORD = "123";
     private static String BD_URL = "jdbc:postgresql://localhost/postgres";
