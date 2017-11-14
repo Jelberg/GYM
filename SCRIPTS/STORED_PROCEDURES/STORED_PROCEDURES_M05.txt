@@ -1,41 +1,49 @@
---*********************FUNCIONES PARA LOS TRIGGERS*******************************
+--DROPS DE LAS FUNCIONES
+drop function FOM05_llenar_duracion();
 
-CREATE OR REPLACE FUNCTION LLENAR_DURACION() 
+
+
+--*********************FUNCIONES PARA LOS TRIGGERS
+
+CREATE OR REPLACE FUNCTION FOM05_LLENAR_DURACION() 
 RETURNS TRIGGER AS $$
 
 DECLARE 
-HORA_INI TIME;
+HORA_INICIO TIME;
 HORA_FIN TIME;
 HORA	 TIME;
-DURACION TIME;
 ID 	 INTEGER;
 
 BEGIN
 
-	SELECT HC_ID,HC_HORA_INICIO, HC_HORA_FIN INTO ID, HORA_INI, HORA_FIN
+	SELECT HC_ID, HC_HORA_INICIO, HC_HORA_FIN INTO ID, HORA_INICIO, HORA_FIN
 	FROM HORARIO_CLASE ORDER BY HC_ID DESC LIMIT 1; 
  
 	HORA = HORA_FIN - HORA_INICIO;
-
+	
 	UPDATE HORARIO_CLASE SET HC_DURACION=HORA WHERE HC_ID=ID;
+	
+	RETURN NEW;
 END $$ 
 language plpgsql;
 
---***************FUNCIONES QUE SE NECESITAN PARA EL WEB SERVICE********************
+--******FUNCIONES QUE SE NECESITAN PARA EL WEB SERVICE****
 
 --consultar toda la tabla de horario_clase en rango de 1 semana (entre lunes y sabado)
 --consultar tabla de horario de clase que ya se halla participado para los comentarios
 
---agregar usuario a la tabla horario clase que seria la participacion
-CREATE OR REPLACE FUNCTION M05_AGREGAR_PARTICIPACION(ID_USUARIO INT, ID_CLASE_HORARIO INT)
+--AGREGAR USUARIO PARA QUE PARTICIPE EN LA CLASE
+CREATE OR REPLACE FUNCTION M05_AGREGAR_PARTICIPACION(ID_USUARIO INTEGER, ID_HC INTEGER)
 RETURNS VOID AS $$
 DECLARE 
 BEGIN 
-	UPDATE HORARIO_CLASE SET FK_USUARIO=ID_USUARIO WHERE HC_ID=ID_CLASE_HORARIO;
+	UPDATE HORARIO_CLASE 
+	SET FK_USUARIO=ID_USUARIO 
+	WHERE HC_ID = ID_HC ;
 END $$
 LANGUAGE PLPGSQL;
 
---eliminar usuario de la tabla horario, restriccion tiene que ser que la fecha aun no halla pasado
+--ELIMINAR USUARIO DE LA PARTICIPACION
 CREATE OR REPLACE FUNCTION M05_ELIMINAR_PARTICIPACION(ID_USUARIO INT, ID_CLASE_HORARIO INT)
 RETURNS VOID AS $$
 DECLARE 
@@ -44,7 +52,36 @@ BEGIN
 END $$
 LANGUAGE PLPGSQL;
 
---agregar comentario y/o valoracion, es independiente ya que se encuentran ambos como atributo de tabla critica
+
+--**********FUNCIONES PARA CRITICA*******
+
+-- Metodo para traer todas las criticas de esa clase
+
+CREATE OR REPLACE FUNCTION FOM05_LISTA_CRITICAS(referencia_hc int) 
+RETURNS TABLE (id int, fecha Date, comentario varchar ,valoracion int ) AS
+$$
+DECLARE 
+var_r record;
+BEGIN
+for var_r in (Select * from CRITICA where FK_HC_ID = referencia_hc)
+
+loop
+	id:= var_r.CRI_ID;
+	fecha:= var_r.CRI_FECHA;
+	comentario:= var_r.CRI_COMENTARIO;
+	valoracion:= var_r.CRI_VALORACION;
+	
+	return next;
+	
+end loop;
+	
+	
+END 
+$$ 
+language plpgsql;
+
+--Metodo para agregar la critica a la clase
+
 CREATE OR REPLACE FUNCTION M05_AGREGAR_CRITICA(FECHA DATE, COMENTARIO CHARACTER VARYING(400),VALORACION INT, REFERENCIA_HC INT)
 RETURNS VOID AS $$
 DECLARE 
@@ -53,11 +90,46 @@ BEGIN
 END $$
 LANGUAGE PLPGSQL;
 
---eliminar comentario y/o valoracion 
+--Metodo para eliminar critica
+
 CREATE OR REPLACE FUNCTION M05_ELIMINAR_CRITICA(ID_CRITICA INT)
 RETURNS VOID AS $$
 DECLARE 
 BEGIN 
 	DELETE FROM CRITICA WHERE CRI_ID=ID_CRITICA;
+END $$
+LANGUAGE PLPGSQL;
+
+--lista las clases en las que ya se participo y no se han comentado EN LOS ULTIMOS 30 DIAS
+
+CREATE OR REPLACE FUNCTION M05_LISTA_CLASES_PARTICIPADAS(id int)
+RETURNS TABLE (fecha Date, clase varchar, instructor_nombre varchar,instructor_apellido varchar, id_hc int) AS $$
+DECLARE 
+var_r record;
+BEGIN 
+     for var_r in (Select HC_ID, HC_FECHA, CLA_NOMBRE, INS_NOMBRE, INS_APELLIDO
+     from HORARIO_CLASE , CLASE , INSTRUCTOR , USUARIO , CRITICA 
+     where
+     FK_USUARIO = id and 
+     USU_ID = FK_USUARIO and 
+     INS_ID = FK_INSTRUCTOR and
+     CLA_ID = FK_CLASE and
+
+     FK_HC_ID != HC_ID AND
+     HC_FECHA BETWEEN CAST (CURRENT_DATE-30 AS DATE) AND CAST (CURRENT_DATE AS DATE)
+     GROUP BY HC_ID, HC_FECHA, CLA_NOMBRE, INS_NOMBRE, INS_APELLIDO
+     )
+loop
+	instructor_nombre:= var_r.INS_NOMBRE;
+	fecha:= var_r.HC_FECHA;
+	instructor_apellido:= var_r.INS_APELLIDO;
+	clase:= var_r.CLA_NOMBRE;
+	id_hc:= var_r.HC_ID;
+	
+	return next;
+	
+end loop;
+	
+
 END $$
 LANGUAGE PLPGSQL;
