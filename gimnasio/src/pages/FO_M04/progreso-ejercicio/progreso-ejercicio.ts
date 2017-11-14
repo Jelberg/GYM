@@ -56,6 +56,20 @@ getDatosEjercicio(){
     }); 
 }
 
+getDatosEjercicioPerYear(){
+  let urlPeticion: string = "FOM03_Rutina/getEjercicios5anios?idUsuario=1&ejercicio="+this.listaRecibida;
+   this.userService.getDato( urlPeticion ).subscribe(data => {
+      let i: number = 0;
+      while ( i < data.length ){
+        this.peso[i] = data[i].peso;
+        this.repeticion[i] = data[i].repeticion;
+        this.mes[i] = data[i].mes;
+        i++;
+      }
+      this.setLineT();
+    }); 
+}
+
 setLineT(){
   
       this.lineChartData = [];
@@ -71,12 +85,8 @@ setLineT(){
       }
       for ( let datoMes of this.mes ){
         arregloMeses.push( datoMes );
-        
         //this.lineChartLabels.push(datoMes);
-        
       }
-      this.lineChartLabels.push(arregloMeses);
-      console.log('#### Chart Labels: ' + this.lineChartLabels);
       this.lineChartData.push(
         {label: 'Peso', data: arregloPeso },
         {label: 'Repeticiones', data: arregloRepeticiones },      
@@ -97,10 +107,7 @@ public lineChartData:Array<any> = [
   {data: [15, 25, 35, 45, 55, 65, 75], label: 'Peso'},
   
 ];
-//public lineChartLabels:Array<any> = ['1', '2', '3', '4', '5', '6', '7'];
-public lineChartLabels:Array<any> = [
-  {data: [1, 2, 3, 4, 5, 6]}
-];
+public lineChartLabels:Array<any> = ['6', '5', '4', '3', '2', '1'];
 public lineChartOptions:any = {
   responsive: true
 };
@@ -149,6 +156,7 @@ public randomize():void {
 // events
 public chartClicked(e:any):void {
   console.log(e);
+  this.getDatosEjercicioPerYear();
 }
 
 public chartHovered(e:any):void {
