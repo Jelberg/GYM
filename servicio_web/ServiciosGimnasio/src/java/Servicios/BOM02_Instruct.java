@@ -100,6 +100,52 @@ private Connection conn = Sql.getConInstance();
         }
     
     }
+    
+    /**
+     * Funcion que recibe como parametro el correo del instructor 
+     * @param correo del cual se quiere 
+     * @return Devuelve todos los datos del instructor
+     */
+    @GET
+    @Path("/getListInstruct")
+    @Produces("application/json")
+    public String getListInstructor(){
+         try{
+            
+            String query = "SELECT * FROM instructor;";
+            jsonArray = new ArrayList<>();
+            PreparedStatement st = conn.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            
+            //La variable donde se almacena el resultado de la consulta.
+            while(rs.next()){
+                jsonArray.add(new Instructor());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
+                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fechanac"));
+                jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("sexo")));
+                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
+                /*byte[] img = rs.getBytes("INS_FOTO");
+                ImageIcon image = new ImageIcon(img);
+                Image im = image.getImage();
+                jsonArray.get(jsonArray.size() - 1).setFoto(im);*/
+                          
+            }
+            response = gson.toJson(jsonArray);
+        }
+        catch(SQLException e) {
+            response = e.getMessage();
+        }
+        catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        finally {
+            Sql.bdClose(conn);
+            return response;
+        }
+    
+    }
     /**
      * Funcion que permite ingresar instructor
      * @param nombre
