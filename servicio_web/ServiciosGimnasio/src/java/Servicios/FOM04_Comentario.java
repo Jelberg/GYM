@@ -52,7 +52,7 @@ public class FOM04_Comentario {
     
         try{
 
-            String query = "SELECT * FROM fo_m04_get_progresoscompartidos()";
+            String query = "SELECT * FROM fo_m04_get_progresoscompartidos(1)";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);                       
             ResultSet rs = st.executeQuery();
@@ -61,6 +61,7 @@ public class FOM04_Comentario {
                 jsonArray.add(new Comentario());
                 jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString(1));                
                 jsonArray.get(jsonArray.size() - 1).setNombreUsuario(rs.getString(2));
+                jsonArray.get(jsonArray.size() - 1).setFecha(rs.getString(3));
                           
             }
             response = gson.toJson(jsonArray);

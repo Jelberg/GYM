@@ -17,10 +17,19 @@ public class Comentario implements Serializable {
     private int _UsuarioProgreso;
     private int _UsuarioComentario;
     private String _NombreUsuario;
+    private String _fecha;
     
     public Comentario(){
     }
 
+    public String getFecha() {
+        return _fecha;
+    }
+
+    public void setFecha(String _fecha) {
+        this._fecha = _fecha;
+    }
+    
     public String getNombreUsuario() {
         return _NombreUsuario;
     }
