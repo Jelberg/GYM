@@ -35,6 +35,7 @@ import { TabsEjercicioPage } from '../pages/FO_M04/tabs-ejercicio/tabs-ejercicio
 //import { CambiarMedidasPage } from '../pages/FO_M04/cambiar-medidas/cambiar-medidas';
 import { CambiaMedidaPage } from '../pages/FO_M04/cambia-medida/cambia-medida';
 import { TabMedidaPage } from '../pages/FO_M04/tab-medida/tab-medida';
+import { ComentarioPage } from '../pages/FO_M04/comentario/comentario'
 //FIN M04
 //M05
 import { ClasesPage } from '../pages/FO_M05/clases/clases';
@@ -70,6 +71,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     ProgresoPesoPage,
     CambiarPesoPage,
     ProgresoComentarioPage,
+    ComentarioPage,
     TabsPesoPage,
     TabsEjercicioPage,
     //TabsMedidasPage,
@@ -120,6 +122,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     ProgresoPesoPage,
     CambiarPesoPage,
     ProgresoComentarioPage,
+    ComentarioPage,
     TabsPesoPage,
     TabsEjercicioPage,
     //TabsMedidasPage,

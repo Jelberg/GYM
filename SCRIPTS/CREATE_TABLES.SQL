@@ -230,13 +230,16 @@ CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DEL
 CREATE TABLE COMENTARIO(
 	com_id		serial not null,
 	com_mensaje	varchar(80),
-	fk_usuario	integer not null,
+	com_fecha	date not null,
+	fk_usuariopro	integer not null,
 	fk_pro_peso	integer,
 	fk_pro_medida	integer,
+	fk_usuariocom	integer,
 CONSTRAINT pk_com_id PRIMARY KEY (com_id),
-CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_usuariopro  FOREIGN KEY(fk_usuariopro) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT fk_pro_peso  FOREIGN KEY(fk_pro_peso) REFERENCES progreso_peso(pp_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT fk_pro_medida FOREIGN KEY(fk_pro_medida) REFERENCES progreso_medida(pm_id) ON DELETE CASCADE ON UPDATE CASCADE
+CONSTRAINT fk_pro_medida FOREIGN KEY(fk_pro_medida) REFERENCES progreso_medida(pm_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_usuariocom  FOREIGN KEY(fk_usuariocom) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE RESERVA(
