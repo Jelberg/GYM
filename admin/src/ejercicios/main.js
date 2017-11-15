@@ -29,3 +29,17 @@ function eliminar(e) {
         }
     }
 }
+var url = "http://localhost:8080/ServiciosGimnasio/Equipamiento";
+window.onload = function mostrartabla() {
+    var url_comple = "/getListEquipo";
+    var url_comple2 = "/getListMaquina";
+
+    $.get(url + url_comple, function (data) {
+        console.log('data', data)
+    });
+
+    $.get(url + url_comple2, function (data) {
+        console.log('data', data)
+    });
+ 
+}
