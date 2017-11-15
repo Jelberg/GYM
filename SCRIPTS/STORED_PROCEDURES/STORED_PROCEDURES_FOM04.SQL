@@ -172,12 +172,12 @@ END; $$
 
 --Este devuelve todos los progresos compartidos de un usuario.
 CREATE OR REPLACE FUNCTION fo_m04_get_progresoscompartidos(usuario_id int)
-  RETURNS TABLE(mensaje varchar, nombre_usuario varchar, fecha varchar)
+  RETURNS TABLE(id varchar, mensaje varchar, nombre_usuario varchar, fecha varchar)
    AS $$
 DECLARE
    var_r    record;
 BEGIN
-   FOR var_r IN(SELECT com.com_mensaje, usu.usu_nombre, com.com_fecha 
+   FOR var_r IN(SELECT com.com_id, com.com_mensaje, usu.usu_nombre, com.com_fecha 
    FROM comentario as com inner join usuario as usu on usu.usu_id = usuario_id and
 						com.fk_usuariopro = usu.usu_id
 	order by com.com_fecha DESC limit 10)
@@ -185,6 +185,7 @@ BEGIN
     mensaje = var_r.com_mensaje;
     nombre_usuario = var_r.usu_nombre;
     fecha = var_r.com_fecha;
+    id = var_r.com_id;
     RETURN NEXT;
    END LOOP;
 END; $$

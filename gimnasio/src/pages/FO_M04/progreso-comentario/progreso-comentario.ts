@@ -31,7 +31,8 @@ export class ProgresoComentarioPage {
         let i: number = 0;
         while ( i < data.length ){
           this.progreso.push(
-            new classcomentario (data[i]._NombreUsuario,
+            new classcomentario (data[i]._id,
+                                data[i]._NombreUsuario,
                                 data[i]._mensaje,
                                 data[i]._fecha)
           );
@@ -40,7 +41,7 @@ export class ProgresoComentarioPage {
       }); 
   }
 
-  goToComentario(){
-    this.navCtrl.push(ComentarioPage);
+  goToComentario(idProgCompartido: String){
+    this.navCtrl.push(ComentarioPage, {id : idProgCompartido});
   }
 }
