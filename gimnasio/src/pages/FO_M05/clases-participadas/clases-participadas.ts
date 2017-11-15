@@ -17,8 +17,10 @@ import { UserServiceProvider } from '../../../providers/user-service/user-servic
 })
 export class ClasesParticipadasPage {
 
-  listaCriticas: any[];
+  listaCriticas: any[]=[];
   id_user: number;
+  users: any;
+  
 
 
   public items:Array<{id:number,titulo:string,instructor:string,fecha:string,hora:string,img:string}>;
@@ -28,6 +30,7 @@ export class ClasesParticipadasPage {
     public userService: UserServiceProvider
   ) 
     {
+      this. cargarClasesSinComentar();
  /*   this.items=[
     {id: 1, titulo:"Yoga", img:"../../../assets/imgs/clasesYoga.jpg", instructor:"Estela Rodriguez", fecha:"24/10/2017", hora: "3:00 pm"},
     {id: 2,titulo:"Spinning", img:"../../../assets/imgs/claseSpinning.jpg", instructor:"Maria Josefa", fecha:"26/10/2017", hora: "4:00 pm"},
@@ -47,28 +50,31 @@ export class ClasesParticipadasPage {
     console.log( this.id_user );
     //PENDIENTE DE CAMBIAR EL 3 POR LA ID DEL USUARIO *******
     let url = "FOM05_Critica/sinCritica?id=4";
-    this.userService.getDato(url)
-        .subscribe( 
-          (data) => {    
-          //  this.listaCriticas = res.result;
+    this.userService.getDato(url).subscribe(data => {    
         let i: number = 0;
-      while ( i < data.length ){
+        while ( i < data.length ){
         this.listaCriticas[i] = data[i];
-        i++;
-      }
-      console.error("HOLAAAAAAAA");
+        i++;}
+      console.log(this.listaCriticas);
     },
     (error) =>{
       console.error(error);
     }
   )
-
+  }
+// METODO DE PREUBAS, NO USAR
+  getUsers() {
+    this.userService.getUsers()
+    .then(data => {
+      this.users = data;
+      console.log(this.users);
+    });
   }
 
   goToComentar(){
     this.navCtrl.push(ComentarClasePage);
   }
 
-
+  
 
 }
