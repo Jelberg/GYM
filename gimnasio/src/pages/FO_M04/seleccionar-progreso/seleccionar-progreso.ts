@@ -5,6 +5,7 @@ import { ProgresoEjercicioPage } from '../progreso-ejercicio/progreso-ejercicio'
 import { TabMedidaPage } from '../tab-medida/tab-medida';
 import { TabsPesoPage } from '../tabs-peso/tabs-peso';
 import { TabsEjercicioPage } from '../tabs-ejercicio/tabs-ejercicio';
+import { ListaEjerciciosPage } from '../lista-ejercicios/lista-ejercicios';
 
 /**
  * Generated class for the SeleccionarProgresoPage page.
@@ -27,8 +28,8 @@ export class SeleccionarProgresoPage {
     console.log('ionViewDidLoad SeleccionarProgresoPage');
   }
 
-  openTabsEjercicioPage(){
-    this.navCtrl.push(TabsEjercicioPage);
+  openListaEjercicioPage(){
+    this.navCtrl.push(ListaEjerciciosPage);
   }
   openProgresoMedidasPage(){
     this.navCtrl.push(TabMedidaPage);

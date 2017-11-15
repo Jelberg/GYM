@@ -66,8 +66,8 @@ CREATE TABLE TURNO_ENTRENADOR(
 	TE_TANDA			CHARACTER VARYING(10) NOT NULL,
 	TE_HORA_INICIO   		TIME NOT NULL,
 	TE_HORA_FIN                 	TIME NOT NULL,
-	FK_TURNO                  	INTEGER NOT NULL,
-	FK_ENTRENADOR           	INTEGER NOT NULL,
+	FK_TURNO                  	INTEGER,
+	FK_ENTRENADOR           	INTEGER,
 CONSTRAINT FK_TURNO  FOREIGN KEY(FK_TURNO) REFERENCES TURNO(TUR_ID) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT PK_ENTRENADOR  FOREIGN KEY(FK_ENTRENADOR) REFERENCES ENTRENADOR(ENT_ID) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT PK_TE_ID PRIMARY KEY (TE_ID)
@@ -230,13 +230,16 @@ CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DEL
 CREATE TABLE COMENTARIO(
 	com_id		serial not null,
 	com_mensaje	varchar(80),
-	fk_usuario	integer not null,
+	com_fecha	date not null,
+	fk_usuariopro	integer not null,
 	fk_pro_peso	integer,
 	fk_pro_medida	integer,
+	fk_usuariocom	integer,
 CONSTRAINT pk_com_id PRIMARY KEY (com_id),
-CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_usuariopro  FOREIGN KEY(fk_usuariopro) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT fk_pro_peso  FOREIGN KEY(fk_pro_peso) REFERENCES progreso_peso(pp_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT fk_pro_medida FOREIGN KEY(fk_pro_medida) REFERENCES progreso_medida(pm_id) ON DELETE CASCADE ON UPDATE CASCADE
+CONSTRAINT fk_pro_medida FOREIGN KEY(fk_pro_medida) REFERENCES progreso_medida(pm_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_usuariocom  FOREIGN KEY(fk_usuariocom) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE RESERVA(
