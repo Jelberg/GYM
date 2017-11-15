@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ComentarioPage } from '../comentario/comentario'
 
 @IonicPage()
 @Component({
@@ -17,5 +18,9 @@ export class ProgresoComentarioPage {
   ionViewDidLoad() 
   {
     console.log('ionViewDidLoad ProgresoComentarioPage');
+  }
+
+  goToComentario(){
+    this.navCtrl.push(ComentarioPage);
   }
 }

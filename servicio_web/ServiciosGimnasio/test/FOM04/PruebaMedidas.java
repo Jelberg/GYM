@@ -67,7 +67,7 @@ public class PruebaMedidas {
     public void pruebaObtenerProgreso(){
         Gson gson = new Gson();
         _progresoMedida = new FOM04_Progreso_Medida();
-        String respuesta = _progresoMedida.getProgresoM( "2012-10-12" , 9999);
+        String respuesta = _progresoMedida.getProgresoM( 9999 );
         _arrayMedidas = new ArrayList<>();
         _arrayMedidas = gson.fromJson( respuesta, new TypeToken<List<Progreso_Medida>>(){}.getType());
         assertEquals( "Cuadricep", _arrayMedidas.get(0).getTipo() );
@@ -76,17 +76,19 @@ public class PruebaMedidas {
     @Test
     public void pruebaInsertaMedida(){
         Gson gson = new Gson();
-        String fecha = "2012-11-12";
         _progresoMedida = new FOM04_Progreso_Medida();
-        String respuesta = _progresoMedida.insertaMedidas(9999, 67, 4, fecha);
+        String respuesta = _progresoMedida.insertaMedidas(9999, 67, 4);
         assertNotNull( respuesta );
     }
+    
     @Test
     public void pruebaEliminaMedida(){
         Gson gson = new Gson();
-        String fecha = "2012-10-12";
         _progresoMedida = new FOM04_Progreso_Medida();
-        String respuesta = _progresoMedida.eliminaMedidas(fecha, 9999);
+        String respuesta = _progresoMedida.eliminaMedidas(9999, "Cuadricep");
         assertNotNull( respuesta );
+        //String respuesta = _progresoMedida.eliminaMedidas(fecha, 9999);
+        //assertNotNull( respuesta );
+
     }
 }
