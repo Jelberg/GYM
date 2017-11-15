@@ -5,13 +5,14 @@ CREATE OR REPLACE FUNCTION fo_m06_get_reserva (usu_id int)
 	AS $$
 DECLARE
 	_reservas record;
-	FOR _reservas IN (SELECT * ent_nombre,res_fecha_ini,ent_fecha_fin from Entrenador,Reserva
+	BEGIN
+	FOR _reservas IN (SELECT ent_nombre,res_fecha_ini,ent_fecha_fin from Entrenador,Reserva
 			where ent_id=fk_entrenador and usu_id=fk_usuario)
 
 	loop
-		entrenador_nombre:=_reserva.ent_nombre;
-		fechai:=_reserva.ent_fecha_ini;
-		fechaf:=_reserva.ent_fecha_fin:
+		nombre_ent:=_reserva.ent_nombre;
+		fecha_ini:=_reserva.ent_fecha_ini;
+		fecha_fin:=_reserva.ent_fecha_fin;
 		return next;
 	end loop;
 	end $$
