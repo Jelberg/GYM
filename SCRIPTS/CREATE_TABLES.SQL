@@ -229,6 +229,17 @@ CONSTRAINT fk_pro_peso  FOREIGN KEY(fk_pro_peso) REFERENCES progreso_peso(pp_id)
 CONSTRAINT fk_pro_medida FOREIGN KEY(fk_pro_medida) REFERENCES progreso_medida(pm_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE INTERACCION_COMENTARIO(
+	id		serial not null,
+	mensaje	varchar(140),
+	fk_usuario	integer not null,
+	fk_progreso	integer not null,
+	
+CONSTRAINT pk_interac PRIMARY KEY (id),
+CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_com  FOREIGN KEY(fk_progreso) REFERENCES comentario(com_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 CREATE TABLE RESERVA(
 	RES_ID					SERIAL NOT NULL,
 	RES_FECHA_INI			DATE NOT NULL,	

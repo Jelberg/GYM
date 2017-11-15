@@ -9,20 +9,14 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
-    
-      <ion-item>
-        <ion-avatar item-start>
-          <!-- <img src="img/marty-avatar.png"> -->
-        </ion-avatar>
-        <h2>Marty McFly</h2>
-        <p>November 5, 1955</p>
+
+  <ion-card *ngFor="let progreso of progreso">
+      <ion-item  >
+        <h2 >{{progreso.nombre}}</h2>
       </ion-item>
-      <!-- <img src="img/advance-card-bttf.png"> -->
       <ion-card-content>
-        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+        <p>{{progreso.mensaje}}</p>
       </ion-card-content>
-    
       <ion-row>
         <ion-col>
         </ion-col>
@@ -34,10 +28,9 @@
         </ion-col>
         <ion-col center text-center>
           <ion-note>
-            11h ago
+              {{progreso.fecha}}
           </ion-note>
         </ion-col>
       </ion-row>
-    
     </ion-card>
 </ion-content>
