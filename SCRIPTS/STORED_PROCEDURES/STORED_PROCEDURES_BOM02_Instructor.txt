@@ -65,7 +65,7 @@ CREATE OR REPLACE FUNCTION bo_m02_actualiza_instructor (
     DECLARE
     BEGIN
         UPDATE instructor
-        SET ins_nombre = nombre , ins_apellido = apellido, ins_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ins_sexo = sexo;
+        SET ins_nombre = nombre , ins_apellido = apellido, ins_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ins_sexo = sexo
  	where ins_correo = correo;
     END; $$
 LANGUAGE plpgsql;
