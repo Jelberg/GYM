@@ -97,6 +97,47 @@ BEGIN
 END; $$
   LANGUAGE plpgsql;
 
+  
+  /*
+	SERIES DE UN EJERCICIO	
+   	Funcion que muestra las series, peso, tiempo, repeticiones, etc para un ejercicio de una rutina
+    	Retorna numero de repeticiones, peso, unidad, tiempo de descanso, tiempo, distancia, nivel
+*/
+CREATE OR REPLACE FUNCTION FO_M03_series_ejercicio(idUsuario int, nombreRutina character varying, dia character varying, nombreEjercicio character varying)
+  RETURNS TABLE(numRep int,peso float, unidad character varying,tiempoDescan float, tiempo float, distancia float, nivel int)
+   AS $$
+DECLARE
+   _series    record;
+BEGIN
+   FOR _series IN(SELECT  ser.ser_repeticion, ser.ser_peso, ser.ser_unidad, tr.tr_descanso, tr.tr_duracion, tr.tr_distancia, tr.tr_nivel
+        FROM serie as ser inner join  trabajo_rutina as tr on ser.fk_trabajo_rutina= tr.tr_id
+        inner join ejercicio_maquina_equipo as eme on tr.fk_eje_maq_equ1= eme.eme_id
+        inner join rutina as rut on rut.rut_id= eme.fk_rutina
+        inner join usuario as usu on usu.usu_id= rut.fk_usuario
+        inner join ejercicio as eje on eje.eje_id= eme.fk_ejercicio
+        WHERE usu.usu_id = idUsuario and rut.rut_nombre=nombreRutina and rut.rut_dia= dia and eje.eje_nombre= nombreEjercicio 
+        and tr.tr_fecha = 
+        (select max(tr.tr_fecha) FROM serie as ser inner join  trabajo_rutina as tr on ser.fk_trabajo_rutina= tr.tr_id
+        						inner join ejercicio_maquina_equipo as eme on tr.fk_eje_maq_equ1= eme.eme_id
+        						inner join rutina as rut on rut.rut_id= eme.fk_rutina
+        						inner join usuario as usu on usu.usu_id= rut.fk_usuario
+        						inner join ejercicio as eje on eje.eje_id= eme.fk_ejercicio
+        						WHERE usu.usu_id = idUsuario and rut.rut_nombre=nombreRutina and rut.rut_dia= dia and eje.eje_nombre= nombreEjercicio 
+          ) 
+       )
+   LOOP
+    numRep = _series.ser_repeticion;
+    peso = _series.ser_peso;
+    unidad = _series.ser_unidad;
+    tiempoDescan= _series.tr_descanso;
+    tiempo= _series.tr_duracion;
+    distancia= _series.tr_distancia;
+    nivel= _series.tr_nivel;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
   ---***********************************************RUTINAS PARA M04******************************************************
 
 -------Lista de ejercicios realizada por un usuario--------------------------------------------

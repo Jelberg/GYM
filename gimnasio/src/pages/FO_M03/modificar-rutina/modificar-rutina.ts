@@ -151,7 +151,8 @@ export class ModificarRutinaPage {
                 {
                   text: 'Aceptar',
                   handler: data => {
-                    console.log('Saved clicked');
+                    this.modificarRutina(data.nombreRutina,data.diaRutina);
+                    console.log('Rutina modificada');
                   }
                 },
                 {
@@ -229,6 +230,16 @@ export class ModificarRutinaPage {
   public goToLog()
   {
     this.navCtrl.push(TabsLogPage);
+  }
+
+  public modificarRutina(nombreModif: string, diaModif : string):void
+  {
+    let urlPeticion: string = "FOM03_Rutina/modificarRutina?idUsuario="
+                                +this.idUsuario+"&nombre="
+                                +this.nombreRut+"&dia="+this.diaRut
+                                +"&nombreModif="+nombreModif
+                                +"&diaModif="+diaModif;
+    this.userService.post2(urlPeticion);
   }
 
   public goToEjercicios(){

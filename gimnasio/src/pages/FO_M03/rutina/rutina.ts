@@ -47,6 +47,9 @@ export class RutinaPage {
     })
     }
 
+
+    
+
     /**
      * Funcion que agrega una nueva rutina al usuario 
      * @param nombre recibe el nombre de la rutina
@@ -55,10 +58,7 @@ export class RutinaPage {
     public setRutinas(nombre: string, dia: string):void
     {
       let urlPeticion: string = "FOM03_Rutina/setRutina?idUsuario="+this.idUsuario+"&nombre="+nombre+"&dia="+dia;
-      this.userService.postDato( urlPeticion ).subscribe( data => {
-        /*this.respuesta =data;
-        console.log(this.respuesta);*/
-    })
+      this.userService.post2(urlPeticion);
   }
 
   /**
