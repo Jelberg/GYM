@@ -7,6 +7,9 @@ package Servicios;
 
 
 import Dominio.Comentario;
+import Dominio.Ejercicio;
+import Dominio.Equipo;
+import Dominio.Maquina;
 import com.google.gson.Gson;
 
 import javax.ws.rs.GET;
@@ -34,21 +37,8 @@ public class FOM03_Rutina {
     private Gson gson = new Gson();
     private ArrayList<Rutina> jsonArray;
     private String response;
-
     
-     @GET
-    @Path("/getDatoPrueba")
-    @Produces("application/json")
-    public String getDatoPrueba(){
-    
-    Gson gson = new Gson();
-        System.out.println ("hola");
-    Comentario c= new Comentario(1,"Funciona");
-    return gson.toJson(c);
-    
-    }
-    
-      /**
+    /**
      * Funcion que retorna una lista de rutinas dado el nombre del usuario.
      * @param idUsuario se recibe el id del usuario a consultar
      * @return Devuelve las rutinas de un usuario en formato JSON
@@ -75,6 +65,7 @@ public class FOM03_Rutina {
                     result.setId(rs.getInt("idRutina"));
                     result.setDia(rs.getString("dia"));
                     result.setNombre(rs.getString( "nombre" ));
+                    result.setCantidadEjercicios(rs.getInt("numEjerc"));
                     listaRutinas.add( result );        
                 }
                 return gson.toJson( listaRutinas );
@@ -97,13 +88,125 @@ public class FOM03_Rutina {
                 Sql.bdClose(conn);
             }
         }
+    /*
+     * Funcion que agrega una nueva rutina.
+     * @param idUsuario se recibe el id del usuario a consultar
+     * @return retorna un string de confirmacion 
+     */
+        @GET
+        @Path("/setRutina")
+        @Produces("application/json")
+         public String setRutina( @QueryParam( "idUsuario" ) int idUsuario, 
+                                  @QueryParam ( "nombre" ) String nombre,
+                                  @QueryParam ( "dia" ) String dia)
+         {
+         try{
+                      
+                String query = "Select * from FO_M03_set_rutina('"+idUsuario+"','"+nombre+"','"+dia+"')";
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);
+              
+                return gson.toJson("La rutina fue Agregada");
+            }
+            catch( SQLException e )
+            {
+                return e.getMessage();
+            }
+            catch ( ParameterNullException e ) 
+            {
+                return e.getMessage();
+            }
+            finally 
+            {
+                Sql.bdClose(conn);
+            }
+        }
+    /**
+     * Funcion que modifica una rutina.
+     * @param idUsuario se recibe el id del usuario a consultar
+     * @param nombre se recibe el nombre de la rutina a eliminar 
+     * @param dia se recibe el dia de la rutina a eliminar
+     * @return retorna un string de confirmacion 
+     */
+        @GET
+        @Path("/modificarRutina")
+        @Produces("application/json")
+         public String modificarRutina( @QueryParam( "idUsuario" ) int idUsuario, 
+                                  @QueryParam ( "nombre" ) String nombre,
+                                  @QueryParam ( "dia" ) String dia,
+                                  @QueryParam ("nombreModif") String nombreModif,
+                                  @QueryParam ("diaModif") String diaModif)
+         {
+         try{
+                      
+                String query = "Select * from FO_M03_modificar_rutina('"+idUsuario+"','"+nombre+"',"
+                                                                    + "'"+dia+"', '"+nombreModif+"','"+diaModif+"')";
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);
+              
+                return gson.toJson("La rutina fue Modificada");
+            }
+            catch( SQLException e )
+            {
+                return e.getMessage();
+            }
+            catch ( ParameterNullException e ) 
+            {
+                return e.getMessage();
+            }
+            finally 
+            {
+                Sql.bdClose(conn);
+            }
+        }
+         
+        /**
+     * Funcion que modifica una rutina.
+     * @param idUsuario se recibe el id del usuario a consultar
+     * @param nombre se recibe el nombre de la rutina a eliminar 
+     * @param dia se recibe el dia de la rutina a eliminar
+     * @return retorna un string de confirmacion 
+     */
+        @GET
+        @Path("/eliminarRutina")
+        @Produces("application/json")
+         public String eliminarRutina( @QueryParam( "idUsuario" ) int idUsuario, 
+                                  @QueryParam ( "nombre" ) String nombre,
+                                  @QueryParam ( "dia" ) String dia)
+         {
+         try{
+                      
+                String query = "Select * from FO_M03_eliminar_rutina('"+idUsuario+"','"+nombre+"',"
+                                                                    + "'"+dia+"')";
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);
+              
+                return gson.toJson("La rutina fue Eliminada");
+            }
+            catch( SQLException e )
+            {
+                return e.getMessage();
+            }
+            catch ( ParameterNullException e ) 
+            {
+                return e.getMessage();
+            }
+            finally 
+            {
+                Sql.bdClose(conn);
+            }
+        } 
+         
+              
+         
+         
+         
          /*****************************************FUNCIONES PARA EL MODULO 4*********************************/
         
          
          /**
-          * Funcion que retorna una lista de ejercicios realizados dado 
-          * el id de un usuario.
-          * @param idUsuario recibe el id del usuario  
+          * Funcion que retorna una lista de ejercicios realizados dado el id de un usuario.
+          * @param idUsuario, 
           * @return Devuelve strings en formato Json 
           */
         @GET
@@ -143,9 +246,9 @@ public class FOM03_Rutina {
         /**
           * Funcion que retorna las repeticiones, series, y peso realizadas de un 
           * ejercicio los ultimos 6 meses.
-          * @param idUsuario recibe el id del usuario
-          * @param ejercicio recibe el nombre del ejercicio
-          * @return Devuelve un arreglo de strings de los ejercicios en formato Json 
+          * @param idUsuario 
+          * @param ejercicio
+          * @return Devuelve strings de los ejercicios en formato Json 
           */         
         @GET
         @Path("/getEjercicios6meses")
@@ -238,4 +341,7 @@ public class FOM03_Rutina {
         }
 
          
-}
+      
+    }
+
+

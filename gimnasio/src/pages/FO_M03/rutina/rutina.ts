@@ -122,9 +122,9 @@ export class RutinaPage {
          * Funcion que redirecciona a la pagina de modificar rutina
          */
         
-        public goToModificar()
+        public goToModificar(nombreRut: string, diaRut: string)
         {
-          this.navCtrl.push(ModificarRutinaPage);
+          this.navCtrl.push(ModificarRutinaPage, {nombre: nombreRut, dia: diaRut});
         }
 
         /**
@@ -183,7 +183,8 @@ export class RutinaPage {
             buttons: ['Aceptar']
           });
           alert.present();
-          this.navCtrl.push(RutinaPage);
+         // this.navCtrl.push(RutinaPage);
+         this.getRutinas();
         }
       
         /**
@@ -197,7 +198,7 @@ export class RutinaPage {
             buttons: ['Aceptar']
           });
           alert.present();
-          this.goToModificar();
+         // this.goToModificar();
         }
         
 }
