@@ -17,7 +17,7 @@ import { UserServiceProvider } from '../../../providers/user-service/user-servic
 })
 export class ClasesParticipadasPage {
 
-  criticas: any[] =[];
+  listaCriticas: any[];
   id_user: number;
 
 
@@ -39,13 +39,23 @@ export class ClasesParticipadasPage {
    
   }
 
+  /**
+   * Metodo para llenar las clases que se han participado en los 
+   * ultimos 30 dias de los cuales no se han hecho comentario y/o valoracion
+   */
   public cargarClasesSinComentar():void{
     console.log( this.id_user );
-    let url = "F0M05_Critica/sinCritica?id="+3;
+    //PENDIENTE DE CAMBIAR EL 3 POR LA ID DEL USUARIO *******
+    let url = "FOM05_Critica/sinCritica?id=3";
     this.userService.getDato(url)
         .subscribe( 
-          (data) => {
-      this.criticas = data[''];   
+          (res) => {    
+            this.listaCriticas = res.result;
+        /*let i: number = 0;
+      while ( i < data.length ){
+        this.listaCriticas[i] = data[i];
+        i++;
+      }*/
     },
     (error) =>{
       console.error(error);

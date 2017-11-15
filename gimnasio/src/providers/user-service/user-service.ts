@@ -13,9 +13,9 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class UserServiceProvider {
 
-  private URL: string = "http://192.168.250.11:8080/ServiciosGimnasio/"
+  private URL: string = "http://localhost:8080/ServiciosGimnasio/"
 
-  private URL: string = "http://190.79.86.82:8080/web/"
+ //private URL: string = "http://190.79.86.82:8080/web/"
   constructor(/*public http: Http,*/ private http: Http ) {
     console.log('Hello UserServiceProvider Provider');
   }
