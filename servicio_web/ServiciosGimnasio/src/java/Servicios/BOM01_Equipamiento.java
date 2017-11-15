@@ -6,6 +6,7 @@
 package Servicios;
  
 import Dominio.Equipo;
+import Dominio.Maquina;
 import Dominio.Sql;
 import Excepciones.ParameterNullException;
 import Validaciones.ValidationWS;
@@ -44,8 +45,8 @@ private Connection conn = Sql.getConInstance();
     //Atributo que se utiliza para transformar a formado JSON las consultas.
     private Gson gson = new Gson();
     private String response;
-    private ArrayList<Equipo> jsonArray;
-    DateFormat df = new SimpleDateFormat("dd/MM/yyyy"); 
+    private ArrayList<Equipo> jsonArray; 
+    private ArrayList<Maquina> jsonArray2; 
     
    @GET
     @Path("/getListEquipo")
@@ -66,6 +67,39 @@ private Connection conn = Sql.getConInstance();
                         
             }
             response = gson.toJson(jsonArray);
+        }
+        catch(SQLException e) {
+            response = e.getMessage();
+        }
+        catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        finally {
+            Sql.bdClose(conn);
+            return response;
+        }
+    
+    } 
+    
+     @GET
+    @Path("/getListMaquina")
+    @Produces("application/json")
+    public String getListMaquina(){
+         try{
+            
+            String query = "SELECT * FROM maquina;";
+            jsonArray2 = new ArrayList<>();
+            PreparedStatement st = conn.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            
+            //La variable donde se almacena el resultado de la consulta.
+            while(rs.next()){ 
+                jsonArray2.add(new Maquina());
+                jsonArray2.get(jsonArray2.size() - 1).setId(rs.getInt("MAQ_ID"));
+                jsonArray2.get(jsonArray2.size() - 1).setNombre(rs.getString("MAQ_NOMBRE")); 
+                        
+            }
+            response = gson.toJson(jsonArray2);
         }
         catch(SQLException e) {
             response = e.getMessage();
