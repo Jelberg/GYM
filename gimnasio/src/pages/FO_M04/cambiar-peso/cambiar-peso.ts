@@ -43,33 +43,7 @@ export class CambiarPesoPage {
     });
     toast.present();
   }
-  public eliminaPeso():void {
-    console.log( this.nuevoPeso );
-    let urlPeticion = "F0M04_Progreso_Peso/eliminarPeso?id_usuario=1";
-    this.userService.postDato( urlPeticion ).subscribe( data => {
-      let i: number = 0;
-      let mensaje: string = "";
-      while ( i < data.lenght ){
-        mensaje = data[i].data;
-      }
-
-    });
-
-    alert("Peso eliminado");
-  }
-
-  public refrescarPeso():void {
-    console.log( this.nuevoPeso );
-    let urlPeticion = "F0M04_Progreso_Peso/actualizaProgresoPeso?id_usuario=1&peso="+this.nuevoPeso;
-    this.userService.postDato( urlPeticion ).subscribe( data => {
-      let i: number = 0;
-      let mensaje: string = "";
-      while ( i < data.lenght ){
-        mensaje = data[i].data;
-      }
-
-    });
-
-    alert("Peso actualizado");
+  public editarPeso(){
+    console.log("Hola");
   }
 }

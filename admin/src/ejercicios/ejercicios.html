@@ -93,7 +93,7 @@
             <p style="font-size:18px">En esta sección podrá gestionar todo lo relacionado a los ejercicios aplicables a los equipos y máquinas del
                 gimnasio.
             </p>
-            <a href="#" onclick="editar(null,0)">
+            <a href="./gest_ejercicios.html">
                 <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Agregar ejercicio</button>
             </a>
         </div>
@@ -101,7 +101,6 @@
             <div class="content">
                 <div class="w3-row ">
                     <table class="table table-bordered table-striped">
-
                         <thead>
                             <tr>
                                 <th class="tablehead">Nombre</th>
@@ -110,11 +109,9 @@
                                 <th class="tablehead tcenter">Acciones</th>
                             </tr>
                         </thead>
-
                         <tbody>
-                            <tr class="trow">
-                                <td class="id" style="display:none">1</td>
-                                <td class="tname">Press de banca</td>
+                            <tr>
+                                <td>Press de banca</td>
                                 <td>
                                     <ul>
                                         <li>Pectorales</li>
@@ -122,12 +119,13 @@
                                 </td>
                                 <td>Press Bank</td>
                                 <td class="tcenter">
-                                    <i class="fa fa-pencil-square-o" onclick="editar(this,1)" aria-hidden="true"></i>
-                                    <i class="fa fa-trash" onclick="eliminar(this)" aria-hidden="true"></i>
+                                    <a href="./gest_ejercicios.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="id" style="display:none">2</td>
                                 <td>Piernas</td>
                                 <td>
                                     <ul>
@@ -139,12 +137,13 @@
                                 </td>
                                 <td>Prensa de piernas</td>
                                 <td class="tcenter">
-                                    <i class="fa fa-pencil-square-o" onclick="editar(this,1)" aria-hidden="true"></i>
-                                    <i class="fa fa-trash" onclick="eliminar(this)" aria-hidden="true"></i>
+                                    <a href="./gest_ejercicios.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="id" style="display:none">3</td>
                                 <td>Paralelas</td>
                                 <td>
                                     <ul>
@@ -155,12 +154,13 @@
                                 </td>
                                 <td>Paralelas</td>
                                 <td class="tcenter">
-                                    <i class="fa fa-pencil-square-o" onclick="editar(this,1)" aria-hidden="true"></i>
-                                    <i class="fa fa-trash" onclick="eliminar(this)" aria-hidden="true"></i>
+                                    <a href="./gest_ejercicios.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="id" style="display:none">4</td>
                                 <td>Aperturas de pecho</td>
                                 <td>
                                     <ul>
@@ -170,12 +170,13 @@
                                 </td>
                                 <td>Peck Deck</td>
                                 <td class="tcenter">
-                                    <i class="fa fa-pencil-square-o" onclick="editar(this,1)" aria-hidden="true"></i>
-                                    <i class="fa fa-trash" onclick="eliminar(this)" aria-hidden="true"></i>
+                                    <a href="./gest_ejercicios.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="id" style="display:none">5</td>
                                 <td>jalones trasnuca</td>
                                 <td>
                                     <ul>
@@ -186,8 +187,10 @@
                                 </td>
                                 <td>Dorsalera</td>
                                 <td class="tcenter">
-                                    <i class="fa fa-pencil-square-o" onclick="editar(this,1)" aria-hidden="true"></i>
-                                    <i class="fa fa-trash" onclick="eliminar(this)" aria-hidden="true"></i>
+                                    <a href="./gest_ejercicios.html">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
                                 </td>
                             </tr>
                         </tbody>
@@ -222,7 +225,6 @@
     </script>
     <script src="../asset/js/jquery.min.js"></script>
     <script src="../asset/js/bootstrap.min.js"></script>
-    <script src="main.js"></script>
 
 </body>
 

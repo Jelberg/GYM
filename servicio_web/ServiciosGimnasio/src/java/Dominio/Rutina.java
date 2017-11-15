@@ -16,9 +16,7 @@ public class Rutina {
     private int _id;
     private String _nombre;
     private String _dia;
-    private String _usuario;
-    private int cantidadEjercicios;
-    //private ArrayList<trabajo> _listaEjercicios;
+    private ArrayList<Ejercicio> _listaEjercicios;
     
     public Rutina(){
     
@@ -74,13 +72,6 @@ public class Rutina {
         this._dia = dia;
     }
 
-    public int getCantidadEjercicios() {
-        return cantidadEjercicios;
-    }
-
-    public void setCantidadEjercicios(int cantidadEjercicios) {
-        this.cantidadEjercicios = cantidadEjercicios;
-    }
       
     
 }

@@ -22,21 +22,21 @@
      <ion-list>
          <ion-list-header>
              <ion-title>
-                <h1>{{ nombreRut }}</h1>
-                <h2>{{ diaRut }}</h2>
+                <h1>Rutina Brazos</h1>
+                <h2>Lunes</h2>
              </ion-title>             
          </ion-list-header>
 
            
-        <ion-item-sliding  *ngFor="let ejercicio of listaEjercicios">
+        <ion-item-sliding #item>
             <ion-item detail-push>
                 <ion-avatar item-start>
                     <img src="../assets/imgs/imgsM03/brazos.png">
                 </ion-avatar>
-                <h1>{{ejercicio._nombre}}</h1>
-                <h2>Grupo Muscular:{{ejercicio._grupomuscular}}</h2>
-                <h2 *ngIf="ejercicio._maquina">Máquina: {{ejercicio._maquina}}</h2>
-                <h2 *ngIf="ejercicio._equipo">Equipo: {{ejercicio._equipo}}</h2>
+                <h1>Curl de Biceps</h1>
+                <h3>Series: 5</h3>
+                <h3>Repeticiones: 20</h3>
+                <h3>Peso: 5 kg</h3>
             </ion-item>
             <ion-item-options side="right">
                 <button ion-button (click)="modificarEjercicio()" color="energized">
@@ -46,19 +46,53 @@
                     <ion-icon name="trash"></ion-icon>
                 </button>
             </ion-item-options>  
-        </ion-item-sliding>       
+        </ion-item-sliding>
+
+        <ion-item-sliding #item>
+            <ion-item detail-push>
+                <ion-avatar item-start>
+                    <img src="../assets/imgs/imgsM03/brazos.png">
+                </ion-avatar>
+                <h1>Press de banca</h1>
+                <h3>Series: 5</h3>
+                <h3>Repeticiones: 20</h3>
+                <h3>Peso: 10 kg</h3>
+            </ion-item>  
+            <ion-item-options side="right">
+                <button ion-button (click)="modificarEjercicio()" color="energized">
+                    <ion-icon name="create"></ion-icon>
+                </button>
+                <button ion-button (click)="ConfirmarEliminacion()" color="pomegranate">
+                    <ion-icon name="trash"></ion-icon>
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+
+        <ion-item-sliding #item>
+            <ion-item detail-push>
+                <ion-avatar item-start>
+                    <img src="../assets/imgs/imgsM03/pecho.png">
+                </ion-avatar>
+                <h1>Barra</h1>
+                <h3>Series: 6</h3>
+                <h3>Repeticiones: 20</h3>
+                <h3>Peso: 10 kg</h3>
+            </ion-item>     
+            <ion-item-options side="right">
+                <button ion-button (click)="modificarEjercicio()" color="energized">
+                    <ion-icon name="create"></ion-icon>
+                </button>
+                <button ion-button (click)="ConfirmarEliminacion()" color="pomegranate">
+                    <ion-icon name="trash"></ion-icon>
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+        
     </ion-list>
     
-
-    <ion-fab right bottom #fab>
-        <button ion-fab color="secondary"><ion-icon name="arrow-up"></ion-icon></button>
-        <ion-fab-list side="top">
-            <button ion-fab (click)="goToEjercicios()" color="secondary"><ion-icon name="add"></ion-icon></button>
-            <button ion-fab color="secondary" (click)="cambiarRutina()"><ion-icon name="build"></ion-icon></button>
-            <button ion-fab color="secondary" (click)="goToLog()"><ion-icon name="calendar"></ion-icon></button>
-            <button ion-fab color="secondary"><ion-icon name="alarm"></ion-icon></button>
-        </ion-fab-list>
-      </ion-fab>
-      
+    <ion-fab right bottom>
+        <button ion-fab (click)="goToEjercicios()" color="secondary"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+        
 </ion-content>
     

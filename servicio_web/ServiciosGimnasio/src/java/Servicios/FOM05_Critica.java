@@ -5,7 +5,6 @@
  */
 package Servicios;
 
-import Dominio.Clase;
 import Dominio.ClasesParticipadas;
 import Dominio.Critica;
 import Dominio.Sql;
@@ -32,7 +31,6 @@ public class FOM05_Critica {
     private String result;
     private ArrayList<Critica> jsonArray;
     private ArrayList<ClasesParticipadas> _cpArray;
-    private ArrayList<Clase> jsonA;
     
     
     @GET  
@@ -221,6 +219,4 @@ public class FOM05_Critica {
             Sql.bdClose(_conn);
         }
     } 
-    
-    
 }

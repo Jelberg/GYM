@@ -1,25 +1,19 @@
 --**************************************************FUNCIONES PARA EL WEB SERVICE******************************************
+-----Esta funcion devuelve las rutinas de un cliente con su dia y la cantidad de ejercicios
 
---*********************************FUNCIONES RUTINA************************************************
-/*	CONSULTAR RUTINA	
-	Funcion que trae todas las rutinas de un usuario
-    dado el id de usuario, devuelve el id de la rutina,
-    nombre, dia, y numero de ejercicios
-*/
-CREATE OR REPLACE FUNCTION FO_M03_get_rutina(idUsuario int)
-  RETURNS TABLE(idRutina int, nombre character varying, dia character varying, numEjerc int)
+CREATE OR REPLACE FUNCTION FO_M03_get_rutina(usuario_CI int)
+  RETURNS TABLE(nombre character varying, dia character varying, numEjerc int)
    AS $$
 DECLARE
    _rutinas    record;
 BEGIN
-   FOR _rutinas IN(SELECT r.rut_id, r.rut_nombre, r.rut_dia, (select count(*) from ejercicio_maquina_equipo as eme where eme.fk_rutina=r.rut_id ) as ejercicio
+   FOR _rutinas IN(SELECT r.rut_nombre, r.rut_dia
         FROM rutina as r inner join  usuario as u on u.usu_id = r.fk_usuario
-        WHERE u.usu_id = idUsuario)
+        WHERE u.usu_cedula = usuario_CI)
    LOOP
-    idRutina = _rutinas.rut_id;
     nombre = _rutinas.rut_nombre;
     dia = _rutinas.rut_dia;
-    numEjerc= _rutinas.ejercicio;
+  --  numEjerc= _rutinas.ejercicio;
     RETURN NEXT;
    END LOOP;
 END; $$
@@ -227,7 +221,7 @@ END; $$
   LANGUAGE plpgsql;  
 
 
- ------Lista de ejercicios con peso promedio por mes de los ultimos 5 años----------------------------------------
+ ------Lista de ejercicios con peso promedio por mes de los ultimos 5 aï¿½os----------------------------------------
 CREATE OR REPLACE FUNCTION FO_M03_get_Ejercicios5anios( _idUsuario int, _ejercicio character varying )
   RETURNS TABLE(mes int, repeticion int, peso decimal, unidad character varying)
    AS $$

@@ -5,8 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/seleccionar-progreso';
-import { RutinaPage } from '../pages/FO_M03/rutina/rutina';
-import { WorkoutPlansPage } from '../pages/FO_M03/workout-plans/workout-plans';
 //import { ClasesPage } from '../pages/FO_M05/clases/clases';
 import { ReservasPage } from '../pages/FO_M05/reservas/reservas';
 import { AmigosPage } from '../pages/FO_M01/amigos/amigos';
@@ -26,12 +24,12 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
 })
 export class MyApp {
   @ViewChild('NAV') nav: Nav;
-  rootPage:any = IniciarsesionPage;
+  rootPage:any = HomePage;
   public pages: Array< { titulo: string, component: any, icon:string } >;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
 
-    this.rootPage = ClasesParticipadasPage;
+    this.rootPage = IniciarsesionPage;
     /* En el bloque de abajo, pueden agregar la pagina inicial de su modulo
       a la que se accedera desde el menu lateral */
     this.pages = [
@@ -39,7 +37,6 @@ export class MyApp {
       {titulo: "perfil", component: PerfilPage, icon: "person"},
       {titulo: "amigos", component: AmigosPage, icon: "people"},
       {titulo: "Progreso", component: SeleccionarProgresoPage, icon: "stats"},
-      { titulo: "Rutinas", component: RutinaPage, icon: "body"},
       {titulo: 'Clases',component:TabCalendarClassPage, icon: 'bicycle'},
       {titulo: 'Reservas',component:ReservasPage, icon: 'calendar'} ,
       {titulo: 'Clases Participadas',component:ClasesParticipadasPage, icon: 'done-all'},

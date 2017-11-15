@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { EjerciciosPage } from '../ejercicios/ejercicios';
-import { TabsLogPage } from '../tabs-log/tabs-log';
-import { UserServiceProvider } from '../../../providers/user-service/user-service';
+
 /**
  * Generated class for the ModificarRutinaPage page.
  *
@@ -19,18 +18,9 @@ import { UserServiceProvider } from '../../../providers/user-service/user-servic
 export class ModificarRutinaPage {
 
   public rutinaID: number;
-  public idUsuario: number;
-  public nombreRut: string;
-  public diaRut: string;
-  public listaEjercicios: Array<{}>;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,  private userService: UserServiceProvider) {
-    this.nombreRut = this.navParams.get('nombre');
-    this.diaRut = this.navParams.get('dia');
-    this.idUsuario=1;
-    this.getEjercicios();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+    this.rutinaID = this.navParams.get('rutinaID');
     console.log(this.rutinaID);
-    console.log(this.listaEjercicios);
   }
 
   ionViewDidLoad() {
@@ -38,25 +28,13 @@ export class ModificarRutinaPage {
   }
 
  
-    public getEjercicios()
-    {
-        let urlPeticion: string = "FOM03_TrabajoRutina/getEjerciciosRutina?idUsuario="+this.idUsuario+"&nombre="+this.nombreRut+"&dia="+this.diaRut;
-        this.userService.getDato( urlPeticion ).subscribe( response => {
-          this.listaEjercicios=response;
-          console.log(this.listaEjercicios);
-      })
-      
-    }
 
-  public seleccionarEjercicios() 
-  {
+  seleccionarEjercicios() {
     let alert = this.alertCtrl.create();
     alert.setTitle('Registro de Trabajo');
     alert.setMessage('¿Cuales son los ejercicios a agregar en el registro?');
     
-    let list = JSON.stringify(this.listaEjercicios,['_nombre']);  
-    console.log(list);
-    
+    let list = ["Curl de Biceps", "Press banca", "Mancuernas"];
     
     for (let i of list) {
 
@@ -93,12 +71,13 @@ export class ModificarRutinaPage {
         console.log('Checkbox data:', data);
         //this.testCheckboxOpen = false;
         //this.testCheckboxResult = data;
+        this.indicarFecha();
       }
     });
     alert.present();
   }
 
- /* public indicarFecha() {
+  indicarFecha() {
     
         let prompt = this.alertCtrl.create({
           title: 'Registro de Trabajo',
@@ -127,9 +106,9 @@ export class ModificarRutinaPage {
           ]
         });
         prompt.present();
-      }*/
+      }
 
-     public cambiarRutina() {
+      ModificarRutina() {
         
             let prompt = this.alertCtrl.create({
               title: 'Modificar Datos',
@@ -137,14 +116,12 @@ export class ModificarRutinaPage {
               inputs: [
                 {
                   name: 'nombreRutina',
-                  placeholder: 'Nombre Rutina',
-                  value: this.nombreRut
+                  placeholder: 'Nombre Rutina'
                 },
                 {
                   type: 'list',
                   name: 'diaRutina',
-                  placeholder: 'Dia',
-                  value: this.diaRut
+                  placeholder: 'Dia'
                 }
               ],
               buttons: [
@@ -167,8 +144,7 @@ export class ModificarRutinaPage {
           }
 
 
-  public modificarEjercicio()
-  {
+  modificarEjercicio(){
     let prompt = this.alertCtrl.create({
       title: 'Modificar Ejercicio',
       inputs: [
@@ -203,8 +179,7 @@ export class ModificarRutinaPage {
     prompt.present();
   }
 
-  public ConfirmarEliminacion() 
-  {
+  ConfirmarEliminacion() {
     const alert = this.alertCtrl.create({
       title: 'Eliminar ejercicio de la rutina',
       message: 'Está seguro que desea eliminar el ejercicio de la rutina?',
@@ -226,12 +201,8 @@ export class ModificarRutinaPage {
     });
     alert.present();
   }
-  public goToLog()
-  {
-    this.navCtrl.push(TabsLogPage);
-  }
 
-  public goToEjercicios(){
+  goToEjercicios(page){
     this.navCtrl.push(EjerciciosPage);
   }
 }
