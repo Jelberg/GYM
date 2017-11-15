@@ -8,13 +8,19 @@ public class Sql {
     private Connection _conn =bdConnect();
     private Statement _st;
     private ResultSet _rs;
-    private static String BD_USER = "gymucab";
-    private static String BD_PASSWORD = "gymucab";
-    private static String BD_URL = "jdbc:postgresql://localhost/gimnasiobd";
+    private static String BD_USER = "gymucab"; 
+    private static String BD_PASSWORD = "gymucab"; 
+    private static String BD_URL = "jdbc:postgresql://localhost/gimnasiobd"; 
     private static String BD_CLASS_FOR_NAME = "org.postgresql.Driver";
-
+  /*  
+    //Metodo por defecto de la conexion a la bd que trae postgres
+    private static String BD_USER = "postgres";
+    private static String BD_PASSWORD = "123";
+    private static String BD_URL = "jdbc:postgresql://localhost/postgres";
+    private static String BD_CLASS_FOR_NAME = "org.postgresql.Driver";
+*/
     /**
-     * Metodo para devolver una unica instancia de la conexion
+     * Metodo para devolver una unica instancia de la conexion (Singleton)
      * @return instancia de la conexion
      */
     public static Connection getConInstance(){
@@ -35,7 +41,7 @@ public class Sql {
      * @see Connection
      * @see Statement
      */
-    private static Connection bdConnect()
+    public static Connection bdConnect()
     {
         Connection conn = null;
         try

@@ -1,0 +1,27 @@
+--------------------------------------ENTRENADOR-------------------------------------------
+
+Funcion para devolver a un entrenador filtrando por su correo
+  
+  CREATE OR REPLACE FUNCTION bo_m02_get_entrenadores(email character varying)
+  RETURNS TABLE(id int, nombre character varying, apellido character varying,
+ fechanac date, sexo char,correo character varying, historial character varying)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT ent_id, ent_nombre, ent_apellido, ent_fecha_nac, ent_sexo, ent_correo, ent_historial
+        FROM entrenador
+        WHERE ent_correo = email)
+   LOOP
+    id = var_r.ent_id;
+    nombre = var_r.ent_nombre;
+    apellido = var_r.ent_apellido;
+    fechanac = var_r.ent_fecha_nac;
+    sexo = var_r.ent_sexo;
+    correo = var_r.ent_correo;
+    historial = var_r.ent_historial;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+-------------------------------------FIN ENTRENADOR----------------------------------------
