@@ -113,4 +113,41 @@ private Connection conn = Sql.getConInstance();
         }
     
     } 
+    
+    
+    @POST
+    @Path("/insertaEquipo")
+    @Produces("application/json")
+    public String insertaEquipo(@QueryParam("nombre") String nombre) {
+
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                
+                put("nombre", nombre ); 
+            }});
+
+            String query = "select * from bo_m01_insertar_equipo(?,?,?)";
+            PreparedStatement st = conn.prepareStatement(query);
+            java.lang.reflect.Type type = new TypeToken<Equipo[]>(){}.getType();
+                
+                st.setString(2, nombre); 
+                
+                st.executeQuery();
+            
+
+            response.put("data", "Se insertó el equipo");
+        }
+        catch (SQLException e){
+            response.put("error", e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            Sql.bdClose(conn);
+            return gson.toJson(response);
+        }
+
+    }
 }

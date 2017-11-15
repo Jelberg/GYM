@@ -106,9 +106,9 @@
                         </div>
                         <div class="w3-section">
                             <label>Tipo:</label>
-                            <select class="form-control" id="sel1">
-                                <option>Máquina</option>
-                                <option>Equipo</option> 
+                            <select class="form-control" id="select">
+                                <option value="1">Máquina</option>
+                                <option value="0">Equipo</option> 
                             </select>
                         </div>
 
@@ -119,9 +119,9 @@
                 <div class="w3-padding-64 w3-center">
                     <div class="w3-padding-64 w3-center">
                         <div class="w3-left-align w3-padding-large">
-                            <a href="./equipamiento.html">
-                                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton myB2">Guardar/Editar</button>
-                            </a>
+                            
+                                <button type="submit" onclick='guardar()' class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton myB2">Guardar</button>
+                            
                             <!--   <a href="">
                                 <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom">Editar</button>
                             </a> -->
@@ -160,6 +160,7 @@
     </script>
     <script src="../asset/js/jquery.min.js"></script>
     <script src="../asset/js/bootstrap.min.js"></script>
+    <script src="gest_equipamiento.js"></script>
 
 </body>
 
