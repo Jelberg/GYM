@@ -20,20 +20,15 @@ END; $$
 
 
 --Este elimina las medidas correspondientes a esa fecha y a ese usuario
-CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_id int, tipo_medida varchar)
+CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_id int, tipo_medida int)
 	RETURNS void AS $$
     DECLARE
     id_medida int;
     fecha_actual DATE;
-    mes	INT;
-    id_pm	INT;
     BEGIN
-	fecha_actual := current_date;
-	mes := (select EXTRACT(MONTH FROM fecha_actual) );
-	id_medida := ( SELECT MED_ID FROM MEDIDA WHERE med_tipo = tipo_medida  );
-	id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = usuario_id and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) );	
+	id_medida := ( SELECT MED_ID FROM MEDIDA WHERE MED_TIPO = tipo_medida AND EXTRACT(MONTH 	   fecha_actual) = ( SELECT EXTRACT(MONTH PM_FECHA) FROM MEDIDA  WHERE tipo_medida = 			tipo_medida) );
         DELETE FROM progreso_medida
-        WHERE pm_id = id_pm;
+        WHERE med_id = id_medida and fk_usuario = usu_id;
     END; $$
 LANGUAGE plpgsql;
 
@@ -56,27 +51,19 @@ CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
 
 
 --FUNCION QUE ACTUALZA MEDIDA DADOS: EL ID DEL USUARIO, FECHA DE EL PROGRESO, TIPO DE LA MEDIDA Y LA NUEVA MEDIDA.
-<<<<<<< HEAD
 CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER, medida INTEGER, tipo_medida VARCHAR)
-=======
-CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER,tipo_medida VARCHAR, medida INTEGER )
->>>>>>> 5ca53c90710b142ba300fdb0c5b77a6d9d069933
   RETURNS void
    AS $$
 DECLARE
     id_medida int;
     fecha_actual DATE;
-    mes	int;
-    id_pm	int;
 BEGIN
-     fecha_actual := current_date;
-     mes := (select EXTRACT(MONTH FROM fecha_actual) );
-    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE med_tipo = tipo_medida  );
-    id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = id_usuario and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) );	
+    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE MED_TIPO = tipo_medida AND EXTRACT(MONTH fecha_actual) = ( SELECT EXTRACT(MONTH PM_FECHA) FROM MEDIDA  WHERE tipo_medida = tipo_medida) );
     UPDATE PROGRESO_MEDIDA SET  PM_MEDIDA = medida
-    WHERE PM_ID = id_pm;
+    WHERE FK_USUARIO = id_usuario and FK_MEDIDA = id_medida)
 END; $$
   LANGUAGE plpgsql;
+
 --FUNCION QUE OBTIENE LOS ULTIMOS REGISTROS DEL PROGRESO DE UN USUARIO CON RESPECTO A SU PESO.
 CREATE OR REPLACE FUNCTION fo_m04_get_progresop(id_usuario int)
   RETURNS TABLE(peso INT, fecha DATE, id INT)
@@ -183,19 +170,20 @@ BEGIN
 END; $$
   LANGUAGE plpgsql;
 
---Este solo devuelve todos los progresos sin importar de que progreso sea.
-CREATE OR REPLACE FUNCTION fo_m04_get_progresoscompartidos()
-  RETURNS TABLE(com_mensaje varchar, usu_nombre varchar)
+--Este devuelve todos los progresos compartidos de un usuario.
+CREATE OR REPLACE FUNCTION fo_m04_get_progresoscompartidos(usuario_id int)
+  RETURNS TABLE(mensaje varchar, nombre_usuario varchar)
    AS $$
 DECLARE
    var_r    record;
 BEGIN
-   FOR var_r IN(SELECT com_mensaje, usu_nombre 
-   FROM comentario com inner join usuario usu on usu.usu_id = com.fk_usuariopro 
-	order by pm_fecha DESC limit 10)
+   FOR var_r IN(SELECT com.com_mensaje, usu.usu_nombre, com.com_fecha 
+   FROM comentario as com inner join usuario as usu on usu.usu_id = usuario_id and
+						com.fk_usuariopro = usu.usu_id
+	order by com.com_fecha DESC limit 10)
    LOOP
-    com_mensaje = var_r.com_mensaje;
-    usu_nombre = var_r.usu_nombre;
+    mensaje = var_r.com_mensaje;
+    nombre_usuario = var_r.usu_nombre;
     RETURN NEXT;
    END LOOP;
 END; $$

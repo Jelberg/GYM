@@ -38,31 +38,17 @@ public class FOM04_Comentario {
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Comentario> jsonArray;
-  
-    
-    
-    @GET
-    @Path("/getDatoPrueba")
-    @Produces("application/json")
-    public String getDatoPrueba(){
-    
-    Gson gson = new Gson();
-    Comentario c= new Comentario(1,"hola");
-    return gson.toJson(c);
-    
-    }
     
     /**
      * Funcion que recibe como parametro el id del progreso correspondiente a medidas
      * y el id usuario
-     * @param idProgresom del cual se quiere saber los comentarios
-     * @param idusuario del cual pertenece el progreso.
+     * @param usuario_id
      * @return Devuelve los comentarios correspondientes a ese progreso de medidas
      */
     @GET
     @Path("/getProgresos")
     @Produces("application/json")
-    public String getProgresos(){
+    public String getProgresos(@QueryParam("usuario_id") int usuario_id){
     
         try{
 
