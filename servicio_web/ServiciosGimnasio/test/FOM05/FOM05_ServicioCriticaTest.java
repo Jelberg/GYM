@@ -7,11 +7,23 @@ package FOM05;
 
 import Dominio.Sql;
 import Servicios.FOM05_Critica;
+import com.google.common.base.Predicate;
+import static com.google.common.base.Predicates.equalTo;
 import com.google.gson.Gson;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.After;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -62,6 +74,7 @@ public class FOM05_ServicioCriticaTest {
     {
     }
     
+    @Ignore
     @Test
     public void testConsultarClasesSinCritica() throws SQLException{
      
@@ -70,11 +83,25 @@ public class FOM05_ServicioCriticaTest {
     @Test
     public void testInsertarCritica()
     {
-   
+  
+        try {
+            HttpUriRequest request = new HttpGet( "http://localhost:8080/ServiciosGimnasio/FOM05_Critica//insertarCritica?referencia=3&fecha=12-12-12&comentario=HOLAA&valoracion=5" );
+            
+            HttpResponse httpResponse = HttpClientBuilder.create().build().execute( request );
+            
+            assertEquals(
+                    httpResponse.getStatusLine().getStatusCode(),
+                    equalTo(HttpStatus.SC_NOT_FOUND));
+            
+        } catch (IOException ex) {
+            Logger.getLogger(FOM05_ServicioCriticaTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
+    @Ignore
     @Test
     public void testEliminarCritica(){
     }
+
     
 }
