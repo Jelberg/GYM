@@ -94,15 +94,18 @@ public class FOM04_Progreso_Peso {
     @DELETE
     @Path( "/eliminarPeso" )
     @Produces( "application/json" )
-    public String eliminaPeso(@QueryParam( "id_usuario" ) int id_usuario) {
+    public String eliminaPeso(@QueryParam( "fecha" ) String fecha,
+                              @QueryParam( "id_usuario" ) int id_usuario) {
         Map<String, String> response = new HashMap<String, String>();
         try{
             ValidationWS.validarParametrosNotNull( new HashMap<String, Object>(){ {
                 put( "id_usuario" , id_usuario );
+                put( "fecha" , fecha );
             }});
             String query = "SELECT fo_m04_elimina_progresop(?, ?)";
             PreparedStatement st = conn.prepareStatement( query );
             st.setInt( 1 , id_usuario);
+            st.setDate( 2 , Date.valueOf( fecha ) );
             ResultSet rs = st.executeQuery();
             response.put( "data" , "Se elimino el peso correctamente" );
         }
@@ -219,20 +222,23 @@ public class FOM04_Progreso_Peso {
      * @return Devuelve un mensaje con el estatus de la peticion.
      */
     @POST
-    @Path( "/actualizaProgresoPeso" )
+    @Path( "actualizaProgresoPeso" )
     @Produces( "application/json" )
     public String actualizarPeso ( @QueryParam ( "id_usuario" ) int id_usuario,
+                                   @QueryParam ( "fecha" ) String fecha,
                                    @QueryParam ( "peso" ) int peso){
         Map<String, String> response = new HashMap<String, String>();
         try {
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put ( "id_usuario" , id_usuario );
+                put( "fecha" , fecha );
                 put( "peso" , peso );
             }});
-            String query = "select * from fo_m04_act_progresop(?,?);";
+            String query = "select * from fo_m04_act_progresop(?,?,?);";
             PreparedStatement st = conn.prepareStatement( query );
             st.setInt( 1 , id_usuario );
-            st.setInt( 2 , peso );
+            st.setDate( 2 , Date.valueOf( fecha ) );
+            st.setInt( 3 , peso );
             st.executeQuery();
             response.put( "data", "Se actualizo correctamente." );
         }

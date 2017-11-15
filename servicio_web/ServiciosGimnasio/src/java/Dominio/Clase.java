@@ -26,10 +26,6 @@ public class Clase {
     public Clase(){
     }
 
-    public Clase(String _nombre) {
-        this._nombre = _nombre;
-    }
-
     public Clase(int _id, String _nombre, String _descripcion, String _idInstructor, Date _fecha, Date _horaInicio, Date _horaFin, int _capacidad) {
         this._id = _id;
         this._nombre = _nombre;

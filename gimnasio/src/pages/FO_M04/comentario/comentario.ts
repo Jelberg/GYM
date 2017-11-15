@@ -9,10 +9,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 export class ComentarioPage {
 
-  id
-
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.id = navParams.get('id');
   }
 
   ionViewDidLoad() {
