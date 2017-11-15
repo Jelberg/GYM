@@ -1,6 +1,9 @@
 var editing
 var id
 var maquina
+var url = "http://localhost:8080/ServiciosGimnasio/Equipamiento";
+var url_comple = "/insertaEquipo"; 
+
 
 $(document).ready(function () {
     editing = localStorage.getItem('edit');
@@ -23,6 +26,12 @@ function guardar() {
             console.log('edito')
         }
     } else {
-        console.log('guardo')
+
+        $.post(url + url_comple, {
+                nombre: "John" 
+            })
+            .done(function (data) {
+                alert("Data Loaded: " + data);
+            });
     }
 }

@@ -47,8 +47,8 @@ window.onload = function mostrartabla() {
                         if (campos[j] == 'type') {
                             if (fila[campos[j]] == 'Máquina') {
                                 maquina = true
-                                
-                            }  
+
+                            }
                         }
 
                         contenido += "<td>";
@@ -86,7 +86,7 @@ function editar(e, esMaquina, type) {
                     localStorage.setItem('id', Number(element.innerHTML));
                     localStorage.setItem('edit', 'true');
                     localStorage.setItem('Maquina', esMaquina);
-                    window.location.href = './gest_equipamiento.html' 
+                    window.location.href = './gest_equipamiento.html'
                 }
             }
         }
