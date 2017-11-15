@@ -27,3 +27,14 @@ BEGIN
 			values (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int);
 	END $$;
 	LANGUAGE PLPGSQL;
+
+
+----******************Esta funcion permite eliminar una reserva******-------------
+CREATE OR REPLACE FUNCTION fo_m06_eliminar_reserva (reserva_id int)
+RETURNS VOID AS $$
+DECLARE
+BEGIN
+	DELETE FROM _reserva
+	where reserva_id=res_id;
+	end$$
+	LANGUAGE PLPGSQL; 
