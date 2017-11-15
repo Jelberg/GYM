@@ -6,7 +6,6 @@
 package Servicios;
 
 import Dominio.Instructor;
-import Dominio.Progreso_Medida;
 import Dominio.Sql;
 import Excepciones.ParameterNullException;
 import Validaciones.ValidationWS;
@@ -25,9 +24,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import javax.swing.ImageIcon;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
@@ -178,7 +174,6 @@ private Connection conn = Sql.getConInstance();
             
             String query = "select * from bo_m02_inserta_instructor('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+Character.toString(sexo)+"', '"+correo+"')";
             PreparedStatement st = conn.prepareStatement(query); 
-            java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
 
                 st.executeQuery();
             
@@ -264,7 +259,6 @@ private Connection conn = Sql.getConInstance();
             }});
              String query = "select * from bo_m02_actualiza_instructor('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+Character.toString(sexo)+"', '"+correo+"')";
             PreparedStatement st = conn.prepareStatement(query); 
-            java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
 
                 st.executeQuery();
             
