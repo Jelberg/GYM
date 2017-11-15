@@ -1,24 +1,102 @@
 --**************************************************FUNCIONES PARA EL WEB SERVICE******************************************
------Esta funcion devuelve las rutinas de un cliente con su dia y la cantidad de ejercicios
 
-CREATE OR REPLACE FUNCTION FO_M03_get_rutina(usuario_CI int)
-  RETURNS TABLE(nombre character varying, dia character varying, numEjerc int)
+--*********************************FUNCIONES RUTINA************************************************
+/*	CONSULTAR RUTINA	
+	Funcion que trae todas las rutinas de un usuario
+    dado el id de usuario, devuelve el id de la rutina,
+    nombre, dia, y numero de ejercicios
+*/
+CREATE OR REPLACE FUNCTION FO_M03_get_rutina(idUsuario int)
+  RETURNS TABLE(idRutina int, nombre character varying, dia character varying, numEjerc int)
    AS $$
 DECLARE
    _rutinas    record;
 BEGIN
-   FOR _rutinas IN(SELECT r.rut_nombre, r.rut_dia
+   FOR _rutinas IN(SELECT r.rut_id, r.rut_nombre, r.rut_dia, (select count(*) from ejercicio_maquina_equipo as eme where eme.fk_rutina=r.rut_id ) as ejercicio
         FROM rutina as r inner join  usuario as u on u.usu_id = r.fk_usuario
-        WHERE u.usu_cedula = usuario_CI)
+        WHERE u.usu_id = idUsuario)
    LOOP
+    idRutina = _rutinas.rut_id;
     nombre = _rutinas.rut_nombre;
     dia = _rutinas.rut_dia;
-  --  numEjerc= _rutinas.ejercicio;
+    numEjerc= _rutinas.ejercicio;
     RETURN NEXT;
    END LOOP;
 END; $$
   LANGUAGE plpgsql;
-  
+/*
+	AGREGAR RUTINA	
+   	Funcion que agrega una nueva rutina, recibe el idUsuario, el nombre de la
+    rutina y el dia a realizarse, no retorna ningun valor
+*/
+CREATE OR REPLACE FUNCTION FO_M03_set_rutina(idUsuario int, nombreRutina character varying, dia character varying)
+  RETURNS VOID
+   AS $$
+DECLARE
+BEGIN
+  		 insert into rutina (rut_nombre, rut_dia, fk_usuario) values (nombreRutina, dia, idUsuario);
+END; $$
+  LANGUAGE plpgsql;
+/*
+	MODIFICAR RUTINA	
+   	Funcion que modifica una rutina, recibe el idUsuario, el nombre de la
+    rutina y el dia a realizarse, no retorna ningun valor
+*/
+CREATE OR REPLACE FUNCTION FO_M03_modificar_rutina(idUsuario int, nombreRutina character varying, dia character varying,
+                                                  nombreModif character varying, diaModif character varying)
+  RETURNS VOID
+   AS $$
+DECLARE
+BEGIN
+  		 update rutina  set (rut_nombre, rut_dia) = (nombreModif, diaModif) where fk_usuario= idUsuario 
+         																	and rut_nombre=nombreRutina and rut_dia = dia;
+END; $$
+  LANGUAGE plpgsql;
+  /*
+	ELIMINAR RUTINA	
+   	Funcion que elimina una rutina, recibe el idUsuario, el nombre de la
+    rutina y el dia a realizarse, no retorna ningun valor
+*/
+CREATE OR REPLACE FUNCTION FO_M03_eliminar_rutina(idUsuario int, nombreRutina character varying, dia character varying)
+  RETURNS VOID
+   AS $$
+DECLARE
+BEGIN
+  		 delete from rutina  where fk_usuario= idUsuario and rut_nombre = nombreRutina and rut_dia = dia;
+END; $$
+  LANGUAGE plpgsql;
+    /*
+	LISTA DE EJERCICIOS DE UNA RUTINA	
+   	Funcion muestra todos los ejercicios de una rutina, recibe el idUsuario, el nombre de la
+    rutina y el dia a realizarse, no retorna ningun valor
+*/
+CREATE OR REPLACE FUNCTION FO_M03_ejercicios_rutina(idUsuario int, nombreRutina character varying, dia character varying)
+  RETURNS TABLE(idEjercicio int, nombre character varying,grupoMuscular character varying, maquina character varying,equipo character varying)
+   AS $$
+DECLARE
+   _ejercicios    record;
+BEGIN
+   FOR _ejercicios IN(SELECT distinct(eje.eje_nombre), eje.eje_id, eje.eje_grupo_muscular, maq.maq_nombre, equ.equ_nombre
+        FROM ejercicio as eje inner join  ejercicio_maquina_equipo as eme on eje.eje_id = eme.fk_ejercicio
+        inner join maquina as maq on maq.maq_id= eme.fk_maquina
+        inner join equipo as equ on equ.equ_id= eme.fk_equipo
+        inner join rutina as rut on rut.rut_id= eme.fk_rutina
+        inner join trabajo_rutina as tr on tr.fk_eje_maq_equ1 = eme.eme_id
+        inner join usuario as usu on usu.usu_id = rut.fk_usuario
+        inner join serie as ser on ser.fk_trabajo_rutina = tr.tr_id
+        WHERE usu.usu_id = idUsuario and rut.rut_nombre= nombreRutina and rut.rut_dia= dia 
+        )
+   LOOP
+    idEjercicio = _ejercicios.eje_id;
+    nombre = _ejercicios.eje_nombre;
+    grupoMuscular = _ejercicios.eje_grupo_muscular;
+    maquina= _ejercicios.maq_nombre;
+    equipo= _ejercicios.equ_nombre;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
   ---***********************************************RUTINAS PARA M04******************************************************
 
 -------Lista de ejercicios realizada por un usuario--------------------------------------------

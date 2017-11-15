@@ -6,7 +6,6 @@
 package Servicios;
 
 import Dominio.Instructor;
-import Dominio.Progreso_Medida;
 import Dominio.Sql;
 import Excepciones.ParameterNullException;
 import Validaciones.ValidationWS;
@@ -25,9 +24,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import javax.swing.ImageIcon;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
@@ -56,7 +52,7 @@ private Connection conn = Sql.getConInstance();
      * @param correo del cual se quiere 
      * @return Devuelve todos los datos del instructor
      */
-    @GET
+   /* @GET
     @Path("/getInstruct")
     @Produces("application/json")
     public String getInstructor(@QueryParam("correo") String correo){
@@ -85,7 +81,7 @@ private Connection conn = Sql.getConInstance();
                 Image im = image.getImage();
                 jsonArray.get(jsonArray.size() - 1).setFoto(im);*/
                           
-            }
+      /*      }
             response = gson.toJson(jsonArray);
         }
         catch(SQLException e) {
@@ -106,7 +102,7 @@ private Connection conn = Sql.getConInstance();
      * @param correo del cual se quiere 
      * @return Devuelve todos los datos del instructor
      */
-    @GET
+  /*  @GET
     @Path("/getListInstruct")
     @Produces("application/json")
     public String getListInstructor(){
@@ -120,17 +116,17 @@ private Connection conn = Sql.getConInstance();
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 jsonArray.add(new Instructor());
-                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
-                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
-                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
-                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fechanac"));
-                jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("sexo")));
-                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("INS_ID"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("INS_NOMBRE"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("INS_APELLIDO"));
+                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("INS_FECHA_NAC"));
+                jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("INS_SEXO")));
+                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("INS_CORREO"));
                 /*byte[] img = rs.getBytes("INS_FOTO");
                 ImageIcon image = new ImageIcon(img);
                 Image im = image.getImage();
                 jsonArray.get(jsonArray.size() - 1).setFoto(im);*/
-                          
+  /*                        
             }
             response = gson.toJson(jsonArray);
         }
@@ -156,6 +152,7 @@ private Connection conn = Sql.getConInstance();
      * @param jsonMedida 
      * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
      */
+    /*
     @POST
     @Path("/insertaInstruct")
     @Produces("application/json")
@@ -178,7 +175,6 @@ private Connection conn = Sql.getConInstance();
             
             String query = "select * from bo_m02_inserta_instructor('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+Character.toString(sexo)+"', '"+correo+"')";
             PreparedStatement st = conn.prepareStatement(query); 
-            java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
 
                 st.executeQuery();
             
@@ -204,7 +200,7 @@ private Connection conn = Sql.getConInstance();
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
-    @DELETE
+   /* @DELETE
     @Path("/eliminaInstruct")
     @Produces("application/json")
     public String eliminaInstruct(@QueryParam("correo") String correo){
@@ -245,7 +241,7 @@ private Connection conn = Sql.getConInstance();
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
-    @POST
+   /* @POST
     @Path("/actualizaInstruct")
     @Produces("application/json")
     public String actualizaInstruct( @QueryParam("nombre") String nombre,
@@ -264,7 +260,6 @@ private Connection conn = Sql.getConInstance();
             }});
              String query = "select * from bo_m02_actualiza_instructor('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+Character.toString(sexo)+"', '"+correo+"')";
             PreparedStatement st = conn.prepareStatement(query); 
-            java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
 
                 st.executeQuery();
             
@@ -281,5 +276,5 @@ private Connection conn = Sql.getConInstance();
             return gson.toJson(response);
         }
         
-    } 
+    }*/ 
 }
