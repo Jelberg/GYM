@@ -80,11 +80,16 @@ public class PruebaMedidas {
         String respuesta = _progresoMedida.insertaMedidas(9999, 67, 4);
         assertNotNull( respuesta );
     }
+    
+    @Ignore
     @Test
     public void pruebaEliminaMedida(){
         Gson gson = new Gson();
         _progresoMedida = new FOM04_Progreso_Medida();
-        String respuesta = _progresoMedida.eliminaMedidas(9999, 1);
+        String respuesta = _progresoMedida.eliminaMedidas(9999, "Cuadricep");
         assertNotNull( respuesta );
+        //String respuesta = _progresoMedida.eliminaMedidas(fecha, 9999);
+        //assertNotNull( respuesta );
+
     }
 }

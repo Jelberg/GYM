@@ -10,6 +10,12 @@ import { ChartsModule } from 'ng2-charts';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+//M01
+import { AmigosPage } from '../pages/FO_M01/amigos/amigos';
+import { CrearusuarioPage } from '../pages/FO_M01/crearusuario/crearusuario';
+import { IniciarsesionPage } from '../pages/FO_M01/iniciarsesion/iniciarsesion';
+import { PerfilPage} from '../pages/FO_M01/perfil/perfil'
+// fin M01
 //M04
 import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/seleccionar-progreso';
 import { LineaComponent } from '../components/linea/linea';
@@ -48,6 +54,10 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
   declarations: [
     MyApp,
     HomePage,
+    AmigosPage,
+    CrearusuarioPage,
+    IniciarsesionPage,
+    PerfilPage,
     SeleccionarProgresoPage,
     LineaComponent,
     BarraComponent,
@@ -100,6 +110,10 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
   entryComponents: [
     MyApp,
     HomePage,
+    AmigosPage,
+    CrearusuarioPage,
+    IniciarsesionPage,
+    PerfilPage,
     SeleccionarProgresoPage,
     ProgresoEjercicioPage,
     ProgresoMedidasPage,

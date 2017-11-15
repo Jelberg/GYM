@@ -17,6 +17,5 @@ import java.util.Set;
  */
 @ApplicationPath("/")
 public class ConfiguracionRestGimnasio extends Application{
-    
-    
+       
 }

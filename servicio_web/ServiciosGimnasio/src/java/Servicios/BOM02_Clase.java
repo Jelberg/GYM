@@ -92,7 +92,7 @@ public class BOM02_Clase {
     @POST
     @Path("/insertaClase")
     @Produces("application/json")
-    public String insertaClases(@QueryParam("id_clase") int id_clase,
+    public String insertaClase(@QueryParam("id_clase") int id_clase,
                                  @QueryParam("nombre") String nombre,
                                  @QueryParam("descripcion") String descripcion){
 
