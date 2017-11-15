@@ -38,43 +38,31 @@ public class FOM04_Comentario {
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Comentario> jsonArray;
-  
-    
-    
-    @GET
-    @Path("/getDatoPrueba")
-    @Produces("application/json")
-    public String getDatoPrueba(){
-    
-    Gson gson = new Gson();
-    Comentario c= new Comentario(1,"hola");
-    return gson.toJson(c);
-    
-    }
     
     /**
      * Funcion que recibe como parametro el id del progreso correspondiente a medidas
      * y el id usuario
-     * @param idProgresom del cual se quiere saber los comentarios
-     * @param idusuario del cual pertenece el progreso.
+     * @param usuario_id
      * @return Devuelve los comentarios correspondientes a ese progreso de medidas
      */
     @GET
     @Path("/getProgresos")
     @Produces("application/json")
-    public String getProgresos(){
+    public String getProgresos(@QueryParam("usuario_id") int usuario_id){
     
         try{
 
-            String query = "SELECT * FROM fo_m04_get_progresoscompartidos()";
+            String query = "SELECT * FROM fo_m04_get_progresoscompartidos(1)";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);                       
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 jsonArray.add(new Comentario());
-                jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString(1));                
-                jsonArray.get(jsonArray.size() - 1).setNombreUsuario(rs.getString(2));
+                jsonArray.get(jsonArray.size() - 1).setId(Integer.parseInt(rs.getString(1)));
+                jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString(2));                
+                jsonArray.get(jsonArray.size() - 1).setNombreUsuario(rs.getString(3));
+                jsonArray.get(jsonArray.size() - 1).setFecha(rs.getString(4));
                           
             }
             response = gson.toJson(jsonArray);
@@ -121,7 +109,7 @@ public class FOM04_Comentario {
             while(rs.next()){
                 jsonArray.add(new Comentario());
                 jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString("mensaje"));                
-                jsonArray.get(jsonArray.size() - 1).setUsuarioComentario(rs.getInt("usuariocomentario"));
+                //jsonArray.get(jsonArray.size() - 1).setUsuarioComentario(rs.getInt("usuariocomentario"));
                           
             }
             response = gson.toJson(jsonArray);
@@ -167,7 +155,7 @@ public class FOM04_Comentario {
             while(rs.next()){
                 jsonArray.add(new Comentario());
                 jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString("mensaje"));                
-                jsonArray.get(jsonArray.size() - 1).setUsuarioComentario(rs.getInt("usuariocomentario"));
+                //jsonArray.get(jsonArray.size() - 1).setUsuarioComentario(rs.getInt("usuariocomentario"));
                           
             }
             response = gson.toJson(jsonArray);
