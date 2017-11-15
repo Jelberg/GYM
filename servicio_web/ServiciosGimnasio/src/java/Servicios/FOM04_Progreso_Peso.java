@@ -11,15 +11,19 @@ import Excepciones.ParameterNullException;
 import Util.CompararProgreso;
 import Validaciones.ValidationWS;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -118,63 +122,6 @@ public class FOM04_Progreso_Peso {
         }
     }
     /**
-     * Funcion obtiene el peso de un usuario correspondiente a cada 
-     * semana del mes.
-     * @param sobrenombre Indica el nombre del usuario.
-     * @return Devuelve un json con la informacion del peso
-     * relacionada con el mes correspondiente
-     */
-    /*
-    @GET
-    @Path("/getPesoDelMes")
-    @Produces("application/json")
-    public String getPesoDelMes(@QueryParam("sobrenombre") String sobrenombre){
-        try {
-            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("sobrenombre", sobrenombre);
-            }});
-
-            String query = "select * from fo_m04_get_peso_mes(?, ?, ?)";
-            jsonArray = new ArrayList<>();
-            ResultSet rs;
-            LocalDate fecha = LocalDate.now();
-            Date day;
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, sobrenombre);
-
-            for (int i=0; i<=3; i++){
-                day = Date.valueOf(fecha);
-                st.setDate(2,day);
-                st.setDate(3,day);
-                rs = st.executeQuery();
-                jsonArray.add(new Progreso_Peso());
-                jsonArray.get(jsonArray.size() - 1).setFechaP(fecha);
-                if (rs.wasNull()){
-                    jsonArray.get(jsonArray.size() - 1).setPeso(0);
-                }
-                while (rs.next()){
-                    jsonArray.get(jsonArray.size() - 1).setPeso(rs.getInt("peso"));
-                }
-
-                if (i < 6) {
-                    fecha = fecha.minusWeeks(1);
-                }
-            }
-            response = gson.toJson(jsonArray);
-        }
-        catch (SQLException e) {
-            response = e.getMessage();
-        }
-        catch (ParameterNullException e){
-            response = e.getMessage();
-        }
-        finally {
-            Sql.bdClose(conn);
-            return response;
-        }
-    }
-*/
-    /**
      * Funcion que se llama cuando el usuario desea agregar un nuevo registro
      * de su peso. Recibe el id del usuario y el peso a registrar
      * @param id_usuario identificador del usuario.
@@ -192,12 +139,21 @@ public class FOM04_Progreso_Peso {
                 put ( "id_usuario" , id_usuario );
                 put( "peso" , peso );
             }});
-            String query = "select * from fo_m04_insert_progresop(?,?);";
-            PreparedStatement st = conn.prepareStatement( query );
-            st.setInt( 1 , id_usuario );
-            st.setInt( 2 , peso );
-            st.executeQuery();
-            response.put( "data", "Se inserto correctamente." );
+            boolean verificacion = comprobarInsercion( id_usuario );
+            if ( verificacion == true ){
+                
+                response.put( "data", "Error. Ya ha agregado un peso hoy." );
+            }
+            else{
+                conn = Sql.getConInstance();
+                String query = "select * from fo_m04_insert_progresop(?,?);";
+                PreparedStatement st = conn.prepareStatement( query );
+                st.setInt( 1 , id_usuario );
+                st.setInt( 2 , peso );
+                st.executeQuery();
+                response.put( "data", "Se agrego correctamente el peso." );
+                
+            }
         }
         catch (SQLException e){
             response.put( "error", e.getMessage() );
@@ -247,4 +203,29 @@ public class FOM04_Progreso_Peso {
             return gson.toJson( response );
         }
     }
+    /**
+     * Funcion que se llama para comprobar que el usuario no tenga ningun
+     * registro de pesos en el dia actual, retorna verdadero si el usuario
+     * ya posee un registro, falso de lo contrario.
+     * @param idUsuario identificador del usuario
+     * @return 
+     */
+    public boolean comprobarInsercion( int idUsuario){
+        ArrayList<Progreso_Peso> progresoPeso = new ArrayList<Progreso_Peso>();
+        Gson gson = new Gson();
+        String respuesta = getProgresoP( idUsuario );
+        progresoPeso = gson.fromJson( respuesta, new TypeToken<List<Progreso_Peso>>(){}.getType());
+        SimpleDateFormat sdft = new SimpleDateFormat( "yyyy-MM-dd" );
+        java.util.Date fecha = new java.util.Date();
+        String fechaActual = sdft.format( fecha );
+        int tamanoArreglo = progresoPeso.size();
+        java.util.Date ultimoProgreso = progresoPeso.get( tamanoArreglo - 1).getFechaP();
+        if ( fechaActual.equals( String.valueOf( ultimoProgreso ) ) ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+            
 }
