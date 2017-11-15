@@ -201,4 +201,7 @@ export class RutinaPage {
          // this.goToModificar();
         }
         
+
+        
+
 }

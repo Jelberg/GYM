@@ -88,11 +88,13 @@ public class FOM03_Rutina {
                 Sql.bdClose(conn);
             }
         }
-    /*
-     * Funcion que agrega una nueva rutina.
-     * @param idUsuario se recibe el id del usuario a consultar
-     * @return retorna un string de confirmacion 
-     */
+        /***
+         * Funcion que inserta una nueva rutina a un usuario
+         * @param idUsuario se ingresa el id del usuario
+         * @param nombre se indica el nombre de la nueva rutina
+         * @param dia se especifica el dia de la rutina
+         * @return Retorna un string de confirmacion de rutina agregada
+         */
         @GET
         @Path("/setRutina")
         @Produces("application/json")
@@ -126,7 +128,9 @@ public class FOM03_Rutina {
      * @param idUsuario se recibe el id del usuario a consultar
      * @param nombre se recibe el nombre de la rutina a eliminar 
      * @param dia se recibe el dia de la rutina a eliminar
-     * @return retorna un string de confirmacion 
+     * @param nombreModif se recibe el nuevo nombre de la rutina
+     * @param diaModif se ingresa el nuevo dia de la rutina
+     * @return retorna un string de confirmacion de modificacion
      */
         @GET
         @Path("/modificarRutina")
@@ -161,11 +165,11 @@ public class FOM03_Rutina {
         }
          
         /**
-     * Funcion que modifica una rutina.
+     * Funcion que elimina una rutina.
      * @param idUsuario se recibe el id del usuario a consultar
      * @param nombre se recibe el nombre de la rutina a eliminar 
      * @param dia se recibe el dia de la rutina a eliminar
-     * @return retorna un string de confirmacion 
+     * @return retorna un string de confirmacion de eliminacion
      */
         @GET
         @Path("/eliminarRutina")
