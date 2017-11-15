@@ -81,7 +81,6 @@ public class PruebaMedidas {
         assertNotNull( respuesta );
     }
     
-    @Ignore
     @Test
     public void pruebaEliminaMedida(){
         Gson gson = new Gson();
