@@ -9,26 +9,16 @@ package Dominio;
  *
  * @author MinervaMorales
  */
-public class Anaerobico extends Ejercicio{
-    private int _id;
-    private int _numSeries;
+public class Serie {
+        
     private int _numRepeticiones;
+    private float _peso;
     private int _tiempoDescanso;
 
-    public int getId() {
-        return _id;
-    }
-
-    public void setId(int _id) {
-        this._id = _id;
-    }
-
-    public int getNumSeries() {
-        return _numSeries;
-    }
-
-    public void setNumSeries(int _numSeries) {
-        this._numSeries = _numSeries;
+    public Serie(int _numRepeticiones, float _peso, int _tiempoDescanso) {
+        this._numRepeticiones = _numRepeticiones;
+        this._peso = _peso;
+        this._tiempoDescanso = _tiempoDescanso;
     }
 
     public int getNumRepeticiones() {
@@ -37,6 +27,14 @@ public class Anaerobico extends Ejercicio{
 
     public void setNumRepeticiones(int _numRepeticiones) {
         this._numRepeticiones = _numRepeticiones;
+    }
+
+    public float getPeso() {
+        return _peso;
+    }
+
+    public void setPeso(float _peso) {
+        this._peso = _peso;
     }
 
     public int getTiempoDescanso() {

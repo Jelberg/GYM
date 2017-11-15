@@ -13,83 +13,23 @@
     </ion-navbar>
   </ion-header>
 
-<!--
-  <ion-content padding>
-      <ion-list>
-          <ion-item>
-                  <ion-grid>
-                          <ion-row>
-                              <ion-col col-2>
-                                      <ion-avatar item-start>
-                                              <img src="../../assets/imgs/clasesYoga.jpg">
-                                          </ion-avatar>
-                              </ion-col>
-                              <ion-col col-6>
-                                <p>24/10/2017</p>
-                                <p>3:00 pm</p> 
-                                <p> </p>      
-                                <h3>Yoga</h3>
-                                <h3>Estela Rodrigues</h3>
-                              </ion-col>
-                              <ion-col col-2>
-                                <button ion-button icon-only (click)="goToComentar()">
-                                    <ion-icon name="chatbubbles"></ion-icon>
-                              </button>
-                              </ion-col>
-                              
-                          </ion-row>
-                      </ion-grid>
-          </ion-item>
-          <ion-item>
-                  <ion-grid>
-                          <ion-row>
-                              <ion-col col-2>
-                                      <ion-avatar item-start>
-                                              <img src="../../assets/imgs/clasesBoxeo.jpeg">
-                                          </ion-avatar>
-                              </ion-col>
-                              <ion-col col-6>
-                                    <p>30/10/2017</p>
-                                    <p>3:00 pm</p>
-                                    <p> </p>  
-                                      <h3>Boxeo</h3>
-                                      <h3>Jesus Rodriguez</h3>
-                                     
-                                  
-                              </ion-col>
-                              <ion-col col-2>
-                                <button ion-button icon-only (click)="goToComentar()">
-                                        <ion-icon name="chatbubbles"></ion-icon>
-                              </button>
-                              </ion-col>
-                              
-                          </ion-row>
-                      </ion-grid>
-          </ion-item>
-          <ion-item>
-              <ion-grid>
-              </ion-grid>
-          </ion-item>
-        </ion-list>
-  </ion-content>
--->
   <ion-content padding>
         <ion-list>
-            <ion-item-sliding *ngFor="let item of items">
+            <ion-item-sliding *ngFor="let listaCritica of listaCriticas">
             <ion-item>
-                    <ion-grid>
+                         <ion-grid>
                             <ion-row>
-                                <ion-col col-2>
+                                <!--ion-col col-2>
                                         <ion-avatar item-start>
                                                 <img src="item.img">
                                             </ion-avatar>
-                                </ion-col>
+                                </ion-col-->
                                 <ion-col col-6>
-                                  <p>{{item.fecha}}</p>
-                                  <p>{{item.hora}}</p> 
+                                  <p>{{listaCritica._fecha}}</p>
+                                  
                                   <p> </p>      
-                                  <h3>{{item.titulo}}</h3>
-                                  <h3>{{item.instructor}}</h3>
+                                  <h3>{{listaCritica._nombreClase}}</h3>
+                                  <h3>{{listaCritica._nombreIns}}</h3>
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
@@ -101,4 +41,6 @@
             </ion-item-options>  
             </ion-item-sliding>
           </ion-list>
+
+          
     </ion-content>
