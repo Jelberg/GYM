@@ -183,7 +183,7 @@ public class BOM02_Clase {
                 put ( "nombre" , nombre );
                 put( "descripcion" , descripcion );
             }});
-            String query = "select * from bo_m02_modifica_clase(?,?);";
+            String query = "select * from bo_m02_modifica_clase(?,?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setString(1, nombre);
             st.setDate(2,Date.valueOf(descripcion));

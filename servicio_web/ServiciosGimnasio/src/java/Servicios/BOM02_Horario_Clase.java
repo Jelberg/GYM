@@ -91,9 +91,16 @@ public class BOM02_Horario_Clase {
     
     /**
      * Funcion que es llamada cuando el admin desea insertar un horario de una clase.
-     * @param id_clase Identificador de la clase.
-     * @param nombre Nombre de la clase.
-     * @param descripcion Descripción de la clase.
+     * @param id_horario_clase Identificador de la clase.
+     * @param fecha Fecha de la clase (dd/mm/aaaa).
+     * @param dia Día de la clase (lunes, martes, ... ).
+     * @param capacidad Capacidad de alumnos en la clase.
+     * @param hora_inicio Hora que inicia la clase.
+     * @param hora_fin Hora que finaliza la clase.
+     * @param status status de la clase A(Activa) I (Inactiva).
+     * @param duracion duración de la clase (calculada con una función).
+     * @param nombreclase Nombre de la clase.
+     * @param instructor Día de la clase (lunes, martes, ... ).
      * @return Devuelve un json con mensaje del estatus de la peticion.
      */
     @POST
@@ -107,8 +114,7 @@ public class BOM02_Horario_Clase {
                                  @QueryParam("hora_fin") Time hora_fin,
                                  @QueryParam("status") int status,
                                  @QueryParam("duracion") int duracion,
-                                 @QueryParam("usuario") int usuario,
-                                 @QueryParam("clase") int clase,
+                                 @QueryParam("nombreclase") int nombreclase,
                                  @QueryParam("instructor") int instructor){
 
         Map<String, String> response = new HashMap<String, String>();
@@ -122,14 +128,13 @@ public class BOM02_Horario_Clase {
                 put("hora_fin", hora_fin );
                 put("status", status );
                 put("duracion", duracion );
-                put("usuario", usuario );
-                put("clase", clase );
+                put("nombreclase", nombreclase );
                 put("instructor", instructor );
             }});
 
             String query = "select * from bo_m02_inserta_horario_clase(?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement st = conn.prepareStatement(query);
-            java.lang.reflect.Type type = new TypeToken<Clase[]>(){}.getType();
+            java.lang.reflect.Type type = new TypeToken<Horario_Clase[]>(){}.getType();
                 st.setInt(1, id_horario_clase);
                 st.setDate(2, fecha);
                 st.setString(3, dia);
@@ -138,8 +143,7 @@ public class BOM02_Horario_Clase {
                 st.setTime(6, hora_fin);
                 st.setInt(7, status);
                 st.setInt(8, duracion);
-                st.setInt(9, usuario);
-                st.setInt(10, clase);
+                st.setInt(10, nombreclase);
                 st.setInt(11, instructor);
                 st.executeQuery();
             response.put("data", "Se insertó el horario");
@@ -154,8 +158,123 @@ public class BOM02_Horario_Clase {
             Sql.bdClose(conn);
             return gson.toJson(response);
         }
-
     }
     
+    /**
+     * Metodo que recibe como parametros los siguientes campos
+     * para eliminar el horario de esa clase con ese instructor ese día y a esa hora.
+     * @param nombreclase Nombre de la clase.
+     * @param instructor Identificador del instructor.
+     * @param fecha Fecha de la clase (dd/mm/aaaa).
+     * @param dia Día de la clase (lunes, martes, ... ).
+     * @param capacidad Capacidad de alumnos en la clase.
+     * @param hora_inicio Hora que inicia la clase.
+     * @param hora_fin Hora que finaliza la clase.
+     * @return Devuelve un json con elemento llamado data, 
+     * contiene el mensaje de la peticion
+     */
+    @DELETE
+    @Path("/eliminaHorario_Clase")
+    @Produces("application/json")
+    public String eliminaClase(@QueryParam("nombreclase") int nombreclase,
+                                 @QueryParam("instructor") int instructor,
+                                 @QueryParam("fecha") Date fecha,
+                                 @QueryParam("dia") String dia,
+                                 @QueryParam("capacidad") int capacidad,
+                                 @QueryParam("hora_inicio") Time hora_inicio,
+                                 @QueryParam("hora_fin") Time hora_fin){
+
+        Map<String, String> response = new HashMap<String, String>();
+        try{
+
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("nombreclase", nombreclase);
+                put("instructor", instructor);
+                put("fecha", fecha );
+                put("dia", dia );
+                put("capacidad", capacidad );
+                put("hora_inicio", hora_inicio );
+                put("hora_fin", hora_fin );
+            }});
+                String query = "SELECT bo_m02_elimina_horario_clase(?,?,?,?,?,?,?)";
+            PreparedStatement st = conn.prepareStatement(query);
+                st.setInt(1, nombreclase);
+                st.setInt(2, instructor);
+                st.setDate(3, fecha);
+                st.setString(4, dia);
+                st.setInt(5, capacidad);
+                st.setTime(6, hora_inicio);
+                st.setTime(7, hora_fin);
+            ResultSet rs = st.executeQuery();
+            response.put("data", "Se elimino el horario");
+        }
+        catch(SQLException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            Sql.bdClose(conn);
+            return gson.toJson(response);
+        }
+    }
+    
+    /**
+     * Funcion que modifica un horario.
+     * @param nombreclase Nombre de la clase.
+     * @param instructor Identificador del instructor.
+     * @param fecha Fecha de la clase (dd/mm/aaaa).
+     * @param dia Día de la clase (lunes, martes, ... ).
+     * @param capacidad Capacidad de alumnos en la clase.
+     * @param hora_inicio Hora que inicia la clase.
+     * @param hora_fin Hora que finaliza la clase.
+     * @return Devuelve un json con un mensaje al usuario sobre el estatus
+     * de la petición.
+     */
+    @POST
+    @Path("/modificaHorario_Clase")
+    @Produces("application/json")
+    public String modificaClase( @QueryParam ( "nombreclase" ) int nombreclase,
+                                 @QueryParam("instructor") int instructor,
+                                 @QueryParam("fecha") Date fecha,
+                                 @QueryParam("dia") String dia,
+                                 @QueryParam("capacidad") int capacidad,
+                                 @QueryParam("hora_inicio") Time hora_inicio,
+                                 @QueryParam("hora_fin") Time hora_fin){
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("nombreclase", nombreclase);
+                put("instructor", instructor);
+                put("fecha", fecha );
+                put("dia", dia );
+                put("capacidad", capacidad );
+                put("hora_inicio", hora_inicio );
+                put("hora_fin", hora_fin );
+            }});
+            String query = "select * from bo_m02_modifica_horario_clase(?,?,?,?,?,?,?)";
+            PreparedStatement st = conn.prepareStatement(query);
+                st.setInt(1, nombreclase);
+                st.setInt(2, instructor);
+                st.setDate(3, fecha);
+                st.setString(4, dia);
+                st.setInt(5, capacidad);
+                st.setTime(6, hora_inicio);
+                st.setTime(7, hora_fin);
+            st.executeQuery();
+            response.put("data", "Se modificó con éxito");
+        }
+        catch (SQLException e){
+            response.put("error", e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            Sql.bdClose(conn);
+            return gson.toJson(response);
+        }
+    } 
     
 }

@@ -1,6 +1,6 @@
---------------------------------------ENTRENADOR-------------------------------------------
+---------------------------ENTRENADOR------------------------------------
 
-Funcion para devolver a un entrenador filtrando por su correo
+--------------------Funcion que devuelve un entrenador--------------------
   
   CREATE OR REPLACE FUNCTION bo_m02_get_entrenadores(email character varying)
   RETURNS TABLE(id int, nombre character varying, apellido character varying,
@@ -24,4 +24,57 @@ BEGIN
    END LOOP;
 END; $$
   LANGUAGE plpgsql;
--------------------------------------FIN ENTRENADOR----------------------------------------
+
+--------------------Funcion que inserta un entrenador--------------------
+
+CREATE OR REPLACE FUNCTION bo_m02_insertar_entrenador(nombre, apellido,
+ fechanac, sexo, correo, historial)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	
+  INSERT INTO ENTRENADOR(ENT_NOMBRE,ENT_APELLIDO,ENT_FECHA_NAC,ENT_SEXO,ENT_CORREO,ENT_HISTORIAL)
+  VALUES (nombre , apellido, to_date(fecha_nac,'dd/mm/yyyy'), sexo, correo, historial);
+END $$
+  LANGUAGE plpgsql;
+
+
+--------------------Funcion que modifica un entrenador--------------------
+
+CREATE OR REPLACE FUNCTION bo_m02_actualizar_entrenador(
+    nombre character varying, apellido character varying,
+    fecha_nac character varying, sexo char,
+    correo character varying, historial character varying)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        UPDATE entrenador
+        SET ent_nombre = nombre , ent_apellido = apellido, ent_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ent_sexo = sexo, ent_historial = historial;
+ 	where ent_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
+--------------------Funcion que elimina un entrenador--------------------
+
+CREATE OR REPLACE FUNCTION bo_m02_eliminar_entrenador(correo character varying)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        DELETE FROM entrenador
+        WHERE ent_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
+--------Este agrega un turno al entrenador---------------------------------
+
+CREATE OR REPLACE FUNCTION bo_m02_insertar_turno(id_entrenador in, id_turno int)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	UPDATE turno_entrenador
+	SET fk_entrenador =id_entrenador 
+	WHERE TE_ID = id_turno;
+END $$
+LANGUAGE PLPGSQL;
+
+
