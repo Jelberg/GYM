@@ -46,7 +46,7 @@ window.onload = function mostrartabla()
                     contenido += "</td>";
                     }
                 }
-                contenido += "<td class='tcenter'><a><i class='fa fa-pencil-square-o' onClick='crud(this.id)' aria-hidden='true' value='"+variable+"'></i></a></td>";
+                contenido += "<td class='tcenter'><a><i class='fa fa-pencil-square-o' onClick='crud(this)' aria-hidden='true'></i></a></td>";
             
                 contenido += "</tr>";
             }
@@ -100,7 +100,7 @@ function buscarInstructor()
                     contenido += "</td>";
                     }
                 }
-                contenido += "<td class='tcenter'><a><i class='fa fa-pencil-square-o' onClick='crud(this.id)' aria-hidden='true' value='"+variable+"'></i></a></td>";
+                contenido += "<td class='tcenter'><a><i class='fa fa-pencil-square-o' onClick='crud(this)' aria-hidden='true' ></i></a></td>";
             
                 contenido += "</tr>";
             }
