@@ -1,16 +1,18 @@
---Este solo devuelve las medidas de ese usuario en esa fecha.
-CREATE OR REPLACE FUNCTION fo_m04_get_progresoM(usuario_CI int, fecha DATE)
-  RETURNS TABLE(medida INT, tipo character varying)
+﻿--Este solo devuelve las medidas de ese usuario en esa fecha.
+CREATE OR REPLACE FUNCTION fo_m04_get_progresoM(usuario_id int)
+  RETURNS TABLE(medida INT, tipo character varying, fecha date)
    AS $$
 DECLARE
    var_r    record;
 BEGIN
-   FOR var_r IN(SELECT pm_medida, med_tipo
+   FOR var_r IN(SELECT pm_medida, med_tipo, pm_fecha
         FROM usuario inner join  progreso_medida on usu_id = fk_usuario inner join medida on fk_medida = med_id
-        WHERE usu_cedula = usuario_CI AND pm_fecha = fecha)
+        WHERE usu_id = usuario_id
+	order by pm_fecha DESC limit 6 )
    LOOP
     medida = var_r.pm_medida;
     tipo = var_r.med_tipo;
+    fecha = var_r.pm_fecha;
     RETURN NEXT;
    END LOOP;
 END; $$
@@ -18,12 +20,20 @@ END; $$
 
 
 --Este elimina las medidas correspondientes a esa fecha y a ese usuario
-CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_CI int, fecha DATE)
+CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_id int, tipo_medida varchar)
 	RETURNS void AS $$
     DECLARE
+    id_medida int;
+    fecha_actual DATE;
+    mes	INT;
+    id_pm	INT;
     BEGIN
+	fecha_actual := current_date;
+	mes := (select EXTRACT(MONTH FROM fecha_actual) );
+	id_medida := ( SELECT MED_ID FROM MEDIDA WHERE med_tipo = tipo_medida  );
+	id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = usuario_id and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) );	
         DELETE FROM progreso_medida
-        WHERE pm_fecha = fecha and fk_usuario = usuario_CI;
+        WHERE pm_id = id_pm;
     END; $$
 LANGUAGE plpgsql;
 
@@ -31,8 +41,7 @@ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
     fk_usuario INT,
     medida INT,
-    tipo INT,
-    fecha DATE)
+    tipo INT)
   RETURNS void
    AS $$
     DECLARE
@@ -44,24 +53,30 @@ CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
     END; $$
   LANGUAGE plpgsql;
 
---Falta la consulta de las medidas durante un ano
 
--- Este devuelve los comentarios pertenencientes a ese progreso
---CREATE OR REPLACE FUNCTION fo_m04_get_comentariopromed( pm_id int)
 
 --FUNCION QUE ACTUALZA MEDIDA DADOS: EL ID DEL USUARIO, FECHA DE EL PROGRESO, TIPO DE LA MEDIDA Y LA NUEVA MEDIDA.
-CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER, fecha DATE, tipo_medida VARCHAR, medida INTEGER)
+<<<<<<< HEAD
+CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER, medida INTEGER, tipo_medida VARCHAR)
+=======
+CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER,tipo_medida VARCHAR, medida INTEGER )
+>>>>>>> 5ca53c90710b142ba300fdb0c5b77a6d9d069933
   RETURNS void
    AS $$
 DECLARE
     id_medida int;
+    fecha_actual DATE;
+    mes	int;
+    id_pm	int;
 BEGIN
-    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE MED_TIPO = tipo_medida );
+     fecha_actual := current_date;
+     mes := (select EXTRACT(MONTH FROM fecha_actual) );
+    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE med_tipo = tipo_medida  );
+    id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = id_usuario and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) );	
     UPDATE PROGRESO_MEDIDA SET  PM_MEDIDA = medida
-    WHERE PM_FECHA = fecha and FK_USUARIO = id_usuario and FK_MEDIDA = id_medida;
+    WHERE PM_ID = id_pm;
 END; $$
   LANGUAGE plpgsql;
-
 --FUNCION QUE OBTIENE LOS ULTIMOS REGISTROS DEL PROGRESO DE UN USUARIO CON RESPECTO A SU PESO.
 CREATE OR REPLACE FUNCTION fo_m04_get_progresop(id_usuario int)
   RETURNS TABLE(peso INT, fecha DATE, id INT)
@@ -111,5 +126,77 @@ BEGIN
 	UPDATE PROGRESO_PESO
 	SET PP_PESO = peso
 	WHERE FK_USUARIO = id_usuario AND PP_FECHA = fecha;
+END; $$
+  LANGUAGE plpgsql;
+
+
+--FUNCION QUE INSERTA LOS COMENTARIOS DE UN PROGRESO DEL USUARIO, RECIBE EL ID DEL USUARIO, EL PROGRESO.
+CREATE OR REPLACE FUNCTION fo_m04_inserta_comentario(id_usuariopro int, id_usuariocom int, con_mensaje varchar,  pm_id int, pp_id int)
+  RETURNS void	
+   AS $$
+DECLARE
+   fecha_actual	date;
+BEGIN
+	fecha_actual := current_date;
+	INSERT INTO COMENTARIO ( com_mensaje, fk_usuariopro, fk_pro_peso, fk_pro_medida, fk_usuariocom, com_fecha  ) VALUES
+	( con_mesaje, id_usuariopro, pp_id, pm_id, id_usuariocom, fecha_actual);
+END; $$
+  LANGUAGE plpgsql;
+
+--Este solo devuelve los comentario de ese pogreso peso.
+CREATE OR REPLACE FUNCTION fo_m04_get_comentarioprop(usuario_id int, fk_pro_peso int)
+  RETURNS TABLE(com_mensaje varchar, usu_nombre varchar)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT com_mensaje, A.usu_nombre
+        FROM usuario inner join  comentario on usu_id = fk_usuariopro inner join A.usuario on A.usu_id = fk_usuariocom
+
+        WHERE usu_id = usuario_id  and fk_pro_peso = fk_pro_peso 
+	order by pm_fecha DESC limit 10 )
+   LOOP
+    com_mensaje = var_r.com_mensaje;
+    usu_nombre = var_r.A.usu_nombre;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--Este solo devuelve los comentario de ese pogreso medida.
+CREATE OR REPLACE FUNCTION fo_m04_get_comentarioprom(usuario_id int, fk_pro_medida int)
+  RETURNS TABLE(com_mensaje varchar, usu_nombre varchar)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT com_mensaje, A.usu_nombre
+        FROM usuario inner join  comentario on usu_id = fk_usuariopro inner join A.usuario on A.usu_id = fk_usuariocom
+
+        WHERE usu_id = usuario_id and fk_pro_medidas = fk_pro_medida
+	order by pm_fecha DESC limit 10 )
+   LOOP
+    com_mensaje = var_r.com_mensaje;
+    usu_nombre = var_r.A.usu_nombre;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--Este solo devuelve todos los progresos sin importar de que progreso sea.
+CREATE OR REPLACE FUNCTION fo_m04_get_progresoscompartidos()
+  RETURNS TABLE(com_mensaje varchar, usu_nombre varchar)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT com_mensaje, usu_nombre 
+   FROM comentario com inner join usuario usu on usu.usu_id = com.fk_usuariopro 
+	order by pm_fecha DESC limit 10)
+   LOOP
+    com_mensaje = var_r.com_mensaje;
+    usu_nombre = var_r.usu_nombre;
+    RETURN NEXT;
+   END LOOP;
 END; $$
   LANGUAGE plpgsql;
