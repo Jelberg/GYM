@@ -47,6 +47,7 @@ import { TabsEjercicioPage } from '../pages/FO_M04/tabs-ejercicio/tabs-ejercicio
 //import { CambiarMedidasPage } from '../pages/FO_M04/cambiar-medidas/cambiar-medidas';
 import { CambiaMedidaPage } from '../pages/FO_M04/cambia-medida/cambia-medida';
 import { TabMedidaPage } from '../pages/FO_M04/tab-medida/tab-medida';
+import { ComentarioPage } from '../pages/FO_M04/comentario/comentario'
 //FIN M04
 //M05
 import { ClasesPage } from '../pages/FO_M05/clases/clases';
@@ -58,7 +59,13 @@ import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-cale
 import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/realizar-valoracion';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 //FIN M05
-
+// M06
+import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/reservas-realizadas';
+import { HorariosEntrenadorPage} from '../pages/FO_M06/horarios-entrenador/horarios-entrenador';
+import { GestiNDeReservasPage} from '../pages/FO_M06/gesti-nde-reservas/gesti-nde-reservas';
+import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reserva';
+import { ChatPage} from '../pages/FO_M06/chat/chat';
+//FIN M06
 
 
 @NgModule({
@@ -82,6 +89,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     ProgresoPesoPage,
     CambiarPesoPage,
     ProgresoComentarioPage,
+    ComentarioPage,
     TabsPesoPage,
     TabsEjercicioPage,
     //TabsMedidasPage,
@@ -103,7 +111,12 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     ClasesParticipadasPage,
     ComentarClasePage,
     RealizarValoracionPage,
-    TabCalendarClassPage
+    TabCalendarClassPage,
+    ReservasRealizadasPage,
+    HorariosEntrenadorPage,
+    GestiNDeReservasPage,
+    DetalleReservaPage,
+    ChatPage
   ],
   imports: [
     BrowserModule,
@@ -140,6 +153,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     ProgresoPesoPage,
     CambiarPesoPage,
     ProgresoComentarioPage,
+    ComentarioPage,
     TabsPesoPage,
     TabsEjercicioPage,
     //TabsMedidasPage,
@@ -160,7 +174,12 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     ComentarClasePage,
     ReservasPage,
     RealizarValoracionPage,
-    TabCalendarClassPage
+    TabCalendarClassPage,
+    ReservasRealizadasPage,
+    HorariosEntrenadorPage,
+    GestiNDeReservasPage,
+    DetalleReservaPage,
+    ChatPage
   ],
   providers: [
     StatusBar,

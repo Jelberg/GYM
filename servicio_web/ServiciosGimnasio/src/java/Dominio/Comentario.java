@@ -16,10 +16,19 @@ public class Comentario implements Serializable {
     private String _mensaje;
     private int _UsuarioProgreso;
     private int _UsuarioComentario;
+    private String _NombreUsuario;
     
     public Comentario(){
     }
-    
+
+    public String getNombreUsuario() {
+        return _NombreUsuario;
+    }
+
+    public void setNombreUsuario(String _NombreUsuario) {
+        this._NombreUsuario = _NombreUsuario;
+    }
+        
     public Comentario(int id, String mensaje ){
         this._id = id;
         this._mensaje = mensaje;
