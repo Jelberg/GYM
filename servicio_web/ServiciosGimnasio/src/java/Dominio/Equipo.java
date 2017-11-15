@@ -7,15 +7,23 @@ package Dominio;
 
 /**
  *
- * @author MinervaMorales
+ * @author Juan Zozaya
  */
 public class Equipo {
     
     private String _nombre;
+    private int id;
 
     public Equipo(String _nombre) {
         this._nombre = _nombre;
     }
+     public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    } 
 
     public String getNombre() {
         return _nombre;
