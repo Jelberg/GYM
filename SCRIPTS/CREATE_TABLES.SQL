@@ -1,5 +1,10 @@
 -----------------FIN CREAR LA BASE DE DATOS CON USER---------------
 
+CREATE 	USER 	 gymucab 	PASSWORD 'gymucab';
+ALTER 	ROLE	 gymucab 	WITH SUPERUSER;
+CREATE 	DATABASE gimnasiobd 	WITH OWNER gymucab;
+
+
  -------------CREATES TABLAS DE LA BASE DE DATOS ORDENADA-----------
 
 CREATE TABLE USUARIO(
