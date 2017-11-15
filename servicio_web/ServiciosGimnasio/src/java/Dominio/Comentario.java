@@ -14,13 +14,20 @@ import java.io.Serializable;
 public class Comentario implements Serializable {
     private int _id;
     private String _mensaje;
-    private int _UsuarioProgreso;
-    private int _UsuarioComentario;
     private String _NombreUsuario;
+    private String _fecha;
     
     public Comentario(){
     }
 
+    public String getFecha() {
+        return _fecha;
+    }
+
+    public void setFecha(String _fecha) {
+        this._fecha = _fecha;
+    }
+    
     public String getNombreUsuario() {
         return _NombreUsuario;
     }
@@ -60,37 +67,7 @@ public class Comentario implements Serializable {
      */
     public void setMensaje(String _mensaje) {
         this._mensaje = _mensaje;
-    }
-
-    /**
-     * @return the _UsuarioProgreso
-     */
-    public int getUsuarioProgreso() {
-        return _UsuarioProgreso;
-    }
-
-    /**
-     * @param _UsuarioProgreso the _UsuarioProgreso to set
-     */
-    public void setUsuarioProgreso(int _UsuarioProgreso) {
-        this._UsuarioProgreso = _UsuarioProgreso;
-    }
-
-    /**
-     * @return the _UsuarioComentario
-     */
-    public int getUsuarioComentario() {
-        return _UsuarioComentario;
-    }
-
-    /**
-     * @param _UsuarioComentario the _UsuarioComentario to set
-     */
-    public void setUsuarioComentario(int _UsuarioComentario) {
-        this._UsuarioComentario = _UsuarioComentario;
-    }
-    
-    
+    }    
 }
 
 
