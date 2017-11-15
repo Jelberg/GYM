@@ -73,12 +73,36 @@ export class CambiaMedidaPage {
 
  
 
-  public abrirToast( mensaje: string ):void {
-    let toast = this.toastCtrl.create({
-      message: mensaje,
-      duration: 3000
+  public refrescarMedidas():void{
+
+    console.log( this.Escapula );
+    let urlPeticion = "F0M04_Progreso_Medida/actualizaMedida?id_usuario=1&medida="+this.Escapula+"&tipo_medida=Escapula";
+    this.userService.postDato( urlPeticion ).subscribe( data => {
+      let i: number = 0;
+      let mensaje: string = "";
+      while ( i < data.lenght ){
+        mensaje = data[i].data;
+      }
+
     });
-    toast.present();
+
   }
+
+  public eliminarMedidas():void{
+
+    console.log( this.Escapula );
+    let urlPeticion = "F0M04_Progreso_Medida/eliminarMedidas?id_usuario=1&tipo_medida=Escapula"
+    this.userService.postDato( urlPeticion ).subscribe( data => {
+      let i: number = 0;
+      let mensaje: string = "";
+      while ( i < data.lenght ){
+        mensaje = data[i].data;
+      }
+
+    });
+
+  }
+
+
 
 }

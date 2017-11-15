@@ -76,19 +76,19 @@ public class PruebaMedidas {
     @Test
     public void pruebaInsertaMedida(){
         Gson gson = new Gson();
-        String fecha = "2012-11-12";
         _progresoMedida = new FOM04_Progreso_Medida();
-        String respuesta = _progresoMedida.insertaMedidas(9999, 67, 4, fecha);
+        String respuesta = _progresoMedida.insertaMedidas(9999, 67, 4);
         assertNotNull( respuesta );
     }
     
-    @Ignore
     @Test
     public void pruebaEliminaMedida(){
         Gson gson = new Gson();
-        String fecha = "2012-10-12";
         _progresoMedida = new FOM04_Progreso_Medida();
+        String respuesta = _progresoMedida.eliminaMedidas(9999, "Cuadricep");
+        assertNotNull( respuesta );
         //String respuesta = _progresoMedida.eliminaMedidas(fecha, 9999);
         //assertNotNull( respuesta );
+
     }
 }

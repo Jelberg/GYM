@@ -30,6 +30,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author marvian
  */
+@Path("/FOM04_Comentario")
 public class FOM04_Comentario {
     
     private Connection conn = Sql.getConInstance();
@@ -60,20 +61,20 @@ public class FOM04_Comentario {
      */
     @GET
     @Path("/getProgresos")
-    @Produces("aplicacion/json")
+    @Produces("application/json")
     public String getProgresos(){
     
         try{
 
-            String query = "SELECT * FROM fo_m04_get_progresos()";
+            String query = "SELECT * FROM fo_m04_get_progresoscompartidos()";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);                       
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 jsonArray.add(new Comentario());
-                jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString("mensaje"));                
-                jsonArray.get(jsonArray.size() - 1).setUsuarioComentario(rs.getInt("usuariocomentario"));
+                jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString(1));                
+                jsonArray.get(jsonArray.size() - 1).setNombreUsuario(rs.getString(2));
                           
             }
             response = gson.toJson(jsonArray);
