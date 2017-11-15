@@ -13,15 +13,13 @@
           </ion-title>             
       </ion-list-header>
       <ion-list>       
-   <!--     <ion-title><h3>Series</h3></ion-title>
-        <ion-item-sliding *ngFor="let serie of listaSeries">
+        <ion-title><h3>Series</h3></ion-title>
+        <ion-item-sliding *ngFor="let serie of listaSeries let i of index">
             <ion-item detail-push>
-                <ion-avatar item-start> 
-                    <img src="../assets/imgs/imgsM03/pecho.png">
-                </ion-avatar>
-                  <h1>Repeticiones {{serie._numRepeticiones}}</h1>
+                  <h1>Serie {{i+1}}</h1>
+                  <h2>Repeticiones {{serie._numRepeticiones}}</h1>
                   <h2>Peso: {{serie._peso}}</h2>
-                  <h3 *ngIf="rutina.cantidadEjercicios !=0">Descanso: {{serie._tiempoDescanso}} minutos</h3>
+                  <h2 *ngIf="serie._tiempoDescanso !=0">Descanso: {{serie._tiempoDescanso}} minutos</h3>
             </ion-item>
             <ion-item-options side="right">
                 <button ion-button  color="calm">
@@ -32,7 +30,7 @@
                     <ion-icon name="trash"></ion-icon>
                 </button>
             </ion-item-options>  
-        </ion-item-sliding>-->
+        </ion-item-sliding>
       </ion-list>
 
     <ion-fab right bottom #fab>

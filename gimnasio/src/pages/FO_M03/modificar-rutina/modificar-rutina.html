@@ -29,7 +29,7 @@
 
            
         <ion-item-sliding  *ngFor="let ejercicio of listaEjercicios">
-            <ion-item detail-push><!--aqui va el goto ejercicio-rutina-->
+            <ion-item detail-push (click)="goToEjercicioRutina(ejercicio._nombre)"><!--aqui va el goto ejercicio-rutina-->
                 <ion-avatar item-start>
                     <img src="../assets/imgs/imgsM03/brazos.png">
                 </ion-avatar>

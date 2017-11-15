@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { EjerciciosPage } from '../ejercicios/ejercicios';
 import { TabsLogPage } from '../tabs-log/tabs-log';
 import { UserServiceProvider } from '../../../providers/user-service/user-service';
+import { EjercicioRutinaPage } from '../../FO_M03/ejercicio-rutina/ejercicio-rutina';
 /**
  * Generated class for the ModificarRutinaPage page.
  *
@@ -244,5 +245,12 @@ export class ModificarRutinaPage {
 
   public goToEjercicios(){
     this.navCtrl.push(EjerciciosPage);
+  }
+
+  public goToEjercicioRutina(nombEjercicio: string){
+    this.navCtrl.push(EjercicioRutinaPage, {idUsuario: this.idUsuario, 
+                                            nombreRut: this.nombreRut, 
+                                            diaRut: this.diaRut,
+                                            nombreEjercicio: nombEjercicio});
   }
 }
