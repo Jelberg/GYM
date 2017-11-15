@@ -18,6 +18,7 @@ export class UserServiceProvider {
  //private URL: string = "http://190.79.86.82:8080/web/"
   constructor(/*public http: Http,*/ private http: Http ) {
     console.log('Hello UserServiceProvider Provider');
+    
   }
 
   //Funcion para probar Web Service
@@ -47,6 +48,18 @@ export class UserServiceProvider {
   }
   public p ( res: Response ){
     return console.log(res);
+  }
+//FUNCION DE PRUEBA, NO USAR 
+  apiUrl = 'http://localhost:8080/ServiciosGimnasio/FOM05_Critica/sinCritica?id=4';
+  //apiUrl ='https://jsonplaceholder.typicode.com/users';
+  getUsers() {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
   }
 
 }

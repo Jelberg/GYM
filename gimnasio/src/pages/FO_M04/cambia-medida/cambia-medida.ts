@@ -86,6 +86,41 @@ export class CambiaMedidaPage {
 
     });
 
+    console.log( this.Tricep );
+    let urlPeticion1 = "F0M04_Progreso_Medida/actualizaMedida?id_usuario=1&medida="+this.Tricep+"&tipo_medida=Tricep";
+    this.userService.postDato( urlPeticion1 ).subscribe( data => {
+      let i: number = 0;
+      let mensaje: string = "";
+      while ( i < data.lenght ){
+        mensaje = data[i].data;
+      }
+
+    });
+
+    console.log( this.Abdomen);
+    let urlPeticion2 = "F0M04_Progreso_Medida/actualizaMedida?id_usuario=1&medida="+this.Abdomen+"&tipo_medida=Abdomen";
+    this.userService.postDato( urlPeticion2 ).subscribe( data => {
+      let i: number = 0;
+      let mensaje: string = "";
+      while ( i < data.lenght ){
+        mensaje = data[i].data;
+      }
+
+    });
+
+    console.log( this.Cuadricep );
+    let urlPeticion3 = "F0M04_Progreso_Medida/actualizaMedida?id_usuario=1&medida="+this.Cuadricep+"&tipo_medida=Cruadricep";
+    this.userService.postDato( urlPeticion3 ).subscribe( data => {
+      let i: number = 0;
+      let mensaje: string = "";
+      while ( i < data.lenght ){
+        mensaje = data[i].data;
+      }
+
+    });
+
+    alert("Medidas actualizadas");
+
   }
 
   public eliminarMedidas():void{
@@ -101,8 +136,41 @@ export class CambiaMedidaPage {
 
     });
 
+    console.log( this.Tricep );
+    let urlPeticion1 = "F0M04_Progreso_Medida/eliminarMedidas?id_usuario=1&tipo_medida=Tricep"
+    this.userService.postDato( urlPeticion1 ).subscribe( data => {
+      let i: number = 0;
+      let mensaje: string = "";
+      while ( i < data.lenght ){
+        mensaje = data[i].data;
+      }
+
+    });
+
+    console.log( this.Abdomen );
+    let urlPeticion2 = "F0M04_Progreso_Medida/eliminarMedidas?id_usuario=1&tipo_medida=Abdomen"
+    this.userService.postDato( urlPeticion2 ).subscribe( data => {
+      let i: number = 0;
+      let mensaje: string = "";
+      while ( i < data.lenght ){
+        mensaje = data[i].data;
+      }
+
+    });
+
+    console.log( this.Cuadricep );
+    let urlPeticion3 = "F0M04_Progreso_Medida/eliminarMedidas?id_usuario=1&tipo_medida=Cuadricepp"
+    this.userService.postDato( urlPeticion3 ).subscribe( data => {
+      let i: number = 0;
+      let mensaje: string = "";
+      while ( i < data.lenght ){
+        mensaje = data[i].data;
+      }
+
+    });
+
+    alert("Medidas del mes borradas");
+
   }
-
-
 
 }
