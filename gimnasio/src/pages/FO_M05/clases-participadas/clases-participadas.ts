@@ -19,7 +19,7 @@ export class ClasesParticipadasPage {
 
   listaCriticas: any[]=[];
   id_user: number;
-  users: any;
+  
   
 
 
@@ -55,20 +55,12 @@ export class ClasesParticipadasPage {
         while ( i < data.length ){
         this.listaCriticas[i] = data[i];
         i++;}
-      console.log(this.listaCriticas);
+      console.log(this.listaCriticas[0]);
     },
     (error) =>{
       console.error(error);
     }
   )
-  }
-// METODO DE PREUBAS, NO USAR
-  getUsers() {
-    this.userService.getUsers()
-    .then(data => {
-      this.users = data;
-      console.log(this.users);
-    });
   }
 
   goToComentar(){
