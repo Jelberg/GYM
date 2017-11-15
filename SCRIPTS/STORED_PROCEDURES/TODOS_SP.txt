@@ -1,0 +1,658 @@
+--***************************************BOM02********************************************
+------------------------------------------CLASE-------------------------------------------
+
+--------------Función que devuelve la descripción de la clase consultada.
+
+CREATE OR REPLACE FUNCTION bo_m02_get_clase(nombreclase character varying)
+  RETURNS TABLE(nombre character varying, descripcion character varying)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT cla_nombre, cla_descripcion
+        FROM clase
+        WHERE cla_nombre = nombreclase)
+   LOOP
+    nombre = var_r.cla_nombre;
+    descripcion = var_r.cla_descripcion;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+----------------------------Función que agrega una clase.
+
+CREATE OR REPLACE FUNCTION bo_m02_inserta_clase(idclase INT, 
+    nombreclase character varying,
+    descripcion character varying)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	INSERT INTO CLASE(CLA_ID,CLA_NOMBRE,CLA_DESCRIPCION) VALUES (idclase, nombreclase, descripcion);
+END $$
+  LANGUAGE plpgsql;
+
+----------------------------Función que elimina una clase.
+
+CREATE OR REPLACE FUNCTION bo_m02_elimina_clase(nombreclase character varying)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	DELETE FROM CLASE WHERE CLA_NOMBRE=nombreclase;
+END $$
+  LANGUAGE plpgsql;
+
+---------------------------Función que modifica datos de una clase.
+
+CREATE OR REPLACE FUNCTION bo_m02_modifica_clase(nombreclase character varying, descripcion character varying)
+  RETURNS void
+   AS $$
+DECLARE
+BEGIN
+    UPDATE CLASE SET (CLA_NOMBRE = nombreclase, CLA_DESCRIPCION = descripcion)
+    WHERE CLA_NOMBRE = nombreclase;
+END; $$
+  LANGUAGE plpgsql;
+
+---------------------------------------FIN CLASE-------------------------------------------
+
+-----------------------------------HORARIO_CLASE-------------------------------------------
+
+--------------Función que devuelve los horarios de clase, de la clase consultada.
+
+CREATE OR REPLACE FUNCTION bo_m02_get_horario_clase(nombreclaseconsulta character varying)
+  RETURNS TABLE(nombreclase character varying, instructor character varying, fecha date, 
+		dia character varying, capacidad int, hora_inicio time, hora_fin time)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT CLA_Nombre, INS_Nombre, HC_fecha, HC_dia, HC_capacidad, HC_hora_inicio, HC_hora_fin
+        FROM Horario_Clase, Clase, Instructor
+	WHERE  nombreclaseconsulta = CLA_Nombre and fk_Clase = CLA_id and fk_Instructor=INS_id)
+   LOOP
+    nombreclase = var_r.CLA_Nombre;
+    instructor= var_r.INS_nombre;
+    fecha = var_r.HC_fecha;
+    dia = var_r.HC_dia;
+    capacidad = var_r.HC_capacidad;
+    hora_inicio = var_r.HC_hora_inicio;
+    hora_fin = var_r.HC_hora_fin;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--------------Función que agrega el horario de una clase
+
+CREATE OR REPLACE FUNCTION bo_m02_inserta_horario_clase(fecha date, dia character varying, 
+	capacidad int, hora_inicio time, hora_fin time, status character varying, duracion int, 
+	nombreclase int, instructor int)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	INSERT INTO CLASE(HC_FECHA, HC_DIA, HC_CAPACIDAD, HC_HORA_INICIO, HC_HORA_FIN, HC_STATUS,
+			  HC_DURACION, fk_CLASE, fk_INSTRUCTOR) VALUES (fecha, dia, capacidad,
+			  hora_inicio, hora_fin, status, duracion, nombreclase, instructor);
+END $$
+  LANGUAGE plpgsql;
+
+----------------------------Función que elimina el horario de una clase.
+
+CREATE OR REPLACE FUNCTION bo_m02_elimina_horario_clase(nombreclase int, instructor int, 
+	fecha date, dia character varying, capacidad int, hora_inicio time, hora_fin time)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	DELETE FROM HORARIO_CLASE WHERE (fk_clase=nombreclase and fk_instructor=instructor
+					and Hc_fecha=fecha and HC_dia=dia and HC_capacidad=capacidad
+					and HC_Hora_inicio=hora_inicio and HC_Hora_Fin=hora_fin);
+END $$
+  LANGUAGE plpgsql;
+
+---------------------------Función que modifica el horario de una clase.
+
+CREATE OR REPLACE FUNCTION bo_m02_modifica_horario_clase(nombreclase int, instructor int, 
+	fecha date, dia character varying, capacidad int, hora_inicio time, hora_fin time)
+  RETURNS void
+   AS $$
+DECLARE
+BEGIN
+    UPDATE HORARIO_CLASE SET (fk_clase=nombreclase and fk_instructor=instructor
+					and Hc_fecha=fecha and HC_dia=dia and HC_capacidad=capacidad
+					and HC_Hora_inicio=hora_inicio and HC_Hora_Fin=hora_fin)
+    WHERE (fk_Clase = nombreclase and fk_Instructor = instructor);
+END; $$
+  LANGUAGE plpgsql;
+
+----------------------------------FIN HORARIO_CLASE-----------------------------------------
+---------------------------ENTRENADOR------------------------------------
+
+--------------------Funcion que devuelve un entrenador--------------------
+  
+  CREATE OR REPLACE FUNCTION bo_m02_get_entrenadores(email character varying)
+  RETURNS TABLE(id int, nombre character varying, apellido character varying,
+ fechanac date, sexo char,correo character varying, historial character varying)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT ent_id, ent_nombre, ent_apellido, ent_fecha_nac, ent_sexo, ent_correo, ent_historial
+        FROM entrenador
+        WHERE ent_correo = email)
+   LOOP
+    id = var_r.ent_id;
+    nombre = var_r.ent_nombre;
+    apellido = var_r.ent_apellido;
+    fechanac = var_r.ent_fecha_nac;
+    sexo = var_r.ent_sexo;
+    correo = var_r.ent_correo;
+    historial = var_r.ent_historial;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--------------------Funcion que inserta un entrenador--------------------
+
+CREATE OR REPLACE FUNCTION bo_m02_insertar_entrenador(nombre, apellido,
+ fechanac, sexo, correo, historial)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	
+  INSERT INTO ENTRENADOR(ENT_NOMBRE,ENT_APELLIDO,ENT_FECHA_NAC,ENT_SEXO,ENT_CORREO,ENT_HISTORIAL)
+  VALUES (nombre , apellido, to_date(fecha_nac,'dd/mm/yyyy'), sexo, correo, historial);
+END $$
+  LANGUAGE plpgsql;
+
+
+--------------------Funcion que modifica un entrenador--------------------
+
+CREATE OR REPLACE FUNCTION bo_m02_actualizar_entrenador(
+    nombre character varying, apellido character varying,
+    fecha_nac character varying, sexo char,
+    correo character varying, historial character varying)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        UPDATE entrenador
+        SET ent_nombre = nombre , ent_apellido = apellido, ent_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ent_sexo = sexo, ent_historial = historial;
+ 	where ent_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
+--------------------Funcion que elimina un entrenador--------------------
+
+CREATE OR REPLACE FUNCTION bo_m02_eliminar_entrenador(correo character varying)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        DELETE FROM entrenador
+        WHERE ent_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
+--------Este agrega un turno al entrenador---------------------------------
+
+CREATE OR REPLACE FUNCTION bo_m02_insertar_turno(id_entrenador in, id_turno int)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	UPDATE turno_entrenador
+	SET fk_entrenador =id_entrenador 
+	WHERE TE_ID = id_turno;
+END $$
+LANGUAGE PLPGSQL;
+
+
+
+--------------------------------------INSTRUCTOR-------------------------------------------
+
+-- funcion que devuelve instructor por correo
+
+CREATE OR REPLACE FUNCTION bo_m02_get_instructor(mail character varying)
+  RETURNS TABLE(id int, nombre character varying, apellido character varying,
+ fechanac date, sexo char,correo character varying )
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT ins_id, ins_nombre, ins_apellido, ins_fecha_nac, ins_sexo, ins_correo
+        FROM instructor
+        WHERE ins_correo = mail)
+   LOOP
+    id= var_r.ins_id;
+    nombre = var_r.ins_nombre;
+    apellido = var_r.ins_apellido;
+    fechanac = var_r.ins_fecha_nac;
+    sexo = var_r.ins_sexo;
+    correo = var_r.ins_correo;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--Este agrega el instructor --------------------------------------------------
+
+CREATE OR REPLACE FUNCTION bo_m02_inserta_instructor (
+    nombre character varying,
+    apellido character varying,
+    fecha_nac character varying, 
+    sexo char,
+    correo character varying)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        INSERT INTO instructor(ins_nombre, ins_apellido,ins_fecha_nac, ins_sexo, ins_correo)
+        VALUES (nombre , apellido, to_date(fecha_nac,'dd/mm/yyyy'), sexo, correo);
+    END; $$
+LANGUAGE plpgsql;
+
+--------Este elimina instructor------------------------------------------------
+
+CREATE OR REPLACE FUNCTION fo_m04_elimina_instructor(correo character varying)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        DELETE FROM instructor
+        WHERE ins_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
+-------- actualizar instructor-----
+
+
+CREATE OR REPLACE FUNCTION bo_m02_actualiza_instructor (
+    nombre character varying,
+    apellido character varying,
+    fecha_nac character varying, 
+    sexo char,
+    correo character varying)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        UPDATE instructor
+        SET ins_nombre = nombre , ins_apellido = apellido, ins_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ins_sexo = sexo
+ 	where ins_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
+
+-----------------------------------FIN INSTRUCTOR------------------------------------------
+
+--********************************************FOM03*********************************************
+
+
+
+--********************************************FOM04*********************************************
+--Este solo devuelve las medidas de ese usuario en esa fecha.
+CREATE OR REPLACE FUNCTION fo_m04_get_progresoM(usuario_id int)
+  RETURNS TABLE(medida INT, tipo character varying, fecha date)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT pm_medida, med_tipo, pm_fecha
+        FROM usuario inner join  progreso_medida on usu_id = fk_usuario inner join medida on fk_medida = med_id
+        WHERE usu_id = usuario_id
+	order by pm_fecha DESC limit 6 )
+   LOOP
+    medida = var_r.pm_medida;
+    tipo = var_r.med_tipo;
+    fecha = var_r.pm_fecha;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+
+--Este elimina las medidas correspondientes a esa fecha y a ese usuario
+CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_id int, tipo_medida varchar)
+	RETURNS void AS $$
+    DECLARE
+    id_medida int;
+    fecha_actual DATE;
+    mes	INT;
+    id_pm	INT;
+    BEGIN
+	fecha_actual := current_date;
+	mes := (select EXTRACT(MONTH FROM fecha_actual) );
+	id_medida := ( SELECT MED_ID FROM MEDIDA WHERE med_tipo = tipo_medida  );
+	id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = usuario_id and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) );	
+        DELETE FROM progreso_medida
+        WHERE pm_id = id_pm;
+    END; $$
+LANGUAGE plpgsql;
+
+-- INSERTA MEDIDAS PERTENECIENTE A ESE USUARIO EN LA FECHA ACTUAL
+CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
+    fk_usuario INT,
+    medida INT,
+    tipo INT)
+  RETURNS void
+   AS $$
+    DECLARE
+	fecha_actual DATE;
+    BEGIN
+	fecha_actual  := current_date;
+        INSERT INTO progreso_medida (pm_medida,pm_fecha, fk_usuario, fk_medida) VALUES
+        ( medida , fecha_actual , fk_usuario , tipo );
+    END; $$
+  LANGUAGE plpgsql;
+
+
+
+--FUNCION QUE ACTUALZA MEDIDA DADOS: EL ID DEL USUARIO, FECHA DE EL PROGRESO, TIPO DE LA MEDIDA Y LA NUEVA MEDIDA.
+
+CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER, medida INTEGER, tipo_medida VARCHAR)
+
+  RETURNS void
+   AS $$
+DECLARE
+    id_medida int;
+    fecha_actual DATE;
+    mes	int;
+    id_pm	int;
+BEGIN
+     fecha_actual := current_date;
+     mes := (select EXTRACT(MONTH FROM fecha_actual) );
+    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE med_tipo = tipo_medida  );
+    id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = id_usuario and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) );	
+    UPDATE PROGRESO_MEDIDA SET  PM_MEDIDA = medida
+    WHERE PM_ID = id_pm;
+END; $$
+  LANGUAGE plpgsql;
+--FUNCION QUE OBTIENE LOS ULTIMOS REGISTROS DEL PROGRESO DE UN USUARIO CON RESPECTO A SU PESO.
+CREATE OR REPLACE FUNCTION fo_m04_get_progresop(id_usuario int)
+  RETURNS TABLE(peso INT, fecha DATE, id INT)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT pp_peso, pp_fecha, pp_id
+        FROM progreso_peso 
+        WHERE fk_usuario = id_usuario 
+        order by pp_fecha DESC limit 6)
+   LOOP
+    peso = var_r.pp_peso;
+    fecha = var_r.pp_fecha;
+    id = var_r.pp_id;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--FUNCION QUE INSERTA PROGRESO DE PESO DEL USUARIO, RECIBE EL ID DEL USUARIO Y EL PESO A REGISTRAR.
+CREATE OR REPLACE FUNCTION fo_m04_insert_progresop(id_usuario int, peso int)
+  RETURNS void	
+   AS $$
+DECLARE
+   fecha_actual	date;
+BEGIN
+	fecha_actual := current_date;
+	INSERT INTO PROGRESO_PESO ( PP_PESO, FK_USUARIO, PP_FECHA ) VALUES
+	( peso, id_usuario, fecha_actual );
+END; $$
+  LANGUAGE plpgsql;
+--FUNCION QUE ELIMINA EL REGISTRO DE PESO DE UN USUARIO, RECIBE EL ID DEL USUARIO Y LA FECHA DEL REGISTRO.
+CREATE OR REPLACE FUNCTION fo_m04_elimina_progresop(id_usuario int, fecha date)
+  RETURNS void	
+   AS $$
+BEGIN
+	DELETE FROM PROGRESO_PESO
+	WHERE FK_USUARIO = id_usuario and PP_FECHA = fecha;
+END; $$
+  LANGUAGE plpgsql;
+--FUNCION QUE ACTUALIZA EL REGISTRO DE PESO DE UN USUARIO, RECIBE EL ID DEL USUARIO, LA FECHA DEL REGISTRO Y EL NUEVO PESO.
+CREATE OR REPLACE FUNCTION fo_m04_act_progresop(id_usuario int, fecha date, peso int)
+  RETURNS void	
+   AS $$
+BEGIN
+	UPDATE PROGRESO_PESO
+	SET PP_PESO = peso
+	WHERE FK_USUARIO = id_usuario AND PP_FECHA = fecha;
+END; $$
+  LANGUAGE plpgsql;
+
+
+--FUNCION QUE INSERTA LOS COMENTARIOS DE UN PROGRESO DEL USUARIO, RECIBE EL ID DEL USUARIO, EL PROGRESO.
+CREATE OR REPLACE FUNCTION fo_m04_inserta_comentario(id_usuariopro int, id_usuariocom int, con_mensaje varchar,  pm_id int, pp_id int)
+  RETURNS void	
+   AS $$
+DECLARE
+   fecha_actual	date;
+BEGIN
+	fecha_actual := current_date;
+	INSERT INTO COMENTARIO ( com_mensaje, fk_usuariopro, fk_pro_peso, fk_pro_medida, fk_usuariocom, com_fecha  ) VALUES
+	( con_mesaje, id_usuariopro, pp_id, pm_id, id_usuariocom, fecha_actual);
+END; $$
+  LANGUAGE plpgsql;
+
+--Este solo devuelve los comentario de ese pogreso peso.
+CREATE OR REPLACE FUNCTION fo_m04_get_comentarioprop(usuario_id int, fk_pro_peso int)
+  RETURNS TABLE(com_mensaje varchar, usu_nombre varchar)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT com_mensaje, A.usu_nombre
+        FROM usuario inner join  comentario on usu_id = fk_usuariopro inner join A.usuario on A.usu_id = fk_usuariocom
+
+        WHERE usu_id = usuario_id  and fk_pro_peso = fk_pro_peso 
+	order by pm_fecha DESC limit 10 )
+   LOOP
+    com_mensaje = var_r.com_mensaje;
+    usu_nombre = var_r.A.usu_nombre;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--Este solo devuelve los comentario de ese pogreso medida.
+CREATE OR REPLACE FUNCTION fo_m04_get_comentarioprom(usuario_id int, fk_pro_medida int)
+  RETURNS TABLE(com_mensaje varchar, usu_nombre varchar)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT com_mensaje, A.usu_nombre
+        FROM usuario inner join  comentario on usu_id = fk_usuariopro inner join A.usuario on A.usu_id = fk_usuariocom
+
+        WHERE usu_id = usuario_id and fk_pro_medidas = fk_pro_medida
+	order by pm_fecha DESC limit 10 )
+   LOOP
+    com_mensaje = var_r.com_mensaje;
+    usu_nombre = var_r.A.usu_nombre;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--Este solo devuelve todos los progresos sin importar de que progreso sea.
+CREATE OR REPLACE FUNCTION fo_m04_get_progresoscompartidos()
+  RETURNS TABLE(com_mensaje varchar, usu_nombre varchar)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT com_mensaje, usu_nombre 
+   FROM comentario com inner join usuario usu on usu.usu_id = com.fk_usuariopro 
+	order by pm_fecha DESC limit 10)
+   LOOP
+    com_mensaje = var_r.com_mensaje;
+    usu_nombre = var_r.usu_nombre;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+
+
+
+--********************************************FOM05*********************************************
+
+---------------------FUNCIONES PARA LOS TRIGGERS
+
+CREATE OR REPLACE FUNCTION FOM05_LLENAR_DURACION() 
+RETURNS TRIGGER AS $$
+
+DECLARE 
+HORA_INICIO TIME;
+HORA_FIN TIME;
+HORA	 TIME;
+ID 	 INTEGER;
+
+BEGIN
+
+	SELECT HC_ID, HC_HORA_INICIO, HC_HORA_FIN INTO ID, HORA_INICIO, HORA_FIN
+	FROM HORARIO_CLASE ORDER BY HC_ID DESC LIMIT 1; 
+ 
+	HORA = HORA_FIN - HORA_INICIO;
+	
+	UPDATE HORARIO_CLASE SET HC_DURACION=HORA WHERE HC_ID=ID;
+	
+	RETURN NEW;
+END $$ 
+language plpgsql;
+
+--TRIGGERS
+
+CREATE TRIGGER FOM05_AGREGAR_DURACION AFTER INSERT ON HORARIO_CLASE FOR EACH ROW
+EXECUTE PROCEDURE FOM05_LLENAR_DURACION();
+
+-----------------------FUNCIONES RESERVA DE CLASES----------------------------
+
+--AGREGAR USUARIO PARA QUE PARTICIPE EN LA CLASE
+CREATE OR REPLACE FUNCTION M05_AGREGAR_PARTICIPACION(ID_USUARIO INTEGER, ID_HC INTEGER)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	UPDATE HORARIO_CLASE 
+	SET FK_USUARIO=ID_USUARIO 
+	WHERE HC_ID = ID_HC ;
+END $$
+LANGUAGE PLPGSQL;
+
+--ELIMINAR USUARIO DE LA PARTICIPACION
+CREATE OR REPLACE FUNCTION M05_ELIMINAR_PARTICIPACION(ID_USUARIO INT, ID_CLASE_HORARIO INT)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	UPDATE HORARIO_CLASE SET FK_USUARIO=NULL WHERE FK_USUARIO=ID_USUARIO AND HC_ID=ID_CLASE_HORARIO;
+END $$
+LANGUAGE PLPGSQL;
+
+
+--------------------------------FUNCIONES PARA CRITICA------------------------
+
+-- Metodo para traer todas las criticas de esa clase
+
+CREATE OR REPLACE FUNCTION FOM05_LISTA_CRITICAS(referencia_hc int) 
+RETURNS TABLE (id int, fecha Date, comentario varchar ,valoracion int ) AS
+$$
+DECLARE 
+var_r record;
+BEGIN
+for var_r in (Select * from CRITICA where FK_HC_ID = referencia_hc)
+
+loop
+	id:= var_r.CRI_ID;
+	fecha:= var_r.CRI_FECHA;
+	comentario:= var_r.CRI_COMENTARIO;
+	valoracion:= var_r.CRI_VALORACION;
+	
+	return next;
+	
+end loop;
+	
+	
+END 
+$$ 
+language plpgsql;
+
+--Metodo para agregar la critica a la clase
+
+CREATE OR REPLACE FUNCTION M05_AGREGAR_CRITICA(FECHA DATE, COMENTARIO CHARACTER VARYING(400),VALORACION INT, REFERENCIA_HC INT)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	INSERT INTO CRITICA(CRI_FECHA,CRI_COMENTARIO,CRI_VALORACION,FK_HC_ID) VALUES (FECHA,COMENTARIO,VALORACION,REFERENCIA_HC);
+END $$
+LANGUAGE PLPGSQL;
+
+--Metodo para eliminar critica
+
+CREATE OR REPLACE FUNCTION M05_ELIMINAR_CRITICA(ID_CRITICA INT)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	DELETE FROM CRITICA WHERE CRI_ID=ID_CRITICA;
+END $$
+LANGUAGE PLPGSQL;
+
+--lista las clases en las que ya se participo y no se han comentado EN LOS ULTIMOS 30 DIAS
+
+CREATE OR REPLACE FUNCTION M05_LISTA_CLASES_PARTICIPADAS(id int)
+RETURNS TABLE (fecha Date, clase varchar, instructor_nombre varchar,instructor_apellido varchar, id_hc int) AS $$
+DECLARE 
+var_r record;
+BEGIN 
+     for var_r in (Select HC_ID, HC_FECHA, CLA_NOMBRE, INS_NOMBRE, INS_APELLIDO
+     from HORARIO_CLASE , CLASE , INSTRUCTOR , USUARIO , CRITICA 
+     where
+     FK_USUARIO = id and 
+     USU_ID = FK_USUARIO and 
+     INS_ID = FK_INSTRUCTOR and
+     CLA_ID = FK_CLASE and
+
+     FK_HC_ID != HC_ID AND
+     HC_FECHA BETWEEN CAST (CURRENT_DATE-30 AS DATE) AND CAST (CURRENT_DATE AS DATE)
+     GROUP BY HC_ID, HC_FECHA, CLA_NOMBRE, INS_NOMBRE, INS_APELLIDO
+     )
+loop
+	instructor_nombre:= var_r.INS_NOMBRE;
+	fecha:= var_r.HC_FECHA;
+	instructor_apellido:= var_r.INS_APELLIDO;
+	clase:= var_r.CLA_NOMBRE;
+	id_hc:= var_r.HC_ID;
+	
+	return next;
+	
+end loop;
+	
+
+END $$
+LANGUAGE PLPGSQL;
+
+
+
+--********************************************FOM06*********************************************
+--------Esta funcion devuelve todas las reservas de entrenadores que ha hecho un usuario-------
+CREATE OR REPLACE FUNCTION fo_m06_get_reserva (usu_id int)
+	Returns Table (nombre_ent character varying,fecha_ini date, fecha_fin date)
+	AS $$
+DECLARE
+	_reservas record;
+	FOR _reservas IN (SELECT * ent_nombre,res_fecha_ini,ent_fecha_fin from Entrenador,Reserva
+			where ent_id=fk_entrenador and usu_id=fk_usuario)
+
+	loop
+		entrenador_nombre:=_reserva.ent_nombre;
+		fechai:=_reserva.ent_fecha_ini;
+		fechaf:=_reserva.ent_fecha_fin:
+		return next;
+	end loop;
+	end $$
+	LANGUAGE PLPGSQL;
+
+-------Esta funcion permitira agregar una reserva-----------
+
+CREATE OR REPLACE fo_m06_agregar_reserva (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int)
+RETURNS VOID AS $$
+DECLARE
+BEGIN
+	INSERT INTO reserva(res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int) 
+			values (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int);
+	END $$;
+	LANGUAGE PLPGSQL;

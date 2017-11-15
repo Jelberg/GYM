@@ -46,16 +46,17 @@ export class ClasesParticipadasPage {
   public cargarClasesSinComentar():void{
     console.log( this.id_user );
     //PENDIENTE DE CAMBIAR EL 3 POR LA ID DEL USUARIO *******
-    let url = "FOM05_Critica/sinCritica?id=3";
+    let url = "FOM05_Critica/sinCritica?id=4";
     this.userService.getDato(url)
         .subscribe( 
-          (res) => {    
-            this.listaCriticas = res.result;
-        /*let i: number = 0;
+          (data) => {    
+          //  this.listaCriticas = res.result;
+        let i: number = 0;
       while ( i < data.length ){
         this.listaCriticas[i] = data[i];
         i++;
-      }*/
+      }
+      console.error("HOLAAAAAAAA");
     },
     (error) =>{
       console.error(error);
