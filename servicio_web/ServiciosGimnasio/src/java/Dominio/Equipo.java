@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class Equipo implements Serializable {
     
-    private String _nombre;
+    private String nombre;
     private int id;
 
   
@@ -26,11 +26,11 @@ public class Equipo implements Serializable {
     } 
 
     public String getNombre() {
-        return _nombre;
+        return nombre;
     }
 
     public void setNombre(String _nombre) {
-        this._nombre = _nombre;
+        this.nombre = _nombre;
     }
     
     

@@ -10,7 +10,7 @@ package Dominio;
  * @author MinervaMorales
  */
 public class Maquina {
-    private String _nombre; 
+    private String nombre; 
     private int id;
     
      public int getId() {
@@ -22,11 +22,11 @@ public class Maquina {
     } 
 
     public String getNombre() {
-        return _nombre;
+        return nombre;
     }
 
     public void setNombre(String _nombre) {
-        this._nombre = _nombre;
+        this.nombre = _nombre;
     }
     
 }
