@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
-
+import { HttpClientModule } from '@angular/common/http';
 //Gráficos
 import { ChartsModule } from 'ng2-charts';
 
@@ -55,8 +55,7 @@ import { ReservasPage } from '../pages/FO_M05/reservas/reservas';
 import { ClaseParticularPage} from '../pages/FO_M05/clase-particular/clase-particular';
 import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clases-participadas';
 import { ComentarClasePage} from '../pages/FO_M05/comentar-clase/comentar-clase';
-import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class'
-import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/realizar-valoracion';
+import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 //FIN M05
 // M06
@@ -110,7 +109,6 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
     ClaseParticularPage,
     ClasesParticipadasPage,
     ComentarClasePage,
-    RealizarValoracionPage,
     TabCalendarClassPage,
     ReservasRealizadasPage,
     HorariosEntrenadorPage,
@@ -173,7 +171,6 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
     ClasesParticipadasPage,
     ComentarClasePage,
     ReservasPage,
-    RealizarValoracionPage,
     TabCalendarClassPage,
     ReservasRealizadasPage,
     HorariosEntrenadorPage,

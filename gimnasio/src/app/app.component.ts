@@ -26,12 +26,12 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
 })
 export class MyApp {
   @ViewChild('NAV') nav: Nav;
-  rootPage:any = HomePage;
+  rootPage:any = IniciarsesionPage;
   public pages: Array< { titulo: string, component: any, icon:string } >;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
 
-    this.rootPage = IniciarsesionPage;
+    this.rootPage = ClasesParticipadasPage;
     /* En el bloque de abajo, pueden agregar la pagina inicial de su modulo
       a la que se accedera desde el menu lateral */
     this.pages = [
