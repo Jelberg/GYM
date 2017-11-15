@@ -77,7 +77,6 @@ window.onload = function mostrartabla() {
 
 
 function editar(e, esMaquina, type) {
-    
     if (type == 1) {
         var id = e.parentNode.parentNode.childNodes
         for (var i = 0; i < id.length; i++) {
@@ -87,14 +86,14 @@ function editar(e, esMaquina, type) {
                     localStorage.setItem('id', Number(element.innerHTML));
                     localStorage.setItem('edit', 'true');
                     localStorage.setItem('Maquina', esMaquina);
-                    //window.location.href = './gest_ejercicios.html' 
+                    window.location.href = './gest_equipamiento.html' 
                 }
             }
         }
     } else {
         localStorage.setItem('id', null);
         localStorage.setItem('edit', 'false');
-        //window.location.href = './gest_ejercicios.html'
+        window.location.href = './gest_equipamiento.html'
     }
 }
 
