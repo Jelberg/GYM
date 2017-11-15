@@ -100,7 +100,7 @@ public class FOM04_Progreso_Peso {
             ValidationWS.validarParametrosNotNull( new HashMap<String, Object>(){ {
                 put( "id_usuario" , id_usuario );
             }});
-            String query = "SELECT fo_m04_elimina_progresop(?, ?)";
+            String query = "SELECT fo_m04_elimina_progresop(?)";
             PreparedStatement st = conn.prepareStatement( query );
             st.setInt( 1 , id_usuario);
             ResultSet rs = st.executeQuery();
