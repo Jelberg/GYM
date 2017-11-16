@@ -43,10 +43,10 @@ export class CambiarPesoPage {
     });
     toast.present();
   }
-  public eliminaPeso():void {
+  public eliminarPeso():void {
     console.log( this.nuevoPeso );
     let urlPeticion = "F0M04_Progreso_Peso/eliminarPeso?id_usuario=1";
-    this.userService.postDato( urlPeticion ).subscribe( data => {
+    this.userService.deleteDato( urlPeticion ).subscribe( data => {
       let i: number = 0;
       let mensaje: string = "";
       while ( i < data.lenght ){
