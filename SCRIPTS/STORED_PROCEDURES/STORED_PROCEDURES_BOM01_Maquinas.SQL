@@ -28,3 +28,21 @@ CREATE OR REPLACE FUNCTION bo_m01_eliminar_maquina(id int)
         WHERE MAQ_ID = id;
     END; $$
 LANGUAGE plpgsql;
+
+---Retornar Maquina---
+  CREATE OR REPLACE FUNCTION bo_m01_get_maquina(_id int)
+  RETURNS TABLE(id int,nombre character varying)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT MAQ_NOMBRE
+        FROM MAQUINA
+        WHERE MAQ_ID = _id)
+   LOOP
+    id = var_r.MAQ_ID;
+    nombre = var_r.MAQ_NOMBRE;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;

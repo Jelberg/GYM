@@ -28,3 +28,21 @@ CREATE OR REPLACE FUNCTION bo_m01_eliminar_equipo(id int)
         WHERE EQU_ID = id;
     END; $$
 LANGUAGE plpgsql;
+
+---Retornar Equipo---
+  CREATE OR REPLACE FUNCTION bo_m01_get_equipo(_id int)
+  RETURNS TABLE(id int,nombre character varying)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT EQU_NOMBRE
+        FROM EQUIPO
+        WHERE EQU_ID = _id)
+   LOOP
+    id = var_r.EQU_ID;
+    nombre = var_r.EQU_NOMBRE;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
