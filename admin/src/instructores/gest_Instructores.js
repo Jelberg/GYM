@@ -77,19 +77,29 @@ function llevaratabla()
 
 function insertarInstructor()
 {
-
-    if (document.getElementById("nombre").value && document.getElementById("fecha").value && document.getElementById("sexo").value && document.getElementById("correo").value )
+    var sex;
+    if(document.getElementById('femenino').checked)
+    sex="f"
+    else
+    if(document.getElementById('masculino').checked)
+    sex="m"
+    if ((document.getElementById("correo").value) &&  (document.getElementById("nombre").value) && (document.getElementById("fecha").value))
+        if(validatedate==true)
     {
-
+        var intento=0
         var res = document.getElementById("nombre").value.split(" ");
-        var url_comple="/insertaInstruct?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+document.getElementById('sexo').value+"&correo="+document.getElementById('correo').value;
+        console.log(res[0]+res[1])
+        var url_comple="/insertaInstruct?nombre="+res[0]+"&apellido="+res[1]+"&fecha_nac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
         fetch(url+url_comple, {
             method: 'POST'
         })
         .then(response => intento=1)
-    }
-    else 
-    alert("Ningun campo puede estar vacio ")
+    }else
+    alert("Fecha invalida")
+    else
+    alert("Debe Llenar todas las casillas")
+    
+    
 }
 
 function borrarInstruct()
