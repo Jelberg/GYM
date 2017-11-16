@@ -51,3 +51,17 @@ DECLARE ref refcursor;
 		RETURN ref;
 	END
 	$$ LANGUAGE PLPGSQL;
+
+
+-----------Esta funcion asigna una relacion usuario entrenador------------------
+
+CREATE OR REPLACE FUNCTION f0_mo6_set_rutina (usu_id int, ent_id int)
+RETURNS VOID AS $$
+DECLARE
+BEGIN
+	INSERT INTO reserva(fk_usuario,fk_entrenador) 
+			values (usu_id,end_id);
+	END $$
+	LANGUAGE PLPGSQL;
+
+
