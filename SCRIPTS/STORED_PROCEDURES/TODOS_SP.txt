@@ -281,12 +281,10 @@ LANGUAGE plpgsql;
 
 -----------------------------------FIN INSTRUCTOR------------------------------------------
 
+
 --********************************************FOM03*********************************************
-/*	CONSULTAR RUTINA	
-	Funcion que trae todas las rutinas de un usuario
-    dado el id de usuario, devuelve el id de la rutina,
-    nombre, dia, y numero de ejercicios
-*/
+-------Funcion que trae todas las rutinas de un usuario dado el id de usuario
+
 CREATE OR REPLACE FUNCTION FO_M03_get_rutina(idUsuario int)
   RETURNS TABLE(idRutina int, nombre character varying, dia character varying, numEjerc int)
    AS $$
@@ -305,11 +303,9 @@ BEGIN
    END LOOP;
 END; $$
   LANGUAGE plpgsql;
-/*
-	AGREGAR RUTINA	
-   	Funcion que agrega una nueva rutina, recibe el idUsuario, el nombre de la
-    rutina y el dia a realizarse, no retorna ningun valor
-*/
+
+--------------------Funcion que agrega una nueva rutina, recibe el idUsuario, el nombre de la    rutina y el dia a realizarse, no retorna ningun valor
+
 CREATE OR REPLACE FUNCTION FO_M03_set_rutina(idUsuario int, nombreRutina character varying, dia character varying)
   RETURNS VOID
    AS $$
@@ -318,9 +314,11 @@ BEGIN
   		 insert into rutina (rut_nombre, rut_dia, fk_usuario) values (nombreRutina, dia, idUsuario);
 END; $$
   LANGUAGE plpgsql;
-	
--------------Funcion que modifica una rutina, recibe el idUsuario, el nombre de la   rutina y el dia a realizarse, no retorna ningun valor
-
+/*
+	MODIFICAR RUTINA	
+   	Funcion que modifica una rutina, recibe el idUsuario, el nombre de la
+    rutina y el dia a realizarse, no retorna ningun valor
+*/
 CREATE OR REPLACE FUNCTION FO_M03_modificar_rutina(idUsuario int, nombreRutina character varying, dia character varying,
                                                   nombreModif character varying, diaModif character varying)
   RETURNS VOID
@@ -331,11 +329,9 @@ BEGIN
          																	and rut_nombre=nombreRutina and rut_dia = dia;
 END; $$
   LANGUAGE plpgsql;
-  /*
-	ELIMINAR RUTINA	
-   	Funcion que elimina una rutina, recibe el idUsuario, el nombre de la
-    rutina y el dia a realizarse, no retorna ningun valor
-*/
+
+------------------------Funcion que elimina una rutina, recibe el idUsuario, el nombre de la rutina y el dia 
+
 CREATE OR REPLACE FUNCTION FO_M03_eliminar_rutina(idUsuario int, nombreRutina character varying, dia character varying)
   RETURNS VOID
    AS $$
@@ -344,8 +340,8 @@ BEGIN
   		 delete from rutina  where fk_usuario= idUsuario and rut_nombre = nombreRutina and rut_dia = dia;
 END; $$
   LANGUAGE plpgsql;
-	
- ----------Funcion muestra todos los ejercicios de una rutina, recibe el idUsuario, el nombre de la rutina y el dia a realizarse, no retorna ningun valor
+  	
+--------------Funcion muestra todos los ejercicios de una rutina------------------------
 
 CREATE OR REPLACE FUNCTION FO_M03_ejercicios_rutina(idUsuario int, nombreRutina character varying, dia character varying)
   RETURNS TABLE(idEjercicio int, nombre character varying,grupoMuscular character varying, maquina character varying,equipo character varying)
@@ -376,7 +372,8 @@ END; $$
 
 
   
---------------Funcion que retorna todas las series de un ejercicio, indicando su peso, repeticiones y     tiempo de descanso----------
+
+ ------------------------------Funcion que retorna todas las series de un ejercicio, indicando su peso, repeticiones y  tiempo de descanso
 
 CREATE OR REPLACE FUNCTION FO_M03_series_ejercicio(idUsuario int, nombreRutina character varying, dia character varying, nombreEjercicio character varying)
   RETURNS TABLE(numRep int,peso float, unidad character varying,tiempoDescan float, tiempo float, distancia float, nivel int)
@@ -414,7 +411,7 @@ END; $$
   LANGUAGE plpgsql;
 
 
-------- funcion que devuelve todos los ejercicios existentes con su maquina o equipamento-------------------------------
+------------------------------funcion que devuelve todos los ejercicios existentes con su maquina o equipamento
 
 CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_maquina()
   RETURNS TABLE(maquina character varying, ejercicio character varying,grupoMuscular character varying)
@@ -436,7 +433,7 @@ BEGIN
    END; $$
   LANGUAGE plpgsql;
 
-
+--------------------------Funcion que devuelve una lista de todos los ejercicios por equipo-------------------------
   CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_equipo()
   RETURNS TABLE(equipo character varying, ejercicio character varying,grupoMuscular character varying)
    AS $$
