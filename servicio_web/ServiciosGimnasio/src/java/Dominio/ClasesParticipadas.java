@@ -21,6 +21,19 @@ public class ClasesParticipadas {
     public ClasesParticipadas() {
     }
 
+    public ClasesParticipadas(int _idHc) {
+        this._idHc = _idHc;
+    }
+
+    public ClasesParticipadas(String _nombreIns) {
+        this._nombreIns = _nombreIns;
+    }
+    
+
+    public ClasesParticipadas(Date _fecha) {
+        this._fecha = _fecha;
+    }
+
     public ClasesParticipadas(int _idHc, String _nombreIns, String _apellidoIns, Date _fecha, String _nombreClase) {
         this._idHc = _idHc;
         this._nombreIns = _nombreIns;

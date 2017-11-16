@@ -133,3 +133,29 @@ end loop;
 
 END $$
 LANGUAGE PLPGSQL;
+
+--CONSULTA DE CLASES POR FECHA
+CREATE OR REPLACE FUNCTION FOM05_CLASES_FECHA(fecha Date) 
+RETURNS TABLE (id int, nombre varchar, descripcion varchar) AS
+$$
+DECLARE 
+
+var_r record;
+
+BEGIN
+
+for var_r in (Select * from CLASE where cla_id in (Select fk_clase from Horario_Clase where hc_fecha=fecha))
+
+loop
+	id:= var_r.cla_id;
+	nombre:= var_r.cla_nombre;
+	descripcion:= var_r.cla_descripcion;
+	
+	return next;
+	
+end loop;
+	
+	
+END 
+$$ 
+language plpgsql;
