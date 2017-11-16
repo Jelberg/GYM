@@ -1,0 +1,34 @@
+<!--
+  Generated template for the ClaseParticularPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Descripcion de la clase</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<!--
+<ion-content padding>
+<img src="../../../assets/imgs/clasesYoga.jpg" class="imagenClase">
+<p class="instructor">Inst. Estela Rodriguez</p>
+<p class="fecha">24/10/2017</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis semper augue in egestas. Aliquam sit amet nulla condimentum, volutpat ex sodales, feugiat nisi. Praesent facilisis lorem erat, bibendum dignissim ex placerat in. Fusce tempus nisi vitae eleifend porttitor. Praesent et lacinia tortor. Sed semper tempus ultricies.</p>
+<p>Duracion: 60 min</p>
+<button ion-button block class="agregarClase" (click)="presentAlert()">Reservar</button>
+</ion-content>
+-->
+
+<ion-content padding>
+      <img src="{{img}}" class="imagenClase">
+      <h1>{{titulo}}</h1>
+      <p class="instructor">Inst. {{instructor}}</p>
+      <p class="fecha">{{fecha}}</p>
+      <p>{{descripcion}}</p>
+      <p>Duracion: {{duracion}} min</p>
+      <p>Cap. {{capacidad}} Disp. {{disponibilidad}}</p>
+      <button ion-button item-end class="agregarClase" (click)="presentAlert()">Reservar</button>
+</ion-content>

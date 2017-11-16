@@ -1,0 +1,64 @@
+<!--
+  Generated template for the ModificarRutinaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Ejercicios</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <div class="rutina">
+         <h1>Rutinas {{ rutinaID }}</h1>
+    </div>
+    
+     <ion-list>
+         <ion-list-header>
+             <ion-title>
+                <h1>{{ nombreRut }}</h1>
+                <h2>{{ diaRut }}</h2>
+             </ion-title>             
+         </ion-list-header>
+
+           
+        <ion-item-sliding  *ngFor="let ejercicio of listaEjercicios">
+            <ion-item detail-push (click)="goToEjercicioRutina(ejercicio._nombre)"><!--aqui va el goto ejercicio-rutina-->
+                <ion-avatar item-start>
+                    <img src="../assets/imgs/imgsM03/brazos.png">
+                </ion-avatar>
+                <h1>{{ejercicio._nombre}}</h1>
+                <h2>Grupo Muscular:{{ejercicio._grupomuscular}}</h2>
+                <h2 *ngIf="ejercicio._maquina">Máquina: {{ejercicio._maquina}}</h2>
+                <h2 *ngIf="ejercicio._equipo">Equipo: {{ejercicio._equipo}}</h2>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button (click)="modificarEjercicio()" color="energized">
+                    <ion-icon name="create"></ion-icon>
+                </button>
+                <button ion-button (click)="ConfirmarEliminacion()" color="pomegranate">
+                    <ion-icon name="trash"></ion-icon>
+                </button>
+            </ion-item-options>  
+        </ion-item-sliding>       
+    </ion-list>
+    
+
+    <ion-fab right bottom #fab>
+        <button ion-fab color="secondary"><ion-icon name="arrow-up"></ion-icon></button>
+        <ion-fab-list side="top">
+            <button ion-fab (click)="goToEjercicios()" color="secondary"><ion-icon name="add"></ion-icon></button>
+            <button ion-fab color="secondary" (click)="cambiarRutina()"><ion-icon name="build"></ion-icon></button>
+            <button ion-fab color="secondary" (click)="goToLog()"><ion-icon name="calendar"></ion-icon></button>
+            <button ion-fab color="secondary"><ion-icon name="alarm"></ion-icon></button>
+        </ion-fab-list>
+      </ion-fab>
+      
+</ion-content>
+    

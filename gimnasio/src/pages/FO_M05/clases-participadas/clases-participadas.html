@@ -1,0 +1,46 @@
+<!--
+  Generated template for the ClasesParticipadasPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar  color="secondary">
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Clases Participadas</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content padding>
+        <ion-list>
+            <ion-item-sliding *ngFor="let listaCritica of listaCriticas">
+            <ion-item>
+                         <ion-grid>
+                            <ion-row>
+                                <!--ion-col col-2>
+                                        <ion-avatar item-start>
+                                                <img src="item.img">
+                                            </ion-avatar>
+                                </ion-col-->
+                                <ion-col col-6>
+                                  <p>{{listaCritica._fecha}}</p>
+                                  
+                                  <p> </p>      
+                                  <h3>{{listaCritica._nombreClase}}</h3>
+                                  <h3>{{listaCritica._nombreIns}}</h3>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+            </ion-item>
+            <ion-item-options side="right ">
+                <button ion-button icon-only (click)="goToComentar()">
+                    <ion-icon name="chatbubbles"></ion-icon>
+                </button>
+            </ion-item-options>  
+            </ion-item-sliding>
+          </ion-list>
+
+          
+    </ion-content>

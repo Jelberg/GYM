@@ -1,0 +1,44 @@
+td .fa {
+    margin: 0 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #009688!important;
+}
+
+.tcenter {
+    text-align: center
+}
+
+.leftie {
+    float: left;
+    margin: 5px 0;
+    margin-left: 14px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 5px 0!important;
+}
+
+.withScroll {
+    height: 100px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.forMaq,
+.forEqu {
+    border: 1px solid #607d8b;
+    padding: 5;
+    border-radius: 5px;
+    cursor: pointer
+}
+
+.selected {
+    background: #009688;
+    color: white;
+}
+.myButton {
+    float: right;
+    width: 150px;
+    border: 1px solid black;
+    font-size: 12px
+}

@@ -1,0 +1,120 @@
+<!--
+  Generated template for the ReservasPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Reservas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<!--
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+                <ion-grid>
+                        <ion-row id="claseReservada">
+                            <ion-col col-2>
+                                    <ion-avatar item-start>
+                                            <img src="../../assets/imgs/clasesYoga.jpg">
+                                        </ion-avatar>
+                            </ion-col>
+                            <ion-col col-7>
+                                    <h2>Yoga</h2>
+                                    <h3>Estela Rodrigues</h3>
+                                    <p>24/10/2017 3:00 pm</p>
+                                    <p>Duracion: 60 min</p>
+                            </ion-col>
+                            <ion-col>
+                                    <button ion-button icon-only (click)="presentAlert()" class="botonEliminar">
+                                            <ion-icon name="trash"></ion-icon>
+                                        </button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+        </ion-item>
+        <ion-item>
+                <ion-grid>
+                        <ion-row id="claseReservada">
+                            <ion-col col-2>
+                                    <ion-avatar item-start>
+                                            <img src="../../assets/imgs/clasesBoxeo.jpeg">
+                                        </ion-avatar>
+                            </ion-col>
+                            <ion-col col-7>
+                                    <h2>Boxeo</h2>
+                                    <h3>Jesus Rodriguez</h3>
+                                    <p>30/10/2017 3:00 pm</p>
+                                    <p>Duracion: 60 min</p>
+                            </ion-col>
+                            <ion-col>
+                                    <button ion-button icon-only (click)="presentAlert()" class="botonEliminar">
+                                            <ion-icon name="trash"></ion-icon>
+                                        </button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+        </ion-item>
+        <ion-item>
+            <ion-grid>
+                <ion-row id="claseReservada">
+                    <ion-col col-2>
+                            <ion-avatar item-start>
+                                    <img src="../../assets/imgs/claseKickboxing.png">
+                                </ion-avatar>
+                    </ion-col>
+                    <ion-col col-7>
+                            <h2>KickBoxing</h2>
+                            <h3>Marcos Rodriguez</h3>
+                            <p>7/11/2017 3:00 pm</p>
+                            <p>Duracion: 60 min</p>
+                    </ion-col>
+                    <ion-col>
+                            <button ion-button icon-only (click)="presentAlert()" class="botonEliminar">
+                                    <ion-icon name="trash"></ion-icon>
+                                </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+      </ion-list>
+</ion-content>
+-->
+
+<ion-content>
+    <ion-list>
+        <ion-item-sliding *ngFor="let item of items">
+        <!--  Hay que buscar la manera de eliminar el item o ocultarlo al eliminar la reserva-->
+        <ion-item>
+            <ion-grid>
+                <ion-row id="claseReservada">
+                    <!--
+                    <ion-col col-5>
+                        <ion-avatar>
+                            <img src="{{item.img}}" alt="" class="imagen">
+                        </ion-avatar>
+                    </ion-col>-->
+                    <ion-col col-12>
+                        <h2>{{item.titulo}}</h2>
+                        <h3>{{item.instructor}}</h3>
+                        <p>{{item.fecha}}</p>
+                        <p>Duracion: {{item.duracion}} min</p>
+                        <p>Cap. {{item.capacidad}}</p>
+                        <p>Disp. {{item.disponibilidad}}</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+        <ion-item-options side="right ">
+            <button ion-button icon-only (click)="presentAlert(item.id)"><ion-icon name="trash"></ion-icon>
+            </button>
+        </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>
+
