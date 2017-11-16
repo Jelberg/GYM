@@ -124,7 +124,7 @@ export class RutinaPage {
         
         public goToModificar(nombreRut: string, diaRut: string)
         {
-          this.navCtrl.push(ModificarRutinaPage, {nombre: nombreRut, dia: diaRut});
+          this.navCtrl.push(ModificarRutinaPage, {nombre: nombreRut, dia: diaRut, idUsuario: this.idUsuario});
         }
 
         /**

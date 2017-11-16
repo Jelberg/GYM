@@ -28,7 +28,7 @@ export class ModificarRutinaPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,  private userService: UserServiceProvider) {
     this.nombreRut = this.navParams.get('nombre');
     this.diaRut = this.navParams.get('dia');
-    this.idUsuario=1;
+    this.idUsuario=this.navParams.get('idUsuario');
     this.getEjercicios();
     console.log(this.rutinaID);
     console.log(this.listaEjercicios);
@@ -244,7 +244,9 @@ export class ModificarRutinaPage {
   }
 
   public goToEjercicios(){
-    this.navCtrl.push(EjerciciosPage);
+    this.navCtrl.push(EjerciciosPage, {idUsuario: this.idUsuario, 
+                                       nombreRut: this.nombreRut, 
+                                       diaRut: this.diaRut} );
   }
 
   public goToEjercicioRutina(nombEjercicio: string){

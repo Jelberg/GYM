@@ -99,9 +99,9 @@ END; $$
 
   
   /*
-	SERIES DE UN EJERCICIO	
-   	Funcion que muestra las series, peso, tiempo, repeticiones, etc para un ejercicio de una rutina
-    	Retorna numero de repeticiones, peso, unidad, tiempo de descanso, tiempo, distancia, nivel
+	LISTA SERIES_EJERCICIO	
+   	Funcion que retorna todas las series de un ejercicio, indicando su peso, repeticiones y 
+    tiempo de descanso
 */
 CREATE OR REPLACE FUNCTION FO_M03_series_ejercicio(idUsuario int, nombreRutina character varying, dia character varying, nombreEjercicio character varying)
   RETURNS TABLE(numRep int,peso float, unidad character varying,tiempoDescan float, tiempo float, distancia float, nivel int)
@@ -136,6 +136,51 @@ BEGIN
     RETURN NEXT;
    END LOOP;
 END; $$
+  LANGUAGE plpgsql;
+
+
+/*
+	LISTA DE EJERCICIOS GENERAL
+    funcion que devuelve todos los ejercicios existentes con su maquina o equipamento
+*/
+CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_maquina()
+  RETURNS TABLE(maquina character varying, ejercicio character varying,grupoMuscular character varying)
+   AS $$
+   DECLARE
+ _ejercicios    record;
+BEGIN
+   FOR _ejercicios IN( select maq.maq_nombre, eje.eje_nombre,
+                       eje.eje_grupo_muscular from ejercicio_maquina_equipo as eme,
+                       maquina as maq, ejercicio as eje where maq.maq_id = eme.fk_maquina and
+    				   eme.fk_ejercicio = eje.eje_id
+						)
+   LOOP
+    maquina = _ejercicios.maq_nombre;
+    ejercicio = _ejercicios.eje_nombre;
+    grupoMuscular = _ejercicios.eje_grupo_muscular;
+    RETURN NEXT;
+   END LOOP; 
+   END; $$
+  LANGUAGE plpgsql;
+
+
+  CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_equipo()
+  RETURNS TABLE(equipo character varying, ejercicio character varying,grupoMuscular character varying)
+   AS $$
+   DECLARE
+ _ejercicios    record;
+BEGIN
+   FOR _ejercicios IN( select equ.equ_nombre, eje.eje_nombre, eje.eje_grupo_muscular 
+                        from ejercicio_maquina_equipo as eme,equipo as equ, ejercicio as eje
+						where equ.equ_id = eme.fk_equipo and eme.fk_ejercicio = eje.eje_id
+						)
+   LOOP
+    equipo = _ejercicios.equ_nombre;
+    ejercicio = _ejercicios.eje_nombre;
+    grupoMuscular = _ejercicios.eje_grupo_muscular;
+    RETURN NEXT;
+   END LOOP; 
+   END; $$
   LANGUAGE plpgsql;
 
   ---***********************************************RUTINAS PARA M04******************************************************

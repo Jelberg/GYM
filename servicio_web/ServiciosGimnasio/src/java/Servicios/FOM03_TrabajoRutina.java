@@ -150,7 +150,81 @@ public class FOM03_TrabajoRutina {
         }
     
         }
-           
-           
+        /**
+         *Funcion que retorna la lista de ejercicios asignados por maquina 
+         * retorna un arreglo de ejercicios
+         */   
+         
+        @GET
+        @Path("/getEjerciciosMaquina")
+        @Produces("application/json")
+         public String getEjerciciosMaquina() throws SQLException
+         {
+           try
+           {
+                String query = "SELECT * FROM FO_M03_get_ejercicios_maquina()";
+                jsonArray = new ArrayList<Ejercicio>();
+                PreparedStatement st = conn.prepareStatement(query);
+                ResultSet rs = st.executeQuery();
+
+                //La variable donde se almacena el resultado de la consulta.
+                while(rs.next())
+                {
+                    jsonArray.add(new Ejercicio());
+                    jsonArray.get(jsonArray.size() - 1).setMaquina(rs.getString("maquina"));
+                    jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("ejercicio"));
+                    jsonArray.get(jsonArray.size() - 1).setGrupomuscular(rs.getString("grupoMuscular"));           
+                }
+                response = gson.toJson(jsonArray);
+            
+            }
+            catch(SQLException e) {
+                response = e.getMessage();
+            }
+            catch (ParameterNullException e) {
+                response = e.getMessage();
+            }
+            finally {
+                Sql.bdClose(conn);
+                return response;
+            }
     
+        }
+    
+         
+        @GET
+        @Path("/getEjerciciosEquipo")
+        @Produces("application/json")
+         public String getEjerciciosEquipo() throws SQLException
+         {
+           try
+           {
+                String query = "SELECT * FROM FO_M03_get_ejercicios_equipo()";
+                jsonArray = new ArrayList<Ejercicio>();
+                PreparedStatement st = conn.prepareStatement(query);
+                ResultSet rs = st.executeQuery();
+
+                //La variable donde se almacena el resultado de la consulta.
+                while(rs.next())
+                {
+                    jsonArray.add(new Ejercicio());
+                    jsonArray.get(jsonArray.size() - 1).setMaquina(rs.getString("equipo"));
+                    jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("ejercicio"));
+                    jsonArray.get(jsonArray.size() - 1).setGrupomuscular(rs.getString("grupoMuscular"));           
+                }
+                response = gson.toJson(jsonArray);
+            
+            }
+            catch(SQLException e) {
+                response = e.getMessage();
+            }
+            catch (ParameterNullException e) {
+                response = e.getMessage();
+            }
+            finally {
+                Sql.bdClose(conn);
+                return response;
+            }
+    
+        }
 }

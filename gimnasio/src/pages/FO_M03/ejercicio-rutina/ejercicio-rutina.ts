@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
 import { UserServiceProvider } from '../../../providers/user-service/user-service';
-
+import { TabsLogPage } from '../../FO_M03/tabs-log/tabs-log';
 /**
  * Generated class for the EjercicioRutinaPage page.
  *
@@ -36,8 +36,9 @@ export class EjercicioRutinaPage {
     console.log('ionViewDidLoad EjercicioRutinaPage');
   }
 
-  public getSeries()/////HAY UN ERROR AQUI
+  public getSeries()
   {
+
       let urlPeticion: string = "FOM03_TrabajoRutina/getSeriesEjercicio?idUsuario="
                                 +this.idUsuario+"&nombre="+this.nombreRut
                                 +"&dia="+this.diaRut+"&ejercicio="+this.nombreEjercicio;
@@ -47,5 +48,11 @@ export class EjercicioRutinaPage {
     })
     
   }
+
+  public goToLog()
+  {
+    this.navCtrl.push(TabsLogPage);
+  }
+
 
 }
