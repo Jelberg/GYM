@@ -65,6 +65,7 @@ import { HorariosEntrenadorPage} from '../pages/FO_M06/horarios-entrenador/horar
 import { GestiNDeReservasPage} from '../pages/FO_M06/gesti-nde-reservas/gesti-nde-reservas';
 import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reserva';
 
+
 //FIN M06
 
 
@@ -115,6 +116,10 @@ import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reser
     HorariosEntrenadorPage,
     GestiNDeReservasPage,
     DetalleReservaPage,
+
+    
+
+
     ListaClasesPage
   ],
   imports: [
@@ -177,6 +182,8 @@ import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reser
     HorariosEntrenadorPage,
     GestiNDeReservasPage,
     DetalleReservaPage,
+    
+    
     ListaClasesPage
   ],
   providers: [
