@@ -57,7 +57,7 @@ END; $$
 
 -----------------------------------HORARIO_CLASE-------------------------------------------
 
---------------Función que devuelve datos de (horario_clase) de la clase consultada.
+--------------Función que devuelve los horarios de clase, de la clase consultada.
 
 CREATE OR REPLACE FUNCTION bo_m02_get_horario_clase(nombreclaseconsulta character varying)
   RETURNS TABLE(nombreclase character varying, instructor character varying, fecha date, 
@@ -82,6 +82,46 @@ BEGIN
 END; $$
   LANGUAGE plpgsql;
 
+--------------Función que agrega el horario de una clase
 
+CREATE OR REPLACE FUNCTION bo_m02_inserta_horario_clase(fecha date, dia character varying, 
+	capacidad int, hora_inicio time, hora_fin time, status character varying, duracion int, 
+	nombreclase int, instructor int)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	INSERT INTO CLASE(HC_FECHA, HC_DIA, HC_CAPACIDAD, HC_HORA_INICIO, HC_HORA_FIN, HC_STATUS,
+			  HC_DURACION, fk_CLASE, fk_INSTRUCTOR) VALUES (fecha, dia, capacidad,
+			  hora_inicio, hora_fin, status, duracion, nombreclase, instructor);
+END $$
+  LANGUAGE plpgsql;
+
+----------------------------Función que elimina el horario de una clase.
+
+CREATE OR REPLACE FUNCTION bo_m02_elimina_horario_clase(nombreclase int, instructor int, 
+	fecha date, dia character varying, capacidad int, hora_inicio time, hora_fin time)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	DELETE FROM HORARIO_CLASE WHERE (fk_clase=nombreclase and fk_instructor=instructor
+					and Hc_fecha=fecha and HC_dia=dia and HC_capacidad=capacidad
+					and HC_Hora_inicio=hora_inicio and HC_Hora_Fin=hora_fin);
+END $$
+  LANGUAGE plpgsql;
+
+---------------------------Función que modifica el horario de una clase.
+
+CREATE OR REPLACE FUNCTION bo_m02_modifica_horario_clase(nombreclase int, instructor int, 
+	fecha date, dia character varying, capacidad int, hora_inicio time, hora_fin time)
+  RETURNS void
+   AS $$
+DECLARE
+BEGIN
+    UPDATE HORARIO_CLASE SET (fk_clase=nombreclase and fk_instructor=instructor
+					and Hc_fecha=fecha and HC_dia=dia and HC_capacidad=capacidad
+					and HC_Hora_inicio=hora_inicio and HC_Hora_Fin=hora_fin)
+    WHERE (fk_Clase = nombreclase and fk_Instructor = instructor);
+END; $$
+  LANGUAGE plpgsql;
 
 ----------------------------------FIN HORARIO_CLASE-----------------------------------------

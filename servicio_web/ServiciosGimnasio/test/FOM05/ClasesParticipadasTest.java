@@ -3,8 +3,10 @@ package FOM05;
 
 import Dominio.ClasesParticipadas;
 import java.sql.Date;
+import java.time.LocalDate;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
@@ -12,101 +14,99 @@ import static org.junit.Assert.*;
  */
 public class ClasesParticipadasTest {
     
-    public ClasesParticipadasTest() {
-    }
+   
 
     @Test
-    public void testGetIdHc() {
-      
-        ClasesParticipadas instance = new ClasesParticipadas();
-        int expResult = 0;
-        int result = instance.getIdHc();
-        assertEquals(expResult, result);
+    public void testGetIdHc() {  
+        ClasesParticipadas ins;
+        ins = new ClasesParticipadas(2);
+        assertEquals(2,ins.getIdHc());
        
     }
 
     @Test
     public void testSetIdHc() {
-    
-        int _idHc = 0;
-        ClasesParticipadas instance = new ClasesParticipadas();
-        instance.setIdHc(_idHc);
-    
+        ClasesParticipadas ins = new ClasesParticipadas();
+        ins.setIdHc(2);
+        int result = ins.getIdHc();
+        assertEquals(2, result);
+       
     }
 
     @Test
     public void testGetNombreIns() {
        
-        ClasesParticipadas instance = new ClasesParticipadas();
-        String expResult = "";
-        String result = instance.getNombreIns();
-        assertEquals(expResult, result);
+        ClasesParticipadas ins = new ClasesParticipadas("jessica");
+        assertEquals("jessica", ins.getNombreIns());
       
     }
 
     @Test
     public void testSetNombreIns() {
      
-        String _nombreIns = "";
-        ClasesParticipadas instance = new ClasesParticipadas();
-        instance.setNombreIns(_nombreIns);
-        
+        ClasesParticipadas ins = new ClasesParticipadas();
+        ins.setNombreIns("jessica");
+        String result = ins.getNombreIns();
+        assertEquals("jessica", result);
     }
 
     @Test
     public void testGetApellidoIns() {
         
-        ClasesParticipadas instance = new ClasesParticipadas();
-        String expResult = "";
-        String result = instance.getApellidoIns();
-        assertEquals(expResult, result);
+        ClasesParticipadas ins = new ClasesParticipadas();
+        ins.setApellidoIns("elberg");
+        String result = ins.getApellidoIns();
+        assertEquals("elberg", result);
        
     }
 
     @Test
     public void testSetApellidoIns() {
        
-        String _apellidoIns = "";
-        ClasesParticipadas instance = new ClasesParticipadas();
-        instance.setApellidoIns(_apellidoIns);
+        String _apellidoIns = "elberg";
+        ClasesParticipadas ins = new ClasesParticipadas();
+        ins.setApellidoIns(_apellidoIns);
+        String result = ins.getApellidoIns();
+        assertEquals(_apellidoIns, result);
       
     }
 
+    @Ignore
     @Test
     public void testGetFecha() {
        
-        ClasesParticipadas instance = new ClasesParticipadas();
-        Date expResult = null;
-        Date result = instance.getFecha();
-        assertEquals(expResult, result);
+        ClasesParticipadas ins = new ClasesParticipadas(Date.valueOf("12-12-12"));
+        assertEquals("12-12-12", ins.getFecha());
         
     }
 
+    @Ignore
     @Test
     public void testSetFecha() {
      
-        Date _fecha = null;
-        ClasesParticipadas instance = new ClasesParticipadas();
-        instance.setFecha(_fecha);
+        Date _fecha = Date.valueOf("12-12-12");
+        ClasesParticipadas ins = new ClasesParticipadas();
+        ins.setFecha(_fecha);
+        Date result = ins.getFecha();
+        assertEquals(_fecha, result);
         
     }
 
     @Test
     public void testGetNombreClase() {
        
-        ClasesParticipadas instance = new ClasesParticipadas();
-        String expResult = "";
-        String result = instance.getNombreClase();
-        assertEquals(expResult, result);
+        ClasesParticipadas ins = new ClasesParticipadas(1,"jessica","elberg",null,"yoga");
+        assertEquals("yoga", ins.getNombreClase());
      
     }
 
     @Test
     public void testSetNombreClase() {
         
-        String _nombreClase = "";
-        ClasesParticipadas instance = new ClasesParticipadas();
-        instance.setNombreClase(_nombreClase);
+        ClasesParticipadas ins = new ClasesParticipadas();
+        ins.setNombreClase("yoga");
+        String result = ins.getNombreClase();
+        assertEquals("yoga", result);
       
     }
     

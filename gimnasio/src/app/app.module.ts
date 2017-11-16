@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
-
+import { HttpClientModule } from '@angular/common/http';
 //Gráficos
 import { ChartsModule } from 'ng2-charts';
 
@@ -16,6 +16,18 @@ import { CrearusuarioPage } from '../pages/FO_M01/crearusuario/crearusuario';
 import { IniciarsesionPage } from '../pages/FO_M01/iniciarsesion/iniciarsesion';
 import { PerfilPage} from '../pages/FO_M01/perfil/perfil'
 // fin M01
+//M03 
+import { RutinaPage } from '../pages/FO_M03/rutina/rutina';
+import { TabsLogPage } from '../pages/FO_M03/tabs-log/tabs-log';
+import { TabsRutinaPage } from '../pages/FO_M03/tabs-rutina/tabs-rutina';
+import { ModificarRutinaPage } from '../pages/FO_M03/modificar-rutina/modificar-rutina';
+import { CompartirRutinaPage } from '../pages/FO_M03/compartir-rutina/compartir-rutina';
+import { PlanPage } from '../pages/FO_M03/plan/plan';
+import { WorkoutPlansPage } from '../pages/FO_M03/workout-plans/workout-plans';
+import { PlanRutinasPage } from '../pages/FO_M03/plan-rutinas/plan-rutinas';
+import { EjerciciosPage } from '../pages/FO_M03/ejercicios/ejercicios';
+//FIN M03
+
 //M04
 import { SeleccionarProgresoPage } from '../pages/FO_M04/seleccionar-progreso/seleccionar-progreso';
 import { LineaComponent } from '../components/linea/linea';
@@ -43,11 +55,16 @@ import { ReservasPage } from '../pages/FO_M05/reservas/reservas';
 import { ClaseParticularPage} from '../pages/FO_M05/clase-particular/clase-particular';
 import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clases-participadas';
 import { ComentarClasePage} from '../pages/FO_M05/comentar-clase/comentar-clase';
-import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class'
-import { RealizarValoracionPage} from '../pages/FO_M05/realizar-valoracion/realizar-valoracion';
+import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 //FIN M05
-
+// M06
+import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/reservas-realizadas';
+import { HorariosEntrenadorPage} from '../pages/FO_M06/horarios-entrenador/horarios-entrenador';
+import { GestiNDeReservasPage} from '../pages/FO_M06/gesti-nde-reservas/gesti-nde-reservas';
+import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reserva';
+import { ChatPage} from '../pages/FO_M06/chat/chat';
+//FIN M06
 
 
 @NgModule({
@@ -79,13 +96,25 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     CambiaMedidaPage,
     TabMedidaPage,
     ProgresoEjercicioPage,
+    RutinaPage,
+    ModificarRutinaPage,
+    TabsLogPage,
+    CompartirRutinaPage,
+    PlanPage,
+    WorkoutPlansPage,
+    PlanRutinasPage,
+    EjerciciosPage,
     ClasesPage,
     ReservasPage,
     ClaseParticularPage,
     ClasesParticipadasPage,
     ComentarClasePage,
-    RealizarValoracionPage,
-    TabCalendarClassPage
+    TabCalendarClassPage,
+    ReservasRealizadasPage,
+    HorariosEntrenadorPage,
+    GestiNDeReservasPage,
+    DetalleReservaPage,
+    ChatPage
   ],
   imports: [
     BrowserModule,
@@ -129,13 +158,25 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     //CambiarMedidasPage,
     CambiaMedidaPage,
     TabMedidaPage,
+    RutinaPage,
+    ModificarRutinaPage,
+    TabsLogPage,
+    CompartirRutinaPage,
+    PlanPage,
+    WorkoutPlansPage,
+    PlanRutinasPage,
+    EjerciciosPage,
     ClasesPage,
     ClaseParticularPage,
     ClasesParticipadasPage,
     ComentarClasePage,
     ReservasPage,
-    RealizarValoracionPage,
-    TabCalendarClassPage
+    TabCalendarClassPage,
+    ReservasRealizadasPage,
+    HorariosEntrenadorPage,
+    GestiNDeReservasPage,
+    DetalleReservaPage,
+    ChatPage
   ],
   providers: [
     StatusBar,
