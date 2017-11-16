@@ -81,6 +81,15 @@ public class PruebaPeso {
         assertNotNull( respuesta );
     }
     
+    @Test
+    public void pruebaActualizaMedida(){
+        Gson gson = new Gson();
+        _progresoPeso = new FOM04_Progreso_Peso();
+        String respuesta = _progresoPeso.actualizarPeso(9999, 65);
+        assertNotNull( respuesta );
+    
+    }
+    
     @After
     public void finalizarPruebas(){
         String query = "SELECT fo_m04_elimina_medidas(2222, '12-10-2012')";
@@ -96,6 +105,7 @@ public class PruebaPeso {
         }
         catch (Exception e){}
         
-    }
+    }    
+    
 }
 
