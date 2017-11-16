@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 //import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -50,6 +50,27 @@ export class UserServiceProvider {
   public p ( res: Response ){
     return console.log(res);
   }
+  
+  ///Conexion FOM03
+public post2(apiUrl: string) {
+  
+    return this.http.post(this.URL+apiUrl, 
+    {
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*', 'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, DELETE' }
+    })
+    .subscribe(data => {
+      return console.log(data);
+    });
+}
+
+
+
+    
+
+  
+
+  
+
 //FUNCION DE PRUEBA, NO USAR 
   apiUrl = 'http://localhost:8080/ServiciosGimnasio/FOM05_Critica/sinCritica?id=4';
   //apiUrl ='https://jsonplaceholder.typicode.com/users';
