@@ -8,6 +8,11 @@ boton.addEventListener("click",buscarInstructor);
 
 window.onload = function mostrartabla()
 {
+    variable=localStorage.getItem("id2");
+    if (variable){
+    alert(variable)
+    localStorage.clear();    
+    }
     var url_comple="/getListInstruct";
     fetch(url+url_comple)
     .then((respuesta) => 
