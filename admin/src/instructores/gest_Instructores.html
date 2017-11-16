@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="../css/styles.css">
 <link href="../asset/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
-
+<script src="gest_Instructores.js"></script>
 <body>
 
   <!-- Sidebar/menu -->
@@ -93,7 +93,6 @@
         <div class="w3-padding-32 w3-padding-large">
           <h1>Instructores</h1>
           <form class="w3-container w3-card w3-padding-32 w3-white" action="/action_page.php" target="_blank">
-            <script src="gest_Instructores.js"></script>
             <div class="w3-section">
               <label>Nombre Completo:</label>
               <input class="w3-input w3-border" style="width:100%;" type="text" required name="Nombre Completo"id="nombre">
@@ -138,12 +137,13 @@
         <div class="w3-padding-64 w3-center">
           <div class="w3-padding-32 w3-center">
             <div class="w3-left-align w3-padding-large">
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Insertar</button>
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Modificar</button>
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Eliminar</button>
-              <a href="./Instructores.html">
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Consultar</button>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton" onclick="insertarInstructor()">Insertar</button>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton"  id="modificar">Modificar</button>
+                  <button type="submit" name="borra" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton" onclick="borrarInstructor()" id="boton_borrar">Eliminar</button>
+              <a >
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton" onclick="llevaratabla()" id="consultar">Consultar</button>
               </a>
+              <script src="gest_Instructores.js"></script>
             </div>
           </div>
         </div>
