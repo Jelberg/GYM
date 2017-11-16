@@ -69,7 +69,7 @@ public class FOM05_Clase_Fecha {
          
             }
              result = _gson.toJson(jsonArray);
-             return result; 
+             
         }
         catch (SQLException e)
         {
@@ -82,6 +82,7 @@ public class FOM05_Clase_Fecha {
         finally
         {
             Sql.bdClose(_conn);
+            return result; 
         }
     } 
 
