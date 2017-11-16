@@ -14,6 +14,7 @@ import { CrearusuarioPage } from '../pages/FO_M01/crearusuario/crearusuario';
 import { IniciarsesionPage } from '../pages/FO_M01/iniciarsesion/iniciarsesion';
 import { PerfilPage} from '../pages/FO_M01/perfil/perfil'
 import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clases-participadas';
+import { ListaClasesPage} from '../pages/FO_M05/lista-clases/lista-clases';
 import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class';
 import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/reservas-realizadas';
 import { HorariosEntrenadorPage} from '../pages/FO_M06/horarios-entrenador/horarios-entrenador';
@@ -26,7 +27,7 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
 })
 export class MyApp {
   @ViewChild('NAV') nav: Nav;
-  rootPage:any = HomePage;
+  rootPage:any = IniciarsesionPage;
   public pages: Array< { titulo: string, component: any, icon:string } >;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
@@ -40,7 +41,7 @@ export class MyApp {
       {titulo: "amigos", component: AmigosPage, icon: "people"},
       {titulo: "Progreso", component: SeleccionarProgresoPage, icon: "stats"},
       { titulo: "Rutinas", component: RutinaPage, icon: "body"},
-      {titulo: 'Clases',component:TabCalendarClassPage, icon: 'bicycle'},
+      {titulo: 'Clases',component: ListaClasesPage, icon: 'bicycle'},
       {titulo: 'Reservas',component:ReservasPage, icon: 'calendar'} ,
       {titulo: 'Clases Participadas',component:ClasesParticipadasPage, icon: 'done-all'},
       {titulo: 'Reservar entrenador',component:ReservasRealizadasPage, icon: 'calendar'},

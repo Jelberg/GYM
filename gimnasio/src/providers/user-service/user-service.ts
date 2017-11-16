@@ -14,10 +14,12 @@ import 'rxjs/add/operator/do';
 export class UserServiceProvider {
 
   private URL: string = "http://localhost:8080/ServiciosGimnasio/"
+  //private URL: string = "http://localhost:8080/web/"
+ //private URL: string = "http://190.79.86.82:8080/web/"
 
- // private URL: string = "http://190.79.86.82:8080/web/"
   constructor(/*public http: Http,*/ private http: Http ) {
     console.log('Hello UserServiceProvider Provider');
+    
   }
 
   //Funcion para probar Web Service
@@ -69,5 +71,17 @@ public post2(apiUrl: string) {
 
   
 
+//FUNCION DE PRUEBA, NO USAR 
+  apiUrl = 'http://localhost:8080/ServiciosGimnasio/FOM05_Critica/sinCritica?id=4';
+  //apiUrl ='https://jsonplaceholder.typicode.com/users';
+  getUsers() {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
 
 }

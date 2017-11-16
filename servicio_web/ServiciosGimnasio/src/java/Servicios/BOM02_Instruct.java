@@ -152,6 +152,7 @@ private Connection conn = Sql.getConInstance();
      * @param jsonMedida 
      * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
      */
+  
     @POST
     @Path("/insertaInstruct")
     @Produces("application/json")
@@ -199,7 +200,7 @@ private Connection conn = Sql.getConInstance();
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
-    @DELETE
+   @DELETE
     @Path("/eliminaInstruct")
     @Produces("application/json")
     public String eliminaInstruct(@QueryParam("correo") String correo){

@@ -97,6 +97,7 @@ BEGIN
 END; $$
   LANGUAGE plpgsql;
 
+
   
   /*
 	LISTA SERIES_EJERCICIO	
@@ -182,6 +183,88 @@ BEGIN
    END LOOP; 
    END; $$
   LANGUAGE plpgsql;
+
+  ---------------------------------- Funcion que devuelve los planes de un usuario --------------------------------------
+
+CREATE OR REPLACE FUNCTION FO_M03_get_plan(usuario_CI int)
+  RETURNS TABLE (idPlan int, nombre character varying, descrip character varying)
+   AS $$
+   DECLARE
+      _plan    record;
+    BEGIN
+      FOR _plan IN (SELECT p.pla_id, p.pla_nombre, p.pla_descripcion
+              FROM plan p, usuario u
+              WHERE p.fk_usuario=u.usu_id and u.usu_id=usuario_CI)
+      LOOP
+          idPlan = _plan.pla_id;
+          nombre = _plan.pla_nombre;
+          descrip = _plan.pla_descripcion;
+        RETURN NEXT;
+      END LOOP;
+  END; $$
+  LANGUAGE plpgsql;
+
+-----------------------------------------------------------------------------------------------------------------------
+--------------------------------- Funcion que devuelve las rutinas de un plan ------------------------------------------
+
+CREATE OR REPLACE FUNCTION FO_M03_get_rutinaplan(usuario_CI int)
+  RETURNS TABLE (nombreR character varying, dia character varying, numEjerc int)
+    AS $$
+    DECLARE
+      _rutina    record;
+    BEGIN
+      FOR _rutina IN (SELECT r.rut_nombre, r.rut_dia, (select count(*) from ejercicio_maquina_equipo eme where eme.fk_rutina=r.rut_id ) as ejercicio
+              FROM rutina r, usuario u, plan p
+              WHERE r.fk_usuario=u.usu_id and r.fk_plan=p.pla_id and u.usu_id = usuario_CI)
+      LOOP
+          nombreR = _rutina.rut_nombre;
+          dia = _rutina.rut_dia;
+            numEjerc= _rutina.ejercicio;
+        RETURN NEXT;
+      END LOOP;
+    END; $$
+    LANGUAGE plpgsql;
+
+-----------------------------------------------------------------------------------------------------------------------
+-------------------------------- Funcion que ELIMINA un plan del usuario ----------------------------------------------
+
+CREATE OR REPLACE FUNCTION FO_M03_eliminaplan(usuario_CI int, nombre character varying)
+  RETURNS void AS $$
+    DECLARE
+    BEGIN
+      DELETE FROM plan
+      WHERE pla_nombre = nombre and fk_usuario = usuario_CI;
+    END; $$
+LANGUAGE plpgsql;
+
+-----------------------------------------------------------------------------------------------------------------------
+-------------------------------- Funcion que AGREGA un plan al usuario ------------------------------------------------
+
+CREATE OR REPLACE FUNCTION FO_M03_set_plan(idUsuario int, nombrePlan character varying, descrip character varying)
+  RETURNS VOID
+   AS $$
+DECLARE
+BEGIN
+       insert into plan (pla_nombre, pla_descripcion, fk_usuario) values (nombrePlan, descrip, idUsuario);
+END; $$
+  LANGUAGE plpgsql;
+
+-----------------------------------------------------------------------------------------------------------------------
+-------------------------------- Funcion que MODIFICA un plan del usuario ---------------------------------------------
+
+CREATE OR REPLACE FUNCTION FO_M03_modificar_plan(idUsuario int, nombrePlan character varying, descrip character varying,
+                                                  nombreModif character varying, descripModif character varying, idPlan int)
+  RETURNS VOID
+   AS $$
+DECLARE
+BEGIN
+       update plan set (pla_nombre, pla_descripcion) = (nombreModif, descripModif) where fk_usuario= idUsuario
+                                                        and pla_id=idPlan;
+END; $$
+  LANGUAGE plpgsql;
+
+------------------------------------------------------------------------------------------------------------------------
+
 
   ---***********************************************RUTINAS PARA M04******************************************************
 

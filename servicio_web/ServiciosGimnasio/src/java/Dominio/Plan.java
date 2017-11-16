@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Plan {
     private int _id;
     private String _nombre;
+    private String _descripcion;
     private ArrayList<Rutina> _listaRutina = new ArrayList<Rutina>();
 
     public int getId() {
@@ -32,6 +33,14 @@ public class Plan {
         this._nombre = _nombre;
     }
 
+    public String getDescripcion() {
+        return _descripcion;
+    }
+
+    public void setDescripcion(String _descripcion) {
+        this._descripcion = _descripcion;
+    }
+    
     public ArrayList<Rutina> getListaRutina() {
         return _listaRutina;
     }
