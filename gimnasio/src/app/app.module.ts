@@ -26,6 +26,7 @@ import { PlanPage } from '../pages/FO_M03/plan/plan';
 import { WorkoutPlansPage } from '../pages/FO_M03/workout-plans/workout-plans';
 import { PlanRutinasPage } from '../pages/FO_M03/plan-rutinas/plan-rutinas';
 import { EjerciciosPage } from '../pages/FO_M03/ejercicios/ejercicios';
+import { EjercicioRutinaPage } from '../pages/FO_M03/ejercicio-rutina/ejercicio-rutina';
 //FIN M03
 
 //M04
@@ -106,6 +107,7 @@ import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reser
     WorkoutPlansPage,
     PlanRutinasPage,
     EjerciciosPage,
+    EjercicioRutinaPage,
     ClasesPage,
     ReservasPage,
     ClaseParticularPage,
@@ -172,6 +174,7 @@ import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reser
     WorkoutPlansPage,
     PlanRutinasPage,
     EjerciciosPage,
+    EjercicioRutinaPage,
     ClasesPage,
     ClaseParticularPage,
     ClasesParticipadasPage,
