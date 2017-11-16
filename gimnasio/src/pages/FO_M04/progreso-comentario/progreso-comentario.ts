@@ -11,6 +11,7 @@ import { classcomentario } from '../progreso-comentario/classcomentario';
 })
 export class ProgresoComentarioPage {
 
+  //Arreglos para el manejo de la  informacion traida desde el servicio
   mensaje = [];
   nombre = [];
   fecha = [];
@@ -25,6 +26,9 @@ export class ProgresoComentarioPage {
     console.log('ionViewDidLoad ProgresoComentarioPage');
   }
 
+  /*Metodo que hace el llamado al servicio web y devuelve la informacion
+  de cada progreso compartido
+  */
   getProgresosCompartidos(){
     let urlPeticion: string = "FOM04_Comentario/getProgresos";
      this.userService.getDato( urlPeticion ).subscribe(data => {

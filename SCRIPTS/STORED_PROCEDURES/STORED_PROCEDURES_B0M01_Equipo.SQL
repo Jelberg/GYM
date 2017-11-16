@@ -49,14 +49,13 @@ END; $$
 
 ---Consulta compleja---
 CREATE OR REPLACE FUNCTION bo_m01_getAllExercices()
-RETURNS TABLE(Equipamiento character varying,Ejercicio character varying, Grupo_muscular character varying)
+RETURNS TABLE(Id int, maquina_id int, equipo_id int, Ejercicio character varying, Equipamiento character varying, Grupo_muscular character varying)
 AS $$
-
+DECLARE
+   var_r    record;
 BEGIN 
-    select 
-        maq_nombre as Equipamiento,
-        eje_nombre as ejercicio,
-        eje_grupo_muscular as Grupo_muscular
+    FOR var_r IN(select 
+        maq_nombre as nombre,eje_nombre,eje_grupo_muscular,eme_id, eme.fk_equipo, eme.fk_maquina
     from 
         ejercicio_maquina_equipo as eme,
         maquina as maq,
@@ -68,15 +67,22 @@ BEGIN
     UNION ALL
 
     select 
-        equ_nombre as Equipamiento,
-        eje_nombre as ejercicio,
-        eje_grupo_muscular as Grupo_muscular
+        equ_nombre as nombre,eje_nombre,eje_grupo_muscular,eme_id, eme.fk_equipo, eme.fk_maquina
     from 
         ejercicio_maquina_equipo as eme,
         equipo as equ,
         ejercicio as eje
     where
         equ.equ_id = eme.fk_equipo and
-        eme.fk_ejercicio = eje.eje_id 
+        eme.fk_ejercicio = eje.eje_id)
+   LOOP
+    id = var_r.eme_id;
+    maquina_id = var_r.eme.fk_maquina;
+    equipo_id = var_r.eme.fk_equipo;
+    Ejercicio = var_r.eje_nombre;
+    Equipamiento = var_r.nombre;
+    Grupo_muscular = var_r.eje_grupo_muscular;
+    RETURN NEXT;
+   END LOOP;        
 END; $$
   LANGUAGE plpgsql;

@@ -91,4 +91,13 @@ public class PruebaMedidas {
         //assertNotNull( respuesta );
 
     }
+    
+    @Test
+    public void pruebaActualizaMedida(){
+        Gson gson = new Gson();
+        _progresoMedida = new FOM04_Progreso_Medida();
+        String respuesta = _progresoMedida.actualizaMedida(9999, "Cuadricep", 34 );
+        assertNotNull( respuesta );
+    
+    }
 }

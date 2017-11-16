@@ -46,6 +46,7 @@ export class MyApp {
       {titulo: 'Clases Participadas',component:ClasesParticipadasPage, icon: 'done-all'},
       {titulo: 'Reservar entrenador',component:ReservasRealizadasPage, icon: 'calendar'},
       {titulo: 'Chat',component:ChatPage, icon: 'mail'},
+      {titulo: 'Asignar Rutina(entrenador)',component:ChatPage, icon: 'stast'},
     ];
 
     platform.ready().then(() => {

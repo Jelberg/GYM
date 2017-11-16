@@ -64,7 +64,7 @@ import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/rese
 import { HorariosEntrenadorPage} from '../pages/FO_M06/horarios-entrenador/horarios-entrenador';
 import { GestiNDeReservasPage} from '../pages/FO_M06/gesti-nde-reservas/gesti-nde-reservas';
 import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reserva';
-import { ChatPage} from '../pages/FO_M06/chat/chat';
+
 //FIN M06
 
 
@@ -115,7 +115,6 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
     HorariosEntrenadorPage,
     GestiNDeReservasPage,
     DetalleReservaPage,
-    ChatPage,
     ListaClasesPage
   ],
   imports: [
@@ -178,7 +177,6 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
     HorariosEntrenadorPage,
     GestiNDeReservasPage,
     DetalleReservaPage,
-    ChatPage,
     ListaClasesPage
   ],
   providers: [
