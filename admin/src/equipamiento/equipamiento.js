@@ -1,15 +1,22 @@
 var url = "http://localhost:8080/ServiciosGimnasio/Equipamiento";
+var url_comple = "/getListEquipo";
+var url_comple2 = "/getListMaquina";
+var url_delete_equipo = "/eliminarEquipo";
+var url_delete_maquina = "/eliminarMaquina";
+
 window.onload = function mostrartabla() {
-    var url_comple = "/getListEquipo";
-    var url_comple2 = "/getListMaquina";
+
 
     var machines = []
     $.get(url + url_comple, function (data) {
         for (var i = 0; i < data.length; i++) {
             data[i].type = 'Equipo'
             machines.push(data[i]);
+            console.log(data)
         }
         $.get(url + url_comple2, function (data2) {
+
+            console.log(data2)
             for (var j = 0; j < data2.length; j++) {
                 data2[j].type = 'Máquina'
                 machines.push(data2[j]);
@@ -103,8 +110,18 @@ function eliminar(e, esMaquina) {
         var element = id[i];
         if (element.classList) {
             if (element.classList.value == 'id') {
-                console.log('Elimino ID: ', element.innerHTML)
-                console.log('Es maquina?: ', esMaquina)
+                if (esMaquina == 0) {
+                    $.post(url + url_delete_equipo + '?id=' + Number(element.innerHTML))
+                        .done(function (data) {
+                            location.reload();
+                        }); 
+                }
+                else{
+                    $.post(url + url_delete_maquina + '?id=' + Number(element.innerHTML))
+                    .done(function (data) {
+                        location.reload();
+                    }); 
+                }
             }
         }
     }
