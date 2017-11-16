@@ -78,14 +78,16 @@ DECLARE ref refcursor;
 	END
 	$$ LANGUAGE PLPGSQL;
 
------------Esta funcion asigna una relacion usuario entrenador------------------
 
-CREATE OR REPLACE FUNCTION f0_mo6_set_usu_ent (usu_id int, ent_id int)
-RETURNS VOID AS $$
-DECLARE
-BEGIN
-	INSERT INTO reserva(fk_usuario,fk_entrenador) 
-			values (usu_id,end_id);
-	END $$
-	LANGUAGE PLPGSQL;
-
+-----------Esta funcion muestra el progreso del usuario------------
+CREATE OR REPLACE FUNCTION fo_m06_get_progreso_usuario (rut_id int)
+RETURNS refcursor AS $$
+DECLARE ref refcursor;
+	BEGIN
+		OPEN ref FOR 
+			SELECT PR.progreso, PR.evaluacion
+			FROM RUTINA R, ENTRENADOR E, USUARIO U, PROGRESO_RUTINA PR
+			WHERE (E.ent_id = R.fk_entrenador AND U.usu_id = r.fk_usuario) AND PR.fk_rutina = R.rut_id;
+		RETURN ref;
+	END
+	$$ LANGUAGE PLPGSQL;
