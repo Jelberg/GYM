@@ -36,7 +36,8 @@ export class ProgresoPesoPage {
         this.listaPeso[i] = data[i]._peso;
         this.listaFecha[i] = data[i]._fechaP;
         i++;
-      };
+      }
+      this.setLine();
     });
   }
 
