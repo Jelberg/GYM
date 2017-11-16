@@ -49,7 +49,7 @@ END; $$
 
 ---Consulta compleja---
 CREATE OR REPLACE FUNCTION bo_m01_getAllExercices()
-RETURNS TABLE(Equipamiento character varying,Ejercicio character varying, Grupo_muscular character varying)
+RETURNS TABLE(emeId int, Ejercicio character varying, Equipamiento character varying, Grupo_muscular character varying)
 AS $$
 
 BEGIN 
@@ -70,13 +70,14 @@ BEGIN
     select 
         equ_nombre as Equipamiento,
         eje_nombre as ejercicio,
-        eje_grupo_muscular as Grupo_muscular
+        eje_grupo_muscular as Grupo_muscular,
+        eme_id as emeId
     from 
         ejercicio_maquina_equipo as eme,
         equipo as equ,
         ejercicio as eje
     where
         equ.equ_id = eme.fk_equipo and
-        eme.fk_ejercicio = eje.eje_id 
+        eme.fk_ejercicio = eje.eje_id;
 END; $$
   LANGUAGE plpgsql;
