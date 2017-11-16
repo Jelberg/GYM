@@ -49,7 +49,7 @@ export class ClasesParticipadasPage {
   public cargarClasesSinComentar():void{
     
     //PENDIENTE DE CAMBIAR EL 3 POR LA ID DEL USUARIO *******
-    let url = "FOM05_Critica/sinCritica?id=4";
+    let url = "FOM05_Critica/sinCritica?id=1";
     this.userService.getDato(url).subscribe(data => {    
         let i: number = 0;
         while ( i < data.length ){
