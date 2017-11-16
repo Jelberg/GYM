@@ -21,6 +21,8 @@ import { HorariosEntrenadorPage} from '../pages/FO_M06/horarios-entrenador/horar
 import { GestiNDeReservasPage} from '../pages/FO_M06/gesti-nde-reservas/gesti-nde-reservas';
 import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reserva';
 import { ChatPage} from '../pages/FO_M06/chat/chat';
+import { AsignarRutinaPage} from '../pages/FO_M06/asignar-rutina/asignar-rutina';
+import {ChatEntrenadorPage} from '../pages/FO_M06/chat-entrenador/chat-entrenador';
 
 @Component({
   templateUrl: 'app.html'
@@ -46,6 +48,8 @@ export class MyApp {
       {titulo: 'Clases Participadas',component:ClasesParticipadasPage, icon: 'done-all'},
       {titulo: 'Reservar entrenador',component:ReservasRealizadasPage, icon: 'calendar'},
       {titulo: 'Chat',component:ChatPage, icon: 'mail'},
+      {titulo: 'Chat(version entrenador)',component:ChatEntrenadorPage, icon: 'mail'},
+      {titulo: 'Asignar Rutina(entrenador)',component:ChatPage, icon: 'stast'},
     ];
 
     platform.ready().then(() => {
