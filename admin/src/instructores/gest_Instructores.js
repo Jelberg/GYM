@@ -80,6 +80,7 @@ function insertarInstructor()
 
     if (document.getElementById("nombre").value && document.getElementById("fecha").value && document.getElementById("sexo").value && document.getElementById("correo").value )
     {
+
         var res = document.getElementById("nombre").value.split(" ");
         var url_comple="/insertaInstruct?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+document.getElementById('sexo').value+"&correo="+document.getElementById('correo').value;
         fetch(url+url_comple, {
@@ -88,7 +89,7 @@ function insertarInstructor()
         .then(response => intento=1)
     }
     else 
-    alert("Ningun cambos ")
+    alert("Ningun campo puede estar vacio ")
 }
 
 function borrarInstruct()
