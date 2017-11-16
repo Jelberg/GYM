@@ -36,7 +36,7 @@ LANGUAGE plpgsql;
 DECLARE
    var_r    record;
 BEGIN
-   FOR var_r IN(SELECT MAQ_NOMBRE
+   FOR var_r IN(SELECT MAQ_ID,MAQ_NOMBRE
         FROM MAQUINA
         WHERE MAQ_ID = _id)
    LOOP

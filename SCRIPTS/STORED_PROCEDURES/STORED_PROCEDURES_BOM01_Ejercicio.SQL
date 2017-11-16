@@ -1,7 +1,7 @@
 ---Ejercicio---
 
 ---Insert Ejercicio---
-CREATE OR REPLACE FUNCTION bo_m01_insertar_ejercicio(nombre character varying, grupo character varying[])
+CREATE OR REPLACE FUNCTION bo_m01_insertar_ejercicio(nombre character varying, grupo character varying)
 RETURNS VOID AS $$
 DECLARE 
 BEGIN 
@@ -11,7 +11,7 @@ END $$
   LANGUAGE plpgsql;
 
 ---Update Ejercicio---
-CREATE OR REPLACE FUNCTION bo_m01_modificar_ejercicio(id int,nombre character varying,grupo character varying[])
+CREATE OR REPLACE FUNCTION bo_m01_modificar_ejercicio(id int,nombre character varying,grupo character varying)
 	RETURNS void AS $$
     DECLARE
     BEGIN
