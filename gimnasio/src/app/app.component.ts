@@ -32,7 +32,7 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
 
-    this.rootPage = IniciarsesionPage;
+    this.rootPage = ListaClasesPage;
     /* En el bloque de abajo, pueden agregar la pagina inicial de su modulo
       a la que se accedera desde el menu lateral */
     this.pages = [

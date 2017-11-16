@@ -22,20 +22,20 @@ export class ClaseParticularPage {
   public img:string;
   public instructor:string;
   public fecha:string;
-  public duracion:number;
-  public capacidad:number;
-  public disponibilidad:number;
+  public duracion:string;
+  public capacidad:string;
+  public disponibilidad:string;
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
-    id: number,titulo: string, descripcion: string, instructor: string, fecha:string,capacidad:number
+    id: string,titulo: string, descripcion: string, instructor: string, fecha:string,capacidad:string
   ){  
 
     this.descripcion=descripcion;
     this.img="../assets/imgs/clasesYoga.jpg";
     this.instructor=instructor;
     this.fecha=fecha;
-    this.duracion= 60;
+    this.duracion= '60';
     this.capacidad=capacidad;
-    this.disponibilidad=20;
+    this.disponibilidad='20';
     this.titulo = titulo;
   }
   
