@@ -17,8 +17,11 @@ import { ListaContactosPage } from '../lista-contactos/lista-contactos';
   selector: 'page-progreso-ejercicio',
   templateUrl: 'progreso-ejercicio.html',
 })
+
+
 export class ProgresoEjercicioPage {
 
+  //Arreglos para el manejo de la informacion traida del servicio
   listaRecibida
   peso = [];
   repeticion = [];
@@ -42,6 +45,9 @@ foo(){
   );
 }
 
+/*Metodo que hace llamada al servicio trae peso del ejercicio, repeticioens
+y mes en el que se ejecuto
+*/ 
 getDatosEjercicio(){
   let urlPeticion: string = "FOM03_Rutina/getEjercicios6meses?idUsuario=1&ejercicio="+this.listaRecibida;
    this.userService.getDato( urlPeticion ).subscribe(data => {
@@ -56,6 +62,7 @@ getDatosEjercicio(){
     }); 
 }
 
+//Realiza lo mismo que el metodo anterior en un periodo de tiempo mayor
 getDatosEjercicioPerYear(){
   let urlPeticion: string = "FOM03_Rutina/getEjercicios5anios?idUsuario=1&ejercicio="+this.listaRecibida;
    this.userService.getDato( urlPeticion ).subscribe(data => {
@@ -70,6 +77,7 @@ getDatosEjercicioPerYear(){
     }); 
 }
 
+//Genera la grafica con la informacion obtenida de los metodos anteriores
 setLineT(){
   
       this.lineChartData = [];
@@ -102,6 +110,7 @@ goToSeleccionarEjercicioPage(){
   this.navCtrl.push(ListaEjerciciosPage);
 }
 
+//Grafica por defecto
 public lineChartData:Array<any> = [
   {data: [10, 20, 30, 40, 50, 60, 70], label: 'Repeticiones'},
   {data: [15, 25, 35, 45, 55, 65, 75], label: 'Peso'},
