@@ -13,9 +13,8 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class UserServiceProvider {
 
-  private URL: string = "http://localhost:9999/ServiciosGimnasio/"
+  private URL: string = "http://localhost:8080/ServiciosGimnasio/"
 
-  
  // private URL: string = "http://190.79.86.82:8080/web/"
   constructor(/*public http: Http,*/ private http: Http ) {
     console.log('Hello UserServiceProvider Provider');
@@ -49,7 +48,8 @@ export class UserServiceProvider {
   public p ( res: Response ){
     return console.log(res);
   }
-
+  
+  ///Conexion FOM03
 public post2(apiUrl: string) {
   
     return this.http.post(this.URL+apiUrl, 
