@@ -65,3 +65,29 @@ BEGIN
 	LANGUAGE PLPGSQL;
 
 
+---------------Esta funcion devuelve todas las rutinas de un usuario---------
+CREATE OR REPLACE FUNCTION fo_m06_get_rutina_usuario (rut_id int)
+RETURNS refcursor AS $$
+DECLARE ref refcursor;
+	BEGIN
+		OPEN ref FOR 
+			SELECT R.rut_nombre, R.rut_dia
+			FROM RUTINA R, ENTRENADOR E, USUARIO U
+			WHERE E.ent_id = R.fk_entrenador AND U.usu_id = r.fk_usuario;
+		RETURN ref;
+	END
+	$$ LANGUAGE PLPGSQL;
+
+
+-----------Esta funcion muestra el progreso del usuario------------
+CREATE OR REPLACE FUNCTION fo_m06_get_progreso_usuario (rut_id int)
+RETURNS refcursor AS $$
+DECLARE ref refcursor;
+	BEGIN
+		OPEN ref FOR 
+			SELECT PR.progreso, PR.evaluacion
+			FROM RUTINA R, ENTRENADOR E, USUARIO U, PROGRESO_RUTINA PR
+			WHERE (E.ent_id = R.fk_entrenador AND U.usu_id = r.fk_usuario) AND PR.fk_rutina = R.rut_id;
+		RETURN ref;
+	END
+	$$ LANGUAGE PLPGSQL;
