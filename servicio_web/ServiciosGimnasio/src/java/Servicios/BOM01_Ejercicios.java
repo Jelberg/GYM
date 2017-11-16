@@ -65,11 +65,9 @@ public class BOM01_Ejercicios {
             while (rs.next()) {
                 jsonArray3.add(new Ejercicio_Maquina_Equipo());
                 jsonArray3.get(jsonArray3.size() - 1).setId(rs.getInt("id"));
-                jsonArray3.get(jsonArray3.size() - 1).setNombre(rs.getString("Ejercicio"));
-                jsonArray3.get(jsonArray3.size() - 1).setEquipamiento(rs.getString("Equipamiento"));
-                jsonArray3.get(jsonArray3.size() - 1).setGrupomuscular(rs.getString("Grupo_muscular"));
-                jsonArray3.get(jsonArray3.size() - 1).setMaquina(rs.getInt("Maquina")); 
-                jsonArray3.get(jsonArray3.size() - 1).setEquipo(rs.getInt("Equipo")); 
+                jsonArray3.get(jsonArray3.size() - 1).setNombre(rs.getString("ejercicio"));
+                jsonArray3.get(jsonArray3.size() - 1).setEquipamiento(rs.getString("equipamiento"));
+                jsonArray3.get(jsonArray3.size() - 1).setGrupomuscular(rs.getString("grupo_muscular")); 
             }
             response = gson.toJson(jsonArray);
         } catch (SQLException e) {
