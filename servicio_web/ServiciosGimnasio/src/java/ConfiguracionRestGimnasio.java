@@ -5,7 +5,12 @@ import Servicios.BOM02_Entrenador;
 import Servicios.BOM02_Horario_Clase;
 import Servicios.BOM02_Instruct;
 import Servicios.FOM03_Rutina;
+
 import Servicios.FOM05_Clase_Fecha;
+
+import Servicios.FOM04_Progreso_Medida;
+import Servicios.FOM04_Progreso_Peso;
+
 import Servicios.FOM05_ClasesSemana;
 import Servicios.FOM05_Critica;
 import Servicios.FOM05_Reserva;
@@ -42,6 +47,9 @@ public class ConfiguracionRestGimnasio extends Application{
         h.add(FOM05_Clase_Fecha.class);
         h.add(FOM05_ClasesSemana.class);
         h.add(FOM05_Reserva.class);
+        h.add(FOM04_Progreso_Medida.class);
+        h.add(FOM04_Progreso_Peso.class);
+
         return h;
     }
        
