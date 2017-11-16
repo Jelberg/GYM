@@ -19,15 +19,15 @@
 <ion-content padding>
 
   <ion-list>
-    <button ion-item *ngFor="let clases of clases" (click)="goToClaseParticular(clases._id,clases._nombre,clases._descripcion,clases._Instructor,clases._fecha, clases._capacidad)">
-      <ion-grid>
+    <ion-item *ngFor="let clases of clases">
+    <button ion-item (click)="goToClaseParticular(clases._id,clases._nombre,clases._descripcion,clases._Instructor,clases._fecha, clases._capacidad)">
          <p>{{clases._fecha}}</p>
          <h2>{{clases._nombre}}</h2>
          <h3>{{clases._Instructor}}</h3>
          <h3>{{clases._capacidad}}</h3>
-         
-      </ion-grid>
     </button>  
+  </ion-item>
+
   </ion-list>
 
 
