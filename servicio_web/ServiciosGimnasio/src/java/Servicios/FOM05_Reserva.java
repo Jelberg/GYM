@@ -27,7 +27,7 @@ import javax.ws.rs.QueryParam;
  * @author GESTION
  */
 
-public class FO_M05_Reserva {
+public class FOM05_Reserva {
 /*    
     private Connection _conn = Sql.getConInstance();
     private Gson _gson = new Gson();
