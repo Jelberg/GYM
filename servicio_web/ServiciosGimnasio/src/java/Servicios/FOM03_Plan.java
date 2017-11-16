@@ -14,8 +14,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import static javax.ws.rs.HttpMethod.POST;
-import Dominio.Aerobico;
-import Dominio.Anaerobico;
+//import Dominio.Aerobico;
+//import Dominio.Anaerobico;
 import Dominio.Comentario;
 import Dominio.Ejercicio;
 import Dominio.Plan;
@@ -74,8 +74,8 @@ public class FOM03_Plan {
                     }});
                     Plan result = new Plan();
                     result.setId(rs.getInt("idPlan"));
-                    result.setNombre(rs.getString("nombre"));
-                    result.setDescripcion(rs.getString("descrip"));
+                 //   result.setNombre(rs.getString("nombre"));
+                   // result.setDescripcion(rs.getString("descrip"));
                     listaPlanes.add(result);
                 }
                 return gson.toJson( listaPlanes );
