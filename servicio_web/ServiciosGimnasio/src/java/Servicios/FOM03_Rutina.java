@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import Excepciones.ParameterNullException;
 import Validaciones.ValidationWS;
+import static javax.ws.rs.HttpMethod.POST;
+import javax.ws.rs.POST;
 
 
 /**
@@ -95,7 +97,7 @@ public class FOM03_Rutina {
          * @param dia se especifica el dia de la rutina
          * @return Retorna un string de confirmacion de rutina agregada
          */
-        @GET
+        @POST
         @Path("/setRutina")
         @Produces("application/json")
          public String setRutina( @QueryParam( "idUsuario" ) int idUsuario, 
@@ -132,7 +134,7 @@ public class FOM03_Rutina {
      * @param diaModif se ingresa el nuevo dia de la rutina
      * @return retorna un string de confirmacion de modificacion
      */
-        @GET
+        @POST
         @Path("/modificarRutina")
         @Produces("application/json")
          public String modificarRutina( @QueryParam( "idUsuario" ) int idUsuario, 

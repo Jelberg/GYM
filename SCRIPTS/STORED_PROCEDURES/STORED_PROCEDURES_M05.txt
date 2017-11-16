@@ -52,6 +52,36 @@ BEGIN
 END $$
 LANGUAGE PLPGSQL;
 
+-- FUNCION QUE DEVUELVE CLASES
+
+CREATE OR REPLACE FUNCTION M05_LISTA_CLASES() 
+RETURNS TABLE (id int, fecha Date, clase varchar ,instructor varchar, descripcion varchar, capacidad int ) AS
+$$
+DECLARE 
+var_r record;
+BEGIN
+for var_r in (Select HC_ID, HC_FECHA, CLA_NOMBRE, INS_NOMBRE, CLA_DESCRIPCION, HC_CAPACIDAD 
+		from CLASE, HORARIO_CLASE, INSTRUCTOR 
+		where CLA_ID=FK_CLASE AND INS_ID = FK_INSTRUCTOR)
+
+loop
+	id:= var_r.HC_ID;
+	fecha:= var_r.HC_FECHA;
+	clase:= var_r.CLA_NOMBRE;
+	instructor:= var_r.INS_NOMBRE;
+	descripcion:=var_r.CLA_DESCRIPCION;
+	capacidad:= var_r.HC_CAPACIDAD;
+	
+	return next;
+	
+end loop;
+	
+	
+END 
+$$ 
+language plpgsql;
+
+
 
 --**********FUNCIONES PARA CRITICA*******
 

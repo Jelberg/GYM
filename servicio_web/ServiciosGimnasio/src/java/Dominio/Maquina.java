@@ -10,18 +10,23 @@ package Dominio;
  * @author MinervaMorales
  */
 public class Maquina {
-    private String _nombre;
+    private String nombre; 
+    private int id;
     
-    public Maquina(String _nombre) {
-        this._nombre = _nombre;
+     public int getId() {
+        return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    } 
+
     public String getNombre() {
-        return _nombre;
+        return nombre;
     }
 
     public void setNombre(String _nombre) {
-        this._nombre = _nombre;
+        this.nombre = _nombre;
     }
     
 }

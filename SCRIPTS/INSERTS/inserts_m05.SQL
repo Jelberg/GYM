@@ -1,7 +1,7 @@
 
 --USUARIO
-insert into usuario (usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac,USU_TELEFONO,USU_ESTATURA, USU_FOTO, USU_CORREO) 
-values (25530426,'Minerva', 'Morales', 'F','19/08/1996','123',12,null,'mm@gmail.com');
+insert into usuario (usu_id,usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac,USU_TELEFONO,USU_ESTATURA, USU_FOTO, USU_CORREO) 
+values (1,25530426,'Minerva', 'Morales', 'F','19/08/1996','123',12,null,'mm@gmail.com');
 
 --INSTRUCTOR
 INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES('Pedro','Alvares','13-12-94','M','fitpedro@gmail.com',null);

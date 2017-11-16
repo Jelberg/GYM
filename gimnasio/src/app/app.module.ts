@@ -26,6 +26,7 @@ import { PlanPage } from '../pages/FO_M03/plan/plan';
 import { WorkoutPlansPage } from '../pages/FO_M03/workout-plans/workout-plans';
 import { PlanRutinasPage } from '../pages/FO_M03/plan-rutinas/plan-rutinas';
 import { EjerciciosPage } from '../pages/FO_M03/ejercicios/ejercicios';
+import { EjercicioRutinaPage } from '../pages/FO_M03/ejercicio-rutina/ejercicio-rutina';
 //FIN M03
 
 //M04
@@ -57,13 +58,15 @@ import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clase
 import { ComentarClasePage} from '../pages/FO_M05/comentar-clase/comentar-clase';
 import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { ListaClasesPage } from '../pages/FO_M05/lista-clases/lista-clases';
 //FIN M05
 // M06
 import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/reservas-realizadas';
 import { HorariosEntrenadorPage} from '../pages/FO_M06/horarios-entrenador/horarios-entrenador';
 import { GestiNDeReservasPage} from '../pages/FO_M06/gesti-nde-reservas/gesti-nde-reservas';
 import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reserva';
-import { ChatPage} from '../pages/FO_M06/chat/chat';
+
+
 //FIN M06
 
 
@@ -104,6 +107,7 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
     WorkoutPlansPage,
     PlanRutinasPage,
     EjerciciosPage,
+    EjercicioRutinaPage,
     ClasesPage,
     ReservasPage,
     ClaseParticularPage,
@@ -114,7 +118,11 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
     HorariosEntrenadorPage,
     GestiNDeReservasPage,
     DetalleReservaPage,
-    ChatPage
+
+    
+
+
+    ListaClasesPage
   ],
   imports: [
     BrowserModule,
@@ -166,6 +174,7 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
     WorkoutPlansPage,
     PlanRutinasPage,
     EjerciciosPage,
+    EjercicioRutinaPage,
     ClasesPage,
     ClaseParticularPage,
     ClasesParticipadasPage,
@@ -176,7 +185,9 @@ import { ChatPage} from '../pages/FO_M06/chat/chat';
     HorariosEntrenadorPage,
     GestiNDeReservasPage,
     DetalleReservaPage,
-    ChatPage
+    
+    
+    ListaClasesPage
   ],
   providers: [
     StatusBar,

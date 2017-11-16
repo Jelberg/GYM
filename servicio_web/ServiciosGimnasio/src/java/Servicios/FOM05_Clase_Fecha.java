@@ -87,6 +87,47 @@ public class FOM05_Clase_Fecha {
     } 
 
     
- 
+        @GET
+    
+         @Path("/listaClases")
+        
+        @Produces("application/json")
+    
+        public String listaClases() throws SQLException
+    {
+        try
+        {
+            String query = "Select * from m05_lista_clases()";
+            jsonArray = new ArrayList<>();
+            Statement st = _conn.createStatement();
+            ResultSet rs = st.executeQuery(query);  
+    
+            while (rs.next())
+            {    
+                jsonArray.add(new Clase());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("clase"));
+                jsonArray.get(jsonArray.size() - 1).setDescripcion(rs.getString("descripcion"));
+                jsonArray.get(jsonArray.size() - 1).setFecha(rs.getDate("fecha"));
+                jsonArray.get(jsonArray.size() - 1).setInstructor(rs.getString("instructor"));
+                jsonArray.get(jsonArray.size() - 1).setCapacidad(rs.getInt("capacidad"));
+         
+            }
+             result = _gson.toJson(jsonArray);
+             return result; 
+        }
+        catch (SQLException e)
+        {
+            return e.getMessage();
+        }
+        catch(Exception e)
+        {
+            return e.getMessage();
+        }
+        finally
+        {
+            Sql.bdClose(_conn);
+        }
+    }
     
 }

@@ -1,10 +1,18 @@
 
 import Servicios.BOM02_Clase;
+import Servicios.BOM01_Equipamiento;
+import Servicios.BOM01_Ejercicios;
 import Servicios.BOM02_Entrenador;
 import Servicios.BOM02_Horario_Clase;
 import Servicios.BOM02_Instruct;
 import Servicios.FOM03_Rutina;
+
 import Servicios.FOM05_Clase_Fecha;
+
+import Servicios.FOM04_Progreso_Medida;
+import Servicios.FOM04_Progreso_Peso;
+
+import Servicios.FOM05_ClasesSemana;
 import Servicios.FOM05_Critica;
 import Servicios.FOM05_Reserva;
 import javax.ws.rs.ApplicationPath;
@@ -30,6 +38,8 @@ public class ConfiguracionRestGimnasio extends Application{
     @Override
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
+        h.add(BOM01_Equipamiento.class);
+        h.add(BOM01_Ejercicios.class);
         h.add(BOM02_Clase.class);
         h.add(BOM02_Entrenador.class);
         h.add(BOM02_Horario_Clase.class);
@@ -37,7 +47,15 @@ public class ConfiguracionRestGimnasio extends Application{
         h.add(FOM03_Rutina.class);
         h.add(FOM05_Critica.class);
         h.add(FOM05_Clase_Fecha.class);
+<<<<<<< HEAD
         h.add(FOM05_Reserva.class);
+=======
+        h.add(FOM05_ClasesSemana.class);
+        h.add(FOM05_Reserva.class);
+        h.add(FOM04_Progreso_Medida.class);
+        h.add(FOM04_Progreso_Peso.class);
+
+>>>>>>> bd10307a877eb917ac7631d46d686acc097da6e9
         return h;
     }
        

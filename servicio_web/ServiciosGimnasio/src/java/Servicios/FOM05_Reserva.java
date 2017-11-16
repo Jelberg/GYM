@@ -5,17 +5,18 @@
  */
 package Servicios;
 
-import Dominio.Reserva;
+import Dominio.Clase;
+import Dominio.Critica;
+//import Dominio.Reserva;
 import Dominio.Sql;
-import Validaciones.ValidationWS;
 import com.google.gson.Gson;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -23,58 +24,49 @@ import javax.ws.rs.QueryParam;
 
 /**
  *
- * @author Mario
+ * @author GESTION
  */
-@Path("/FOM05_Reserva")
+
 public class FOM05_Reserva {
+/*    
     private Connection _conn = Sql.getConInstance();
     private Gson _gson = new Gson();
+    private ArrayList<Reserva> _listaReservas;
     private String result;
-    private ArrayList<Reserva> jsonArray;
-  
-    
-    
-    @GET  
-    @Produces("application/json")
-    public String prueba ()
-    {
-        return "PRUEBA RESERVA";
-    }
-    
-    /**
-     * 
-     * @return Consulta que devuelve todas las clases por fecha
-     * @throws SQLException 
-     */
     
     @GET
     
-    @Path("/consultaReserva")
+    @Path("/consultarReservas")
     
     @Produces("application/json")
     
-    public String consultaReserva(@QueryParam("id") int id) throws SQLException
+    public String consultarReservas() throws SQLException
     {
+        String query = "Select * from HORARIO_CLASE";
+        
         try
         {
-             
-            String query = "Select * from FOM05_CONSULTAR_RESERVA("+id+")";
-            jsonArray = new ArrayList<>();
-            Statement st = _conn.createStatement();
-            ResultSet rs = st.executeQuery(query);  
-           
-    
+            Statement st = _conn.createStatement();           
+            ResultSet rs = st.executeQuery(query);
+            Reserva reserva = new Reserva();
+         
             while (rs.next())
             {    
-               jsonArray.add(new Reserva());
-                jsonArray.get(jsonArray.size() - 1).setRes_Id(rs.getInt("id"));
-                jsonArray.get(jsonArray.size() - 1).setFecha_Ini(rs.getDate("fechainicio"));
-                jsonArray.get(jsonArray.size() - 1).setFecha_Fin(rs.getDate("fechafin"));
-                jsonArray.get(jsonArray.size() - 1).setUsuario(rs.getInt("username"));
-                jsonArray.get(jsonArray.size() - 1).setEntrenador(rs.getInt("entrenador"));                              
+               
+                reserva.setId(rs.getInt("id"));
+                reserva.setFecha(rs.getDate("fecha"));
+                reserva.setCapacidad(rs.getInt("capacidad"));
+                reserva.setHoraInicio(rs.getDate("hora_inicio"));
+                reserva.setHoraFin(rs.getDate("hora_fin"));
+                reserva.setDuracion(rs.getDate("duracion"));
+                reserva.setIdUsuario(rs.getInt("usuario"));
+                reserva.setIdInstructor(rs.getInt("instructor"));
+                reserva.setIdClase(rs.getInt("clase"));
+                
+                _listaReservas.add(reserva);
             }
-             result = _gson.toJson(jsonArray);
-             
+            //result = _gson.toJson(_listaReservas);
+            return _gson.toJson(_listaReservas);
         }
         catch (SQLException e)
         {
@@ -87,29 +79,30 @@ public class FOM05_Reserva {
         finally
         {
             Sql.bdClose(_conn);
-            return result; 
         }
     } 
-
-     @GET
+    /*
+    @GET
     
-    @Path("/insertarReserva")
+    @Path("/reservarClase")
     
     @Produces("application/json")
     
-    public String insertarReserva(@QueryParam("fechainicio") String fechainicio,
-                                  @QueryParam("fechafin") String fechafin,
-                                  @QueryParam("usuario") int usuario,
-                                  @QueryParam("entrenador") int entrenador) throws SQLException
+    public String reservarClase(@QueryParam("fk_clase") int _idClase,
+            @QueryParam("fk_instructor") int _idInstructor, @QueryParam("fk_usuario") int _idUsuario,
+            @QueryParam("hc_fecha") Date _fecha, @QueryParam("hc_dia") String _dia,
+            @QueryParam("hc_capacidad") int _capacidad, @QueryParam("hc_hora_inicio") Date _hora_inicio,
+            @QueryParam("hc_hora_fin") Date _hora_fin,@QueryParam("hc_status") String _status,
+            @QueryParam("hc_duracion") Date _duracion,  @QueryParam("fk_clase") int _idClase) throws SQLException
     {
+        String query = "insert into HORARIO_CLASE (hc_fecha,hc_dia,hc_capacidad,hc_hora_inicio,hc_hora_fin,hc_status,hc_duracion,fk_usuario,fk_instructor,fk_clase) "
+                + "values ('"+_fecha+"','"+_dia+"',"+_capacidad+",'"+_hora_inicio+"','"+_hora_fin+"','"+_status+"',"+_duracion+","+_idUsuario+","+_idInstructor+","+_idClase+")";
+        
         try
         {
-            String query = "Select * from M05_AGREGAR_RESERVA('"+fechainicio+"','"+fechafin+"', "+usuario+","+entrenador+")";
-            
-            Statement st = _conn.createStatement();
-            ResultSet rs = st.executeQuery(query);  
-
-             return "AGREGADO"; 
+            Statement st = _conn.createStatement();           
+            st.executeUpdate(query);
+            return _gson.toJson(true);
         }
         catch (SQLException e)
         {
@@ -124,23 +117,42 @@ public class FOM05_Reserva {
             Sql.bdClose(_conn);
         }
     } 
- 
-     @GET
+    */
+    /*
+    @GET
     
-    @Path("/eliminarReserva")
+    @Path("/verificarDisponibilidad")
     
     @Produces("application/json")
     
-    public String eliminarCritica(@QueryParam("id") int id) throws SQLException
+    public String verificarDisponibilidad(@QueryParam("pk_clase") int _idClase) throws SQLException
     {
+        String query = "Select (count(hc_id)) as disp from HORARIO_CLASE where pk_clase="+_idClase;
+        int _disp=0,_cap=0;
         try
         {
-            String query = "Select * from M05_ELIMINAR_RESERVA("+id+")";
-          
-            Statement st = _conn.createStatement();
-            ResultSet rs = st.executeQuery(query);  
-
-             return "ELIMINADO"; 
+            Statement st = _conn.createStatement();           
+            ResultSet rs = st.executeQuery(query);
+         
+            while (rs.next())
+            {    
+               
+                _disp = rs.getInt("disp");
+                query="select hc_capacidad from horario_clase where pk_clase="+_idClase+" limit 1";
+                rs = st.executeQuery(query);
+                rs.next();
+                _cap=rs.getInt("capacidad");
+                if(_cap >=_disp){
+                    return _gson.toJson(true);
+                }
+                else
+                {
+                    return _gson.toJson(false);
+                }
+                
+            }
+            //result = _gson.toJson(_listaReservas);
+            return _gson.toJson(true);
         }
         catch (SQLException e)
         {
@@ -156,4 +168,5 @@ public class FOM05_Reserva {
         }
     } 
     
+    */
 }
