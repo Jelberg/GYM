@@ -21,6 +21,8 @@ export class CambiarPesoPage {
   {
     console.log('ionViewDidLoad CambiarPesoPage');
   }
+
+  //Metodo que insetar el peso del usuario
   public cargarPeso():void{
     console.log( this.nuevoPeso );
     let urlPeticion = "F0M04_Progreso_Peso/insertaProgresoPeso?id_usuario=1&peso="+this.nuevoPeso;
@@ -33,6 +35,7 @@ export class CambiarPesoPage {
       this.abrirToast( mensaje );
     });
   }
+  //Metodo que abre mensaje al realizar una accion.
   public abrirToast( mensaje: string ):void {
     let toast = this.toastCtrl.create({
       message: mensaje,
@@ -41,6 +44,7 @@ export class CambiarPesoPage {
     });
     toast.present();
   }
+  //Metodo que eleminar el peso ingresado en la semana
   public eliminarPeso():void {
     console.log( this.nuevoPeso );
     let urlPeticion = "F0M04_Progreso_Peso/eliminarPeso?id_usuario=1";
@@ -53,7 +57,7 @@ export class CambiarPesoPage {
       this.abrirToast( mensaje );
     });
   }
-
+  //Metodo para actualizar el peso
   public refrescarPeso():void {
     console.log( this.nuevoPeso );
     let urlPeticion = "F0M04_Progreso_Peso/actualizaProgresoPeso?id_usuario=1&peso="+this.nuevoPeso;

@@ -14,6 +14,7 @@ import { ListaContactosPage } from '../lista-contactos/lista-contactos';
 
 export class ProgresoMedidasPage {
 
+  //Arreglos que se usan para separar las medidas por cada tipo
   listaFecha = [];
   listaTipoEscapula = [];
   listaTipoTricep = [];
@@ -32,12 +33,13 @@ export class ProgresoMedidasPage {
     console.log('ionViewDidLoad ProgresoMedidasPage');
   }
 
+  //Metodo para traer los datos del servicio que serviran para la grafica
   getProgreso(){
     let urlPeticion: string = "F0M04_Progreso_Medida/getProgresoM?id_usuario=1";
     this.userService.getDato( urlPeticion ).subscribe(data => {
 
       let posicionEscapula: number = 0;
- 	  let posicionTricep: number = 0;
+ 	    let posicionTricep: number = 0;
   	  let posicionAbdomen: number = 0;
       let posicionCuadrice: number = 0;
       let i: number = 0;
@@ -73,15 +75,16 @@ export class ProgresoMedidasPage {
     });
   }
 
+  //Grafica por defecto
   public lineChartData:Array<any> = [
-  {data: [10,20,30,40,50], label: "Peso"},
+  {data: [10,20,30,40,50], label: "UNO"},
   {data: [60,70,80,60,70], label: "DOS"},
   {data: [60,70,80,60,70], label: "TRES"},
   {data: [60,70,80,60,70], label: "CUATRO"}
   ];
 
 
-  public lineChartLabels:Array<any> = ["Enero", "Febrero", "Marzo", "Abril", "Mayo"];
+  public lineChartLabels:Array<any> = ["Septiembre", "Octubre", "Noviembre", "Diciembre", "Enero"];
   
   public lineChartOptions:any = {
     responsive: true
@@ -111,6 +114,7 @@ export class ProgresoMedidasPage {
   public lineChartType:string = 'line';
 
   
+  //Genera la gradica con cada arreglo perteneciente a cada tipo de medida
   setLineT(){
 
     this.lineChartData = [];
@@ -118,6 +122,7 @@ export class ProgresoMedidasPage {
     let arregloTricep: any = [];
     let arregloAbdomen: any = [];
     let arregloCuadricep: any = []
+
     for ( let medida of this.listaTipoCuadricep ) {
       arregloCuadricep.push(medida);
     }
