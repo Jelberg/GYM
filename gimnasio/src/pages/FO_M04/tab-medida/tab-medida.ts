@@ -10,20 +10,24 @@ import { ListaContactosPage } from '../lista-contactos/lista-contactos';
   selector: 'page-tab-medida',
   templateUrl: 'tab-medida.html'
 })
+
+//Clase para generar el tab y su navegacion entre cada opcion
 export class TabMedidaPage {
 
   grafica: any = ProgresoMedidasPage;
   peso: any = CambiaMedidaPage;
   comentarios: any = ProgresoComentarioPage;
+
   constructor(public navCtrl: NavController, public navParams: NavParams)
-  {
-  	
+  {  	
 
   }
+
   ionViewDidLoad() 
   {
     console.log('ionViewDidLoad TabMedidaPage');
   }
+
   goToListaContactosPage(){
     this.navCtrl.push(ListaContactosPage);
   }

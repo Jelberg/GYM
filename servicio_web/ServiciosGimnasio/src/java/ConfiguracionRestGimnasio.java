@@ -1,6 +1,7 @@
 
 import Servicios.BOM02_Clase;
 import Servicios.BOM01_Equipamiento;
+import Servicios.BOM01_Ejercicios;
 import Servicios.BOM02_Entrenador;
 import Servicios.BOM02_Horario_Clase;
 import Servicios.BOM02_Instruct;
@@ -38,6 +39,7 @@ public class ConfiguracionRestGimnasio extends Application{
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
         h.add(BOM01_Equipamiento.class);
+        h.add(BOM01_Ejercicios.class);
         h.add(BOM02_Clase.class);
         h.add(BOM02_Entrenador.class);
         h.add(BOM02_Horario_Clase.class);
