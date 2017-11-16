@@ -49,16 +49,16 @@ public class BOM01_Ejercicios {
     private String response;
     private ArrayList<Equipo> jsonArray;
     private ArrayList<Maquina> jsonArray2;
-     private ArrayList<Ejercicio_Maquina_Equipo> jsonArray3;
-     
+    private ArrayList<Ejercicio_Maquina_Equipo> jsonArray3;
+
     @GET
     @Path("/getAll")
     @Produces("application/json")
     public String getAll() {
-        try { 
+        try {
             String query = "SELECT * FROM bo_m01_getallexercices();";
             jsonArray3 = new ArrayList<>();
-            PreparedStatement st = conn.prepareStatement(query); 
+            PreparedStatement st = conn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
 
             //La variable donde se almacena el resultado de la consulta.
@@ -67,7 +67,7 @@ public class BOM01_Ejercicios {
                 jsonArray3.get(jsonArray3.size() - 1).setId(rs.getInt("id"));
                 jsonArray3.get(jsonArray3.size() - 1).setNombre(rs.getString("ejercicio"));
                 jsonArray3.get(jsonArray3.size() - 1).setEquipamiento(rs.getString("equipamiento"));
-                jsonArray3.get(jsonArray3.size() - 1).setGrupomuscular(rs.getString("grupo_muscular")); 
+                jsonArray3.get(jsonArray3.size() - 1).setGrupomuscular(rs.getString("grupo_muscular"));
             }
             response = gson.toJson(jsonArray);
         } catch (SQLException e) {
@@ -77,6 +77,44 @@ public class BOM01_Ejercicios {
         } finally {
             Sql.bdClose(conn);
             return response;
+        }
+
+    }
+
+    @POST
+    @Path("/insertaEjercicio")
+    @Produces("application/json")
+    public String insertaEjercicio(@QueryParam("nombre") String nombre,
+            @QueryParam("grupo") String grupo, 
+            @QueryParam("maquina") int maquina, 
+            @QueryParam("equipo") int equipo) {
+
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>() {
+                {
+                    put("nombre", nombre);
+                    put("grupo", grupo);
+                }
+            });
+
+            String query = "select * from bo_m01_insertar_ejercicio(?,?,?,?)";
+            PreparedStatement st = conn.prepareStatement(query);
+            java.lang.reflect.Type type = new TypeToken<Ejercicio_Maquina_Equipo[]>() {
+            }.getType();
+
+            st.setString(1, nombre);
+
+            st.executeQuery();
+
+            response.put("data", "Se insertó el ejercicio");
+        } catch (SQLException e) {
+            response.put("error", e.getMessage());
+        } catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        } finally {
+            Sql.bdClose(conn);
+            return gson.toJson(response);
         }
 
     }
