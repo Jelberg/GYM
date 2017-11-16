@@ -17,14 +17,14 @@
     
     
     <ion-content padding>
-      <ion-list>
-        <ion-item-sliding>
-          <ion-item (click)="goToRutinas(1)" detail-push>
+ <ion-list>
+        <ion-item-sliding *ngFor="let plan of listaPlanes">
+          <ion-item (click)="goToRutinas(plan._nombre)"  detail-push>
             <ion-avatar item-start>
               <img src="/assets/imgs/imgsM03/weightlifting.png">
             </ion-avatar>
-            <h2>Plan de entrenamiento 1</h2>
-            <p>Ganar masa muscular, 3 dias/semana</p>
+            <h2>{{plan._nombre}}</h2>
+            <p>{{plan._descripcion}}</p>
           </ion-item>
           <ion-item-options side="right">
             <button ion-button (click)="presentActionSheet()" color="calm">
@@ -33,49 +33,7 @@
             <button ion-button (click)="informacionPlan()" color="energized">
               <ion-icon name="md-create"></ion-icon>
             </button>
-            <button ion-button (click)="ConfirmarEliminacion()" color="pomegranate">
-              <ion-icon name="md-trash"></ion-icon>
-            </button>
-          </ion-item-options>
-        </ion-item-sliding>
-    
-        <ion-item-sliding>
-          <ion-item (click)="goToRutinas(2)" detail-push>
-            <ion-avatar item-start>
-              <img src="../assets/imgs/imgsM03/weightlifting.png">
-            </ion-avatar>
-            <h2>Plan de entrenamiento 2</h2>
-            <p>Adelgazar, 4 dias/semana</p>
-          </ion-item>
-          <ion-item-options side="right">
-            <button ion-button (click)="presentActionSheet()" color="calm">
-              <ion-icon name="md-share"></ion-icon>
-            </button>
-            <button ion-button (click)="informacionPlan()" color="energized">
-              <ion-icon name="md-create"></ion-icon>
-            </button>
-            <button ion-button (click)="ConfirmarEliminacion()" color="pomegranate">
-              <ion-icon name="md-trash"></ion-icon>
-            </button>
-          </ion-item-options>
-        </ion-item-sliding>
-    
-        <ion-item-sliding>
-          <ion-item (click)="goToRutinas(3)" detail-push>
-            <ion-avatar item-start>
-              <img src="../assets/imgs/imgsM03/weightlifting.png">
-            </ion-avatar>
-            <h2>Plan de entrenamiento 3</h2>
-            <p>Ganar masa muscular, 3 dias/semana</p>
-          </ion-item>
-          <ion-item-options side="right">
-            <button ion-button (click)="presentActionSheet()" color="calm">
-              <ion-icon name="md-share"></ion-icon>
-            </button>
-            <button ion-button (click)="informacionPlan()" color="energized">
-              <ion-icon name="md-create"></ion-icon>
-            </button>
-            <button ion-button (click)="ConfirmarEliminacion()" color="pomegranate">
+            <button ion-button (click)="ConfirmarEliminacion(plan._nombre,plan._descripcion)" color="pomegranate">
               <ion-icon name="md-trash"></ion-icon>
             </button>
           </ion-item-options>

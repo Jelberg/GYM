@@ -77,7 +77,7 @@ public class PruebaPeso {
         Gson gson = new Gson();
         String fecha = "2012-10-12";
         _progresoPeso = new FOM04_Progreso_Peso();
-        String respuesta = _progresoPeso.eliminaPeso(fecha, 2222 );
+        String respuesta = _progresoPeso.eliminaPeso( 2222 );
         assertNotNull( respuesta );
     }
     

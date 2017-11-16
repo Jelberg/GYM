@@ -26,6 +26,7 @@ import java.lang.ProcessBuilder.Redirect.Type;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
+import java.util.List;
 import java.util.Map;
 import javax.ws.rs.DELETE;
 import static javax.ws.rs.HttpMethod.POST;
@@ -90,7 +91,6 @@ public class FOM04_Progreso_Medida {
             Sql.bdClose(conn);
             return response;
         }
-    
     }
     
     /**
@@ -228,10 +228,15 @@ public class FOM04_Progreso_Medida {
                 put("medida", medida );
                 put("tipo_medida", tipo_medida );
             }});
-
-            String query = "select * from fo_m04_inserta_medidas(?, ?, ?)";
-            PreparedStatement st = conn.prepareStatement(query);
-            java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
+            boolean verificacion = comprobarInsercion( id_usuario );
+            if ( verificacion == true ){
+                response.put( "data", "Error. Ya ha agregado sus medidas del mes." );
+            }
+            else{
+                conn = Sql.getConInstance();
+                String query = "select * from fo_m04_inserta_medidas(?, ?, ?)";
+                PreparedStatement st = conn.prepareStatement(query);
+                //java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
                 st.setInt(1, id_usuario);
                 st.setInt(2, medida);
                 st.setInt(3, tipo_medida);
@@ -239,7 +244,9 @@ public class FOM04_Progreso_Medida {
                 st.executeQuery();
             
 
-            response.put("data", "Se insertaron las medidas");
+                response.put("data", "Se insertaron las medidas");
+            }
+                
         }
         catch (SQLException e){
             response.put("error", e.getMessage());
@@ -299,6 +306,32 @@ public class FOM04_Progreso_Medida {
             return gson.toJson(response);
         }
         
-    }   
+    }
+    /**
+     * Funcion que se llama para comprobar que el usuario no tenga ningun
+     * registro de medidas en el mes actual, retorna verdadero si el usuario
+     * ya posee un registro, falso de lo contrario.
+     * @param idUsuario identificador del usuario
+     * @return 
+     */
+    public boolean comprobarInsercion( int idUsuario){
+        ArrayList<Progreso_Medida> progresoMedida = new ArrayList<Progreso_Medida>();
+        Gson gson = new Gson();
+        String respuesta = getProgresoM( idUsuario );
+        progresoMedida = gson.fromJson( respuesta, new TypeToken<List<Progreso_Medida>>(){}.getType());
+        SimpleDateFormat sdft = new SimpleDateFormat( "yyyy-MM-dd" );
+        java.util.Date fecha = new java.util.Date();
+        String fechaActual = sdft.format( fecha );
+        String mesActual =  fechaActual.substring( 5, 7 ) ;
+        int tamanoArreglo = progresoMedida.size();
+        String ultimoProgreso = progresoMedida.get( 0 ).getFechaM();
+        String mes =  ultimoProgreso.substring( 5, 7 );
+        if ( mesActual.equals( mes ) ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     
 }
