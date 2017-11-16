@@ -13,4 +13,5 @@ import { SeleccionarProgresoPage } from '../seleccionar-progreso/seleccionar-pro
     IonicPageModule.forChild(TabMedidaPage),
   ],
 })
+
 export class TabMedidaPageModule {}
