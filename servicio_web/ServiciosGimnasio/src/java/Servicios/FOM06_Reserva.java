@@ -147,7 +147,7 @@ public class FOM06_Reserva {
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("id", id_rest);
             }});
-                String query = "SELECT bo_m02_elimina_clase(?)";
+                String query = "SELECT * FROM fo_m06_elimina_reserva(?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, id_rest);
             ResultSet rs = st.executeQuery();
