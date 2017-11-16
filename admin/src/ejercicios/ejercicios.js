@@ -1,7 +1,7 @@
 var url_ej = "http://localhost:8080/ServiciosGimnasio/Ejercicio";
 var getAll = "/getAll";
 var items = []
-$.get(url_ej + getAll, function (data) {
+/* $.get(url_ej + getAll, function (data) {
     console.log('ejercicios', data)
 
 
@@ -61,7 +61,7 @@ $.get(url_ej + getAll, function (data) {
         document.getElementById("tabla").innerHTML = contenido;
     }
 });
-
+ */
 function editar(e, type) {
     if (type == 1) {
         var id = e.parentNode.parentNode.childNodes
