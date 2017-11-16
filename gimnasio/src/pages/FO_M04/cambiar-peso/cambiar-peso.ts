@@ -21,55 +21,54 @@ export class CambiarPesoPage {
   {
     console.log('ionViewDidLoad CambiarPesoPage');
   }
+
+  //Metodo que insetar el peso del usuario
   public cargarPeso():void{
     console.log( this.nuevoPeso );
     let urlPeticion = "F0M04_Progreso_Peso/insertaProgresoPeso?id_usuario=1&peso="+this.nuevoPeso;
-    this.userService.postDato( urlPeticion ).subscribe( data => {
-      let i: number = 0;
+    this.userService.postDato( urlPeticion ).subscribe( datas => {
       let mensaje: string = "";
-      while ( i < data.lenght ){
-        mensaje = data[i].data;
-        //this.abrirToast( data[0].data );
-      }
-      alert("Peso agregado correctamente");
+      let keys = Object.keys(datas);
+      let key: string = "";
+      key = keys[0];
+      mensaje = datas[key];
+      this.abrirToast( mensaje );
     });
   }
-  //No logre que el toast se mostrara, pero si un alert, si logran que funcione, seria cool
-  //decirme: Gilbert.
+  //Metodo que abre mensaje al realizar una accion.
   public abrirToast( mensaje: string ):void {
     let toast = this.toastCtrl.create({
       message: mensaje,
-      duration: 3000
+      duration: 3000,
+      position: 'middle'
     });
     toast.present();
   }
+  //Metodo que eleminar el peso ingresado en la semana
   public eliminarPeso():void {
     console.log( this.nuevoPeso );
     let urlPeticion = "F0M04_Progreso_Peso/eliminarPeso?id_usuario=1";
-    this.userService.deleteDato( urlPeticion ).subscribe( data => {
-      let i: number = 0;
+    this.userService.deleteDato( urlPeticion ).subscribe( datas => {
       let mensaje: string = "";
-      while ( i < data.lenght ){
-        mensaje = data[i].data;
-      }
-
+      let keys = Object.keys(datas);
+      let key: string = "";
+      key = keys[0];
+      mensaje = datas[key];
+      this.abrirToast( mensaje );
     });
-
-    alert("Peso eliminado");
   }
-
+  //Metodo para actualizar el peso
   public refrescarPeso():void {
     console.log( this.nuevoPeso );
     let urlPeticion = "F0M04_Progreso_Peso/actualizaProgresoPeso?id_usuario=1&peso="+this.nuevoPeso;
-    this.userService.postDato( urlPeticion ).subscribe( data => {
-      let i: number = 0;
+    this.userService.postDato( urlPeticion ).subscribe( datas => {
       let mensaje: string = "";
-      while ( i < data.lenght ){
-        mensaje = data[i].data;
-      }
+      let keys = Object.keys(datas);
+      let key: string = "";
+      key = keys[0];
+      mensaje = datas[key];
+      this.abrirToast( mensaje );
 
     });
-
-    alert("Peso actualizado");
   }
 }

@@ -29,6 +29,7 @@ export class ListaEjerciciosPage {
     console.log('ionViewDidLoad ListaEjerciciosPage');
   }
 
+  //Metodo que hace la llamada al servicio trayendo los ejercicios disponibles
   getListaEjercicios(){
     let urlPeticion: string = "FOM03_Rutina/getEjerciciosRealizados?idUsuario=1";
      this.userService.getDato( urlPeticion ).subscribe(data => {
@@ -40,6 +41,7 @@ export class ListaEjerciciosPage {
       }); 
   }
 
+  //Metodo para seleccionar un ejericicio y poder generar la grafica
   itemSelected(listaEjercicios: string){
     this.navCtrl.push(TabsEjercicioPage, {lista : listaEjercicios});
     console.log('itemSelected, valor listaEjercicios ' + listaEjercicios);

@@ -142,7 +142,7 @@ public class FOM04_Progreso_Peso {
             boolean verificacion = comprobarInsercion( id_usuario );
             if ( verificacion == true ){
                 
-                response.put( "data", "Error. Ya ha agregado un peso hoy." );
+                response.put( "data", "Error. Ya ha agregado un peso esta semana." );
             }
             else{
                 conn = Sql.getConInstance();
