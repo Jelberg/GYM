@@ -13,12 +13,22 @@ public class Serie {
         
     private int _numRepeticiones;
     private float _peso;
+    private String _unidad;
     private int _tiempoDescanso;
 
     public Serie(int _numRepeticiones, float _peso, int _tiempoDescanso) {
         this._numRepeticiones = _numRepeticiones;
         this._peso = _peso;
         this._tiempoDescanso = _tiempoDescanso;
+    }
+    public Serie(){
+    }
+    public String getUnidad() {
+        return _unidad;
+    }
+
+    public void setUnidad(String _unidad) {
+        this._unidad = _unidad;
     }
 
     public int getNumRepeticiones() {
