@@ -25,6 +25,7 @@ export class CambiaMedidaPage {
     console.log('ionViewDidLoad CambiaMedidaPage');
   }
 
+  //Metodo para hacer el llamado al servicio e insertar en la base de datos
   public cargarMedida():void{
     console.log( this.Escapula );
     let urlPeticion = "F0M04_Progreso_Medida/insertaMedidas?id_usuario=1&medida="+this.Escapula+"&tipo_medida="+1;
@@ -72,7 +73,7 @@ export class CambiaMedidaPage {
   }
 
  
-
+  //Metodo que me permite actualizar las medidas segun lo que inserto el usuario
   public refrescarMedidas():void{
 
     console.log( this.Escapula );
@@ -123,6 +124,7 @@ export class CambiaMedidaPage {
 
   }
 
+  //Metodo que permite eliminar las medidas ingresadas en el mes 
   public eliminarMedidas():void{
 
     console.log( this.Escapula );
