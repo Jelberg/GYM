@@ -5,12 +5,21 @@ var correo_busqueda= document.getElementById("correo");
 var x=0
 window.onload = function busquedainstructor()
 {
+    var a,b,c,d,e,f,g,h
+    a=0
+    b=0
+    c=0
+    d=0
+    e=0
+    f=0
+    g=0
+    h=0
     variable=localStorage.getItem("id");
     console.log(variable);
     if (variable)
         {
 
-            var url_comple="/getHorario_Clase?nombreclaseconsulta="+variable;
+            var url_comple="/getHorario_Clase_id?id="+variable;
             fetch(url+url_comple)
             .then((respuesta) => 
             {            
@@ -32,20 +41,29 @@ window.onload = function busquedainstructor()
                             console.log(fila[campos[j]]);
                             switch(j) {
                                 case 1:
-                                document.getElementById('nombre').value = fila[campos[j]] +" "+fila[campos[j+1]];
+                                llenarcombobox(a,document.getElementById('fecha'),fila[campos[j]]) ;
+                                break;
+                                case 2:
+                                document.getElementById('dia').value = cambiarFormato(fila[campos[j]]);
                                 break;
                                 case 3:
-                                document.getElementById('fecha').value = cambiarFormato(fila[campos[j]]);
+                                document.getElementById('capacidad').value = cambiarFormato(fila[campos[j]]);
                                 break;
                                 case 4:
-                                if((fila[campos[j]]=="M"))
-                                document.getElementById('masculino').checked = true
-                                else
-                                document.getElementById('femenino').checked = true;
+                                document.getElementById('horaini').value = cambiarFormato(fila[campos[j]]);
                                 break;
                                 case 5:
-                                document.getElementById('correo').value = fila[campos[j]];
-                                break;                           
+                                document.getElementById('horafin').value = fila[campos[j]];
+                                break;  
+                                case 6:
+                                document.getElementById('duracion').value = cambiarFormato(fila[campos[j]]);
+                                break;
+                                case 7:
+                                document.getElementById('nombreclase').value = cambiarFormato(fila[campos[j]]);
+                                break;
+                                case 8:
+                                document.getElementById('instructor').value = cambiarFormato(fila[campos[j]]);
+                                break;                         
                             }
                         }
                     }
@@ -67,6 +85,13 @@ function ValidateEmail(mail)
     return (false);  
     
 } 
+
+function llenarcombobox(limite , box ,valor){
+
+        box.options[limite+1]=new option('text',valor)
+        limite++;
+    
+}
 
 function async(params){
     setTimeout(function correrAsync(){
