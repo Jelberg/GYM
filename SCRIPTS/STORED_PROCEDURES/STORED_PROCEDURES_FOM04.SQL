@@ -198,3 +198,18 @@ BEGIN
    END LOOP;
 END; $$
   LANGUAGE plpgsql;
+
+-- INSERTAR UN PROGRESO COMPARTIDO
+CREATE OR REPLACE FUNCTION fo_m04_inserta_progreso_compartido(
+    mensaje character varying,
+    usuario INT)
+  RETURNS void
+   AS $$
+    DECLARE
+	fecha_actual DATE;
+    BEGIN
+	fecha_actual  := current_date;
+        INSERT INTO comentario (com_mensaje, com_fecha, fk_usuario) VALUES
+        ( mensaje, fecha_actual, usuario );
+    END; $$
+  LANGUAGE plpgsql;
