@@ -95,7 +95,7 @@ public class BOM02_Entrenador {
     public String getListaEntrenador(){
          try{
             
-            String query = "SELECT * FROM entrenador;";
+            String query = "SELECT ent_id, ent_nombre, ent_apellido, ent_fecha_nac, ent_sexo, ent_correo, ent_historial FROM entrenador;";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
@@ -109,7 +109,7 @@ public class BOM02_Entrenador {
                 jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("ENT_FECHA_NAC"));
                 jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("ENT_SEXO")));
                 jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("ENT_CORREO"));
-                 jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("ENT_HISTORIAL"));
+                 jsonArray.get(jsonArray.size() - 1).setHistorial(rs.getString("ENT_HISTORIAL"));
                 /*byte[] img = rs.getBytes("ENT_FOTO");
                 ImageIcon image = new ImageIcon(img);
                 Image im = image.getImage();
@@ -250,7 +250,7 @@ public class BOM02_Entrenador {
                 put("correo", correo );
                 put("historial", historial );
             }});
-             String query = "select * from bo_m02_actualizar_entrenador('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+Character.toString(sexo)+"', '"+correo+"')";
+             String query = "select * from bo_m02_actualizar_entrenador('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+Character.toString(sexo)+"', '"+correo+"' , '"+historial+"')";
             PreparedStatement st = conn.prepareStatement(query); 
 
                 st.executeQuery();

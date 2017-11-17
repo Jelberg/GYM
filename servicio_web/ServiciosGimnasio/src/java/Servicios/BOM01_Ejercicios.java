@@ -66,7 +66,7 @@ public class BOM01_Ejercicios {
                 jsonArray3.add(new Ejercicio_Maquina_Equipo());
                 jsonArray3.get(jsonArray3.size() - 1).setId(rs.getInt("id"));
                 jsonArray3.get(jsonArray3.size() - 1).setNombre(rs.getString("Ejercicio"));
-                jsonArray3.get(jsonArray3.size() - 1).setEquipamiento(rs.getString("Equipamiento"));
+               // jsonArray3.get(jsonArray3.size() - 1).setEquipamiento(rs.getString("Equipamiento"));
                 jsonArray3.get(jsonArray3.size() - 1).setGrupomuscular(rs.getString("Grupo_muscular"));
                 jsonArray3.get(jsonArray3.size() - 1).setMaquina(rs.getInt("Maquina")); 
                 jsonArray3.get(jsonArray3.size() - 1).setEquipo(rs.getInt("Equipo")); 

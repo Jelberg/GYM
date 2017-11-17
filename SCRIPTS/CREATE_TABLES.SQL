@@ -35,7 +35,7 @@ CREATE TABLE ENTRENADOR(
 	ENT_apellido character varying (50) not null,
 	ENT_fecha_nac date not null,
 	ENT_sexo char not null,
-	ENT_correo character varying (100) not null,
+	ENT_correo character varying (100) not null unique,
 	ENT_historial character varying (200) not null,
 	ENT_foto bytea,
 CONSTRAINT PK_ENT_ID PRIMARY KEY (ENT_ID)	
@@ -155,7 +155,7 @@ CREATE TABLE INSTRUCTOR
  	INS_APELLIDO                	CHARACTER VARYING(10) NOT NULL,
  	INS_FECHA_NAC   DATE NOT NULL,
  	INS_SEXO            	CHARACTER(1) NOT NULL,
- 	INS_CORREO                 	CHARACTER VARYING(20) NOT NULL,
+ 	INS_CORREO                 	CHARACTER VARYING(20) NOT NULL UNIQUE,
  	INS_FOTO            	BYTEA,
  CONSTRAINT INSTRUCTOR_PKEY PRIMARY KEY (INS_ID)
 );

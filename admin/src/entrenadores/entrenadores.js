@@ -1,19 +1,21 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/Instruct";
+var url="http://localhost:8080/ServiciosGimnasio/BOM02_Entrenador";
 var correo_busqueda= document.getElementById("text_correo");
 var boton= document.getElementById("boton_consulta");
 var variable;
-boton.addEventListener("click",buscarInstructor);
+//boton.addEventListener("click",buscarInstructor);
 
 window.onload = function mostrartabla()
 {
+    date= new Date();
+    alert(cambiarFormato(date));
     variable=localStorage.getItem("id2");
     if (variable){
     alert(variable)
     localStorage.clear();    
     }
-    var url_comple="/getListInstruct";
+    var url_comple="/getListEntrenador";
     fetch(url+url_comple)
     .then((respuesta) => 
     {
@@ -27,7 +29,7 @@ window.onload = function mostrartabla()
        var ncampos =campos.length;
        for (var i = 0; i < ncampos; i++)
        {
-           if (i!=0)
+           if (i!=1)
            {
             contenido += "<th><font color ='white'>";
             contenido += campos[i];
@@ -38,13 +40,13 @@ window.onload = function mostrartabla()
        var nregistros = respuesta.length;
        for(var i = 0; i< nregistros; i++)
         {
-            if (i!=0)
+            if (i!=1)
             {
                 fila =respuesta[i];
                 contenido += "<tr>";
                 for (var j = 0; j < ncampos; j++)
                 {
-                    if (j!=0)
+                    if (j!=1)
                     {
                     contenido += "<td>";
                     contenido += fila[campos[j]];
@@ -61,17 +63,19 @@ window.onload = function mostrartabla()
 
     })
 }
+function cambiarFormato(date){
+    return((date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear());
+}
 
-
-function buscarInstructor()
+function buscarEntrenador()
 {
-    
+    console.log(correo_busqueda.value)
     if (correo_busqueda.value!="")
     {
         var prueba = ValidateEmail(correo_busqueda.value);
         if (prueba==true) 
         {
-            var url_comple="/getInstruct?correo="+correo_busqueda.value;
+            var url_comple="/getEntrenador?correo="+correo_busqueda.value;
             fetch(url+url_comple)
             .then((respuesta) => 
             {
@@ -88,7 +92,7 @@ function buscarInstructor()
                 var ncampos =campos.length;
                 for (var i = 0; i < ncampos; i++)
                 {
-                    if (i!=0)
+                    if (i!=1)
                     {
                         contenido += "<th><font color ='white'>";
                         contenido += campos[i];
@@ -105,7 +109,7 @@ function buscarInstructor()
                             contenido += "<tr>";
                             for (var j = 0; j < ncampos; j++)
                             {
-                                if (j!=0)
+                                if (j!=1)
                                 {
                                 contenido += "<td>";
                                 contenido += fila[campos[j]];
@@ -145,10 +149,10 @@ function buscarInstructor()
   }  
 
 function crud( guardar ){
-    var id = guardar.parentNode.parentNode.parentNode.childNodes[4];
+    var id = guardar.parentNode.parentNode.parentNode.childNodes[5];
     console.log(id.innerHTML);
     localStorage.setItem("id",id.innerHTML);
-    document.location.href="./gest_Instructores.html";
+    document.location.href="./gest_Entrenadores.html";
 }
     
 
