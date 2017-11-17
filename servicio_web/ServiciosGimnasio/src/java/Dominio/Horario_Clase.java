@@ -13,111 +13,111 @@ import java.sql.Time;
  * @author YESIMAR
  */
 public class Horario_Clase {
-    private int _id;
-    private Date _fecha;
-    private String _dia;
-    private int _capacidad;
-    private Time _horaInicio;
-    private Time _horaFin;
-    private String _status;
-    private int _duracion;
-    private String _nombreclase;
-    private String _instructor;
+    private int id;
+    private Date fecha;
+    private String dia;
+    private int capacidad;
+    private Time horaInicio;
+    private Time horaFin;
+    private String status;
+    private int duracion;
+    private String nombreclase;
+    private String instructor;
 
     public Horario_Clase(int _id, Date _fecha, String _dia, int _capacidad, Time _horaInicio, Time _horaFin, String _status, int _duracion, String _nombreclase, String _instructor) {
-        this._id = _id;
-        this._fecha = _fecha;
-        this._dia = _dia;
-        this._capacidad = _capacidad;
-        this._horaInicio = _horaInicio;
-        this._horaFin = _horaFin;
-        this._status = _status;
-        this._duracion = _duracion;
-        this._nombreclase = _nombreclase;
-        this._instructor = _instructor;
+        this.id = _id;
+        this.fecha = _fecha;
+        this.dia = _dia;
+        this.capacidad = _capacidad;
+        this.horaInicio = _horaInicio;
+        this.horaFin = _horaFin;
+        this.status = _status;
+        this.duracion = _duracion;
+        this.nombreclase = _nombreclase;
+        this.instructor = _instructor;
     }
 
     public Horario_Clase(){
     }
 
     public int getId() {
-        return _id;
+        return id;
     }
 
     public Date getFecha() {
-        return _fecha;
+        return fecha;
     }
 
     public String getDia() {
-        return _dia;
+        return dia;
     }
 
     public int getCapacidad() {
-        return _capacidad;
+        return capacidad;
     }
 
     public Time getHoraInicio() {
-        return _horaInicio;
+        return horaInicio;
     }
 
     public Time getHoraFin() {
-        return _horaFin;
+        return horaFin;
     }
 
     public String getStatus() {
-        return _status;
+        return status;
     }
 
     public int getDuracion() {
-        return _duracion;
+        return duracion;
     }
 
     public void setId(int _id) {
-        this._id = _id;
+        this.id = _id;
     }
 
     public void setFecha(Date _fecha) {
-        this._fecha = _fecha;
+        this.fecha = _fecha;
     }
 
     public void setDia(String _dia) {
-        this._dia = _dia;
+        this.dia = _dia;
     }
 
     public void setCapacidad(int _capacidad) {
-        this._capacidad = _capacidad;
+        this.capacidad = capacidad;
     }
 
     public void setHoraInicio(Time _horaInicio) {
-        this._horaInicio = _horaInicio;
+        this.horaInicio = _horaInicio;
     }
 
     public void setHoraFin(Time _horaFin) {
-        this._horaFin = _horaFin;
+        this.horaFin = _horaFin;
     }
 
     public void setStatus(String _status) {
-        this._status = _status;
+        this.status = _status;
     }
 
     public void setDuracion(int _duracion) {
-        this._duracion = _duracion;
+        this.duracion = _duracion;
     }
 
     public String getNombreclase() {
-        return _nombreclase;
+        return nombreclase;
     }
 
     public void setNombreclase(String _nombreclase) {
-        this._nombreclase = _nombreclase;
+        this.nombreclase = _nombreclase;
     }
 
     public String getInstructor() {
-        return _instructor;
+        return instructor;
     }
 
     public void setInstructor(String _instructor) {
-        this._instructor = _instructor;
+        this.instructor = _instructor;
     }
    
     
