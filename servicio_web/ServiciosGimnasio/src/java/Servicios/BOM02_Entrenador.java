@@ -84,9 +84,7 @@ public class BOM02_Entrenador {
         }
     
     }
-      /**
-     * Funcion que recibe como parametro el correo del entrenador 
-     * @param correo del cual se quiere 
+     /**
      * @return Devuelve todos los datos del entrenador
      */
     @GET

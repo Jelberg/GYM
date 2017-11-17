@@ -16,10 +16,16 @@ public class Ejercicio_Maquina_Equipo implements Serializable{
 
     private int id;
     private String nombre;
-    private String grupomuscular;
-    private int maquina;
-    private int equipo;
+    private String grupomuscular; 
     private String equipamiento; 
+
+    public String getEquipamiento() {
+        return equipamiento;
+    }
+
+    public void setEquipamiento(String equipamiento) {
+        this.equipamiento = equipamiento;
+    }
  
 
     public int getId() {
@@ -45,21 +51,5 @@ public class Ejercicio_Maquina_Equipo implements Serializable{
     public void setGrupomuscular(String _grupomuscular) {
         this.grupomuscular = _grupomuscular;
     }
-
-    public int getMaquina() {
-        return maquina;
-    }
-
-    public void setMaquina(int _maquina) {
-        this.maquina = _maquina;
-    }
-
-    public int getEquipo() {
-        return equipo;
-    }
-
-    public void setEquipo(int _equipo) {
-        this.equipo = _equipo;
-    }
-
+ 
 }
