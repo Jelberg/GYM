@@ -1,7 +1,7 @@
 
 
 ---USUARIO
-insert into usuario (usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac) values (25530426,'Minerva', 'Morales', 'F','19/08/1996');
+insert into usuario (usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac,usu_telefono,usu_estatura,usu_correo) values (25530426,'Minerva', 'Morales', 'F','19/08/1996','04143039376',160,'minervamoralesruiz@gmail.com');
 
 ---RUTINAS
 insert into rutina (rut_nombre,rut_dia,fk_usuario) values ('Piernas','Lunes',1);  ---Rutina 1

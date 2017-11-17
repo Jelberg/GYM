@@ -119,6 +119,14 @@ public class Horario_Clase {
     public void setInstructor(String _instructor) {
         this.instructor = _instructor;
     }
+
+    public String getDescripcion() {
+        return _descripcion;
+    }
+
+    public void setDescripcion(String _descripcion) {
+        this._descripcion = _descripcion;
+    }
    
     
 }

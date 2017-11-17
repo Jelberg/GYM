@@ -33,11 +33,9 @@ BEGIN
   		 insert into rutina (rut_nombre, rut_dia, fk_usuario) values (nombreRutina, dia, idUsuario);
 END; $$
   LANGUAGE plpgsql;
-/*
-	MODIFICAR RUTINA	
-   	Funcion que modifica una rutina, recibe el idUsuario, el nombre de la
-    rutina y el dia a realizarse, no retorna ningun valor
-*/
+
+-----Funcion que modifica una rutina, recibe el idUsuario, el nombre de la rutina y el dia a realizarse, no retorna ningun valor------
+
 CREATE OR REPLACE FUNCTION FO_M03_modificar_rutina(idUsuario int, nombreRutina character varying, dia character varying,
                                                   nombreModif character varying, diaModif character varying)
   RETURNS VOID
@@ -62,34 +60,33 @@ END; $$
   	
 --------------Funcion muestra todos los ejercicios de una rutina------------------------
 
+  
 CREATE OR REPLACE FUNCTION FO_M03_ejercicios_rutina(idUsuario int, nombreRutina character varying, dia character varying)
-  RETURNS TABLE(idEjercicio int, nombre character varying,grupoMuscular character varying, maquina character varying,equipo character varying)
+  RETURNS TABLE(idEjercicio int, nombre character varying,grupoMuscular character varying, maqui character varying,equip character varying)
    AS $$
 DECLARE
    _ejercicios    record;
+   _idEme int;
 BEGIN
-   FOR _ejercicios IN(SELECT distinct(eje.eje_nombre), eje.eje_id, eje.eje_grupo_muscular, maq.maq_nombre, equ.equ_nombre
+   FOR _ejercicios IN(SELECT distinct(eje.eje_nombre), eje.eje_id, eje.eje_grupo_muscular, eme.eme_id
         FROM ejercicio as eje inner join  ejercicio_maquina_equipo as eme on eje.eje_id = eme.fk_ejercicio
-        inner join maquina as maq on maq.maq_id= eme.fk_maquina
-        inner join equipo as equ on equ.equ_id= eme.fk_equipo
         inner join rutina as rut on rut.rut_id= eme.fk_rutina
-        inner join trabajo_rutina as tr on tr.fk_eje_maq_equ1 = eme.eme_id
         inner join usuario as usu on usu.usu_id = rut.fk_usuario
-        inner join serie as ser on ser.fk_trabajo_rutina = tr.tr_id
         WHERE usu.usu_id = idUsuario and rut.rut_nombre= nombreRutina and rut.rut_dia= dia 
         )
    LOOP
     idEjercicio = _ejercicios.eje_id;
     nombre = _ejercicios.eje_nombre;
     grupoMuscular = _ejercicios.eje_grupo_muscular;
-    maquina= _ejercicios.maq_nombre;
-    equipo= _ejercicios.equ_nombre;
+    _idEme = _ejercicios.eme_id;
+    SELECT maq.maq_nombre into maqui from maquina as maq    ---Seleccionar la maquina de ese ejercicio
+    inner join ejercicio_maquina_equipo as eme on maq.maq_id= eme.fk_maquina where eme.eme_id= _idEme;
+    SELECT equ.equ_nombre into equip from equipo as equ    ---Seleccionar el equipo de ese ejercicio
+    inner join ejercicio_maquina_equipo as eme on equ.equ_id= eme.fk_equipo where eme.eme_id= 2;
     RETURN NEXT;
    END LOOP;
 END; $$
   LANGUAGE plpgsql;
-
-
   
 
  ------------------------------Funcion que retorna todas las series de un ejercicio, indicando su peso, repeticiones y  tiempo de descanso

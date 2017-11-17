@@ -63,8 +63,8 @@ export class ClasesParticipadasPage {
   )
   }
 
-  goToComentar(){
-    this.navCtrl.push(ComentarClasePage);
+  goToComentar(id:string){
+    this.navCtrl.push(ComentarClasePage,{navParametros: id});
   }
 
   

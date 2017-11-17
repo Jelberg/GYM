@@ -68,4 +68,6 @@ export class EjerciciosPage {
     toast.present();
   }
 
+
+
 }
