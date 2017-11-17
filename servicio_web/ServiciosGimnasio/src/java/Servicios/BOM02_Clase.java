@@ -21,14 +21,9 @@ import javax.ws.rs.QueryParam;
 import Validaciones.ValidationWS;
 import Excepciones.ParameterNullException;
 import com.google.gson.reflect.TypeToken;
-import java.lang.ProcessBuilder.Redirect.Type;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
 import java.util.Map;
 import javax.ws.rs.DELETE;
-import static javax.ws.rs.HttpMethod.POST;
 import javax.ws.rs.POST;
 /**
  *
