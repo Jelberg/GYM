@@ -1,0 +1,33 @@
+<!--
+  Generated template for the ListaCriticasPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>Criticas Realizadas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-list>
+        <ion-item *ngFor="let lista of lista">
+        <button ion-item >
+             <h3>{{lista._fecha}}</h3>
+             <h4>Comentario:</h4>
+             <p>{{lista._comentario}}</p>
+             <h4>Valoracion :{{lista._valoracion}}</h4>
+        </button>  
+      </ion-item>
+    
+      </ion-list>
+
+</ion-content>

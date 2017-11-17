@@ -49,7 +49,7 @@ CREATE OR REPLACE FUNCTION bo_m02_actualizar_entrenador(
     DECLARE
     BEGIN
         UPDATE entrenador
-        SET ent_nombre = nombre , ent_apellido = apellido, ent_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ent_sexo = sexo, ent_historial = historial;
+        SET ent_nombre = nombre , ent_apellido = apellido, ent_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ent_sexo = sexo, ent_historial = historial
  	where ent_correo = correo;
     END; $$
 LANGUAGE plpgsql;

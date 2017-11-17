@@ -50,7 +50,7 @@ public class FOM03_TrabajoRutina {
         @GET
         @Path("/getEjerciciosRutina")
         @Produces("application/json")
-         public String getEjericiosRutina( @QueryParam( "idUsuario" ) int idUsuario, 
+         public String getEjerciciosRutina( @QueryParam( "idUsuario" ) int idUsuario, 
                                            @QueryParam ( "nombre" ) String nombre,
                                            @QueryParam ( "dia" ) String dia)
          {
@@ -75,8 +75,8 @@ public class FOM03_TrabajoRutina {
                 jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("idEjercicio"));
                 jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
                 jsonArray.get(jsonArray.size() - 1).setGrupomuscular(rs.getString("grupoMuscular"));
-                jsonArray.get(jsonArray.size() - 1).setMaquina(rs.getString("maquina"));
-                jsonArray.get(jsonArray.size() - 1).setEquipo(rs.getString("equipo"));
+                jsonArray.get(jsonArray.size() - 1).setMaquina(rs.getString("maqui"));
+                jsonArray.get(jsonArray.size() - 1).setEquipo(rs.getString("equip"));
                           
             }
             response = gson.toJson(jsonArray);
@@ -195,7 +195,7 @@ public class FOM03_TrabajoRutina {
         @GET
         @Path("/getEjerciciosEquipo")
         @Produces("application/json")
-         public String getEjerciciosEquipo() throws SQLException
+         public String getEjerciciosEquipo() 
          {
            try
            {
