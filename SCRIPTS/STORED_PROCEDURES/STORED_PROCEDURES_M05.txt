@@ -189,3 +189,50 @@ end loop;
 END 
 $$ 
 language plpgsql;
+
+------ CONSULTA DE RESERVA
+
+CREATE OR REPLACE FUNCTION FOM05_CONSULTAR_RESERVA(usuario int) 
+RETURNS TABLE (id int, fechainicio Date, fechafin Date, username int, entrenador int) AS
+$$
+DECLARE 
+
+var_r record;
+
+BEGIN
+for var_r in (Select * from RESERVA where fk_usuario=usuario)
+
+loop
+	id:= var_r.res_id;
+	fechainicio:= var_r.res_fecha_ini;
+	fechafin:= var_r.res_fecha_fin;
+	username:= var_r.fk_usuario;
+	entrenador:= var_r.fk_entrenador;
+	
+	return next;
+	
+end loop;
+	
+	
+END 
+$$ 
+language plpgsql;
+
+-- METODO PARA AGREGAR RESERVA
+CREATE OR REPLACE FUNCTION M05_AGREGAR_RESERVA(FECHAINI DATE, FECHAFIN DATE,USUARIO INT, ENTRENADOR INT)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	INSERT INTO RESERVA(RES_FECHA_INI,RES_FECHA_FIN,FK_USUARIO,FK_ENTRENADOR) VALUES (FECHAINI,FECHAFIN,USUARIO,ENTRENADOR);
+END $$
+LANGUAGE PLPGSQL;
+
+--Metodo para eliminar RESERVA
+
+CREATE OR REPLACE FUNCTION M05_ELIMINAR_RESERVA(RESERVA_ID INT)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	DELETE FROM RESERVA WHERE RES_ID=RESERVA_ID;
+END $$
+LANGUAGE PLPGSQL;
