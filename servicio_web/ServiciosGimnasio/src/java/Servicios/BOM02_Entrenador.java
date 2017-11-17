@@ -139,7 +139,7 @@ public class BOM02_Entrenador {
      * Funcion que permite ingresar un entrenador
      * @param nombre
      * @param apellido
-     * @param fecha_nac
+     * @param fecha
      * @param sexo
      * @param correo
      * @param historial
