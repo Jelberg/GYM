@@ -39,7 +39,7 @@ public class FOM05_Critica {
     @Produces("application/json")
     public String holaCriticas ()
     {
-        return "CRITICA FO-M05";
+        return "SERVICIO WEB";
     }
     
     /**
