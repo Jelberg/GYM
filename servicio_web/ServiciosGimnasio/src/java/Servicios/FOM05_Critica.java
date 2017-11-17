@@ -93,7 +93,7 @@ public class FOM05_Critica {
     /**
      * 
      * @param referencia  ID de la tabla horarario de clase
-     * @param fecha  fecha que se hace la critica
+     * @param idu  id del usuario
      * @param comentario   comentario de la critica
      * @param valoracion  valoracion del 0 al 10
      * @return AGREGADO si la critica fue agregada

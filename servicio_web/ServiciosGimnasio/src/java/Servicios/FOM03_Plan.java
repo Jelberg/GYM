@@ -58,7 +58,9 @@ public class FOM03_Plan {
          public String getPlan( @QueryParam( "idUsuario" ) int idUsuario )
          {
             try{
-                      
+                     ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                        put("idUsuario", idUsuario);
+                    }}); 
                 String query = "Select * from FO_M03_get_plan('"+idUsuario+"')";
                 this.jsonArray = new ArrayList<>();
                 System.out.println (query);
@@ -69,13 +71,11 @@ public class FOM03_Plan {
                 
                 while( rs.next() )
                 {
-                    ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                        put("idUsuario", idUsuario);
-                    }});
+                    
                     Plan result = new Plan();
                     result.setId(rs.getInt("idPlan"));
-                 //   result.setNombre(rs.getString("nombre"));
-                   // result.setDescripcion(rs.getString("descrip"));
+                 result.setNombre(rs.getString("nombre"));
+                   result.setDescripcion(rs.getString("descrip"));
                     listaPlanes.add(result);
                 }
                 return gson.toJson( listaPlanes );
@@ -155,7 +155,7 @@ public class FOM03_Plan {
         /** Funcion que inserta un nuevo plan a un usuario
          * @param idUsuario se ingresa el id del usuario
          * @param nombre se indica el nombre del plan
-         * @param descripcion se especifica la descripcion del plan
+         * @param descrip se especifica la descripcion del plan
          * @return Retorna un string de confirmacion de plan agregado
          */
         @GET

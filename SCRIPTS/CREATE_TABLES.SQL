@@ -1,4 +1,4 @@
------------------FIN CREAR LA BASE DE DATOS CON USER---------------
+﻿-----------------FIN CREAR LA BASE DE DATOS CON USER---------------
 
 CREATE 	USER 	 gymucab 	PASSWORD 'gymucab';
 ALTER 	ROLE	 gymucab 	WITH SUPERUSER;
@@ -137,7 +137,7 @@ CREATE TABLE TRABAJO_RUTINA(
 CONSTRAINT FK_EJE_MAQ_EQU_RUT  FOREIGN KEY(FK_EJE_MAQ_EQU1, FK_EJE_MAQ_EQU2) REFERENCES EJERCICIO_MAQUINA_EQUIPO(EME_ID, FK_EJERCICIO) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT PK_TR_ID PRIMARY KEY (TR_ID)
 );
-
+ALTER TABLE  Trabajo_rutina ALTER COLUMN tr_fecha  DROP  NOT NULL
 CREATE TABLE SERIE(
 	SER_ID                 SERIAL NOT NULL,
 	SER_PESO           	   DECIMAL NOT NULL,
@@ -234,18 +234,15 @@ CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DEL
 CREATE TABLE COMENTARIO(
 	com_id		serial not null,
 	com_mensaje	varchar(80),
-	fk_usuario	integer not null,
-	fk_pro_peso	integer,
-	fk_pro_medida	integer,
+	com_fecha date,
+	fk_usuario	integer not null,	
 CONSTRAINT pk_com_id PRIMARY KEY (com_id),
-CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT fk_pro_peso  FOREIGN KEY(fk_pro_peso) REFERENCES progreso_peso(pp_id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT fk_pro_medida FOREIGN KEY(fk_pro_medida) REFERENCES progreso_medida(pm_id) ON DELETE CASCADE ON UPDATE CASCADE
+CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE INTERACCION_COMENTARIO(
 	id		serial not null,
-	mensaje	varchar(140),
+	mensaje		varchar(140),
 	fk_usuario	integer not null,
 	fk_progreso	integer not null,
 	

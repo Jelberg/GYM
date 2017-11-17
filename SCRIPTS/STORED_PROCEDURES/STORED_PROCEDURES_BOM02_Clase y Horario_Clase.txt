@@ -107,6 +107,30 @@ BEGIN
    END LOOP;
 END; $$
   LANGUAGE plpgsql;
+------------------------------busca horario por id
+CREATE OR REPLACE FUNCTION bo_m02_get_horario_clase_id(ide int)
+RETURNS TABLE(id int, nombreclase character varying, instructor character varying, fecha date, 
+		dia character varying, capacidad int, hora_inicio time, hora_fin time)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT HC_id,CLA_Nombre, INS_CORREO, HC_fecha, HC_dia, HC_capacidad, HC_hora_inicio, HC_hora_fin
+        FROM Horario_Clase, Clase, Instructor
+	WHERE ide=HC_id)
+   LOOP
+    id = var_r.HC_id;
+    nombreclase = var_r.CLA_Nombre;
+    instructor= var_r.INS_Correo;
+    fecha = var_r.HC_fecha;
+    dia = var_r.HC_dia;
+    capacidad = var_r.HC_capacidad;
+    hora_inicio = var_r.HC_hora_inicio;
+    hora_fin = var_r.HC_hora_fin;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
 --------------Función que agrega el horario de una clase
 
 CREATE OR REPLACE FUNCTION bo_m02_inserta_horario_clase(fecha date, dia character varying, 
