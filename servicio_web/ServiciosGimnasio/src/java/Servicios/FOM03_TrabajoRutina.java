@@ -294,4 +294,44 @@ public class FOM03_TrabajoRutina {
             }
         }
          
+        @GET
+        @Path("/eliminarEjercicio")
+        @Produces("application/json")
+         public String eliminarEjercicio( @QueryParam( "idUsuario" ) int idUsuario, 
+                                            @QueryParam ( "nombre" ) String nombre,
+                                            @QueryParam ( "dia" ) String dia,
+                                            @QueryParam ( "ejercicio" ) String ejercicio,
+                                            @QueryParam ( "maquina" ) String maquina,
+                                            @QueryParam ( "equipo" ) String equipo )
+
+         {
+         try{
+                      
+                String query = "Select * from FO_M03_eliminar_ejercicio(?,?,?,?,?,?)";
+               PreparedStatement st = conn.prepareStatement(query);
+                st.setInt(1, idUsuario);
+                st.setString(2, nombre);
+                st.setString(3, dia);
+                st.setString(4, ejercicio);
+                st.setString(5, maquina);
+                st.setString(6, equipo);
+                
+                ResultSet rs = st.executeQuery();
+                return gson.toJson("El ejercicio fue Eliminado");
+            }
+            catch( SQLException e )
+            {
+                return e.getMessage();
+            }
+            catch ( ParameterNullException e ) 
+            {
+                return e.getMessage();
+            }
+            finally 
+            {
+                Sql.bdClose(conn);
+            }
+        } 
+         
+         
 }

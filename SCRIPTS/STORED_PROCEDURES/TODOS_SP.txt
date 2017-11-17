@@ -394,7 +394,7 @@ END; $$
   LANGUAGE plpgsql;
   
 --------------------------------Funcion que elimina un ejercicio de una rutina---------------------------------------------------------
-  CREATE OR REPLACE FUNCTION FO_M03_eliminar_ejercicio(idUsuario int, 
+CREATE OR REPLACE FUNCTION FO_M03_eliminar_ejercicio(idUsuario int, 
                                                        nombreRutina character varying, 
                                                        dia character varying, 
                                                        ejercicio character varying,
@@ -403,7 +403,7 @@ END; $$
   RETURNS VOID
    AS $$
 DECLARE
-    _idRutina int;
+	_idRutina int;
     _idEjercicio int;
     _idMaquina int;
     _idEquipo int;
