@@ -34,10 +34,12 @@ export class ListaEjerciciosPage {
     let urlPeticion: string = "FOM03_Rutina/getEjerciciosRealizados?idUsuario=1";
      this.userService.getDato( urlPeticion ).subscribe(data => {
         let i: number = 0;
+        console.log('Data: '+ data);
         while ( i < data.length ){
           this.listaEjercicios[i] = data[i];
           i++;
         }
+        console.log('ListaEjercciios: '+ this.listaEjercicios);
       }); 
   }
 

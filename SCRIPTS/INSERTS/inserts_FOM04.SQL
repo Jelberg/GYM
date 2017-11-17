@@ -4,9 +4,9 @@ insert into usuario (usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac) 
 insert into usuario (usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac) values (78978978,'Gilbert', 'Gomez', 'M','01/01/2000');
 
 -- INSERTS DE PROGRESOS COMPARTIDOS
-insert into comentario (com_mensaje, com_fecha, fk_usuariopro) values ('¡Rebajo 3 Kg este mes!','14/11/2017',1);
-insert into comentario (com_mensaje, com_fecha, fk_usuariopro) values ('¡Aumento 1 Kg este mes!','14/11/2017',1);
-insert into comentario (com_mensaje, com_fecha, fk_usuariopro) values ('¡Ahora realiza series de 50 flexiones!','14/11/2017',1);
+insert into comentario (com_mensaje, com_fecha, fk_usuario) values ('¡Rebajo 3 Kg este mes!','14/11/2017',1);
+insert into comentario (com_mensaje, com_fecha, fk_usuario) values ('¡Aumento 1 Kg este mes!','14/11/2017',1);
+insert into comentario (com_mensaje, com_fecha, fk_usuario) values ('¡Ahora realiza series de 50 flexiones!','14/11/2017',1);
 
 -- INSERTS DE COMENTARIOS SOBRE PROGRESOS COMPARTIDOS
 insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('Excelente avance', 2, 1);

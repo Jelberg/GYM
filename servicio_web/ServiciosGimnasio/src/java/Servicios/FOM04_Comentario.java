@@ -52,9 +52,10 @@ public class FOM04_Comentario {
     
         try{
 
-            String query = "SELECT * FROM fo_m04_get_progresoscompartidos(1)";
+            String query = "SELECT * FROM fo_m04_get_progresoscompartidos(?)";
             jsonArray = new ArrayList<>();
-            PreparedStatement st = conn.prepareStatement(query);                       
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt( 1 , usuario_id );
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
