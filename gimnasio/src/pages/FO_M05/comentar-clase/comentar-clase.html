@@ -14,9 +14,10 @@
 
 
 <ion-content padding>
-      <div class="tituloContenedor">
-        <p class="titulo">Yoga</p>
-        <p class="texto-h2">Estela Rodrigues</p>
+
+      <div class="tituloContenedor" *ngFor="let comentario of comentario">
+        <p class="titulo">{{comentario._nombreclase}}</p>
+        <p class="texto-h2">Inst: {{comentario._instructor}}</p>
       </div> 
       <img src="../../assets/imgs//entrenadoryoga.jpg">
       <p class="texto-h2">Valoracion de la clase</p>
@@ -37,4 +38,5 @@
               <button ion-button block class="botonEnviar" (click)="enviarComentario()">Enviar</button>
             </ion-item>
           </ion-list>
+ 
 </ion-content>

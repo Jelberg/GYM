@@ -27,7 +27,7 @@
                                 <ion-col col-6>
                                   <p>{{listaCritica._fecha}}</p>
                                   
-                                  <p> </p>      
+                                  <p> {{listaCritica._idHc}}</p>      
                                   <h3>{{listaCritica._nombreClase}}</h3>
                                   <h3>{{listaCritica._nombreIns}}</h3>
                                 </ion-col>
@@ -35,7 +35,7 @@
                         </ion-grid>
             </ion-item>
             <ion-item-options side="right ">
-                <button ion-button icon-only (click)="goToComentar()">
+                <button ion-button icon-only (click)="goToComentar(listaCritica._idHc)">
                     <ion-icon name="chatbubbles"></ion-icon>
                 </button>
             </ion-item-options>  

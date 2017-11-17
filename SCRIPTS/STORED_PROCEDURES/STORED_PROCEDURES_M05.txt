@@ -52,6 +52,33 @@ BEGIN
 END $$
 LANGUAGE PLPGSQL;
 
+--LISTA DE CLASES RESERVADAS
+
+CREATE OR REPLACE FUNCTION M05_LISTAR_RESERVAS(ID_USUARIO INT)
+RETURNS TABLE (ID_HC INT , NOMBRE VARCHAR, INSTRUCTOR VARCHAR, FECHA DATE, DIA VARCHAR) AS  $$
+DECLARE 
+var_r record;
+BEGIN
+	for var_r in (SELECT HC_ID, CLA_NOMBRE, INS_NOMBRE, HC_FECHA, HC_DIA
+			FROM HORARIO_CLASE, INSTRUCTOR, CLASE, USUARIO
+			WHERE USU_ID = ID_USUARIO AND
+			      USU_ID = FK_USUARIO AND CLA_ID=FK_CLASE AND FK_INSTRUCTOR = INS_ID)
+
+	loop
+	ID_HC:= var_r.HC_ID;
+	NOMBRE:= var_r.CLA_NOMBRE;
+	INSTRUCTOR:= var_r.INS_NOMBRE;
+	FECHA:= var_r.HC_FECHA;
+	DIA:=var_r.HC_DIA;
+	
+	
+	return next;
+	
+end loop;
+END 
+$$
+LANGUAGE PLPGSQL;
+
 -- FUNCION QUE DEVUELVE CLASES
 
 CREATE OR REPLACE FUNCTION M05_LISTA_CLASES() 
@@ -112,11 +139,11 @@ language plpgsql;
 
 --Metodo para agregar la critica a la clase
 
-CREATE OR REPLACE FUNCTION M05_AGREGAR_CRITICA(FECHA DATE, COMENTARIO CHARACTER VARYING(400),VALORACION INT, REFERENCIA_HC INT)
+CREATE OR REPLACE FUNCTION M05_AGREGAR_CRITICA( COMENTARIO CHARACTER VARYING(400),VALORACION INT, REFERENCIA_HC INT)
 RETURNS VOID AS $$
 DECLARE 
 BEGIN 
-	INSERT INTO CRITICA(CRI_FECHA,CRI_COMENTARIO,CRI_VALORACION,FK_HC_ID) VALUES (FECHA,COMENTARIO,VALORACION,REFERENCIA_HC);
+	INSERT INTO CRITICA(CRI_FECHA,CRI_COMENTARIO,CRI_VALORACION,FK_HC_ID) VALUES (current_date,COMENTARIO,VALORACION,REFERENCIA_HC);
 END $$
 LANGUAGE PLPGSQL;
 
@@ -140,11 +167,11 @@ BEGIN
      for var_r in (Select HC_ID, HC_FECHA, CLA_NOMBRE, INS_NOMBRE, INS_APELLIDO
      from HORARIO_CLASE , CLASE , INSTRUCTOR , USUARIO , CRITICA 
      where
-     FK_USUARIO = id and 
+     FK_USUARIO = ID and 
      USU_ID = FK_USUARIO and 
      INS_ID = FK_INSTRUCTOR and
-     CLA_ID = FK_CLASE and
-
+     CLA_ID = FK_CLASE AND 
+	--CRI_ID_USUARIO != 4 and 
      FK_HC_ID != HC_ID AND
      HC_FECHA BETWEEN CAST (CURRENT_DATE-30 AS DATE) AND CAST (CURRENT_DATE AS DATE)
      GROUP BY HC_ID, HC_FECHA, CLA_NOMBRE, INS_NOMBRE, INS_APELLIDO
@@ -236,3 +263,29 @@ BEGIN
 	DELETE FROM RESERVA WHERE RES_ID=RESERVA_ID;
 END $$
 LANGUAGE PLPGSQL;
+
+--Consulta la clase en particular en base a la id 
+
+CREATE OR REPLACE FUNCTION m05_get_horario_clase(id int)
+  RETURNS TABLE(nombreclase character varying, instructor character varying, fecha date, 
+		dia character varying, capacidad int, hora_inicio time, hora_fin time, descripcion varchar)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT CLA_Nombre, INS_Nombre, HC_fecha, HC_dia, HC_capacidad, HC_hora_inicio, HC_hora_fin, CLA_descripcion
+        FROM Horario_Clase, Clase, Instructor
+	WHERE  id = HC_id and fk_Clase = CLA_id and fk_Instructor=INS_id)
+   LOOP
+    nombreclase = var_r.CLA_Nombre;
+    instructor= var_r.INS_nombre;
+    fecha = var_r.HC_fecha;
+    dia = var_r.HC_dia;
+    capacidad = var_r.HC_capacidad;
+    hora_inicio = var_r.HC_hora_inicio;
+    hora_fin = var_r.HC_hora_fin;
+    descripcion = var_r.CLA_descripcion;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
