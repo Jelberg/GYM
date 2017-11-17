@@ -19,7 +19,7 @@ window.onload = function busquedainstructor()
     if (variable)
         {
 
-            var url_comple="/getHorario_Clase_id?id="+variable;
+            var url_comple="/getHorario_Clase_?id="+variable;
             fetch(url+url_comple)
             .then((respuesta) => 
             {            

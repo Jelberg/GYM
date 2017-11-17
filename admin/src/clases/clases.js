@@ -4,7 +4,7 @@ var url="http://localhost:8080/ServiciosGimnasio/BOM02_Clase";
 var busqueda= document.getElementById("clase_nombre");
 var boton= document.getElementById("consulta");
 var variable;
-boton.addEventListener("click",buscarClase);
+
 
 window.onload = function mostrartabla()
 {
@@ -21,8 +21,10 @@ window.onload = function mostrartabla()
         return respuesta.json();
     } ).then((respuesta) => 
     {
+    
        var contenido= "<link rel='stylesheet' href='../css/styles.css'><link rel='stylesheet' href='./style.css'><link rel='stylesheet' href='../css/font-awesome/css/font-awesome.min.css'><div class='row'><div class='content'><div class='w3-row' ><table class='table table-bordered table-striped'><thead ><tr style='border: 1px solid black; background-color: #008080;'>";
        var fila= respuesta[0];
+       
        var campos = Object.keys(fila);
        var ncampos =campos.length;
        for (var i = 0; i < ncampos; i++)
@@ -82,12 +84,14 @@ function buscarClase()
         console.log(fila)
         if (fila)
         {
+        
                 var campos = Object.keys(fila);
                 var ncampos =campos.length;
                 for (var i = 0; i < ncampos; i++)
                 {
                     if ((i!=3) &&(i!=0))
                     {
+                        
                         contenido += "<th><font color ='white'>";
                         contenido += campos[i];
                         contenido += "</font></th>";
@@ -97,7 +101,7 @@ function buscarClase()
                 var nregistros = respuesta.length;
                 for(var i = 0; i< nregistros; i++)
                     {
-                        if ((i!=3) &&(i!=0))
+                       
                         {
                             fila =respuesta[i];
                             contenido += "<tr>";
