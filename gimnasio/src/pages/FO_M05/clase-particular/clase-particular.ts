@@ -68,7 +68,7 @@ export class ClaseParticularPage {
         while ( i < data.length ){
         this.class[i] = data[i];
         i++;}
-      console.log(this.class[0]);      
+     // console.log(this.class[0]);      
     },
     (error) =>{
       //console.error(error);
