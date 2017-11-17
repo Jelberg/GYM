@@ -12,7 +12,7 @@ import Servicios.FOM05_Clase_Fecha;
 import Servicios.FOM04_Progreso_Medida;
 import Servicios.FOM04_Progreso_Peso;
 
-import Servicios.FOM05_ClasesSemana;
+
 import Servicios.FOM05_Critica;
 import Servicios.FOM05_Reserva;
 import javax.ws.rs.ApplicationPath;
@@ -47,10 +47,14 @@ public class ConfiguracionRestGimnasio extends Application{
         h.add(FOM03_Rutina.class);
         h.add(FOM05_Critica.class);
         h.add(FOM05_Clase_Fecha.class);
-        h.add(FOM05_ClasesSemana.class);
+
+        h.add(FOM05_Reserva.class);
+
+        
         h.add(FOM05_Reserva.class);
         h.add(FOM04_Progreso_Medida.class);
         h.add(FOM04_Progreso_Peso.class);
+
 
         return h;
     }

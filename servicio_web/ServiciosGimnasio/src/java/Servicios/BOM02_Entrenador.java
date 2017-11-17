@@ -29,7 +29,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author Laura
  */
-@Path("BOM02_Entrenador")
+@Path("/BOM02_Entrenador")
 public class BOM02_Entrenador {
     
     private Connection conn = Sql.getConInstance();
@@ -84,9 +84,7 @@ public class BOM02_Entrenador {
         }
     
     }
-      /**
-     * Funcion que recibe como parametro el correo del entrenador 
-     * @param correo del cual se quiere 
+     /**
      * @return Devuelve todos los datos del entrenador
      */
     @GET

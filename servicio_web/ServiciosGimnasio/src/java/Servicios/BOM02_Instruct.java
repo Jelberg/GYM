@@ -38,7 +38,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Miguel
  */
-@Path("Instruct")
+@Path("/Instruct")
 public class BOM02_Instruct {
 private Connection conn = Sql.getConInstance();
     //Atributo que se utiliza para transformar a formado JSON las consultas.
@@ -241,7 +241,7 @@ private Connection conn = Sql.getConInstance();
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
-    @POST
+    /*@POST
     @Path("/actualizaInstruct")
     @Produces("application/json")
     public String actualizaInstruct( @QueryParam("nombre") String nombre,
@@ -277,4 +277,5 @@ private Connection conn = Sql.getConInstance();
         }
         
     } 
+*/
 }
