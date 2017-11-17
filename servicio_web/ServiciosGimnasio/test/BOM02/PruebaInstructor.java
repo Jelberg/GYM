@@ -34,7 +34,7 @@ public class PruebaInstructor {
     public void comenzarPrueba() {
         _conn = new Sql();
         String insertaInstruct = "INSERT INTO INSTRUCTOR (ins_id, ins_nombre, ins_apellido, ins_fecha_nac, ins_sexo, ins_correo, ins_foto ) "
-                + "VALUES (9999,'Laura','Quinones','14-09-1992','F','lvqp.93@gmail.com','Yoga',null )";
+                + "VALUES (9999,'Laura','Quinones','14/09/1992','F','lvqp.93@gmail.com','Yoga',null )";
         
         try {
             _rs = _conn.sql ( insertaInstruct );  
