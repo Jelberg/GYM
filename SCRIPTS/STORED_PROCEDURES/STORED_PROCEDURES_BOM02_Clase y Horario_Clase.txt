@@ -163,9 +163,9 @@ CREATE OR REPLACE FUNCTION bo_m02_modifica_horario_clase(id int, nombreclase int
    AS $$
 DECLARE
 BEGIN
-    UPDATE HORARIO_CLASE SET (fk_clase=(select cla_id from clase where cla_nombre=nombreclase) and fk_instructor=instructor
+    UPDATE HORARIO_CLASE SET fk_clase=(select cla_id from clase where cla_nombre=nombreclase) and fk_instructor=instructor
 					and Hc_fecha=fecha and HC_dia=dia and HC_capacidad=capacidad
-					and HC_Hora_inicio=hora_inicio and HC_Hora_Fin=hora_fin)
+					and HC_Hora_inicio=hora_inicio and HC_Hora_Fin=hora_fin
     WHERE (hc_id = id);
 END; $$
   LANGUAGE plpgsql;
