@@ -132,7 +132,7 @@ public class TestCriticaServicio {
     {
         String response;
            try {
-               response = _M05Crit.insertarCritica(1, "comentario", "1");
+               response = _M05Crit.insertarCritica(1,1, "comentario", 1);
                  assertNotNull( response );
            } catch (SQLException ex) {
                Logger.getLogger(TestCriticaServicio.class.getName()).log(Level.SEVERE, null, ex);
