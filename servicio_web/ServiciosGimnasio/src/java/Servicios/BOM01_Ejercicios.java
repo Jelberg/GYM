@@ -82,11 +82,49 @@ public class BOM01_Ejercicios {
     }
 
     @POST
-    @Path("/insertaEjercicio")
+    @Path("/insertaEjercicioMaquina")
     @Produces("application/json")
-    public String insertaEjercicio(@QueryParam("nombre") String nombre,
-            @QueryParam("grupo") String grupo, 
-            @QueryParam("maquina") int maquina, 
+    public String insertaEjercicioMaquina(@QueryParam("nombre") String nombre,
+            @QueryParam("grupo") String grupo,
+            @QueryParam("maquina") int maquina) {
+
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>() {
+                {
+                    put("nombre", nombre);
+                    put("grupo", grupo);
+                    put("maquina", maquina);
+                }
+            });
+
+            String query = "select * from bo_m01_insertar_ejercicio_maquina(?,?,?)";
+            PreparedStatement st = conn.prepareStatement(query);
+            java.lang.reflect.Type type = new TypeToken<Ejercicio_Maquina_Equipo[]>() {
+            }.getType();
+
+            st.setString(1, nombre);
+            st.setString(2, grupo);
+            st.setInt(3, maquina);
+            st.executeQuery();
+
+            response.put("data", "Se insertó el ejercicio");
+        } catch (SQLException e) {
+            response.put("error", e.getMessage());
+        } catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        } finally {
+            Sql.bdClose(conn);
+            return gson.toJson(response);
+        }
+
+    }
+    
+    @POST
+    @Path("/insertaEjercicioEquipo")
+    @Produces("application/json")
+    public String insertaEjercicioEquipo(@QueryParam("nombre") String nombre,
+            @QueryParam("grupo") String grupo,
             @QueryParam("equipo") int equipo) {
 
         Map<String, String> response = new HashMap<String, String>();
@@ -95,16 +133,18 @@ public class BOM01_Ejercicios {
                 {
                     put("nombre", nombre);
                     put("grupo", grupo);
+                    put("equipo", equipo);
                 }
             });
 
-            String query = "select * from bo_m01_insertar_ejercicio(?,?,?,?)";
+            String query = "select * from bo_m01_insertar_ejercicio_equipo(?,?,?)";
             PreparedStatement st = conn.prepareStatement(query);
             java.lang.reflect.Type type = new TypeToken<Ejercicio_Maquina_Equipo[]>() {
             }.getType();
 
             st.setString(1, nombre);
-
+            st.setString(2, grupo);
+            st.setInt(3, equipo);
             st.executeQuery();
 
             response.put("data", "Se insertó el ejercicio");
