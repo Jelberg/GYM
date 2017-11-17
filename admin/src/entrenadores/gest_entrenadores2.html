@@ -7,8 +7,12 @@
 <link rel="stylesheet" href="../css/styles.css">
 <link href="../asset/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
+
+
+
 <body>
 
+  <!-- Sidebar/menu -->
   <!-- Sidebar/menu -->
   <nav class="w3-sidebar w3-color w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:215px;font-weight:bold;" id="mySidebar">
     <br>
@@ -21,15 +25,15 @@
           <b>Home</b>
         </p>
       </a>
-      <a href="../instructores/instructores.html" onclick="w3_close()" class="menuIcon active">
+      <a href="../instructores/instructores.html" onclick="w3_close()" class="menuIcon">
         <img src="../Imagenes/Instructor_white.png" class="menuImg">
         <p class="menuText">
           <b>Instructores</b>
         </p>
         <hr style="width:120px;border:2px">
       </a>
-      <a href="../entrenadores/entrenadores.html" onclick="w3_close()" class="menuIcon">
-        <img src="../Imagenes/Entrenador_white.png" class="menuImg">
+      <a href="../entrenadores/entrenadores.html" onclick="w3_close()" class="menuIcon active">
+        <img src="../Imagenes/Entrenador_white.png" class="menuImg ">
         <p class="menuText">
           <b>Entrenadores</b>
         </p>
@@ -42,7 +46,7 @@
         </p>
         <hr style="width:120px;border:2px">
       </a>
-      <a href="../horarios/horarios.html" onclick="w3_close()" class="menuIcon">
+      <a href="../horarios/horarios.html" onclick="w3_close()" class="menuIcon ">
         <img src="../Imagenes/horario_white.png" class="menuImg">
         <p class="menuText">
           <b>Horarios</b>
@@ -81,37 +85,37 @@
     <div class="w3-container" id="showcase">
       <img src="../Imagenes/Logo Gimnasio.png" class="mainImg">
       <h1 class="w3-xxxlarge w3-text-color">
-        <b>Gestión de Instructores.</b>
+        <b>Gestión de Entrenadores.</b>
       </h1>
       <hr style="width:50px;border:5px solid #3CB371" class="w3-round">
     </div>
 
     <!-- Rellenar -->
     <div class="w3-row ">
-      <div class="w3-twothird w3-teal w3-container" style="height:660px">
+      <div class="w3-twothird w3-teal w3-container" style="height:850px">
         <div class="w3-padding-32 w3-padding-large">
-          <h1>Instructores</h1>
+          <h1>Entrenadores</h1>
           <form class="w3-container w3-card w3-padding-32 w3-white" action="/action_page.php" target="_blank">
             <div class="w3-section">
               <label>Nombre Completo:</label>
-              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Nombre Completo"id="nombre">
+              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Nombre Completo" id="nombre">
             </div>
             <div class="w3-section">
               <label>Fecha de Nacimiento:</label>
-              <input class="w3-input w3-border" style="width:100%;" type="text" placeholder="dd/mm/aaaa" required name="Fecha de Nacimiento" id="fecha">
+              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Fecha de Nacimiento" id="fecha">
             </div>
             <div class="w3-section">
               <label>Sexo:</label>
               <div class="w3-row ">
-                <div class="w3-half w3-container" style="height:60px" id="sexo">
+                <div class="w3-half w3-container" style="height:60px">
                   <p>
-                    <input class="w3-radio" type="radio" name="gender" value="male" id="masculino">
+                    <input class="w3-radio" type="radio" name="gender" value="masculino" id="masculino">
                     <label>Masculino</label>
                   </p>
                 </div>
                 <div class="w3-half w3-container" style="height:60px">
                   <p>
-                    <input class="w3-radio" type="radio" name="gender" value="female" id="femenino">
+                    <input class="w3-radio" type="radio" name="gender" value="femenino" id="femenino">
                     <label>Femenino</label>
                   </p>
                   <p>
@@ -121,7 +125,11 @@
             </div>
             <div class="w3-section">
               <label>Correo Electrónico:</label>
-              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Correo Electrónico" id=correo>
+              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Correo Electrónico"  id=correo>
+            </div>
+            <div class="w3-section">
+              <label>Historial:</label>
+              <input class="w3-input w3-padding-64 w3-border" style="width:100%;" type="text" required name="Historial"  id=historial>
             </div>
             <div class="w3-section">
               <label>Foto:</label>
@@ -132,15 +140,17 @@
           </form>
         </div>
       </div>
-      <div class="w3-quarter w3-blue-grey w3-container" style="height:660px">
+      <div class="w3-quarter w3-blue-grey w3-container" style="height:850px">
         <div class="w3-padding-64 w3-center">
           <div class="w3-padding-32 w3-center">
             <div class="w3-left-align w3-padding-large">
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton" onclick="insertarInstructor()">Insertar</button>
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom w3-disabled saveButton" onclick="actualizarInstructor()">Modificar</button>
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom w3-disabled saveButton" onclick="borrarInstruct()">Eliminar</button>
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton" onclick="llevaratabla()">Consultar</button>
-
+              <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom w3-disabled saveButton" onclick="insertarEntrenador()">Insertar</button>
+              <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton" onclick="actualizarEntrenador()">Modificar</button>
+              <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton" onclick="borrarEntrenador()">Eliminar</button>
+              <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton" onclick="llevaratabla()">Consultar</button>
+              <a  href="./Entrenadores2.html">
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Agregar Turno</button>
+              </a>
             </div>
           </div>
         </div>
@@ -171,9 +181,9 @@
       captionText.innerHTML = element.alt;
     }
   </script>
-   <script src="../asset/js/jquery.min.js"></script>
-   <script src="../asset/js/bootstrap.min.js"></script>
-   <script src="gest_instructores.js"></script>
+ <script src="../asset/js/jquery.min.js"></script>
+ <script src="../asset/js/bootstrap.min.js"></script>
+ <script src="gest_entrenadores.js"></script>
 </body>
 
 </html>

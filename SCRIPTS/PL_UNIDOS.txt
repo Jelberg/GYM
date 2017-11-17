@@ -314,6 +314,325 @@ ADD COLUMN CRI_ID_USUARIO INTEGER;
 
 ------***FOM03*****-----
 
+-------Funcion que trae todas las rutinas de un usuario dado el id de usuario
+
+CREATE OR REPLACE FUNCTION FO_M03_get_rutina(idUsuario int)
+  RETURNS TABLE(idRutina int, nombre character varying, dia character varying, numEjerc int)
+   AS $$
+DECLARE
+   _rutinas    record;
+BEGIN
+   FOR _rutinas IN(SELECT r.rut_id, r.rut_nombre, r.rut_dia, (select count(*) from ejercicio_maquina_equipo as eme where eme.fk_rutina=r.rut_id ) as ejercicio
+        FROM rutina as r inner join  usuario as u on u.usu_id = r.fk_usuario
+        WHERE u.usu_id = idUsuario)
+   LOOP
+    idRutina = _rutinas.rut_id;
+    nombre = _rutinas.rut_nombre;
+    dia = _rutinas.rut_dia;
+    numEjerc= _rutinas.ejercicio;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--------------------Funcion que agrega una nueva rutina, recibe el idUsuario, el nombre de la    rutina y el dia a realizarse, no retorna ningun valor
+
+CREATE OR REPLACE FUNCTION FO_M03_set_rutina(idUsuario int, nombreRutina character varying, dia character varying)
+  RETURNS VOID
+   AS $$
+DECLARE
+BEGIN
+  		 insert into rutina (rut_nombre, rut_dia, fk_usuario) values (nombreRutina, dia, idUsuario);
+END; $$
+  LANGUAGE plpgsql;
+
+-----Funcion que modifica una rutina, recibe el idUsuario, el nombre de la rutina y el dia a realizarse, no retorna ningun valor------
+
+CREATE OR REPLACE FUNCTION FO_M03_modificar_rutina(idUsuario int, nombreRutina character varying, dia character varying,
+                                                  nombreModif character varying, diaModif character varying)
+  RETURNS VOID
+   AS $$
+DECLARE
+BEGIN
+  		 update rutina  set (rut_nombre, rut_dia) = (nombreModif, diaModif) where fk_usuario= idUsuario 
+         																	and rut_nombre=nombreRutina and rut_dia = dia;
+END; $$
+  LANGUAGE plpgsql;
+
+------------------------Funcion que elimina una rutina, recibe el idUsuario, el nombre de la rutina y el dia 
+
+CREATE OR REPLACE FUNCTION FO_M03_eliminar_rutina(idUsuario int, nombreRutina character varying, dia character varying)
+  RETURNS VOID
+   AS $$
+DECLARE
+BEGIN
+  		 delete from rutina  where fk_usuario= idUsuario and rut_nombre = nombreRutina and rut_dia = dia;
+END; $$
+  LANGUAGE plpgsql;
+  	
+--------------Funcion muestra todos los ejercicios de una rutina------------------------
+
+  
+CREATE OR REPLACE FUNCTION FO_M03_ejercicios_rutina(idUsuario int, nombreRutina character varying, dia character varying)
+  RETURNS TABLE(idEjercicio int, nombre character varying,grupoMuscular character varying, maqui character varying,equip character varying)
+   AS $$
+DECLARE
+   _ejercicios    record;
+   _idEme int;
+BEGIN
+   FOR _ejercicios IN(SELECT distinct(eje.eje_nombre), eje.eje_id, eje.eje_grupo_muscular, eme.eme_id
+        FROM ejercicio as eje inner join  ejercicio_maquina_equipo as eme on eje.eje_id = eme.fk_ejercicio
+        inner join rutina as rut on rut.rut_id= eme.fk_rutina
+        inner join usuario as usu on usu.usu_id = rut.fk_usuario
+        WHERE usu.usu_id = idUsuario and rut.rut_nombre= nombreRutina and rut.rut_dia= dia 
+        )
+   LOOP
+    idEjercicio = _ejercicios.eje_id;
+    nombre = _ejercicios.eje_nombre;
+    grupoMuscular = _ejercicios.eje_grupo_muscular;
+    _idEme = _ejercicios.eme_id;
+    SELECT maq.maq_nombre into maqui from maquina as maq    ---Seleccionar la maquina de ese ejercicio
+    inner join ejercicio_maquina_equipo as eme on maq.maq_id= eme.fk_maquina where eme.eme_id= _idEme;
+    SELECT equ.equ_nombre into equip from equipo as equ    ---Seleccionar el equipo de ese ejercicio
+    inner join ejercicio_maquina_equipo as eme on equ.equ_id= eme.fk_equipo where eme.eme_id= 2;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+  
+
+ ------------------------------Funcion que retorna todas las series de un ejercicio, indicando su peso, repeticiones y  tiempo de descanso
+
+CREATE OR REPLACE FUNCTION FO_M03_series_ejercicio(idUsuario int, nombreRutina character varying, dia character varying, nombreEjercicio character varying)
+  RETURNS TABLE(numRep int,peso float, unidad character varying,tiempoDescan float, tiempo float, distancia float, nivel int)
+   AS $$
+DECLARE
+   _series    record;
+BEGIN
+   FOR _series IN(SELECT  ser.ser_repeticion, ser.ser_peso, ser.ser_unidad, tr.tr_descanso, tr.tr_duracion, tr.tr_distancia, tr.tr_nivel
+        FROM serie as ser inner join  trabajo_rutina as tr on ser.fk_trabajo_rutina= tr.tr_id
+        inner join ejercicio_maquina_equipo as eme on tr.fk_eje_maq_equ1= eme.eme_id
+        inner join rutina as rut on rut.rut_id= eme.fk_rutina
+        inner join usuario as usu on usu.usu_id= rut.fk_usuario
+        inner join ejercicio as eje on eje.eje_id= eme.fk_ejercicio
+        WHERE usu.usu_id = idUsuario and rut.rut_nombre=nombreRutina and rut.rut_dia= dia and eje.eje_nombre= nombreEjercicio 
+        and tr.tr_fecha = 
+        (select max(tr.tr_fecha) FROM serie as ser inner join  trabajo_rutina as tr on ser.fk_trabajo_rutina= tr.tr_id
+        						inner join ejercicio_maquina_equipo as eme on tr.fk_eje_maq_equ1= eme.eme_id
+        						inner join rutina as rut on rut.rut_id= eme.fk_rutina
+        						inner join usuario as usu on usu.usu_id= rut.fk_usuario
+        						inner join ejercicio as eje on eje.eje_id= eme.fk_ejercicio
+        						WHERE usu.usu_id = idUsuario and rut.rut_nombre=nombreRutina and rut.rut_dia= dia and eje.eje_nombre= nombreEjercicio 
+          ) 
+       )
+   LOOP
+    numRep = _series.ser_repeticion;
+    peso = _series.ser_peso;
+    unidad = _series.ser_unidad;
+    tiempoDescan= _series.tr_descanso;
+    tiempo= _series.tr_duracion;
+    distancia= _series.tr_distancia;
+    nivel= _series.tr_nivel;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+
+------------------------------funcion que devuelve todos los ejercicios existentes con su maquina o equipamento
+
+CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_maquina()
+  RETURNS TABLE(maquina character varying, ejercicio character varying,grupoMuscular character varying)
+   AS $$
+   DECLARE
+ _ejercicios    record;
+BEGIN
+   FOR _ejercicios IN( select maq.maq_nombre, eje.eje_nombre,
+                       eje.eje_grupo_muscular from ejercicio_maquina_equipo as eme,
+                       maquina as maq, ejercicio as eje where maq.maq_id = eme.fk_maquina and
+    				   eme.fk_ejercicio = eje.eje_id
+						)
+   LOOP
+    maquina = _ejercicios.maq_nombre;
+    ejercicio = _ejercicios.eje_nombre;
+    grupoMuscular = _ejercicios.eje_grupo_muscular;
+    RETURN NEXT;
+   END LOOP; 
+   END; $$
+  LANGUAGE plpgsql;
+
+--------------------------Funcion que devuelve una lista de todos los ejercicios por equipo-------------------------
+  CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_equipo()
+  RETURNS TABLE(equipo character varying, ejercicio character varying,grupoMuscular character varying)
+   AS $$
+   DECLARE
+ _ejercicios    record;
+BEGIN
+   FOR _ejercicios IN( select equ.equ_nombre, eje.eje_nombre, eje.eje_grupo_muscular 
+                        from ejercicio_maquina_equipo as eme,equipo as equ, ejercicio as eje
+						where equ.equ_id = eme.fk_equipo and eme.fk_ejercicio = eje.eje_id
+						)
+   LOOP
+    equipo = _ejercicios.equ_nombre;
+    ejercicio = _ejercicios.eje_nombre;
+    grupoMuscular = _ejercicios.eje_grupo_muscular;
+    RETURN NEXT;
+   END LOOP; 
+   END; $$
+  LANGUAGE plpgsql;
+
+  ---------------------------------- Funcion que devuelve los planes de un usuario --------------------------------------
+
+CREATE OR REPLACE FUNCTION FO_M03_get_plan(usuario_CI int)
+  RETURNS TABLE (idPlan int, nombre character varying, descrip character varying)
+   AS $$
+   DECLARE
+      _plan    record;
+    BEGIN
+      FOR _plan IN (SELECT p.pla_id, p.pla_nombre, p.pla_descripcion
+              FROM plan p, usuario u
+              WHERE p.fk_usuario=u.usu_id and u.usu_id=usuario_CI)
+      LOOP
+          idPlan = _plan.pla_id;
+          nombre = _plan.pla_nombre;
+          descrip = _plan.pla_descripcion;
+        RETURN NEXT;
+      END LOOP;
+  END; $$
+  LANGUAGE plpgsql;
+
+-----------------------------------------------------------------------------------------------------------------------
+--------------------------------- Funcion que devuelve las rutinas de un plan ------------------------------------------
+
+CREATE OR REPLACE FUNCTION FO_M03_get_rutinaplan(usuario_CI int)
+  RETURNS TABLE (nombreR character varying, dia character varying, numEjerc int)
+    AS $$
+    DECLARE
+      _rutina    record;
+    BEGIN
+      FOR _rutina IN (SELECT r.rut_nombre, r.rut_dia, (select count(*) from ejercicio_maquina_equipo eme where eme.fk_rutina=r.rut_id ) as ejercicio
+              FROM rutina r, usuario u, plan p
+              WHERE r.fk_usuario=u.usu_id and r.fk_plan=p.pla_id and u.usu_id = usuario_CI)
+      LOOP
+          nombreR = _rutina.rut_nombre;
+          dia = _rutina.rut_dia;
+            numEjerc= _rutina.ejercicio;
+        RETURN NEXT;
+      END LOOP;
+    END; $$
+    LANGUAGE plpgsql;
+
+-----------------------------------------------------------------------------------------------------------------------
+-------------------------------- Funcion que ELIMINA un plan del usuario ----------------------------------------------
+
+CREATE OR REPLACE FUNCTION FO_M03_eliminaplan(usuario_CI int, nombre character varying)
+  RETURNS void AS $$
+    DECLARE
+    BEGIN
+      DELETE FROM plan
+      WHERE pla_nombre = nombre and fk_usuario = usuario_CI;
+    END; $$
+LANGUAGE plpgsql;
+
+-----------------------------------------------------------------------------------------------------------------------
+-------------------------------- Funcion que AGREGA un plan al usuario ------------------------------------------------
+
+CREATE OR REPLACE FUNCTION FO_M03_set_plan(idUsuario int, nombrePlan character varying, descrip character varying)
+  RETURNS VOID
+   AS $$
+DECLARE
+BEGIN
+       insert into plan (pla_nombre, pla_descripcion, fk_usuario) values (nombrePlan, descrip, idUsuario);
+END; $$
+  LANGUAGE plpgsql;
+
+-----------------------------------------------------------------------------------------------------------------------
+-------------------------------- Funcion que MODIFICA un plan del usuario ---------------------------------------------
+
+CREATE OR REPLACE FUNCTION FO_M03_modificar_plan(idUsuario int, nombrePlan character varying, descrip character varying,
+                                                  nombreModif character varying, descripModif character varying, idPlan int)
+  RETURNS VOID
+   AS $$
+DECLARE
+BEGIN
+       update plan set (pla_nombre, pla_descripcion) = (nombreModif, descripModif) where fk_usuario= idUsuario
+                                                        and pla_id=idPlan;
+END; $$
+  LANGUAGE plpgsql;
+
+------------------------------------------------------------------------------------------------------------------------
+
+-------Lista de ejercicios realizada por un usuario--------------------------------------------
+  CREATE OR REPLACE FUNCTION FO_M03_get_ejerciciosRealizados(idUsuario int)
+  RETURNS TABLE(nombre character varying)
+   AS $$
+DECLARE
+   _ejercicios    record;
+BEGIN
+   FOR _ejercicios IN(select  distinct(eje.eje_nombre) from ejercicio as eje 
+inner join ejercicio_maquina_equipo as eme on eje.eje_id= eme.fk_ejercicio 
+inner join trabajo_rutina as tr on tr.fk_eje_maq_equ1 = eme.eme_id 
+inner join rutina as rut on rut.rut_id=eme.fk_rutina 
+inner join usuario as usu on usu.usu_id= rut.fk_usuario where usu.usu_id= idUsuario )
+   LOOP
+    nombre = _ejercicios.eje_nombre;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+  
+  
+------Lista de ejercicios con peso promedio por mes de los ultimos 6 meses----------------------------------------
+CREATE OR REPLACE FUNCTION FO_M03_get_Ejercicios6meses( _idUsuario int, _ejercicio character varying )
+  RETURNS TABLE(mes int, repeticion int, peso numeric(7,2), unidad character varying)
+   AS $$
+DECLARE
+   _ejercicios    record;
+BEGIN
+   FOR _ejercicios IN(select Extract(Month from tr.tr_fecha) as mes, sum(ser.ser_repeticion) as repeticion,
+                    avg(ser.ser_peso) as peso, ser.ser_unidad as unidad from trabajo_rutina as tr 
+					inner join serie as ser on ser.fk_trabajo_rutina= tr.tr_id 
+					inner join ejercicio_maquina_equipo as eme on eme_id = tr.fk_eje_maq_equ1
+					inner join ejercicio as eje on eje.eje_id= eme.fk_ejercicio
+					inner join rutina as rut on eme.fk_rutina = rut.rut_id
+					inner join usuario as usu on usu.usu_id = rut.fk_usuario
+					where eje.eje_nombre= _ejercicio and usu.usu_id=_idUsuario 
+                    and (tr.tr_fecha >= (current_date - interval '6 month')) group by mes, ser.ser_unidad)
+   LOOP
+    mes = _ejercicios.mes;
+    repeticion = _ejercicios.repeticion;
+ 	peso = ROUND(_ejercicios.peso, 1);
+    unidad= _ejercicios.unidad;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;  
+
+
+ ------Lista de ejercicios con peso promedio por mes de los ultimos 5 años----------------------------------------
+CREATE OR REPLACE FUNCTION FO_M03_get_Ejercicios5anios( _idUsuario int, _ejercicio character varying )
+  RETURNS TABLE(mes int, repeticion int, peso decimal, unidad character varying)
+   AS $$
+DECLARE
+   _ejercicios    record;
+BEGIN
+   FOR _ejercicios IN(select Extract(Year from tr.tr_fecha) as mes, sum(ser.ser_repeticion) as repeticion, avg(ser.ser_peso) as peso, ser.ser_unidad as unidad from trabajo_rutina as tr 
+						inner join serie as ser on ser.fk_trabajo_rutina= tr.tr_id 
+						inner join ejercicio_maquina_equipo as eme on eme_id = tr.fk_eje_maq_equ1
+                        inner join ejercicio as eje on eje.eje_id= eme.fk_ejercicio
+                        inner join rutina as rut on eme.fk_rutina = rut.rut_id
+                        inner join usuario as usu on usu.usu_id = rut.fk_usuario
+                        where eje.eje_nombre= _ejercicio and usu.usu_id=_idUsuario 
+                        and (tr.tr_fecha >= (current_date - interval '5 year')) group by mes, ser.ser_unidad)
+   LOOP
+    mes = _ejercicios.mes;
+    repeticion = _ejercicios.repeticion;
+ 	peso = ROUND(_ejercicios.peso, 2);
+    unidad= _ejercicios.unidad;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
 ------***FOM05****-----
 
 CREATE OR REPLACE FUNCTION FOM05_LLENAR_DURACION() 
@@ -445,13 +764,38 @@ END
 $$ 
 language plpgsql;
 
+-- lista de criticas del usuario
+
+CREATE OR REPLACE FUNCTION FOM05_LISTA_CRITICAS_USUARIO(usu_id int) 
+RETURNS TABLE (id int, fecha Date, comentario varchar ,valoracion int ) AS
+$$
+DECLARE 
+var_r record;
+BEGIN
+for var_r in (Select * from CRITICA where CRI_ID_USUARIO = usu_id)
+
+loop
+	id:= var_r.CRI_ID;
+	fecha:= var_r.CRI_FECHA;
+	comentario:= var_r.CRI_COMENTARIO;
+	valoracion:= var_r.CRI_VALORACION;
+	
+	return next;
+	
+end loop;
+	
+	
+END 
+$$ 
+language plpgsql;
+
 --Metodo para agregar la critica a la clase
 
-CREATE OR REPLACE FUNCTION M05_AGREGAR_CRITICA( COMENTARIO CHARACTER VARYING(400),VALORACION INT, REFERENCIA_HC INT)
+CREATE OR REPLACE FUNCTION M05_AGREGAR_CRITICA( COMENTARIO CHARACTER VARYING(400),VALORACION INT, REFERENCIA_HC INT, ID_USUARIO INT)
 RETURNS VOID AS $$
 DECLARE 
 BEGIN 
-	INSERT INTO CRITICA(CRI_FECHA,CRI_COMENTARIO,CRI_VALORACION,FK_HC_ID) VALUES (current_date,COMENTARIO,VALORACION,REFERENCIA_HC);
+	INSERT INTO CRITICA(CRI_FECHA,CRI_COMENTARIO,CRI_VALORACION,FK_HC_ID,CRI_ID_USUARIO) VALUES (current_date,COMENTARIO,VALORACION,REFERENCIA_HC,ID_USUARIO);
 END $$
 LANGUAGE PLPGSQL;
 

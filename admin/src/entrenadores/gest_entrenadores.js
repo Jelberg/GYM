@@ -1,16 +1,15 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/Instruct";
+var url="http://localhost:8080/ServiciosGimnasio/BOM02_Entrenador";
 var correo_busqueda= document.getElementById("correo");
-var x=0
-window.onload = function busquedainstructor()
+
+
+window.onload = function busquedaEntrenador()
 {
     variable=localStorage.getItem("id");
-    console.log(variable);
     if (variable)
         {
-
-            var url_comple="/getInstruct?correo="+variable;
+            var url_comple="/getEntrenador?correo="+variable;
             fetch(url+url_comple)
             .then((respuesta) => 
             {            
@@ -27,25 +26,28 @@ window.onload = function busquedainstructor()
                     fila =respuesta[i];
                     for (var j = 0; j < ncampos; j++)
                     {
-                        if (j!=0)
+                        if (j!=1)
                         {
                             console.log(fila[campos[j]]);
                             switch(j) {
-                                case 1:
+                                case 2:
                                 document.getElementById('nombre').value = fila[campos[j]] +" "+fila[campos[j+1]];
                                 break;
-                                case 3:
+                                case 4:
                                 document.getElementById('fecha').value = cambiarFormato(fila[campos[j]]);
                                 break;
-                                case 4:
-                                if((fila[campos[j]]=="M"))
+                                case 5:
+                                if(fila[campos[j]]=="M")
                                 document.getElementById('masculino').checked = true
                                 else
                                 document.getElementById('femenino').checked = true;
                                 break;
-                                case 5:
+                                case 6:
                                 document.getElementById('correo').value = fila[campos[j]];
-                                break;                           
+                                break; 
+                                case 0:
+                                document.getElementById('historial').value = fila[campos[j]];
+                                break;                          
                             }
                         }
                     }
@@ -55,76 +57,6 @@ window.onload = function busquedainstructor()
             })  
         }
     localStorage.clear();
-}
-
-function ValidateEmail(mail)   
-{  
- if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))  
-  {  
-    return (true)  
-  } 
-  alert("Formato de correo invalido."); 
-    return (false);  
-    
-} 
-
-function async(params){
-    setTimeout(function correrAsync(){
-        params.fn.call(undefined, params.max)
-    }, params.tiempo);
-}
-
-function llevaratabla()
-{
-    document.location.href="./Instructores.html"
-    
-}
-
-
-function insertarInstructor()
-{
-    {
-        var sex;
-        if(document.getElementById('femenino').checked)
-        sex="f"
-        else
-        if(document.getElementById('masculino').checked)
-        sex="m"
-        if ((document.getElementById("correo").value) &&  (document.getElementById("nombre").value) && (document.getElementById("fecha").value))
-            if(validatedate(document.getElementById("fecha"))==true)
-                if(ValidateEmail(document.getElementById("correo").value)==true)
-                {
-                    var intento=0
-                    var res = document.getElementById("nombre").value.split(" ");
-                    console.log(res[0]+res[1])
-                    var url_comple="/insertaInstruct?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
-                    fetch(url+url_comple, {
-                        method: 'POST'
-                    })
-                    .then(response =>{
-                        
-                        return response.json()
-                    }).then(response =>{
-                        var fila= response;
-                        console.log(fila)
-                        if(fila.error)
-                        alert("Ya existe ese correo")
-                        else
-                        alert("ingresado correctamente")
-                        
-
-                    })
-                }
-                else 
-                alert("Correo invalido")   
-            else
-            alert("Fecha invalida")
-        else
-        alert("Debe Llenar todas las casillas")
-    }
-
-    
-    
 }
 
 function cambiarFormato(dates){
@@ -152,53 +84,111 @@ function cambiarFormato(dates){
         
         return((date.toLocaleDateString()));
     }
-function validarbusqueda()
+
+
+
+
+function ValidateEmail(mail)   
+{  
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))  
+  {  
+    return (true)  
+  } 
+  alert("Formato de correo invalido."); 
+    return (false);  
+    
+} 
+
+
+function llevaratabla()
 {
-    var url_comple="/getInstructor?correo="+x;
-    return fetch(url+url_comple)
-    .then((respuesta) => 
-    {            
-        return respuesta.json();
-    } ).then((respuesta) => 
-    {    
-        var fila= respuesta[0];
-        if (fila)
-        alert("Ya existe ese correo en la base de datos")
-    })
+    document.location.href="./Entrenadores.html"
+    
 }
 
-function actualizarInstructor()
+
+function insertarEntrenador()
+{
+    date= new Date();
+    alert(document.getElementById("fecha").value);
+   var intento = 0
+    {
+        var sex;
+        if(document.getElementById('femenino').checked)
+        sex="f"
+        else
+        if(document.getElementById('masculino').checked)
+        sex="m"
+        if ((document.getElementById("correo").value) &&  (document.getElementById("nombre").value) && (document.getElementById("fecha").value) && (document.getElementById("historial").value))
+            if(validatedate(document.getElementById("fecha"))==true)
+                if(ValidateEmail(document.getElementById("correo").value)==true)
+                {
+                    var intento=0
+                    var res = document.getElementById("nombre").value.split(" ");
+                    console.log(res[0]+res[1])
+                    var url_comple="/insertarEntrenador?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value+"&historial="+document.getElementById('historial').value;
+                    fetch(url+url_comple, {
+                        method: 'POST'
+                    })
+                    .then(response =>
+                        {
+                            
+                            return response.json()
+                        }).then(response =>{
+                            var fila= response;
+                            console.log(fila)
+                            if(fila.error)
+                            alert("Ya existe ese correo")
+                            else
+                            alert("ingresado correctamente")
+                            
+
+                        })
+                    
+                }
+                else 
+                alert("Correo invalido")   
+            else
+            alert("Fecha invalida")
+        else
+        alert("Debe Llenar todas las casillas")
+    }
+    
+}
+
+
+function actualizarEntrenador()
 {
     var sex;
     if(document.getElementById('femenino').checked)
-    sex="f"
+    sex="F"
     else
     if(document.getElementById('masculino').checked)
-    sex="m"
+    sex="M"
     if ((document.getElementById("correo").value) &&  (document.getElementById("nombre").value) && (document.getElementById("fecha").value))
         if(validatedate(document.getElementById("fecha"))==true)
             if(ValidateEmail(document.getElementById("correo").value)==true)
             {
                 var intento=0
                 var res = document.getElementById("nombre").value.split(" ");
-                console.log(res[0]+res[1])
-                var url_comple="/actualizaInstruct?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
+                var url_comple="/modificarEntrenador?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value+"&historial="+document.getElementById('historial').value;
                 fetch(url+url_comple, {
                     method: 'POST'
                 })
-                .then(response => {
-                    
-                    return response.json()
-                }).then(response =>{
-                    var fila= response;
-                    console.log(fila)
-                    if(fila.error)
-                    alert("No se ha podido modificar")
-                    else
-                    alert("Actualizado correctamente")
-                    
+                .then(response => 
+                    {
+                        
+                        return response.json()
+                    }).then(response =>{
+                        var fila= response;
+                        console.log(fila)
+                        if(fila.error)
+                        alert("No se ha podido modificar")
+                        else
+                        alert("Actualizado correctamente")
+                        
 
-                })
+                    })
             }
             else 
             alert("Correo invalido")   
@@ -209,31 +199,31 @@ function actualizarInstructor()
     
     
 }
-var p = 1
-function borrarInstruct()
+
+function borrarEntrenador()
 {
-    {
    var intento;
-    var url_comple="/eliminaInstruct?correo="+correo_busqueda.value;
+    var url_comple="/eliminarEntrenador?correo="+document.getElementById('correo').value;
     fetch(url+url_comple, {
         method: 'DELETE'
     })
-    .then(response => {
+    .then(response =>{
+        
+        return response.json()
+    }).then(response =>{
         var fila= response;
         console.log(fila)
         if(fila.error)
-        alert("Correo Incorrecto")
+        alert("No se ha podido eliminar")
         else
         {
         alert("Eliminado correctamente")
-        document.location.href="./Instructores.html";
+        
+        
         }
     })
-}
-  
     
 }
-
 
 
 function validatedate(inputText)  

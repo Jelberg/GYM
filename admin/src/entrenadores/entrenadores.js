@@ -1,10 +1,10 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/Instruct";
+var url="http://localhost:8080/ServiciosGimnasio/BOM02_Entrenador";
 var correo_busqueda= document.getElementById("text_correo");
 var boton= document.getElementById("boton_consulta");
 var variable;
-boton.addEventListener("click",buscarInstructor);
+//boton.addEventListener("click",buscarInstructor);
 
 window.onload = function mostrartabla()
 {
@@ -13,7 +13,7 @@ window.onload = function mostrartabla()
     alert(variable)
     localStorage.clear();    
     }
-    var url_comple="/getListInstruct";
+    var url_comple="/getListEntrenador";
     fetch(url+url_comple)
     .then((respuesta) => 
     {
@@ -27,7 +27,7 @@ window.onload = function mostrartabla()
        var ncampos =campos.length;
        for (var i = 0; i < ncampos; i++)
        {
-           if (i!=0)
+           if (i!=1)
            {
             contenido += "<th><font color ='white'>";
             contenido += campos[i];
@@ -38,16 +38,16 @@ window.onload = function mostrartabla()
        var nregistros = respuesta.length;
        for(var i = 0; i< nregistros; i++)
         {
-            if (i!=0)
+            if (i!=1)
             {
                 fila =respuesta[i];
                 contenido += "<tr>";
                 for (var j = 0; j < ncampos; j++)
                 {
-                    if (j!=0)
+                    if (j!=1)
                     {
                     contenido += "<td>";
-                    if (j!=3)
+                    if (j!=4)
                     contenido += fila[campos[j]];
                     else
                     {
@@ -66,42 +66,42 @@ window.onload = function mostrartabla()
 
     })
 }
-
 function cambiarFormato(dates){
-    
-        var opera1 = dates.split(' ');
-        switch(opera1[0]){
-        case "ene":
-        opera1[0]="jan"
-        break;
-        case "ago":
-        opera1[0]="aug"
-        break;
-        case "dic":
-        opera1[0]="dec"
-        break;
-        case "ene":
-        opera1[0]="jan"
-        break;
-        case "abr":
-        opera1[0]="apr"
-        break;
-        }
-        dates= opera1[0]+" "+ opera1[1]+" "+ opera1[2]
-        var date = new Date(dates);
-        
-        return((date.toLocaleDateString()));
-    }
 
-function buscarInstructor()
-{
+    var opera1 = dates.split(' ');
+    switch(opera1[0]){
+    case "ene":
+    opera1[0]="jan"
+    break;
+    case "ago":
+    opera1[0]="aug"
+    break;
+    case "dic":
+    opera1[0]="dec"
+    break;
+    case "ene":
+    opera1[0]="jan"
+    break;
+    case "abr":
+    opera1[0]="apr"
+    break;
+    }
+    dates= opera1[0]+" "+ opera1[1]+" "+ opera1[2]
+    var date = new Date(dates);
     
+    return((date.toLocaleDateString()));
+}
+
+
+
+function buscarEntrenador()
+{
     if (correo_busqueda.value!="")
     {
         var prueba = ValidateEmail(correo_busqueda.value);
         if (prueba==true) 
         {
-            var url_comple="/getInstruct?correo="+correo_busqueda.value;
+            var url_comple="/getEntrenador?correo="+correo_busqueda.value;
             fetch(url+url_comple)
             .then((respuesta) => 
             {
@@ -111,17 +111,22 @@ function buscarInstructor()
         {
         var contenido= "<link rel='stylesheet' href='../css/styles.css'><link rel='stylesheet' href='./style.css'><link rel='stylesheet' href='../css/font-awesome/css/font-awesome.min.css'><div class='row'><div class='content'><div class='w3-row' ><table class='table table-bordered table-striped'><thead ><tr style='border: 1px solid black; background-color: #008080;'>";
         var fila= respuesta[0];
-        console.log(fila)
+
         if (fila)
         {
                 var campos = Object.keys(fila);
                 var ncampos =campos.length;
                 for (var i = 0; i < ncampos; i++)
                 {
-                    if (i!=0)
+                    if (i!=1)
                     {
                         contenido += "<th><font color ='white'>";
-                        contenido += campos[i];
+                        if (j!=4)
+                        contenido += fila[campos[j]];
+                        else
+                        {
+                            contenido +=cambiarFormato( fila[campos[j]] );
+                        }
                         contenido += "</font></th>";
                     }
                 }
@@ -135,15 +140,10 @@ function buscarInstructor()
                             contenido += "<tr>";
                             for (var j = 0; j < ncampos; j++)
                             {
-                                if (j!=0)
+                                if (j!=1)
                                 {
                                 contenido += "<td>";
-                                if (j!=3)
                                 contenido += fila[campos[j]];
-                                else
-                                {
-                                    contenido +=cambiarFormato( fila[campos[j]] );
-                                }
                                 contenido += "</td>";
                                 }
                             }
@@ -180,10 +180,9 @@ function buscarInstructor()
   }  
 
 function crud( guardar ){
-    var id = guardar.parentNode.parentNode.parentNode.childNodes[4];
-    console.log(id.innerHTML);
+    var id = guardar.parentNode.parentNode.parentNode.childNodes[5];
     localStorage.setItem("id",id.innerHTML);
-    document.location.href="./gest_Instructores2.html";
+    document.location.href="./gest_Entrenadores2.html";
 }
     
 
