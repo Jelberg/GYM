@@ -54,5 +54,6 @@ export class EjercicioRutinaPage {
     this.navCtrl.push(TabsLogPage);
   }
 
+  
 
 }
