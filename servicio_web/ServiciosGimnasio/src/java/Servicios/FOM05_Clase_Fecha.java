@@ -146,7 +146,7 @@ public class FOM05_Clase_Fecha {
         
         /**
          * 
-         * @param id_hc 
+         * @param id 
          * @return datos de la clase en base al id de horario clase
          */
         
