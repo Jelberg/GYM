@@ -182,7 +182,7 @@ function buscarEntrenador()
 function crud( guardar ){
     var id = guardar.parentNode.parentNode.parentNode.childNodes[5];
     localStorage.setItem("id",id.innerHTML);
-    document.location.href="./gest_Entrenadores.html";
+    document.location.href="./gest_Entrenadores2.html";
 }
     
 
