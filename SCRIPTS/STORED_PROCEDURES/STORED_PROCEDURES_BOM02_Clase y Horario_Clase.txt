@@ -48,7 +48,7 @@ CREATE OR REPLACE FUNCTION bo_m02_modifica_clase(nombreclase character varying, 
    AS $$
 DECLARE
 BEGIN
-    UPDATE CLASE SET (CLA_NOMBRE = nombreclase, CLA_DESCRIPCION = descripcion)
+    UPDATE CLASE SET CLA_NOMBRE = nombreclase, CLA_DESCRIPCION = descripcion
     WHERE CLA_NOMBRE = nombreclase;
 END; $$
   LANGUAGE plpgsql;
