@@ -29,6 +29,7 @@ export class ClaseParticularPage {
     public alertCtrl: AlertController,
     public userService: UserServiceProvider
   ){  
+    // con el let se optiene el parametro
       let id= this.navParams.get('navParametros');
       console.log(id);
       this._id=id;
@@ -36,6 +37,9 @@ export class ClaseParticularPage {
      this.cargarClass();
   }
   
+  /**
+   * Metodo trae la informacion particular de la clase
+   */
   public cargarClass():void{
     let url = "FOM05_Clase_Fecha/getClaseP?id="+this._id;
     this.userService.getDato(url).subscribe(data => {    
@@ -52,10 +56,32 @@ export class ClaseParticularPage {
   )
   }
 
+
+/**
+ * Metodo para agregar la participacion del usuario
+ */
+  public agregarParticipacion():void{
+    //IMPORTANTE CAMBIAR DEL URL usuario = 1 , este debe de ser la id instanciada
+    let url = "FOM05_Reserva/addReserva?usuario=1&horario="+this._id;
+    this.userService.getDato(url).subscribe(data => {    
+        let i: number = 0;
+        while ( i < data.length ){
+        this.class[i] = data[i];
+        i++;}
+      console.log(this.class[0]);      
+    },
+    (error) =>{
+      console.error(error);
+    }
+  )
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClaseParticularPage');
   }
+
   presentAlert() {
+    this.agregarParticipacion();
     const alert = this.alertCtrl.create({
       title: 'Clase',
       subTitle: 'Clase Agregada Satisfactoriamente',
