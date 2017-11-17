@@ -54,7 +54,7 @@ public class Rutina {
     }
 
     /**
-     * @param _nombre the_nombre to set
+     * @param nombre the_nombre to set
      */
     public void setNombre( String nombre ) {
         this._nombre = nombre;
@@ -68,7 +68,7 @@ public class Rutina {
     }
 
     /**
-     * @param _dia the _dia to set
+     * @param dia
      */
     public void setDia( String dia) {
         this._dia = dia;

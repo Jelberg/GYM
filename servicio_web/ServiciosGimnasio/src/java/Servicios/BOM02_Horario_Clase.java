@@ -125,7 +125,7 @@ public class BOM02_Horario_Clase {
     
     /**
      * Funcion que es llamada cuando el admin desea insertar un horario de una clase.
-     * @param id_horario_clase Identificador de la clase.
+     * 
      * @param fecha Fecha de la clase (dd/mm/aaaa).
      * @param dia Día de la clase (lunes, martes, ... ).
      * @param capacidad Capacidad de alumnos en la clase.
