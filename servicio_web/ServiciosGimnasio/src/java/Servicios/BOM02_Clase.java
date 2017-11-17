@@ -146,7 +146,6 @@ public class BOM02_Clase {
     
     /**
      * Funcion que es llamada cuando el admin desea insertar una clase.
-     * @param id_clase Identificador de la clase.
      * @param nombre Nombre de la clase.
      * @param descripcion Descripción de la clase.
      * @return Devuelve un json con mensaje del estatus de la peticion.
@@ -171,7 +170,6 @@ public class BOM02_Clase {
                 st.setString(2, descripcion);
                 st.executeQuery();
             
-
             response.put("data", "Se insertaron las clases");
         }
         catch (SQLException e){
@@ -184,7 +182,6 @@ public class BOM02_Clase {
             Sql.bdClose(conn);
             return gson.toJson(response);
         }
-
     }
     
     /**
@@ -258,7 +255,6 @@ public class BOM02_Clase {
             Sql.bdClose(conn);
             return gson.toJson(response);
         }
-        
     } 
     
 }
