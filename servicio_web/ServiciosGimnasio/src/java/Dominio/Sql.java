@@ -38,9 +38,9 @@ public class Sql {
     /**
      * Metodo que realiza la conexion con la base de datos
      * @return Conexion hecha a la base de datos
-     * @throws ClassNotFoundException Si la clase no es encontrada
-     * @throws SQLException Problemas con sql
-     * @throws Exception
+     * 
+     * 
+     * 
      * @see Connection
      * @see Statement
      */
@@ -70,7 +70,7 @@ public class Sql {
      * @param query
      * @return Tabla que representa la consulta del query
      * @throws SQLException Error en SQL
-     * @throws Exception
+     * 
      * @see ResultSet
      */
     public ResultSet sql (String query) throws SQLException , NullPointerException {
@@ -98,7 +98,7 @@ public class Sql {
      * @param query
      * @return boolean
      * @throws SQLException Error en SQL
-     * @throws Exception
+     * 
      * @see boolean
      */
     public boolean sqlNoReturn ( String query ) throws SQLException {

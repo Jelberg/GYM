@@ -9,6 +9,7 @@ import Dominio.Clase;
 import Dominio.Sql;
 import Dominio.Horario_Clase;
 import Excepciones.ParameterNullException;
+import Validaciones.ValidationWS;
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -58,6 +60,10 @@ public class FOM05_Clase_Fecha {
     {
         try
         {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("fecha", fecha);
+            }});
+            
             String query = "Select * from FOM05_CLASES_FECHA('"+fecha+"')";
             jsonArray = new ArrayList<>();
             Statement st = _conn.createStatement();
@@ -89,6 +95,11 @@ public class FOM05_Clase_Fecha {
         }
     } 
 
+    /**
+     * Metodo que lista todas las clases
+     * @return
+     * @throws SQLException 
+     */
     
         @GET
     
@@ -135,7 +146,7 @@ public class FOM05_Clase_Fecha {
         
         /**
          * 
-         * @param id_hc 
+         * @param id 
          * @return datos de la clase en base al id de horario clase
          */
         
@@ -144,6 +155,11 @@ public class FOM05_Clase_Fecha {
         @Produces("application/json")
         public String getHorario_Clase(@QueryParam("id") int id){    
         try{     
+            
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("id", id);
+            }});
+            
             String query = "SELECT * FROM m05_get_horario_clase(?)";
             jsonA = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);

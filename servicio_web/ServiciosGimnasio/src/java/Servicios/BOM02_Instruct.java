@@ -99,7 +99,7 @@ private Connection conn = Sql.getConInstance();
     
     /**
      * Funcion que recibe como parametro el correo del instructor 
-     * @param correo del cual se quiere 
+     * 
      * @return Devuelve todos los datos del instructor
      */
     @GET
@@ -146,10 +146,10 @@ private Connection conn = Sql.getConInstance();
      * Funcion que permite ingresar instructor
      * @param nombre
      * @param apellido
-     * @param fecha_nac
+     * @param fecha
      * @param sexo
      * @param correo
-     * @param jsonMedida 
+     * 
      * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
      */
   
@@ -181,10 +181,10 @@ private Connection conn = Sql.getConInstance();
             response.put("data", "Se inserto el instructor");
         }
         catch (SQLException e){
-            response.put("error1", e.getMessage());
+            response.put("error", e.getMessage());
         }
         catch (ParameterNullException e) {
-            response.put("error2", e.getMessage());
+            response.put("error", e.getMessage());
         }
         finally {
             Sql.bdClose(conn);

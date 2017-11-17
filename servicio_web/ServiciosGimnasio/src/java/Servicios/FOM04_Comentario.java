@@ -52,9 +52,10 @@ public class FOM04_Comentario {
     
         try{
 
-            String query = "SELECT * FROM fo_m04_get_progresoscompartidos(1)";
+            String query = "SELECT * FROM fo_m04_get_progresoscompartidos(?)";
             jsonArray = new ArrayList<>();
-            PreparedStatement st = conn.prepareStatement(query);                       
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt( 1 , usuario_id );
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
@@ -83,7 +84,7 @@ public class FOM04_Comentario {
     /**
      * Funcion que recibe como parametro el id del progreso correspondiente a medidas
      * y el id usuario
-     * @param idProgresom del cual se quiere saber los comentarios
+     * @param idprogresom del cual se quiere saber los comentarios
      * @param idusuario del cual pertenece el progreso.
      * @return Devuelve los comentarios correspondientes a ese progreso de medidas
      */
@@ -175,7 +176,11 @@ public class FOM04_Comentario {
     
     /**
      * Funcion que permite ingresar comentarios a un progreso
-     * @param jsonMedida 
+     * @param id_usuariocomentario
+     * @param id_usuarioprogreso
+     * @param mensaje
+     * @param id_progresoM
+     * @param id_progresoP
      * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
      */
     @POST
