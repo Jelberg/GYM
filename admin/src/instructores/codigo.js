@@ -183,7 +183,7 @@ function crud( guardar ){
     var id = guardar.parentNode.parentNode.parentNode.childNodes[4];
     console.log(id.innerHTML);
     localStorage.setItem("id",id.innerHTML);
-    document.location.href="./gest_Instructores.html";
+    document.location.href="./gest_Instructores2.html";
 }
     
 
