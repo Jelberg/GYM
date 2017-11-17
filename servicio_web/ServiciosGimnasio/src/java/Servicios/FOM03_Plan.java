@@ -155,7 +155,7 @@ public class FOM03_Plan {
         /** Funcion que inserta un nuevo plan a un usuario
          * @param idUsuario se ingresa el id del usuario
          * @param nombre se indica el nombre del plan
-         * @param descripcion se especifica la descripcion del plan
+         * @param descrip se especifica la descripcion del plan
          * @return Retorna un string de confirmacion de plan agregado
          */
         @GET
