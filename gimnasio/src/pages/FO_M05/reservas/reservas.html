@@ -28,10 +28,10 @@
                         </ion-avatar>
                     </ion-col>-->
                     <ion-col col-12>
-                        <h2>{{reservas._nombreclase}}</h2>
-                        <h3>{{reservas._instructor}}</h3>
-                        <p>{{reservas._fecha}}</p>
-                        <p> {{reservas._dia}} </p>
+                        <h2>{{reservas.nombreclase}}</h2>
+                        <h3>{{reservas.instructor}}</h3>
+                        <p>{{reservas.fecha}}</p>
+                        <p> {{reservas.dia}} </p>
          
                     </ion-col>
                 </ion-row>
@@ -39,7 +39,7 @@
         </ion-item>
         <ion-item-options side="right ">
             <button ion-button color="danger" icon-only
-            (click)="presentAlert(reservas._id,i)"><ion-icon name="trash"></ion-icon>
+            (click)="presentAlert(reservas.id,i)"><ion-icon name="trash"></ion-icon>
             </button>
         </ion-item-options>
         </ion-item-sliding>

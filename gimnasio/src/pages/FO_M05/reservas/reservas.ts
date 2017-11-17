@@ -63,7 +63,7 @@ export class ReservasPage {
         while ( i < data.length ){
         this.reservas[i] = data[i];
         i++;}
-      console.log(this.reservas[0]);
+      //console.log(this.reservas[0]);
       
     },
     (error) =>{
