@@ -100,7 +100,7 @@ public class FOM04_Comentario {
     /**
      * Funcion que recibe como parametro el id del progreso correspondiente a medidas
      * y el id usuario
-     * @param idProgresom del cual se quiere saber los comentarios
+     * @param idprogresom del cual se quiere saber los comentarios
      * @param idusuario del cual pertenece el progreso.
      * @return Devuelve los comentarios correspondientes a ese progreso de medidas
      */

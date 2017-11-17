@@ -44,7 +44,7 @@ public class FOM05_Critica {
     
     /**
      * 
-     * @return Consulta que devuelve todas las criticas hechas con respecto la id horario_clase
+     * @return Consulta que devuelve todas las criticas hechas por el usuario
      * @throws SQLException 
      */
     
@@ -58,7 +58,7 @@ public class FOM05_Critica {
     {
         try
         {
-            String query = "Select * from FOM05_LISTA_CRITICAS("+referencia+")";
+            String query = "Select * from FOM05_LISTA_CRITICAS_USUARIO("+referencia+")";
             jsonArray = new ArrayList<>();
             Statement st = _conn.createStatement();
             ResultSet rs = st.executeQuery(query);  
@@ -93,7 +93,7 @@ public class FOM05_Critica {
     /**
      * 
      * @param referencia  ID de la tabla horarario de clase
-     * @param fecha  fecha que se hace la critica
+     * @param idu  id del usuario
      * @param comentario   comentario de la critica
      * @param valoracion  valoracion del 0 al 10
      * @return AGREGADO si la critica fue agregada
@@ -107,13 +107,13 @@ public class FOM05_Critica {
     @Produces("application/json")
     
     public String insertarCritica(@QueryParam("referencia") int referencia,
-                                  @QueryParam("fecha") String fecha,
+                                 @QueryParam("idu") int idu,
                                   @QueryParam("comentario") String comentario,
-                                  @QueryParam("valoracion") String valoracion) throws SQLException
+                                  @QueryParam("valoracion") int valoracion) throws SQLException
     {
         try
         {
-            String query = "Select * from m05_agregar_critica('"+fecha+"','"+comentario+"', "+valoracion+","+referencia+")";
+            String query = "Select * from m05_agregar_critica('"+comentario+"', "+valoracion+","+referencia+","+idu+")";
             
             Statement st = _conn.createStatement();
             ResultSet rs = st.executeQuery(query);  

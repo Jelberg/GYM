@@ -14,7 +14,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.ws.rs.DELETE;
@@ -29,7 +31,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author Laura
  */
-@Path("BOM02_Entrenador")
+@Path("/BOM02_Entrenador")
 public class BOM02_Entrenador {
     
     private Connection conn = Sql.getConInstance();
@@ -63,6 +65,11 @@ public class BOM02_Entrenador {
                 jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
                 jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
                 jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
+                Date dte;
+                Date dte1=rs.getDate("fechanac");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                String formattedDate = formatter.format(dte1);
+                dte  = formatter.parse(formattedDate);
                 jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fechanac"));
                 jsonArray.get(jsonArray.size() - 1).setSexo(rs.getString("sexo"));
                 jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
@@ -84,9 +91,7 @@ public class BOM02_Entrenador {
         }
     
     }
-      /**
-     * Funcion que recibe como parametro el correo del entrenador 
-     * @param correo del cual se quiere 
+     /**
      * @return Devuelve todos los datos del entrenador
      */
     @GET
@@ -95,7 +100,7 @@ public class BOM02_Entrenador {
     public String getListaEntrenador(){
          try{
             
-            String query = "SELECT * FROM entrenador;";
+            String query = "SELECT ent_id, ent_nombre, ent_apellido, ent_fecha_nac, ent_sexo, ent_correo, ent_historial FROM entrenador;";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
@@ -109,7 +114,7 @@ public class BOM02_Entrenador {
                 jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("ENT_FECHA_NAC"));
                 jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("ENT_SEXO")));
                 jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("ENT_CORREO"));
-                 jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("ENT_HISTORIAL"));
+                 jsonArray.get(jsonArray.size() - 1).setHistorial(rs.getString("ENT_HISTORIAL"));
                 /*byte[] img = rs.getBytes("ENT_FOTO");
                 ImageIcon image = new ImageIcon(img);
                 Image im = image.getImage();
@@ -134,7 +139,7 @@ public class BOM02_Entrenador {
      * Funcion que permite ingresar un entrenador
      * @param nombre
      * @param apellido
-     * @param fecha_nac
+     * @param fecha
      * @param sexo
      * @param correo
      * @param historial
@@ -250,7 +255,7 @@ public class BOM02_Entrenador {
                 put("correo", correo );
                 put("historial", historial );
             }});
-             String query = "select * from bo_m02_actualizar_entrenador('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+Character.toString(sexo)+"', '"+correo+"')";
+             String query = "select * from bo_m02_actualizar_entrenador('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+Character.toString(sexo)+"', '"+correo+"' , '"+historial+"')";
             PreparedStatement st = conn.prepareStatement(query); 
 
                 st.executeQuery();

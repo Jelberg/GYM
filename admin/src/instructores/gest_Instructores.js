@@ -1,16 +1,15 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
 var url="http://localhost:8080/ServiciosGimnasio/Instruct";
-var correo_busqueda= document.getElementById("text_correo");
-
-
+var correo_busqueda= document.getElementById("correo");
+var x=0
 window.onload = function busquedainstructor()
 {
     variable=localStorage.getItem("id");
     console.log(variable);
     if (variable)
         {
-            alert="jeje"
+
             var url_comple="/getInstruct?correo="+variable;
             fetch(url+url_comple)
             .then((respuesta) => 
@@ -36,10 +35,10 @@ window.onload = function busquedainstructor()
                                 document.getElementById('nombre').value = fila[campos[j]] +" "+fila[campos[j+1]];
                                 break;
                                 case 3:
-                                document.getElementById('fecha').value = fila[campos[j]];
+                                document.getElementById('fecha').value = cambiarFormato(fila[campos[j]]);
                                 break;
                                 case 4:
-                                if(fila[campos[j]]=="m")
+                                if((fila[campos[j]]=="M"))
                                 document.getElementById('masculino').checked = true
                                 else
                                 document.getElementById('femenino').checked = true;
@@ -63,10 +62,17 @@ function ValidateEmail(mail)
  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))  
   {  
     return (true)  
-  }  
-    return (false)  
-}  
+  } 
+  alert("Formato de correo invalido."); 
+    return (false);  
+    
+} 
 
+function async(params){
+    setTimeout(function correrAsync(){
+        params.fn.call(undefined, params.max)
+    }, params.tiempo);
+}
 
 function llevaratabla()
 {
@@ -77,6 +83,92 @@ function llevaratabla()
 
 function insertarInstructor()
 {
+    {
+        var sex;
+        if(document.getElementById('femenino').checked)
+        sex="f"
+        else
+        if(document.getElementById('masculino').checked)
+        sex="m"
+        if ((document.getElementById("correo").value) &&  (document.getElementById("nombre").value) && (document.getElementById("fecha").value))
+            if(validatedate(document.getElementById("fecha"))==true)
+                if(ValidateEmail(document.getElementById("correo").value)==true)
+                {
+                    var intento=0
+                    var res = document.getElementById("nombre").value.split(" ");
+                    console.log(res[0]+res[1])
+                    var url_comple="/insertaInstruct?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
+                    fetch(url+url_comple, {
+                        method: 'POST'
+                    })
+                    .then(response =>{
+                        
+                        return response.json()
+                    }).then(response =>{
+                        var fila= response;
+                        console.log(fila)
+                        if(fila.error)
+                        alert("Ya existe ese correo")
+                        else
+                        alert("ingresado correctamente")
+                        
+
+                    })
+                }
+                else 
+                alert("Correo invalido")   
+            else
+            alert("Fecha invalida")
+        else
+        alert("Debe Llenar todas las casillas")
+    }
+
+    
+    
+}
+
+function cambiarFormato(dates){
+    
+        var opera1 = dates.split(' ');
+        switch(opera1[0]){
+        case "ene":
+        opera1[0]="jan"
+        break;
+        case "ago":
+        opera1[0]="aug"
+        break;
+        case "dic":
+        opera1[0]="dec"
+        break;
+        case "ene":
+        opera1[0]="jan"
+        break;
+        case "abr":
+        opera1[0]="apr"
+        break;
+        }
+        dates= opera1[0]+" "+ opera1[1]+" "+ opera1[2]
+        var date = new Date(dates);
+        
+        return((date.toLocaleDateString()));
+    }
+function validarbusqueda()
+{
+    var url_comple="/getInstructor?correo="+x;
+    return fetch(url+url_comple)
+    .then((respuesta) => 
+    {            
+        return respuesta.json();
+    } ).then((respuesta) => 
+    {    
+        var fila= respuesta[0];
+        if (fila)
+        alert("Ya existe ese correo en la base de datos")
+    })
+}
+
+function actualizarInstructor()
+{
     var sex;
     if(document.getElementById('femenino').checked)
     sex="f"
@@ -84,43 +176,64 @@ function insertarInstructor()
     if(document.getElementById('masculino').checked)
     sex="m"
     if ((document.getElementById("correo").value) &&  (document.getElementById("nombre").value) && (document.getElementById("fecha").value))
-        if(validatedate==true)
-    {
-        var intento=0
-        var res = document.getElementById("nombre").value.split(" ");
-        console.log(res[0]+res[1])
-        var url_comple="/insertaInstruct?nombre="+res[0]+"&apellido="+res[1]+"&fecha_nac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
-        fetch(url+url_comple, {
-            method: 'POST'
-        })
-        .then(response => intento=1)
-    }else
-    alert("Fecha invalida")
+        if(validatedate(document.getElementById("fecha"))==true)
+            if(ValidateEmail(document.getElementById("correo").value)==true)
+            {
+                var intento=0
+                var res = document.getElementById("nombre").value.split(" ");
+                console.log(res[0]+res[1])
+                var url_comple="/actualizaInstruct?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
+                fetch(url+url_comple, {
+                    method: 'POST'
+                })
+                .then(response => {
+                    
+                    return response.json()
+                }).then(response =>{
+                    var fila= response;
+                    console.log(fila)
+                    if(fila.error)
+                    alert("No se ha podido modificar")
+                    else
+                    alert("Actualizado correctamente")
+                    
+
+                })
+            }
+            else 
+            alert("Correo invalido")   
+        else
+        alert("Fecha invalida")
     else
     alert("Debe Llenar todas las casillas")
     
     
 }
-
+var p = 1
 function borrarInstruct()
 {
+    {
    var intento;
-    var url_comple="/eliminaInstruct?correo="+document.getElementById('correo').value;
+    var url_comple="/eliminaInstruct?correo="+correo_busqueda.value;
     fetch(url+url_comple, {
         method: 'DELETE'
     })
-    .then(response => intento=1)
-    if(intento==1){
-    localStorage.setItem("id2","Se ha eliminado correctamente");    
-    document.location.href="./Instructores.html";
-    }
-    else
-    {
-    localStorage.setItem("id2","No se ha encontrado el correo buscar en la lista a continuacion");
-    document.location.href="./Instructores.html";
-    }
+    .then(response => {
+        var fila= response;
+        console.log(fila)
+        if(fila.error)
+        alert("Correo Incorrecto")
+        else
+        {
+        alert("Eliminado correctamente")
+        document.location.href="./Instructores.html";
+        }
+    })
+}
+  
     
 }
+
 
 
 function validatedate(inputText)  
@@ -128,8 +241,7 @@ function validatedate(inputText)
 var dateformat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;  
 // Match the date format through regular expression  
 if(inputText.value.match(dateformat))  
-{  
-document.form1.text1.focus();  
+{    
 //Test which seperator is used '/' or '-'  
 var opera1 = inputText.value.split('/');  
 var opera2 = inputText.value.split('-');  
@@ -152,8 +264,7 @@ var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];
 if (mm==1 || mm>2)  
 {  
 if (dd>ListofDays[mm-1])  
-{  
-alert('Invalid date format!');  
+{   
 return false;  
 }  
 }  
@@ -166,20 +277,17 @@ lyear = true;
 }  
 if ((lyear==false) && (dd>=29))  
 {  
-alert('Invalid date format!');  
 return false;  
 }  
 if ((lyear==true) && (dd>29))  
-{  
-alert('Invalid date format!');  
+{    
 return false;  
 }  
-}  
+}
+return true;  
 }  
 else  
-{  
-alert("Invalid date format!");  
-document.form1.text1.focus();  
+{      
 return false;  
 }  
 }
