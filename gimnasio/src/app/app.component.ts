@@ -40,6 +40,7 @@ export class MyApp {
       {titulo: "perfil", component: PerfilPage, icon: "person"},
       {titulo: "amigos", component: AmigosPage, icon: "people"},
       {titulo: "Progreso", component: SeleccionarProgresoPage, icon: "stats"},
+      {titulo: "Plan", component: WorkoutPlansPage, icon: "list"},
       { titulo: "Rutinas", component: RutinaPage, icon: "body"},
       {titulo: 'Clases',component: ListaClasesPage, icon: 'bicycle'},
       {titulo: 'Reservas',component:ReservasPage, icon: 'calendar'} ,
