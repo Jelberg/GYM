@@ -139,7 +139,7 @@ function crud( guardar ){
     var id = guardar.parentNode.parentNode.parentNode.childNodes[0];
     console.log(id.innerHTML);
     localStorage.setItem("id",id.innerHTML);
-    document.location.href="./gest_Clases.html";
+    document.location.href="./gest_Clases2.html";
 }
     
 
