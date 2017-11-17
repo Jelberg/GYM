@@ -58,7 +58,9 @@ public class FOM03_Plan {
          public String getPlan( @QueryParam( "idUsuario" ) int idUsuario )
          {
             try{
-                      
+                     ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                        put("idUsuario", idUsuario);
+                    }}); 
                 String query = "Select * from FO_M03_get_plan('"+idUsuario+"')";
                 this.jsonArray = new ArrayList<>();
                 System.out.println (query);
@@ -69,13 +71,11 @@ public class FOM03_Plan {
                 
                 while( rs.next() )
                 {
-                    ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                        put("idUsuario", idUsuario);
-                    }});
+                    
                     Plan result = new Plan();
                     result.setId(rs.getInt("idPlan"));
-                 //   result.setNombre(rs.getString("nombre"));
-                   // result.setDescripcion(rs.getString("descrip"));
+                 result.setNombre(rs.getString("nombre"));
+                   result.setDescripcion(rs.getString("descrip"));
                     listaPlanes.add(result);
                 }
                 return gson.toJson( listaPlanes );
