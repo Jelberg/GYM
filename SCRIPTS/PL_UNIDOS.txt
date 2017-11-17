@@ -1,0 +1,658 @@
+-------***********************************************************---------------------
+-------/                                                         /---------------------
+-------/            CREATE DATA BASE AND USER                   /---------------------
+-------/                                                         /---------------------
+-------***********************************************************--------------------
+
+-----------------FIN CREAR LA BASE DE DATOS CON USER---------------
+
+CREATE 	USER 	 gymucab 	PASSWORD 'gymucab';
+ALTER 	ROLE	 gymucab 	WITH SUPERUSER;
+CREATE 	DATABASE gimnasiobd 	WITH OWNER gymucab;
+
+
+-------***********************************************************---------------------
+-------/                                                         /---------------------
+-------/                        CREATES                          /---------------------
+-------/                                                         /---------------------
+-------***********************************************************--------------------
+
+
+ -------------CREATES TABLAS DE LA BASE DE DATOS ORDENADA-----------
+
+CREATE TABLE USUARIO(
+	USU_ID                  	SERIAL ,
+	USU_CEDULA                  	INTEGER NOT NULL,
+	USU_NOMBRE                	VARCHAR(10) NOT NULL,
+	USU_APELLIDO               	VARCHAR(10) NOT NULL,
+	USU_SEXO           		CHAR NOT NULL,
+	USU_FECHA_NAC          		DATE NOT NULL,
+	USU_TELEFONO			VARCHAR(15) NOT NULL,
+	USU_ESTATURA			INTEGER,
+	USU_FOTO			BYTEA,
+	USU_CORREO			VARCHAR(30) NOT NULL,
+CONSTRAINT PK_USU_ID PRIMARY KEY (USU_ID)
+);
+
+CREATE TABLE USUARIO_AMIGO(
+  	AMI_USUARIO INTEGER,
+  	AMI_AMIGO INTEGER,
+  CONSTRAINT USUARIO_AMIGO_AMI_AMIGO_FKEY FOREIGN KEY (AMI_AMIGO) REFERENCES USUARIO (USU_ID) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT USUARIO_AMIGO_AMI_USUARIO_FKEY FOREIGN KEY (AMI_USUARIO) REFERENCES USUARIO (USU_ID) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+
+CREATE TABLE ENTRENADOR(
+	ENT_ID serial not null,
+	ENT_nombre character varying (50) not null,
+	ENT_apellido character varying (50) not null,
+	ENT_fecha_nac date not null,
+	ENT_sexo char not null,
+	ENT_correo character varying (100) not null,
+	ENT_historial character varying (200) not null,
+	ENT_foto bytea,
+CONSTRAINT PK_ENT_ID PRIMARY KEY (ENT_ID)	
+);
+
+CREATE TABLE USUARIO_ENTRENADOR(
+	FK_USUARIO		INTEGER NOT NULL,
+	FK_ENTRENADOR	INTEGER NOT NULL,
+CONSTRAINT PK_UE_ID PRIMARY KEY (FK_USUARIO, FK_ENTRENADOR),
+CONSTRAINT FK_USUARIO  FOREIGN KEY(FK_USUARIO) REFERENCES USUARIO(USU_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT FK_ENTRENADOR  FOREIGN KEY(FK_ENTRENADOR) REFERENCES ENTRENADOR(ENT_ID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE TURNO(
+	TUR_ID serial not null,
+	TUR_DIA character varying (15) not null,
+CONSTRAINT PK_TUR_ID PRIMARY KEY (TUR_ID)	
+);
+
+CREATE TABLE TURNO_ENTRENADOR(
+	TE_ID                           SERIAL NOT NULL,
+	TE_FECHA           		DATE NOT NULL,
+	TE_TANDA			CHARACTER VARYING(10) NOT NULL,
+	TE_HORA_INICIO   		TIME NOT NULL,
+	TE_HORA_FIN                 	TIME NOT NULL,
+	FK_TURNO                  	INTEGER,
+    FK_ENTRENADOR				INTEGER,
+CONSTRAINT FK_TURNO  FOREIGN KEY(FK_TURNO) REFERENCES TURNO(TUR_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_ENTRENADOR  FOREIGN KEY(FK_ENTRENADOR) REFERENCES ENTRENADOR(ENT_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_TE_ID PRIMARY KEY (TE_ID)
+);
+
+CREATE TABLE PLAN(	
+	PLA_ID	SERIAL NOT NULL,	
+	PLA_NOMBRE	VARCHAR(30) NOT NULL,    
+	PLA_DESCRIPCION	VARCHAR(100),   
+	FK_USUARIO	INTEGER,   
+CONSTRAINT FK_USUARIO_PLAN  FOREIGN KEY(FK_USUARIO) REFERENCES USUARIO(USU_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_PLA_ID PRIMARY KEY (PLA_ID)
+);
+
+CREATE TABLE RUTINA(
+	RUT_ID                          SERIAL NOT NULL,
+	RUT_NOMBRE           		VARCHAR(10) NOT NULL,
+	RUT_DIA              		VARCHAR(10),
+	RUT_ESTADO			BOOLEAN,
+	FK_USUARIO                   	INTEGER,
+	FK_USUARIO_ENTRENADOR           INTEGER,
+	FK_PLAN                         INTEGER,
+CONSTRAINT FK_USUARIO_RUTINA  FOREIGN KEY(FK_USUARIO) REFERENCES USUARIO(USU_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+--CONSTRAINT FK_USUARIO_ENTRENADOR_RUT  FOREIGN KEY(FK_USUARIO_ENTRENADOR) REFERENCES ENTRENADOR(ENT_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT NOMBRE_RUTINA_UNICO UNIQUE(RUT_NOMBRE, FK_USUARIO, RUT_DIA),
+CONSTRAINT FK_RUTINA_PLAN FOREIGN KEY (FK_PLAN) REFERENCES PLAN (PLA_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_RUT_ID PRIMARY KEY (RUT_ID)
+);
+
+CREATE TABLE EJERCICIO(
+	EJE_ID                           SERIAL NOT NULL,
+	EJE_NOMBRE           		VARCHAR(20) NOT NULL,
+	EJE_GRUPO_MUSCULAR			VARCHAR(20) NOT NULL,
+CONSTRAINT PK_EJE_ID PRIMARY KEY (EJE_ID)
+);
+
+CREATE TABLE EQUIPO(
+	EQU_ID                           SERIAL NOT NULL,
+	EQU_NOMBRE           		VARCHAR(20) NOT NULL,
+CONSTRAINT PK_EQU_ID PRIMARY KEY (EQU_ID)
+);
+
+CREATE TABLE MAQUINA(
+	MAQ_ID                           SERIAL NOT NULL,
+	MAQ_NOMBRE           		VARCHAR(20) NOT NULL,
+CONSTRAINT PK_MAQ_ID PRIMARY KEY (MAQ_ID)
+);
+
+CREATE TABLE EJERCICIO_MAQUINA_EQUIPO(
+	EME_ID                           SERIAL NOT NULL,
+	FK_MAQUINA           		INTEGER,
+	FK_EJERCICIO              	INTEGER NOT NULL,
+	FK_EQUIPO           	 INTEGER,
+	FK_RUTINA                INTEGER,
+CONSTRAINT FK_MAQ  FOREIGN KEY(FK_MAQUINA) REFERENCES MAQUINA(MAQ_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT FK_EJE  FOREIGN KEY(FK_EJERCICIO) REFERENCES EJERCICIO(EJE_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT FK_EQU  FOREIGN KEY(FK_EQUIPO) REFERENCES EQUIPO(EQU_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT FK_RUT  FOREIGN KEY(FK_RUTINA) REFERENCES RUTINA(RUT_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_EME_ID PRIMARY KEY (EME_ID, FK_EJERCICIO)
+);
+ ALTER TABLE EJERCICIO_MAQUINA_EQUIPO ADD COLUMN EME_TIPO BOOLEAN;
+
+CREATE TABLE TRABAJO_RUTINA(
+	TR_ID                           SERIAL NOT NULL,
+	TR_FECHA           		DATE NOT NULL,
+	TR_DESCANSO             DECIMAL,
+	TR_DURACION             INTEGER,
+	TR_DISTANCIA            INTEGER,
+	TR_NIVEL                INTEGER,
+	FK_EJE_MAQ_EQU1          INTEGER NOT NULL,
+	FK_EJE_MAQ_EQU2          INTEGER NOT NULL,
+CONSTRAINT FK_EJE_MAQ_EQU_RUT  FOREIGN KEY(FK_EJE_MAQ_EQU1, FK_EJE_MAQ_EQU2) REFERENCES EJERCICIO_MAQUINA_EQUIPO(EME_ID, FK_EJERCICIO) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_TR_ID PRIMARY KEY (TR_ID)
+);
+
+CREATE TABLE SERIE(
+	SER_ID                 SERIAL NOT NULL,
+	SER_PESO           	   DECIMAL NOT NULL,
+	SER_UNIDAD             VARCHAR(2),
+	SER_REPETICION         INTEGER,
+	FK_TRABAJO_RUTINA      INTEGER NOT NULL,
+CONSTRAINT FK_TRABAJO_RUTINA_SER  FOREIGN KEY(FK_TRABAJO_RUTINA) REFERENCES TRABAJO_RUTINA(TR_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_SER_ID PRIMARY KEY (SER_ID,FK_TRABAJO_RUTINA)
+);
+
+CREATE TABLE INSTRUCTOR
+(
+ 	INS_ID                  	SERIAL NOT NULL,
+ 	INS_NOMBRE                 	CHARACTER VARYING(10) NOT NULL,
+ 	INS_APELLIDO                	CHARACTER VARYING(10) NOT NULL,
+ 	INS_FECHA_NAC   DATE NOT NULL,
+ 	INS_SEXO            	CHARACTER(1) NOT NULL,
+ 	INS_CORREO                 	CHARACTER VARYING(20) NOT NULL,
+ 	INS_FOTO            	BYTEA,
+ CONSTRAINT INSTRUCTOR_PKEY PRIMARY KEY (INS_ID)
+);
+ 
+CREATE TABLE CLASE
+(
+ 	CLA_ID                 	SERIAL NOT NULL,
+ 	CLA_NOMBRE                	CHARACTER VARYING(10) NOT NULL,
+ 	CLA_DESCRIPCION       	CHARACTER VARYING(300) NOT NULL,
+ CONSTRAINT CLASE_PKEY PRIMARY KEY (CLA_ID)
+);
+ 
+CREATE TABLE HORARIO_CLASE(
+	HC_ID                           SERIAL NOT NULL,
+	HC_FECHA           		DATE NOT NULL,
+	HC_DIA			CHARACTER VARYING(10) NOT NULL,
+	HC_CAPACIDAD              	INTEGER  NOT NULL,
+	HC_HORA_INICIO   		TIME NOT NULL,
+	HC_HORA_FIN                 	TIME NOT NULL,
+	HC_STATUS			CHARACTER(1) NOT NULL,
+	HC_DURACION               	TIME,
+	FK_USUARIO                   	INTEGER,
+	FK_INSTRUCTOR           	INTEGER ,
+	FK_CLASE            		INTEGER ,
+CONSTRAINT FK_USUARIO  FOREIGN KEY(FK_USUARIO) REFERENCES USUARIO(USU_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_INSTRUCTOR  FOREIGN KEY(FK_INSTRUCTOR) REFERENCES INSTRUCTOR(INS_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_CLASE_USUARIO  FOREIGN KEY(FK_CLASE) REFERENCES CLASE(CLA_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_HC_ID PRIMARY KEY (HC_ID)
+);
+
+CREATE TABLE RESERVA_CLASE(
+	RC_ID                           SERIAL NOT NULL,
+	FK_HC_ID           		INTEGER,
+	FK_USUARIO           		INTEGER,
+CONSTRAINT FK_USUARIO  FOREIGN KEY(FK_USUARIO) REFERENCES USUARIO(USU_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT FK_HC_ID  FOREIGN KEY(FK_HC_ID) REFERENCES HORARIO_CLASE(HC_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_RC_ID PRIMARY KEY (RC_ID)
+);
+
+CREATE TABLE CRITICA(
+	CRI_ID			SERIAL NOT NULL,
+	CRI_FECHA		DATE NOT NULL,
+	CRI_COMENTARIO		CHARACTER VARYING(400),
+	CRI_VALORACION		INTEGER,
+	FK_HC_ID		INTEGER,
+CONSTRAINT FK_HC_ID FOREIGN KEY (FK_HC_ID) REFERENCES HORARIO_CLASE(HC_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT PK_CRI_ID PRIMARY KEY (CRI_ID)
+);
+
+CREATE TABLE MEDIDA(
+	med_id		serial  not null,
+	med_tipo	varchar(20) unique not null,
+CONSTRAINT pk_med_id PRIMARY KEY (med_id)
+);
+
+CREATE TABLE PROGRESO_MEDIDA(
+	pm_id		serial not null,
+	pm_medida	integer,
+	pm_fecha	date not null,
+	fk_usuario	integer,
+	fk_medida	integer,
+CONSTRAINT pk_pm_id PRIMARY KEY (pm_id),
+CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_medida  FOREIGN KEY(fk_medida) REFERENCES medida(med_id) ON DELETE CASCADE ON UPDATE CASCADE	
+);
+
+CREATE TABLE PROGRESO_PESO(
+	pp_id		serial not null,
+	pp_peso		integer,	
+	pp_fecha	date not null,
+	fk_usuario	integer not null,
+CONSTRAINT pk_pp_id PRIMARY KEY (pp_id),
+CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE COMENTARIO(
+	com_id		serial not null,
+	com_mensaje	varchar(80),
+	fk_usuario	integer not null,
+	fk_pro_peso	integer,
+	fk_pro_medida	integer,
+CONSTRAINT pk_com_id PRIMARY KEY (com_id),
+CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_pro_peso  FOREIGN KEY(fk_pro_peso) REFERENCES progreso_peso(pp_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_pro_medida FOREIGN KEY(fk_pro_medida) REFERENCES progreso_medida(pm_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE INTERACCION_COMENTARIO(
+	id		serial not null,
+	mensaje	varchar(140),
+	fk_usuario	integer not null,
+	fk_progreso	integer not null,
+	
+CONSTRAINT pk_interac PRIMARY KEY (id),
+CONSTRAINT fk_usuario  FOREIGN KEY(fk_usuario) REFERENCES usuario(usu_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_com  FOREIGN KEY(fk_progreso) REFERENCES comentario(com_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE RESERVA(
+	RES_ID					SERIAL NOT NULL,
+	RES_FECHA_INI			DATE NOT NULL,	
+	RES_FECHA_FIN			DATE NOT NULL,
+	FK_USUARIO				INTEGER NOT NULL,
+	FK_ENTRENADOR			INTEGER NOT NULL,
+CONSTRAINT PK_RES_ID PRIMARY KEY (RES_ID),
+CONSTRAINT FK_USUARIO  FOREIGN KEY(FK_USUARIO,FK_ENTRENADOR) REFERENCES USUARIO_ENTRENADOR(FK_USUARIO,FK_ENTRENADOR) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE MENSAJE(
+	MES_ID					SERIAL NOT NULL,
+	MES_MENSAJE				VARCHAR(250) NOT NULL,	
+	FK_USUARIO				INTEGER NOT NULL,
+	FK_ENTRENADOR			INTEGER NOT NULL,
+CONSTRAINT PK_MES_ID PRIMARY KEY (MES_ID),
+CONSTRAINT FK_USUARIO  FOREIGN KEY(FK_USUARIO,FK_ENTRENADOR) REFERENCES USUARIO_ENTRENADOR(FK_USUARIO,FK_ENTRENADOR) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE PROGRESO_RUTINA(
+	PR_ID		SERIAL NOT NULL,
+	PR_PROGRESO		VARCHAR(50) NOT NULL,	
+	PR_EVALUACION		VARCHAR(50) NOT NULL,
+	FK_RUTINA	INTEGER NOT NULL,
+CONSTRAINT PK_PR_ID PRIMARY KEY (PR_ID),
+CONSTRAINT FK_RUTINA  FOREIGN KEY(FK_RUTINA) REFERENCES RUTINA(RUT_ID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ -----------FIN DE CREATES TABLAS DE LA BASE DE DATOS ORDENADA----------
+
+--------- INICIO ALTER-------
+ALTER TABLE CRITICA
+ADD COLUMN CRI_ID_USUARIO INTEGER;
+
+-------***********************************************************---------------------
+-------/                                                         /---------------------
+-------/             STORED PROCEDURES                           /---------------------
+-------/                                                         /---------------------
+-------***********************************************************--------------------
+------*****BOM01*****-----
+
+------*****BOM01*****-----
+
+------*****FOM01*****-----
+
+------***FOM03*****-----
+
+------***FOM05****-----
+
+CREATE OR REPLACE FUNCTION FOM05_LLENAR_DURACION() 
+RETURNS TRIGGER AS $$
+
+DECLARE 
+HORA_INICIO TIME;
+HORA_FIN TIME;
+HORA	 TIME;
+ID 	 INTEGER;
+
+BEGIN
+
+	SELECT HC_ID, HC_HORA_INICIO, HC_HORA_FIN INTO ID, HORA_INICIO, HORA_FIN
+	FROM HORARIO_CLASE ORDER BY HC_ID DESC LIMIT 1; 
+ 
+	HORA = HORA_FIN - HORA_INICIO;
+	
+	UPDATE HORARIO_CLASE SET HC_DURACION=HORA WHERE HC_ID=ID;
+	
+	RETURN NEW;
+END $$ 
+language plpgsql;
+
+
+
+--AGREGAR USUARIO PARA QUE PARTICIPE EN LA CLASE
+CREATE OR REPLACE FUNCTION M05_AGREGAR_PARTICIPACION(ID_USUARIO INTEGER, ID_HC INTEGER)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	UPDATE HORARIO_CLASE 
+	SET FK_USUARIO=ID_USUARIO 
+	WHERE HC_ID = ID_HC ;
+END $$
+LANGUAGE PLPGSQL;
+
+--ELIMINAR USUARIO DE LA PARTICIPACION
+CREATE OR REPLACE FUNCTION M05_ELIMINAR_PARTICIPACION(ID_USUARIO INT, ID_CLASE_HORARIO INT)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	UPDATE HORARIO_CLASE SET FK_USUARIO=NULL WHERE FK_USUARIO=ID_USUARIO AND HC_ID=ID_CLASE_HORARIO;
+END $$
+LANGUAGE PLPGSQL;
+
+--LISTA DE CLASES RESERVADAS
+
+CREATE OR REPLACE FUNCTION M05_LISTAR_RESERVAS(ID_USUARIO INT)
+RETURNS TABLE (ID_HC INT , NOMBRE VARCHAR, INSTRUCTOR VARCHAR, FECHA DATE, DIA VARCHAR) AS  $$
+DECLARE 
+var_r record;
+BEGIN
+	for var_r in (SELECT HC_ID, CLA_NOMBRE, INS_NOMBRE, HC_FECHA, HC_DIA
+			FROM HORARIO_CLASE, INSTRUCTOR, CLASE, USUARIO
+			WHERE USU_ID = ID_USUARIO AND
+			      USU_ID = FK_USUARIO AND CLA_ID=FK_CLASE AND FK_INSTRUCTOR = INS_ID)
+
+	loop
+	ID_HC:= var_r.HC_ID;
+	NOMBRE:= var_r.CLA_NOMBRE;
+	INSTRUCTOR:= var_r.INS_NOMBRE;
+	FECHA:= var_r.HC_FECHA;
+	DIA:=var_r.HC_DIA;
+	
+	
+	return next;
+	
+end loop;
+END 
+$$
+LANGUAGE PLPGSQL;
+
+-- FUNCION QUE DEVUELVE CLASES
+
+CREATE OR REPLACE FUNCTION M05_LISTA_CLASES() 
+RETURNS TABLE (id int, fecha Date, clase varchar ,instructor varchar, descripcion varchar, capacidad int ) AS
+$$
+DECLARE 
+var_r record;
+BEGIN
+for var_r in (Select HC_ID, HC_FECHA, CLA_NOMBRE, INS_NOMBRE, CLA_DESCRIPCION, HC_CAPACIDAD 
+		from CLASE, HORARIO_CLASE, INSTRUCTOR 
+		where CLA_ID=FK_CLASE AND INS_ID = FK_INSTRUCTOR)
+
+loop
+	id:= var_r.HC_ID;
+	fecha:= var_r.HC_FECHA;
+	clase:= var_r.CLA_NOMBRE;
+	instructor:= var_r.INS_NOMBRE;
+	descripcion:=var_r.CLA_DESCRIPCION;
+	capacidad:= var_r.HC_CAPACIDAD;
+	
+	return next;
+	
+end loop;
+	
+	
+END 
+$$ 
+language plpgsql;
+
+
+
+--FUNCIONES PARA CRITICA
+
+-- Metodo para traer todas las criticas de esa clase
+
+CREATE OR REPLACE FUNCTION FOM05_LISTA_CRITICAS(referencia_hc int) 
+RETURNS TABLE (id int, fecha Date, comentario varchar ,valoracion int ) AS
+$$
+DECLARE 
+var_r record;
+BEGIN
+for var_r in (Select * from CRITICA where FK_HC_ID = referencia_hc)
+
+loop
+	id:= var_r.CRI_ID;
+	fecha:= var_r.CRI_FECHA;
+	comentario:= var_r.CRI_COMENTARIO;
+	valoracion:= var_r.CRI_VALORACION;
+	
+	return next;
+	
+end loop;
+	
+	
+END 
+$$ 
+language plpgsql;
+
+--Metodo para agregar la critica a la clase
+
+CREATE OR REPLACE FUNCTION M05_AGREGAR_CRITICA( COMENTARIO CHARACTER VARYING(400),VALORACION INT, REFERENCIA_HC INT)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	INSERT INTO CRITICA(CRI_FECHA,CRI_COMENTARIO,CRI_VALORACION,FK_HC_ID) VALUES (current_date,COMENTARIO,VALORACION,REFERENCIA_HC);
+END $$
+LANGUAGE PLPGSQL;
+
+--Metodo para eliminar critica
+
+CREATE OR REPLACE FUNCTION M05_ELIMINAR_CRITICA(ID_CRITICA INT)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	DELETE FROM CRITICA WHERE CRI_ID=ID_CRITICA;
+END $$
+LANGUAGE PLPGSQL;
+
+--lista las clases en las que ya se participo y no se han comentado EN LOS ULTIMOS 30 DIAS
+
+CREATE OR REPLACE FUNCTION M05_LISTA_CLASES_PARTICIPADAS(id int)
+RETURNS TABLE (fecha Date, clase varchar, instructor_nombre varchar,instructor_apellido varchar, id_hc int) AS $$
+DECLARE 
+var_r record;
+BEGIN 
+     for var_r in (Select HC_ID, HC_FECHA, CLA_NOMBRE, INS_NOMBRE, INS_APELLIDO
+     from HORARIO_CLASE , CLASE , INSTRUCTOR , USUARIO , CRITICA 
+     where
+     FK_USUARIO = ID and 
+     USU_ID = FK_USUARIO and 
+     INS_ID = FK_INSTRUCTOR and
+     CLA_ID = FK_CLASE AND 
+	--CRI_ID_USUARIO != 4 and 
+     FK_HC_ID != HC_ID AND
+     HC_FECHA BETWEEN CAST (CURRENT_DATE-30 AS DATE) AND CAST (CURRENT_DATE AS DATE)
+     GROUP BY HC_ID, HC_FECHA, CLA_NOMBRE, INS_NOMBRE, INS_APELLIDO
+     )
+loop
+	instructor_nombre:= var_r.INS_NOMBRE;
+	fecha:= var_r.HC_FECHA;
+	instructor_apellido:= var_r.INS_APELLIDO;
+	clase:= var_r.CLA_NOMBRE;
+	id_hc:= var_r.HC_ID;
+	
+	return next;
+	
+end loop;
+	
+
+END $$
+LANGUAGE PLPGSQL;
+
+--CONSULTA DE CLASES POR FECHA
+CREATE OR REPLACE FUNCTION FOM05_CLASES_FECHA(fecha Date) 
+RETURNS TABLE (id int, nombre varchar, descripcion varchar) AS
+$$
+DECLARE 
+
+var_r record;
+
+BEGIN
+
+for var_r in (Select * from CLASE where cla_id in (Select fk_clase from Horario_Clase where hc_fecha=fecha))
+
+loop
+	id:= var_r.cla_id;
+	nombre:= var_r.cla_nombre;
+	descripcion:= var_r.cla_descripcion;
+	
+	return next;
+	
+end loop;
+	
+	
+END 
+$$ 
+language plpgsql;
+
+------ CONSULTA DE RESERVA
+
+CREATE OR REPLACE FUNCTION FOM05_CONSULTAR_RESERVA(usuario int) 
+RETURNS TABLE (id int, fechainicio Date, fechafin Date, username int, entrenador int) AS
+$$
+DECLARE 
+
+var_r record;
+
+BEGIN
+for var_r in (Select * from RESERVA where fk_usuario=usuario)
+
+loop
+	id:= var_r.res_id;
+	fechainicio:= var_r.res_fecha_ini;
+	fechafin:= var_r.res_fecha_fin;
+	username:= var_r.fk_usuario;
+	entrenador:= var_r.fk_entrenador;
+	
+	return next;
+	
+end loop;
+	
+	
+END 
+$$ 
+language plpgsql;
+
+-- METODO PARA AGREGAR RESERVA
+CREATE OR REPLACE FUNCTION M05_AGREGAR_RESERVA(FECHAINI DATE, FECHAFIN DATE,USUARIO INT, ENTRENADOR INT)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	INSERT INTO RESERVA(RES_FECHA_INI,RES_FECHA_FIN,FK_USUARIO,FK_ENTRENADOR) VALUES (FECHAINI,FECHAFIN,USUARIO,ENTRENADOR);
+END $$
+LANGUAGE PLPGSQL;
+
+--Metodo para eliminar RESERVA
+
+CREATE OR REPLACE FUNCTION M05_ELIMINAR_RESERVA(RESERVA_ID INT)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	DELETE FROM RESERVA WHERE RES_ID=RESERVA_ID;
+END $$
+LANGUAGE PLPGSQL;
+
+--Consulta la clase en particular en base a la id 
+
+CREATE OR REPLACE FUNCTION m05_get_horario_clase(id int)
+  RETURNS TABLE(nombreclase character varying, instructor character varying, fecha date, 
+		dia character varying, capacidad int, hora_inicio time, hora_fin time, descripcion varchar)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT CLA_Nombre, INS_Nombre, HC_fecha, HC_dia, HC_capacidad, HC_hora_inicio, HC_hora_fin, CLA_descripcion
+        FROM Horario_Clase, Clase, Instructor
+	WHERE  id = HC_id and fk_Clase = CLA_id and fk_Instructor=INS_id)
+   LOOP
+    nombreclase = var_r.CLA_Nombre;
+    instructor= var_r.INS_nombre;
+    fecha = var_r.HC_fecha;
+    dia = var_r.HC_dia;
+    capacidad = var_r.HC_capacidad;
+    hora_inicio = var_r.HC_hora_inicio;
+    hora_fin = var_r.HC_hora_fin;
+    descripcion = var_r.CLA_descripcion;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+----*****FOM06*****---
+
+-------***********************************************************---------------------
+-------/                                                         /---------------------
+-------/                       TRIGGERS                          /---------------------
+-------/                                                         /---------------------
+-------***********************************************************--------------------
+
+--M05
+CREATE TRIGGER FOM05_AGREGAR_DURACION AFTER INSERT ON HORARIO_CLASE FOR EACH ROW
+EXECUTE PROCEDURE FOM05_LLENAR_DURACION();
+--FIN M05
+
+
+-------***********************************************************---------------------
+-------/                                                         /---------------------
+-------/                       INSERTS                           /---------------------
+-------/                                                         /---------------------
+-------***********************************************************--------------------
+
+
+
+--USUARIO
+insert into usuario (usu_id,usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac,USU_TELEFONO,USU_ESTATURA, USU_FOTO, USU_CORREO) 
+values (1,25530426,'Alexander', 'Pront', 'F','19/08/1996','123',12,null,'mm@gmail.com');
+
+--INSTRUCTOR
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES('Pedro','Alvares','13-12-94','M','fitpedro@gmail.com',null);
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES 
+('Maria','Cardenas','13-12-94','F','marica@gmail.com',null);
+
+--CLASE
+INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Yoga','yoga master class') ;
+INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('TRX','TRX master class') ;
+INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Pilates','Pilates master class') ;
+
+--HORARIO_CLASE
+INSERT INTO HORARIO_CLASE(HC_FECHA,HC_DIA
+,HC_CAPACIDAD,HC_HORA_INICIO,HC_HORA_FIN,HC_STATUS
+,HC_DURACION,FK_USUARIO,FK_INSTRUCTOR,FK_CLASE) VALUES ('12-11-17','LUNES',20,'12:00:00','14:00:00','A',null,null,
+(SELECT INS_ID FROM INSTRUCTOR WHERE INS_NOMBRE='Pedro' LIMIT 1),
+(SELECT CLA_ID FROM CLASE WHERE CLA_NOMBRE='TRX'LIMIT 1) );
+
+INSERT INTO HORARIO_CLASE(HC_FECHA,HC_DIA
+,HC_CAPACIDAD,HC_HORA_INICIO,HC_HORA_FIN,HC_STATUS
+,HC_DURACION,FK_USUARIO,FK_INSTRUCTOR,FK_CLASE) VALUES ('12-11-17','LUNES',20,'14:00:00','16:00:00','A',null,(SELECT USU_ID FROM USUARIO LIMIT 1),
+(SELECT INS_ID FROM INSTRUCTOR WHERE INS_NOMBRE='Pedro' LIMIT 1),
+(SELECT CLA_ID FROM CLASE WHERE CLA_NOMBRE='Pilates'LIMIT 1) );
+
+INSERT INTO HORARIO_CLASE(HC_FECHA,HC_DIA
+,HC_CAPACIDAD,HC_HORA_INICIO,HC_HORA_FIN,HC_STATUS
+,HC_DURACION,FK_USUARIO,FK_INSTRUCTOR,FK_CLASE) VALUES ('12-11-17','LUNES',20,'16:00:00','18:00:00','A',null,(SELECT USU_ID FROM USUARIO where usu_id= 1 ),
+(SELECT INS_ID FROM INSTRUCTOR WHERE INS_NOMBRE='Maria' LIMIT 1),
+(SELECT CLA_ID FROM CLASE WHERE CLA_NOMBRE='TRX' LIMIT 1));
+
+
+--CRITICA       
+INSERT INTO CRITICA (CRI_FECHA,CRI_COMENTARIO,CRI_VALORACION,fk_hc_id)VALUES('12-12-12','ESTO ES UNA CRITICA',5,(SELECT HC_ID FROM HORARIO_CLASE LIMIT 1));
