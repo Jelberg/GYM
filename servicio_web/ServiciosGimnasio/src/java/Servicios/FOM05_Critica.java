@@ -107,13 +107,13 @@ public class FOM05_Critica {
     @Produces("application/json")
     
     public String insertarCritica(@QueryParam("referencia") int referencia,
-                                  @QueryParam("fecha") String fecha,
+                                 
                                   @QueryParam("comentario") String comentario,
                                   @QueryParam("valoracion") String valoracion) throws SQLException
     {
         try
         {
-            String query = "Select * from m05_agregar_critica('"+fecha+"','"+comentario+"', "+valoracion+","+referencia+")";
+            String query = "Select * from m05_agregar_critica('"+comentario+"', "+valoracion+","+referencia+")";
             
             Statement st = _conn.createStatement();
             ResultSet rs = st.executeQuery(query);  
