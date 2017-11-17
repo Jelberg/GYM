@@ -20,11 +20,11 @@
 
   <ion-list>
     <ion-item *ngFor="let clases of clases">
-    <button ion-item (click)="goToClaseParticular(clases._id,clases._nombre,clases._descripcion,clases._Instructor,clases._fecha, clases._capacidad)">
+    <button ion-item (click)="goToClaseParticular(clases._id)">
          <p>{{clases._fecha}}</p>
-         <h2>{{clases._nombre}}</h2>
-         <h3>{{clases._Instructor}}</h3>
-         <h3>{{clases._capacidad}}</h3>
+         <h1>{{clases._nombre}}</h1>
+         <h4>Instructor:{{clases._Instructor}}</h4>
+         <h4>Cupos:{{clases._capacidad}}</h4>
     </button>  
   </ion-item>
 

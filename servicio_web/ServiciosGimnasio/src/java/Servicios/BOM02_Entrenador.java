@@ -29,7 +29,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author Laura
  */
-@Path("BOM02_Entrenador")
+@Path("/BOM02_Entrenador")
 public class BOM02_Entrenador {
     
     private Connection conn = Sql.getConInstance();

@@ -47,15 +47,15 @@ public class ConfiguracionRestGimnasio extends Application{
         h.add(FOM03_Rutina.class);
         h.add(FOM05_Critica.class);
         h.add(FOM05_Clase_Fecha.class);
-<<<<<<< HEAD
+
         h.add(FOM05_Reserva.class);
-=======
+
         h.add(FOM05_ClasesSemana.class);
         h.add(FOM05_Reserva.class);
         h.add(FOM04_Progreso_Medida.class);
         h.add(FOM04_Progreso_Peso.class);
 
->>>>>>> bd10307a877eb917ac7631d46d686acc097da6e9
+
         return h;
     }
        

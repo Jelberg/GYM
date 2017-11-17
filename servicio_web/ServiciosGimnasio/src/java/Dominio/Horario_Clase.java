@@ -23,6 +23,7 @@ public class Horario_Clase {
     private int _duracion;
     private String _nombreclase;
     private String _instructor;
+    private String _descripcion;
 
     public Horario_Clase(int _id, Date _fecha, String _dia, int _capacidad, Time _horaInicio, Time _horaFin, int _status, int _duracion, String _nombreclase, String _instructor) {
         this._id = _id;
@@ -118,6 +119,14 @@ public class Horario_Clase {
 
     public void setInstructor(String _instructor) {
         this._instructor = _instructor;
+    }
+
+    public String getDescripcion() {
+        return _descripcion;
+    }
+
+    public void setDescripcion(String _descripcion) {
+        this._descripcion = _descripcion;
     }
    
     

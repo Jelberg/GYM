@@ -18,6 +18,7 @@ import { AlertController } from 'ionic-angular';
 })
 export class ListaClasesPage {
   public clases: any[]=[];
+  private id_clase: string;
   
 
   constructor(
@@ -55,6 +56,10 @@ export class ListaClasesPage {
   )
   }
 
+  returnIdClase(){
+    return this.id_clase;
+  }
+
   presentAlert() {
     const alert = this.alertCtrl.create({
       title: 'Clase',
@@ -64,9 +69,9 @@ export class ListaClasesPage {
     alert.present();
   }
 
-  goToClaseParticular(id: string ,titulo: string, descripcion: string, instructor: string, fecha:string,capacidad:string){
-    this.navCtrl.push(ClaseParticularPage,{navControler:this.navCtrl, navParametros:this.navParams, alertControler:this.alertCtrl,
-      id,titulo, descripcion, instructor, fecha,capacidad
+  goToClaseParticular(id: string ){
+   // this.userService.setId(id);
+    this.navCtrl.push(ClaseParticularPage,{ navParametros: id
     });
   }
 

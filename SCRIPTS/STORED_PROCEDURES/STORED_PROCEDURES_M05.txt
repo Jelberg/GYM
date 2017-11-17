@@ -236,3 +236,29 @@ BEGIN
 	DELETE FROM RESERVA WHERE RES_ID=RESERVA_ID;
 END $$
 LANGUAGE PLPGSQL;
+
+--Consulta la clase en particular en base a la id 
+
+CREATE OR REPLACE FUNCTION m05_get_horario_clase(id int)
+  RETURNS TABLE(nombreclase character varying, instructor character varying, fecha date, 
+		dia character varying, capacidad int, hora_inicio time, hora_fin time, descripcion varchar)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT CLA_Nombre, INS_Nombre, HC_fecha, HC_dia, HC_capacidad, HC_hora_inicio, HC_hora_fin, CLA_descripcion
+        FROM Horario_Clase, Clase, Instructor
+	WHERE  id = HC_id and fk_Clase = CLA_id and fk_Instructor=INS_id)
+   LOOP
+    nombreclase = var_r.CLA_Nombre;
+    instructor= var_r.INS_nombre;
+    fecha = var_r.HC_fecha;
+    dia = var_r.HC_dia;
+    capacidad = var_r.HC_capacidad;
+    hora_inicio = var_r.HC_hora_inicio;
+    hora_fin = var_r.HC_hora_fin;
+    descripcion = var_r.CLA_descripcion;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
