@@ -19,13 +19,13 @@ public class Horario_Clase {
     private int _capacidad;
     private Time _horaInicio;
     private Time _horaFin;
-    private int _status;
+    private String _status;
     private int _duracion;
     private String _nombreclase;
     private String _instructor;
     private String _descripcion;
 
-    public Horario_Clase(int _id, Date _fecha, String _dia, int _capacidad, Time _horaInicio, Time _horaFin, int _status, int _duracion, String _nombreclase, String _instructor) {
+    public Horario_Clase(int _id, Date _fecha, String _dia, int _capacidad, Time _horaInicio, Time _horaFin, String _status, int _duracion, String _nombreclase, String _instructor) {
         this._id = _id;
         this._fecha = _fecha;
         this._dia = _dia;
@@ -65,7 +65,7 @@ public class Horario_Clase {
         return _horaFin;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return _status;
     }
 
@@ -97,7 +97,7 @@ public class Horario_Clase {
         this._horaFin = _horaFin;
     }
 
-    public void setStatus(int _status) {
+    public void setStatus(String _status) {
         this._status = _status;
     }
 
