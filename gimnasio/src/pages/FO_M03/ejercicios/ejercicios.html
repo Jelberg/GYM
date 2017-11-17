@@ -12,20 +12,20 @@
 
 </ion-header>
 <ion-content padding>
-    <ion-title>Ejercicios por Maquina</ion-title>    
+    <ion-title *ngIf="listaEjerciciosMaquina">Ejercicios por Maquina</ion-title>    
   <ion-item-sliding *ngFor="let ejercicioM of listaEjerciciosMaquina">
     <ion-item (click)="mensaje()" detail-push>
-      <h2>{{ejercicioM._nombre}}</h2>
-      <h2>{{ejercicioM._grupomuscular}}</h2>
-      <h2>{{ejercicioM._maquina}}</h2>
+      <h2>Nombre: {{ejercicioM._nombre}}</h2>
+      <h2>Grupo Muscular: {{ejercicioM._grupomuscular}}</h2>
+      <h2>Maquina: {{ejercicioM._maquina}}</h2>
     </ion-item>
   </ion-item-sliding>
   <ion-title>Ejercicios por Equipamento</ion-title>
   <ion-item-sliding *ngFor="let ejercicioE of listaEjerciciosEquipo">
     <ion-item (click)="mensaje()" detail-push>
-      <h2>{{ejercicioE._nombre}}</h2>
+      <h2>Nombre: {{ejercicioE._nombre}}</h2>
       <h2>{{ejercicioE._grupomuscular}}</h2>
-      <h2>{{ejercicioE._equipo}}</h2>
+      <h2>{{ejercicioE._maquina}}</h2>
     </ion-item>
   </ion-item-sliding>
 </ion-content>
