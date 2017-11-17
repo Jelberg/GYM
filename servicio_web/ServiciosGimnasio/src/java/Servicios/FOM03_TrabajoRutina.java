@@ -25,7 +25,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-
+import javax.ws.rs.POST;
 /**
  *
  * @author MinervaMorales
@@ -152,20 +152,30 @@ public class FOM03_TrabajoRutina {
         }
         /**
          *Funcion que retorna la lista de ejercicios asignados por maquina 
-         * retorna un arreglo de ejercicios
+         * retorna un arreglo de ejercicios sin incluir los que ya estan asignados
+         * en la rutina
+         * @param idUsuario recibe el usuario de la rutina
+         * @param nombre recibe el nombre de la rutina
+         * @param dia recibe el dia de la rutina
+         * @throws SQLException
          */   
-         
         @GET
         @Path("/getEjerciciosMaquina")
         @Produces("application/json")
-         public String getEjerciciosMaquina() throws SQLException
+         public String getEjerciciosMaquina(@QueryParam( "idUsuario" ) int idUsuario, 
+                                           @QueryParam ( "nombre" ) String nombre,
+                                           @QueryParam ( "dia" ) String dia) throws SQLException
          {
            try
            {
-                String query = "SELECT * FROM FO_M03_get_ejercicios_maquina()";
+                String query = "SELECT * FROM FO_M03_get_ejercicios_maquina(?,?,?)";
                 jsonArray = new ArrayList<Ejercicio>();
                 PreparedStatement st = conn.prepareStatement(query);
+                st.setInt(1, idUsuario);
+                st.setString(2, nombre);
+                st.setString(3, dia);
                 ResultSet rs = st.executeQuery();
+
 
                 //La variable donde se almacena el resultado de la consulta.
                 while(rs.next())
@@ -191,17 +201,27 @@ public class FOM03_TrabajoRutina {
     
         }
     
-         
+         /**Funcion que retorna una lista de los ejercicios asignados por maquina 
+          * sin incluir los que ya han sido asignados a la rutina
+          * @param idUsuario
+          * @param nombre
+          * @param dia
+          */
         @GET
         @Path("/getEjerciciosEquipo")
         @Produces("application/json")
-         public String getEjerciciosEquipo() 
+         public String getEjerciciosEquipo(@QueryParam( "idUsuario" ) int idUsuario, 
+                                           @QueryParam ( "nombre" ) String nombre,
+                                           @QueryParam ( "dia" ) String dia) 
          {
            try
            {
-                String query = "SELECT * FROM FO_M03_get_ejercicios_equipo()";
+                String query = "SELECT * FROM FO_M03_get_ejercicios_equipo(?,?,?)";
                 jsonArray = new ArrayList<Ejercicio>();
                 PreparedStatement st = conn.prepareStatement(query);
+                st.setInt(1, idUsuario);
+                st.setString(2, nombre);
+                st.setString(3, dia);
                 ResultSet rs = st.executeQuery();
 
                 //La variable donde se almacena el resultado de la consulta.
@@ -227,4 +247,91 @@ public class FOM03_TrabajoRutina {
             }
     
         }
+         
+        @POST 
+        @Path("/setEjercicioRutina")
+        @Produces("application/json")
+         public String setEjerciciosRutina( @QueryParam( "idUsuario" ) int idUsuario, 
+                                           @QueryParam ( "nombre" ) String nombre,
+                                           @QueryParam ( "dia" ) String dia,
+                                           @QueryParam ( "ejercicio" ) String ejercicio,
+                                           @QueryParam ( "maquina" ) String maquina,
+                                           @QueryParam ( "equipo" ) String equipo)
+         {
+            try{
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("idUsuario", idUsuario);
+                put("nombre", nombre);
+                put("dia", dia);
+                put("ejercicio", ejercicio);
+                put("maquina", maquina);
+                put("equipo", equipo);
+            }});
+
+            String query = "SELECT * FROM FO_M03_set_ejercicio_rutina(?,?,?,?,?,?)";
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1, idUsuario);
+            st.setString(2, nombre);
+            st.setString(3, dia);
+            st.setString(4, ejercicio);
+            st.setString(5, maquina);
+            st.setString(6, equipo);
+            
+            ResultSet rs = st.executeQuery();
+             return gson.toJson("El ejercicio fue asignado a la rutina");
+            }
+            catch( SQLException e )
+            {
+                return e.getMessage();
+            }
+            catch ( ParameterNullException e ) 
+            {
+                return e.getMessage();
+            }
+            finally 
+            {
+                Sql.bdClose(conn);
+            }
+        }
+         
+        @GET
+        @Path("/eliminarEjercicio")
+        @Produces("application/json")
+         public String eliminarEjercicio( @QueryParam( "idUsuario" ) int idUsuario, 
+                                            @QueryParam ( "nombre" ) String nombre,
+                                            @QueryParam ( "dia" ) String dia,
+                                            @QueryParam ( "ejercicio" ) String ejercicio,
+                                            @QueryParam ( "maquina" ) String maquina,
+                                            @QueryParam ( "equipo" ) String equipo )
+
+         {
+         try{
+                      
+                String query = "Select * from FO_M03_eliminar_ejercicio(?,?,?,?,?,?)";
+               PreparedStatement st = conn.prepareStatement(query);
+                st.setInt(1, idUsuario);
+                st.setString(2, nombre);
+                st.setString(3, dia);
+                st.setString(4, ejercicio);
+                st.setString(5, maquina);
+                st.setString(6, equipo);
+                
+                ResultSet rs = st.executeQuery();
+                return gson.toJson("El ejercicio fue Eliminado");
+            }
+            catch( SQLException e )
+            {
+                return e.getMessage();
+            }
+            catch ( ParameterNullException e ) 
+            {
+                return e.getMessage();
+            }
+            finally 
+            {
+                Sql.bdClose(conn);
+            }
+        } 
+         
+         
 }

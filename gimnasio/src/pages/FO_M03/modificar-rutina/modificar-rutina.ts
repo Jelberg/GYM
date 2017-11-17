@@ -68,24 +68,6 @@ export class ModificarRutinaPage {
       });
     }
 
-  /*  alert.addInput({
-      type: 'checkbox',
-      label: 'Curl',
-      value: 'Curl de biceps',
-      checked: true
-    });
-
-    alert.addInput({
-      type: 'checkbox',
-      label: 'press',
-      value: 'Press de Banca'
-    });
-
-    alert.addInput({
-      type: 'checkbox',
-      label: 'barra',
-      value: 'Barra'
-    });*/
 
     alert.addButton('Cancelar');
     alert.addButton({
@@ -98,37 +80,6 @@ export class ModificarRutinaPage {
     });
     alert.present();
   }
-
- /* public indicarFecha() {
-    
-        let prompt = this.alertCtrl.create({
-          title: 'Registro de Trabajo',
-          message: "Ingrese la fecha:",
-          inputs: [
-            {
-              type: 'date',
-              name: 'diaRutina',
-              placeholder: 'Dia'
-            }
-          ],
-          buttons: [
-            {
-              text: 'Aceptar',
-              handler: data => {
-                console.log('Saved clicked');
-              }
-            },
-            {
-              text: 'Cancelar',
-              handler: data => {
-                console.log('Cancel clicked');
-              }
-            }
-            
-          ]
-        });
-        prompt.present();
-      }*/
 
      public cambiarRutina() {
         
