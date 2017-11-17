@@ -61,10 +61,13 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 import { ListaClasesPage } from '../pages/FO_M05/lista-clases/lista-clases';
 //FIN M05
 // M06
-import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/reservas-realizadas';
-import { HorariosEntrenadorPage} from '../pages/FO_M06/horarios-entrenador/horarios-entrenador';
-import { GestiNDeReservasPage} from '../pages/FO_M06/gesti-nde-reservas/gesti-nde-reservas';
+//import  { AsignarRutinaPage} from '../pages/FO_M06/asignar-rutina/asignar-rutina';
+import  { ChatPage} from '../pages/FO_M06/chat/chat';
+//import  { ChatEntrenadorPage} from '../pages/FO_M06/chat-entrenador/chat-entrenador';
 import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reserva';
+import { GestiNDeReservasPage} from '../pages/FO_M06/gesti-nde-reservas/gesti-nde-reservas';
+import { HorariosEntrenadorPage} from '../pages/FO_M06/horarios-entrenador/horarios-entrenador';
+import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/reservas-realizadas';
 
 //FIN M06
 
