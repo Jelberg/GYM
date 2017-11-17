@@ -71,7 +71,7 @@ export class ClaseParticularPage {
       console.log(this.class[0]);      
     },
     (error) =>{
-      console.error(error);
+      //console.error(error);
     }
   )
   }
