@@ -1,6 +1,6 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/Instruct";
+var url="http://localhost:8080/ServiciosGimnasio/BOM02_Horario_Clase";
 var correo_busqueda= document.getElementById("correo");
 var x=0
 window.onload = function busquedainstructor()
@@ -10,7 +10,7 @@ window.onload = function busquedainstructor()
     if (variable)
         {
 
-            var url_comple="/getInstruct?correo="+variable;
+            var url_comple="/getHorario_Clase?nombreclaseconsulta="+variable;
             fetch(url+url_comple)
             .then((respuesta) => 
             {            

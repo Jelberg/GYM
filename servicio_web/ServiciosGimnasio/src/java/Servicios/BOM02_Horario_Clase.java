@@ -21,15 +21,9 @@ import javax.ws.rs.QueryParam;
 import Validaciones.ValidationWS;
 import Excepciones.ParameterNullException;
 import com.google.gson.reflect.TypeToken;
-import java.lang.ProcessBuilder.Redirect.Type;
-import java.sql.Statement;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
 import java.util.Map;
 import javax.ws.rs.DELETE;
-import static javax.ws.rs.HttpMethod.POST;
 import javax.ws.rs.POST;
 
 /**
@@ -98,7 +92,7 @@ public class BOM02_Horario_Clase {
     public String getListaHorario_Clase(){
          try{
             
-            String query = "SELECT * FROM horario_clase;";
+            String query = "SELECT * FROM bo_m02_get_horarios();";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
@@ -106,16 +100,14 @@ public class BOM02_Horario_Clase {
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 jsonArray.add(new Horario_Clase());
-                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("HC_ID"));
-                jsonArray.get(jsonArray.size() - 1).setFecha(rs.getDate("HC_FECHA"));
-                jsonArray.get(jsonArray.size() - 1).setDia(rs.getString("HC_DIA"));
-                jsonArray.get(jsonArray.size() - 1).setCapacidad(rs.getInt("HC_CAPACIDAD"));
-                jsonArray.get(jsonArray.size() - 1).setHoraInicio(rs.getTime("HC_HORA_INICIO"));
-                jsonArray.get(jsonArray.size() - 1).setHoraFin(rs.getTime("HC_HORA_FIN"));
-                jsonArray.get(jsonArray.size() - 1).setStatus(rs.getString("HC_STATUS"));
-                jsonArray.get(jsonArray.size() - 1).setDuracion(rs.getInt("HC_DURACION"));
-                jsonArray.get(jsonArray.size() - 1).setNombreclase(rs.getString("fk_clase"));
-                jsonArray.get(jsonArray.size() - 1).setInstructor(rs.getString("fk_instructor"));         
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setNombreclase(rs.getString("nombreclase"));
+                jsonArray.get(jsonArray.size() - 1).setInstructor(rs.getString("instructor"));
+                jsonArray.get(jsonArray.size() - 1).setFecha(rs.getDate("fecha"));
+                jsonArray.get(jsonArray.size() - 1).setDia(rs.getString("dia"));
+                jsonArray.get(jsonArray.size() - 1).setCapacidad(rs.getInt("capacidad"));
+                jsonArray.get(jsonArray.size() - 1).setHoraInicio(rs.getTime("hora_inicio"));
+                jsonArray.get(jsonArray.size() - 1).setHoraFin(rs.getTime("hora_fin"));        
             }
             response = gson.toJson(jsonArray);
         }
@@ -215,7 +207,7 @@ public class BOM02_Horario_Clase {
     @DELETE
     @Path("/eliminaHorario_Clase")
     @Produces("application/json")
-    public String eliminaClase(@QueryParam("nombreclase") int nombreclase,
+    public String eliminaHorario_Clase(@QueryParam("nombreclase") int nombreclase,
                                  @QueryParam("instructor") int instructor,
                                  @QueryParam("fecha") Date fecha,
                                  @QueryParam("dia") String dia,
