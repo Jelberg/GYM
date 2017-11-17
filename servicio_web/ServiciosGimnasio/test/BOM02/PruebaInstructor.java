@@ -60,7 +60,7 @@ public class PruebaInstructor {
         Gson gson = new Gson();
         _claseServicios = new BOM02_Instruct();
         String respuesta;
-         respuesta = _claseServicios.insertaInstruct("Laura","Quinones","14-09-1993",("F"),"lvqp.93@gmail.com");
+         respuesta = _claseServicios.insertaInstruct("Laura","Quinones","14-09-1993","F","lvqp.93@gmail.com");
         assertNotNull( respuesta );
     }
     
@@ -69,8 +69,8 @@ public class PruebaInstructor {
         Gson gson = new Gson();
         _claseServicios = new BOM02_Instruct();
         String respuesta;
-        // respuesta = _claseServicios.ActualizaInstruct("Emilio","Romero","02-10-1990",("F"),"lvqp.93@gmail.com");
-      //  assertNotNull( respuesta );
+        respuesta = _claseServicios.actualizaInstruct("Laura","Quinones","14-09-1993","F","lvqp.93@gmail.com");
+        assertNotNull( respuesta );
     }
     
  

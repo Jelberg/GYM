@@ -60,7 +60,7 @@ public class PruebaEntrenador {
         Gson gson = new Gson();
         _claseServicios = new BOM02_Entrenador();
         String respuesta;
-         respuesta = _claseServicios.insertarEntrenador("Emilio","Romero","02-10-1990",("M"),"earp@gmail.com","Crossfit");
+         respuesta = _claseServicios.insertarEntrenador("Emilio","Romero","02-10-1990","M","earp@gmail.com","Crossfit");
         assertNotNull( respuesta );
     }
     
@@ -69,7 +69,7 @@ public class PruebaEntrenador {
         Gson gson = new Gson();
         _claseServicios = new BOM02_Entrenador();
         String respuesta;
-         respuesta = _claseServicios.actualizaInstruct("Emilio","Romero","02-10-1990",("M"),"earp@gmail.com","Crossfit");
+         respuesta = _claseServicios.actualizaInstruct("Emilio","Romero","02-10-1990","M","earp@gmail.com","Crossfit");
         assertNotNull( respuesta );
     }
     
