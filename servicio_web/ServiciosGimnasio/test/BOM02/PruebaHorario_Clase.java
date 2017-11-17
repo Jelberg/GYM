@@ -86,7 +86,7 @@ public class PruebaHorario_Clase {
         String fecha = "2017-11-11";
         String tiempo ="12:00:00";
         _horario_ClaseServicios = new BOM02_Horario_Clase();
-        String respuesta = _horario_ClaseServicios.eliminaClase( 9999,9999,Date.valueOf(fecha), "lunes",9999,Time.valueOf(tiempo),Time.valueOf(tiempo) );
+        String respuesta = _horario_ClaseServicios.eliminaHorario_Clase( 9999,9999,Date.valueOf(fecha), "lunes",9999,Time.valueOf(tiempo),Time.valueOf(tiempo) );
         assertNotNull( respuesta );
     }
     

@@ -1,10 +1,10 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/Instruct";
-var correo_busqueda= document.getElementById("text_correo");
-var boton= document.getElementById("boton_consulta");
+var url="http://localhost:8080/ServiciosGimnasio/BOM02_Clase";
+var busqueda= document.getElementById("clase_nombre");
+var boton= document.getElementById("consulta");
 var variable;
-boton.addEventListener("click",buscarInstructor);
+boton.addEventListener("click",buscarClase);
 
 window.onload = function mostrartabla()
 {
@@ -13,7 +13,7 @@ window.onload = function mostrartabla()
     alert(variable)
     localStorage.clear();    
     }
-    var url_comple="/getListInstruct";
+    var url_comple="/getListClase";
     fetch(url+url_comple)
     .then((respuesta) => 
     {
@@ -27,7 +27,7 @@ window.onload = function mostrartabla()
        var ncampos =campos.length;
        for (var i = 0; i < ncampos; i++)
        {
-           if (i!=0)
+           if ((i!=3) &&(i!=0))
            {
             contenido += "<th><font color ='white'>";
             contenido += campos[i];
@@ -38,21 +38,16 @@ window.onload = function mostrartabla()
        var nregistros = respuesta.length;
        for(var i = 0; i< nregistros; i++)
         {
-            if (i!=0)
+            if ((i!=3) &&(i!=0))
             {
                 fila =respuesta[i];
                 contenido += "<tr>";
                 for (var j = 0; j < ncampos; j++)
                 {
-                    if (j!=0)
+                    if ((j!=3) &&(j!=0))
                     {
                     contenido += "<td>";
-                    if (j!=3)
                     contenido += fila[campos[j]];
-                    else
-                    {
-                        contenido +=cambiarFormato( fila[campos[j]] );
-                    }
                     contenido += "</td>";
                     }
                 }
@@ -67,41 +62,14 @@ window.onload = function mostrartabla()
     })
 }
 
-function cambiarFormato(dates){
-    
-        var opera1 = dates.split(' ');
-        switch(opera1[0]){
-        case "ene":
-        opera1[0]="jan"
-        break;
-        case "ago":
-        opera1[0]="aug"
-        break;
-        case "dic":
-        opera1[0]="dec"
-        break;
-        case "ene":
-        opera1[0]="jan"
-        break;
-        case "abr":
-        opera1[0]="apr"
-        break;
-        }
-        dates= opera1[0]+" "+ opera1[1]+" "+ opera1[2]
-        var date = new Date(dates);
-        
-        return((date.toLocaleDateString()));
-    }
 
-function buscarInstructor()
+function buscarClase()
 {
     
-    if (correo_busqueda.value!="")
+    if (busqueda.value!="")
     {
-        var prueba = ValidateEmail(correo_busqueda.value);
-        if (prueba==true) 
         {
-            var url_comple="/getInstruct?correo="+correo_busqueda.value;
+            var url_comple="/getClase?nombre="+busqueda.value;
             fetch(url+url_comple)
             .then((respuesta) => 
             {
@@ -118,7 +86,7 @@ function buscarInstructor()
                 var ncampos =campos.length;
                 for (var i = 0; i < ncampos; i++)
                 {
-                    if (i!=0)
+                    if ((i!=3) &&(i!=0))
                     {
                         contenido += "<th><font color ='white'>";
                         contenido += campos[i];
@@ -129,21 +97,16 @@ function buscarInstructor()
                 var nregistros = respuesta.length;
                 for(var i = 0; i< nregistros; i++)
                     {
-                        
+                        if ((i!=3) &&(i!=0))
                         {
                             fila =respuesta[i];
                             contenido += "<tr>";
                             for (var j = 0; j < ncampos; j++)
                             {
-                                if (j!=0)
+                                if ((j!=3) &&(j!=0))
                                 {
                                 contenido += "<td>";
-                                if (j!=3)
                                 contenido += fila[campos[j]];
-                                else
-                                {
-                                    contenido +=cambiarFormato( fila[campos[j]] );
-                                }
                                 contenido += "</td>";
                                 }
                             }
@@ -156,35 +119,23 @@ function buscarInstructor()
                     document.getElementById("tabla").innerHTML = contenido;
             }
             else
-            alert("No se encontro el correo solicitado");
+            alert("No se encontro la clase solicitada");
 
         })
         }}else
-        alert("ERROR: No puede dejar el campo del correo vacio para una busqueda.")
+        alert("ERROR: No puede dejar el campo del nombre vacio para una busqueda.")
     }
 
 
 
 
-  
-
-  function ValidateEmail(mail)   
-  {  
-   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))  
-    {  
-      return (true)  
-    } 
-    alert("Formato de correo invalido."); 
-      return (false);  
-      
-  }  
+   
 
 function crud( guardar ){
-    var id = guardar.parentNode.parentNode.parentNode.childNodes[4];
+    var id = guardar.parentNode.parentNode.parentNode.childNodes[0];
     console.log(id.innerHTML);
     localStorage.setItem("id",id.innerHTML);
-    document.location.href="./gest_Instructores2.html";
+    document.location.href="./gest_Clases.html";
 }
     
-
 
