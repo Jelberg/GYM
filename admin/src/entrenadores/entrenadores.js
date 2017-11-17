@@ -8,8 +8,6 @@ var variable;
 
 window.onload = function mostrartabla()
 {
-    date= new Date();
-    alert(cambiarFormato(date));
     variable=localStorage.getItem("id2");
     if (variable){
     alert(variable)
@@ -49,7 +47,12 @@ window.onload = function mostrartabla()
                     if (j!=1)
                     {
                     contenido += "<td>";
+                    if (j!=4)
                     contenido += fila[campos[j]];
+                    else
+                    {
+                        contenido +=cambiarFormato( fila[campos[j]] );
+                    }
                     contenido += "</td>";
                     }
                 }
@@ -63,13 +66,36 @@ window.onload = function mostrartabla()
 
     })
 }
-function cambiarFormato(date){
-    return((date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear());
+function cambiarFormato(dates){
+
+    var opera1 = dates.split(' ');
+    switch(opera1[0]){
+    case "ene":
+    opera1[0]="jan"
+    break;
+    case "ago":
+    opera1[0]="aug"
+    break;
+    case "dic":
+    opera1[0]="dec"
+    break;
+    case "ene":
+    opera1[0]="jan"
+    break;
+    case "abr":
+    opera1[0]="apr"
+    break;
+    }
+    dates= opera1[0]+" "+ opera1[1]+" "+ opera1[2]
+    var date = new Date(dates);
+    
+    return((date.toLocaleDateString()));
 }
+
+
 
 function buscarEntrenador()
 {
-    console.log(correo_busqueda.value)
     if (correo_busqueda.value!="")
     {
         var prueba = ValidateEmail(correo_busqueda.value);
@@ -85,7 +111,7 @@ function buscarEntrenador()
         {
         var contenido= "<link rel='stylesheet' href='../css/styles.css'><link rel='stylesheet' href='./style.css'><link rel='stylesheet' href='../css/font-awesome/css/font-awesome.min.css'><div class='row'><div class='content'><div class='w3-row' ><table class='table table-bordered table-striped'><thead ><tr style='border: 1px solid black; background-color: #008080;'>";
         var fila= respuesta[0];
-        console.log(fila)
+
         if (fila)
         {
                 var campos = Object.keys(fila);
@@ -95,7 +121,12 @@ function buscarEntrenador()
                     if (i!=1)
                     {
                         contenido += "<th><font color ='white'>";
-                        contenido += campos[i];
+                        if (j!=4)
+                        contenido += fila[campos[j]];
+                        else
+                        {
+                            contenido +=cambiarFormato( fila[campos[j]] );
+                        }
                         contenido += "</font></th>";
                     }
                 }
@@ -150,7 +181,6 @@ function buscarEntrenador()
 
 function crud( guardar ){
     var id = guardar.parentNode.parentNode.parentNode.childNodes[5];
-    console.log(id.innerHTML);
     localStorage.setItem("id",id.innerHTML);
     document.location.href="./gest_Entrenadores.html";
 }

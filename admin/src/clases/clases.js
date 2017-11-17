@@ -123,7 +123,7 @@ function buscarClase()
 
         })
         }}else
-        alert("ERROR: No puede dejar el campo del correo vacio para una busqueda.")
+        alert("ERROR: No puede dejar el campo del nombre vacio para una busqueda.")
     }
 
 

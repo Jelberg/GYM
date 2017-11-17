@@ -181,10 +181,10 @@ private Connection conn = Sql.getConInstance();
             response.put("data", "Se inserto el instructor");
         }
         catch (SQLException e){
-            response.put("error1", e.getMessage());
+            response.put("error", e.getMessage());
         }
         catch (ParameterNullException e) {
-            response.put("error2", e.getMessage());
+            response.put("error", e.getMessage());
         }
         finally {
             Sql.bdClose(conn);
