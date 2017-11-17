@@ -183,8 +183,11 @@ DECLARE
    var_r    record;
 BEGIN
    FOR var_r IN(SELECT com.com_id, com.com_mensaje, usu.usu_nombre, com.com_fecha 
-   FROM comentario as com inner join usuario as usu on usu.usu_id = usuario_id and
-						com.fk_usuariopro = usu.usu_id
+   FROM comentario as com inner join usuario as usu on usu.usu_id = usuario_id and(
+						com.fk_usuario = usu.usu_id or
+						com.fk_usuario in (
+						select ami_amigo from usuario_amigo as ua
+						where ua.ami_usuario = usuario_id))
 	order by com.com_fecha DESC limit 10)
    LOOP
     mensaje = var_r.com_mensaje;
