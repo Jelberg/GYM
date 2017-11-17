@@ -129,6 +129,22 @@ function insertarInstructor()
     
 }
 
+function validarbusqueda()
+{
+    var url_comple="/getInstructor?correo="+x;
+    fetch(url+url_comple)
+    .then((respuesta) => 
+    {            
+        return respuesta.json();
+    } ).then((respuesta) => 
+    {    
+        var fila= respuesta[0];
+        if (fila)
+        return true
+        else 
+        return false
+    })
+}
 
 function actualizarInstructor()
 {

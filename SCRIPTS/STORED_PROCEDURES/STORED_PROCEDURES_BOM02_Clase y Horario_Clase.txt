@@ -21,13 +21,13 @@ END; $$
 
 ----------------------------Función que agrega una clase.
 
-CREATE OR REPLACE FUNCTION bo_m02_inserta_clase(idclase INT, 
+CREATE OR REPLACE FUNCTION bo_m02_inserta_clase( 
     nombreclase character varying,
     descripcion character varying)
 RETURNS VOID AS $$
 DECLARE 
 BEGIN 
-	INSERT INTO CLASE(CLA_ID,CLA_NOMBRE,CLA_DESCRIPCION) VALUES (idclase, nombreclase, descripcion);
+	INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ( nombreclase, descripcion);
 END $$
   LANGUAGE plpgsql;
 
