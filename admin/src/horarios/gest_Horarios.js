@@ -41,28 +41,55 @@ window.onload = function busquedainstructor()
                             console.log(fila[campos[j]]);
                             switch(j) {
                                 case 1:
-                                llenarcombobox(a,document.getElementById('fecha'),fila[campos[j]]) ;
+                                document.getElementById('fecha').value=cambiarFormato(fila[campos[j]]) ;
                                 break;
                                 case 2:
-                                document.getElementById('dia').value = cambiarFormato(fila[campos[j]]);
+                                switch(fila[campos[j]]) 
+                                {
+                                    case "lunes":
+                                    document.getElementById('dia').selectedIndex="0";
+                                    break;
+                                    case "martes":
+                                    document.getElementById('dia').selectedIndex="1";
+                                    break;
+                                    case "miercoles":
+                                    document.getElementById('dia').selectedIndex="2";
+                                    break;
+                                    case "jueves":
+                                    document.getElementById('dia').selectedIndex="3";
+                                    break;
+                                    case "viernes":
+                                    document.getElementById('dia').selectedIndex="4";
+                                    break;
+                                    case "sabado":
+                                    document.getElementById('dia').selectedIndex="5";
+                                    break;
+                                    case "domingo":
+                                    document.getElementById('dia').selectedIndex="6";
+                                    break;
+
+                                }
+                                
                                 break;
                                 case 3:
-                                document.getElementById('capacidad').value = cambiarFormato(fila[campos[j]]);
+                                document.getElementById('capacidad').value = (fila[campos[j]]);
                                 break;
                                 case 4:
-                                document.getElementById('horaini').value = cambiarFormato(fila[campos[j]]);
+                                document.getElementById('horaini').value =(fila[campos[j]]);
                                 break;
                                 case 5:
-                                document.getElementById('horafin').value = fila[campos[j]];
+                                document.getElementById('horafin').value =(fila[campos[j]]);
                                 break;  
                                 case 6:
-                                document.getElementById('duracion').value = cambiarFormato(fila[campos[j]]);
+                                document.getElementById('duracion').value = 2;
                                 break;
                                 case 7:
-                                document.getElementById('nombreclase').value = cambiarFormato(fila[campos[j]]);
+                                llenarcombobox(a,document.getElementById('clase'),fila[campos[j]]) ;
+                                a++;
                                 break;
                                 case 8:
-                                document.getElementById('instructor').value = cambiarFormato(fila[campos[j]]);
+                                llenarcombobox(b,document.getElementById('instructor'),fila[campos[j]]) 
+                                b++;
                                 break;                         
                             }
                         }
@@ -72,7 +99,6 @@ window.onload = function busquedainstructor()
             
             })  
         }
-    localStorage.clear();
 }
 
 function ValidateEmail(mail)   

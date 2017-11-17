@@ -68,7 +68,7 @@ DECLARE
 BEGIN
    FOR var_r IN(SELECT HC_id,CLA_Nombre, INS_CORREO, HC_fecha, HC_dia, HC_capacidad, HC_hora_inicio, HC_hora_fin
         FROM Horario_Clase, Clase, Instructor
-	WHERE nombreconsulta=CLA_nombre fk_Clase = CLA_id and fk_Instructor=INS_id)
+	WHERE nombreclaseconsulta=CLA_nombre and fk_Clase = CLA_id and fk_Instructor=INS_id)
    LOOP
     id = var_r.HC_id;
     nombreclase = var_r.CLA_Nombre;
@@ -117,7 +117,7 @@ DECLARE
 BEGIN
    FOR var_r IN(SELECT HC_id,CLA_Nombre, INS_CORREO, HC_fecha, HC_dia, HC_capacidad, HC_hora_inicio, HC_hora_fin
         FROM Horario_Clase, Clase, Instructor
-	WHERE ide=HC_id)
+	WHERE HC_id=id)
    LOOP
     id = var_r.HC_id;
     nombreclase = var_r.CLA_Nombre;

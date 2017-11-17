@@ -61,6 +61,7 @@ public class BOM02_Horario_Clase {
             ResultSet rs = st.executeQuery();
             while(rs.next()){
                 jsonArray.add(new Horario_Clase());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
                 jsonArray.get(jsonArray.size() - 1).setNombreclase(rs.getString("nombreclase"));
                 jsonArray.get(jsonArray.size() - 1).setInstructor(rs.getString("instructor"));
                 jsonArray.get(jsonArray.size() - 1).setFecha(rs.getDate("fecha"));
@@ -83,6 +84,45 @@ public class BOM02_Horario_Clase {
         }
     }
     
+    
+    @GET
+    @Path("/getHorario_Clase_id")
+    @Produces("application/json")
+    public String getHorario_Clase_id(@QueryParam("id") int nombreclaseconsulta){
+        
+        try{
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("id", nombreclaseconsulta);
+            }});
+            String query = "SELECT * FROM bo_m02_get_horario_clase_id(?)";
+            jsonArray = new ArrayList<>();
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1, nombreclaseconsulta);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                jsonArray.add(new Horario_Clase());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setNombreclase(rs.getString("nombreclase"));
+                jsonArray.get(jsonArray.size() - 1).setInstructor(rs.getString("instructor"));
+                jsonArray.get(jsonArray.size() - 1).setFecha(rs.getDate("fecha"));
+                jsonArray.get(jsonArray.size() - 1).setDia(rs.getString("dia"));
+                jsonArray.get(jsonArray.size() - 1).setCapacidad(rs.getInt("capacidad"));
+                jsonArray.get(jsonArray.size() - 1).setHoraInicio(rs.getTime("hora_inicio"));
+                jsonArray.get(jsonArray.size() - 1).setHoraFin(rs.getTime("hora_fin"));
+            }
+            response = gson.toJson(jsonArray);
+        }
+        catch(SQLException e) {
+            response = e.getMessage();
+        }
+        catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        finally {
+            Sql.bdClose(conn);
+            return response;
+        }
+    }
     /**
      * @return Devuelve todos los datos de los horarios de clases
      */
