@@ -5,7 +5,7 @@ var correo_busqueda= document.getElementById("nombre");
 var boton= document.getElementById("consulta");
 var variable;
 //boton.addEventListener("click",buscarInstructor);
-
+localStorage.clear();
 window.onload = function mostrartabla()
 {
     variable=localStorage.getItem("id2");
@@ -55,6 +55,7 @@ window.onload = function mostrartabla()
                     }
                     contenido += "</td>";
                     }
+                   
                 }
                 contenido += "<td class='tcenter'><a><i class='fa fa-pencil-square-o' onClick='crud(this)' aria-hidden='true'></i></a></td>";
             
@@ -116,15 +117,10 @@ function buscarHorario()
                 var ncampos =campos.length;
                 for (var i = 0; i < ncampos; i++)
                 {
-                    if (i!=1)
+                    if (i!=0)
                     {
                         contenido += "<th><font color ='white'>";
-                        if (j!=4)
-                        contenido += fila[campos[j]];
-                        else
-                        {
-                            contenido +=cambiarFormato( fila[campos[j]] );
-                        }
+                        contenido += campos[i];
                         contenido += "</font></th>";
                     }
                 }
@@ -138,12 +134,19 @@ function buscarHorario()
                             contenido += "<tr>";
                             for (var j = 0; j < ncampos; j++)
                             {
-                                if (j!=1)
+                                if (j!=0)
                                 {
                                 contenido += "<td>";
+                                if (j!=1)
                                 contenido += fila[campos[j]];
+                                else
+                                {
+                                    contenido +=cambiarFormato( fila[campos[j]] );
+                                }
                                 contenido += "</td>";
                                 }
+                                else
+                                localStorage.setItem("id",fila[campos[j]])
                             }
                             contenido += "<td class='tcenter'><a><i class='fa fa-pencil-square-o' onClick='crud(this)' aria-hidden='true' ></i></a></td>";
                         
@@ -178,8 +181,7 @@ function buscarHorario()
   }  
 
 function crud( guardar ){
-    var id = guardar.parentNode.parentNode.parentNode.childNodes[0];
-    localStorage.setItem("id",id.innerHTML);
+
     document.location.href="./gest_Horarios.html";
 }
     
