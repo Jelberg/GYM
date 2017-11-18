@@ -12,12 +12,30 @@ import java.util.ArrayList;
  *
  * @author MinervaMorales
  */
-public class Ejercicio_Maquina_Equipo implements Serializable{
+public class Ejercicio_Maquina_Equipo implements Serializable {
 
     private int id;
     private String nombre;
-    private String grupomuscular; 
-    private String equipamiento; 
+    private String grupomuscular;
+    private String equipamiento;
+    private int maquina;
+    private int equipo;
+
+    public int getMaquina() {
+        return maquina;
+    }
+
+    public void setMaquina(int maquina) {
+        this.maquina = maquina;
+    }
+
+    public int getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(int equipo) {
+        this.equipo = equipo;
+    }
 
     public String getEquipamiento() {
         return equipamiento;
@@ -26,7 +44,6 @@ public class Ejercicio_Maquina_Equipo implements Serializable{
     public void setEquipamiento(String equipamiento) {
         this.equipamiento = equipamiento;
     }
- 
 
     public int getId() {
         return id;
@@ -51,5 +68,5 @@ public class Ejercicio_Maquina_Equipo implements Serializable{
     public void setGrupomuscular(String _grupomuscular) {
         this.grupomuscular = _grupomuscular;
     }
- 
+
 }

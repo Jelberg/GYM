@@ -1,10 +1,8 @@
 var url_ej = "http://localhost:8080/ServiciosGimnasio/Ejercicio";
+var eliminarEme = "/eliminarEme";
 var getAll = "/getAll";
 var items = []
 $.get(url_ej + getAll, function (data) {
-    console.log('ejercicios', data)
-
-
     for (var j = 0; j < data.length; j++) {
         items.push(data[j]);
     }
@@ -14,13 +12,17 @@ $.get(url_ej + getAll, function (data) {
         var campos = Object.keys(fila);
         var ncampos = campos.length;
         for (var i = 0; i < ncampos; i++) {
-            if (campos[i] == 'id') {
+            if (campos[i] == 'id' || campos[i] == 'maquina' || campos[i] == 'equipo') {
                 contenido += "<th style='display:none'>";
                 contenido += campos[i];
                 contenido += "</th>";
             } else {
+                var titulo
+                if (campos[i] == 'nombre') titulo = 'Nombre'
+                if (campos[i] == 'grupomuscular') titulo = 'Grupo muscular'
+                if (campos[i] == 'equipamiento') titulo = 'Equipamiento'
                 contenido += "<th style='color:white'>";
-                contenido += campos[i];
+                contenido += titulo;
                 contenido += "</th>";
             }
         }
@@ -31,9 +33,21 @@ $.get(url_ej + getAll, function (data) {
             fila = items[i];
             contenido += "<tr>";
             var maquina = false
-            for (var j = 0; j < ncampos; j++) { 
+            for (var j = 0; j < ncampos; j++) {
                 if (campos[j] == 'id') {
                     contenido += "<td class='id' style='display:none'>";
+                    contenido += fila[campos[j]];
+                    contenido += "</td>";
+                } else if (campos[j] == 'maquina' || campos[j] == 'equipo') {
+                    contenido += "<td class='' style='display:none'>";
+                    contenido += fila[campos[j]];
+                    contenido += "</td>";
+                } else if (campos[j] == 'grupomuscular') {
+                    contenido += "<td class='grupomuscular'>";
+                    contenido += fila[campos[j]];
+                    contenido += "</td>";
+                } else if (campos[j] == 'nombre') {
+                    contenido += "<td class='nombre'>";
                     contenido += fila[campos[j]];
                     contenido += "</td>";
                 } else {
@@ -43,7 +57,7 @@ $.get(url_ej + getAll, function (data) {
                 }
 
             }
-            contenido += "<td class='tcenter'><i class='fa fa-pencil-square-o' onclick='editar(this,1)' aria-hidden='true'></i><i class='fa fa-trash' onclick='eliminar(this,0)' aria-hidden='true'></i></td>";
+            contenido += "<td class='tcenter'><i class='fa fa-pencil-square-o' onclick='editar(this,1)' aria-hidden='true'></i><i class='fa fa-trash' onclick='eliminar(this)' aria-hidden='true'></i></td>";
             contenido += "</tr>";
 
         }
@@ -52,19 +66,29 @@ $.get(url_ej + getAll, function (data) {
     }
 });
 
-function editar(e, type) { 
+function editar(e, type) {
     if (type == 1) {
-        var id = e.parentNode.parentNode.childNodes 
+        var id = e.parentNode.parentNode.childNodes
         for (var i = 0; i < id.length; i++) {
             var element = id[i];
             if (element.classList) {
+                console.log(element.classList.value)
                 if (element.classList.value == 'id') {
                     localStorage.setItem('id', Number(element.innerHTML));
-                    localStorage.setItem('edit', 'true');
-                    //window.location.href = './gest_ejercicios.html'
                 }
+                if (element.classList.value == 'nombre') {
+                    localStorage.setItem('nombre_eme', element.innerHTML);
+                }
+                if (element.classList.value == 'grupomuscular') {
+                    localStorage.setItem('grupo_eme', element.innerHTML);
+                }
+
+
             }
         }
+        localStorage.setItem('edit', 'true');
+        window.location.href = './gest_ejercicios.html'
+
     } else {
         localStorage.setItem('id', null);
         localStorage.setItem('edit', 'false');
@@ -78,7 +102,11 @@ function eliminar(e) {
         var element = id[i];
         if (element.classList) {
             if (element.classList.value == 'id') {
-                console.log('Elimino ID: ', element.innerHTML)
+                $.post(url_ej + eliminarEme + '?id=' + Number(element.innerHTML))
+                    .done(function (data) {
+                        location.reload();
+                    });
+
             }
         }
     }
