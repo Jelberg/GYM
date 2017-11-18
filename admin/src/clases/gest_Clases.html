@@ -96,11 +96,11 @@
 
             <div class="w3-section">
               <label>Nombre:</label>
-              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Nombre">
+              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Nombre" id="nombre">
             </div>
             <div class="w3-section">
               <label>Descripción:</label>
-              <textarea class="w3-input w3-border" style="resize:none" type="text" required name="Descripcion"></textarea>
+              <textarea class="w3-input w3-border" style="resize:none" type="text" required name="Descripcion" id="descripcio"></textarea>
             </div>
             <div class="w3-section">
             </div>
@@ -111,9 +111,9 @@
         <div class="w3-padding-64 w3-center">
           <div class="w3-padding-32 w3-center">
             <div class="w3-left-align w3-padding-large">
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Insertar</button>
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Modificar</button>
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Eliminar</button>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton" onclick="insertarClase()">Insertar</button>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom w3-disabled saveButton" onclick="actualizarClase()">Modificar</button>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom w3-disabled saveButton" onclick="borrarClase()">Eliminar</button>
               <a  href="./Clases.html">
                 <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Consultar</button>
               </a>
@@ -149,6 +149,7 @@
   </script>
    <script src="../asset/js/jquery.min.js"></script>
    <script src="../asset/js/bootstrap.min.js"></script>
+   <script src="gest_Clases.js"></script>
 </body>
 
 </html>

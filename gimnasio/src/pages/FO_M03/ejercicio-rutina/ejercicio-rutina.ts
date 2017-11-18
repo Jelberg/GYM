@@ -54,5 +54,46 @@ export class EjercicioRutinaPage {
     this.navCtrl.push(TabsLogPage);
   }
 
+  public agregarSerie()
+  {
+    let prompt = this.alertCtrl.create({
+      title: 'Agregar serie',
+      inputs: [
+        {
+          name: 'Peso',
+          placeholder: 'Peso'
+        },
+        {
+          name: 'unidad',
+          placeholder: 'unidad'
+        },
+        {
+          name: 'repeticion',
+          placeholder: 'Repeticiones'
+        }
+        ,
+        {
+          name: 'descanso',
+          placeholder: 'descanso (min)'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: data => {
+            console.log('Saved clicked');
+          }
+        }       
+      ]
+    });
+    prompt.present();
+  }
+
 
 }

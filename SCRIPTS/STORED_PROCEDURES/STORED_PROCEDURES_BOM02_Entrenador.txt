@@ -27,8 +27,8 @@ END; $$
 
 --------------------Funcion que inserta un entrenador--------------------
 
-CREATE OR REPLACE FUNCTION bo_m02_insertar_entrenador(nombre, apellido,
- fechanac, sexo, correo, historial)
+CREATE OR REPLACE FUNCTION bo_m02_insertar_entrenador(nombre character varying, apellido character varying,
+ fecha_nac character varying, sexo char, correo character varying, historial character varying)
 RETURNS VOID AS $$
 DECLARE 
 BEGIN 
@@ -49,7 +49,7 @@ CREATE OR REPLACE FUNCTION bo_m02_actualizar_entrenador(
     DECLARE
     BEGIN
         UPDATE entrenador
-        SET ent_nombre = nombre , ent_apellido = apellido, ent_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ent_sexo = sexo, ent_historial = historial;
+        SET ent_nombre = nombre , ent_apellido = apellido, ent_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ent_sexo = sexo, ent_historial = historial
  	where ent_correo = correo;
     END; $$
 LANGUAGE plpgsql;
@@ -67,7 +67,7 @@ LANGUAGE plpgsql;
 
 --------Este agrega un turno al entrenador---------------------------------
 
-CREATE OR REPLACE FUNCTION bo_m02_insertar_turno(id_entrenador in, id_turno int)
+CREATE OR REPLACE FUNCTION bo_m02_insertar_turno(id_entrenador int, id_turno int)
 RETURNS VOID AS $$
 DECLARE 
 BEGIN 

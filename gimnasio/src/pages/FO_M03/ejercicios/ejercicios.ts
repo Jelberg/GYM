@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 
-import  { UserServiceProvider } from '../../../providers/user-service/user-service';
-
+import { UserServiceProvider } from '../../../providers/user-service/user-service';
+import { ModificarRutinaPage } from '../../FO_M03/modificar-rutina/modificar-rutina';
 /**
  * Generated class for the EjerciciosPage page.
  *
@@ -39,7 +39,8 @@ export class EjerciciosPage {
   
   public getEjerciciosMaquina()
   {
-    let urlPeticion: string = "FOM03_TrabajoRutina/getEjerciciosMaquina";
+    let urlPeticion: string = "FOM03_TrabajoRutina/getEjerciciosMaquina?idUsuario="+this.idUsuario
+                                                  +"&nombre="+this.nombreRut+"&dia="+this.diaRut;
     this.userService.getDato( urlPeticion ).subscribe( response => {
       this.listaEjerciciosMaquina=response;
       console.log(this.listaEjerciciosMaquina);
@@ -47,7 +48,8 @@ export class EjerciciosPage {
   }
   public getEjerciciosEquipo()
   {
-    let urlPeticion: string = "FOM03_TrabajoRutina/getEjerciciosEquipo";
+    let urlPeticion: string = "FOM03_TrabajoRutina/getEjerciciosEquipo?idUsuario="+this.idUsuario
+                                                  +"&nombre="+this.nombreRut+"&dia="+this.diaRut;
     this.userService.getDato( urlPeticion ).subscribe( response => {
       this.listaEjerciciosEquipo=response;
       console.log(this.listaEjerciciosEquipo);
@@ -59,13 +61,46 @@ export class EjerciciosPage {
   }
 
   
-  mensaje(){
-    let toast = this.toastCtrl.create({
-      message: 'Ejercicio añadido',
-      duration: 1000,
-      position: 'middle'
+  setEjercicio(ejercicio: string, maquina: string, equipo: string)
+  {
+      this.agregarEjercicioRutina(ejercicio,maquina,equipo);
+      let toast = this.toastCtrl.create({
+        message: 'Ejercicio añadido',
+        duration: 1000,
+        position: 'middle'
+      });
+      toast.present();
+    
+  }
+
+  public agregarEjercicioRutina(ejercicio: string, maquina: string, equipo: string):void 
+  {
+    
+      let urlPeticion: string = "FOM03_TrabajoRutina/setEjercicioRutina?idUsuario="+this.idUsuario
+                                                                        +"&nombre="+this.nombreRut
+                                                                        +"&dia="+this.diaRut
+                                                                        +"&ejercicio="+ejercicio
+                                                                        +"&maquina="+maquina
+                                                                        +"&equipo="+equipo;
+      this.userService.post2(urlPeticion);
+      this.mostrarEjercicioAgregado();
+      this.goToModificar();
+
+  }
+
+
+  public mostrarEjercicioAgregado() {
+    const alert = this.alertCtrl.create({
+      title: 'El ejercicio fue agregado con exito',
+      buttons: ['Aceptar']
     });
-    toast.present();
+    alert.present();
+   // this.goToModificar();
+  }
+
+  public goToModificar()
+  {
+    this.navCtrl.push(ModificarRutinaPage, {nombre: this.nombreRut, dia: this.diaRut, idUsuario: this.idUsuario});
   }
 
 }

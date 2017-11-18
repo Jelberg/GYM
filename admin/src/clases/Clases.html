@@ -95,73 +95,13 @@
             <a href="./gest_Clases.html">
                 <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Agregar Clase</button>
             </a>
-            <a href="">
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Consultar Clase</button>
+            <a>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton" onclick="buscarClase()">Consultar Clase</button>
             </a>
             <label>Introduzca Nombre de la Clase:</label>
-            <input class="w3-input w3-border" style="width:30%;" type="text" required name="NombreClase">
+            <input class="w3-input w3-border" style="width:30%;" type="text" required name="NombreClase" id="clase_nombre">
         </div>
-        <div class="row">
-            <div class="content">
-                <div class="w3-row ">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-
-                                <th class="tablehead">Nombre</th>
-                                <th class="tablehead">Descripción</th>
-                                <th class="tablehead">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-
-                                <td>Yoga</td>
-                                <td>Clase de relajación</td>
-                                <td class="tcenter">
-                                    <a href="./gest_Clases.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>TRX</td>
-                                <td>Boxeo leve</td>
-                                <td class="tcenter">
-                                    <a href="./gest_Clases.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>Insanitys</td>
-                                <td>No sé quejesto</td>
-                                <td class="tcenter">
-                                    <a href="./gest_Clases.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>Estiramientos</td>
-                                <td>Clase para estirar y relajar los músculos</td>
-                                <td class="tcenter">
-                                    <a href="./gest_Clases.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div id="tabla">
         </div>
 
 
@@ -190,6 +130,7 @@
     </script>
     <script src="../asset/js/jquery.min.js"></script>
     <script src="../asset/js/bootstrap.min.js"></script>
+    <script src="clases.js"></script>
 
 </body>
 

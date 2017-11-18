@@ -59,6 +59,7 @@ import { ComentarClasePage} from '../pages/FO_M05/comentar-clase/comentar-clase'
 import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { ListaClasesPage } from '../pages/FO_M05/lista-clases/lista-clases';
+import { ListaCriticasPage } from '../pages/FO_M05/lista-criticas/lista-criticas';
 //FIN M05
 // M06
 //import  { AsignarRutinaPage} from '../pages/FO_M06/asignar-rutina/asignar-rutina';
@@ -68,6 +69,7 @@ import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reser
 import { GestiNDeReservasPage} from '../pages/FO_M06/gesti-nde-reservas/gesti-nde-reservas';
 import { HorariosEntrenadorPage} from '../pages/FO_M06/horarios-entrenador/horarios-entrenador';
 import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/reservas-realizadas';
+
 
 //FIN M06
 
@@ -120,6 +122,10 @@ import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/rese
     HorariosEntrenadorPage,
     GestiNDeReservasPage,
     DetalleReservaPage,
+    ListaCriticasPage,
+    
+
+
     ListaClasesPage
   ],
   imports: [
@@ -183,6 +189,8 @@ import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/rese
     HorariosEntrenadorPage,
     GestiNDeReservasPage,
     DetalleReservaPage,
+    
+    ListaCriticasPage,
     ListaClasesPage
   ],
   providers: [

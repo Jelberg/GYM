@@ -93,87 +93,19 @@
             <p style="font-size:18px">En esta sección podrá gestionar todo lo relacionado a los datos de los entrenadores del gimnasio.
             </p>
             <a href="./gest_Entrenadores.html">
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Agregar Entrenador</button>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton" >Agregar Entrenador</button>
             </a>
-            <a href="">
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Consultar Entrenador</button>
+            <a >
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton" onclick="buscarEntrenador()">Consultar Entrenador</button>
             </a>
             <label>Introduzca Correo:</label>
-            <input class="w3-input w3-border" style="width:30%;" type="text" required name="Correo">
+            <input class="w3-input w3-border" style="width:30%;" type="text" required name="Correo" id="text_correo">
+            <script src="Entrenadores.js"></script> 
         </div>
-        <div class="row">
-            <div class="content">
-                <div class="w3-row ">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th class="tablehead">Nombre</th>
-                                <th class="tablehead">Edad</th>
-                                <th class="tablehead">Correo Electronico</th>
-                                <th class="tablehead tcenter">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Alejandro González</td>
-                                <td>32</td>
-                                <td>agonzalezz3@gmail.com</td>
-                                <td class="tcenter">
-                                    <a href="./gest_entrenadores.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Gabriel Diaz</td>
-                                <td>28</td>
-                                <td>gd2433@hotmail.com</td>
-                                <td class="tcenter">
-                                    <a href="./gest_entrenadores.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Iliana Contreras</td>
-                                <td>29</td>
-                                <td>icontreras12@gmail.com</td>
-                                <td class="tcenter">
-                                    <a href="./gest_entrenadores.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jose Hernandez</td>
-                                <td>38</td>
-                                <td>jhs.12@gmail.com</td>
-                                <td class="tcenter">
-                                    <a href="./gest_entrenadores.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Fernanda Torres</td>
-                                <td>28</td>
-                                <td>fernandat_8@gmail.com</td>
-                                <td class="tcenter">
-                                    <a href="./gest_entrenadores.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr> 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div id="tabla">
+
         </div>
+        
 
 
 
