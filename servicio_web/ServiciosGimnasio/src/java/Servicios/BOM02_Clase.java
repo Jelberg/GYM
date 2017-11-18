@@ -71,6 +71,9 @@ public class BOM02_Clase {
         catch (ParameterNullException e) {
             response = e.getMessage();
         }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
         finally {
             Sql.bdClose(conn);
             return response;
@@ -106,6 +109,9 @@ public class BOM02_Clase {
         catch (ParameterNullException e) {
             response = e.getMessage();
         }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
         finally {
             Sql.bdClose(conn);
             return response;
@@ -136,6 +142,9 @@ public class BOM02_Clase {
             response = e.getMessage();
         }
         catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        catch (Exception e) {
             response = e.getMessage();
         }
         finally {
@@ -178,6 +187,9 @@ public class BOM02_Clase {
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
         }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
         finally {
             Sql.bdClose(conn);
             return gson.toJson(response);
@@ -212,6 +224,9 @@ public class BOM02_Clase {
             response.put("error", e.getMessage());
         }
         catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
             response.put("error", e.getMessage());
         }
         finally {
@@ -249,6 +264,9 @@ public class BOM02_Clase {
             response.put("error", e.getMessage());
         }
         catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
             response.put("error", e.getMessage());
         }
         finally {
