@@ -74,29 +74,37 @@ function guardar() {
     if (nombre == '' || grupo == '') return
     if (editing == 'true') {
         if (equipo == null) {
+            if (maquina == '') return
             console.log(nombre, grupo, maquina, equipo)
             $.post(url2 + editaEjercicioMaquina + '?id=' + id + '?nombre=' + nombre + '&grupo=' + grupo + '&maquina=' + maquina)
                 .done(function (data) {
-                    window.location.href = './ejercicios.html'
+                    console.log(data)
+                    // window.location.href = './ejercicios.html'
                 });
         } else {
+            if (equipo == '') return
             $.post(url2 + editaEjercicioEquipo + '?id=' + id + '?nombre=' + nombre + '&grupo=' + grupo + '&equipo=' + equipo)
                 .done(function (data) {
-                    window.location.href = './ejercicios.html'
+                    console.log(data)
+                    //window.location.href = './ejercicios.html'
                 });
         }
 
     } else {
         if (equipo == null) {
+            if (maquina == '') return
             console.log(nombre, grupo, maquina, equipo)
             $.post(url2 + insertaEjercicioMaquina + '?nombre=' + nombre + '&grupo=' + grupo + '&maquina=' + maquina)
                 .done(function (data) {
-                    window.location.href = './ejercicios.html'
+                    console.log(data)
+                    //window.location.href = './ejercicios.html'
                 });
         } else {
+            if (equipo == '') return
             $.post(url2 + insertaEjercicioEquipo + '?nombre=' + nombre + '&grupo=' + grupo + '&equipo=' + equipo)
                 .done(function (data) {
-                    window.location.href = './ejercicios.html'
+                    console.log(data)
+                    //window.location.href = './ejercicios.html'
                 });
         }
     }

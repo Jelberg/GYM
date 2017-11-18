@@ -69,7 +69,7 @@ public class BOM01_Ejercicios {
                 jsonArray3.get(jsonArray3.size() - 1).setEquipamiento(rs.getString("equipamiento"));
                 jsonArray3.get(jsonArray3.size() - 1).setGrupomuscular(rs.getString("grupo_muscular"));
             }
-            response = gson.toJson(jsonArray);
+            response = gson.toJson(jsonArray3);
         } catch (SQLException e) {
             response = e.getMessage();
         } catch (ParameterNullException e) {

@@ -1,7 +1,7 @@
 var url_ej = "http://localhost:8080/ServiciosGimnasio/Ejercicio";
 var getAll = "/getAll";
 var items = []
-/* $.get(url_ej + getAll, function (data) {
+$.get(url_ej + getAll, function (data) {
     console.log('ejercicios', data)
 
 
@@ -31,19 +31,9 @@ var items = []
             fila = items[i];
             contenido += "<tr>";
             var maquina = false
-            for (var j = 0; j < ncampos; j++) {
+            for (var j = 0; j < ncampos; j++) { 
                 if (campos[j] == 'id') {
                     contenido += "<td class='id' style='display:none'>";
-                    contenido += fila[campos[j]];
-                    contenido += "</td>";
-                }
-                if (campos[j] == 'maquina') {
-                    contenido += "<td class='maquina' style='display:none'>";
-                    contenido += fila[campos[j]];
-                    contenido += "</td>";
-                }
-                if (campos[j] == 'equipo') {
-                    contenido += "<td class='equipo' style='display:none'>";
                     contenido += fila[campos[j]];
                     contenido += "</td>";
                 } else {
@@ -53,7 +43,7 @@ var items = []
                 }
 
             }
-            contenido += "<td class='tcenter'><i class='fa fa-pencil-square-o' onclick='editar(this,0,1)' aria-hidden='true'></i><i class='fa fa-trash' onclick='eliminar(this,0)' aria-hidden='true'></i></td>";
+            contenido += "<td class='tcenter'><i class='fa fa-pencil-square-o' onclick='editar(this,1)' aria-hidden='true'></i><i class='fa fa-trash' onclick='eliminar(this,0)' aria-hidden='true'></i></td>";
             contenido += "</tr>";
 
         }
@@ -61,17 +51,17 @@ var items = []
         document.getElementById("tabla").innerHTML = contenido;
     }
 });
- */
-function editar(e, type) {
+
+function editar(e, type) { 
     if (type == 1) {
-        var id = e.parentNode.parentNode.childNodes
+        var id = e.parentNode.parentNode.childNodes 
         for (var i = 0; i < id.length; i++) {
             var element = id[i];
             if (element.classList) {
                 if (element.classList.value == 'id') {
                     localStorage.setItem('id', Number(element.innerHTML));
                     localStorage.setItem('edit', 'true');
-                    window.location.href = './gest_ejercicios.html'
+                    //window.location.href = './gest_ejercicios.html'
                 }
             }
         }
