@@ -45,15 +45,15 @@ public class PruebaEntrenador {
         catch (Exception e){}
     }
     
-    @Test
-    public void pruebaConsultarEntrenador(){
-        Gson gson = new Gson();
-        _claseServicios = new BOM02_Entrenador();
-        String respuesta = _claseServicios.getEntrenador( "earp@gmail.com" );
-        _arrayEnt = new ArrayList<>();
-        _arrayEnt = gson.fromJson( respuesta, new TypeToken<List<Entrenador>>(){}.getType());
-        assertEquals( "earp@gmail.com" , _arrayEnt.get(0).getCorreo());
-    }
+//    @Test
+//    public void pruebaConsultarEntrenador(){
+//        Gson gson = new Gson();
+//        _claseServicios = new BOM02_Entrenador();
+//        String respuesta = _claseServicios.getEntrenador( "earp@gmail.com" );
+//        _arrayEnt = new ArrayList<>();
+//        _arrayEnt = gson.fromJson( respuesta, new TypeToken<List<Entrenador>>(){}.getType());
+//        assertEquals( "earp@gmail.com" , _arrayEnt.get(0).getCorreo());
+//    }
     
     @Test
     public void pruebaInsertarEntenador(){

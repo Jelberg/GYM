@@ -45,15 +45,15 @@ public class PruebaInstructor {
         catch (Exception e){}
     }
     
-    @Test
-    public void pruebaConsultaInstruct(){
-        Gson gson = new Gson();
-        _claseServicios = new BOM02_Instruct();
-        String respuesta = _claseServicios.getInstructor("lvqp.93@gmail.com" );
-        _arrayInstruct = new ArrayList<>();
-        _arrayInstruct = gson.fromJson( respuesta, new TypeToken<List<Instructor>>(){}.getType());
-        assertEquals( "lvqp.93@gmail.com" , _arrayInstruct.get(0) .getCorreo());
-    }
+//    @Test
+//    public void pruebaConsultaInstruct(){
+//        Gson gson = new Gson();
+//        _claseServicios = new BOM02_Instruct();
+//        String respuesta = _claseServicios.getInstructor("lvqp.93@gmail.com" );
+//        _arrayInstruct = new ArrayList<>();
+//        _arrayInstruct = gson.fromJson( respuesta, new TypeToken<List<Instructor>>(){}.getType());
+//        assertEquals( "lvqp.93@gmail.com" , _arrayInstruct.get(0) .getCorreo());
+//    }
     
     @Test
     public void pruebaInsertaInstruct(){
