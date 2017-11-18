@@ -1066,6 +1066,21 @@ CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_id int, tipo_medida v
     END; $$
 LANGUAGE plpgsql;
 
+-- INSERTA MEDIDAS PERTENECIENTE A ESE USUARIO EN LA FECHA ACTUAL
+CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
+    fk_usuario INT,
+    medida INT,
+    tipo INT)
+  RETURNS void
+   AS $$
+    DECLARE
+	fecha_actual DATE;
+    BEGIN
+	fecha_actual  := current_date;
+        INSERT INTO progreso_medida (pm_medida,pm_fecha, fk_usuario, fk_medida) VALUES
+        ( medida , fecha_actual , fk_usuario , tipo );
+    END; $$
+  LANGUAGE plpgsql;
 
 
 --FUNCION QUE ACTUALZA MEDIDA DADOS: EL ID DEL USUARIO, FECHA DE EL PROGRESO, TIPO DE LA MEDIDA Y LA NUEVA MEDIDA.
