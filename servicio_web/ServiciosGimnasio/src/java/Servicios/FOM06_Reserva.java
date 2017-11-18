@@ -42,12 +42,12 @@ public class FOM06_Reserva {
     private String response;
     private ArrayList<Reserva> jsonArray;
     
-    /*
+    /**
      * Funcion que consulta las reservas que se han hecho por un usuario
      * @param id_usuario del usuario que realiza las consultas 
-     *return devuele las reservas
-    */
-     @GET
+     * @return devuelve las reservas
+    */    
+    @GET
     @Path("/getReservas")
     @Produces("application/json")
     public String getReservas(@QueryParam("id") int id_usuario){
@@ -83,14 +83,17 @@ public class FOM06_Reserva {
         }
     
     }
-        /*
-     * Funcion que permite agregar las reservas que un usuario desee
-     * @param id_reserva,fecha inicial,fecha final,id usuario e id entrenador 
-     *
-    */
-
     
- @POST
+    /**
+     * Funcion que permite agregar las reservas que un usuario desee
+     * @param id_reserva
+     * @param fecha_inicial
+     * @param fecha_final
+     * @param id_usu
+     * @param id_ent 
+     * @return mensaje excepcion en caso que exista
+     */    
+    @POST
     @Path("/insertaReservas")
     @Produces("application/json")
     public String insertaReservas(@QueryParam("id") int id_res,
@@ -131,29 +134,29 @@ public class FOM06_Reserva {
             return response;
         }   
     }
-    /*
+    
+    /**
      * Funcion que permite eliminar una reserva hecha por un usuario
-     * @param id_reserva a eliminar
-     *
+     * @param id_res a eliminar
+     * @return mensaje excepcion
     */
     @DELETE
     @Path("/eliminaReserva")
     @Produces("application/json")
-    public String eliminaReservas(@QueryParam("id") int id_rest){
+    public String eliminaReservas(@QueryParam("id") int id_res){
         
         Map<String, String> response = new HashMap<String, String>();
         try{
 
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("id", id_rest);
+                put("id", id_res);
             }});
-                String query = "SELECT * FROM fo_m06_elimina_reserva(?)";
+            String query = "SELECT * FROM fo_m06_elimina_reserva(?)";
             PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, id_rest);
+            st.setInt(1, id_res);
             ResultSet rs = st.executeQuery();
             response.put("data", "Se elimino la reserva");
-        }
-        
+        }        
         catch(SQLException e) {
             response.put("error", e.getMessage());
         }
@@ -164,9 +167,5 @@ public class FOM06_Reserva {
             Sql.bdClose(conn);
             return gson.toJson(response);
         }
-    }
-    
+    }    
 }
-    
-
-
