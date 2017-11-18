@@ -47,7 +47,7 @@ public class FOM06_Reserva {
      * @param id_usuario del usuario que realiza las consultas 
      *return devuele las reservas
     */
-     @GET
+    @GET
     @Path("/getReservas")
     @Produces("application/json")
     public String getReservas(@QueryParam("id") int id_usuario){
@@ -57,7 +57,7 @@ public class FOM06_Reserva {
                 put("id", id_usuario);
             }});
 
-            String query = "SELECT * FROM fo_m06_get_reserva(?)";
+            String query = "SELECT * FROM fo_m06_get_reserva( ? );";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, id_usuario);
