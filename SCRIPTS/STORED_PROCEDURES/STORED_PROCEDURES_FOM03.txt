@@ -170,20 +170,25 @@ END; $$
   LANGUAGE plpgsql;
 
 
-------------------------------funcion que devuelve todos los ejercicios existentes con su maquina o equipamento
-
-CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_maquina()
-  RETURNS TABLE(maquina character varying, ejercicio character varying,grupoMuscular character varying)
+CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_maquina(idUsuario int, nombre character varying
+                                                         , dia character varying)
+  RETURNS TABLE(idEme int, maquina character varying, ejercicio character varying,grupoMuscular character varying)
    AS $$
    DECLARE
  _ejercicios    record;
+ _idRutina int;
 BEGIN
-   FOR _ejercicios IN( select maq.maq_nombre, eje.eje_nombre,
+ SELECT rut.rut_id into _idRutina from rutina as rut where rut.fk_usuario= idUsuario and 
+   														rut.rut_nombre= nombre and 
+                                                        rut.rut_dia= dia; 
+   FOR _ejercicios IN( select distinct(eje.eje_nombre), eme.eme_id, maq.maq_nombre, 
                        eje.eje_grupo_muscular from ejercicio_maquina_equipo as eme,
                        maquina as maq, ejercicio as eje where maq.maq_id = eme.fk_maquina and
-    				   eme.fk_ejercicio = eje.eje_id
+    				   eme.fk_ejercicio = eje.eje_id and eme.fk_rutina is null
 						)
+                        
    LOOP
+    idEme = _ejercicios.eme_id;
     maquina = _ejercicios.maq_nombre;
     ejercicio = _ejercicios.eje_nombre;
     grupoMuscular = _ejercicios.eje_grupo_muscular;
@@ -191,19 +196,25 @@ BEGIN
    END LOOP; 
    END; $$
   LANGUAGE plpgsql;
-
 --------------------------Funcion que devuelve una lista de todos los ejercicios por equipo-------------------------
-  CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_equipo()
-  RETURNS TABLE(equipo character varying, ejercicio character varying,grupoMuscular character varying)
+CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_equipo(idUsuario int, nombre character varying
+                                                         , dia character varying)
+  RETURNS TABLE(idEme int, equipo character varying, ejercicio character varying,grupoMuscular character varying)
    AS $$
    DECLARE
  _ejercicios    record;
+ _idRutina int;
 BEGIN
-   FOR _ejercicios IN( select equ.equ_nombre, eje.eje_nombre, eje.eje_grupo_muscular 
+	SELECT rut.rut_id into _idRutina from rutina as rut where rut.fk_usuario= idUsuario and 
+   								rut.rut_nombre= nombre and 
+                                                        	rut.rut_dia= dia; 
+   FOR _ejercicios IN( select eme.eme_id, equ.equ_nombre, eje.eje_nombre, eje.eje_grupo_muscular 
                         from ejercicio_maquina_equipo as eme,equipo as equ, ejercicio as eje
 						where equ.equ_id = eme.fk_equipo and eme.fk_ejercicio = eje.eje_id
+                      	and eme.fk_rutina is null
 						)
    LOOP
+    idEme = _ejercicios.eme_id;
     equipo = _ejercicios.equ_nombre;
     ejercicio = _ejercicios.eje_nombre;
     grupoMuscular = _ejercicios.eje_grupo_muscular;

@@ -1,4 +1,4 @@
--------***********************************************************---------------------
+﻿-------***********************************************************---------------------
 -------/                                                         /---------------------
 -------/            CREATE DATA BASE AND USER                   /---------------------
 -------/                                                         /---------------------
@@ -140,7 +140,7 @@ CONSTRAINT PK_EME_ID PRIMARY KEY (EME_ID, FK_EJERCICIO)
 
 CREATE TABLE TRABAJO_RUTINA(
 	TR_ID                           SERIAL NOT NULL,
-	TR_FECHA           		DATE NOT NULL,
+	TR_FECHA           		DATE NULL,
 	TR_DESCANSO             DECIMAL,
 	TR_DURACION             INTEGER,
 	TR_DISTANCIA            INTEGER,
@@ -828,12 +828,12 @@ CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_maquina(idUsuario int, nombre c
  _idRutina int;
 BEGIN
  SELECT rut.rut_id into _idRutina from rutina as rut where rut.fk_usuario= idUsuario and 
-   							rut.rut_nombre= nombre and 
+   														rut.rut_nombre= nombre and 
                                                         rut.rut_dia= dia; 
-   FOR _ejercicios IN( select eme.eme_id, maq.maq_nombre, eje.eje_nombre,
+   FOR _ejercicios IN( select distinct(eje.eje_nombre), eme.eme_id, maq.maq_nombre, 
                        eje.eje_grupo_muscular from ejercicio_maquina_equipo as eme,
                        maquina as maq, ejercicio as eje where maq.maq_id = eme.fk_maquina and
-    				   eme.fk_ejercicio = eje.eje_id and eme.fk_rutina <> _idRutina
+    				   eme.fk_ejercicio = eje.eje_id and eme.fk_rutina is null
 						)
                         
    LOOP
@@ -845,7 +845,6 @@ BEGIN
    END LOOP; 
    END; $$
   LANGUAGE plpgsql;
-
 --------------------------Funcion que devuelve una lista de todos los ejercicios por equipo-------------------------
 CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_equipo(idUsuario int, nombre character varying
                                                          , dia character varying)
@@ -861,7 +860,7 @@ BEGIN
    FOR _ejercicios IN( select eme.eme_id, equ.equ_nombre, eje.eje_nombre, eje.eje_grupo_muscular 
                         from ejercicio_maquina_equipo as eme,equipo as equ, ejercicio as eje
 						where equ.equ_id = eme.fk_equipo and eme.fk_ejercicio = eje.eje_id
-                      	and eme.fk_rutina <> _idRutina
+                      	and eme.fk_rutina is null
 						)
    LOOP
     idEme = _ejercicios.eme_id;
@@ -1718,6 +1717,42 @@ INSERT INTO HORARIO_CLASE(HC_FECHA,HC_DIA
 --CRITICA       
 INSERT INTO CRITICA (CRI_FECHA,CRI_COMENTARIO,CRI_VALORACION,fk_hc_id)VALUES('12-12-12','ESTO ES UNA CRITICA',5,(SELECT HC_ID FROM HORARIO_CLASE LIMIT 1));
 
+--PLAN
+insert into plan (pla_nombre,pla_descripcion,fk_usuario) values ('Plan A','Adelgazar 6kg, Dificultad: Media',1);
+
+---RUTINAS
+insert into rutina (rut_nombre,rut_dia,fk_usuario,fk_plan) values ('Piernas','Lunes',1,1);  
+insert into rutina (rut_nombre,rut_dia,fk_usuario,fk_plan) values ('Biceps','Martes',1,1); 
+
+---TRABAJO_RUTINA
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('06/11/2017',1.5,1,1);--Prensa
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('13/12/2017',3.5,2,2);--Prensa
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('23/10/2018',3.5,3,3);--Prensa
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('14/04/2017',3.5,4,4);--Prensa
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('07/11/2017',1.5,5,5);--Curl de biceps
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('16/11/2017',1.5,6,6);--Curl de biceps
+
+---SERIES
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (20, 'kg', 15,1);--06/11/2017
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (30, 'kg', 10,1);
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (40, 'kg', 8,1);
+
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (61, 'kg', 20,2);--13/12/2017
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (65, 'kg', 20,2);
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (53, 'kg', 20,2);
+
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (100, 'kg', 55,3);--23/10/2018
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (100, 'kg', 55,3);
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (100, 'kg', 55,3);
+
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (60, 'kg', 12,4);--14/04/2018
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (70, 'kg', 10,4);
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (80, 'kg', 55,4);
+
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (120, 'kg', 23,5);--07/11/2017
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (96, 'kg', 50,5);
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (50, 'kg', 35,5);
+
 -- INSERTS DE PROGRESOS COMPARTIDOS
 insert into comentario (com_mensaje, com_fecha, fk_usuario) values ('¡Rebajo 3 Kg este mes!','14/11/2017',1);
 insert into comentario (com_mensaje, com_fecha, fk_usuario) values ('¡Aumento 1 Kg este mes!','14/11/2017',1);
@@ -1742,4 +1777,5 @@ INSERT INTO PROGRESO_PESO ( pp_peso, pp_fecha, fk_usuario ) VALUES ( 5, '12-10-2
 INSERT INTO PROGRESO_PESO ( pp_peso, pp_fecha, fk_usuario ) VALUES ( 5, '21-10-2017', 1 );
 INSERT INTO PROGRESO_PESO ( pp_peso, pp_fecha, fk_usuario ) VALUES ( 5, '29-10-2017', 1 );
 INSERT INTO PROGRESO_PESO ( pp_peso, pp_fecha, fk_usuario ) VALUES ( 5, '05-11-2017', 1 );
+
 
