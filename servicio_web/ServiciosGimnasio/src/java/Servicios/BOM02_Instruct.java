@@ -159,7 +159,7 @@ private Connection conn = Sql.getConInstance();
     public String insertaInstruct(@QueryParam("nombre") String nombre,
                                     @QueryParam("apellido") String apellido,
                                     @QueryParam("fechanac") String fecha,
-                                    @QueryParam("sexo") char sexo,
+                                    @QueryParam("sexo") String sexo,
                                     @QueryParam("correo") String correo
                                     ){
         
@@ -173,7 +173,7 @@ private Connection conn = Sql.getConInstance();
                 put("correo", correo );
             }});
             
-            String query = "select * from bo_m02_inserta_instructor('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+Character.toString(sexo)+"', '"+correo+"')";
+            String query = "select * from bo_m02_inserta_instructor('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+sexo+"', '"+correo+"')";
             PreparedStatement st = conn.prepareStatement(query); 
 
                 st.executeQuery();
@@ -241,13 +241,13 @@ private Connection conn = Sql.getConInstance();
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
-    /*@POST
+    @POST
     @Path("/actualizaInstruct")
     @Produces("application/json")
     public String actualizaInstruct( @QueryParam("nombre") String nombre,
                                     @QueryParam("apellido") String apellido,
                                     @QueryParam("fechanac") String fecha,
-                                    @QueryParam("sexo") char sexo,
+                                    @QueryParam("sexo") String sexo,
                                     @QueryParam("correo") String correo){
         Map<String, String> response = new HashMap<String, String>();
         try {
@@ -258,7 +258,7 @@ private Connection conn = Sql.getConInstance();
                 put("sexo", sexo );
                 put("correo", correo );
             }});
-             String query = "select * from bo_m02_actualiza_instructor('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+Character.toString(sexo)+"', '"+correo+"')";
+             String query = "select * from bo_m02_actualiza_instructor('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+sexo+"', '"+correo+"')";
             PreparedStatement st = conn.prepareStatement(query); 
 
                 st.executeQuery();
@@ -277,5 +277,4 @@ private Connection conn = Sql.getConInstance();
         }
         
     } 
-*/
 }
