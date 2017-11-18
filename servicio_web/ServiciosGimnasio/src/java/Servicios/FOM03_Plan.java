@@ -152,6 +152,128 @@ public class FOM03_Plan {
         }
         
         
+        /***
+         * Funcion que inserta una nueva rutina a un plan de un usuario
+         * @param idUsuario se ingresa el id del usuario
+         * @param nombre se indica el nombre de la nueva rutina
+         * @param dia se especifica el dia de la rutina
+         * @param idPlan se especifica a que plan va a pertenecer la rutina
+         * @return Retorna un string de confirmacion de rutina agregada
+         */
+        @GET
+        @Path("/setRutinaPlan")
+        @Produces("application/json")
+         public String setRutina( @QueryParam( "idUsuario" ) int idUsuario, 
+                                  @QueryParam ( "nombre" ) String nombre,
+                                  @QueryParam ( "dia" ) String dia,
+                                  @QueryParam ( "idPlan" ) int idPlan)
+         {
+         try{
+                      
+                String query = "Select * from FO_M03_set_rutina_plan('"+idUsuario+"','"+nombre+"','"+dia+"','"+idPlan+"')";
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);
+              
+                return gson.toJson("La rutina fue Agregada");
+            }
+            catch( SQLException e )
+            {
+                return e.getMessage();
+            }
+            catch ( ParameterNullException e ) 
+            {
+                return e.getMessage();
+            }
+            finally 
+            {
+                Sql.bdClose(conn);
+            }
+        }
+        
+        /**
+          * Funcion que modifica la rutina de un plan del usuario.
+          * @param idUsuario se recibe el id del usuario a consultar
+          * @param nombreRutina se recibe el nombre de la rutina a eliminar 
+          * @param dia se recibe el dia de la rutina a eliminar
+          * @param nombreModif se recibe el nuevo nombre de la rutina
+          * @param diaModif se ingresa el nuevo dia de la rutina
+          * @param idPlan recibe el id del plan
+          * @return retorna un string de confirmacion de modificacion
+        */
+        @POST
+        @Path("/modificarRutinaPlan")
+        @Produces("application/json")
+         public String modificarRutina( @QueryParam( "idUsuario" ) int idUsuario, 
+                                  @QueryParam ( "nombreRutina" ) String nombreRutina,
+                                  @QueryParam ( "dia" ) String dia,
+                                  @QueryParam ("nombreModif") String nombreModif,
+                                  @QueryParam ("diaModif") String diaModif,
+                                  @QueryParam ("idPlan") int idPlan)
+         {
+         try{
+                      
+                String query = "Select * from FO_M03_modificar_rutina_plan('"+idUsuario+"','"+nombreRutina+"',"
+                                                                    + "'"+dia+"','"+nombreModif+"','"+diaModif+"',"
+                                                                    + "'"+idPlan+"')";
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);
+              
+                return gson.toJson("La rutina fue Modificada");
+            }
+            catch( SQLException e )
+            {
+                return e.getMessage();
+            }
+            catch ( ParameterNullException e ) 
+            {
+                return e.getMessage();
+            }
+            finally 
+            {
+                Sql.bdClose(conn);
+            }
+        }
+        
+         
+         /**
+            * Funcion que elimina una rutina.
+            * @param idUsuario se recibe el id del usuario a consultar
+            * @param nombre se recibe el nombre de la rutina a eliminar 
+            * @param dia se recibe el dia de la rutina a eliminar
+            * @return retorna un string de confirmacion de eliminacion
+        */
+        @GET
+        @Path("/eliminarRutinaPlan")
+        @Produces("application/json")
+         public String eliminarRutinaPlan( @QueryParam( "idUsuario" ) int idUsuario, 
+                                  @QueryParam ( "nombre" ) String nombre,
+                                  @QueryParam ( "dia" ) String dia,
+                                  @QueryParam ( "idPlan" ) int idPlan)
+         {
+         try{
+                      
+                String query = "Select * from FO_M03_eliminar_rutina_plan('"+idUsuario+"','"+nombre+"',"
+                                                                    + "'"+dia+"','"+idPlan+"')";
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);
+              
+                return gson.toJson("La rutina fue Eliminada");
+            }
+            catch( SQLException e )
+            {
+                return e.getMessage();
+            }
+            catch ( ParameterNullException e ) 
+            {
+                return e.getMessage();
+            }
+            finally 
+            {
+                Sql.bdClose(conn);
+            }
+        } 
+        
+        
         /** Funcion que inserta un nuevo plan a un usuario
          * @param idUsuario se ingresa el id del usuario
          * @param nombre se indica el nombre del plan
