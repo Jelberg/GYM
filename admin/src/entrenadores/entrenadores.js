@@ -122,10 +122,10 @@ function buscarEntrenador()
                     {
                         contenido += "<th><font color ='white'>";
                         if (j!=4)
-                        contenido += fila[campos[j]];
+                        contenido += fila[campos[i]];
                         else
                         {
-                            contenido +=cambiarFormato( fila[campos[j]] );
+                            contenido +=cambiarFormato( fila[campos[i]] );
                         }
                         contenido += "</font></th>";
                     }
