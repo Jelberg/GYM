@@ -1,17 +1,23 @@
+var url = "http://localhost:8080/ServiciosGimnasio/Equipamiento";
+var url2 = "http://localhost:8080/ServiciosGimnasio/Ejercicio";
+
+var url_comple = "/getListEquipo";
+var url_comple2 = "/getListMaquina";
+var insertaEjercicioMaquina = "/insertaEjercicioMaquina";
+var insertaEjercicioEquipo = "/insertaEjercicioEquipo";
+var editaEjercicioMaquina = "/editaEjercicioMaquina";
+var editaEjercicioEquipo = "/editaEjercicioEquipo";
+
+var editing = localStorage.getItem('edit');
+var id = localStorage.getItem('id');
+
+isMaq = true
+$(".forMaq").addClass('selected');
+$(".forEqu").removeClass('selected')
+$(".equipos").hide()
+$(".maquinas").show()
+
 $(document).ready(function () {
-    var url = "http://localhost:8080/ServiciosGimnasio/Equipamiento";
-
-    var url_comple = "/getListEquipo";
-    var url_comple2 = "/getListMaquina";
-
-    var editing = localStorage.getItem('edit');
-    var id = localStorage.getItem('id');
-
-    $(".forMaq").addClass('selected');
-    $(".forEqu").removeClass('selected')
-    $(".equipos").hide()
-    $(".maquinas").show()
-    
 
     $.get(url + url_comple, function (data) {
         console.log('data', data)
@@ -34,18 +40,67 @@ $(document).ready(function () {
 });
 
 function toggle(val) {
-    if (val == 0) {
+    isMaq = true
+    if (val == 1) {
+        isMaq = true
         $(".forMaq").addClass('selected');
         $(".forEqu").removeClass('selected')
         $(".equipos").hide()
         $(".maquinas").show()
-        console.log(0)
     } else {
+        isMaq = false
         $(".forMaq").removeClass('selected');
         $(".forEqu").addClass('selected');
         $(".equipos").show()
         $(".maquinas").hide()
-        console.log(1)
     }
+}
+
+function guardar() {
+    var maquina = null
+    var equipo = null
+    var nombre = document.getElementById("nombreEjercicio").value;
+    var grupo = document.getElementById("grupoEjercicio").value;
+    console.log(isMaq)
+    if (isMaq == true) {
+        equipo = null
+        maquina = document.getElementById("maquinas").value;
+    } else {
+        maquina = null
+        equipo = document.getElementById("equipos").value;
+    }
+
+
+    if (nombre == '' || grupo == '') return
+    if (editing == 'true') {
+        if (equipo == null) {
+            console.log(nombre, grupo, maquina, equipo)
+            $.post(url2 + editaEjercicioMaquina + '?id=' + id + '?nombre=' + nombre + '&grupo=' + grupo + '&maquina=' + maquina)
+                .done(function (data) {
+                    window.location.href = './ejercicios.html'
+                });
+        } else {
+            $.post(url2 + editaEjercicioEquipo + '?id=' + id + '?nombre=' + nombre + '&grupo=' + grupo + '&equipo=' + equipo)
+                .done(function (data) {
+                    window.location.href = './ejercicios.html'
+                });
+        }
+
+    } else {
+        if (equipo == null) {
+            console.log(nombre, grupo, maquina, equipo)
+            $.post(url2 + insertaEjercicioMaquina + '?nombre=' + nombre + '&grupo=' + grupo + '&maquina=' + maquina)
+                .done(function (data) {
+                    window.location.href = './ejercicios.html'
+                });
+        } else {
+            $.post(url2 + insertaEjercicioEquipo + '?nombre=' + nombre + '&grupo=' + grupo + '&equipo=' + equipo)
+                .done(function (data) {
+                    window.location.href = './ejercicios.html'
+                });
+        }
+    }
+
+
 
 }

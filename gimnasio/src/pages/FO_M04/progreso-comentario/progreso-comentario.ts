@@ -30,7 +30,7 @@ export class ProgresoComentarioPage {
   de cada progreso compartido
   */
   getProgresosCompartidos(){
-    let urlPeticion: string = "FOM04_Comentario/getProgresos";
+    let urlPeticion: string = "FOM04_Comentario/getProgresos?usuario_id=1";
      this.userService.getDato( urlPeticion ).subscribe(data => {
         let i: number = 0;
         while ( i < data.length ){
