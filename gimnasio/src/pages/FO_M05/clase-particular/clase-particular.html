@@ -23,12 +23,17 @@
 -->
 
 <ion-content padding>
+  <ion-item *ngFor="let class of class">
       <img src="{{img}}" class="imagenClase">
-      <h1>{{titulo}}</h1>
-      <p class="instructor">Inst. {{instructor}}</p>
-      <p class="fecha">{{fecha}}</p>
-      <p>{{descripcion}}</p>
-      <p>Duracion: {{duracion}} min</p>
-      <p>Cap. {{capacidad}} Disp. {{disponibilidad}}</p>
+      <h1>{{class.nombreClase}}</h1>
+      <p class="instructor">Inst. {{class.instructor}}</p>
+      <p class="fecha">{{class.fecha}}</p>
+      <p>{{class.dia}}</p>
+      <p>Hora inicio: {{class.horaInicio}}</p>
+      <p>Hora fin: {{class.horaFin}}</p>
+      <p>Descripcion: {{class.Descripcion}}</p>
+      
+      <p>Cap. {{class.capacidad}} </p>
       <button ion-button item-end class="agregarClase" (click)="presentAlert()">Reservar</button>
+    </ion-item>
 </ion-content>

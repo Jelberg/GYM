@@ -1,7 +1,7 @@
 --***************************************BOM02********************************************
 ------------------------------------------CLASE-------------------------------------------
 
---------------Función que devuelve la descripción de la clase consultada.
+--------------Funciï¿½n que devuelve la descripciï¿½n de la clase consultada.
 
 CREATE OR REPLACE FUNCTION bo_m02_get_clase(nombreclase character varying)
   RETURNS TABLE(nombre character varying, descripcion character varying)
@@ -20,7 +20,7 @@ BEGIN
 END; $$
   LANGUAGE plpgsql;
 
-----------------------------Función que agrega una clase.
+----------------------------Funciï¿½n que agrega una clase.
 
 CREATE OR REPLACE FUNCTION bo_m02_inserta_clase(idclase INT, 
     nombreclase character varying,
@@ -32,7 +32,7 @@ BEGIN
 END $$
   LANGUAGE plpgsql;
 
-----------------------------Función que elimina una clase.
+----------------------------Funciï¿½n que elimina una clase.
 
 CREATE OR REPLACE FUNCTION bo_m02_elimina_clase(nombreclase character varying)
 RETURNS VOID AS $$
@@ -42,7 +42,7 @@ BEGIN
 END $$
   LANGUAGE plpgsql;
 
----------------------------Función que modifica datos de una clase.
+---------------------------Funciï¿½n que modifica datos de una clase.
 
 CREATE OR REPLACE FUNCTION bo_m02_modifica_clase(nombreclase character varying, descripcion character varying)
   RETURNS void
@@ -58,7 +58,7 @@ END; $$
 
 -----------------------------------HORARIO_CLASE-------------------------------------------
 
---------------Función que devuelve los horarios de clase, de la clase consultada.
+--------------Funciï¿½n que devuelve los horarios de clase, de la clase consultada.
 
 CREATE OR REPLACE FUNCTION bo_m02_get_horario_clase(nombreclaseconsulta character varying)
   RETURNS TABLE(nombreclase character varying, instructor character varying, fecha date, 
@@ -83,7 +83,7 @@ BEGIN
 END; $$
   LANGUAGE plpgsql;
 
---------------Función que agrega el horario de una clase
+--------------Funciï¿½n que agrega el horario de una clase
 
 CREATE OR REPLACE FUNCTION bo_m02_inserta_horario_clase(fecha date, dia character varying, 
 	capacidad int, hora_inicio time, hora_fin time, status character varying, duracion int, 
@@ -97,7 +97,7 @@ BEGIN
 END $$
   LANGUAGE plpgsql;
 
-----------------------------Función que elimina el horario de una clase.
+----------------------------Funciï¿½n que elimina el horario de una clase.
 
 CREATE OR REPLACE FUNCTION bo_m02_elimina_horario_clase(nombreclase int, instructor int, 
 	fecha date, dia character varying, capacidad int, hora_inicio time, hora_fin time)
@@ -110,7 +110,7 @@ BEGIN
 END $$
   LANGUAGE plpgsql;
 
----------------------------Función que modifica el horario de una clase.
+---------------------------Funciï¿½n que modifica el horario de una clase.
 
 CREATE OR REPLACE FUNCTION bo_m02_modifica_horario_clase(nombreclase int, instructor int, 
 	fecha date, dia character varying, capacidad int, hora_inicio time, hora_fin time)
@@ -370,9 +370,52 @@ BEGIN
 END; $$
   LANGUAGE plpgsql;
 
+ -----------------------------Funcion que agrega un ejercicio a una rutina----------------------------------------------------------
 
   
-
+  CREATE OR REPLACE FUNCTION FO_M03_set_ejercicio_rutina(idUsuario int, nombreRutina character varying,
+                                                         dia character varying, ejercicio character varying, 
+                                                        maquina character varying, equipo character varying)
+  RETURNS VOID
+   AS $$
+DECLARE
+	idMaquina int;
+    idEjercicio int;
+    idEquipo int;
+    idRutina int;
+    
+BEGIN
+		select maq.maq_id into idMaquina from maquina as maq where maq.maq_nombre= maquina;
+        select eje.eje_id into idEjercicio from ejercicio as eje where eje.eje_nombre= ejercicio;
+        select equ.equ_id into idEquipo from equipo as equ where equ.equ_nombre= equipo;
+        select rut.rut_id into idRutina from rutina as rut where rut.rut_nombre= nombreRutina and rut.rut_dia= dia and rut.fk_usuario= idUsuario; 
+  		 insert into ejercicio_maquina_equipo ( fk_maquina, fk_ejercicio, fk_equipo, fk_rutina ) values (idMaquina, idEjercicio, idEquipo, idRutina);
+END; $$
+  LANGUAGE plpgsql;
+  
+--------------------------------Funcion que elimina un ejercicio de una rutina---------------------------------------------------------
+CREATE OR REPLACE FUNCTION FO_M03_eliminar_ejercicio(idUsuario int, 
+                                                       nombreRutina character varying, 
+                                                       dia character varying, 
+                                                       ejercicio character varying,
+                                                       maquina character varying,
+                                                       equipo character varying)
+  RETURNS VOID
+   AS $$
+DECLARE
+	_idRutina int;
+    _idEjercicio int;
+    _idMaquina int;
+    _idEquipo int;
+BEGIN		
+		 select rut.rut_id into _idRutina from rutina as rut where rut.rut_nombre= nombreRutina and rut.rut_dia= dia;
+         select eje.eje_id into _idEjercicio from ejercicio as eje where eje.eje_nombre= ejercicio;
+         select maq.maq_id into _idMaquina from maquina as maq where maq.maq_nombre= maquina;
+         select equ.equ_id into _idEquipo from equipo as equ where equ.equ_nombre= equipo;
+  		 delete from ejercicio_maquina_equipo as eme  where eme.fk_rutina= _idRutina and eme.fk_equipo= _idEquipo 
+         										and eme.fk_maquina= _idMaquina and eme.fk_ejercicio= _idEjercicio;
+END; $$
+  LANGUAGE plpgsql;
  ------------------------------Funcion que retorna todas las series de un ejercicio, indicando su peso, repeticiones y  tiempo de descanso
 
 CREATE OR REPLACE FUNCTION FO_M03_series_ejercicio(idUsuario int, nombreRutina character varying, dia character varying, nombreEjercicio character varying)
@@ -413,18 +456,25 @@ END; $$
 
 ------------------------------funcion que devuelve todos los ejercicios existentes con su maquina o equipamento
 
-CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_maquina()
-  RETURNS TABLE(maquina character varying, ejercicio character varying,grupoMuscular character varying)
+CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_maquina(idUsuario int, nombre character varying
+                                                         , dia character varying)
+  RETURNS TABLE(idEme int, maquina character varying, ejercicio character varying,grupoMuscular character varying)
    AS $$
    DECLARE
  _ejercicios    record;
+ _idRutina int;
 BEGIN
-   FOR _ejercicios IN( select maq.maq_nombre, eje.eje_nombre,
+ SELECT rut.rut_id into _idRutina from rutina as rut where rut.fk_usuario= idUsuario and 
+   														rut.rut_nombre= nombre and 
+                                                        rut.rut_dia= dia; 
+   FOR _ejercicios IN( select distinct(eje.eje_nombre), eme.eme_id, maq.maq_nombre, 
                        eje.eje_grupo_muscular from ejercicio_maquina_equipo as eme,
                        maquina as maq, ejercicio as eje where maq.maq_id = eme.fk_maquina and
-    				   eme.fk_ejercicio = eje.eje_id
+    				   eme.fk_ejercicio = eje.eje_id and eme.fk_rutina is null
 						)
+                        
    LOOP
+    idEme = _ejercicios.eme_id;
     maquina = _ejercicios.maq_nombre;
     ejercicio = _ejercicios.eje_nombre;
     grupoMuscular = _ejercicios.eje_grupo_muscular;
@@ -432,19 +482,25 @@ BEGIN
    END LOOP; 
    END; $$
   LANGUAGE plpgsql;
-
 --------------------------Funcion que devuelve una lista de todos los ejercicios por equipo-------------------------
-  CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_equipo()
-  RETURNS TABLE(equipo character varying, ejercicio character varying,grupoMuscular character varying)
+CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_equipo(idUsuario int, nombre character varying
+                                                         , dia character varying)
+  RETURNS TABLE(idEme int, equipo character varying, ejercicio character varying,grupoMuscular character varying)
    AS $$
    DECLARE
  _ejercicios    record;
+ _idRutina int;
 BEGIN
-   FOR _ejercicios IN( select equ.equ_nombre, eje.eje_nombre, eje.eje_grupo_muscular 
+	SELECT rut.rut_id into _idRutina from rutina as rut where rut.fk_usuario= idUsuario and 
+   								rut.rut_nombre= nombre and 
+                                                        	rut.rut_dia= dia; 
+   FOR _ejercicios IN( select eme.eme_id, equ.equ_nombre, eje.eje_nombre, eje.eje_grupo_muscular 
                         from ejercicio_maquina_equipo as eme,equipo as equ, ejercicio as eje
 						where equ.equ_id = eme.fk_equipo and eme.fk_ejercicio = eje.eje_id
+                      	and eme.fk_rutina is null
 						)
    LOOP
+    idEme = _ejercicios.eme_id;
     equipo = _ejercicios.equ_nombre;
     ejercicio = _ejercicios.eje_nombre;
     grupoMuscular = _ejercicios.eje_grupo_muscular;
@@ -584,7 +640,7 @@ END; $$
   LANGUAGE plpgsql;  
 
 
- ------Lista de ejercicios con peso promedio por mes de los ultimos 5 años----------------------------------------
+ ------Lista de ejercicios con peso promedio por mes de los ultimos 5 aï¿½os----------------------------------------
 CREATE OR REPLACE FUNCTION FO_M03_get_Ejercicios5anios( _idUsuario int, _ejercicio character varying )
   RETURNS TABLE(mes int, repeticion int, peso decimal, unidad character varying)
    AS $$
@@ -981,3 +1037,420 @@ BEGIN
 			values (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int);
 	END $$;
 	LANGUAGE PLPGSQL;
+
+
+
+
+  --- BACKOFFICE M01----
+----------------------
+
+
+--- Eliminar EQUIPO
+
+CREATE OR REPLACE FUNCTION public.bo_m01_eliminar_equipo(
+	id integer)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE  
+AS $BODY$
+
+    DECLARE
+    BEGIN
+        DELETE FROM EQUIPO
+        WHERE EQU_ID = id;
+    END; 
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_eliminar_equipo(integer)
+    OWNER TO gymucab;
+
+
+--- ELIMINAR MAQUINA 
+
+CREATE OR REPLACE FUNCTION public.bo_m01_eliminar_maquina(
+	id integer)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+     
+AS $BODY$
+
+    DECLARE
+    BEGIN
+        DELETE FROM MAQUINA
+        WHERE MAQ_ID = id;
+    END; 
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_eliminar_maquina(integer)
+    OWNER TO gymucab;
+
+
+--- OBTENER EJERCICIO POR ID
+
+CREATE OR REPLACE FUNCTION public.bo_m01_get_ejercicio_maquina(
+	_id integer)
+    RETURNS TABLE(fk_eje integer, nombre character varying, grupo character varying, fk_maq integer, fk_equ integer) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+
+DECLARE
+   var_r    record;
+   var_i    record;
+BEGIN
+    FOR var_i IN(SELECT FK_MAQUINA, FK_EJERCICIO, FK_EQUIPO 
+    FROM EJERCICIO_MAQUINA_EQUIPO 
+    WHERE EME_ID = _id)
+    LOOP 
+    fk_maq = var_i.FK_MAQUINA;
+    fk_eje = var_i.FK_EJERCICIO;
+    fk_equ = var_i.FK_EQUIPO;
+    RETURN NEXT;
+    END LOOP;
+
+    FOR var_r IN(SELECT EJE_NOMBRE,EJE_GRUPO_MUSCULAR 
+    FROM EJERCICIO 
+    WHERE EJE_ID = fk_eje)
+    LOOP
+    nombre = var_r.EJE_NOMBRE;
+    grupo = var_r.EJE_GRUPO_MUSCULAR;
+    RETURN NEXT;
+    END LOOP;
+END; 
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_get_ejercicio_maquina(integer)
+    OWNER TO gymucab;
+
+
+---- OBTENER EQUIPO POR ID
+
+CREATE OR REPLACE FUNCTION public.bo_m01_get_equipo(
+	_id integer)
+    RETURNS TABLE(id integer, nombre character varying) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT EQU_ID,EQU_NOMBRE
+        FROM EQUIPO
+        WHERE EQU_ID = _id)
+   LOOP
+    id = var_r.EQU_ID;
+    nombre = var_r.EQU_NOMBRE;
+    RETURN NEXT;
+   END LOOP;
+END; 
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_get_equipo(integer)
+    OWNER TO postgres;
+
+GRANT EXECUTE ON FUNCTION public.bo_m01_get_equipo(integer) TO gymucab WITH GRANT OPTION;
+
+GRANT EXECUTE ON FUNCTION public.bo_m01_get_equipo(integer) TO PUBLIC;
+
+GRANT EXECUTE ON FUNCTION public.bo_m01_get_equipo(integer) TO postgres;
+
+
+--- OBTENER MAQUINA POR ID
+
+CREATE OR REPLACE FUNCTION public.bo_m01_get_maquina(
+	_id integer)
+    RETURNS TABLE(id integer, nombre character varying) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT MAQ_ID,MAQ_NOMBRE
+        FROM MAQUINA
+        WHERE MAQ_ID = _id)
+   LOOP
+    id = var_r.MAQ_ID;
+    nombre = var_r.MAQ_NOMBRE;
+    RETURN NEXT;
+   END LOOP;
+END; 
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_get_maquina(integer)
+    OWNER TO postgres;
+
+GRANT EXECUTE ON FUNCTION public.bo_m01_get_maquina(integer) TO gymucab WITH GRANT OPTION;
+
+GRANT EXECUTE ON FUNCTION public.bo_m01_get_maquina(integer) TO PUBLIC;
+
+GRANT EXECUTE ON FUNCTION public.bo_m01_get_maquina(integer) TO postgres;
+
+
+---- OBTENER TODOS LOS EJERCICIOS
+
+CREATE OR REPLACE FUNCTION public.bo_m01_getallexercices(
+	)
+    RETURNS TABLE(id integer, ejercicio character varying, equipamiento character varying, grupo_muscular character varying) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+
+DECLARE
+   var_r    record;
+BEGIN 
+    FOR var_r IN(select eme_id, maq_nombre as nombre, eje_nombre, eje_grupo_muscular
+from 
+	ejercicio_maquina_equipo as eme,
+    maquina as maq,
+    ejercicio as eje
+where
+	maq.maq_id = eme.fk_maquina and
+    eme.fk_ejercicio = eje.eje_id
+
+UNION ALL
+
+select 
+    eme_id,	equ_nombre as nombre,eje_nombre,eje_grupo_muscular
+from 
+	ejercicio_maquina_equipo as eme,
+    equipo as equ,
+    ejercicio as eje
+where
+	equ.equ_id = eme.fk_equipo and
+    eme.fk_ejercicio = eje.eje_id)
+   LOOP
+    id = var_r.eme_id;
+    Ejercicio = var_r.eje_nombre;
+    Equipamiento = var_r.nombre;
+    Grupo_muscular = var_r.eje_grupo_muscular;
+    RETURN NEXT;
+   END LOOP;        
+END; 
+
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_getallexercices()
+    OWNER TO gymucab;
+
+
+---- INSERTA EJERCICIO
+
+
+CREATE OR REPLACE FUNCTION public.bo_m01_insertar_ejercicio(
+	nombre character varying,
+	grupo character varying,
+	maquina integer,
+	equipo integer)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+     
+AS $BODY$
+
+DECLARE 
+BEGIN 
+  INSERT INTO EJERCICIO(EJE_NOMBRE,EJE_GRUPO_MUSCULAR) VALUES (nombre,grupo);
+
+  SELECT EJE_ID as ejeId, EJE_NOMBRE as ejeNombre, EJE_GRUPO_MUSCULAR as ejeGrupo FROM EJERCICIO 
+  WHERE ejeNombre = nombre and
+        ejeGrupo  = grupo; 
+
+INSERT INTO EJERCICIO_MAQUINA_EQUIPO(FK_MAQUINA,FK_EJERCICIO,FK_EQUIPO,FK_RUTINA,EME_TIPO) VALUES(maquina,ejeId,equipo,null,false); 
+
+END 
+
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_insertar_ejercicio(character varying, character varying, integer, integer)
+    OWNER TO gymucab;
+
+
+
+---- INSERTA EJERCICIO CON EQUIPO
+
+CREATE OR REPLACE FUNCTION public.bo_m01_insertar_ejercicio_equipo(
+	nombre character varying,
+	grupo character varying,
+	equipo integer)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+     
+AS $BODY$
+
+DECLARE
+  var_r    record;
+  ejeId    integer; 
+BEGIN 
+  INSERT INTO EJERCICIO(EJE_NOMBRE,EJE_GRUPO_MUSCULAR) VALUES (nombre,grupo);
+
+  FOR var_r in (SELECT EJE_ID FROM EJERCICIO 
+  WHERE EJE_NOMBRE = nombre and
+        EJE_GRUPO_MUSCULAR  = grupo)
+   LOOP
+    ejeId = var_r.EJE_ID;
+   END LOOP;  
+
+INSERT INTO EJERCICIO_MAQUINA_EQUIPO(FK_MAQUINA,FK_EJERCICIO,FK_EQUIPO,FK_RUTINA,EME_TIPO) VALUES(null,ejeId,equipo,null,false); 
+
+END 
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_insertar_ejercicio_equipo(character varying, character varying, integer)
+    OWNER TO postgres;
+
+GRANT EXECUTE ON FUNCTION public.bo_m01_insertar_ejercicio_equipo(character varying, character varying, integer) TO gymucab WITH GRANT OPTION;
+
+GRANT EXECUTE ON FUNCTION public.bo_m01_insertar_ejercicio_equipo(character varying, character varying, integer) TO PUBLIC;
+
+GRANT EXECUTE ON FUNCTION public.bo_m01_insertar_ejercicio_equipo(character varying, character varying, integer) TO postgres;
+
+
+---- INSERTA EJERCICIO CON MAQUINA
+CREATE OR REPLACE FUNCTION public.bo_m01_insertar_ejercicio_maquina(
+	nombre character varying,
+	grupo character varying,
+	maquina integer)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+     
+AS $BODY$
+
+DECLARE
+  var_r    record; 
+  ejeId    integer;
+BEGIN 
+  INSERT INTO EJERCICIO(EJE_NOMBRE,EJE_GRUPO_MUSCULAR) VALUES (nombre,grupo);
+
+  FOR var_r in (SELECT EJE_ID FROM EJERCICIO 
+  WHERE EJE_NOMBRE = nombre and
+        EJE_GRUPO_MUSCULAR  = grupo)
+   LOOP
+    ejeId = var_r.EJE_ID;
+   END LOOP;  
+
+INSERT INTO EJERCICIO_MAQUINA_EQUIPO(FK_MAQUINA,FK_EJERCICIO,FK_EQUIPO,FK_RUTINA,EME_TIPO) VALUES(maquina,ejeId,null,null,false); 
+
+END 
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_insertar_ejercicio_maquina(character varying, character varying, integer)
+    OWNER TO gymucab;
+
+
+---- INSERTA EQUIPO
+
+CREATE OR REPLACE FUNCTION public.bo_m01_insertar_equipo(
+	nombre character varying)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+     
+AS $BODY$
+
+DECLARE 
+BEGIN 
+	
+  INSERT INTO EQUIPO(EQU_NOMBRE) VALUES (nombre) ;
+END 
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_insertar_equipo(character varying)
+    OWNER TO gymucab;
+
+
+
+--- INSERTA MAQUINA
+
+CREATE OR REPLACE FUNCTION public.bo_m01_insertar_maquina(
+	nombre character varying)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+     
+AS $BODY$
+
+DECLARE 
+BEGIN 
+	
+  INSERT INTO MAQUINA(MAQ_NOMBRE) VALUES (nombre) ;
+END 
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_insertar_maquina(character varying)
+    OWNER TO gymucab;
+
+
+---- MODIFICAR EQUIPO
+CREATE OR REPLACE FUNCTION public.bo_m01_modificar_equipo(
+	id integer,
+	nombre character varying)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+     
+AS $BODY$
+
+    DECLARE
+    BEGIN
+        UPDATE EQUIPO SET EQU_NOMBRE = nombre WHERE EQU_ID = id;
+    END; 
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_modificar_equipo(integer, character varying)
+    OWNER TO gymucab;
+
+
+---- MODIFICAR MAQUINA
+CREATE OR REPLACE FUNCTION public.bo_m01_modificar_maquina(
+	id integer,
+	nombre character varying)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+     
+AS $BODY$
+
+    DECLARE
+    BEGIN
+        UPDATE MAQUINA SET MAQ_NOMBRE = nombre WHERE MAQ_ID = id;
+    END; 
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_modificar_maquina(integer, character varying)
+    OWNER TO gymucab;

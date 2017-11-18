@@ -52,9 +52,11 @@ public class FOM04_Comentario {
     
         try{
 
-            String query = "SELECT * FROM fo_m04_get_progresoscompartidos(1)";
+            String query = "SELECT * FROM fo_m04_get_progresoscompartidos(?)";
+            String query2 = "SELECT * FROM fo_m04_get_progresoscompartidosamigos(?)";
             jsonArray = new ArrayList<>();
-            PreparedStatement st = conn.prepareStatement(query);                       
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt( 1 , usuario_id );
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
@@ -65,6 +67,20 @@ public class FOM04_Comentario {
                 jsonArray.get(jsonArray.size() - 1).setFecha(rs.getString(4));
                           
             }
+            
+            st = conn.prepareStatement(query2);
+            st.setInt( 1 , usuario_id );
+            rs = st.executeQuery();
+            //La variable donde se almacena el resultado de la consulta.
+            while(rs.next()){
+                jsonArray.add(new Comentario());
+                jsonArray.get(jsonArray.size() - 1).setId(Integer.parseInt(rs.getString(1)));
+                jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString(2));                
+                jsonArray.get(jsonArray.size() - 1).setNombreUsuario(rs.getString(3));
+                jsonArray.get(jsonArray.size() - 1).setFecha(rs.getString(4));
+                          
+            }
+            
             response = gson.toJson(jsonArray);
         }
         catch(SQLException e) {
@@ -79,11 +95,12 @@ public class FOM04_Comentario {
         }
     
     }
-
+    
+    
     /**
      * Funcion que recibe como parametro el id del progreso correspondiente a medidas
      * y el id usuario
-     * @param idProgresom del cual se quiere saber los comentarios
+     * @param idprogresom del cual se quiere saber los comentarios
      * @param idusuario del cual pertenece el progreso.
      * @return Devuelve los comentarios correspondientes a ese progreso de medidas
      */
@@ -175,6 +192,8 @@ public class FOM04_Comentario {
     
     /**
      * Funcion que permite ingresar comentarios a un progreso
+     * @param id_usuariocomentario
+     * @param mensaje
      * @param jsonMedida 
      * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
      */
@@ -182,32 +201,21 @@ public class FOM04_Comentario {
     @Path("/insertaComentario")
     @Produces("aplicacion/json")
     public String insertaComentario(@QueryParam("id_usuariocomentario") int id_usuariocomentario,
-                                    @QueryParam("id_usuarioprogreso") int id_usuarioprogreso,
-                                    @QueryParam("mensaje") String mensaje,
-                                    @QueryParam("id_progresoM") int id_progresoM,
-                                    @QueryParam("id_progresoP")int id_progresoP){
+                                    @QueryParam("mensaje") String mensaje
+                                    ){
 
         Map<String, String> response = new HashMap<String, String>();
         try {
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("id_usuariocomentario", id_usuariocomentario );
-                put("id_usuarioprogreso", id_usuarioprogreso );
                 put("mensaje", mensaje );
-                put("id_progresom",id_progresoM);
-                put("id_progresop", id_progresoP);
             }});
 
-            String query = "select * from fo_m04_inserta_comentario(?, ?, ?, ?, ?)";
+            String query = "select * from fo_m04_inserta_progreso_compartido(?, ?)";
             PreparedStatement st = conn.prepareStatement(query);
-            java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
-                st.setInt(1, id_usuariocomentario);
-                st.setInt(2, id_usuarioprogreso);
-                st.setString(3, mensaje);
-                st.setInt(4, id_progresoM);
-                st.setInt(5, id_progresoP);
-                
+                st.setInt(2, id_usuariocomentario);
+                st.setString(1, mensaje);
                 st.executeQuery();
-            
 
             response.put("data", "Se inserto el comentario");
         }

@@ -96,94 +96,16 @@
             <a href="./gest_Horarios.html">
                 <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Agregar Horario</button>
             </a>
-            <a href="">
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Consultar Clase</button>
+            <a>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton" onclick="buscarHorario()">Consultar Clase</button>
             </a>
             <label>Introduzca Nombre de la Clase:</label>
-            <input class="w3-input w3-border" style="width:30%;" type="text" required name="NombreClase">
+            <input class="w3-input w3-border" style="width:30%;" type="text" required name="NombreClase" id="nombre">
         </div>
-        <div class="row">
-            <div class="content">
-                <div class="w3-row ">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th class="tablehead">Clase</th>
-                                <th class="tablehead">Instructor</th>
-                                <th class="tablehead">Fecha</th>
-                                <th class="tablehead">Día</th>
-                                <th class="tablehead">Capacidad</th>
-                                <th class="tablehead">Hora Inicio</th>
-                                <th class="tablehead">Hora Fin</th>
-                                <th class="tablehead">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Yoga</td>
-                                <td>Pedro Pérez</td>
-                                <td>15/11/2017</td>
-                                <td>Lunes</td>
-                                <td>20</td>
-                                <td>7:00am</td>
-                                <td>8:00am</td>
-                                <td class="tcenter">
-                                    <a href="./gest_Horarios.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>TRX</td>
-                                <td>Pedro Pérez</td>
-                                <td>15/11/2017</td>
-                                <td>Lunes</td>
-                                <td>20</td>
-                                <td>7:00am</td>
-                                <td>8:00am</td>
-                                <td class="tcenter">
-                                    <a href="./gest_Horarios.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Insanity</td>
-                                <td>Pedro Pérez</td>
-                                <td>15/11/2017</td>
-                                <td>Lunes</td>
-                                <td>20</td>
-                                <td>7:00am</td>
-                                <td>8:00am</td>
-                                <td class="tcenter">
-                                    <a href="./gest_Horarios.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Estiramientos</td>
-                                <td>Pedro Pérez</td>
-                                <td>15/11/2017</td>
-                                <td>Lunes</td>
-                                <td>20</td>
-                                <td>7:00am</td>
-                                <td>8:00am</td>
-                                <td class="tcenter">
-                                    <a href="./gest_Horarios.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div id=tabla>
+
         </div>
+        
          
     
       </div>
@@ -209,6 +131,7 @@
       </script>
        <script src="../asset/js/jquery.min.js"></script>
        <script src="../asset/js/bootstrap.min.js"></script>
+       <script src="Horarios.js"></script>
     
     </body>
     

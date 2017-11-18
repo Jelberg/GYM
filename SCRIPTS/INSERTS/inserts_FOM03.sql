@@ -1,11 +1,9 @@
-
-
----USUARIO
-insert into usuario (usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac) values (25530426,'Minerva', 'Morales', 'F','19/08/1996');
+---PLAN
+insert into plan (pla_nombre,pla_descripcion,fk_usuario) values ('Plan A','Adelgazar 6kg, Dificultad: Media',1);
 
 ---RUTINAS
-insert into rutina (rut_nombre,rut_dia,fk_usuario) values ('Piernas','Lunes',1);  ---Rutina 1
-insert into rutina (rut_nombre,rut_dia,fk_usuario) values ('Biceps','Martes',1);  ---Rutina 2
+insert into rutina (rut_nombre,rut_dia,fk_usuario,fk_plan) values ('Piernas','Lunes',1,1);  ---Rutina 1
+insert into rutina (rut_nombre,rut_dia,fk_usuario,fk_plan) values ('Biceps','Martes',1,1);  ---Rutina 2
 
 ---EQUIPO
 insert into equipo (equ_nombre) values ('Disco'); 
@@ -24,11 +22,12 @@ insert into ejercicio_maquina_equipo (fk_maquina, fk_ejercicio, fk_equipo, fk_ru
 
 ---TRABAJO_RUTINA
 insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('06/11/2017',1.5,1,1);--Prensa
-insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('13/12/2017',3.5,1,1);--Prensa
-insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('23/10/2018',3.5,1,1);--Prensa
-insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('14/04/2017',3.5,1,1);--Prensa
-insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('07/11/2017',1.5,2,2);--Curl de biceps
-insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('16/11/2017',1.5,1,1);--Curl de biceps
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('13/12/2017',3.5,2,2);--Prensa
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('23/10/2018',3.5,3,3);--Prensa
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('14/04/2017',3.5,4,4);--Prensa
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('07/11/2017',1.5,5,5);--Curl de biceps
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('16/11/2017',1.5,6,6);--Curl de biceps
+
 
 ---SERIES
 insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (20, 'kg', 15,1);--06/11/2017
@@ -52,5 +51,3 @@ insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) valu
 insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (50, 'kg', 35,5);
 
 ---**************************************************************************************************************
-
-
