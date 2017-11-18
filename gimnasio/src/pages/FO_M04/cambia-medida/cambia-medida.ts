@@ -25,6 +25,7 @@ export class CambiaMedidaPage {
     console.log('ionViewDidLoad CambiaMedidaPage');
   }
 
+  //Metodo para hacer el llamado al servicio e insertar en la base de datos
   public cargarMedida():void{
     console.log( this.Escapula );
     let urlPeticion = "F0M04_Progreso_Medida/insertaMedidas?id_usuario=1&medida="+this.Escapula+"&tipo_medida="+1;
@@ -60,19 +61,19 @@ export class CambiaMedidaPage {
 
     console.log( this.Cuadricep );
     let urlPeticion3 = "F0M04_Progreso_Medida/insertaMedidas?id_usuario=1&medida="+this.Cuadricep+"&tipo_medida="+4;
-    this.userService.postDato( urlPeticion3 ).subscribe( data => {
-      let i: number = 0;
+    this.userService.postDato( urlPeticion3 ).subscribe( datas => {
       let mensaje: string = "";
-      while ( i < data.lenght ){
-        mensaje = data[i].data;
-      }
-      
+      let keys = Object.keys(datas);
+      let key: string = "";
+      key = keys[0];
+      mensaje = datas[key];
+      this.abrirToast( mensaje );
     });
-    alert("Medidas agregadas correctamente");
+    
   }
 
  
-
+  //Metodo que me permite actualizar las medidas segun lo que inserto el usuario
   public refrescarMedidas():void{
 
     console.log( this.Escapula );
@@ -109,25 +110,26 @@ export class CambiaMedidaPage {
     });
 
     console.log( this.Cuadricep );
-    let urlPeticion3 = "F0M04_Progreso_Medida/actualizaMedida?id_usuario=1&medida="+this.Cuadricep+"&tipo_medida=Cruadricep";
-    this.userService.postDato( urlPeticion3 ).subscribe( data => {
-      let i: number = 0;
+    let urlPeticion3 = "F0M04_Progreso_Medida/actualizaMedida?id_usuario=1&medida="+this.Cuadricep+"&tipo_medida=Cuadricep";
+    this.userService.postDato( urlPeticion3 ).subscribe( datas => {
       let mensaje: string = "";
-      while ( i < data.lenght ){
-        mensaje = data[i].data;
-      }
+      let keys = Object.keys(datas);
+      let key: string = "";
+      key = keys[0];
+      mensaje = datas[key];
+      this.abrirToast( mensaje );
 
     });
 
-    alert("Medidas actualizadas");
 
   }
 
+  //Metodo que permite eliminar las medidas ingresadas en el mes 
   public eliminarMedidas():void{
 
     console.log( this.Escapula );
     let urlPeticion = "F0M04_Progreso_Medida/eliminarMedidas?id_usuario=1&tipo_medida=Escapula"
-    this.userService.postDato( urlPeticion ).subscribe( data => {
+    this.userService.deleteDato( urlPeticion ).subscribe( data => {
       let i: number = 0;
       let mensaje: string = "";
       while ( i < data.lenght ){
@@ -138,7 +140,7 @@ export class CambiaMedidaPage {
 
     console.log( this.Tricep );
     let urlPeticion1 = "F0M04_Progreso_Medida/eliminarMedidas?id_usuario=1&tipo_medida=Tricep"
-    this.userService.postDato( urlPeticion1 ).subscribe( data => {
+    this.userService.deleteDato( urlPeticion1 ).subscribe( data => {
       let i: number = 0;
       let mensaje: string = "";
       while ( i < data.lenght ){
@@ -149,7 +151,7 @@ export class CambiaMedidaPage {
 
     console.log( this.Abdomen );
     let urlPeticion2 = "F0M04_Progreso_Medida/eliminarMedidas?id_usuario=1&tipo_medida=Abdomen"
-    this.userService.postDato( urlPeticion2 ).subscribe( data => {
+    this.userService.deleteDato( urlPeticion2 ).subscribe( data => {
       let i: number = 0;
       let mensaje: string = "";
       while ( i < data.lenght ){
@@ -159,18 +161,28 @@ export class CambiaMedidaPage {
     });
 
     console.log( this.Cuadricep );
-    let urlPeticion3 = "F0M04_Progreso_Medida/eliminarMedidas?id_usuario=1&tipo_medida=Cuadricepp"
-    this.userService.postDato( urlPeticion3 ).subscribe( data => {
-      let i: number = 0;
+    let urlPeticion3 = "F0M04_Progreso_Medida/eliminarMedidas?id_usuario=1&tipo_medida=Cuadricep"
+    this.userService.deleteDato( urlPeticion3 ).subscribe( datas => {
       let mensaje: string = "";
-      while ( i < data.lenght ){
-        mensaje = data[i].data;
-      }
+      let keys = Object.keys(datas);
+      let key: string = "";
+      key = keys[0];
+      mensaje = datas[key];
+      this.abrirToast( mensaje );
 
     });
 
-    alert("Medidas del mes borradas");
+    
 
+  }
+  //Metodo que abre mensaje al realizar una accion.
+  public abrirToast( mensaje: string ):void {
+    let toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: 3000,
+      position: 'middle'
+    });
+    toast.present();
   }
 
 }

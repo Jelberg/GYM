@@ -26,6 +26,7 @@ import { PlanPage } from '../pages/FO_M03/plan/plan';
 import { WorkoutPlansPage } from '../pages/FO_M03/workout-plans/workout-plans';
 import { PlanRutinasPage } from '../pages/FO_M03/plan-rutinas/plan-rutinas';
 import { EjerciciosPage } from '../pages/FO_M03/ejercicios/ejercicios';
+import { EjercicioRutinaPage } from '../pages/FO_M03/ejercicio-rutina/ejercicio-rutina';
 //FIN M03
 
 //M04
@@ -57,14 +58,17 @@ import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clase
 import { ComentarClasePage} from '../pages/FO_M05/comentar-clase/comentar-clase';
 import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { ListaClasesPage } from '../pages/FO_M05/lista-clases/lista-clases';
 //FIN M05
 // M06
-import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/reservas-realizadas';
-import { HorariosEntrenadorPage} from '../pages/FO_M06/horarios-entrenador/horarios-entrenador';
-import { GestiNDeReservasPage} from '../pages/FO_M06/gesti-nde-reservas/gesti-nde-reservas';
+//import  { AsignarRutinaPage} from '../pages/FO_M06/asignar-rutina/asignar-rutina';
+import  { ChatPage} from '../pages/FO_M06/chat/chat';
+//import  { ChatEntrenadorPage} from '../pages/FO_M06/chat-entrenador/chat-entrenador';
 import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reserva';
-import { AsignarRutinaPage} from '../pages/FO_M06/asignar-rutina/asignar-rutina';
-import {ChatEntrenadorPage} from '../pages/FO_M06/chat-entrenador/chat-entrenador';
+import { GestiNDeReservasPage} from '../pages/FO_M06/gesti-nde-reservas/gesti-nde-reservas';
+import { HorariosEntrenadorPage} from '../pages/FO_M06/horarios-entrenador/horarios-entrenador';
+import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/reservas-realizadas';
+
 //FIN M06
 
 
@@ -105,6 +109,7 @@ import {ChatEntrenadorPage} from '../pages/FO_M06/chat-entrenador/chat-entrenado
     WorkoutPlansPage,
     PlanRutinasPage,
     EjerciciosPage,
+    EjercicioRutinaPage,
     ClasesPage,
     ReservasPage,
     ClaseParticularPage,
@@ -115,9 +120,7 @@ import {ChatEntrenadorPage} from '../pages/FO_M06/chat-entrenador/chat-entrenado
     HorariosEntrenadorPage,
     GestiNDeReservasPage,
     DetalleReservaPage,
-    ChatPage,
-    ChatEntrenadorPage,
-    AsignarRutinaPage,
+    ListaClasesPage
   ],
   imports: [
     BrowserModule,
@@ -169,6 +172,7 @@ import {ChatEntrenadorPage} from '../pages/FO_M06/chat-entrenador/chat-entrenado
     WorkoutPlansPage,
     PlanRutinasPage,
     EjerciciosPage,
+    EjercicioRutinaPage,
     ClasesPage,
     ClaseParticularPage,
     ClasesParticipadasPage,
@@ -179,9 +183,7 @@ import {ChatEntrenadorPage} from '../pages/FO_M06/chat-entrenador/chat-entrenado
     HorariosEntrenadorPage,
     GestiNDeReservasPage,
     DetalleReservaPage,
-    ChatPage,
-    ChatEntrenadorPage,
-    AsignarRutinaPage,
+    ListaClasesPage
   ],
   providers: [
     StatusBar,

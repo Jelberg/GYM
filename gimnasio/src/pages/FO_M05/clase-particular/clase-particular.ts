@@ -25,15 +25,18 @@ export class ClaseParticularPage {
   public duracion:number;
   public capacidad:number;
   public disponibilidad:number;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController){  
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+    id: number,titulo: string, descripcion: string, instructor: string, fecha:string,capacidad:number
+  ){  
 
-    this.descripcion="sbsdgsdsdfdsfsd dsdssdvsdvsda vsdsd s";
+    this.descripcion=descripcion;
     this.img="../assets/imgs/clasesYoga.jpg";
-    this.instructor="Estela Rodriguez";
-    this.fecha="24/10/2017 3:00 pm";
+    this.instructor=instructor;
+    this.fecha=fecha;
     this.duracion= 60;
-    this.capacidad=50;
+    this.capacidad=capacidad;
     this.disponibilidad=20;
+    this.titulo = titulo;
   }
   
 

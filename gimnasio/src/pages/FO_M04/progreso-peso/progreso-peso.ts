@@ -8,7 +8,7 @@ import { UserServiceProvider } from '../../../providers/user-service/user-servic
   templateUrl: 'progreso-peso.html'
 })
 export class ProgresoPesoPage {
-  //chart = BaseChartDirective;
+  //Arreglos para el manejo de la informacion traida de los servicios
   dataProbar: number = 0;
   listaPeso = [];
   listaFecha = [];
@@ -24,6 +24,10 @@ export class ProgresoPesoPage {
   {
     console.log('ionViewDidLoad ProgresoPesoPage');
   }
+
+  /*Metodo en la que se realiza la llamada al servicio 
+  y trae lo correspondiste al peso del usuario
+  */
   getProgreso(){
     let urlPeticion: string = "F0M04_Progreso_Peso/getProgresoP?id_usuario=1";
     this.userService.getDato( urlPeticion ).subscribe(data => {
@@ -33,12 +37,11 @@ export class ProgresoPesoPage {
         this.listaFecha[i] = data[i]._fechaP;
         i++;
       }
-      this.dataProbar = data[0]._peso;
-      this.uno = data[1]._peso;
-      this.dos = data[3]._peso;
       this.setLine();
     });
   }
+
+  //Gracia por defecto
   public lineChartData:Array<any> = [{
     data: [10,20,30,40,50], label: "Peso"
   }];
@@ -60,6 +63,8 @@ export class ProgresoPesoPage {
   ];
   public lineChartLegend:boolean = false;
   public lineChartType:string = 'line';
+
+  //Metodo que genera la grafica
   setLine(){
     this.lineChartData = [];
     //this.lineChartLabels = [];
@@ -75,7 +80,6 @@ export class ProgresoPesoPage {
       label: 'Peso',
       data: arreglo
     });
-    //this.lineChartLabels = this.listaFecha;
   }
   public chartClicked(e:any):void {
     console.log(e);
