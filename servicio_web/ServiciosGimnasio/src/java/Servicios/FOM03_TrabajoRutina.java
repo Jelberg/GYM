@@ -26,6 +26,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.POST;
+
 /**
  *
  * @author MinervaMorales
@@ -224,7 +225,6 @@ public class FOM03_TrabajoRutina {
                 st.setString(3, dia);
                 ResultSet rs = st.executeQuery();
 
-                //La variable donde se almacena el resultado de la consulta.
                 while(rs.next())
                 {
                     jsonArray.add(new Ejercicio());

@@ -465,12 +465,12 @@ CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_maquina(idUsuario int, nombre c
  _idRutina int;
 BEGIN
  SELECT rut.rut_id into _idRutina from rutina as rut where rut.fk_usuario= idUsuario and 
-   							rut.rut_nombre= nombre and 
+   														rut.rut_nombre= nombre and 
                                                         rut.rut_dia= dia; 
-   FOR _ejercicios IN( select eme.eme_id, maq.maq_nombre, eje.eje_nombre,
+   FOR _ejercicios IN( select distinct(eje.eje_nombre), eme.eme_id, maq.maq_nombre, 
                        eje.eje_grupo_muscular from ejercicio_maquina_equipo as eme,
                        maquina as maq, ejercicio as eje where maq.maq_id = eme.fk_maquina and
-    				   eme.fk_ejercicio = eje.eje_id and eme.fk_rutina <> _idRutina
+    				   eme.fk_ejercicio = eje.eje_id and eme.fk_rutina is null
 						)
                         
    LOOP
@@ -482,7 +482,6 @@ BEGIN
    END LOOP; 
    END; $$
   LANGUAGE plpgsql;
-
 --------------------------Funcion que devuelve una lista de todos los ejercicios por equipo-------------------------
 CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_equipo(idUsuario int, nombre character varying
                                                          , dia character varying)
@@ -498,7 +497,7 @@ BEGIN
    FOR _ejercicios IN( select eme.eme_id, equ.equ_nombre, eje.eje_nombre, eje.eje_grupo_muscular 
                         from ejercicio_maquina_equipo as eme,equipo as equ, ejercicio as eje
 						where equ.equ_id = eme.fk_equipo and eme.fk_ejercicio = eje.eje_id
-                      	and eme.fk_rutina <> _idRutina
+                      	and eme.fk_rutina is null
 						)
    LOOP
     idEme = _ejercicios.eme_id;
