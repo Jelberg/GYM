@@ -34,7 +34,7 @@ public class PruebaEntrenador {
     public void comenzarPrueba() {
         _conn = new Sql();
         String insertarEntrenador = "INSERT INTO ENTRENADOR (ent_id, ent_nombre, ent_apellido, ent_fecha_nac, ent_sexo, ent_correo, ent_historial, ent_foto ) "
-                + "VALUES (9999,'Emilio','Romero','02/10/1990','M','earp@gmail.com','Crossfit',null )";
+                + "VALUES (9999,'Emilio','Romero','to_date(02/10/1990,'dd/mm/yyyy'),'M','earp@gmail.com','Crossfit',null )";
         
         try {
             _rs = _conn.sql ( insertarEntrenador );  
