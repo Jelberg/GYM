@@ -152,7 +152,7 @@ public class BOM02_Entrenador {
     public String insertarEntrenador(@QueryParam("nombre") String nombre,
                                     @QueryParam("apellido") String apellido,
                                     @QueryParam("fechanac") String fecha,
-                                    @QueryParam("sexo") char sexo,
+                                    @QueryParam("sexo") String sexo,
                                     @QueryParam("correo") String correo,
                                     @QueryParam("historial") String historial
                                     ){
@@ -168,7 +168,7 @@ public class BOM02_Entrenador {
                 put("historial", historial );
             }});
             
-            String query = "select * from bo_m02_insertar_entrenador('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+Character.toString(sexo)+"', '"+correo+"', '"+historial+"')";
+            String query = "select * from bo_m02_insertar_entrenador('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+sexo+"', '"+correo+"', '"+historial+"')";
             PreparedStatement st = conn.prepareStatement(query); 
 
                 st.executeQuery();
@@ -242,7 +242,7 @@ public class BOM02_Entrenador {
     public String actualizaInstruct( @QueryParam("nombre") String nombre,
                                     @QueryParam("apellido") String apellido,
                                     @QueryParam("fechanac") String fecha,
-                                    @QueryParam("sexo") char sexo,
+                                    @QueryParam("sexo") String sexo,
                                     @QueryParam("correo") String correo,
                                     @QueryParam("historial") String historial ){
         Map<String, String> response = new HashMap<String, String>();
@@ -255,7 +255,7 @@ public class BOM02_Entrenador {
                 put("correo", correo );
                 put("historial", historial );
             }});
-             String query = "select * from bo_m02_actualizar_entrenador('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+Character.toString(sexo)+"', '"+correo+"' , '"+historial+"')";
+             String query = "select * from bo_m02_actualizar_entrenador('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+sexo+"', '"+correo+"' , '"+historial+"')";
             PreparedStatement st = conn.prepareStatement(query); 
 
                 st.executeQuery();
