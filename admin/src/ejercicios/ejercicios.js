@@ -57,7 +57,7 @@ $.get(url_ej + getAll, function (data) {
                 }
 
             }
-            contenido += "<td class='tcenter'><i class='fa fa-pencil-square-o' onclick='editar(this,1)' aria-hidden='true'></i><i class='fa fa-trash' onclick='eliminar(this)' aria-hidden='true'></i></td>";
+            contenido += "<td class='tcenter'> <i class='fa fa-trash' onclick='eliminar(this)' aria-hidden='true'></i></td>";
             contenido += "</tr>";
 
         }
