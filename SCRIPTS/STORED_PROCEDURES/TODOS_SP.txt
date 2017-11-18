@@ -1435,7 +1435,6 @@ ALTER FUNCTION public.bo_m01_modificar_equipo(integer, character varying)
 
 
 ---- MODIFICAR MAQUINA
-
 CREATE OR REPLACE FUNCTION public.bo_m01_modificar_maquina(
 	id integer,
 	nombre character varying)
