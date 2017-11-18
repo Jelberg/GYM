@@ -1127,7 +1127,7 @@ DECLARE
     id_peso int;
 BEGIN
     id_peso := ( SELECT pp_id FROM progreso_peso WHERE fk_usuario = id_usuario order by pp_fecha DESC limit 1 );
-    UPDATE PROGRESO_PESO SET  pp_peso = peso
+    DELETE FROM PROGRESO_PESO
     WHERE pp_id = id_peso;
 END; $$
   LANGUAGE plpgsql;
