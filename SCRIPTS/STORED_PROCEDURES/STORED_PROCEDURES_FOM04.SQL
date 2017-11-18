@@ -1,5 +1,5 @@
 ﻿--Este solo devuelve las medidas de ese usuario en esa fecha.
-CREATE OR REPLACE FUNCTION fo_m04_get_progresoM(usuario_id int)
+CREATE OR REPLACE FUNCTION fo_m04_get_progresom(usuario_id int)
   RETURNS TABLE(medida INT, tipo character varying, fecha date)
    AS $$
 DECLARE

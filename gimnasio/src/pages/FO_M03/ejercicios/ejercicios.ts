@@ -88,7 +88,7 @@ export class EjerciciosPage {
 
   }
 
-
+ 
   public mostrarEjercicioAgregado() {
     const alert = this.alertCtrl.create({
       title: 'El ejercicio fue agregado con exito',
@@ -102,5 +102,5 @@ export class EjerciciosPage {
   {
     this.navCtrl.push(ModificarRutinaPage, {nombre: this.nombreRut, dia: this.diaRut, idUsuario: this.idUsuario});
   }
-
+  
 }

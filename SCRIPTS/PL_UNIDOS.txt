@@ -1,4 +1,4 @@
--------***********************************************************---------------------
+﻿-------***********************************************************---------------------
 -------/                                                         /---------------------
 -------/            CREATE DATA BASE AND USER                   /---------------------
 -------/                                                         /---------------------
@@ -6,9 +6,9 @@
 
 -----------------FIN CREAR LA BASE DE DATOS CON USER---------------
 
-CREATE 	USER 	 gymucab 	PASSWORD 'gymucab';
+/*CREATE 	USER 	 gymucab 	PASSWORD 'gymucab';
 ALTER 	ROLE	 gymucab 	WITH SUPERUSER;
-CREATE 	DATABASE gimnasiobd 	WITH OWNER gymucab;
+CREATE 	DATABASE gimnasiobd 	WITH OWNER gymucab;*/
 
 
 -------***********************************************************---------------------
@@ -140,7 +140,7 @@ CONSTRAINT PK_EME_ID PRIMARY KEY (EME_ID, FK_EJERCICIO)
 
 CREATE TABLE TRABAJO_RUTINA(
 	TR_ID                           SERIAL NOT NULL,
-	TR_FECHA           		DATE NOT NULL,
+	TR_FECHA           		DATE NULL,
 	TR_DESCANSO             DECIMAL,
 	TR_DURACION             INTEGER,
 	TR_DISTANCIA            INTEGER,
@@ -828,12 +828,12 @@ CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_maquina(idUsuario int, nombre c
  _idRutina int;
 BEGIN
  SELECT rut.rut_id into _idRutina from rutina as rut where rut.fk_usuario= idUsuario and 
-   							rut.rut_nombre= nombre and 
+   														rut.rut_nombre= nombre and 
                                                         rut.rut_dia= dia; 
-   FOR _ejercicios IN( select eme.eme_id, maq.maq_nombre, eje.eje_nombre,
+   FOR _ejercicios IN( select distinct(eje.eje_nombre), eme.eme_id, maq.maq_nombre, 
                        eje.eje_grupo_muscular from ejercicio_maquina_equipo as eme,
                        maquina as maq, ejercicio as eje where maq.maq_id = eme.fk_maquina and
-    				   eme.fk_ejercicio = eje.eje_id and eme.fk_rutina <> _idRutina
+    				   eme.fk_ejercicio = eje.eje_id and eme.fk_rutina is null
 						)
                         
    LOOP
@@ -845,7 +845,6 @@ BEGIN
    END LOOP; 
    END; $$
   LANGUAGE plpgsql;
-
 --------------------------Funcion que devuelve una lista de todos los ejercicios por equipo-------------------------
 CREATE OR REPLACE FUNCTION FO_M03_get_ejercicios_equipo(idUsuario int, nombre character varying
                                                          , dia character varying)
@@ -861,7 +860,7 @@ BEGIN
    FOR _ejercicios IN( select eme.eme_id, equ.equ_nombre, eje.eje_nombre, eje.eje_grupo_muscular 
                         from ejercicio_maquina_equipo as eme,equipo as equ, ejercicio as eje
 						where equ.equ_id = eme.fk_equipo and eme.fk_ejercicio = eje.eje_id
-                      	and eme.fk_rutina <> _idRutina
+                      	and eme.fk_rutina is null
 						)
    LOOP
     idEme = _ejercicios.eme_id;
@@ -1026,9 +1025,9 @@ BEGIN
 END; $$
   LANGUAGE plpgsql;
   
---- ################################################ FOM04   ##########################################################################################################
+
 --Este solo devuelve las medidas de ese usuario en esa fecha.
-CREATE OR REPLACE FUNCTION fo_m04_get_progresoM(usuario_id int)
+CREATE OR REPLACE FUNCTION fo_m04_get_progresom(usuario_id int)
   RETURNS TABLE(medida INT, tipo character varying, fecha date)
    AS $$
 DECLARE
@@ -1049,15 +1048,21 @@ END; $$
 
 
 --Este elimina las medidas correspondientes a esa fecha y a ese usuario
-CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_id int, tipo_medida int)
+--Este elimina las medidas correspondientes a esa fecha y a ese usuario
+CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_id int, tipo_medida varchar)
 	RETURNS void AS $$
     DECLARE
     id_medida int;
     fecha_actual DATE;
+    mes	INT;
+    id_pm	INT;
     BEGIN
-	id_medida := ( SELECT MED_ID FROM MEDIDA WHERE MED_TIPO = tipo_medida AND EXTRACT(MONTH 	   fecha_actual) = ( SELECT EXTRACT(MONTH PM_FECHA) FROM MEDIDA  WHERE tipo_medida = 			tipo_medida) );
+	fecha_actual := current_date;
+	mes := (select EXTRACT(MONTH FROM fecha_actual) );
+	id_medida := ( SELECT MED_ID FROM MEDIDA WHERE med_tipo = tipo_medida  );
+	id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = usuario_id and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) );	
         DELETE FROM progreso_medida
-        WHERE med_id = id_medida and fk_usuario = usu_id;
+        WHERE pm_id = id_pm;
     END; $$
 LANGUAGE plpgsql;
 
@@ -1078,21 +1083,24 @@ CREATE OR REPLACE FUNCTION fo_m04_inserta_medidas(
   LANGUAGE plpgsql;
 
 
-
 --FUNCION QUE ACTUALZA MEDIDA DADOS: EL ID DEL USUARIO, FECHA DE EL PROGRESO, TIPO DE LA MEDIDA Y LA NUEVA MEDIDA.
-CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER, medida INTEGER, tipo_medida VARCHAR)
+CREATE OR REPLACE FUNCTION fo_m04_act_medida(id_usuario INTEGER,tipo_medida VARCHAR, medida INTEGER )
   RETURNS void
    AS $$
 DECLARE
     id_medida int;
     fecha_actual DATE;
+    mes	int;
+    id_pm	int;
 BEGIN
-    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE MED_TIPO = tipo_medida AND EXTRACT(MONTH fecha_actual) = ( SELECT EXTRACT(MONTH PM_FECHA) FROM MEDIDA  WHERE tipo_medida = tipo_medida) );
+     fecha_actual := current_date;
+     mes := (select EXTRACT(MONTH FROM fecha_actual) );
+    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE med_tipo = tipo_medida  );
+    id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = id_usuario and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) );	
     UPDATE PROGRESO_MEDIDA SET  PM_MEDIDA = medida
-    WHERE FK_USUARIO = id_usuario and FK_MEDIDA = id_medida)
+    WHERE PM_ID = id_pm;
 END; $$
   LANGUAGE plpgsql;
-
 --FUNCION QUE OBTIENE LOS ULTIMOS REGISTROS DEL PROGRESO DE UN USUARIO CON RESPECTO A SU PESO.
 CREATE OR REPLACE FUNCTION fo_m04_get_progresop(id_usuario int)
   RETURNS TABLE(peso INT, fecha DATE, id INT)
@@ -1133,7 +1141,7 @@ DECLARE
     id_peso int;
 BEGIN
     id_peso := ( SELECT pp_id FROM progreso_peso WHERE fk_usuario = id_usuario order by pp_fecha DESC limit 1 );
-    UPDATE PROGRESO_PESO SET  pp_peso = peso
+    DELETE FROM PROGRESO_PESO
     WHERE pp_id = id_peso;
 END; $$
   LANGUAGE plpgsql;
@@ -1253,22 +1261,9 @@ BEGIN
 END; $$
   LANGUAGE plpgsql;
 
--- INSERTAR UN PROGRESO COMPARTIDO
-CREATE OR REPLACE FUNCTION fo_m04_inserta_progreso_compartido(
-    mensaje character varying,
-    usuario INT)
-  RETURNS void
-   AS $$
-    DECLARE
-	fecha_actual DATE;
-    BEGIN
-	fecha_actual  := current_date;
-        INSERT INTO comentario (com_mensaje, com_fecha, fk_usuario) VALUES
-        ( mensaje, fecha_actual, usuario );
-    END; $$
-  LANGUAGE plpgsql;
-  
-------***FOM05****-----
+
+
+  ------***FOM05****-----
 
 CREATE OR REPLACE FUNCTION FOM05_LLENAR_DURACION() 
 RETURNS TRIGGER AS $$
@@ -1578,6 +1573,98 @@ END; $$
   LANGUAGE plpgsql;
 
 ----*****FOM06*****---
+--********************Funciones del Web Service***************
+--------Esta funcion devuelve todas las reservas de entrenadores que ha hecho un usuario-------
+CREATE OR REPLACE FUNCTION fo_m06_get_reserva(id int)
+	Returns Table (id_usuario int, nombre_ent character varying,fecha_ini date, fecha_fin date)
+	AS $$
+DECLARE
+	_reservas record;
+	BEGIN
+	FOR _reservas IN (SELECT usu_id,ent_nombre,res_fecha_ini,res_fecha_fin from Entrenador,Reserva, Usuario where ent_id=fk_entrenador and usu_id=fk_usuario)
+
+	loop
+		id_usuario=_reservas.usu_id;
+		nombre_ent=_reservas.ent_nombre;
+		fecha_ini=_reservas.ent_fecha_ini;
+		fecha_fin=_reservas.ent_fecha_fin;
+		return next;
+	end loop;
+	end $$
+	LANGUAGE PLPGSQL;
+---************Esta funcion permitira agregar una reserva******-------
+CREATE OR REPLACE fo_m06_agregar_reserva (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int)
+RETURNS VOID AS $$
+DECLARE
+BEGIN
+	INSERT INTO reserva(res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int) 
+			values (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int);
+	END $$;
+	LANGUAGE PLPGSQL;
+
+
+----******************Esta funcion permite eliminar una reserva******-------------
+CREATE OR REPLACE FUNCTION fo_m06_eliminar_reserva (reserva_id int)
+RETURNS VOID AS $$
+DECLARE
+BEGIN
+	DELETE FROM _reserva
+	where reserva_id=res_id;
+	end $$
+	LANGUAGE PLPGSQL; 
+
+
+---------------Esta funcion devuelve todos los entrenadores en lista-----------------------
+CREATE OR REPLACE FUNCTION fo_m06_get_entrenador (ent_id int)
+RETURNS refcursor AS $$
+DECLARE ref refcursor;
+	BEGIN
+		OPEN ref FOR 
+			SELECT ent_nombre, ent_correo
+			FROM ENTRENADOR;
+		RETURN ref;
+	END
+	$$ LANGUAGE PLPGSQL;
+
+
+-----------Esta funcion asigna una relacion usuario entrenador------------------
+
+CREATE OR REPLACE FUNCTION f0_mo6_set_rutina (usu_id int, ent_id int)
+RETURNS VOID AS $$
+DECLARE
+BEGIN
+	INSERT INTO reserva(fk_usuario,fk_entrenador) 
+			values (usu_id,end_id);
+	END $$
+	LANGUAGE PLPGSQL;
+
+
+---------------Esta funcion devuelve todas las rutinas de un usuario---------
+CREATE OR REPLACE FUNCTION fo_m06_get_rutina_usuario (rut_id int)
+RETURNS refcursor AS $$
+DECLARE ref refcursor;
+	BEGIN
+		OPEN ref FOR 
+			SELECT R.rut_nombre, R.rut_dia
+			FROM RUTINA R, ENTRENADOR E, USUARIO U
+			WHERE E.ent_id = R.fk_entrenador AND U.usu_id = r.fk_usuario;
+		RETURN ref;
+	END
+	$$ LANGUAGE PLPGSQL;
+
+
+-----------Esta funcion muestra el progreso del usuario------------
+CREATE OR REPLACE FUNCTION fo_m06_get_progreso_usuario (rut_id int)
+RETURNS refcursor AS $$
+DECLARE ref refcursor;
+	BEGIN
+		OPEN ref FOR 
+			SELECT PR.progreso, PR.evaluacion
+			FROM RUTINA R, ENTRENADOR E, USUARIO U, PROGRESO_RUTINA PR
+			WHERE (E.ent_id = R.fk_entrenador AND U.usu_id = r.fk_usuario) AND PR.fk_rutina = R.rut_id;
+		RETURN ref;
+	END
+	$$ LANGUAGE PLPGSQL;
 
 -------***********************************************************---------------------
 -------/                                                         /---------------------
@@ -1641,7 +1728,7 @@ INSERT INTO public.turno_entrenador(te_fecha, te_tanda, te_hora_inicio, te_hora_
 (SELECT TUR_ID FROM TURNO WHERE TUR_DIA='miercoles'),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_CORREO='bertham@gmail.com'));
 
 --CLASE
-INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Yoga','yoga master class') ;
+/*INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Yoga','yoga master class') ;
 INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('TRX','TRX master class') ;
 INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Pilates','Pilates master class') ;
 INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Aerobic','quemar calorias con ejercicio cardiovascular') ;
@@ -1651,7 +1738,7 @@ INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Crossfit','combina trabaj
 INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Zumba','fortalecer los m�sculos, liberar tensiones y mejorar la coordinaci�n. ') ;
 INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Body pump','Entrenamiento de fuerza en el que se trabajan distintas zonas musculares al ritmo de la m�sica.') ;
 INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Spinning','Esta actividad cardiovascular lleva al coraz�n a sus m�ximas pulsaciones a trav�s del pedaleo siguiendo el ritmo de la m�sica.') ;
-
+*/
 
 --INSTRUCTOR
 
@@ -1693,6 +1780,51 @@ INSERT INTO HORARIO_CLASE(HC_FECHA,HC_DIA,HC_CAPACIDAD,HC_HORA_INICIO,HC_HORA_FI
 --USUARIO
 insert into usuario (usu_id,usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac,USU_TELEFONO,USU_ESTATURA, USU_FOTO, USU_CORREO) 
 values (1,25530426,'Alexander', 'Pront', 'F','19/08/1996','123',12,null,'mm@gmail.com');
+insert into usuario (usu_id,usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac,USU_TELEFONO,USU_ESTATURA, USU_FOTO, USU_CORREO) 
+values (2,25530426,'Pedro', 'Perez', 'M','19/08/1997','123',12,null,'ppm@gmail.com');
+insert into usuario (usu_id,usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac,USU_TELEFONO,USU_ESTATURA, USU_FOTO, USU_CORREO) 
+values (3,25530426,'Maria', 'Peraza', 'F','19/08/1998','123',12,null,'mma@gmail.com');
+
+-----INSERT USUARIO_ENTRENADOR-------
+INSERT INTO USUARIO_ENTRENADOR VALUES ((SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Alexander' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Alejandro' LIMIT 1));
+INSERT INTO USUARIO_ENTRENADOR VALUES ((SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Alexander' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pedro' LIMIT 1));
+INSERT INTO USUARIO_ENTRENADOR VALUES ((SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Alexander' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Ana' LIMIT 1));
+INSERT INTO USUARIO_ENTRENADOR VALUES ((SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Pedro' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Alejandra' LIMIT 1));
+INSERT INTO USUARIO_ENTRENADOR VALUES ((SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Pedro' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Jorge' LIMIT 1));
+INSERT INTO USUARIO_ENTRENADOR VALUES ((SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Pedro' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Maria' LIMIT 1));
+INSERT INTO USUARIO_ENTRENADOR VALUES ((SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Maria' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Azucena' LIMIT 1));
+INSERT INTO USUARIO_ENTRENADOR VALUES ((SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Maria' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pablo' LIMIT 1));
+INSERT INTO USUARIO_ENTRENADOR VALUES ((SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Maria' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Julia' LIMIT 1));
+
+
+-----INSERT MENSAJE-------
+INSERT INTO MENSAJE VALUES (default,'hola, por que no viniste a clases?',(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Alexander' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Alejandro' LIMIT 1));
+INSERT INTO MENSAJE VALUES (default,'Te asigne la rutina de hoy',(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Alexander' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Alejandro' LIMIT 1));
+INSERT INTO MENSAJE VALUES (default,'Sigue trabajando asi',(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Alexander' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pedro' LIMIT 1));
+INSERT INTO MENSAJE VALUES (default,'Acuerdate del pago',(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Pedro' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Jorge' LIMIT 1));
+INSERT INTO MENSAJE VALUES (default,'Hoy te traje las proteinas, cuando puedas las buscas',(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Pedro' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Jorge' LIMIT 1));
+INSERT INTO MENSAJE VALUES (default,'Te sugiero meterte a la clase de spinning',(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Pedro' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Jorge' LIMIT 1));
+INSERT INTO MENSAJE VALUES (default,'Te evalue la rutina, sigue asi!',(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Maria' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pablo' LIMIT 1));
+INSERT INTO MENSAJE VALUES (default,'Estoy vendiendo proteinas',(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Maria' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pablo' LIMIT 1));
+INSERT INTO MENSAJE VALUES (default,'Vendo guantes y calleras',(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Maria' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pablo' LIMIT 1));
+INSERT INTO MENSAJE VALUES (default,'Este es el mensaje de prueba #10',(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Maria' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pablo' LIMIT 1));
+
+-----INSERT RESERVA-------
+INSERT INTO RESERVA VALUES (default,TO_DATE('20/11/2017 08:30', 'DD/MM/YYYY HH:MI'),TO_DATE('20/11/2017', 'DD/MM/YYYY HH:MI 09:30'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Alexander' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Alejandro' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('21/11/2017 10:00', 'DD/MM/YYYY HH:MI'),TO_DATE('21/11/2017', 'DD/MM/YYYY HH:MI 12:00'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Alexander' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Alejandro' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('22/11/2017 07:30', 'DD/MM/YYYY HH:MI'),TO_DATE('22/11/2017', 'DD/MM/YYYY HH:MI 10:00'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Alexander' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pedro' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('23/11/2017 18:00', 'DD/MM/YYYY HH:MI'),TO_DATE('23/11/2017', 'DD/MM/YYYY HH:MI 20:00'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Alexander' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pedro' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('24/11/2017 09:00', 'DD/MM/YYYY HH:MI'),TO_DATE('24/11/2017', 'DD/MM/YYYY HH:MI 10:00'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Alexander' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pedro' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('25/11/2017 10:00', 'DD/MM/YYYY HH:MI'),TO_DATE('25/11/2017', 'DD/MM/YYYY HH:MI 13:00'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Pedro' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Jorge' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('26/11/2017 15:00', 'DD/MM/YYYY HH:MI'),TO_DATE('26/11/2017', 'DD/MM/YYYY HH:MI 17:30'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Pedro' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Jorge' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('27/11/2017 10:00', 'DD/MM/YYYY HH:MI'),TO_DATE('27/11/2017', 'DD/MM/YYYY HH:MI 11:00'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Pedro' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Jorge' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('28/11/2017 14:00', 'DD/MM/YYYY HH:MI'),TO_DATE('28/11/2017', 'DD/MM/YYYY HH:MI 17:00'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Pedro' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Maria' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('29/11/2017 16:30', 'DD/MM/YYYY HH:MI'),TO_DATE('29/11/2017', 'DD/MM/YYYY HH:MI 18:30'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Pedro' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Maria' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('30/11/2017 09:30', 'DD/MM/YYYY HH:MI'),TO_DATE('30/11/2017', 'DD/MM/YYYY HH:MI 10:00'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Maria' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pablo' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('20/11/2017 08:30', 'DD/MM/YYYY HH:MI'),TO_DATE('20/11/2017', 'DD/MM/YYYY HH:MI 09:30'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Maria' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pablo' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('21/11/2017 10:00', 'DD/MM/YYYY HH:MI'),TO_DATE('21/11/2017', 'DD/MM/YYYY HH:MI 12:00'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Maria' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pablo' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('22/11/2017 07:30', 'DD/MM/YYYY HH:MI'),TO_DATE('22/11/2017', 'DD/MM/YYYY HH:MI 10:00'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Maria' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Pablo' LIMIT 1));
+INSERT INTO RESERVA VALUES (default,TO_DATE('23/11/2017 18:00', 'DD/MM/YYYY HH:MI'),TO_DATE('23/11/2017', 'DD/MM/YYYY HH:MI 20:00'),(SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Maria' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Azucena' LIMIT 1));
 
 --INSTRUCTOR
 INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES('Pedro','Alvares','13-12-94','M','fitpedro@gmail.com',null);
@@ -1726,3 +1858,74 @@ INSERT INTO HORARIO_CLASE(HC_FECHA,HC_DIA
 
 --CRITICA       
 INSERT INTO CRITICA (CRI_FECHA,CRI_COMENTARIO,CRI_VALORACION,fk_hc_id)VALUES('12-12-12','ESTO ES UNA CRITICA',5,(SELECT HC_ID FROM HORARIO_CLASE LIMIT 1));
+
+--PLAN
+insert into plan (pla_nombre,pla_descripcion,fk_usuario) values ('Plan A','Adelgazar 6kg, Dificultad: Media',1);
+
+---RUTINAS
+insert into rutina (rut_nombre,rut_dia,fk_usuario,fk_plan) values ('Piernas','Lunes',1,1);  
+insert into rutina (rut_nombre,rut_dia,fk_usuario,fk_plan) values ('Biceps','Martes',1,1); 
+
+
+-----INSERT PROGRESO RUTINA-------
+INSERT INTO PROGRESO_RUTINA VALUES (default,'PROGRESO NOTABLE', 'RUTINA DE PIERNAS',(SELECT RUT_ID FROM RUTINA WHERE RUT_NOMBRE = 'Piernas' LIMIT 1));
+INSERT INTO PROGRESO_RUTINA VALUES (default,'PROGRESO MEDIO', 'RUTINA DE PIERNAS',(SELECT RUT_ID FROM RUTINA WHERE RUT_NOMBRE = 'Piernas' LIMIT 1));
+INSERT INTO PROGRESO_RUTINA VALUES (default,'PROGRESO ESPERADO', 'RUTINA DE PIERNAS',(SELECT RUT_ID FROM RUTINA WHERE RUT_NOMBRE = 'Piernas' LIMIT 1));
+INSERT INTO PROGRESO_RUTINA VALUES (default,'PROGRESO BAJO', 'RUTINA DE BICEPS',(SELECT RUT_ID FROM RUTINA WHERE RUT_NOMBRE = 'Biceps' LIMIT 1));
+INSERT INTO PROGRESO_RUTINA VALUES (default,'NO HUBO PROGRESO', 'RUTINA DE BICEPS',(SELECT RUT_ID FROM RUTINA WHERE RUT_NOMBRE = 'Biceps' LIMIT 1));
+
+---TRABAJO_RUTINA
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('06/11/2017',1.5,1,1);--Prensa
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('13/12/2017',3.5,2,2);--Prensa
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('23/10/2018',3.5,3,3);--Prensa
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('14/04/2017',3.5,4,4);--Prensa
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('07/11/2017',1.5,5,5);--Curl de biceps
+insert  into trabajo_rutina (tr_fecha,tr_descanso, fk_eje_maq_equ1, fk_eje_maq_equ2) values('16/11/2017',1.5,6,6);--Curl de biceps
+
+---SERIES
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (20, 'kg', 15,1);--06/11/2017
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (30, 'kg', 10,1);
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (40, 'kg', 8,1);
+
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (61, 'kg', 20,2);--13/12/2017
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (65, 'kg', 20,2);
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (53, 'kg', 20,2);
+
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (100, 'kg', 55,3);--23/10/2018
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (100, 'kg', 55,3);
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (100, 'kg', 55,3);
+
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (60, 'kg', 12,4);--14/04/2018
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (70, 'kg', 10,4);
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (80, 'kg', 55,4);
+
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (120, 'kg', 23,5);--07/11/2017
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (96, 'kg', 50,5);
+insert into serie ( ser_peso, ser_unidad, ser_repeticion,fk_trabajo_rutina) values (50, 'kg', 35,5);
+
+-- INSERTS DE PROGRESOS COMPARTIDOS
+insert into comentario (com_mensaje, com_fecha, fk_usuario) values ('¡Rebajo 3 Kg este mes!','14/11/2017',1);
+insert into comentario (com_mensaje, com_fecha, fk_usuario) values ('¡Aumento 1 Kg este mes!','14/11/2017',1);
+insert into comentario (com_mensaje, com_fecha, fk_usuario) values ('¡Ahora realiza series de 50 flexiones!','14/11/2017',1);
+
+-- INSERTS DE COMENTARIOS SOBRE PROGRESOS COMPARTIDOS
+insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('Excelente avance', 2, 1);
+insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('¡Muy bien!', 3, 1);
+insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('¡Uy! ¡la siguiente semana mas cardio!', 2, 2);
+insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('Mucha torta el fin de semana jajaja! xD', 3, 2);
+insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('¡¡Vas mejorando!!', 2, 3);
+insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('¡¡Excelente!!', 3, 3);
+--TIPOS DE MEDIDAS
+INSERT INTO MEDIDA ( med_tipo ) VALUES ( 'Escapula' );
+INSERT INTO MEDIDA ( med_tipo ) VALUES ( 'Tricep' );
+INSERT INTO MEDIDA ( med_tipo ) VALUES ( 'Abdomen' );
+INSERT INTO MEDIDA ( med_tipo ) VALUES ( 'Cuadricep' );
+INSERT INTO PROGRESO_MEDIDA ( pm_medida, pm_fecha, fk_usuario, fk_medida) VALUES ( 5, '12-10-2017', 1, 1 );
+INSERT INTO PROGRESO_MEDIDA ( pm_medida, pm_fecha, fk_usuario, fk_medida) VALUES ( 7, '12-10-2017', 1, 4 );
+INSERT INTO PROGRESO_MEDIDA ( pm_medida, pm_fecha, fk_usuario, fk_medida) VALUES ( 8, '12-10-2017', 1, 3 );
+INSERT INTO PROGRESO_PESO ( pp_peso, pp_fecha, fk_usuario ) VALUES ( 5, '12-10-2017', 1 );
+INSERT INTO PROGRESO_PESO ( pp_peso, pp_fecha, fk_usuario ) VALUES ( 5, '21-10-2017', 1 );
+INSERT INTO PROGRESO_PESO ( pp_peso, pp_fecha, fk_usuario ) VALUES ( 5, '29-10-2017', 1 );
+INSERT INTO PROGRESO_PESO ( pp_peso, pp_fecha, fk_usuario ) VALUES ( 5, '05-11-2017', 1 );
+
+
