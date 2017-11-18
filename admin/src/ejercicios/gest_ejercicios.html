@@ -83,7 +83,7 @@
         <div class="w3-container" id="showcase">
             <img src="../Imagenes/Logo Gimnasio.png" class="mainImg">
             <h1 class="w3-xxxlarge w3-text-color">
-                <b>Gestión de Ejercicios.</b>
+                <b>Ejercicios.</b>
             </h1>
             <hr style="width:50px;border:5px solid #3CB371" class="w3-round">
         </div>
@@ -106,7 +106,18 @@
                             <label>Nombre del ejercicio:</label>
                             <input class="w3-input w3-border" id="nombreEjercicio" style="width:100%;" type="text" required name="Nombre Completo">
                         </div>
+
+                        <div class="w3-section">
+                            <label>Grupo muscular:</label>
+                            <input class="w3-input w3-border" id="grupoEjercicio" style="width:100%;" type="text" required name="Nombre Completo">
+
+                        </div>
+
                         <div class="row">
+                            <div class="col-xs-12">
+                                <label>Seleccione una máquina o un equipo:</label>
+                            </div>
+
                             <div class="col-xs-6">
                                 <div class="forMaq" onclick="toggle(1)">Máquina</div>
                                 <div class="w3-section maquinas">
@@ -125,11 +136,7 @@
                             </div>
                         </div>
 
-                        <div class="w3-section">
-                            <label>Grupo muscular:</label>
-                            <input class="w3-input w3-border" id="grupoEjercicio" style="width:100%;" type="text" required name="Nombre Completo">
 
-                        </div>
 
 
                     </form>
@@ -139,9 +146,10 @@
                 <div class="w3-padding-64 w3-center">
                     <div class="w3-padding-64 w3-center">
                         <div class="w3-left-align w3-padding-large">
-                             
-                                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton myB2" onclick="guardar()">Guardar/Editar</button>
-                             
+
+                            <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton myB2"
+                                onclick="guardar()">Guardar/Editar</button>
+
                             <!--   <a href="">
                                     <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom">Editar</button>
                                 </a> -->
