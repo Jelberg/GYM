@@ -47,15 +47,15 @@ public class PruebaHorario_Clase {
     }
     
     //Prueba de Consulta
-    @Test
-    public void pruebaConsultaHorario_Clase(){
-        Gson gson = new Gson();
-        _horario_ClaseServicios = new BOM02_Horario_Clase();
-        String respuesta = _horario_ClaseServicios.getHorario_Clase( "Yoga" );
-        _arrayHorario_Clase = new ArrayList<>();
-        _arrayHorario_Clase = gson.fromJson( respuesta, new TypeToken<List<Horario_Clase>>(){}.getType());
-        assertEquals( "Yoga" , _arrayHorario_Clase.get(0).getNombreclase() );
-    }
+//    @Test
+//    public void pruebaConsultaHorario_Clase(){
+//        Gson gson = new Gson();
+//        _horario_ClaseServicios = new BOM02_Horario_Clase();
+//        String respuesta = _horario_ClaseServicios.getHorario_Clase( "Yoga" );
+//        _arrayHorario_Clase = new ArrayList<>();
+//        _arrayHorario_Clase = gson.fromJson( respuesta, new TypeToken<List<Horario_Clase>>(){}.getType());
+//        assertEquals( "Yoga" , _arrayHorario_Clase.get(0).getNombreclase() );
+//    }
     
     //Prueba de Inserción
     @Test
