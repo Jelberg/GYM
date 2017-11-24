@@ -30,6 +30,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author marvian
  */
+@Path("/FOM04_Comentario")
 public class FOM04_Comentario {
     
     private Connection conn = Sql.getConInstance();
@@ -37,46 +38,95 @@ public class FOM04_Comentario {
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Comentario> jsonArray;
-  
     
-    
-    @GET
-    @Path("/getDatoPrueba")
-    @Produces("application/json")
-    public String getDatoPrueba(){
-    
-    Gson gson = new Gson();
-    Comentario c= new Comentario(1,"hola");
-    return gson.toJson(c);
-    
-    }
-
     /**
      * Funcion que recibe como parametro el id del progreso correspondiente a medidas
-     * @param idProgreso del cual se quiere saber los comentarios
+     * y el id usuario
+     * @param usuario_id
      * @return Devuelve los comentarios correspondientes a ese progreso de medidas
      */
     @GET
-    @Path("/getComentarioM")
-    @Produces("aplicacion/json")
-    public String getComentarioProM(@QueryParam("idProgreso") int idProgreso){
+    @Path("/getProgresos")
+    @Produces("application/json")
+    public String getProgresos(@QueryParam("usuario_id") int usuario_id){
     
         try{
-            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("idProgreso", idProgreso);
-            }});
 
-            String query = "SELECT * FROM fo_m04_get_comentariopromed(?, ?)";
+            String query = "SELECT * FROM fo_m04_get_progresoscompartidos(?)";
+            String query2 = "SELECT * FROM fo_m04_get_progresoscompartidosamigos(?)";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, idProgreso);
+            st.setInt( 1 , usuario_id );
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 jsonArray.add(new Comentario());
-                jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString("mensaje"));
-                jsonArray.get(jsonArray.size() - 1).setUsuarioProgreso(rs.getInt("usuarioprogreso"));
-                jsonArray.get(jsonArray.size() - 1).setUsuarioComentario(rs.getInt("usuariocomentario"));
+                jsonArray.get(jsonArray.size() - 1).setId(Integer.parseInt(rs.getString(1)));
+                jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString(2));                
+                jsonArray.get(jsonArray.size() - 1).setNombreUsuario(rs.getString(3));
+                jsonArray.get(jsonArray.size() - 1).setFecha(rs.getString(4));
+                          
+            }
+            
+            st = conn.prepareStatement(query2);
+            st.setInt( 1 , usuario_id );
+            rs = st.executeQuery();
+            //La variable donde se almacena el resultado de la consulta.
+            while(rs.next()){
+                jsonArray.add(new Comentario());
+                jsonArray.get(jsonArray.size() - 1).setId(Integer.parseInt(rs.getString(1)));
+                jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString(2));                
+                jsonArray.get(jsonArray.size() - 1).setNombreUsuario(rs.getString(3));
+                jsonArray.get(jsonArray.size() - 1).setFecha(rs.getString(4));
+                          
+            }
+            
+            response = gson.toJson(jsonArray);
+        }
+        catch(SQLException e) {
+            response = e.getMessage();
+        }
+        catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        finally {
+            Sql.bdClose(conn);
+            return response;
+        }
+    
+    }
+    
+    
+    /**
+     * Funcion que recibe como parametro el id del progreso correspondiente a medidas
+     * y el id usuario
+     * @param idprogresom del cual se quiere saber los comentarios
+     * @param idusuario del cual pertenece el progreso.
+     * @return Devuelve los comentarios correspondientes a ese progreso de medidas
+     */
+    @GET
+    @Path("/getComentarioProM")
+    @Produces("aplicacion/json")
+    public String getComentarioProM(@QueryParam("idUsuario") int idusuario,
+                                    @QueryParam("idprogresom") int idprogresom){
+    
+        try{
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("idusurio", idusuario);
+                put("idprogresom", idprogresom);
+            }});
+
+            String query = "SELECT * FROM fo_m04_get_comentarioprom(?,?)";
+            jsonArray = new ArrayList<>();
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1, idusuario);
+            st.setInt(2, idprogresom);
+            ResultSet rs = st.executeQuery();
+            //La variable donde se almacena el resultado de la consulta.
+            while(rs.next()){
+                jsonArray.add(new Comentario());
+                jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString("mensaje"));                
+                //jsonArray.get(jsonArray.size() - 1).setUsuarioComentario(rs.getInt("usuariocomentario"));
                           
             }
             response = gson.toJson(jsonArray);
@@ -95,31 +145,34 @@ public class FOM04_Comentario {
     }
     
     /**
-     * Funcion que recibe como parametro el id del progreso correspondiente a peso
-     * @param idProgreso del cual se quiere saber los comentarios
-     * @return Devuelve los comentarios correspondientes a ese progreso de peso
+     * Funcion que recibe como parametro el id del progreso correspondiente al peso
+     * y el id usuario
+     * @param idprogresop del cual se quiere saber los comentarios
+     * @param idusuario del cual pertenece el progreso.
      */
     @GET
-    @Path("/getComentarioP")
+    @Path("/getComentarioProP")
     @Produces("aplicacion/json")
-    public String getComentarioProP(@QueryParam("idProgreso") int idProgreso){
+    public String getComentarioProP(@QueryParam("idUsuario") int idusuario,
+                                    @QueryParam("idprogresop") int idprogresop){
     
         try{
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("idProgreso", idProgreso);
+                put("idusurio", idusuario);
+                put("idprogresop", idprogresop);
             }});
 
-            String query = "SELECT * FROM fo_m04_get_comentariopropes(?, ?)";
+            String query = "SELECT * FROM fo_m04_get_comentarioprop(?,?)";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, idProgreso);
+            st.setInt(1, idusuario);
+            st.setInt(2, idprogresop);
             ResultSet rs = st.executeQuery();
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 jsonArray.add(new Comentario());
-                jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString("mensaje"));
-                jsonArray.get(jsonArray.size() - 1).setUsuarioProgreso(rs.getInt("usuarioprogreso"));
-                jsonArray.get(jsonArray.size() - 1).setUsuarioComentario(rs.getInt("usuariocomentario"));
+                jsonArray.get(jsonArray.size() - 1).setMensaje(rs.getString("mensaje"));                
+                //jsonArray.get(jsonArray.size() - 1).setUsuarioComentario(rs.getInt("usuariocomentario"));
                           
             }
             response = gson.toJson(jsonArray);
@@ -139,6 +192,8 @@ public class FOM04_Comentario {
     
     /**
      * Funcion que permite ingresar comentarios a un progreso
+     * @param id_usuariocomentario
+     * @param mensaje
      * @param jsonMedida 
      * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
      */
@@ -146,26 +201,21 @@ public class FOM04_Comentario {
     @Path("/insertaComentario")
     @Produces("aplicacion/json")
     public String insertaComentario(@QueryParam("id_usuariocomentario") int id_usuariocomentario,
-                                    @QueryParam("id_usuarioprogreso") int id_usuarioprogreso,
-                                    @QueryParam("mensaje") String mensaje){
+                                    @QueryParam("mensaje") String mensaje
+                                    ){
 
         Map<String, String> response = new HashMap<String, String>();
         try {
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("id_usuariocomentario", id_usuariocomentario );
-                put("id_usuarioprogreso", id_usuarioprogreso );
                 put("mensaje", mensaje );
             }});
 
-            String query = "select * from fo_m04_inserta_comentario(?, ?, ?)";
+            String query = "select * from fo_m04_inserta_progreso_compartido(?, ?)";
             PreparedStatement st = conn.prepareStatement(query);
-            java.lang.reflect.Type type = new TypeToken<Progreso_Medida[]>(){}.getType();
-                st.setInt(1, id_usuariocomentario);
-                st.setInt(2, id_usuarioprogreso);
-                st.setString(3, mensaje);
-                
+                st.setInt(2, id_usuariocomentario);
+                st.setString(1, mensaje);
                 st.executeQuery();
-            
 
             response.put("data", "Se inserto el comentario");
         }

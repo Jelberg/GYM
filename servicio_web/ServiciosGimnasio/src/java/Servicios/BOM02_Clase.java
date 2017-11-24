@@ -21,14 +21,9 @@ import javax.ws.rs.QueryParam;
 import Validaciones.ValidationWS;
 import Excepciones.ParameterNullException;
 import com.google.gson.reflect.TypeToken;
-import java.lang.ProcessBuilder.Redirect.Type;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
 import java.util.Map;
 import javax.ws.rs.DELETE;
-import static javax.ws.rs.HttpMethod.POST;
 import javax.ws.rs.POST;
 /**
  *
@@ -76,6 +71,82 @@ public class BOM02_Clase {
         catch (ParameterNullException e) {
             response = e.getMessage();
         }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
+        finally {
+            Sql.bdClose(conn);
+            return response;
+        }
+    }
+    
+    
+    @GET
+    @Path("/getClaseId")
+    @Produces("application/json")
+    public String getClaseId(@QueryParam("id") int id){
+        
+        try{
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("id", id);
+            }});
+            String query = "SELECT * FROM clase where cla_id="+id;
+            jsonArray = new ArrayList<>();
+            System.out.println (query);
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                jsonArray.add(new Clase());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("cla_id"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("cla_nombre"));
+                jsonArray.get(jsonArray.size() - 1).setDescripcion(rs.getString("cla_descripcion"));
+            }
+            response = gson.toJson(jsonArray);
+        }
+        catch(SQLException e) {
+            response = e.getMessage();
+        }
+        catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
+        finally {
+            Sql.bdClose(conn);
+            return response;
+        }
+    }
+    
+    
+    @GET
+    @Path("/getListClase")
+    @Produces("application/json")
+    public String getListClase(){
+        
+        try{
+            
+            String query = "SELECT cla_nombre, cla_descripcion FROM clase";
+            jsonArray = new ArrayList<>();
+            System.out.println (query);
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                jsonArray.add(new Clase());
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("cla_nombre"));
+                jsonArray.get(jsonArray.size() - 1).setDescripcion(rs.getString("cla_descripcion"));
+            }
+            response = gson.toJson(jsonArray);
+        }
+        catch(SQLException e) {
+            response = e.getMessage();
+        }
+        catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
         finally {
             Sql.bdClose(conn);
             return response;
@@ -84,7 +155,6 @@ public class BOM02_Clase {
     
     /**
      * Funcion que es llamada cuando el admin desea insertar una clase.
-     * @param id_clase Identificador de la clase.
      * @param nombre Nombre de la clase.
      * @param descripcion Descripción de la clase.
      * @return Devuelve un json con mensaje del estatus de la peticion.
@@ -92,28 +162,23 @@ public class BOM02_Clase {
     @POST
     @Path("/insertaClase")
     @Produces("application/json")
-    public String insertaClases(@QueryParam("id_clase") int id_clase,
-                                 @QueryParam("nombre") String nombre,
+    public String insertaClase(  @QueryParam("nombre") String nombre,
                                  @QueryParam("descripcion") String descripcion){
 
         Map<String, String> response = new HashMap<String, String>();
         try {
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("id_clase", id_clase );
                 put("nombre", nombre );
                 put("descripcion", descripcion );
             }});
 
-            String query = "select * from bo_m02_inserta_clase(?,?,?)";
+            String query = "select * from bo_m02_inserta_clase(?,?)";
             PreparedStatement st = conn.prepareStatement(query);
             java.lang.reflect.Type type = new TypeToken<Clase[]>(){}.getType();
-                st.setInt(1, id_clase);
-                st.setString(2, nombre);
-                st.setString(3, descripcion);
-                
+                st.setString(1, nombre);
+                st.setString(2, descripcion);
                 st.executeQuery();
             
-
             response.put("data", "Se insertaron las clases");
         }
         catch (SQLException e){
@@ -122,11 +187,13 @@ public class BOM02_Clase {
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
         }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
         finally {
             Sql.bdClose(conn);
             return gson.toJson(response);
         }
-
     }
     
     /**
@@ -159,6 +226,9 @@ public class BOM02_Clase {
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
         }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
         finally {
             Sql.bdClose(conn);
             return gson.toJson(response);
@@ -183,10 +253,10 @@ public class BOM02_Clase {
                 put ( "nombre" , nombre );
                 put( "descripcion" , descripcion );
             }});
-            String query = "select * from bo_m02_modifica_clase(?,?);";
+            String query = "select * from bo_m02_modifica_clase(?,?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setString(1, nombre);
-            st.setDate(2,Date.valueOf(descripcion));
+            st.setString(2,descripcion);
             st.executeQuery();
             response.put("data", "Se modificó con éxito");
         }
@@ -196,11 +266,13 @@ public class BOM02_Clase {
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
         }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
         finally {
             Sql.bdClose(conn);
             return gson.toJson(response);
         }
-        
     } 
     
 }

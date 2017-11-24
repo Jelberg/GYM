@@ -5,8 +5,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="../css/styles.css">
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
+<link href="../asset/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
 <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
 
@@ -84,7 +83,7 @@
         <div class="w3-container" id="showcase">
             <img src="../Imagenes/Logo Gimnasio.png" class="mainImg">
             <h1 class="w3-xxxlarge w3-text-color">
-                <b>Gestión de Ejercicios.</b>
+                <b>Ejercicios.</b>
             </h1>
             <hr style="width:50px;border:5px solid #3CB371" class="w3-round">
         </div>
@@ -94,108 +93,14 @@
             <p style="font-size:18px">En esta sección podrá gestionar todo lo relacionado a los ejercicios aplicables a los equipos y máquinas del
                 gimnasio.
             </p>
-            <a href="./gest_ejercicios.html">
+            <a href="#" onclick="editar(null,0)">
                 <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Agregar ejercicio</button>
             </a>
         </div>
         <div class="row">
             <div class="content">
                 <div class="w3-row ">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th class="tablehead">Nombre</th>
-                                <th class="tablehead">Grupo muscular</th>
-                                <th class="tablehead">Equipamiento</th>
-                                <th class="tablehead tcenter">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Press de banca</td>
-                                <td>
-                                    <ul>
-                                        <li>Pectorales</li>
-                                    </ul>
-                                </td>
-                                <td>Press Bank</td>
-                                <td class="tcenter">
-                                    <a href="./gest_ejercicios.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Piernas</td>
-                                <td>
-                                    <ul>
-                                        <li>Femorales</li>
-                                        <li>Glúteos</li>
-                                        <li>Aductores</li>
-                                        <li>Cuádriceps</li>
-                                    </ul>
-                                </td>
-                                <td>Prensa de piernas</td>
-                                <td class="tcenter">
-                                    <a href="./gest_ejercicios.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Paralelas</td>
-                                <td>
-                                    <ul>
-                                        <li>Abdominales</li>
-                                        <li>Triceps</li>
-                                        <li>Pectorales</li>
-                                    </ul>
-                                </td>
-                                <td>Paralelas</td>
-                                <td class="tcenter">
-                                    <a href="./gest_ejercicios.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Aperturas de pecho</td>
-                                <td>
-                                    <ul>
-                                        <li>Pectorales</li>
-                                        <li>Hombros</li>
-                                    </ul>
-                                </td>
-                                <td>Peck Deck</td>
-                                <td class="tcenter">
-                                    <a href="./gest_ejercicios.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>jalones trasnuca</td>
-                                <td>
-                                    <ul>
-                                        <li>
-                                            Espalda
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>Dorsalera</td>
-                                <td class="tcenter">
-                                    <a href="./gest_ejercicios.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div id="tabla"></div> 
                 </div>
             </div>
         </div>
@@ -224,10 +129,9 @@
             captionText.innerHTML = element.alt;
         }
     </script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-        crossorigin="anonymous"></script>
+    <script src="../asset/js/jquery.min.js"></script>
+    <script src="../asset/js/bootstrap.min.js"></script>
+    <script src="ejercicios.js"></script>
 
 </body>
 

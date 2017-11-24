@@ -8,13 +8,22 @@ public class Sql {
     private Connection _conn =bdConnect();
     private Statement _st;
     private ResultSet _rs;
-    private static String BD_USER = "gymucab";
-    private static String BD_PASSWORD = "gymucab";
-    private static String BD_URL = "jdbc:postgresql://localhost/gimnasiobd";
+/*
+    private static String BD_USER = "GYMUCAB";
+    private static String BD_PASSWORD = "GYMUCAB";
+    private static String BD_URL = "jdbc:postgresql://localhost/GIMNASIOBD";
     private static String BD_CLASS_FOR_NAME = "org.postgresql.Driver";
+   */ 
 
+    private static String BD_USER = "gymucab"; 
+    private static String BD_PASSWORD = "gymucab"; 
+    private static String BD_URL = "jdbc:postgresql://localhost/gimnasiobd"; 
+    private static String BD_CLASS_FOR_NAME = "org.postgresql.Driver";
+    
+
+  
     /**
-     * Metodo para devolver una unica instancia de la conexion
+     * Metodo para devolver una unica instancia de la conexion (Singleton)
      * @return instancia de la conexion
      */
     public static Connection getConInstance(){
@@ -29,13 +38,13 @@ public class Sql {
     /**
      * Metodo que realiza la conexion con la base de datos
      * @return Conexion hecha a la base de datos
-     * @throws ClassNotFoundException Si la clase no es encontrada
-     * @throws SQLException Problemas con sql
-     * @throws Exception
+     * 
+     * 
+     * 
      * @see Connection
      * @see Statement
      */
-    private static Connection bdConnect()
+    public static Connection bdConnect()
     {
         Connection conn = null;
         try
@@ -61,7 +70,7 @@ public class Sql {
      * @param query
      * @return Tabla que representa la consulta del query
      * @throws SQLException Error en SQL
-     * @throws Exception
+     * 
      * @see ResultSet
      */
     public ResultSet sql (String query) throws SQLException , NullPointerException {
@@ -89,7 +98,7 @@ public class Sql {
      * @param query
      * @return boolean
      * @throws SQLException Error en SQL
-     * @throws Exception
+     * 
      * @see boolean
      */
     public boolean sqlNoReturn ( String query ) throws SQLException {

@@ -5,8 +5,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="../css/styles.css">
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
+<link href="../asset/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
 
 <body>
@@ -83,7 +82,7 @@
         <div class="w3-container" id="showcase">
             <img src="../Imagenes/Logo Gimnasio.png" class="mainImg">
             <h1 class="w3-xxxlarge w3-text-color">
-                <b>Gestión de equipamiento.</b>
+                <b>Equipamiento.</b>
             </h1>
             <hr style="width:50px;border:5px solid #3CB371" class="w3-round">
         </div>
@@ -103,13 +102,13 @@
                          
                         <div class="w3-section">
                             <label>Nombre del equipo:</label>
-                            <input class="w3-input w3-border" style="width:100%;" type="text" required name="Nombre Completo">
+                            <input class="w3-input w3-border" style="width:100%;" type="text" id="nombre" required name="Nombre Completo">
                         </div>
                         <div class="w3-section">
                             <label>Tipo:</label>
-                            <select class="form-control" id="sel1">
-                                <option>Máquina</option>
-                                <option>Equipo</option> 
+                            <select class="form-control" id="select">
+                                <option value="1">Máquina</option>
+                                <option value="0">Equipo</option> 
                             </select>
                         </div>
 
@@ -120,9 +119,9 @@
                 <div class="w3-padding-64 w3-center">
                     <div class="w3-padding-64 w3-center">
                         <div class="w3-left-align w3-padding-large">
-                            <a href="./equipamiento.html">
-                                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton myB2">Guardar/Editar</button>
-                            </a>
+                            
+                                <button type="submit" onclick='guardar()' class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton myB2">Guardar</button>
+                            
                             <!--   <a href="">
                                 <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom">Editar</button>
                             </a> -->
@@ -159,10 +158,9 @@
             captionText.innerHTML = element.alt;
         }
     </script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-        crossorigin="anonymous"></script>
+    <script src="../asset/js/jquery.min.js"></script>
+    <script src="../asset/js/bootstrap.min.js"></script>
+    <script src="gest_equipamiento.js"></script>
 
 </body>
 

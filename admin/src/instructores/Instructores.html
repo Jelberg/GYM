@@ -5,8 +5,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="../css/styles.css">
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
+<link href="../asset/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
 <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
 
@@ -26,7 +25,7 @@
             </a>
             <a href="../instructores/instructores.html" onclick="w3_close()" class="menuIcon active">
                 <img src="../Imagenes/Instructor_white.png" class="menuImg">
-                <p class="menuText">
+                <p class="menuText" >
                     <b>Instructores</b>
                 </p>
                 <hr style="width:120px;border:2px">
@@ -96,90 +95,15 @@
             <a href="./gest_Instructores.html">
                 <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Agregar Instructor</button>
             </a>
-            <a href="">
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton">Consultar Instructor</button>
+            <a>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom myButton" id="boton_consulta">Consultar Instructor</button>
             </a>
             <label>Introduzca Correo:</label>
-            <input class="w3-input w3-border" style="width:30%;" type="text" required name="Correo">
+            <input class="w3-input w3-border" style="width:30%;" type="text" required name="Correo" id="text_correo">
+            <script src="codigo.js"></script> 
         </div>
-        <div class="row">
-            <div class="content">
-                <div class="w3-row ">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-
-                                <th class="tablehead">Nombre</th>
-                                <th class="tablehead">Edad</th>
-                                <th class="tablehead">Correo Electronico</th>
-                                <th class="tablehead tcenter">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-
-                                <td>Ana González</td>
-                                <td>32</td>
-                                <td>anagonzalezz301@gmail.com</td>
-                                <td class="tcenter">
-                                    <a href="./gest_Instructores.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>Cristian Rojas</td>
-                                <td>28</td>
-                                <td>crojas32@hotmail.com</td>
-                                <td class="tcenter">
-                                    <a href="./gest_Instructores.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>Ernesto Contreras</td>
-                                <td>29</td>
-                                <td>ernestocontreras12@gmail.com</td>
-                                <td class="tcenter">
-                                    <a href="./gest_Instructores.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>Jose Diaz</td>
-                                <td>38</td>
-                                <td>jads.12@gmail.com</td>
-                                <td class="tcenter">
-                                    <a href="./gest_Instructores.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>Fernanda Torres</td>
-                                <td>28</td>
-                                <td>fernandat_8@gmail.com</td>
-                                <td class="tcenter">
-                                    <a href="./gest_Instructores.html">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </td>
-                            </tr> 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div id="tabla">
+            
         </div>
 
 
@@ -206,10 +130,8 @@
             captionText.innerHTML = element.alt;
         }
     </script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-        crossorigin="anonymous"></script>
+     <script src="../asset/js/jquery.min.js"></script>
+     <script src="../asset/js/bootstrap.min.js"></script>
 
 </body>
 

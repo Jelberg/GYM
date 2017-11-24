@@ -16,7 +16,9 @@ public class Rutina {
     private int _id;
     private String _nombre;
     private String _dia;
-    private ArrayList<Ejercicio> _listaEjercicios;
+    private String _usuario;
+    private int cantidadEjercicios;
+    //private ArrayList<trabajo> _listaEjercicios;
     
     public Rutina(){
     
@@ -52,7 +54,7 @@ public class Rutina {
     }
 
     /**
-     * @param _nombre the_nombre to set
+     * @param nombre the_nombre to set
      */
     public void setNombre( String nombre ) {
         this._nombre = nombre;
@@ -66,12 +68,19 @@ public class Rutina {
     }
 
     /**
-     * @param _dia the _dia to set
+     * @param dia
      */
     public void setDia( String dia) {
         this._dia = dia;
     }
 
+    public int getCantidadEjercicios() {
+        return cantidadEjercicios;
+    }
+
+    public void setCantidadEjercicios(int cantidadEjercicios) {
+        this.cantidadEjercicios = cantidadEjercicios;
+    }
       
     
 }
