@@ -31,22 +31,13 @@ public class FOM01_Login_Conn {
     public String iniciarSesion( String usuario, String password){
         
         try{
-            String query = "SELECT * FROM fo_m01_iniciarSesion('"+usuario+"','"+password+"')";
+            String query = "SELECT * FROM fo_m01_iniciarsesion('"+usuario+"','"+password+"')";
             jsonArray = new ArrayList<>();
-            System.out.println (query);
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
                 jsonArray.add(new Usuario());
                 jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
-                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
-                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
-                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fechanac"));
-                jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("sexo")));
-                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
-                jsonArray.get(jsonArray.size() - 1).setUsuario(rs.getString("usuario"));
-                jsonArray.get(jsonArray.size() - 1).setPassword(rs.getString("password"));
-                jsonArray.get(jsonArray.size() - 1).setEstatura(rs.getInt("estatura"));
             }
             response = gson.toJson(jsonArray);
         }
@@ -65,5 +56,42 @@ public class FOM01_Login_Conn {
         }
         
     }
- 
+    
+     public String get_Usuario( int id){
+        
+        try{
+            String query = "SELECT * FROM fo_m01_getusuario("+id+")";
+            jsonArray = new ArrayList<>();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                jsonArray.add(new Usuario());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
+                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fechanac"));
+                jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("sexo")));
+                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
+                jsonArray.get(jsonArray.size() - 1).setUsuario(rs.getString("usuario"));
+                jsonArray.get(jsonArray.size() - 1).setPassword(rs.getString("password"));
+                jsonArray.get(jsonArray.size() - 1).setEstatura(rs.getInt("estatura"));
+                jsonArray.get(jsonArray.size() - 1).setTelefono(rs.getString("telefono"));
+            }
+            response = gson.toJson(jsonArray);
+        }
+        catch(SQLException e) {
+            response = e.getMessage();
+        }
+        catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
+        finally {
+            Sql.bdClose(conn);
+            return response;
+        }
+     }
+
 }

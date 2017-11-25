@@ -57,4 +57,34 @@ private String response;
             return response;
         }
     }
+    
+    
+    /**
+     * Funcion que recibe como parámetro el id del usuario,
+     * para consultarla y saber sus datos.
+     * @param id
+     * @return Devuelve el usuario 
+     */
+    @GET
+    @Path("/getUsuario")
+    @Produces("application/json")
+    public String iniciarSesion(@QueryParam("id") int id) {
+    try
+    {
+        ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+        put("id", id);
+        }});
+        FOM01_Login_Conn conexion = new FOM01_Login_Conn();
+        response= conexion.get_Usuario(id);
+    }
+    catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
+        finally {
+            return response;
+        }
+    }
 }
