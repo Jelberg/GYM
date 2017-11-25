@@ -9,65 +9,43 @@ package Dominio;
  *
  * @author gilbert
  */
-public class Usuario {
-    private String _nombre;
-    private String _apellido;
-    private String _sexo;
-    private String _fechaNacimiento;
+public class Usuario extends Persona {
+    private String password;
+    private String usuario;
+    private int estatura;
 
-    /**
-     * @return the _nombre
-     */
-    public String getNombre() {
-        return _nombre;
+    public Usuario(String password, String usuario, int estatura) {
+        this.password = password;
+        this.usuario = usuario;
+        this.estatura = estatura;
     }
 
-    /**
-     * @param _nombre the _nombre to set
-     */
-    public void setNombre(String _nombre) {
-        this._nombre = _nombre;
+    public String getPassword() {
+        return password;
     }
 
-    /**
-     * @return the _apellido
-     */
-    public String getApellido() {
-        return _apellido;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    /**
-     * @param _apellido the _apellido to set
-     */
-    public void setApellido(String _apellido) {
-        this._apellido = _apellido;
+    public String getUsuario() {
+        return usuario;
     }
 
-    /**
-     * @return the _sexo
-     */
-    public String getSexo() {
-        return _sexo;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    /**
-     * @param _sexo the _sexo to set
-     */
-    public void setSexo(String _sexo) {
-        this._sexo = _sexo;
+    public int getEstatura() {
+        return estatura;
     }
 
-    /**
-     * @return the _fechaNacimiento
-     */
-    public String getFechaNacimiento() {
-        return _fechaNacimiento;
+    public void setEstatura(int estatura) {
+        this.estatura = estatura;
     }
 
-    /**
-     * @param _fechaNacimiento the _fechaNacimiento to set
-     */
-    public void setFechaNacimiento(String _fechaNacimiento) {
-        this._fechaNacimiento = _fechaNacimiento;
+    public Usuario() {
     }
+    
+    
 }
