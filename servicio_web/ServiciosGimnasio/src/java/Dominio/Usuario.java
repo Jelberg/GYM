@@ -13,12 +13,17 @@ public class Usuario extends Persona {
     private String password;
     private String usuario;
     private int estatura;
+    private String telefono;
 
-    public Usuario(String password, String usuario, int estatura) {
-        this.password = password;
-        this.usuario = usuario;
-        this.estatura = estatura;
+
+    public String getTelefono() {
+        return telefono;
     }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
 
     public String getPassword() {
         return password;
@@ -44,8 +49,7 @@ public class Usuario extends Persona {
         this.estatura = estatura;
     }
 
-    public Usuario() {
-    }
+  
     
     
 }
