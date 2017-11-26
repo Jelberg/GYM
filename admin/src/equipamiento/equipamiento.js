@@ -21,14 +21,17 @@ window.onload = function mostrartabla() {
                 var fila = machines[0]
                 var campos = Object.keys(fila);
                 var ncampos = campos.length;
-                for (var i = 0; i < ncampos; i++) {
+                for (var i = 0; i < ncampos; i++) { 
                     if (campos[i] == 'id') {
                         contenido += "<th style='display:none'>";
                         contenido += campos[i];
                         contenido += "</th>";
                     } else {
+                        var titulo
+                        if (campos[i] == 'nombre') titulo = 'Nombre'
+                        if (campos[i] == 'type') titulo = 'Tipo'
                         contenido += "<th style='color:white'>";
-                        contenido += campos[i];
+                        contenido += titulo;
                         contenido += "</th>";
                     }
                 }

@@ -9,65 +9,47 @@ package Dominio;
  *
  * @author gilbert
  */
-public class Usuario {
-    private String _nombre;
-    private String _apellido;
-    private String _sexo;
-    private String _fechaNacimiento;
+public class Usuario extends Persona {
+    private String password;
+    private String usuario;
+    private int estatura;
+    private String telefono;
 
-    /**
-     * @return the _nombre
-     */
-    public String getNombre() {
-        return _nombre;
+
+    public String getTelefono() {
+        return telefono;
     }
 
-    /**
-     * @param _nombre the _nombre to set
-     */
-    public void setNombre(String _nombre) {
-        this._nombre = _nombre;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    /**
-     * @return the _apellido
-     */
-    public String getApellido() {
-        return _apellido;
+
+    public String getPassword() {
+        return password;
     }
 
-    /**
-     * @param _apellido the _apellido to set
-     */
-    public void setApellido(String _apellido) {
-        this._apellido = _apellido;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    /**
-     * @return the _sexo
-     */
-    public String getSexo() {
-        return _sexo;
+    public String getUsuario() {
+        return usuario;
     }
 
-    /**
-     * @param _sexo the _sexo to set
-     */
-    public void setSexo(String _sexo) {
-        this._sexo = _sexo;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    /**
-     * @return the _fechaNacimiento
-     */
-    public String getFechaNacimiento() {
-        return _fechaNacimiento;
+    public int getEstatura() {
+        return estatura;
     }
 
-    /**
-     * @param _fechaNacimiento the _fechaNacimiento to set
-     */
-    public void setFechaNacimiento(String _fechaNacimiento) {
-        this._fechaNacimiento = _fechaNacimiento;
+    public void setEstatura(int estatura) {
+        this.estatura = estatura;
     }
+
+  
+    
+    
 }

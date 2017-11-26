@@ -5,6 +5,7 @@ import Servicios.BOM01_Ejercicios;
 import Servicios.BOM02_Entrenador;
 import Servicios.BOM02_Horario_Clase;
 import Servicios.BOM02_Instruct;
+import Servicios.FOM01_Login;
 import Servicios.FOM03_Plan;
 import Servicios.FOM03_Rutina;
 import Servicios.FOM04_Comentario;
@@ -48,6 +49,7 @@ public class ConfiguracionRestGimnasio extends Application{
         h.add(BOM02_Entrenador.class);
         h.add(BOM02_Horario_Clase.class);
         h.add(BOM02_Instruct.class);
+        h.add(FOM01_Login.class);
         h.add(FOM03_Rutina.class);
         h.add(FOM03_TrabajoRutina.class);
         h.add(FOM03_Plan.class);

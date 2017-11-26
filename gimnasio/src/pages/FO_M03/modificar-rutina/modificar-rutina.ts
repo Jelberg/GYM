@@ -33,6 +33,7 @@ export class ModificarRutinaPage {
     console.log(this.rutinaID);
     console.log(this.listaEjercicios);
   }
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModificarRutinaPage');
