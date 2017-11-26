@@ -62,6 +62,7 @@ export class IniciarsesionPage {
       {
         localStorage.setItem("id",this.class[0].id)
         this.radioopen=false;
+        this.irahomeusuario() 
       }
       else 
       {
