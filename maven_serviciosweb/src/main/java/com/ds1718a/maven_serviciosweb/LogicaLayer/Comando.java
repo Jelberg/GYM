@@ -9,6 +9,9 @@ package com.ds1718a.maven_serviciosweb.LogicaLayer;
  *
  * @author Elberg
  */
-public class Comando {
+public abstract class Comando {
+ 
+    
+    public abstract void ejecutar();
     
 }

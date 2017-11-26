@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ds1718a.maven_serviciosweb.Comun.Entidad;
+package com.ds1718a.maven_serviciosweb.Comun.Dominio;
 
 /**
  *
  * @author Elberg
  */
-public class Usuario {
+public class Entidad {
     
 }
