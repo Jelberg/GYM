@@ -34,7 +34,7 @@ private String response;
      * @return Devuelve el usuario 
      */
     @GET
-    @Path("/iniciarSesion")
+    @Path("/IniciarSesion")
     @Produces("application/json")
     public String iniciarSesion(@QueryParam("usuario") String usuario,
                                 @QueryParam("password") String password) {

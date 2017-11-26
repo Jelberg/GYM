@@ -20,12 +20,12 @@
                     
                       <ion-item>
                         <ion-label stacked>Usuario:</ion-label>
-                        <ion-input type="text"></ion-input>
+                        <ion-input  name="usuario" [(ngModel)]="usuario" type="text" id="usu" ></ion-input>
                       </ion-item>
                     
                       <ion-item>
                         <ion-label stacked>Contraseña:</ion-label>
-                        <ion-input type="password"></ion-input>
+                        <ion-input  name="password" [(ngModel)]="password" type="password" id="pass" ></ion-input>
                         
                       </ion-item>
 
@@ -34,7 +34,7 @@
                     <button ion-button icon-left clear small color="secondary" (click)= "recoverPassword()">
                         Olvide mi contraseña
                       </button>
-                          <button ion-button icon-left block color="secondary" (click)="irahomeusuario()">
+                          <button ion-button icon-left block color="secondary" (click)="iniciarSesion()">
                             <ion-icon name="checkmark"></ion-icon>
                           </button>
                           <button (click)="irapaginacrear()" ion-button icon-left clear small color="secondary" >
