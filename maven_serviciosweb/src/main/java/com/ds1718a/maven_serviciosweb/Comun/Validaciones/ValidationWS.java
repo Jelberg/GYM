@@ -1,9 +1,6 @@
 package com.ds1718a.maven_serviciosweb.Comun.Validaciones;
 
-
-
-import Excepciones.ParameterNullException;
-
+import com.ds1718a.maven_serviciosweb.Comun.Excepciones.ParameterNullException;
 import java.util.Map;
 
 public class ValidationWS {
