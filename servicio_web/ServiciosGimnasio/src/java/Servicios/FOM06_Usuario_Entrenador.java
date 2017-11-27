@@ -37,6 +37,13 @@ public class FOM06_Usuario_Entrenador {
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Reserva> jsonArray;
+    
+    /**
+     * 
+     * @param id_usu
+     * @param id_ent
+     * @return 
+     */
     @POST
     @Path("/insertaUsuario_Entrenador")
     @Produces("application/json")
@@ -68,7 +75,5 @@ public class FOM06_Usuario_Entrenador {
             Sql.bdClose(conn);
             return response;
         }   
-    }
-    
-    
+    }   
 }

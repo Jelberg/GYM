@@ -69,7 +69,7 @@ public class BOM01_Ejercicios {
                 jsonArray3.get(jsonArray3.size() - 1).setEquipamiento(rs.getString("equipamiento"));
                 jsonArray3.get(jsonArray3.size() - 1).setGrupomuscular(rs.getString("grupo_muscular"));
             }
-            response = gson.toJson(jsonArray);
+            response = gson.toJson(jsonArray3);
         } catch (SQLException e) {
             response = e.getMessage();
         } catch (ParameterNullException e) {
@@ -81,6 +81,42 @@ public class BOM01_Ejercicios {
 
     }
 
+    @GET
+    @Path("/getEjercicio")
+    @Produces("application/json")
+    public String getEjercicio(@QueryParam("id") int id) {
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>() {
+                {
+                    put("id", id);
+                }
+            });
+
+            String query = "SELECT * FROM bo_m01_get_eme( ? );";
+            jsonArray3 = new ArrayList<>();
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+
+            //La variable donde se almacena el resultado de la consulta.
+            while (rs.next()) {
+                jsonArray3.add(new Ejercicio_Maquina_Equipo()); 
+                jsonArray3.get(jsonArray3.size() - 1).setMaquina(rs.getInt("fk_maq"));
+                jsonArray3.get(jsonArray3.size() - 1).setEquipo(rs.getInt("fk_eje"));
+
+            }
+            response = gson.toJson(jsonArray3);
+        } catch (SQLException e) {
+            response = e.getMessage();
+        } catch (ParameterNullException e) {
+            response = e.getMessage();
+        } finally {
+            Sql.bdClose(conn);
+            return response;
+        }
+
+    }
+    
     @POST
     @Path("/insertaEjercicioMaquina")
     @Produces("application/json")
@@ -158,4 +194,37 @@ public class BOM01_Ejercicios {
         }
 
     }
+    
+    @POST
+    @Path("/eliminarEme")
+    @Produces("application/json")
+    public String eliminarEme(@QueryParam("id") int id) throws SQLException {
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>() {
+                {
+                    put("id", id);
+                }
+            });
+
+            String query = "select * from bo_m01_eliminar_eme(?)";
+            PreparedStatement st = conn.prepareStatement(query);
+            java.lang.reflect.Type type = new TypeToken<Equipo[]>() {
+            }.getType();
+
+            st.setInt(1, id);
+
+            st.executeQuery();
+
+            response.put("data", "Se eliminó el ejercicio");
+        } catch (SQLException e) {
+            response.put("error", e.getMessage());
+        } catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        } finally {
+            Sql.bdClose(conn);
+            return gson.toJson(response);
+        }
+    }
+
 }
