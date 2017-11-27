@@ -8,7 +8,7 @@ CREATE 	DATABASE gimnasiobd 	WITH OWNER gymucab;
  -------------CREATES TABLAS DE LA BASE DE DATOS ORDENADA-----------
 
 CREATE TABLE USUARIO(
-	USU_ID                  	SERIAL ,
+	USU_ID                  	SERIAL NOT NULL,
 	USU_USUARIO                  	VARCHAR(10) NOT NULL,
 	USU_PASSWORD                  	VARCHAR(10) NOT NULL,
 	USU_NOMBRE                	VARCHAR(10) NOT NULL,
