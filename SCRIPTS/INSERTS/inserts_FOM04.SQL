@@ -15,3 +15,7 @@ insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('�
 insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('Mucha torta el fin de semana jajaja! xD', 3, 2);
 insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('¡¡Vas mejorando!!', 2, 3);
 insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('¡¡Excelente!!', 3, 3);
+
+insert into usuario (usu_usuario,usu_password,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac,usu_telefono,usu:estatura,usu_foto,usu_correo) values ('Simon',12312312,'Simon', 'Esperanza', 'M','01/01/2000');
+insert into usuario (usu_usuario,usu_password,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac,usu_telefono,usu:estatura,usu_foto,usu_correo) values ('Marvian',45645645,'Marvian', 'Montoya', 'F','01/01/2000');
+insert into usuario (usu_usuario,usu_password,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac,usu_telefono,usu:estatura,usu_foto,usu_correo) values ('Gilbert',78978978,'Gilbert', 'Gomez', 'M','01/01/2000');
