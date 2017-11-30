@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../../home/home';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { UserServiceProvider } from '../../../providers/user-service/user-service';
+import { Jsonp } from '@angular/http/src/http';
 /**
  * Generated class for the CrearusuarioPage page.
  *
@@ -16,21 +18,34 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
   templateUrl: 'crearusuario.html',
 })
 export class CrearusuarioPage {
+  usuario : string;
+  password :string;
+  password2: string;
+  nombre : string;
+  apellido :string;
+  myDate :Date;
+  correo: string;
+  telefono :string;
+  estatura :number;
+  genero :string;
+  public class : any []=[];
+  public class2 : any;
   public users:any;
   private cgenero : any;
   private radioopen : boolean;
-  public editar: string = "true";
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public alertCtrl: AlertController) 
+              public alertCtrl: AlertController,
+              public userService: UserServiceProvider) 
               {
                 this.users = []
               }
+              
+              
   volver() {
     this.navCtrl.pop();
   }
   ionViewDidLoad() {
-      document.getElementById("fechanac").innerHTML = this.fechaActual();
       document.getElementById("genero").innerHTML = "Seleccionar";
     
   }
@@ -40,6 +55,82 @@ export class CrearusuarioPage {
     return date;
   }
 
+  confirmarpas(){
+    if (this.password==this.password2)
+    {
+      return false;
+    }
+    else 
+    {
+      return true;
+    }
+  }
+
+  cargarts(){}
+
+  insertarUsuario(){
+    if ((this.usuario) && (this.password) && (this.password2) && (this.nombre) && (this.apellido) && (this.correo) && (this.estatura) && (this.telefono))
+    {
+      if (this.password.length>=8) // no avanzara si no se cumple la condicion
+      {
+        if (this.myDate)
+          if ((this.genero))
+          {
+            if (this.confirmarpas()==false)
+            {
+              var x;
+              let url = "Login/insertausuario?nombre="+this.nombre+"&apellido="+this.apellido+"&fechanac="+this.myDate+"&sexo="+this.genero+"&correo="+this.correo+"&usuario="+this.usuario+"&password="+this.password+"&estatura="+this.estatura+"&telefono="+this.telefono;
+              this.userService.postDato2(url).subscribe(data => {    
+                  let i: number = 0;
+                  console.log(data);     
+                    x = data;
+                    console.log(x);
+                  
+                  this.radioopen=false;
+                  if(x.id=="usuario duplicado")
+                  this.mensajeerror("Ya existe ese nombre de usuario en el sistema")
+                  else
+                  if(x.id=="correo duplicado")
+                  this.mensajeerror("Ya existe ese correo en el sistema")
+                  else
+                  if(x.id=="Se inserto el usuario")
+                  {
+                    this.mensajeexito("Usuario creado correctamente")
+                    this.irahomeusuario();
+                  }
+                  else this.mensajeerror("Problema no identificado")
+                         
+              },
+              (error) =>{
+                console.error(error);
+              }
+            )
+              
+            }
+            else
+            {
+              this.mensajeerror("Las contrasenas no coinciden")
+            }
+
+          }
+          else 
+          {
+            this.mensajeerror("Debe seleccionar su genero")
+          }
+        else
+        {
+          this.mensajeerror("Fecha de nacimiento invalida")
+        }
+      }
+    }
+  }
+
+
+  irahomeusuario() {
+    this.navCtrl.setRoot(HomePage);
+ }
+
+/* metodo que cambia el genero por el seleccionado en el checkbox*/
   cambiargenero(){
     let alert = this.alertCtrl.create();
     alert.setTitle('Genero');
@@ -49,6 +140,7 @@ export class CrearusuarioPage {
       label: 'Masculino',
       value: 'Masculino',
       checked: false
+      
     });
   
     alert.addInput({
@@ -70,10 +162,46 @@ export class CrearusuarioPage {
         }else{
         this.radioopen = false;
         document.getElementById("genero").innerHTML= this.cgenero;
+        
+        if (this.cgenero=="Femenino")
+        {
+          this.genero="F";
+        }
+        if (this.cgenero=="Masculino")
+        {
+          this.genero="M"
+        }
       }}
     });
     alert.present().then(() => {
       this.radioopen=true;
     })
   }
+
+  /* metodo que muestra un  mensaje de error */
+mensajeerror( mensaje )
+{
+  let alert = this.alertCtrl.create();
+  alert.setTitle('Error'); 
+  alert.setMessage(mensaje)
+  alert.addButton({
+    text: 'OK',
+  });
+  alert.present().then(() => {
+    this.radioopen=true;
+  })
+}
+
+mensajeexito( mensaje )
+{
+  let alert = this.alertCtrl.create();
+  alert.setTitle('Exito'); 
+  alert.setMessage(mensaje)
+  alert.addButton({
+    text: 'OK',
+  });
+  alert.present().then(() => {
+    this.radioopen=true;
+  })
+}
 }
