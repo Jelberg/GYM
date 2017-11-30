@@ -75,7 +75,7 @@ export class IniciarsesionPage {
   )
 }
  }
-
+/* metodo que muestra un  mensaje de error */
 mensajeerror( mensaje )
 {
   let alert = this.alertCtrl.create();

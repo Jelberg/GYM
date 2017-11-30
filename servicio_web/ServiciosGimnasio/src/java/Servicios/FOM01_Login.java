@@ -6,14 +6,27 @@
 package Servicios;
 
 import Connection.FOM01_Login_Conn;
-import Dominio.Sql;
-import Excepciones.ParameterNullException;
-import Validaciones.ValidationWS;
+import Dominio.*;
+import Dominio.Clase;
+import com.google.gson.Gson;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import Validaciones.ValidationWS;
+import Excepciones.ParameterNullException;
+import com.google.gson.reflect.TypeToken;
+import java.sql.Statement;
+import java.util.Map;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.POST;
 
 
 /**
@@ -24,6 +37,7 @@ import javax.ws.rs.QueryParam;
 @Path("/Login")
 public class FOM01_Login {
 private String response;
+private Gson gson = new Gson();
 
 
 /**
@@ -85,6 +99,47 @@ private String response;
         }
         finally {
             return response;
+        }
+    }
+    
+    @POST
+    @Path("/insertausuario")
+    @Produces("application/json")
+    public String insertaInstruct(@QueryParam("nombre") String nombre,
+                                    @QueryParam("apellido") String apellido,
+                                    @QueryParam("fechanac") String fecha,
+                                    @QueryParam("sexo") String sexo,
+                                    @QueryParam("correo") String correo,
+                                    @QueryParam("usuario") String usuario,
+                                    @QueryParam("password") String password,
+                                    @QueryParam("estatura") int estatura,
+                                    @QueryParam("telefono") String telefono
+                                    )
+    {
+        Map<String, String> response = new HashMap<String, String>();
+        try{    
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+            put("nombre", nombre);
+            put("apellido", apellido);
+            put("fechanac", fecha);
+            put("sexo", sexo);
+            put("correo", correo);
+            put("usuario", usuario);
+            put("password", password);
+            put("estatura", estatura);
+            put("telefono", telefono);           
+            }});
+            FOM01_Login_Conn conexion = new FOM01_Login_Conn();
+            response.put("id",conexion.insertaInstruct(nombre,apellido,fecha,sexo,correo,usuario,password,estatura,telefono));
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            return gson.toJson(response);
         }
     }
 }

@@ -9,8 +9,8 @@ CREATE 	DATABASE gimnasiobd 	WITH OWNER gymucab;
 
 CREATE TABLE USUARIO(
 	USU_ID                  	SERIAL NOT NULL,
-	USU_USUARIO                  	VARCHAR(10) NOT NULL UNIQUE,
-	USU_PASSWORD                  	VARCHAR(10) NOT NULL,
+	USU_USUARIO                  	VARCHAR(14) NOT NULL UNIQUE,
+	USU_PASSWORD                  	VARCHAR(14) NOT NULL,
 	USU_NOMBRE                	VARCHAR(10) NOT NULL,
 	USU_APELLIDO               	VARCHAR(10) NOT NULL,
 	USU_SEXO           		CHAR NOT NULL,

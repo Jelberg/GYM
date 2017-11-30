@@ -11,10 +11,14 @@ import Dominio.Usuario;
 import Excepciones.ParameterNullException;
 import com.google.gson.Gson;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  *
@@ -94,4 +98,42 @@ public class FOM01_Login_Conn {
         }
      }
 
+     
+    public String insertaInstruct(  String nombre,
+                                    String apellido,
+                                    String fecha,
+                                    String sexo,
+                                    String correo,
+                                    String usuario,
+                                    String password,
+                                    int estatura,
+                                    String telefono
+                                    ){
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            
+            String query = "select * from fo_m01_inserta_usuario('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+sexo+"', '"+correo+"', '"+usuario+"', '"+password+ "', "+estatura+", '"+telefono+"')";
+            PreparedStatement st = conn.prepareStatement(query); 
+            st.executeQuery();           
+            return("Se inserto el usuario");
+        }
+        catch (SQLException e){
+            if (e.getMessage().regionMatches(0, "ERROR: llave duplicada viola restricción de unicidad «usuario_usu_usuario_key»", 0, 78))
+            return ("usuario duplicado");
+                    else
+                        if (e.getMessage().regionMatches(0, "ERROR: llave duplicada viola restricción de unicidad «usuario_usu_correo_key»", 0, 77))
+                        return ("correo duplicado");
+                        else return e.getMessage();
+            
+        }
+        catch (ParameterNullException e) {
+         return e.getMessage();
+        }
+        catch (Exception e) {
+         return e.getMessage();
+        }
+        finally {
+            Sql.bdClose(conn);
+        }
+    }
 }
