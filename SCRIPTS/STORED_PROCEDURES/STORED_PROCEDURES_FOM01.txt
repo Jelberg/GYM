@@ -51,7 +51,7 @@ END; $$
 CREATE OR REPLACE FUNCTION fo_m01_inserta_usuario(
     nombre character varying,
     apellido character varying,
-    fecha_nac character varying, 
+    fecha_nac date, 
     sexo char,
     correo character varying,
     usuario character varying,
@@ -62,6 +62,6 @@ CREATE OR REPLACE FUNCTION fo_m01_inserta_usuario(
     DECLARE
     BEGIN
         INSERT INTO usuario(usu_nombre, usu_apellido,usu_fecha_nac, usu_sexo, usu_correo, usu_usuario, usu_password, usu_estatura, usu_telefono)
-        VALUES (nombre , apellido, to_date(fecha_nac,'dd/mm/yyyy'), sexo, correo, usuario, password, estatura, telefono);
+        VALUES (nombre , apellido,fecha_nac, sexo, correo, usuario, password, estatura, telefono);
     END; $$
 LANGUAGE plpgsql;
