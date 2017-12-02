@@ -77,7 +77,8 @@ public class PruebaUsuario {
     public void pruebaModificaUsuario(){
         Gson gson = new Gson();
         _usuarioServicios = new FOM01_Usuario();
-        String respuesta = _usuarioServicios.modificaUsuario( 9999 );
+        String respuesta = _usuarioServicios.modificaUsuario("Yesi", "hola","Yesimar",
+                "Hernández", "f", "01-02-1994","04265121963", 173, "yyhernandez.13@gmail.com", false, 9999 );
         assertNotNull( respuesta );
     }
     
