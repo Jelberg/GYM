@@ -224,7 +224,7 @@ public class FOM01_Usuario {
                 put("entrenador", entrenador );
                 put("codigo", codigo );
             }});
-            String query = "select * from fo_m01_modifica_usuario(?)";
+            String query = "select * from fo_m01_modifica_usuario(?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setString(1, usuario);
             st.setString(2, password);
