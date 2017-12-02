@@ -121,7 +121,7 @@ private Gson gson = new Gson();
             put("entrenador", entrenador);
             }});
             FOM01_Login_Conn conexion = new FOM01_Login_Conn();
-            response.put("id",conexion.insertaInstruct(nombre,apellido,fecha,sexo,correo,usuario,password,estatura,telefono,entrenador));
+            response.put("id",conexion.insertaUsu(nombre,apellido,fecha,sexo,correo,usuario,password,estatura,telefono,entrenador));
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());

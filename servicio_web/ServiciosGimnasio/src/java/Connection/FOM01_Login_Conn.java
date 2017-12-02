@@ -42,6 +42,7 @@ public class FOM01_Login_Conn {
             while(rs.next()){
                 jsonArray.add(new Usuario());
                 jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setEntrenador(rs.getBoolean("entrenador"));
             }
             response = gson.toJson(jsonArray);
         }
@@ -80,6 +81,8 @@ public class FOM01_Login_Conn {
                 jsonArray.get(jsonArray.size() - 1).setPassword(rs.getString("password"));
                 jsonArray.get(jsonArray.size() - 1).setEstatura(rs.getInt("estatura"));
                 jsonArray.get(jsonArray.size() - 1).setTelefono(rs.getString("telefono"));
+                jsonArray.get(jsonArray.size() - 1).setEntrenador(rs.getBoolean("entrenador"));
+                jsonArray.get(jsonArray.size() - 1).setCodigo(rs.getInt("codigo"));
             }
             response = gson.toJson(jsonArray);
         }
@@ -99,7 +102,7 @@ public class FOM01_Login_Conn {
      }
 
      
-    public String insertaInstruct(  String nombre,
+    public String insertaUsu(  String nombre,
                                     String apellido,
                                     String fecha,
                                     String sexo,

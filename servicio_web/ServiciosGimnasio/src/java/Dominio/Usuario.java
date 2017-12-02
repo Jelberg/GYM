@@ -14,6 +14,25 @@ public class Usuario extends Persona {
     private String usuario;
     private int estatura;
     private String telefono;
+    private int codigo;
+    private boolean entrenador;
+
+    public boolean isEntrenador() {
+        return entrenador;
+    }
+
+    public void setEntrenador(boolean entrenador) {
+        this.entrenador = entrenador;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+    
 
 
     public String getTelefono() {
