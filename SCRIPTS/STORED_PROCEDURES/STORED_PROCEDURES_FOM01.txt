@@ -11,6 +11,7 @@ BEGIN
         WHERE usu_usuario = usu and usu_password=password)
    LOOP
     id= var_r.usu_id;
+    entrenador = var_r.usu_entrenador;
     RETURN NEXT;
    END LOOP;
 END; $$
