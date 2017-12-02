@@ -61,6 +61,8 @@ export class IniciarsesionPage {
       if (this.class[0])
       {
         localStorage.setItem("id",this.class[0].id)
+        localStorage.setItem("entrenador",this.class[0].entrenador)
+        console.log(localStorage.getItem("entrenador"));
         this.radioopen=false;
         this.irahomeusuario() 
       }
