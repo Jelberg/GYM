@@ -38,28 +38,29 @@ public class FOM01_Usuario {
     private ArrayList<Usuario> jsonArray;
     
     /**
-     * Funcion que recibe como parámetro el nombre de usuario del Usuario,
+     * Funcion que recibe como parámetro el ID del Usuario,
      * para consultarlo y saber sus datos.
-     * @param nombreUsuario Nombre de usuario del Usuario.
+     * @param idUsuario ID del Usuario.
      * @return Devuelve los datos del cliente en formato json
      */
     @GET
     @Path("/getUsuario")
     @Produces("application/json")
-    public String getUsuario(@QueryParam("nombreUsuario") String nombreUsuario){
+    public String getUsuario(@QueryParam("idUsuario") String idUsuario){
         
         try{
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("nombreUsuario", nombreUsuario);
+                put("idUsuario", idUsuario);
             }});
-            String query = "SELECT * FROM fo_m01_get_usuario('"+nombreUsuario+"')";
+            String query = "SELECT * FROM fo_m01_get_usuario('"+idUsuario+"')";
             jsonArray = new ArrayList<>();
             System.out.println (query);
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
                 jsonArray.add(new Usuario());
-                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombreUsuario"));
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("idUsuario"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
                 jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
                 jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fecha_nac"));
                 jsonArray.get(jsonArray.size() - 1).setSexo(rs.getString("sexo"));
@@ -103,7 +104,8 @@ public class FOM01_Usuario {
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
                 jsonArray.add(new Usuario());
-                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombreUsuario"));
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("idUsuario"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
                 jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
                 jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fecha_nac"));
                 jsonArray.get(jsonArray.size() - 1).setSexo(rs.getString("sexo"));
@@ -131,28 +133,28 @@ public class FOM01_Usuario {
     }
     
     /**
-     * Metodo que recibe como parametros el nombre de usuario del Usuario
+     * Metodo que recibe como parametros el ID del Usuario
      * para eliminar su cuenta.
-     * @param nombreUsuario Nombre de usuario del Usuario.
+     * @param idUsuario ID del Usuario.
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
     @DELETE
     @Path("/eliminaUsuario")
     @Produces("application/json")
-    public String eliminaUsuario(@QueryParam("nombreUsuario") String nombreUsuario){
+    public String eliminaUsuario(@QueryParam("idUsuario") String idUsuario){
 
         Map<String, String> response = new HashMap<String, String>();
         try{
 
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("nombreUsuario", nombreUsuario);
+                put("idUsuario", idUsuario);
             }});
                 String query = "SELECT fo_m01_elimina_usuario(?)";
             PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, nombreUsuario);
+            st.setString(1, idUsuario);
             ResultSet rs = st.executeQuery();
-            response.put("data", "Se elimino el usuario");
+            response.put("data", "Se eliminó el usuario");
         }
         catch(SQLException e) {
             response.put("error", e.getMessage());
@@ -171,22 +173,22 @@ public class FOM01_Usuario {
     
     /**
      * Funcion que modifica los datos de un Usuario.
-     * @param nombreUsuario Nombre de usuario del Usuario.
+     * @param idUsuario ID del Usuario.
      * @return Devuelve un json con un mensaje al usuario sobre el estatus
      * de la petición.
      */
     @POST
     @Path("/modificaUsuario")
     @Produces("application/json")
-    public String modificaUsuario( @QueryParam ( "nombreUsuario" ) String nombreUsuario){
+    public String modificaUsuario( @QueryParam ( "idUsuario" ) String idUsuario){
         Map<String, String> response = new HashMap<String, String>();
         try {
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put ( "nombreUsuario" , nombreUsuario );
+                put ( "idUsuario" , idUsuario );
             }});
             String query = "select * from fo_m01_modifica_usuario(?)";
             PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, nombreUsuario);
+            st.setString(1, idUsuario);
             st.executeQuery();
             response.put("data", "Se modificaron los datos con éxito");
         }
