@@ -82,7 +82,7 @@ private Gson gson = new Gson();
     @GET
     @Path("/getUsuario")
     @Produces("application/json")
-    public String iniciarSesion(@QueryParam("id") int id) {
+    public String getUsuario(@QueryParam("id") int id) {
     try
     {
         ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
