@@ -6,15 +6,7 @@
 package Servicios;
 
 import Connection.FOM01_Login_Conn;
-import Dominio.*;
-import Dominio.Clase;
 import com.google.gson.Gson;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -22,10 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import Validaciones.ValidationWS;
 import Excepciones.ParameterNullException;
-import com.google.gson.reflect.TypeToken;
-import java.sql.Statement;
 import java.util.Map;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 
 
@@ -105,7 +94,7 @@ private Gson gson = new Gson();
     @POST
     @Path("/insertausuario")
     @Produces("application/json")
-    public String insertaInstruct(@QueryParam("nombre") String nombre,
+    public String insertaUsuario(@QueryParam("nombre") String nombre,
                                     @QueryParam("apellido") String apellido,
                                     @QueryParam("fechanac") String fecha,
                                     @QueryParam("sexo") String sexo,
