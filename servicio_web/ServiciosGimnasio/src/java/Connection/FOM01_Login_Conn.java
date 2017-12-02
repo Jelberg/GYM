@@ -100,6 +100,47 @@ public class FOM01_Login_Conn {
             return response;
         }
      }
+     
+     
+     public String get_Usuariocorreo( String correo){
+        
+        try{
+            String query = "SELECT * FROM fo_m01_getusuariocorreo('"+correo+"')";
+            jsonArray = new ArrayList<>();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                jsonArray.add(new Usuario());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
+                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fechanac"));
+                jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("sexo")));
+                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
+                jsonArray.get(jsonArray.size() - 1).setUsuario(rs.getString("usuario"));
+                jsonArray.get(jsonArray.size() - 1).setPassword(rs.getString("password"));
+                jsonArray.get(jsonArray.size() - 1).setEstatura(rs.getInt("estatura"));
+                jsonArray.get(jsonArray.size() - 1).setTelefono(rs.getString("telefono"));
+                jsonArray.get(jsonArray.size() - 1).setEntrenador(rs.getBoolean("entrenador"));
+                jsonArray.get(jsonArray.size() - 1).setCodigo(rs.getInt("codigo"));
+            }
+            response = gson.toJson(jsonArray);
+        }
+        catch(SQLException e) {
+            response = e.getMessage();
+        }
+        catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
+        finally {
+            Sql.bdClose(conn);
+            return response;
+        }
+     }
+
 
      
     public String insertaUsu(  String nombre,

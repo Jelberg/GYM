@@ -24,6 +24,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import Connection.FOM01_Login_Conn;
 
 /**
  *
@@ -87,6 +88,36 @@ public class FOM01_Usuario {
         }
         finally {
             Sql.bdClose(conn);
+            return response;
+        }
+    }
+    
+    
+        /**
+     * Funcion que recibe como parámetro el id del usuario,
+     * para consultarla y saber sus datos.
+     * @param id
+     * @return Devuelve el usuario 
+     */
+    @GET
+    @Path("/getUsuarioCorreo")
+    @Produces("application/json")
+    public String getUsuarioCorreo(@QueryParam("correo") String correo) {
+    try
+    {
+        ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+        put("correo", correo);
+        }});
+        FOM01_Login_Conn conexion = new FOM01_Login_Conn();
+        response= conexion.get_Usuariocorreo(correo);
+    }
+    catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
+        finally {
             return response;
         }
     }
