@@ -35,9 +35,9 @@ public class PruebaLogin {
         _conn = new Sql();
         String insertUsuario = "INSERT INTO USUARIO ( usu_id, usu_usuario, usu_password,"
                 + " usu_nombre, usu_apellido, usu_sexo, usu_fecha_nac, usu_telefono,"
-                + " usu_estatura, usu_foto, usu_correo ) "
+                + " usu_estatura, usu_foto, usu_correo, usu_entrenador, usu_codigo) "
                 + "VALUES (9999, 'Yesi', 'hola', 'Yesimar', 'Hernández', 'f', '01-02-1994',"
-                + "'04265121963', 173, null, 'yyhernandez.13@gmail.com')";
+                + "'04265121963', 173, null, 'yyhernandez.13@gmail.com', 'false', null)";
         
         try {
             _rs = _conn.sql ( insertUsuario );  
