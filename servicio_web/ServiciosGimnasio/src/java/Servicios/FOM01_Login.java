@@ -105,7 +105,7 @@ private Gson gson = new Gson();
     @POST
     @Path("/insertausuario")
     @Produces("application/json")
-    public String insertaInstruct(@QueryParam("nombre") String nombre,
+    public String insertaUsuario(@QueryParam("nombre") String nombre,
                                     @QueryParam("apellido") String apellido,
                                     @QueryParam("fechanac") String fecha,
                                     @QueryParam("sexo") String sexo,
@@ -132,7 +132,7 @@ private Gson gson = new Gson();
             put("entrenador", entrenador);
             }});
             FOM01_Login_Conn conexion = new FOM01_Login_Conn();
-            response.put("id",conexion.insertaInstruct(nombre,apellido,fecha,sexo,correo,usuario,password,estatura,telefono,entrenador));
+            response.put("id",conexion.insertaUsu(nombre,apellido,fecha,sexo,correo,usuario,password,estatura,telefono,entrenador));
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());

@@ -99,7 +99,7 @@ public class FOM01_Login_Conn {
      }
 
      
-    public String insertaInstruct(  String nombre,
+    public String insertaUsu(  String nombre,
                                     String apellido,
                                     String fecha,
                                     String sexo,
