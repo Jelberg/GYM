@@ -1,6 +1,6 @@
 -----------------------funcion para iniciar sesion retornando el id del usuario----------
 
-CREATE OR REPLACE FUNCTION fo_m01_iniciarsesion(usuario character varying, password character varying)
+CREATE OR REPLACE FUNCTION fo_m01_iniciarsesion(usu character varying, password character varying)
   RETURNS TABLE(id int)
    AS $$
 DECLARE
@@ -8,7 +8,7 @@ DECLARE
 BEGIN
    FOR var_r IN(SELECT usu_id
         FROM usuario
-        WHERE usu_usuario = usuario and usu_password=password)
+        WHERE usu_usuario = usu and usu_password=password)
    LOOP
     id= var_r.usu_id;
     RETURN NEXT;
@@ -45,3 +45,23 @@ BEGIN
    END LOOP;
 END; $$
   LANGUAGE plpgsql;
+
+-----------------------insertar usuario nuevo----------
+
+CREATE OR REPLACE FUNCTION fo_m01_inserta_usuario(
+    nombre character varying,
+    apellido character varying,
+    fecha_nac date, 
+    sexo char,
+    correo character varying,
+    usuario character varying,
+    password character varying,
+    estatura int,
+    telefono character varying)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        INSERT INTO usuario(usu_nombre, usu_apellido,usu_fecha_nac, usu_sexo, usu_correo, usu_usuario, usu_password, usu_estatura, usu_telefono)
+        VALUES (nombre , apellido,fecha_nac, sexo, correo, usuario, password, estatura, telefono);
+    END; $$
+LANGUAGE plpgsql;
