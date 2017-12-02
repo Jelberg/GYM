@@ -107,12 +107,13 @@ public class FOM01_Login_Conn {
                                     String usuario,
                                     String password,
                                     int estatura,
-                                    String telefono
+                                    String telefono,
+                                    boolean entrenador
                                     ){
         Map<String, String> response = new HashMap<String, String>();
         try {
             
-            String query = "select * from fo_m01_inserta_usuario('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+sexo+"', '"+correo+"', '"+usuario+"', '"+password+ "', "+estatura+", '"+telefono+"')";
+            String query = "select * from fo_m01_inserta_usuario('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+sexo+"', '"+correo+"', '"+usuario+"', '"+password+ "', "+estatura+", '"+telefono+"','"+entrenador+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
             return("Se inserto el usuario");

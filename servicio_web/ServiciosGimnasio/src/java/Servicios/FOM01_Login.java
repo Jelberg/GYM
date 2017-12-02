@@ -102,7 +102,8 @@ private Gson gson = new Gson();
                                     @QueryParam("usuario") String usuario,
                                     @QueryParam("password") String password,
                                     @QueryParam("estatura") int estatura,
-                                    @QueryParam("telefono") String telefono
+                                    @QueryParam("telefono") String telefono,
+                                    @QueryParam("entrenador") boolean entrenador
                                     )
     {
         Map<String, String> response = new HashMap<String, String>();
@@ -116,10 +117,11 @@ private Gson gson = new Gson();
             put("usuario", usuario);
             put("password", password);
             put("estatura", estatura);
-            put("telefono", telefono);           
+            put("telefono", telefono); 
+            put("entrenador", entrenador);
             }});
             FOM01_Login_Conn conexion = new FOM01_Login_Conn();
-            response.put("id",conexion.insertaInstruct(nombre,apellido,fecha,sexo,correo,usuario,password,estatura,telefono));
+            response.put("id",conexion.insertaInstruct(nombre,apellido,fecha,sexo,correo,usuario,password,estatura,telefono,entrenador));
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
