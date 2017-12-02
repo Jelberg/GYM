@@ -46,13 +46,13 @@ public class FOM01_Usuario {
     @GET
     @Path("/getUsuario")
     @Produces("application/json")
-    public String getUsuario(@QueryParam("idUsuario") String idUsuario){
+    public String getUsuario(@QueryParam("idUsuario") int idUsuario){
         
         try{
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("idUsuario", idUsuario);
             }});
-            String query = "SELECT * FROM fo_m01_get_usuario('"+idUsuario+"')";
+            String query = "SELECT * FROM fo_m01_get_usuario("+idUsuario+")";
             jsonArray = new ArrayList<>();
             System.out.println (query);
             Statement st = conn.createStatement();
@@ -142,7 +142,7 @@ public class FOM01_Usuario {
     @DELETE
     @Path("/eliminaUsuario")
     @Produces("application/json")
-    public String eliminaUsuario(@QueryParam("idUsuario") String idUsuario){
+    public String eliminaUsuario(@QueryParam("idUsuario") int idUsuario){
 
         Map<String, String> response = new HashMap<String, String>();
         try{
@@ -152,7 +152,7 @@ public class FOM01_Usuario {
             }});
                 String query = "SELECT fo_m01_elimina_usuario(?)";
             PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, idUsuario);
+            st.setInt(1, idUsuario);
             ResultSet rs = st.executeQuery();
             response.put("data", "Se eliminó el usuario");
         }
@@ -180,7 +180,7 @@ public class FOM01_Usuario {
     @POST
     @Path("/modificaUsuario")
     @Produces("application/json")
-    public String modificaUsuario( @QueryParam ( "idUsuario" ) String idUsuario){
+    public String modificaUsuario( @QueryParam ( "idUsuario" ) int idUsuario){
         Map<String, String> response = new HashMap<String, String>();
         try {
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
@@ -188,7 +188,7 @@ public class FOM01_Usuario {
             }});
             String query = "select * from fo_m01_modifica_usuario(?)";
             PreparedStatement st = conn.prepareStatement(query);
-            st.setString(1, idUsuario);
+            st.setInt(1, idUsuario);
             st.executeQuery();
             response.put("data", "Se modificaron los datos con éxito");
         }

@@ -55,10 +55,10 @@ public class PruebaUsuario {
     public void pruebaConsultaUsuario(){
         Gson gson = new Gson();
         _usuarioServicios = new FOM01_Usuario();
-        String respuesta = _usuarioServicios.getUsuario( "9999" );
+        String respuesta = _usuarioServicios.getUsuario( 9999 );
         _arrayUsuario = new ArrayList<>();
         _arrayUsuario = gson.fromJson( respuesta, new TypeToken<List<Usuario>>(){}.getType());
-        assertEquals( "9999" , _arrayUsuario.get(0).getId() );
+        assertEquals( 9999 , _arrayUsuario.get(0).getId() );
     }
     
     //Prueba de Inserción
@@ -77,7 +77,7 @@ public class PruebaUsuario {
     public void pruebaModificaUsuario(){
         Gson gson = new Gson();
         _usuarioServicios = new FOM01_Usuario();
-        String respuesta = _usuarioServicios.modificaUsuario("9999");
+        String respuesta = _usuarioServicios.modificaUsuario( 9999 );
         assertNotNull( respuesta );
     }
     
@@ -86,18 +86,18 @@ public class PruebaUsuario {
     public void pruebaEliminaClase(){
         Gson gson = new Gson();
         _usuarioServicios = new FOM01_Usuario();
-        String respuesta = _usuarioServicios.eliminaUsuario( "9999" );
+        String respuesta = _usuarioServicios.eliminaUsuario( 9999 );
         assertNotNull( respuesta );
     }
     
     @After
     public void terminarPrueba(){
-        String query = "SELECT fo_m01_elimina_usuario('Yesi')";
+        String query = "SELECT fo_m01_elimina_usuario( 9999 )";
         
         try {
             _rs = _conn.sql( query );
             _conn = new Sql();
-            query = "DELETE FROM USUARIO where usu_usuario = 'Yesi'";
+            query = "DELETE FROM USUARIO where usu_id = 9999 ";
             _rs = _conn.sql( query );
         }catch (NullPointerException e) {
             e.printStackTrace();
