@@ -61,6 +61,8 @@ export class IniciarsesionPage {
       if (this.class[0])
       {
         localStorage.setItem("id",this.class[0].id)
+        localStorage.setItem("entrenador",this.class[0].entrenador)
+        console.log(localStorage.getItem("entrenador"));
         this.radioopen=false;
         this.irahomeusuario() 
       }
@@ -105,13 +107,19 @@ recoverPassword() {
         text: 'Cancelar',
         role: 'cancel',
         handler: data => {
-          console.log('Cancel clicked');
+          
         }
       },
       {
         text: 'Ok',
         handler: data => {
-          console.log('Cancel clicked');
+          if (data.Correo!="") 
+          {
+          localStorage.setItem("correo",data);
+          console.log(data)
+          }
+          else
+          this.mensajeerror("Introduzca el correo")
         }
       }
     ]

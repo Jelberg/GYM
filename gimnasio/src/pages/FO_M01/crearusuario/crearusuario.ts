@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../../home/home';
+import { IniciarsesionPage} from '../iniciarsesion/iniciarsesion'
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { UserServiceProvider } from '../../../providers/user-service/user-service';
 import { Jsonp } from '@angular/http/src/http';
@@ -28,6 +29,8 @@ export class CrearusuarioPage {
   telefono :string;
   estatura :number;
   genero :string;
+  public entrenador: boolean;
+  public codigo: number;
   public class : any []=[];
   public class2 : any;
   public users:any;
@@ -66,12 +69,43 @@ export class CrearusuarioPage {
     }
   }
 
-  cargarts(){}
+validarEntrenador(){
+
+  {
+    let url = "BOM02_Entrenador/getEntrenador?correo="+this.correo;
+    this.userService.getDato(url).subscribe(data => {    
+      let i: number = 0;
+      if ( i < data.length ){
+        this.class[i] = data[i];
+        this.radioopen=true;
+      }
+      console.log(this.class[0]);
+      if (this.class[0])
+      {
+        this.radioopen=true;
+      }
+      else
+      {
+        this.radioopen=false;
+      }
+  },
+  (error) =>{
+    console.error(error);
+    this.radioopen = false
+  }
+) 
+  }
+  return this.radioopen;
+}
 
   insertarUsuario(){
+
+
+    this.entrenador=this.validarEntrenador();
+    console.log("bool "+this.entrenador)
     if ((this.usuario) && (this.password) && (this.password2) && (this.nombre) && (this.apellido) && (this.correo) && (this.estatura) && (this.telefono))
     {
-      if (this.password.length>=8) // no avanzara si no se cumple la condicion
+      if (this.password.length>=5) // no avanzara si no se cumple la condicion
       {
         if (this.myDate)
           if ((this.genero))
@@ -79,7 +113,7 @@ export class CrearusuarioPage {
             if (this.confirmarpas()==false)
             {
               var x;
-              let url = "Login/insertausuario?nombre="+this.nombre+"&apellido="+this.apellido+"&fechanac="+this.myDate+"&sexo="+this.genero+"&correo="+this.correo+"&usuario="+this.usuario+"&password="+this.password+"&estatura="+this.estatura+"&telefono="+this.telefono;
+              let url = "Login/insertausuario?nombre="+this.nombre+"&apellido="+this.apellido+"&fechanac="+this.myDate+"&sexo="+this.genero+"&correo="+this.correo+"&usuario="+this.usuario+"&password="+this.password+"&estatura="+this.estatura+"&telefono="+this.telefono+"&entrenador="+this.entrenador;
               this.userService.postDato2(url).subscribe(data => {    
                   let i: number = 0;
                   console.log(data);     
@@ -96,7 +130,7 @@ export class CrearusuarioPage {
                   if(x.id=="Se inserto el usuario")
                   {
                     this.mensajeexito("Usuario creado correctamente")
-                    this.irahomeusuario();
+                    this.navCtrl.setRoot(IniciarsesionPage);
                   }
                   else this.mensajeerror("Problema no identificado")
                          
@@ -104,8 +138,7 @@ export class CrearusuarioPage {
               (error) =>{
                 console.error(error);
               }
-            )
-              
+            )              
             }
             else
             {
