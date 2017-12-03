@@ -81,6 +81,21 @@ BEGIN
 END; $$
   LANGUAGE plpgsql;
 
+-------- actualizar codigo para recuperar contrasena-----
+
+
+CREATE OR REPLACE FUNCTION fo_m01_update_codigo (
+    correo character varying,
+    cod int
+    )
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        UPDATE usuario
+        SET usu_codigo = cod
+ 	where usu_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
 
 -----------------------insertar usuario nuevo----------
 

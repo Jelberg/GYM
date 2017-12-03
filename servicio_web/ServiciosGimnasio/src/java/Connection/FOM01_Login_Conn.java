@@ -181,4 +181,55 @@ public class FOM01_Login_Conn {
             Sql.bdClose(conn);
         }
     }
+    
+    
+    public String updateCodigo(     String correo,
+                                    int codigo
+                                    ){
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            Usuario usu= new Usuario();
+            String query = "select * from fo_m01_update_codigo('"+correo+"','"+codigo+"')";
+            PreparedStatement st = conn.prepareStatement(query); 
+            st.executeQuery();           
+            return("Se actualizo el codigo");
+        }
+        catch (SQLException e){
+            return e.getMessage();           
+        }
+        catch (ParameterNullException e) {
+         return e.getMessage();
+        }
+        catch (Exception e) {
+         return e.getMessage();
+        }
+        finally {
+            Sql.bdClose(conn);
+        }
+    }
+    
+     public String updatePassword(     String correo,
+                                       String password
+                                    ){
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            Usuario usu= new Usuario();
+            String query = "select * from fo_m01_update_pass('"+correo+"','"+password+"')";
+            PreparedStatement st = conn.prepareStatement(query); 
+            st.executeQuery();           
+            return("Se actualizo la contrasena");
+        }
+        catch (SQLException e){
+            return e.getMessage();           
+        }
+        catch (ParameterNullException e) {
+         return e.getMessage();
+        }
+        catch (Exception e) {
+         return e.getMessage();
+        }
+        finally {
+            Sql.bdClose(conn);
+        }
+    }
 }

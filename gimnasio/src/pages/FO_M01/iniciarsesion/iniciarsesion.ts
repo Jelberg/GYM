@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { CrearusuarioPage} from '../crearusuario/crearusuario';
-import { recuperar_passPage} from '../recuperar-pass/recuperar-pass';
 import { HomePage } from '../../home/home';
 import { UserServiceProvider } from '../../../providers/user-service/user-service';
 /**
@@ -108,17 +107,16 @@ recoverPassword() {
         text: 'Cancelar',
         role: 'cancel',
         handler: data => {
-          console.log('Cancel clicked');
+          
         }
       },
       {
         text: 'Ok',
         handler: data => {
-          if (data) 
+          if (data.Correo!="") 
           {
           localStorage.setItem("correo",data);
           console.log(data)
-          this.navCtrl.setRoot(recuperar_passPage);
           }
           else
           this.mensajeerror("Introduzca el correo")

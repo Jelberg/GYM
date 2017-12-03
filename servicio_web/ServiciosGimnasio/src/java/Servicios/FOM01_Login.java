@@ -6,6 +6,7 @@
 package Servicios;
 
 import Connection.FOM01_Login_Conn;
+import Dominio.Usuario;
 import com.google.gson.Gson;
 import java.util.HashMap;
 import javax.ws.rs.GET;
@@ -132,5 +133,78 @@ private Gson gson = new Gson();
         finally {
             return gson.toJson(response);
         }
+    }
+    
+    
+    @POST
+    @Path("/updateCodigo")
+    @Produces("application/json")
+    public String updateCod(
+                                    @QueryParam("correo") String correo                          
+                                    )
+    {
+        Usuario usu = new Usuario();
+        Map<String, String> response = new HashMap<String, String>();
+        try{    
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+            put("correo", correo);
+            }});
+            int cod = usu.recuperarContrasena(correo);
+            if (cod != 0)
+            {
+                FOM01_Login_Conn conexion = new FOM01_Login_Conn();
+                String d = conexion.updateCodigo(correo,cod);
+                if ( d == "Se actualizo el codigo")
+                {
+                    response.put("id",String.valueOf(cod));
+                }
+                else response.put("error", d);
+            }
+            else
+            {
+                response.put("id","problema en el envio");
+            }
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            return gson.toJson(response);
+        }
+        
+    }
+    
+    @POST
+    @Path("/updatePass")
+    @Produces("application/json")
+    public String updatePass(
+                                    @QueryParam("correo") String correo, 
+                                    @QueryParam("password") String password
+                                    )
+    {
+        Usuario usu = new Usuario();
+        Map<String, String> response = new HashMap<String, String>();
+        try{    
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+            put("correo", correo);
+            put("password", password);
+            }});
+                FOM01_Login_Conn conexion = new FOM01_Login_Conn();
+                String d = conexion.updatePassword(correo,password);
+                response.put("id",d);
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            return gson.toJson(response);
+        }
+        
     }
 }
