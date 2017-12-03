@@ -4,6 +4,7 @@ import { AlertController } from 'ionic-angular';
 import { CrearusuarioPage} from '../crearusuario/crearusuario';
 import { HomePage } from '../../home/home';
 import { UserServiceProvider } from '../../../providers/user-service/user-service';
+import { RecuperarPassPage } from '../recuperar-pass/recuperar-pass';
 /**
  * Generated class for the IniciarsesionPage page.
  *
@@ -115,7 +116,8 @@ recoverPassword() {
         handler: data => {
           if (data.Correo!="") 
           {
-          localStorage.setItem("correo",data);
+          localStorage.setItem("correo",data.Correo);
+          this.navCtrl.setRoot(RecuperarPassPage);
           console.log(data)
           }
           else

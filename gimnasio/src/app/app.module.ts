@@ -15,6 +15,7 @@ import { AmigosPage } from '../pages/FO_M01/amigos/amigos';
 import { CrearusuarioPage } from '../pages/FO_M01/crearusuario/crearusuario';
 import { IniciarsesionPage } from '../pages/FO_M01/iniciarsesion/iniciarsesion';
 import { PerfilPage} from '../pages/FO_M01/perfil/perfil'
+import { RecuperarPassPage } from '../pages/FO_M01/recuperar-pass/recuperar-pass';
 // fin M01
 //M03 
 import { RutinaPage } from '../pages/FO_M03/rutina/rutina';
@@ -79,6 +80,7 @@ import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/rese
     MyApp,
     HomePage,
     AmigosPage,
+    RecuperarPassPage,
     CrearusuarioPage,
     IniciarsesionPage,
     PerfilPage,
@@ -153,6 +155,7 @@ import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/rese
     HomePage,
     AmigosPage,
     CrearusuarioPage,
+    RecuperarPassPage,
     IniciarsesionPage,
     PerfilPage,
     SeleccionarProgresoPage,

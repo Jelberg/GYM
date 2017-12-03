@@ -12,6 +12,7 @@ import { ReservasPage } from '../pages/FO_M05/reservas/reservas';
 import { AmigosPage } from '../pages/FO_M01/amigos/amigos';
 import { CrearusuarioPage } from '../pages/FO_M01/crearusuario/crearusuario';
 import { IniciarsesionPage } from '../pages/FO_M01/iniciarsesion/iniciarsesion';
+import { RecuperarPassPage } from '../pages/FO_M01/recuperar-pass/recuperar-pass';
 import { PerfilPage} from '../pages/FO_M01/perfil/perfil'
 import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clases-participadas';
 import { ListaClasesPage} from '../pages/FO_M05/lista-clases/lista-clases';
