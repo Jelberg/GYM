@@ -97,6 +97,22 @@ CREATE OR REPLACE FUNCTION fo_m01_update_codigo (
     END; $$
 LANGUAGE plpgsql;
 
+-------- actualizar contrasena-----
+
+
+CREATE OR REPLACE FUNCTION fo_m01_update_pass (
+    correo character varying,
+    password character varying
+    )
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        UPDATE usuario
+        SET usu_password = password
+ 	where usu_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
 -----------------------insertar usuario nuevo----------
 
 CREATE OR REPLACE FUNCTION fo_m01_inserta_usuario(
