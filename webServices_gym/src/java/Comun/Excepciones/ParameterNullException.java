@@ -1,4 +1,4 @@
-package com.ds1718a.maven_serviciosweb.Comun.Excepciones;
+package Comun.Excepciones;
 
 
 
