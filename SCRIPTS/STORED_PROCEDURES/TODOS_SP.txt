@@ -49,7 +49,7 @@ CREATE OR REPLACE FUNCTION bo_m02_modifica_clase(nombreclase character varying, 
    AS $$
 DECLARE
 BEGIN
-    UPDATE CLASE SET (CLA_NOMBRE = nombreclase, CLA_DESCRIPCION = descripcion)
+    UPDATE CLASE SET CLA_NOMBRE = nombreclase, CLA_DESCRIPCION = descripcion
     WHERE CLA_NOMBRE = nombreclase;
 END; $$
   LANGUAGE plpgsql;
@@ -118,9 +118,9 @@ CREATE OR REPLACE FUNCTION bo_m02_modifica_horario_clase(nombreclase int, instru
    AS $$
 DECLARE
 BEGIN
-    UPDATE HORARIO_CLASE SET (fk_clase=nombreclase and fk_instructor=instructor
+    UPDATE HORARIO_CLASE SET fk_clase=nombreclase and fk_instructor=instructor
 					and Hc_fecha=fecha and HC_dia=dia and HC_capacidad=capacidad
-					and HC_Hora_inicio=hora_inicio and HC_Hora_Fin=hora_fin)
+					and HC_Hora_inicio=hora_inicio and HC_Hora_Fin=hora_fin
     WHERE (fk_Clase = nombreclase and fk_Instructor = instructor);
 END; $$
   LANGUAGE plpgsql;
@@ -155,8 +155,8 @@ END; $$
 
 --------------------Funcion que inserta un entrenador--------------------
 
-CREATE OR REPLACE FUNCTION bo_m02_insertar_entrenador(nombre, apellido,
- fechanac, sexo, correo, historial)
+CREATE OR REPLACE FUNCTION bo_m02_insertar_entrenador(nombre character varying, apellido character varying,
+ fechanac character varying, sexo char, correo character varying, historial character varying)
 RETURNS VOID AS $$
 DECLARE 
 BEGIN 
@@ -177,7 +177,7 @@ CREATE OR REPLACE FUNCTION bo_m02_actualizar_entrenador(
     DECLARE
     BEGIN
         UPDATE entrenador
-        SET ent_nombre = nombre , ent_apellido = apellido, ent_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ent_sexo = sexo, ent_historial = historial;
+        SET ent_nombre = nombre , ent_apellido = apellido, ent_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ent_sexo = sexo, ent_historial = historial
  	where ent_correo = correo;
     END; $$
 LANGUAGE plpgsql;
@@ -195,7 +195,7 @@ LANGUAGE plpgsql;
 
 --------Este agrega un turno al entrenador---------------------------------
 
-CREATE OR REPLACE FUNCTION bo_m02_insertar_turno(id_entrenador in, id_turno int)
+CREATE OR REPLACE FUNCTION bo_m02_insertar_turno(id_entrenador int, id_turno int)
 RETURNS VOID AS $$
 DECLARE 
 BEGIN 
@@ -1015,13 +1015,14 @@ CREATE OR REPLACE FUNCTION fo_m06_get_reserva (usu_id int)
 	AS $$
 DECLARE
 	_reservas record;
-	FOR _reservas IN (SELECT * ent_nombre,res_fecha_ini,ent_fecha_fin from Entrenador,Reserva
+    Begin
+	FOR _reservas IN (SELECT ent_nombre,res_fecha_ini,ent_fecha_fin from Entrenador,Reserva
 			where ent_id=fk_entrenador and usu_id=fk_usuario)
 
 	loop
-		entrenador_nombre:=_reserva.ent_nombre;
-		fechai:=_reserva.ent_fecha_ini;
-		fechaf:=_reserva.ent_fecha_fin:
+		nombre_ent:=_reserva.ent_nombre;
+		fecha_ini:=_reserva.ent_fecha_ini;
+		fecha_fin:=_reserva.ent_fecha_fin;
 		return next;
 	end loop;
 	end $$
@@ -1029,13 +1030,13 @@ DECLARE
 
 -------Esta funcion permitira agregar una reserva-----------
 
-CREATE OR REPLACE fo_m06_agregar_reserva (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int)
+CREATE OR REPLACE FUNCTION fo_m06_agregar_reserva (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int)
 RETURNS VOID AS $$
 DECLARE
 BEGIN
-	INSERT INTO reserva(res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int) 
-			values (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int);
-	END $$;
+	INSERT INTO reserva(res_id,res_fecha_ini,res_fecha_fin,id_usuario,id_entrenador) 
+			values (res_id,res_fecha_ini,res_fecha_fin,id_usuario,id_entrenador);
+	END $$
 	LANGUAGE PLPGSQL;
 
 
