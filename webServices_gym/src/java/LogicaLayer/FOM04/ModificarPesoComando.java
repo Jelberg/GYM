@@ -5,7 +5,9 @@
  */
 package LogicaLayer.FOM04;
 
-import com.ds1718a.maven_serviciosweb.LogicaLayer.Comando;
+import LogicaLayer.Comando;
+
+
 
 /**
  *
