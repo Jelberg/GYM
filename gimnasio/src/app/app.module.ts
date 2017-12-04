@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
+
 //Gráficos
 import { ChartsModule } from 'ng2-charts';
 
@@ -197,6 +199,7 @@ import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/rese
     ListaClasesPage
   ],
   providers: [
+    Contacts, Contact,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
