@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AccesoDatosLayer.FOM04;
+package AccesoDatosLayer.FOM04Postgre;
 
 /**
  *
