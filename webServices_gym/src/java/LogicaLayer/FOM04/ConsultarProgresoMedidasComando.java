@@ -13,7 +13,7 @@ import LogicaLayer.Comando;
  *
  * @author Leonardo
  */
-public class ConsultarProgesoMedidasComando extends Comando {
+public class ConsultarProgresoMedidasComando extends Comando {
     
     @Override
     public void ejecutar() {
