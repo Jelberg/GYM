@@ -9,6 +9,6 @@ package LogicaLayer.BO2;
  *
  * @author simon
  */
-public class ConsultarInstructor {
+public class getInstructores {
     
 }
