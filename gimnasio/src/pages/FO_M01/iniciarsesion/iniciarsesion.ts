@@ -4,6 +4,7 @@ import { AlertController } from 'ionic-angular';
 import { CrearusuarioPage} from '../crearusuario/crearusuario';
 import { HomePage } from '../../home/home';
 import { UserServiceProvider } from '../../../providers/user-service/user-service';
+import { RecuperarPassPage } from '../recuperar-pass/recuperar-pass';
 /**
  * Generated class for the IniciarsesionPage page.
  *
@@ -61,6 +62,8 @@ export class IniciarsesionPage {
       if (this.class[0])
       {
         localStorage.setItem("id",this.class[0].id)
+        localStorage.setItem("entrenador",this.class[0].entrenador)
+        console.log(localStorage.getItem("entrenador"));
         this.radioopen=false;
         this.irahomeusuario() 
       }
@@ -75,7 +78,7 @@ export class IniciarsesionPage {
   )
 }
  }
-
+/* metodo que muestra un  mensaje de error */
 mensajeerror( mensaje )
 {
   let alert = this.alertCtrl.create();
@@ -105,13 +108,20 @@ recoverPassword() {
         text: 'Cancelar',
         role: 'cancel',
         handler: data => {
-          console.log('Cancel clicked');
+          
         }
       },
       {
         text: 'Ok',
         handler: data => {
-          console.log('Cancel clicked');
+          if (data.Correo!="") 
+          {
+          localStorage.setItem("correo",data.Correo);
+          this.navCtrl.setRoot(RecuperarPassPage);
+          console.log(data)
+          }
+          else
+          this.mensajeerror("Introduzca el correo")
         }
       }
     ]
