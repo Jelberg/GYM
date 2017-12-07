@@ -12,10 +12,13 @@
       <ion-title>
         Amigos
       </ion-title>
+      <ion-buttons end>
+        <ion-icon name="agregar_amigos" color="light" md="md-person-add" style="padding-top: 2%"></ion-icon>
+      </ion-buttons>
   </ion-navbar>
 
   <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="pet">
+    <ion-segment [(ngModel)]="categorias">
       <ion-segment-button value="lista_amigos">
         Lista de Amigos
       </ion-segment-button>
@@ -29,37 +32,25 @@
 
 
 <ion-content>
-<div [ngSwitch]="pet">
+<div [ngSwitch]="categorias">
   <ion-list *ngSwitchCase="'lista_amigos'">
     <ion-item>
-      <ion-thumbnail item-start>
-        <!--
-        <img src="assets/img/thumbnail-puppy-1.jpg">
-        -->
+      <ion-thumbnail item-start name="personas">
       </ion-thumbnail>
       <h2>Ruby</h2>
     </ion-item>
     <ion-item>
       <ion-thumbnail item-start>
-        <!--
-        <img src="assets/img/thumbnail-puppy-2.jpg">
-        -->
       </ion-thumbnail>
       <h2>Oscar</h2>
     </ion-item>
     <ion-item>
       <ion-thumbnail item-start>
-        <!--
-        <img src="assets/img/thumbnail-puppy-4.jpg">
-        -->
       </ion-thumbnail>
       <h2>Zoey</h2>
     </ion-item>
     <ion-item>
       <ion-thumbnail item-start>
-        <!--
-        <img src="assets/img/thumbnail-puppy-3.jpg">
-        -->
       </ion-thumbnail>
       <h2>Otto</h2>
     </ion-item>

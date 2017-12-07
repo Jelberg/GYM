@@ -16,21 +16,16 @@ import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/cont
   templateUrl: 'amigos.html',
 })
 export class AmigosPage {
-
+  personas : string;
   /**
-   * listaContactos => se encarga de almacenar el listado de contactos recuperados del dispositivo
+   * listaContactos, se encarga de almacenar el listado de contactos recuperados del dispositivo.
    */
   listaContactos:any[]=[];
-  /**
-  avatar:string="./assets/icon/avatar.png";
-   */
   constructor(public navCtrl: NavController, private contacts:Contacts, private modalCtrl:ModalController) {
     this.cargarListaContactos();
   }
   /**
-   * Funcion encargada de cargar la lista de contactos del celular, en mi caso filtrare y mostrare solo
-   * los objetos que tienen valor en los campos dislplayName, photos, phoneNumbers. Con estos cargare
-   * la lista a mostrar.
+   * Funcion encargada de cargar la lista de contactos del celular
    */
   cargarListaContactos(){
     this.contacts.find(["*"])
@@ -47,6 +42,10 @@ export class AmigosPage {
     },error => {
       console.log({error:error})
     })
+  }
+
+  public listarAmigos(){
+
   }
   
 }
