@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
-
 import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
 
 /**
@@ -44,8 +43,8 @@ export class AmigosPage {
     })
   }
 
-  public listarAmigos(){
-
+  public agregarAmigos(){
+    
   }
   
 }

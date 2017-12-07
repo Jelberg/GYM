@@ -12,15 +12,15 @@
       <ion-title>
         Amigos
       </ion-title>
-      <ion-buttons end>
-        <ion-icon name="agregar_amigos" color="light" md="md-person-add" style="padding-top: 2%"></ion-icon>
-      </ion-buttons>
   </ion-navbar>
 
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="categorias">
       <ion-segment-button value="lista_amigos">
         Lista de Amigos
+      </ion-segment-button>
+      <ion-segment-button value="agregar_amigos">
+        Agregar Amigos
       </ion-segment-button>
       <ion-segment-button value="invitar">
         Invitar
@@ -54,6 +54,10 @@
       </ion-thumbnail>
       <h2>Otto</h2>
     </ion-item>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'agregar_amigos'" (click)="agregarAmigos()">
+
   </ion-list>
 
   <ion-list *ngSwitchCase="'invitar'">
