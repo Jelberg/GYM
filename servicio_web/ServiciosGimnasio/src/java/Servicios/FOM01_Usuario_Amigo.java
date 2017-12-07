@@ -82,43 +82,6 @@ public class FOM01_Usuario_Amigo {
     }
     
     /**
-     * @return Devuelve una lista de la relación usuario - amigos
-     */
-    @GET
-    @Path("/getListUsuario_Amigo")
-    @Produces("application/json")
-    public String getListUsuario_Amigo(){
-        
-        try{
-            
-            String query = "SELECT * FROM USUARIO_AMIGO";
-            jsonArray = new ArrayList<>();
-            System.out.println (query);
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            while(rs.next()){
-                jsonArray.add(new Usuario_Amigo());
-                jsonArray.get(jsonArray.size() - 1).setAmi_usuario(rs.getInt("idUsuario"));
-                jsonArray.get(jsonArray.size() - 1).setAmi_amigo(rs.getInt("idAmigo"));
-            }
-            response = gson.toJson(jsonArray);
-        }
-        catch(SQLException e) {
-            response = e.getMessage();
-        }
-        catch (ParameterNullException e) {
-            response = e.getMessage();
-        }
-        catch (Exception e) {
-            response = e.getMessage();
-        }
-        finally {
-            Sql.bdClose(conn);
-            return response;
-        }
-    }
-    
-    /**
      * Funcion que es llamada cuando el usuario quiere agregar a un amigo.
      * @param idUsuario ID del Usuario.
      * @param idAmigo ID del Amigo.
