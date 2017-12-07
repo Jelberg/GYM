@@ -10,7 +10,6 @@ import Excepciones.ParameterNullException;
 import Validaciones.ValidationWS;
 import com.google.gson.Gson;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -93,7 +92,7 @@ public class FOM01_Usuario {
     }
     
     
-        /**
+    /**
      * Funcion que recibe como parámetro el id del usuario,
      * para consultarla y saber sus datos.
      * @param id
