@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
+import { UserServiceProvider } from '../../../providers/user-service/user-service';
 
 /**
  * Generated class for the AmigosPage page.
@@ -15,7 +16,10 @@ import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/cont
   templateUrl: 'amigos.html',
 })
 export class AmigosPage {
-  personas : string;
+  usuario : string;
+  userService: UserServiceProvider;
+  public class : any []=[];
+
   /**
    * listaContactos, se encarga de almacenar el listado de contactos recuperados del dispositivo.
    */
@@ -44,7 +48,21 @@ export class AmigosPage {
   }
 
   public agregarAmigos(){
-    
+
   }
   
+  public listaAmigos(){
+    let url = "Usuario_Amigo/getUsuario_Amigo?idUsuario="+this.usuario;
+    this.userService.getDato(url).subscribe(data => {    
+        let i: number = 0;
+        while ( i < data.length ){
+        this.class[i] = data[i];
+      i++;}
+    },
+      (error) =>{
+        console.error(error);
+      }
+    )
+  }
+
 }

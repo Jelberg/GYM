@@ -33,9 +33,9 @@
 
 <ion-content>
 <div [ngSwitch]="categorias">
-  <ion-list *ngSwitchCase="'lista_amigos'">
-    <ion-item>
-      <ion-thumbnail item-start name="personas">
+  <ion-list *ngSwitchCase="'lista_amigos'" (click)="listaAmigos()">
+    <ion-item >
+      <ion-thumbnail item-start >
       </ion-thumbnail>
       <h2>Ruby</h2>
     </ion-item>

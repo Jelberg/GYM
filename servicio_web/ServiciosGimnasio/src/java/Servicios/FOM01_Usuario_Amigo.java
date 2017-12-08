@@ -6,6 +6,7 @@
 package Servicios;
 
 import Dominio.Sql;
+import Dominio.Usuario;
 import Dominio.Usuario_Amigo;
 import Excepciones.ParameterNullException;
 import Validaciones.ValidationWS;
@@ -38,6 +39,7 @@ public class FOM01_Usuario_Amigo {
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Usuario_Amigo> jsonArray;
+    private ArrayList<Usuario> jsonArray2;
     
     /**
      * Funcion que recibe como parámetro el ID del Usuario,
@@ -54,17 +56,19 @@ public class FOM01_Usuario_Amigo {
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("idUsuario", idUsuario);
             }});
-            String query = "SELECT usu_usuario FROM fo_m01_get_usuario_amigo("+idUsuario+")";
-            jsonArray = new ArrayList<>();
+            String query = "SELECT * FROM fo_m01_get_usuario_amigo("+idUsuario+")";
+            jsonArray2 = new ArrayList<>();
             System.out.println (query);
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
-                jsonArray.add(new Usuario_Amigo());
-                jsonArray.get(jsonArray.size() - 1).setAmi_usuario(rs.getInt("idUsuario"));
-                jsonArray.get(jsonArray.size() - 1).setAmi_amigo(rs.getInt("idAmigo"));
+                jsonArray2.add(new Usuario());
+                jsonArray2.get(jsonArray2.size() - 1).setNombre(rs.getString("nombre"));
+                jsonArray2.get(jsonArray2.size() - 1).setApellido(rs.getString("apellido"));
+                jsonArray2.get(jsonArray2.size() - 1).setUsuario(rs.getString("usuario"));
+                jsonArray2.get(jsonArray2.size() - 1).setCorreo(rs.getString("correo"));
             }
-            response = gson.toJson(jsonArray);
+            response = gson.toJson(jsonArray2);
         }
         catch(SQLException e) {
             response = e.getMessage();
