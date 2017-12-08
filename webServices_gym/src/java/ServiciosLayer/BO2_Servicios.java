@@ -21,9 +21,13 @@ public class BO2_Servicios {
     @POST
     @Path( "/RegistrarInstructor" )
     @Produces( "application/json" )
-    public void RegistrarInstructor(){
+    public void RegistrarInstructor(String nombre, String apellido,
+                                    String fechanac, String sexo,
+                                    String correo){
+
         FabricaComando fab = new FabricaComando();
-        Comando c = fab.CrearRegInstructor();
+        Comando c = fab.CrearRegInstructor(nombre, apellido, fechanac,
+                                           sexo, correo);
         c.ejecutar();
     }
 }

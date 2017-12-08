@@ -14,8 +14,11 @@ import LogicaLayer.BO2.RegistrarInstructor;
 public class FabricaComando {
     
     //Crear comando para registrar un instructor
-    public Comando CrearRegInstructor (){
-        return new RegistrarInstructor();
+    public Comando CrearRegInstructor (String nombre, String apellido,
+                                    String fechanac, String sexo,
+                                    String correo){
+        return new RegistrarInstructor(nombre, apellido, fechanac,
+                                           sexo, correo);
     }
     
 }
