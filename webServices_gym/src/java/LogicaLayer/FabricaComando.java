@@ -5,10 +5,17 @@
  */
 package LogicaLayer;
 
+import LogicaLayer.BO2.RegistrarInstructor;
+
 /**
  *
  * @author Elberg
  */
 public class FabricaComando {
+    
+    //Crear comando para registrar un instructor
+    public Comando CrearRegInstructor (){
+        return new RegistrarInstructor();
+    }
     
 }
