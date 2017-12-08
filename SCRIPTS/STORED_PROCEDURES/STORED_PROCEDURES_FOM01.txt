@@ -130,6 +130,6 @@ CREATE OR REPLACE FUNCTION fo_m01_inserta_usuario(
     DECLARE
     BEGIN
         INSERT INTO usuario(usu_nombre, usu_apellido,usu_fecha_nac, usu_sexo, usu_correo, usu_usuario, usu_password, usu_estatura, usu_telefono, usu_entrenador)
-        VALUES (nombre , apellido,fecha_nac, sexo, correo, usuario, password, estatura, telefono, entrenador);
+        VALUES (INITCAP(nombre) , INITCAP(apellido),fecha_nac, sexo, correo, usuario, password, estatura, telefono, entrenador);
     END; $$
 LANGUAGE plpgsql;
