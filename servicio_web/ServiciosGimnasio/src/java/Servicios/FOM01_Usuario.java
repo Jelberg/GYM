@@ -10,7 +10,6 @@ import Excepciones.ParameterNullException;
 import Validaciones.ValidationWS;
 import com.google.gson.Gson;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -93,10 +92,54 @@ public class FOM01_Usuario {
     }
     
     
-        /**
-     * Funcion que recibe como parámetro el id del usuario,
+    /**
+     * Funcion que recibe como parámetro el nombre y apellido del Usuario,
+     * para consultarlo y saber sus datos.
+     * @param nombre del Usuario.
+     * @return Devuelve los datos del cliente en formato json
+     */
+    @GET
+    @Path("/getUsuarioNomApe")
+    @Produces("application/json")
+    public String getUsuarioNomApe(@QueryParam("nombre") String nombre, @QueryParam("apellido") String apellido){
+        
+        try{
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("nombre", nombre);
+                put("apellido", apellido);
+            }});
+            String query = "SELECT * FROM fo_m01_get_usuarioNA('"+nombre+"','"+apellido+"')";
+            jsonArray = new ArrayList<>();
+            System.out.println (query);
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                jsonArray.add(new Usuario());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setUsuario(rs.getString("usuario"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
+            }
+            response = gson.toJson(jsonArray);
+        }
+        catch(SQLException e) {
+            response = e.getMessage();
+        }
+        catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
+        finally {
+            Sql.bdClose(conn);
+            return response;
+        }
+    }
+    /**
+     * Funcion que recibe como parámetro el correodel usuario,
      * para consultarla y saber sus datos.
-     * @param id
+     * @param correo
      * @return Devuelve el usuario 
      */
     @GET
