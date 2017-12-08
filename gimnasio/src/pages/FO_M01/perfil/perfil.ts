@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../../home/home';
-import { IniciarsesionPage} from '../iniciarsesion/iniciarsesion'
+import { IniciarsesionPage} from '../iniciarsesion/iniciarsesion';
+import { UserServiceProvider } from '../../../providers/user-service/user-service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 /**
@@ -21,24 +22,43 @@ export class PerfilPage {
   private editar: boolean = true;
   private cgenero : any;
   private radioopen : boolean;
+  public class : any []=[];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public alertCtrl: AlertController)
+    public alertCtrl: AlertController,
+    public userService: UserServiceProvider)
   {
   this.users = [];
   }
 
   ionViewDidLoad() {
-    var usuariodata ='{"nombre":"Javier Hernandez", "fechanac":"28/07/1995", "altura":"180", "correo":"javierhzo1995@gmail.com", "telefono":"+584123621328", "genero":"Masculino"}'; 
-    this.users = JSON.parse(usuariodata);
-    console.log(this.users)
-    document.getElementById("nombre").innerHTML= this.users.nombre;
-    document.getElementById("correo").innerHTML= this.users.correo;
-    document.getElementById("telefono").innerHTML= this.users.telefono;
-    document.getElementById("estatura").innerHTML= this.users.altura;
-    document.getElementById("genero").innerHTML= this.users.genero;
-    document.getElementById("fechanac").innerHTML= this.users.fechanac;
+
+    let url = "Login/getUsuario?id="+localStorage.getItem("id");
+    this.userService.getDato(url).subscribe(data => {    
+        let i: number = 0;
+        while ( i < data.length ){
+        this.class[i] = data[i];
+      i++;}
+      console.log(this.class[0]);
+      if (this.class[0])
+      {
+        document.getElementById("nombre").innerHTML=this.class[0].nombre+" "+this.class[0].apellido;
+        document.getElementById("correo").innerHTML=this.class[0].correo;
+        document.getElementById("telefono").innerHTML=this.class[0].telefono;
+        document.getElementById("estatura").innerHTML= this.class[0].estatura;       
+        document.getElementById("fechanac").innerHTML= this.class[0].fecha_nac;
+        if (this.class[0].sexo=="M")
+        document.getElementById("genero").innerHTML= "Masculino"
+        else
+        document.getElementById("genero").innerHTML= "Femenino"
+        this.radioopen=false;
+      }
+    },
+    (error) =>{
+      console.error(error);
+    }
+  )
   }
   cerrarsesion() {
     this.navCtrl.setRoot(IniciarsesionPage);}
@@ -84,7 +104,7 @@ export class PerfilPage {
         this.radioopen=true;
       })
     }
-    
+  
     
     editarperfil(){
     if (this.editar === true){

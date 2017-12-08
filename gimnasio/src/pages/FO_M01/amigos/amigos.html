@@ -15,9 +15,12 @@
   </ion-navbar>
 
   <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="pet">
-      <ion-segment-button value="lista_amigos">
+    <ion-segment [(ngModel)]="categorias">
+      <ion-segment-button (click)=cargarAmigos() value="lista_amigos">
         Lista de Amigos
+      </ion-segment-button>
+      <ion-segment-button value="agregar_amigos">
+        Agregar Amigos
       </ion-segment-button>
       <ion-segment-button value="invitar">
         Invitar
@@ -29,40 +32,25 @@
 
 
 <ion-content>
-<div [ngSwitch]="pet">
-  <ion-list *ngSwitchCase="'lista_amigos'">
-    <ion-item>
-      <ion-thumbnail item-start>
-        <!--
-        <img src="assets/img/thumbnail-puppy-1.jpg">
-        -->
-      </ion-thumbnail>
-      <h2>Ruby</h2>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <!--
-        <img src="assets/img/thumbnail-puppy-2.jpg">
-        -->
-      </ion-thumbnail>
-      <h2>Oscar</h2>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <!--
-        <img src="assets/img/thumbnail-puppy-4.jpg">
-        -->
-      </ion-thumbnail>
-      <h2>Zoey</h2>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <!--
-        <img src="assets/img/thumbnail-puppy-3.jpg">
-        -->
-      </ion-thumbnail>
-      <h2>Otto</h2>
-    </ion-item>
+<div [ngSwitch]="categorias">
+  <ion-list  *ngSwitchCase="'lista_amigos'" >
+    <ion-list-header *ngFor="let item of class" no-lines no-padding>
+    <button ion-item ><ion-icon item-right name='mail'></ion-icon>{{item.nombre}} {{item.apellido}}</button > 
+    </ion-list-header>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'agregar_amigos'" >
+      <ion-item>
+          <ion-label stacked>Nombre y apellido:</ion-label>
+          <ion-input  name="usuario" [(ngModel)]="usuario" type="text" id="usuario" ></ion-input>
+        </ion-item>
+        <button ion-button icon-left block color="secondary" (click)="listaBuscar()">
+            <ion-icon name="checkmark"></ion-icon>
+          </button>
+
+          <ion-list-header *ngFor="let item of buscar" no-lines no-padding>
+              <button ion-item (click)="agregarAmigos(item.id)"><ion-icon item-right name='add'></ion-icon>{{item.nombre}} {{item.apellido}}({{item.usuario}})</button > 
+              </ion-list-header>
   </ion-list>
 
   <ion-list *ngSwitchCase="'invitar'">
@@ -76,10 +64,6 @@
   </ion-list>
 </div>
 
-<ion-fab right bottom>
-    <button ion-fab color="secondary" (click)="agregaramigos()">
-        <ion-icon name="add"></ion-icon>
-    </button>
-</ion-fab>
+
 
 </ion-content>
