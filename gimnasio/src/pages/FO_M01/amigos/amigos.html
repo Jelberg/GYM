@@ -16,7 +16,7 @@
 
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="categorias">
-      <ion-segment-button  value="lista_amigos">
+      <ion-segment-button (click)=cargarAmigos() value="lista_amigos">
         Lista de Amigos
       </ion-segment-button>
       <ion-segment-button value="agregar_amigos">
@@ -49,7 +49,7 @@
           </button>
 
           <ion-list-header *ngFor="let item of buscar" no-lines no-padding>
-              <button ion-item ><ion-icon item-right name='add'></ion-icon>{{item.nombre}} {{item.apellido}}({{item.usuario}})</button > 
+              <button ion-item (click)="agregarAmigos(item.id)"><ion-icon item-right name='add'></ion-icon>{{item.nombre}} {{item.apellido}}({{item.usuario}})</button > 
               </ion-list-header>
   </ion-list>
 

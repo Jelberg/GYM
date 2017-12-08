@@ -28,14 +28,7 @@ export class AmigosPage {
     public alertCtrl: AlertController,
     public userService: UserServiceProvider, 
     private contacts:Contacts) {
-      let url = "Usuario_Amigo/getUsuario_Amigo?idUsuario="+localStorage.getItem("id");
-      this.userService.getDato(url).subscribe(data => {    
-          this.class = data;
-      },
-        (error) =>{
-          console.error(error);
-        }
-      )
+      
   }
   /**
    * Funcion encargada de cargar la lista de contactos del celular
@@ -57,8 +50,34 @@ export class AmigosPage {
     })
   }
 
-  public agregarAmigos(){
 
+  public cargarAmigos(){
+    let url = "Usuario_Amigo/getUsuario_Amigo?idUsuario="+localStorage.getItem("id");
+    this.userService.getDato(url).subscribe(data => {    
+        this.class = data;
+    },
+      (error) =>{
+        console.error(error);
+      }
+    )
+  }
+  public agregarAmigos( id ){
+    var x;
+    let url = "Usuario_Amigo/insertaUsuario_Amigo?idUsuario="+localStorage.getItem("id")+"&idAmigo="+id
+    this.userService.postDato2(url).subscribe(data => {    
+        let i: number = 0;
+        console.log(data);     
+          x = data;
+          console.log(x);
+        if(x.data=="Se agregó el amigo")
+        this.mensajeexito("Usuario agregado correctamente")
+        else
+        this.mensajeerror("Usuario ya es amigo")             
+    },
+    (error) =>{
+      console.error(error);
+    }
+  )
   }
   
   public listaBuscar(){
@@ -89,6 +108,19 @@ mensajeerror( mensaje )
 {
   let alert = this.alertCtrl.create();
   alert.setTitle('Error'); 
+  alert.setMessage(mensaje)
+  alert.addButton({
+    text: 'OK',
+  });
+  alert.present().then(() => {
+  })
+}
+
+
+mensajeexito( mensaje )
+{
+  let alert = this.alertCtrl.create();
+  alert.setTitle('Exito'); 
   alert.setMessage(mensaje)
   alert.addButton({
     text: 'OK',
