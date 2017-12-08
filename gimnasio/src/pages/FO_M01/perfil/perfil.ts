@@ -33,15 +33,6 @@ export class PerfilPage {
   }
 
   ionViewDidLoad() {
-    /*var usuariodata ='{"nombre":"Javier Hernandez", "fechanac":"28/07/1995", "altura":"180", "correo":"javierhzo1995@gmail.com", "telefono":"+584123621328", "genero":"Masculino"}'; 
-    this.users = JSON.parse(usuariodata);
-    console.log(this.users)
-    document.getElementById("nombre").innerHTML= this.users.nombre;
-    document.getElementById("correo").innerHTML= this.users.correo;
-    document.getElementById("telefono").innerHTML= this.users.telefono;
-    document.getElementById("estatura").innerHTML= this.users.altura;
-    document.getElementById("genero").innerHTML= this.users.genero;
-    document.getElementById("fechanac").innerHTML= this.users.fechanac;*/
 
     let url = "Login/getUsuario?id="+localStorage.getItem("id");
     this.userService.getDato(url).subscribe(data => {    

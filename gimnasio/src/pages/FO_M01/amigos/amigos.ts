@@ -17,15 +17,25 @@ import { UserServiceProvider } from '../../../providers/user-service/user-servic
 })
 export class AmigosPage {
   usuario : string;
-  userService: UserServiceProvider;
-  public class : any []=[];
-
+  public class : any [];
+  buscar:any[]=[];
   /**
    * listaContactos, se encarga de almacenar el listado de contactos recuperados del dispositivo.
    */
   listaContactos:any[]=[];
-  constructor(public navCtrl: NavController, private contacts:Contacts, private modalCtrl:ModalController) {
-    this.cargarListaContactos();
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public alertCtrl: AlertController,
+    public userService: UserServiceProvider, 
+    private contacts:Contacts) {
+      let url = "Usuario_Amigo/getUsuario_Amigo?idUsuario="+localStorage.getItem("id");
+      this.userService.getDato(url).subscribe(data => {    
+          this.class = data;
+      },
+        (error) =>{
+          console.error(error);
+        }
+      )
   }
   /**
    * Funcion encargada de cargar la lista de contactos del celular
@@ -51,18 +61,40 @@ export class AmigosPage {
 
   }
   
-  public listaAmigos(){
-    let url = "Usuario_Amigo/getUsuario_Amigo?idUsuario="+this.usuario;
-    this.userService.getDato(url).subscribe(data => {    
-        let i: number = 0;
-        while ( i < data.length ){
-        this.class[i] = data[i];
-      i++;}
-    },
-      (error) =>{
-        console.error(error);
-      }
-    )
+  public listaBuscar(){
+    var arregloDeCadenas = this.usuario.split(" ");
+    let url = "Registrar_Usuario/getUsuarioNomApe?nombre="+arregloDeCadenas[0]+"&apellido="+arregloDeCadenas[1];
+    if (this.usuario!="")
+    {
+      this.userService.getDato(url).subscribe(data => {    
+          let i: number = 0;
+          if ( i < data.length ){
+          this.buscar = data;
+          }
+          else
+          this.mensajeerror("no se encontro usuario")
+      },
+        (error) =>{
+          console.error(error);
+        }
+      )
+    }
+    else
+    this.mensajeerror("Llene el campo de busqueda")
+    
   }
+
+  /* metodo que muestra un  mensaje de error */
+mensajeerror( mensaje )
+{
+  let alert = this.alertCtrl.create();
+  alert.setTitle('Error'); 
+  alert.setMessage(mensaje)
+  alert.addButton({
+    text: 'OK',
+  });
+  alert.present().then(() => {
+  })
+}
 
 }
