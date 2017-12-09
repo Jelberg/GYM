@@ -5,8 +5,13 @@
  */
 package ServiciosLayer;
 
+import Comun.Dominio.Entidad;
+import Comun.Dominio.FabricaEntidad;
+import Comun.Dominio.Persona;
 import LogicaLayer.Comando;
 import LogicaLayer.FabricaComando;
+import java.sql.Date;
+
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -17,17 +22,18 @@ import javax.ws.rs.Produces;
  */
 @Path("/bo2servicios")
 public class BO2_Servicios {
-    
+
     @POST
     @Path( "/RegistrarInstructor" )
     @Produces( "application/json" )
     public void RegistrarInstructor(String nombre, String apellido,
-                                    String fechanac, String sexo,
+                                    Date fechanac, String sexo,
                                     String correo){
-
+        
+        Entidad instructor = FabricaEntidad.InstanciaInstructor(nombre,
+                apellido, fechanac, sexo, correo);
         FabricaComando fab = new FabricaComando();
-        Comando c = fab.CrearRegInstructor(nombre, apellido, fechanac,
-                                           sexo, correo);
+        Comando c = fab.CrearRegInstructor(instructor);
         c.ejecutar();
     }
 }

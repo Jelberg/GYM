@@ -5,6 +5,7 @@
  */
 package LogicaLayer.BO2;
 
+import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
 
 /**
@@ -13,16 +14,10 @@ import LogicaLayer.Comando;
  */
 public class RegistrarInstructor extends Comando {
 
-    String nombre, apellido, fechanac, sexo, correo;
-    
-    public RegistrarInstructor (String nombre, String apellido,
-                                String fechanac, String sexo,
-                                String correo){
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fechanac = fechanac;
-        this.sexo = sexo;
-        this.correo = correo;
+    Entidad instructor;
+        
+    public RegistrarInstructor (Entidad instructor){
+        this.instructor = instructor;
     }
     
     @Override
