@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author marvian
  */
-public class Comentario implements Serializable {
+public class Comentario extends Entidad {
     private int _id;
     private String _mensaje;
     private String _NombreUsuario;
@@ -20,6 +20,13 @@ public class Comentario implements Serializable {
     public Comentario(){
     }
 
+    public Comentario(int _id, String _mensaje, String _NombreUsuario, String _fecha) {
+        this._id = _id;
+        this._mensaje = _mensaje;
+        this._NombreUsuario = _NombreUsuario;
+        this._fecha = _fecha;
+    }
+    
     public String getFecha() {
         return _fecha;
     }
@@ -36,10 +43,7 @@ public class Comentario implements Serializable {
         this._NombreUsuario = _NombreUsuario;
     }
         
-    public Comentario(int id, String mensaje ){
-        this._id = id;
-        this._mensaje = mensaje;
-    }
+   
 
     /**
      * @return the _id

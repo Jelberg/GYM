@@ -5,6 +5,7 @@
  */
 package LogicaLayer.FOM04;
 
+import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
 
 /**
@@ -15,6 +16,11 @@ public class AgregarMedidaComando extends Comando {
 
     @Override
     public void ejecutar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void ejecutar(Entidad entidad) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

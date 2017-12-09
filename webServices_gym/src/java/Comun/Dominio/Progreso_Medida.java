@@ -11,7 +11,7 @@ import java.sql.Date;
  *
  * @author marvian
  */
-public class Progreso_Medida {
+public class Progreso_Medida extends Entidad {
     private int _id;
     private int _medida;
     private String _tipo;
