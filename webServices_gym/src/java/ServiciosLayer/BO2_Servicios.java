@@ -23,14 +23,6 @@ import javax.ws.rs.QueryParam;
 @Path("/bo2servicios")
 public class BO2_Servicios {
 
-    /**
-     *
-     * @param nombre nombre del instructor
-     * @param apellido apellido del instructor
-     * @param fechanac fecha de nacimiento
-     * @param sexo sexo
-     * @param correo correo electronico
-     */
     @POST
     @Path( "/RegistrarInstructor" )
     @Produces( "application/json" )
@@ -40,8 +32,9 @@ public class BO2_Servicios {
         @QueryParam( "sexo" ) String sexo,
         @QueryParam( "correo" ) String correo){
         
-        Instructor instructor = (Instructor) FabricaEntidad.InstanciaInstructor(nombre,
-                apellido, fechanac, sexo, correo);
+        Instructor instructor = (Instructor) FabricaEntidad.InstanciaInstructor
+        (nombre, apellido, fechanac, sexo, correo);
+        
         FabricaComando fab = new FabricaComando();
         Comando c = fab.CrearRegInstructor(instructor);
         c.ejecutar();
