@@ -14,8 +14,8 @@ import com.google.gson.Gson;
  *
  * @author Miguel
  */
-public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
-    private Connection conn = super.getConInstance();
+//public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
+    /*private Connection conn = super.getConInstance();
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Usuario> jsonArray;
@@ -184,7 +184,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
         finally {
             super.bdClose(conn);
         }
-    }
+    }*/
 
     /**
      * Metodo que recibe como parametros los datos del usuario
@@ -203,7 +203,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
-    @Override
+   /* @Override
     public String Modificar(        int id,
                                     String nombre,
                                     String apellido,
@@ -235,7 +235,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
             super.bdClose(conn);
         }
     }
-
+*/
     
 /**
      * Funcion que recibe como parámetro el nombre y apellido del Usuario,
@@ -244,7 +244,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
      * @return Devuelve los datos del cliente en formato json
      */
 
-    @Override
+   /* @Override
     public String getUsuarioNomApe( String nombre, String apellido){
         
         try{
@@ -277,7 +277,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
         }
     }
     
-    
+    */
     /**
      * Metodo que recibe como parametros el ID del Usuario
      * para eliminar su cuenta.
@@ -285,7 +285,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
-    @Override
+   /* @Override
     public String Elimina( int idUsuario)
     {
         try{
@@ -307,6 +307,6 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
         finally {
             super.bdClose(conn);
         }
-    }
+    }*/
     
-}
+//}
