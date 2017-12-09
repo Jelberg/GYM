@@ -6,7 +6,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
-
+import ServiciosLayer.BOm02_Entrenador;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,7 +25,7 @@ public class ConfiguracionRestGimnasio extends Application{
     @Override
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
-        
+        h.add(BOm02_Entrenador.class);
 
 
         return h;

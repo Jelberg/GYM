@@ -14,16 +14,20 @@ import java.sql.Date;
 public class FabricaEntidad {
     
     // Inicia Fabricas de BO2
-    static public Entidad InstanciaInstructor(String nombre, String apellido,
+    static public Entidad InstanciaInstructor( int id, String nombre, String apellido,
                                     Date fecha_nac, String sexo, String correo){
-        return new Instructor(nombre, apellido, fecha_nac, sexo, correo);
+        return new Instructor(id, nombre, apellido, fecha_nac, sexo, correo);
+    }
+    static public Entidad instanciaEntrenador ( int id, String nombre, String apellido,
+                                    Date fecha_nac, String sexo, String correo, String historial ){
+        return new Entrenador( id, nombre, apellido, fecha_nac, sexo, correo, historial );
     }
     // Fin de BO2
     
     // Inicia Fabricas de M04
-    static public Entidad InstaciaProgresoPeso(int id, int peso, Date fechaP, String sobrenombre){
+    /*static public Entidad InstaciaProgresoPeso(int id, int peso, Date fechaP, String sobrenombre){
     return new Progreso_Peso(id, peso, fechaP,sobrenombre);
-    }
+    }*/
     // Fin de M04        
     
 }

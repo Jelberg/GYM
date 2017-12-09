@@ -1,5 +1,6 @@
 package AccesoDatosLayer;
 
+import AccesoDatosLayer.BO2.IDaoEntrenador;
 import AccesoDatosLayer.BO2.IDaoInstructor;
 
 /**
@@ -20,4 +21,5 @@ public abstract class FabricaAbstracta {
     
     // Gets BO2
     public abstract IDaoInstructor getDaoInstructor();
+    public abstract IDaoEntrenador instanciaDaoEntrenador();
 }

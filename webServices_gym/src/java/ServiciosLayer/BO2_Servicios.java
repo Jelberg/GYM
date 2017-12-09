@@ -33,7 +33,7 @@ public class BO2_Servicios {
         @QueryParam( "correo" ) String correo){
         
         Instructor instructor = (Instructor) FabricaEntidad.InstanciaInstructor
-        (nombre, apellido, fechanac, sexo, correo);
+        (1, nombre, apellido, fechanac, sexo, correo);
         
         FabricaComando fab = new FabricaComando();
         Comando c = fab.CrearRegInstructor(instructor);

@@ -5,12 +5,18 @@
  */
 package AccesoDatosLayer;
 
+import java.sql.Connection;
+
 /**
  *
  * @author Elberg
  */
-public class DaoPostgre {
+public abstract class DaoPostgre extends Dao{
     
     // Conexion con la base de datos
+    
+    public Connection getConexion(){
+        return Dao.getPostgreBdConnect();
+    }
     
 }
