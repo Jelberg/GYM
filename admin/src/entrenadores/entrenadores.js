@@ -1,6 +1,7 @@
+//import Formato './probando.js';
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/BOM02_Entrenador";
+var url="http://localhost:8080/web/BOM02_Entrenador";
 var correo_busqueda= document.getElementById("text_correo");
 var boton= document.getElementById("boton_consulta");
 var variable;
@@ -51,6 +52,8 @@ window.onload = function mostrartabla()
                     contenido += fila[campos[j]];
                     else
                     {
+                        //let formato = new Formato();
+                        //contenido += formato.cambiarFormato( fila[campos[j]] );
                         contenido +=cambiarFormato( fila[campos[j]] );
                     }
                     contenido += "</td>";
