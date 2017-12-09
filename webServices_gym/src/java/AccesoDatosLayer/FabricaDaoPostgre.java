@@ -11,6 +11,8 @@ package AccesoDatosLayer;
  */
 public class FabricaDaoPostgre extends FabricaAbstracta {
 
+    
+
 
     
 }
