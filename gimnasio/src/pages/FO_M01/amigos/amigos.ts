@@ -82,25 +82,29 @@ export class AmigosPage {
   
   public listaBuscar(){
     var arregloDeCadenas = this.usuario.split(" ");
-    let url = "Registrar_Usuario/getUsuarioNomApe?nombre="+arregloDeCadenas[0]+"&apellido="+arregloDeCadenas[1];
-    if (this.usuario!="")
+    if(arregloDeCadenas.length<3)
     {
-      this.userService.getDato(url).subscribe(data => {    
-          let i: number = 0;
-          if ( i < data.length ){
-          this.buscar = data;
+      let url = "Registrar_Usuario/getUsuarioNomApe?nombre="+arregloDeCadenas[0]+"&apellido="+arregloDeCadenas[1];
+      if (this.usuario!="")
+      {
+        this.userService.getDato(url).subscribe(data => {    
+            let i: number = 0;
+            if ( i < data.length ){
+            this.buscar = data;
+            }
+            else
+            this.mensajeerror("no se encontro usuario")
+        },
+          (error) =>{
+            console.error(error);
           }
-          else
-          this.mensajeerror("no se encontro usuario")
-      },
-        (error) =>{
-          console.error(error);
-        }
-      )
+        )
+      }
+      else
+      this.mensajeerror("Llene el campo de busqueda")
     }
-    else
-    this.mensajeerror("Llene el campo de busqueda")
-    
+    else 
+    this.mensajeerror("Introduzca unicamente el nombre y apellido ")
   }
 
   /* metodo que muestra un  mensaje de error */
