@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package AccesoDatosLayer;
+
+import AccesoDatosLayer.BO2.DaoInstructorPostgre;
+import AccesoDatosLayer.BO2.IDaoInstructor;
 
 /**
  *
@@ -11,8 +9,9 @@ package AccesoDatosLayer;
  */
 public class FabricaDaoPostgre extends FabricaAbstracta {
 
-    
-
-
-    
+    // Inicio Daos BO2
+    public IDaoInstructor getDaoInstructor(){
+        return new DaoInstructorPostgre();
+    }
+    // Fin Daos BO2
 }
