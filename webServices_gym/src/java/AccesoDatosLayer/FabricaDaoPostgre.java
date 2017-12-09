@@ -10,6 +10,7 @@ import AccesoDatosLayer.BO2.IDaoInstructor;
 public class FabricaDaoPostgre extends FabricaAbstracta {
 
     // Inicio Daos BO2
+    @Override
     public IDaoInstructor getDaoInstructor(){
         return new DaoInstructorPostgre();
     }

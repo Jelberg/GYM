@@ -1,5 +1,6 @@
 package LogicaLayer.BO2;
 
+import AccesoDatosLayer.BO2.IDaoInstructor;
 import AccesoDatosLayer.FabricaAbstracta;
 import Comun.Dominio.Instructor;
 import LogicaLayer.Comando;
@@ -19,7 +20,7 @@ public class RegistrarInstructor extends Comando {
     @Override
     public void ejecutar() {
         FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
-        //IDaoInstructor dao = fab.getDaoInstructor();
+        IDaoInstructor dao = fab.getDaoInstructor();
     }
     
 }
