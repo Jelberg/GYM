@@ -5,6 +5,7 @@
  */
 package Comun.Dominio;
 
+import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 import javax.mail.Message;
@@ -19,13 +20,20 @@ import javax.mail.internet.MimeMessage;
  *
  * @author Jorge
  */
-public class Usuario {
+public class Usuario extends Persona {
     private String password;
     private String usuario;
     private int estatura;
     private String telefono;
     private int codigo;
     private boolean entrenador;
+
+    public Usuario(String nombre, String apellido, Date fecha_nac, String sexo, String correo) {
+        super(nombre, apellido, fecha_nac, sexo, correo);
+    }
+
+    public Usuario() 
+    {}
 
     public boolean isEntrenador() {
         return entrenador;

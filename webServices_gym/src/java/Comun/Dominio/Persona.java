@@ -13,6 +13,9 @@ import java.util.Date;
  * @author simon
  */
 public class Persona extends Entidad implements Serializable{
+
+    public Persona() {
+    }
     
     private String nombre;
     private String apellido;    
