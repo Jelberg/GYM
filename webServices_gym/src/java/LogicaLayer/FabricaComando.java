@@ -5,7 +5,7 @@
  */
 package LogicaLayer;
 
-import Comun.Dominio.Entidad;
+import Comun.Dominio.Instructor;
 import LogicaLayer.BO2.RegistrarInstructor;
 
 /**
@@ -15,7 +15,7 @@ import LogicaLayer.BO2.RegistrarInstructor;
 public class FabricaComando {
     
     //Crear comando para registrar un instructor
-    public Comando CrearRegInstructor (Entidad instructor){
+    public Comando CrearRegInstructor (Instructor instructor){
         return new RegistrarInstructor(instructor);
     }
     

@@ -5,7 +5,7 @@
  */
 package LogicaLayer.BO2;
 
-import Comun.Dominio.Entidad;
+import Comun.Dominio.Instructor;
 import LogicaLayer.Comando;
 
 /**
@@ -14,15 +14,16 @@ import LogicaLayer.Comando;
  */
 public class RegistrarInstructor extends Comando {
 
-    Entidad instructor;
+    Instructor instructor;
         
-    public RegistrarInstructor (Entidad instructor){
+    public RegistrarInstructor (Instructor instructor){
         this.instructor = instructor;
     }
     
     @Override
     public void ejecutar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }
