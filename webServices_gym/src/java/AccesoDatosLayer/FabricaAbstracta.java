@@ -1,5 +1,7 @@
 package AccesoDatosLayer;
 
+import AccesoDatosLayer.BO2.IDaoInstructor;
+
 /**
  *
  * @author Elberg
@@ -15,4 +17,7 @@ public abstract class FabricaAbstracta {
         }
         return new FabricaDaoPostgre();
     }
+    
+    // Gets BO2
+    public abstract IDaoInstructor getDaoInstructor();
 }

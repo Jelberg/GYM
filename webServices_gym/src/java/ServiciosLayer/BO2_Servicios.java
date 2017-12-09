@@ -14,6 +14,7 @@ import java.sql.Date;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 /**
  *
@@ -25,12 +26,15 @@ public class BO2_Servicios {
     @POST
     @Path( "/RegistrarInstructor" )
     @Produces( "application/json" )
-    public void RegistrarInstructor(String nombre, String apellido,
-                                    Date fechanac, String sexo,
-                                    String correo){
+    public void RegistrarInstructor( @QueryParam( "nombre" ) String nombre,
+        @QueryParam( "apellido" ) String apellido, 
+        @QueryParam( "fechanac" ) Date fechanac, 
+        @QueryParam( "sexo" ) String sexo,
+        @QueryParam( "correo" ) String correo){
         
-        Instructor instructor = (Instructor) FabricaEntidad.InstanciaInstructor(nombre,
-                apellido, fechanac, sexo, correo);
+        Instructor instructor = (Instructor) FabricaEntidad.InstanciaInstructor
+        (nombre, apellido, fechanac, sexo, correo);
+        
         FabricaComando fab = new FabricaComando();
         Comando c = fab.CrearRegInstructor(instructor);
         c.ejecutar();
