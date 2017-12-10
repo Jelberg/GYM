@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package AccesoDatosLayer.FO1;
+import AccesoDatosLayer.Dao;
 import AccesoDatosLayer.DaoPostgre;
+import Comun.Dominio.Entidad;
 import Comun.Dominio.Usuario;
 import Comun.Excepciones.ParameterNullException;
 import java.sql.*;
@@ -14,8 +16,8 @@ import com.google.gson.Gson;
  *
  * @author Miguel
  */
-//public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
-    /*private Connection conn = super.getConInstance();
+public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
+    private Connection conn;
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Usuario> jsonArray;
@@ -23,6 +25,7 @@ import com.google.gson.Gson;
     @Override     
     public String Consultar( int id){
         try{
+            conn = Dao.getPostgreBdConnect();
             String query = "SELECT * FROM fo_m01_getusuario("+id+")";
             jsonArray = new ArrayList<>();
             Statement st = conn.createStatement();
@@ -54,7 +57,7 @@ import com.google.gson.Gson;
             response = e.getMessage();
         }
         finally {
-            super.bdClose(conn);
+            Dao.closePostgreConnection(conn);
             return response;
         }
      }
@@ -63,6 +66,7 @@ import com.google.gson.Gson;
     public String get_Usuariocorreo( String correo)
     {
         try{
+            conn = Dao.getPostgreBdConnect();
             String query = "SELECT * FROM fo_m01_getusuariocorreo('"+correo+"')";
             jsonArray = new ArrayList<>();
             Statement st = conn.createStatement();
@@ -94,28 +98,18 @@ import com.google.gson.Gson;
             response = e.getMessage();
         }
         finally {
-            super.bdClose(conn);
+            Dao.closePostgreConnection(conn);
             return response;
         }
     }
 
 
     @Override
-    public String Insertar(  String nombre,
-                                    String apellido,
-                                    String fecha,
-                                    String sexo,
-                                    String correo,
-                                    String usuario,
-                                    String password,
-                                    int estatura,
-                                    String telefono,
-                                    boolean entrenador
-                                    ){
+    public String Insertar(  Usuario u ){
         try {
-            
-            String query = "select * from fo_m01_inserta_usuario('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+sexo+"', '"+correo+"', '"+usuario+"', '"+password+ "', "+estatura+", '"+telefono+"','"+entrenador+"')";
-            PreparedStatement st = conn.prepareStatement(query); 
+            conn = Dao.getPostgreBdConnect();
+            String query = "select * from fo_m01_inserta_usuario('"+u.getNombre()+"', '"+u.getApellido()+"', "+01/01/2000+", '"+u.getSexo()+"', '"+u.getCorreo()+"', '"+u.getUsuario()+"', '"+u.getPassword()+ "', "+u.getEstatura()+", '"+u.getTelefono()+"','"+u.isEntrenador()+"')";
+            PreparedStatement st = conn.prepareStatement(query);
             st.executeQuery();           
             return("Se inserto el usuario");
         }
@@ -135,14 +129,14 @@ import com.google.gson.Gson;
          return e.getMessage();
         }
         finally {
-            super.bdClose(conn);
+            Dao.closePostgreConnection(conn);
         }
     }
     
     @Override
     public String updateCodigo(String correo, int codigo ){
         try {
-            Usuario usu= new Usuario();
+            conn = Dao.getPostgreBdConnect();
             String query = "select * from fo_m01_update_codigo('"+correo+"','"+codigo+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
@@ -158,7 +152,7 @@ import com.google.gson.Gson;
          return e.getMessage();
         }
         finally {
-            super.bdClose(conn);
+            Dao.closePostgreConnection(conn);
         }
     }
     
@@ -166,7 +160,7 @@ import com.google.gson.Gson;
     public String updatePassword( String correo, String password)
     {
         try {
-            Usuario usu= new Usuario();
+            conn = Dao.getPostgreBdConnect();
             String query = "select * from fo_m01_update_pass('"+correo+"','"+password+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
@@ -182,9 +176,9 @@ import com.google.gson.Gson;
          return e.getMessage();
         }
         finally {
-            super.bdClose(conn);
+            Dao.closePostgreConnection(conn);
         }
-    }*/
+    }
 
     /**
      * Metodo que recibe como parametros los datos del usuario
@@ -203,7 +197,7 @@ import com.google.gson.Gson;
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
-   /* @Override
+    @Override
     public String Modificar(        int id,
                                     String nombre,
                                     String apellido,
@@ -216,7 +210,7 @@ import com.google.gson.Gson;
                                     String telefono,
                                     boolean entrenador) {
         try {
-            Usuario usu= new Usuario();
+            conn = Dao.getPostgreBdConnect();
             String query = "select * from fo_m01_modifica_usuario('"+id+"','"+nombre+"','"+apellido+"','"+fecha+"','"+sexo+"','"+correo+"','"+usuario+"','"+password+"','"+estatura+"','"+telefono+"','"+entrenador+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
@@ -232,10 +226,10 @@ import com.google.gson.Gson;
          return e.getMessage();
         }
         finally {
-            super.bdClose(conn);
+            Dao.closePostgreConnection(conn);
         }
     }
-*/
+
     
 /**
      * Funcion que recibe como parámetro el nombre y apellido del Usuario,
@@ -244,10 +238,11 @@ import com.google.gson.Gson;
      * @return Devuelve los datos del cliente en formato json
      */
 
-   /* @Override
+   @Override
     public String getUsuarioNomApe( String nombre, String apellido){
         
         try{
+            conn = Dao.getPostgreBdConnect();
             String query = "SELECT * FROM fo_m01_get_usuarioNA('"+nombre+"','"+apellido+"')";
             jsonArray = new ArrayList<>();
             System.out.println (query);
@@ -272,12 +267,12 @@ import com.google.gson.Gson;
             response = e.getMessage();
         }
         finally {
-            super.bdClose(conn);
+            Dao.closePostgreConnection(conn);
             return response;
         }
     }
     
-    */
+    
     /**
      * Metodo que recibe como parametros el ID del Usuario
      * para eliminar su cuenta.
@@ -285,10 +280,11 @@ import com.google.gson.Gson;
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
-   /* @Override
+    @Override
     public String Elimina( int idUsuario)
     {
         try{
+            conn = Dao.getPostgreBdConnect();
             String query = "SELECT fo_m01_elimina_usuario(?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, idUsuario);
@@ -305,8 +301,13 @@ import com.google.gson.Gson;
             return ( e.getMessage());
         }
         finally {
-            super.bdClose(conn);
+            Dao.closePostgreConnection(conn);
         }
-    }*/
+    }
+
+    @Override
+    public Entidad consultar(Entidad ent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
-//}
+}

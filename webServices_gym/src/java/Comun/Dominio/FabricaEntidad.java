@@ -24,6 +24,15 @@ public class FabricaEntidad {
     }
     // Fin de BO2
     
+        // Inicia Fabricas de FO1
+    static public Usuario InstanciaUsuario(String usuario, String password, String nombre, String apellido,
+                                    Date fecha_nac, String sexo, String correo, int estatura, 
+                                    String telefono, boolean entrenador)
+    {
+        return new Usuario(password, usuario, estatura, telefono, entrenador, nombre, apellido, fecha_nac, sexo, correo);
+    }
+    // Fin de FO1
+    
     // Inicia Fabricas de M04
     /*static public Entidad InstaciaProgresoPeso(int id, int peso, Date fechaP, String sobrenombre){
     return new Progreso_Peso(id, peso, fechaP,sobrenombre);
