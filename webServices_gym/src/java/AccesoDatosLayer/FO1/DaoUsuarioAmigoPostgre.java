@@ -5,7 +5,9 @@
  */
 package AccesoDatosLayer.FO1;
 
+import AccesoDatosLayer.Dao;
 import AccesoDatosLayer.DaoPostgre;
+import Comun.Dominio.Entidad;
 import Comun.Dominio.Usuario;
 import Comun.Dominio.Usuario_Amigo;
 import Comun.Excepciones.ParameterNullException;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
  * @author Miguel
  */
 public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmigo{        
-    private Connection conn = super.getConInstance();
+    private Connection conn;
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Usuario_Amigo> jsonArray;
@@ -39,7 +41,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
     public String getUsuario_Amigo(int idUsuario){
         
         try{
-            
+            conn = Dao.getPostgreBdConnect();
             String query = "SELECT * FROM fo_m01_get_usuario_amigo("+idUsuario+")";
             jsonArray2 = new ArrayList<>();
             System.out.println (query);
@@ -64,7 +66,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
             response = e.getMessage();
         }
         finally {
-            super.bdClose(conn);
+            Dao.closePostgreConnection(conn);
             return response;
         }
     }
@@ -81,8 +83,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
 
         
         try {
-            
-
+            conn = Dao.getPostgreBdConnect();
             String query = "select * from fo_m01_inserta_usuario_amigo(?,?)";
             PreparedStatement st = conn.prepareStatement(query);
             java.lang.reflect.Type type = new TypeToken<Usuario_Amigo[]>(){}.getType();
@@ -102,7 +103,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
             return( e.getMessage());
         }
         finally {
-            super.bdClose(conn);
+            Dao.closePostgreConnection(conn);
             return gson.toJson(response);
         }
     }
@@ -120,6 +121,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
                                        int idAmigo){
 
         try{
+            conn = Dao.getPostgreBdConnect();
             String query = "SELECT fo_m01_elimina_usuario_amigo(?,?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, idUsuario);
@@ -136,8 +138,13 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
             return(e.getMessage());
         }
         finally {
-            super.bdClose(conn);
+            Dao.closePostgreConnection(conn);
             
         }
+    }
+
+    @Override
+    public Entidad consultar(Entidad ent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
