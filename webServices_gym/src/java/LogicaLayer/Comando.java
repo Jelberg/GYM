@@ -14,4 +14,8 @@ public abstract class Comando {
     
     public abstract void ejecutar();
     
+    
+    // devuelve resultado de la operacios
+    public abstract String ejecuta();
+    
 }

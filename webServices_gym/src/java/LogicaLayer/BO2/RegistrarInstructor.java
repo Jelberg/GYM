@@ -22,5 +22,10 @@ public class RegistrarInstructor extends Comando {
         FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
         IDaoInstructor dao = fab.getDaoInstructor();
     }
+
+    @Override
+    public String ejecuta() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

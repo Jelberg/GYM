@@ -2,8 +2,10 @@ package LogicaLayer;
 
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
+import Comun.Dominio.Usuario;
 import LogicaLayer.BO2.ComandoGetEntrenadores;
 import LogicaLayer.BO2.RegistrarInstructor;
+import LogicaLayer.FO1.IngresarUsuario;
 
 /**
  *
@@ -17,6 +19,13 @@ public class FabricaComando {
     }
     public static ComandoGetEntrenadores instanciaCmdGetEntrenadores(){
         return new ComandoGetEntrenadores();
+    }
+    
+    
+    // comandos FO1
+    //Crear comando para registrar un usuario
+    public Comando CrearRegUsuario (Usuario usuario){
+        return new IngresarUsuario(usuario);
     }
     
 }

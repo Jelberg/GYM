@@ -24,16 +24,7 @@ public interface IDaoUsuario {
                                     String telefono,
                                     boolean entrenador);
     public String Consultar(int id);
-    public String Insertar(String nombre,
-                                    String apellido,
-                                    String fecha,
-                                    String sexo,
-                                    String correo,
-                                    String usuario,
-                                    String password,
-                                    int estatura,
-                                    String telefono,
-                                    boolean entrenador);
+    public String Insertar( Usuario u);
     public String get_Usuariocorreo( String correo);
     public String updatePassword( String correo, String password);
     public String updateCodigo(String correo, int codigo );
