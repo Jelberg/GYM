@@ -10,6 +10,7 @@ import Comun.Dominio.Usuario;
 import Comun.Excepciones.ParameterNullException;
 import Comun.Validaciones.ValidationWS;
 import LogicaLayer.Comando;
+import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Date;
@@ -58,12 +59,10 @@ public class FO1_Servicios {
             put("estatura", estatura);
             put("telefono", telefono); 
             put("entrenador", entrenador);
-            }});
-            
+            }});              
         Usuario usuario = FabricaEntidad.InstanciaUsuario
         (usuar, password, nombre, apellido, fecha, sexo, correo, estatura, telefono, entrenador);        
-        FabricaComando fab = new FabricaComando();
-        Comando c = fab.CrearRegUsuario(usuario);
+        IngresarUsuario c = FabricaComando.CrearRegUsuario(usuario);
         response.put("id", c.ejecuta());
         }
         catch (ParameterNullException e) {

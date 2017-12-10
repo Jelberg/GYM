@@ -7,6 +7,7 @@ package LogicaLayer.FO1;
 
 import AccesoDatosLayer.FO1.IDaoUsuario;
 import AccesoDatosLayer.FabricaAbstracta;
+import AccesoDatosLayer.FabricaDaoPostgre;
 import Comun.Dominio.Usuario;
 import LogicaLayer.Comando;
 
@@ -15,17 +16,17 @@ import LogicaLayer.Comando;
  * @author Miguel
  */
 public class IngresarUsuario extends Comando{
-    Usuario usuario;
+    Usuario _usuario;
         
     public IngresarUsuario (Usuario usuario){
-        this.usuario = usuario;
+        _usuario = usuario;
     }
     
     
     public String ejecuta() {
-        FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
+        FabricaDaoPostgre fab = (FabricaDaoPostgre)FabricaAbstracta.getFabrica(1);
         IDaoUsuario dao = fab.getDaoUsuario();
-        return dao.Insertar(usuario);
+        return dao.Insertar(_usuario);
         
     }
 
