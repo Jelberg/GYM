@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ServiciosLayer;
 
 import Comun.Dominio.FabricaEntidad;
@@ -20,8 +15,8 @@ import javax.ws.rs.QueryParam;
  *
  * @author simon
  */
-@Path("/bo2servicios")
-public class BO2_Servicios {
+@Path("/instructor")
+public class BO2_Instructor {
 
     @POST
     @Path( "/RegistrarInstructor" )
@@ -39,4 +34,15 @@ public class BO2_Servicios {
         Comando c = fab.CrearRegInstructor(instructor);
         c.ejecutar();
     }
+    
+    /*@GET
+    @Path("/getListInstructor")
+    @Produces("application/json")
+    public String getListInstructor(){
+        ComandoGetEntrenadores cmd = FabricaComando.instanciaCmdGetEntrenadores();
+        cmd.ejecutar();
+        _listaEntrenadores = cmd.getEntrenadores();
+        _response = _gson.toJson( _listaEntrenadores );
+        return _response;
+    }*/
 }
