@@ -7,7 +7,14 @@ import LogicaLayer.Comando;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 
 import javax.ws.rs.POST;
@@ -28,18 +35,16 @@ public class BO2_Instructor {
     
     @POST
     @Path( "/RegistrarInstructor" )
-    @Produces( "application/json" )
     public void RegistrarInstructor( @QueryParam( "nombre" ) String nombre,
         @QueryParam( "apellido" ) String apellido, 
-        @QueryParam( "fechanac" ) Date fechanac, 
+        @QueryParam( "fecha" ) String fechanac, 
         @QueryParam( "sexo" ) String sexo,
         @QueryParam( "correo" ) String correo){
-        
+     
         Instructor instructor = (Instructor) FabricaEntidad.InstanciaInstructor
-        (1, nombre, apellido, fechanac, sexo, correo);
+        (1, nombre, apellido, java.sql.Date.valueOf(fechanac), sexo, correo);
         
-        FabricaComando fab = new FabricaComando();
-        Comando c = fab.CrearRegInstructor(instructor);
+        Comando c = FabricaComando.CrearRegInstructor(instructor);
         c.ejecutar();
     }
     

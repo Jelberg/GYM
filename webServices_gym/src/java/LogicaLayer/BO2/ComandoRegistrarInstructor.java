@@ -21,6 +21,7 @@ public class ComandoRegistrarInstructor extends Comando {
     public void ejecutar() {
         FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
         IDaoInstructor dao = fab.getDaoInstructor();
+        dao.insertar(instructor);
     }
 
 }

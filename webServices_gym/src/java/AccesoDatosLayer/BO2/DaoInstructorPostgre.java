@@ -52,12 +52,38 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
         }
 
     }
+    
+    @Override
+    public void insertar(Instructor i) {
+        try {
+            _conn = Dao.getPostgreBdConnect();       
+            
+            String query = "select * from bo_m02_inserta_instructor('"+
+                    i.getNombre()+"', '"+i.getApellido()+
+                    "', '"+i.getFecha_nac()+"', '"+i.getSexo()+
+                    "', '"+i.getCorreo()+"')";
+            
+            PreparedStatement st = _conn.prepareStatement(query); 
+
+            st.executeQuery();
+            
+        }
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            Dao.closePostgreConnection( _conn );
+        }
+    }
 
     @Override
     public Entidad eliminar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public Entidad modificar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -72,4 +98,6 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
     public Entidad consultar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 }
