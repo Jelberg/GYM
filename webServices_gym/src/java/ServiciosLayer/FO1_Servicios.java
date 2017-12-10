@@ -60,7 +60,7 @@ public class FO1_Servicios {
             put("entrenador", entrenador);
             }});
             
-        Usuario usuario = (Usuario) FabricaEntidad.InstanciaUsuario
+        Usuario usuario = FabricaEntidad.InstanciaUsuario
         (usuar, password, nombre, apellido, fecha, sexo, correo, estatura, telefono, entrenador);        
         FabricaComando fab = new FabricaComando();
         Comando c = fab.CrearRegUsuario(usuario);

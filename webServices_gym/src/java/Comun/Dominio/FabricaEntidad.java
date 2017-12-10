@@ -25,7 +25,7 @@ public class FabricaEntidad {
     // Fin de BO2
     
         // Inicia Fabricas de FO1
-    static public Entidad InstanciaUsuario(String usuario, String password, String nombre, String apellido,
+    static public Usuario InstanciaUsuario(String usuario, String password, String nombre, String apellido,
                                     Date fecha_nac, String sexo, String correo, int estatura, 
                                     String telefono, boolean entrenador)
     {
