@@ -5,6 +5,7 @@ import Comun.Dominio.Instructor;
 import Comun.Dominio.Usuario;
 import LogicaLayer.BO2.ComandoGetEntrenadores;
 import LogicaLayer.BO2.RegistrarInstructor;
+import LogicaLayer.FO1.ComandoIniciarSesion;
 import LogicaLayer.FO1.IngresarUsuario;
 
 /**
@@ -26,6 +27,10 @@ public class FabricaComando {
     //Crear comando para registrar un usuario
     public static IngresarUsuario CrearRegUsuario (Usuario usuario){
         return new IngresarUsuario(usuario);
+    }
+    
+    public static ComandoIniciarSesion IniciarUsuario (Usuario usuario){
+        return new ComandoIniciarSesion(usuario);
     }
     
 }

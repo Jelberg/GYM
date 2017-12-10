@@ -23,10 +23,10 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     private ArrayList<Usuario> jsonArray;
     
     @Override     
-    public String Consultar( int id){
+    public String Consultar( Usuario u){
         try{
             conn = Dao.getPostgreBdConnect();
-            String query = "SELECT * FROM fo_m01_getusuario("+id+")";
+            String query = "SELECT * FROM fo_m01_getusuario("+u.getId()+")";
             jsonArray = new ArrayList<>();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -61,13 +61,45 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
             return response;
         }
      }
+    
+    @Override
+    public String IniciarSesion(Usuario u){
+        
+        try{
+            conn = Dao.getPostgreBdConnect();
+            String query = "SELECT * FROM fo_m01_iniciarsesion('"+u.getUsuario()+"','"+u.getPassword()+"')";
+            jsonArray = new ArrayList<>();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                jsonArray.add(new Usuario());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setEntrenador(rs.getBoolean("entrenador"));
+            }
+            response = gson.toJson(jsonArray);
+        }
+        catch(SQLException e) {
+            response = e.getMessage();
+        }
+        catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
+        finally {
+            Dao.closePostgreConnection(conn);
+            return response;
+        }
+        
+    }
          
     @Override
-    public String get_Usuariocorreo( String correo)
+    public String get_Usuariocorreo(Usuario u)
     {
         try{
             conn = Dao.getPostgreBdConnect();
-            String query = "SELECT * FROM fo_m01_getusuariocorreo('"+correo+"')";
+            String query = "SELECT * FROM fo_m01_getusuariocorreo('"+u.getCorreo()+"')";
             jsonArray = new ArrayList<>();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -134,10 +166,10 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     }
     
     @Override
-    public String updateCodigo(String correo, int codigo ){
+    public String updateCodigo(Usuario u ){
         try {
             conn = Dao.getPostgreBdConnect();
-            String query = "select * from fo_m01_update_codigo('"+correo+"','"+codigo+"')";
+            String query = "select * from fo_m01_update_codigo('"+u.getCorreo()+"','"+u.getCodigo()+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
             return("Se actualizo el codigo");
@@ -157,11 +189,11 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     }
     
     @Override
-    public String updatePassword( String correo, String password)
+    public String updatePassword( Usuario u)
     {
         try {
             conn = Dao.getPostgreBdConnect();
-            String query = "select * from fo_m01_update_pass('"+correo+"','"+password+"')";
+            String query = "select * from fo_m01_update_pass('"+u.getCorreo()+"','"+u.getPassword()+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
             return("Se actualizo la contrasena");
@@ -183,35 +215,15 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     /**
      * Metodo que recibe como parametros los datos del usuario
      * para modificarlo.
-     * @param id
-     * @param usuario
-     * @param password
-     * @param nombre
-     * @param apellido
-     * @param sexo
-     * @param fecha
-     * @param telefono
-     * @param estatura
-     * @param correo
-     * @param entrenador
+     * @param u usuario
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
     @Override
-    public String Modificar(        int id,
-                                    String nombre,
-                                    String apellido,
-                                    String fecha,
-                                    String sexo,
-                                    String correo,
-                                    String usuario,
-                                    String password,
-                                    int estatura,
-                                    String telefono,
-                                    boolean entrenador) {
+    public String Modificar(Usuario u) {
         try {
             conn = Dao.getPostgreBdConnect();
-            String query = "select * from fo_m01_modifica_usuario('"+id+"','"+nombre+"','"+apellido+"','"+fecha+"','"+sexo+"','"+correo+"','"+usuario+"','"+password+"','"+estatura+"','"+telefono+"','"+entrenador+"')";
+            String query = "select * from fo_m01_modifica_usuario('"+u.getId()+"','"+u.getNombre()+"','"+u.getApellido()+"','"+u.getFecha_nac()+"','"+u.getSexo()+"','"+u.getCorreo()+"','"+u.getUsuario()+"','"+u.getPassword()+"','"+u.getEstatura()+"','"+u.getTelefono()+"','"+u.isEntrenador()+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
             return("Se actualizo el usuario");
@@ -234,16 +246,16 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
 /**
      * Funcion que recibe como parámetro el nombre y apellido del Usuario,
      * para consultarlo y saber sus datos.
-     * @param nombre del Usuario.
+    * @param u usuario 
      * @return Devuelve los datos del cliente en formato json
      */
 
    @Override
-    public String getUsuarioNomApe( String nombre, String apellido){
+    public String getUsuarioNomApe( Usuario u){
         
         try{
             conn = Dao.getPostgreBdConnect();
-            String query = "SELECT * FROM fo_m01_get_usuarioNA('"+nombre+"','"+apellido+"')";
+            String query = "SELECT * FROM fo_m01_get_usuarioNA('"+u.getNombre()+"','"+u.getApellido()+"')";
             jsonArray = new ArrayList<>();
             System.out.println (query);
             Statement st = conn.createStatement();
@@ -276,18 +288,18 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     /**
      * Metodo que recibe como parametros el ID del Usuario
      * para eliminar su cuenta.
-     * @param idUsuario ID del Usuario.
+     * @param u usuario
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
     @Override
-    public String Elimina( int idUsuario)
+    public String Elimina( Usuario u)
     {
         try{
             conn = Dao.getPostgreBdConnect();
             String query = "SELECT fo_m01_elimina_usuario(?)";
             PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, idUsuario);
+            st.setInt(1, u.getId());
             ResultSet rs = st.executeQuery();
             return ("Se eliminó el usuario");
         }

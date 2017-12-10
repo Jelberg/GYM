@@ -12,22 +12,13 @@ import Comun.Dominio.Usuario;
  * @author Jorge
  */
 public interface IDaoUsuario {
-    public String Modificar(        int id,
-                                    String nombre,
-                                    String apellido,
-                                    String fecha,
-                                    String sexo,
-                                    String correo,
-                                    String usuario,
-                                    String password,
-                                    int estatura,
-                                    String telefono,
-                                    boolean entrenador);
-    public String Consultar(int id);
+    public String Modificar(Usuario u);
+    public String Consultar(Usuario u);
+    public String IniciarSesion(Usuario u);
     public String Insertar( Usuario u);
-    public String get_Usuariocorreo( String correo);
-    public String updatePassword( String correo, String password);
-    public String updateCodigo(String correo, int codigo );
-    public String getUsuarioNomApe( String nombre, String apellido);
-    public String Elimina( int idUsuario);
+    public String get_Usuariocorreo(Usuario u);
+    public String updatePassword(Usuario u);
+    public String updateCodigo(Usuario u);
+    public String getUsuarioNomApe(Usuario u);
+    public String Elimina(Usuario u);
 }

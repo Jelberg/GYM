@@ -10,12 +10,14 @@ import Comun.Dominio.Usuario;
 import Comun.Excepciones.ParameterNullException;
 import Comun.Validaciones.ValidationWS;
 import LogicaLayer.Comando;
+import LogicaLayer.FO1.ComandoIniciarSesion;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -28,7 +30,7 @@ import javax.ws.rs.QueryParam;
 @Path("/Login")
 public class FO1_Servicios {
     private Gson gson = new Gson();
-    
+    private String response;
     
     
     @POST
@@ -73,6 +75,41 @@ public class FO1_Servicios {
         }
         finally {
             return gson.toJson(response);
+        }
+    }
+    
+    
+    /**
+     * Funcion que recibe como parámetro el usuario y contrasena del cliente,
+     * para consultarla y saber sus datos.
+     * @param usuario
+     * @param password
+     * @return Devuelve el usuario 
+     */
+    @GET
+    @Path("/IniciarSesion")
+    @Produces("application/json")
+    public String iniciarSesion(@QueryParam("usuario") String usuar,
+                                @QueryParam("password") String password) {
+    try
+    {
+        ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+        put("usuario", usuar);
+        put("password", password);
+        }});
+        Usuario usuario = FabricaEntidad.InstanciaUsuario
+        (usuar, password, "", "", null, "", "", 0, "", false);        
+        ComandoIniciarSesion c = FabricaComando.IniciarUsuario(usuario);
+        response= c.ejecuta();
+    }
+    catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
+        finally {
+            return response;
         }
     }
 }
