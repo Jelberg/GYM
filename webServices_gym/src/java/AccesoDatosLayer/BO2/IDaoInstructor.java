@@ -1,6 +1,8 @@
 package AccesoDatosLayer.BO2;
 
+import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
+import java.util.ArrayList;
 
 /**
  *
@@ -8,5 +10,8 @@ import Comun.Dominio.Instructor;
  */
 public interface IDaoInstructor {
     
-    public void RegistrarInstructor(Instructor i);
+    public ArrayList<Instructor> getInstructores();
+    public Entidad eliminar( Entidad ent );
+    public Entidad modificar( Entidad ent );
+    public Entidad actualizar( Entidad ent );
 }

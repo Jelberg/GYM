@@ -2,9 +2,13 @@ package ServiciosLayer;
 
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Instructor;
+import LogicaLayer.BO2.ComandoGetInstructores;
 import LogicaLayer.Comando;
 import LogicaLayer.FabricaComando;
+import com.google.gson.Gson;
 import java.sql.Date;
+import java.util.ArrayList;
+import javax.ws.rs.GET;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,6 +22,10 @@ import javax.ws.rs.QueryParam;
 @Path("/instructor")
 public class BO2_Instructor {
 
+    private Gson _gson = new Gson();
+    private String _response;
+    private ArrayList<Instructor> _listaInstructores;
+    
     @POST
     @Path( "/RegistrarInstructor" )
     @Produces( "application/json" )
@@ -35,14 +43,14 @@ public class BO2_Instructor {
         c.ejecutar();
     }
     
-    /*@GET
-    @Path("/getListInstructor")
+    @GET
+    @Path("/getListInstructores")
     @Produces("application/json")
     public String getListInstructor(){
-        ComandoGetEntrenadores cmd = FabricaComando.instanciaCmdGetEntrenadores();
+        ComandoGetInstructores cmd = FabricaComando.instanciaGetInstructores();
         cmd.ejecutar();
-        _listaEntrenadores = cmd.getEntrenadores();
-        _response = _gson.toJson( _listaEntrenadores );
+        _listaInstructores = cmd.getInstructores();
+        _response = _gson.toJson( _listaInstructores );
         return _response;
-    }*/
+    }
 }
