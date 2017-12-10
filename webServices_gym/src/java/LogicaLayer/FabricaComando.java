@@ -4,6 +4,7 @@ import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
 import Comun.Dominio.Usuario;
 import LogicaLayer.BO2.ComandoGetEntrenadores;
+import LogicaLayer.BO2.ComandoGetInstructores;
 import LogicaLayer.BO2.RegistrarInstructor;
 import LogicaLayer.FO1.IngresarUsuario;
 
@@ -13,10 +14,17 @@ import LogicaLayer.FO1.IngresarUsuario;
  */
 public class FabricaComando {
     
+    // Comandos BO2
+    
     //Crear comando para registrar un instructor
-    public Comando CrearRegInstructor (Instructor instructor){
+    public static Comando CrearRegInstructor (Instructor instructor){
         return new RegistrarInstructor(instructor);
     }
+    
+    public static ComandoGetInstructores instanciaGetInstructores(){
+        return new ComandoGetInstructores();
+    }
+    
     public static ComandoGetEntrenadores instanciaCmdGetEntrenadores(){
         return new ComandoGetEntrenadores();
     }
