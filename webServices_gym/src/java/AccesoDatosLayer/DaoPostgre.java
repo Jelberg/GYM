@@ -15,6 +15,8 @@ public abstract class DaoPostgre extends Dao{
     
     // Conexion con la base de datos
     
+
+    
     public Connection getConexion(){
         return Dao.getPostgreBdConnect();
     }

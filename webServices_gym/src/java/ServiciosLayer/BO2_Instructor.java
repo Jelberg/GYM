@@ -21,7 +21,7 @@ import javax.ws.rs.QueryParam;
  * @author simon
  */
 @Path("/bo2servicios")
-public class BO2_Servicios {
+public class BO2_Instructor {
 
     @POST
     @Path( "/RegistrarInstructor" )
