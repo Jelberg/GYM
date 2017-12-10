@@ -6,14 +6,17 @@
 package Servicios;
 
 import Connection.FOM01_Login_Conn;
-import Dominio.Sql;
-import Excepciones.ParameterNullException;
-import Validaciones.ValidationWS;
+import Dominio.Usuario;
+import com.google.gson.Gson;
 import java.util.HashMap;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import Validaciones.ValidationWS;
+import Excepciones.ParameterNullException;
+import java.util.Map;
+import javax.ws.rs.POST;
 
 
 /**
@@ -24,6 +27,7 @@ import javax.ws.rs.QueryParam;
 @Path("/Login")
 public class FOM01_Login {
 private String response;
+private Gson gson = new Gson();
 
 
 /**
@@ -34,7 +38,7 @@ private String response;
      * @return Devuelve el usuario 
      */
     @GET
-    @Path("/iniciarSesion")
+    @Path("/IniciarSesion")
     @Produces("application/json")
     public String iniciarSesion(@QueryParam("usuario") String usuario,
                                 @QueryParam("password") String password) {
@@ -68,7 +72,7 @@ private String response;
     @GET
     @Path("/getUsuario")
     @Produces("application/json")
-    public String iniciarSesion(@QueryParam("id") int id) {
+    public String getUsuario(@QueryParam("id") int id) {
     try
     {
         ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
@@ -86,5 +90,121 @@ private String response;
         finally {
             return response;
         }
+    }
+    
+    @POST
+    @Path("/insertausuario")
+    @Produces("application/json")
+    public String insertaUsuario(@QueryParam("nombre") String nombre,
+                                    @QueryParam("apellido") String apellido,
+                                    @QueryParam("fechanac") String fecha,
+                                    @QueryParam("sexo") String sexo,
+                                    @QueryParam("correo") String correo,
+                                    @QueryParam("usuario") String usuario,
+                                    @QueryParam("password") String password,
+                                    @QueryParam("estatura") int estatura,
+                                    @QueryParam("telefono") String telefono,
+                                    @QueryParam("entrenador") boolean entrenador
+                                    )
+    {
+        Map<String, String> response = new HashMap<String, String>();
+        try{    
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+            put("nombre", nombre);
+            put("apellido", apellido);
+            put("fechanac", fecha);
+            put("sexo", sexo);
+            put("correo", correo);
+            put("usuario", usuario);
+            put("password", password);
+            put("estatura", estatura);
+            put("telefono", telefono); 
+            put("entrenador", entrenador);
+            }});
+            FOM01_Login_Conn conexion = new FOM01_Login_Conn();
+            response.put("id",conexion.insertaUsu(nombre,apellido,fecha,sexo,correo,usuario,password,estatura,telefono,entrenador));
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            return gson.toJson(response);
+        }
+    }
+    
+    
+    @POST
+    @Path("/updateCodigo")
+    @Produces("application/json")
+    public String updateCod(
+                                    @QueryParam("correo") String correo                          
+                                    )
+    {
+        Usuario usu = new Usuario();
+        Map<String, String> response = new HashMap<String, String>();
+        try{    
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+            put("correo", correo);
+            }});
+            int cod = usu.recuperarContrasena(correo);
+            if (cod != 0)
+            {
+                FOM01_Login_Conn conexion = new FOM01_Login_Conn();
+                String d = conexion.updateCodigo(correo,cod);
+                if ( d == "Se actualizo el codigo")
+                {
+                    response.put("id",String.valueOf(cod));
+                }
+                else response.put("error", d);
+            }
+            else
+            {
+                response.put("id","problema en el envio");
+            }
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            return gson.toJson(response);
+        }
+        
+    }
+    
+    @POST
+    @Path("/updatePass")
+    @Produces("application/json")
+    public String updatePass(
+                                    @QueryParam("correo") String correo, 
+                                    @QueryParam("password") String password
+                                    )
+    {
+        Usuario usu = new Usuario();
+        Map<String, String> response = new HashMap<String, String>();
+        try{    
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+            put("correo", correo);
+            put("password", password);
+            }});
+                FOM01_Login_Conn conexion = new FOM01_Login_Conn();
+                String d = conexion.updatePassword(correo,password);
+                response.put("id",d);
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            return gson.toJson(response);
+        }
+        
     }
 }

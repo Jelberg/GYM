@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ds1718a.maven_serviciosweb.LogicaLayer;
+package LogicaLayer;
 
 /**
  *
  * @author Elberg
  */
-public class Comando {
+public abstract class Comando {
+ 
+    
+    public abstract void ejecutar();
     
 }

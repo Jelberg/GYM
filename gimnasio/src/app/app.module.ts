@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
+
 //Gráficos
 import { ChartsModule } from 'ng2-charts';
 
@@ -15,6 +17,7 @@ import { AmigosPage } from '../pages/FO_M01/amigos/amigos';
 import { CrearusuarioPage } from '../pages/FO_M01/crearusuario/crearusuario';
 import { IniciarsesionPage } from '../pages/FO_M01/iniciarsesion/iniciarsesion';
 import { PerfilPage} from '../pages/FO_M01/perfil/perfil'
+import { RecuperarPassPage } from '../pages/FO_M01/recuperar-pass/recuperar-pass';
 // fin M01
 //M03 
 import { RutinaPage } from '../pages/FO_M03/rutina/rutina';
@@ -79,6 +82,7 @@ import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/rese
     MyApp,
     HomePage,
     AmigosPage,
+    RecuperarPassPage,
     CrearusuarioPage,
     IniciarsesionPage,
     PerfilPage,
@@ -153,6 +157,7 @@ import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/rese
     HomePage,
     AmigosPage,
     CrearusuarioPage,
+    RecuperarPassPage,
     IniciarsesionPage,
     PerfilPage,
     SeleccionarProgresoPage,
@@ -194,6 +199,7 @@ import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/rese
     ListaClasesPage
   ],
   providers: [
+    Contacts, Contact,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

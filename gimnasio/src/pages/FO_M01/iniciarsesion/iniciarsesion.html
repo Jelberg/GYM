@@ -1,50 +1,52 @@
 <ion-header >
-  <ion-navbar color="secondary">
-    <ion-title style="color:ionic link --pro-id ca32ab04;" style="text-align:center">Gimnasio</ion-title>
+  <ion-navbar color="secondary" class="bar">
+    <ion-title>
+        <img src="../../assets/imgs/img_usuarios/Logo.png" />
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding >
-
-  <h1 style="text-align:center" >Iniciar Sesion</h1>
+  <h1 ></h1>
+  <h1 style="text-align:center" >Iniciar Sesión</h1>
 
   <p>
       <ion-card >
           
             <ion-card-header>
-              Ingrese Cuenta
+              Ingrese Cuenta:
             </ion-card-header>
           
             <ion-card-content>
+
                 <ion-list>
-                    
-                      <ion-item>
+                    <ion-item>
                         <ion-label stacked>Usuario:</ion-label>
-                        <ion-input type="text"></ion-input>
-                      </ion-item>
+                        <ion-input  name="usuario" [(ngModel)]="usuario" type="text" id="usu" ></ion-input>
+                    </ion-item>
                     
-                      <ion-item>
+                    <ion-item>
                         <ion-label stacked>Contraseña:</ion-label>
-                        <ion-input type="password"></ion-input>
-                        
-                      </ion-item>
+                        <ion-input  name="password" [(ngModel)]="password" type="password" id="pass" ></ion-input> 
+                    </ion-item>
+                    <h1 ></h1>
+                </ion-list>
 
-                    </ion-list>
-
+                    <button ion-button icon-left block color="secondary" (click)="iniciarSesion()">
+                      <ion-icon name="ios-arrow-forward"></ion-icon>
+                    </button>
+                
                     <button ion-button icon-left clear small color="secondary" (click)= "recoverPassword()">
-                        Olvide mi contraseña
-                      </button>
-                          <button ion-button icon-left block color="secondary" (click)="irahomeusuario()">
-                            <ion-icon name="checkmark"></ion-icon>
-                          </button>
-                          <button (click)="irapaginacrear()" ion-button icon-left clear small color="secondary" >
-                            Crear tu usuario
-                          </button>
-                        
+                        Recuperar Contraseña
+                    </button> 
+
+                    <button (click)="irapaginacrear()" ion-button icon-left clear small color="secondary" >
+                        Registrarse
+                    </button> 
+
             </ion-card-content>
           
-          </ion-card>
+      </ion-card>
   </p>
-
 
 </ion-content>
