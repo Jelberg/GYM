@@ -28,7 +28,8 @@ public class Usuario extends Persona {
     private int codigo;
     private boolean entrenador;
 
-    public Usuario(int id, String nombre, String apellido, Date fecha_nac, String sexo, String correo) {
+    public Usuario(int id, String nombre, String apellido, Date fecha_nac, 
+                    String sexo, String correo) {
         super(id,nombre, apellido, fecha_nac, sexo, correo);
     }
 
@@ -36,7 +37,9 @@ public class Usuario extends Persona {
     {}
 
 
-    public Usuario(String password, String usuario, int estatura, String telefono, boolean entrenador, String nombre, String apellido, Date fecha_nac, String sexo, String correo) {
+    public Usuario(String password, String usuario, int estatura, 
+                    String telefono, boolean entrenador, String nombre, 
+                    String apellido, Date fecha_nac, String sexo, String correo) {
         super(nombre, apellido, fecha_nac, sexo, correo);
         this.password = password;
         this.usuario = usuario;
@@ -45,7 +48,18 @@ public class Usuario extends Persona {
         this.entrenador = entrenador;
     }
 
-    
+    public Usuario(String password, String usuario, int estatura, 
+                    String telefono, int codigo, boolean entrenador, 
+                    int id, String nombre, String apellido, Date fecha_nac, 
+                    String sexo, String correo) {
+        super(id, nombre, apellido, fecha_nac, sexo, correo);
+        this.password = password;
+        this.usuario = usuario;
+        this.estatura = estatura;
+        this.telefono = telefono;
+        this.codigo = codigo;
+        this.entrenador = entrenador;
+    }
 
     public boolean isEntrenador() {
         return entrenador;
@@ -63,8 +77,6 @@ public class Usuario extends Persona {
         this.codigo = codigo;
     }
     
-
-
     public String getTelefono() {
         return telefono;
     }
@@ -72,7 +84,6 @@ public class Usuario extends Persona {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
 
     public String getPassword() {
         return password;

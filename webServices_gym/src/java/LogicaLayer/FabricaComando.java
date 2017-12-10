@@ -23,7 +23,7 @@ public class FabricaComando {
     }
     
     
-    // comandos FO1
+    // comandos FOM01
     //Crear comando para registrar un usuario
     public static IngresarUsuario CrearRegUsuario (Usuario usuario){
         return new IngresarUsuario(usuario);
@@ -32,5 +32,8 @@ public class FabricaComando {
     public static ComandoIniciarSesion IniciarUsuario (Usuario usuario){
         return new ComandoIniciarSesion(usuario);
     }
+    
+    
+    //Fin Comandos FOM01
     
 }
