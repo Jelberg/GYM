@@ -20,7 +20,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author simon
  */
-@Path("/bo2servicios")
+@Path("/instructor")
 public class BO2_Instructor {
 
     @POST
@@ -39,4 +39,15 @@ public class BO2_Instructor {
         Comando c = fab.CrearRegInstructor(instructor);
         c.ejecutar();
     }
+    
+    /*@GET
+    @Path("/getListaInstructores")
+    @Produces("application/json")
+    public String getListaEntrenador(){
+        ComandoGetEntrenadores cmd = FabricaComando.instanciaCmdGetEntrenadores();
+        cmd.ejecutar();
+        _listaEntrenadores = cmd.getEntrenadores();
+        _response = _gson.toJson( _listaEntrenadores );
+        return _response;
+    }*/
 }

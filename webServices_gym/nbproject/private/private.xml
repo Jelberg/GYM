@@ -3,22 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/Comun/Validaciones/ValidationWS.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/AccesoDatosLayer/FOM04Postgre/DaoProgresoPesoPostgre.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/Comun/Dominio/Entidad.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/ServiciosLayer/ConfiguracionRestGimnasio.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/LogicaLayer/FOM04/ModificarMedidasComando.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/LogicaLayer/FOM04/ConsultarProgesoMedidasComando.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/LogicaLayer/Comando.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/LogicaLayer/FabricaComando.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/LogicaLayer/FOM04/AgregarPesoComando.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/LogicaLayer/FOM04/AgregarComentarioComando.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/LogicaLayer/FOM04/ModificarPesoComando.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/Comun/Dominio/FabricaEntidad.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/LogicaLayer/FOM04/AgregarMedidaComando.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/AccesoDatosLayer/DaoPostgre.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/AccesoDatosLayer/FOM04Postgre/IDaoProgresoPesoPostgre.java</file>
-            <file>file:/C:/Users/Miguel/Documents/Repositorio/GYM/webServices_gym/src/java/LogicaLayer/FOM04/CompartirProgresoComando.java</file>
+            <file>file:/C:/Users/lozad/Documents/Proyecto/GYM/webServices_gym/src/java/AccesoDatosLayer/BO2/IDaoEntrenador.java</file>
+            <file>file:/C:/Users/lozad/Documents/Proyecto/GYM/webServices_gym/src/java/AccesoDatosLayer/FabricaAbstracta.java</file>
+            <file>file:/C:/Users/lozad/Documents/Proyecto/GYM/webServices_gym/src/java/AccesoDatosLayer/BO2/DaoEntrenadorPostgre.java</file>
+            <file>file:/C:/Users/lozad/Documents/Proyecto/GYM/webServices_gym/src/java/AccesoDatosLayer/IDao.java</file>
+            <file>file:/C:/Users/lozad/Documents/Proyecto/GYM/webServices_gym/src/java/AccesoDatosLayer/Dao.java</file>
+            <file>file:/C:/Users/lozad/Documents/Proyecto/GYM/webServices_gym/src/java/AccesoDatosLayer/FabricaDaoPostgre.java</file>
+            <file>file:/C:/Users/lozad/Documents/Proyecto/GYM/webServices_gym/src/java/ServiciosLayer/BO2_Instructor.java</file>
+            <file>file:/C:/Users/lozad/Documents/Proyecto/GYM/webServices_gym/src/java/ServiciosLayer/BOm02_Entrenador.java</file>
         </group>
     </open-files>
 </project-private>
