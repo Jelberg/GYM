@@ -21,17 +21,21 @@ public class IngresarUsuario extends Comando{
     public IngresarUsuario (Usuario usuario){
         _usuario = usuario;
     }
-    
-    
-    public String ejecuta() {
-        FabricaDaoPostgre fab = (FabricaDaoPostgre)FabricaAbstracta.getFabrica(1);
-        IDaoUsuario dao = fab.getDaoUsuario();
-        return dao.Insertar(_usuario);
-        
+
+    public Usuario getUsuario() {
+        return _usuario;
     }
 
+    public void setUsuario(Usuario _usuario) {
+        this._usuario = _usuario;
+    }
+    
     @Override
     public void ejecutar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FabricaDaoPostgre fab = (FabricaDaoPostgre)FabricaAbstracta.getFabrica(1);
+        IDaoUsuario dao = fab.getDaoUsuario();
+        _usuario.setNombre(dao.Insertar(_usuario));
     }
+
+    
 }

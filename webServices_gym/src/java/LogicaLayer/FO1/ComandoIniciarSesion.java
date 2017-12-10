@@ -16,24 +16,31 @@ import LogicaLayer.Comando;
  * @author Miguel
  */
 public class ComandoIniciarSesion extends Comando{
-    Usuario _usuario;
+    private Usuario _usuario;
+    private String resultado;
+
+    public String getResultado() {
+        return resultado;
+    }
 
     public ComandoIniciarSesion(Usuario _usuario) {
         this._usuario = _usuario;
     }
-    
-    
-    
-    public String ejecuta() {
-        FabricaDaoPostgre fab = (FabricaDaoPostgre)FabricaAbstracta.getFabrica(1);
-        IDaoUsuario dao = fab.getDaoUsuario();
-        return dao.IniciarSesion(_usuario);
-        
+
+    public Usuario getUsuario() {
+        return _usuario;
     }
+
+    public void setUsuario(Usuario _usuario) {
+        this._usuario = _usuario;
+    }
+    
 
     @Override
     public void ejecutar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FabricaDaoPostgre fab = (FabricaDaoPostgre)FabricaAbstracta.getFabrica(1);
+        IDaoUsuario dao = fab.getDaoUsuario();
+        resultado = dao.IniciarSesion(_usuario);
     }
     
 }

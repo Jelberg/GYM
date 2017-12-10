@@ -64,9 +64,9 @@ public class FO1_Servicios {
             }});              
         Usuario usuario = FabricaEntidad.InstanciaUsuario
         (usuar, password, nombre, apellido, fecha, sexo, correo, estatura, telefono, entrenador);        
-        FabricaComando fab = new FabricaComando();
-        Comando c = fab.CrearRegUsuario(usuario);
-        //response.put("id", c.ejecuta());
+        IngresarUsuario c = FabricaComando.CrearRegUsuario(usuario);
+        c.ejecutar();
+        response.put("id", c.getUsuario().getNombre());
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
@@ -101,7 +101,8 @@ public class FO1_Servicios {
         Usuario usuario = FabricaEntidad.InstanciaUsuario
         (usuar, password, "", "", null, "", "", 0, "", false);        
         ComandoIniciarSesion c = FabricaComando.IniciarUsuario(usuario);
-        response= c.ejecuta();
+        c.ejecutar();
+        response = c.getResultado();
     }
     catch (ParameterNullException e) {
             response = e.getMessage();
