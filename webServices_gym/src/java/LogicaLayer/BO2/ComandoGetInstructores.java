@@ -1,5 +1,8 @@
 package LogicaLayer.BO2;
 
+import AccesoDatosLayer.BO2.IDaoInstructor;
+import AccesoDatosLayer.FabricaAbstracta;
+import AccesoDatosLayer.FabricaDaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
 import LogicaLayer.Comando;
@@ -11,8 +14,9 @@ import java.util.ArrayList;
  */
 public class ComandoGetInstructores extends Comando {
     
-    private Entidad _instructores;
     private ArrayList<Instructor> _listaInstructores;
+    
+    public ComandoGetInstructores(){}
     
     public ArrayList<Instructor> getInstructores(){
         return _listaInstructores;
@@ -20,7 +24,9 @@ public class ComandoGetInstructores extends Comando {
     
     @Override
     public void ejecutar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
+        IDaoInstructor dao = fab.getDaoInstructor();
+        _listaInstructores = dao.getInstructores();
     }
 
 }

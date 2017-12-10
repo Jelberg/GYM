@@ -23,6 +23,7 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
      * 
      * @return Retorna objeto del tipo DaoEntrenador.
      */
+    @Override
     public DaoEntrenadorPostgre instanciaDaoEntrenador(){
         return new DaoEntrenadorPostgre();
     }
