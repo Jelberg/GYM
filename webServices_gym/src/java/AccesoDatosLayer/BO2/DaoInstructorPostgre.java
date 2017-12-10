@@ -1,51 +1,75 @@
 package AccesoDatosLayer.BO2;
 
+import AccesoDatosLayer.Dao;
+import AccesoDatosLayer.DaoPostgre;
+import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
-import Comun.Validaciones.ValidationWS;
+import Comun.Excepciones.ParameterNullException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
  *
  * @author simon
  */
-public class DaoInstructorPostgre implements IDaoInstructor{
+public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
 
-   // private Connection conn = Sql.getConInstance();
+    private Connection _conn;
+    private ArrayList<Instructor> jsonArray;
+    
+    public DaoInstructorPostgre() {}
     
     @Override
-    public void RegistrarInstructor(Instructor i) {
-/*        Map<String, String> response = new HashMap<>();
-        try {
-            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("nombre", i.getNombre() );
-                put("apellido", i.getApellido() );
-                put("fechanac", i.getFecha_nac());
-                put("sexo", i.getSexo() );
-                put("correo", i.getCorreo() );
-            }});
+    public ArrayList<Instructor> getInstructores() {
+         try{
+            _conn = Dao.getPostgreBdConnect();
+            String query = "SELECT * FROM instructor;";
+            jsonArray = new ArrayList<>();
+            PreparedStatement st = _conn.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
             
-            String query = "select * from bo_m02_inserta_instructor('"+i.getNombre()+"', '"+apellido+"', '"+fecha+"', '"+sexo+"', '"+correo+"')";
-           // PreparedStatement st = conn.prepareStatement(query); 
-
-                st.executeQuery();
-            
-            response.put("data", "Se inserto el instructor");
+            //La variable donde se almacena el resultado de la consulta.
+            while(rs.next()){
+                jsonArray.add(new Instructor());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("INS_ID"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("INS_NOMBRE"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("INS_APELLIDO"));
+                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("INS_FECHA_NAC"));
+                jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("INS_SEXO")));
+                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("INS_CORREO"));
+            }
         }
-        catch (SQLException e){
-            response.put("error", e.getMessage());
+        catch(SQLException e) {
         }
         catch (ParameterNullException e) {
-            response.put("error", e.getMessage());
         }
         finally {
-            Sql.bdClose(conn);
-            return gson.toJson(response);
+            Dao.closePostgreConnection( _conn );
+            return jsonArray;
         }
-*/
+
     }
-    
+
+    @Override
+    public Entidad eliminar(Entidad ent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Entidad modificar(Entidad ent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Entidad actualizar(Entidad ent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Entidad consultar(Entidad ent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

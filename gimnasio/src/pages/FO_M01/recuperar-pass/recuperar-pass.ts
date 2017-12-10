@@ -43,7 +43,7 @@ export class RecuperarPassPage {
   }
   ionViewDidLoad() {
     this.Nuevacontrasena();
-    console.log("JVAZZZZ"+this.cod);
+
   }
 
 
@@ -60,7 +60,7 @@ export class RecuperarPassPage {
 
   getCodigo( correo )
   {
-    let url = "Registrar_Usuario/getUsuarioCorreo?correo="+correo;
+    let url = "Login/getUsuarioCorreo?correo="+correo;
     this.userService.getDato(url).subscribe(data => {    
         let i: number = 0;
         while ( i < data.length ){
@@ -135,7 +135,6 @@ export class RecuperarPassPage {
 
   cambiarContrasena()
   {
-
     console.log(this.cod)
     if (this.cod==this.codigo)
     {
@@ -175,38 +174,42 @@ export class RecuperarPassPage {
     this.mensajeerror("El codigo es incorrecto ")
   }
 
+
+  //Valida que el correo este metido en el sistema
   validarCorreo(correo )
   {
-    
-      
-        let vali;
-        let url = "Registrar_Usuario/getUsuarioCorreo?correo="+correo;
+        
+        let url = "Login/getUsuarioCorreo?correo="+correo;
         this.userService.getDato(url).subscribe(data => {    
-          let i: number = 0;
-          if ( i < data.length ){
-            this.class[i] = data[i];
-            this.radioopen=true;
-            
-          }
-          console.log(this.class[0]);
+          let i: number = 0;       
+            this.radioopen=true;console.log(data.id+"MIRAA");
+            if (data.id=="0")
+            localStorage.setItem("aux","false");
+            else
+            localStorage.setItem("aux","true");
+          
+          console.log(localStorage.getItem("aux"));
       },
       (error) =>{
         console.error(error);
         this.radioopen = false
       }
     ) 
-    if (this.class)
+    if (localStorage.getItem("aux")=="true")
     {
       
       this.radioopen=true;
+      localStorage.removeItem("aux")
     }
     else
     {
       
       this.radioopen=false;
+      localStorage.removeItem("aux")
     }
       
       console.log(this.class)
+      console.log(this.radioopen)
       return this.radioopen;
 }
 
