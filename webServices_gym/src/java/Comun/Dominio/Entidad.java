@@ -12,6 +12,13 @@ package Comun.Dominio;
 public class Entidad {
     int id;
 
+    public Entidad() {
+    }
+
+    public Entidad(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

@@ -101,21 +101,11 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
 
 
     @Override
-    public String Insertar(  String nombre,
-                                    String apellido,
-                                    String fecha,
-                                    String sexo,
-                                    String correo,
-                                    String usuario,
-                                    String password,
-                                    int estatura,
-                                    String telefono,
-                                    boolean entrenador
-                                    ){
+    public String Insertar(  Usuario u ){
         try {
             
-            String query = "select * from fo_m01_inserta_usuario('"+nombre+"', '"+apellido+"', '"+fecha+"', '"+sexo+"', '"+correo+"', '"+usuario+"', '"+password+ "', "+estatura+", '"+telefono+"','"+entrenador+"')";
-            PreparedStatement st = conn.prepareStatement(query); 
+            String query = "select * from fo_m01_inserta_usuario('"+u.getNombre()+"', '"+u.getApellido()+"', "+01/01/2000+", '"+u.getSexo()+"', '"+u.getCorreo()+"', '"+u.getUsuario()+"', '"+u.getPassword()+ "', "+u.getEstatura()+", '"+u.getTelefono()+"','"+u.isEntrenador()+"')";
+            PreparedStatement st = conn.prepareStatement(query);
             st.executeQuery();           
             return("Se inserto el usuario");
         }

@@ -2,8 +2,10 @@ package AccesoDatosLayer;
 
 import AccesoDatosLayer.BO2.DaoInstructorPostgre;
 import AccesoDatosLayer.BO2.IDaoInstructor;
+import AccesoDatosLayer.FO1.DaoUsuarioAmigoPostgre;
 import AccesoDatosLayer.FO1.DaoUsuarioPostgre;
 import AccesoDatosLayer.FO1.IDaoUsuario;
+import AccesoDatosLayer.FO1.IDaoUsuarioAmigo;
 
 /**
  *
@@ -23,5 +25,12 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
     public IDaoUsuario getDaoUsuario(){
         return new DaoUsuarioPostgre();
     }
+    
+    @Override
+    public IDaoUsuarioAmigo getDaoUsuarioAmigo() {
+        return new DaoUsuarioAmigoPostgre();
+    }
     // Fin Daos F01
+
+    
 }
