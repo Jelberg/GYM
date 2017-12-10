@@ -1,0 +1,3 @@
+class FabricaComando{
+	static instanciaComandoEntrenador(  )
+}

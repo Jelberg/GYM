@@ -10,21 +10,17 @@ package Comun.Dominio;
  * @author Elberg
  */
 public class Entidad {
-    int id;
-
-    public Entidad() {
+    int _id;
+    public Entidad ( int id ){
+        _id = id;
     }
-
-    public Entidad(int id) {
-        this.id = id;
-    }
-
+    public Entidad(){}
     public int getId() {
-        return id;
+        return _id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this._id = id;
     }
     
 }
