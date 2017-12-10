@@ -64,7 +64,7 @@ public class FO1_Servicios {
         (usuar, password, nombre, apellido, fecha, sexo, correo, estatura, telefono, entrenador);        
         FabricaComando fab = new FabricaComando();
         Comando c = fab.CrearRegUsuario(usuario);
-        response.put("id", c.ejecuta());
+        //response.put("id", c.ejecuta());
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());

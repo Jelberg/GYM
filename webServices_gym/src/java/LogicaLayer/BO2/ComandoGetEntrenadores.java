@@ -35,9 +35,4 @@ public class ComandoGetEntrenadores extends Comando{
         _listaEntrenadores = dao.consultarEntrenadores();
     }
 
-    @Override
-    public String ejecuta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
