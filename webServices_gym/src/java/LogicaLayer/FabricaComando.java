@@ -5,6 +5,9 @@ import Comun.Dominio.Instructor;
 import Comun.Dominio.Usuario;
 import LogicaLayer.BO2.ComandoGetEntrenadores;
 import LogicaLayer.BO2.RegistrarInstructor;
+import LogicaLayer.FO1.ComandoActualizarCodigo;
+import LogicaLayer.FO1.ComandoActualizarPassword;
+import LogicaLayer.FO1.ComandoGetCorreo;
 import LogicaLayer.FO1.ComandoIniciarSesion;
 import LogicaLayer.FO1.IngresarUsuario;
 
@@ -33,4 +36,15 @@ public class FabricaComando {
         return new ComandoIniciarSesion(usuario);
     }
     
+    public static ComandoActualizarCodigo actualizarCodigo (Usuario usuario){
+        return new ComandoActualizarCodigo(usuario);
+    }
+    
+    public static ComandoActualizarPassword actualizarPassword (Usuario usuario){
+        return new ComandoActualizarPassword(usuario);
+    }
+    
+     public static ComandoGetCorreo getCorreo (Usuario usuario){
+        return new ComandoGetCorreo(usuario);
+    }
 }

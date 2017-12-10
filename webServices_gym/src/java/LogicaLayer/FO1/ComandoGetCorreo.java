@@ -15,7 +15,7 @@ import LogicaLayer.Comando;
  *
  * @author Miguel
  */
-public class ComandoIniciarSesion extends Comando{
+public class ComandoGetCorreo extends Comando{
     private Usuario _usuario;
     private String resultado;
 
@@ -23,11 +23,7 @@ public class ComandoIniciarSesion extends Comando{
         return resultado;
     }
 
-    public void setResultado(String resultado) {
-        this.resultado = resultado;
-    }
-
-    public ComandoIniciarSesion(Usuario _usuario) {
+    public ComandoGetCorreo(Usuario _usuario) {
         this._usuario = _usuario;
     }
 
@@ -44,7 +40,10 @@ public class ComandoIniciarSesion extends Comando{
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre)FabricaAbstracta.getFabrica(1);
         IDaoUsuario dao = fab.getDaoUsuario();
-        setResultado(dao.IniciarSesion(_usuario));
+        setResultado(dao.get_Usuariocorreo(_usuario));
     }
-    
+
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
 }

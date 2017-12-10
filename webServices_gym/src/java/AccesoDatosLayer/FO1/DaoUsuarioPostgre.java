@@ -96,7 +96,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
          
     @Override
     public String get_Usuariocorreo(Usuario u)
-    {
+    {int x=0;
         try{
             conn = Dao.getPostgreBdConnect();
             String query = "SELECT * FROM fo_m01_getusuariocorreo('"+u.getCorreo()+"')";
@@ -117,7 +117,11 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
                 jsonArray.get(jsonArray.size() - 1).setTelefono(rs.getString("telefono"));
                 jsonArray.get(jsonArray.size() - 1).setEntrenador(rs.getBoolean("entrenador"));
                 jsonArray.get(jsonArray.size() - 1).setCodigo(rs.getInt("codigo"));
+                x=1;
             }
+            if (x!=1)
+                response = "0";
+            else
             response = gson.toJson(jsonArray);
         }
         catch(SQLException e) {
