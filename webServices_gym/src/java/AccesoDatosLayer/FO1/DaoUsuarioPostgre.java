@@ -23,7 +23,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     private ArrayList<Usuario> jsonArray;
     
     @Override     
-    public String Consultar( Usuario u){
+    public String getUsuario( Usuario u){
         try{
             conn = Dao.getPostgreBdConnect();
             String query = "SELECT * FROM fo_m01_getusuario("+u.getId()+")";
@@ -224,10 +224,10 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
      * contiene el mensaje de la peticion
      */
     @Override
-    public String Modificar(Usuario u) {
+    public String modificaUsuario(Usuario u) {
         try {
             conn = Dao.getPostgreBdConnect();
-            String query = "select * from fo_m01_modifica_usuario('"+u.getId()+"','"+u.getNombre()+"','"+u.getApellido()+"','"+u.getFecha_nac()+"','"+u.getSexo()+"','"+u.getCorreo()+"','"+u.getUsuario()+"','"+u.getPassword()+"','"+u.getEstatura()+"','"+u.getTelefono()+"','"+u.isEntrenador()+"')";
+            String query = "select * from fo_m01_modifica_usuario('"+u.getId()+"','"+u.getUsuario()+"','"+u.getPassword()+"','"+u.getNombre()+"','"+u.getApellido()+"','"+u.getSexo()+"','"+u.getFecha_nac()+"','"+u.getTelefono()+"','"+u.getEstatura()+"','"+u.getCorreo()+"','"+u.isEntrenador()+"','"+u.getCodigo()+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
             return("Se actualizo el usuario");
@@ -297,7 +297,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
      * contiene el mensaje de la peticion
      */
     @Override
-    public String Elimina( Usuario u)
+    public String eliminaUsuario( Usuario u)
     {
         try{
             conn = Dao.getPostgreBdConnect();
@@ -324,6 +324,47 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     @Override
     public Entidad consultar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Usuario> getListUsuario() {
+        try{
+            conn = Dao.getPostgreBdConnect();
+            String query = "SELECT * FROM USUARIO";
+            jsonArray = new ArrayList<>();
+            PreparedStatement st = conn.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            
+            while(rs.next()){
+                jsonArray.add(new Usuario());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("USU_ID"));
+                jsonArray.get(jsonArray.size() - 1).setUsuario(rs.getString("USU_USUARIO"));
+                jsonArray.get(jsonArray.size() - 1).setPassword(rs.getString("USU_PASSWORD"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("USU_NOMBRE"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("USU_APELLIDO"));
+                jsonArray.get(jsonArray.size() - 1).setSexo(rs.getString("USU_SEXO"));
+                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("USU_FECHA_NAC"));
+                jsonArray.get(jsonArray.size() - 1).setTelefono(rs.getString("USU_TELEFONO"));
+                jsonArray.get(jsonArray.size() - 1).setEstatura(rs.getInt("USU_ESTATURA"));
+//                jsonArray.get(jsonArray.size() - 1).setFoto(rs.getString("foto"));
+                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("USU_CORREO"));
+                jsonArray.get(jsonArray.size() - 1).setEntrenador(rs.getBoolean("USU_ENTRENADOR"));
+                jsonArray.get(jsonArray.size() - 1).setCodigo(rs.getInt("USU_CODIGO"));
+            }
+        }
+        catch(SQLException e) {
+            
+        }
+        catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
+        finally {
+            Dao.closePostgreConnection( conn );
+            return jsonArray;
+        }
     }
     
 }

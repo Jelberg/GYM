@@ -3,12 +3,18 @@ package LogicaLayer;
 import Comun.Dominio.Instructor;
 import Comun.Dominio.Usuario;
 import LogicaLayer.BO2.ComandoGetEntrenadores;
+//import LogicaLayer.BO2.RegistrarInstructor;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
 import LogicaLayer.FO1.ComandoActualizarPassword;
 import LogicaLayer.FO1.ComandoGetCorreo;
 import LogicaLayer.FO1.ComandoIniciarSesion;
 import LogicaLayer.BO2.ComandoGetInstructores;
 import LogicaLayer.BO2.ComandoRegistrarInstructor;
+import LogicaLayer.FO1.ComandoEliminaUsuario;
+import LogicaLayer.FO1.ComandoGetUsuario;
+import LogicaLayer.FO1.ComandoGetUsuarioNomApe;
+import LogicaLayer.FO1.ComandoListaUsuario;
+import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 
 /**
@@ -33,7 +39,7 @@ public class FabricaComando {
     }
     
     
-    // comandos FO1
+    // comandos FOM01
     //Crear comando para registrar un usuario
     public static IngresarUsuario CrearRegUsuario (Usuario usuario){
         return new IngresarUsuario(usuario);
@@ -51,7 +57,35 @@ public class FabricaComando {
         return new ComandoActualizarPassword(usuario);
     }
     
-     public static ComandoGetCorreo getCorreo (Usuario usuario){
+    public static ComandoGetCorreo getCorreo (Usuario usuario){
         return new ComandoGetCorreo(usuario);
     }
+    
+    //Comando para consultar un usuario por id.
+    public static ComandoGetUsuario getUsuario (Usuario usuario){
+        return new ComandoGetUsuario(usuario);
+    }
+    
+    //Comando para consultar un usuario por nombre y apellido.
+    public static ComandoGetUsuarioNomApe getUsuarioNomApe (Usuario usuario){
+        return new ComandoGetUsuarioNomApe(usuario);
+    }
+    
+    //Comando para modificar los datos de un usuario.
+    public static ComandoModificaUsuario modificaUsuario (Usuario usuario){
+        return new ComandoModificaUsuario(usuario);
+    }
+    
+    //Comando para listar los usuarios.
+    public static ComandoListaUsuario getListUsuario (){
+        return new ComandoListaUsuario();
+    }
+    
+    //Comando para eliminar un usuario.
+    public static ComandoEliminaUsuario eliminaUsuario (Usuario usuario){
+        return new ComandoEliminaUsuario(usuario);
+    }
+    
+    //Fin Comandos FOM01
+    
 }
