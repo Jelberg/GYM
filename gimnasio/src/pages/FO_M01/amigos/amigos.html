@@ -35,7 +35,7 @@
 <div [ngSwitch]="categorias">
   <ion-list  *ngSwitchCase="'lista_amigos'" >
     <ion-list-header *ngFor="let item of class" no-lines no-padding>
-    <button ion-item ><ion-icon item-right name='mail'></ion-icon>{{item.nombre}} {{item.apellido}}</button > 
+    <button ion-item (press)="eliminarAmigo(item._id)" name="ami" id="ami" ><ion-icon item-right name='mail'></ion-icon>{{item.nombre}} {{item.apellido}}</button > 
     </ion-list-header>
   </ion-list>
 
@@ -49,7 +49,7 @@
           </button>
 
           <ion-list-header *ngFor="let item of buscar" no-lines no-padding>
-              <button ion-item (click)="agregarAmigos(item.id)"><ion-icon item-right name='add'></ion-icon>{{item.nombre}} {{item.apellido}}({{item.usuario}})</button > 
+              <button ion-item  (click)="agregarAmigos(item._id)"><ion-icon item-right name='add'></ion-icon>{{item.nombre}} {{item.apellido}}({{item.usuario}})</button > 
               </ion-list-header>
   </ion-list>
 
