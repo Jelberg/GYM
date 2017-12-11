@@ -39,6 +39,22 @@ public class FOM01_Usuario {
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Usuario> listaUsuario;
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public ArrayList<Usuario> getListaUsuario() {
+        return listaUsuario;
+    }
+
+    public void setListaUsuario(ArrayList<Usuario> listaUsuario) {
+        this.listaUsuario = listaUsuario;
+    }
     
     /**
      * Funcion que recibe como parámetro el ID del Usuario,
@@ -177,7 +193,8 @@ public class FOM01_Usuario {
     @POST
     @Path("/modificaUsuario")
     @Produces("application/json")
-    public String modificaUsuario(  @QueryParam("usuario") String usuar,
+    public String modificaUsuario(  @QueryParam("id") int id,
+                                    @QueryParam("usuario") String usuar,
                                     @QueryParam("password") String password,
                                     @QueryParam("nombre") String nombre,
                                     @QueryParam("apellido") String apellido,
@@ -191,6 +208,7 @@ public class FOM01_Usuario {
         Map<String, String> response = new HashMap<String, String>();
         try {
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("id", id);
                 put("usuario", usuar );
                 put("password", password );
                 put("nombre", nombre );
@@ -204,7 +222,7 @@ public class FOM01_Usuario {
                 put("codigo", codigo );
             }});
             Usuario usuario = FabricaEntidad.InstanciaModificaUsuario
-            (usuar, password, nombre, apellido, sexo, fecha_nac, telefono,
+            (id, usuar, password, nombre, apellido, sexo, fecha_nac, telefono,
                     estatura, correo, entrenador, codigo);   
             ComandoModificaUsuario c = FabricaComando.modificaUsuario(usuario);
             c.ejecutar();

@@ -227,7 +227,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     public String modificaUsuario(Usuario u) {
         try {
             conn = Dao.getPostgreBdConnect();
-            String query = "select * from fo_m01_modifica_usuario('"+u.getId()+"','"+u.getNombre()+"','"+u.getApellido()+"','"+u.getFecha_nac()+"','"+u.getSexo()+"','"+u.getCorreo()+"','"+u.getUsuario()+"','"+u.getPassword()+"','"+u.getEstatura()+"','"+u.getTelefono()+"','"+u.isEntrenador()+"')";
+            String query = "select * from fo_m01_modifica_usuario('"+u.getId()+"','"+u.getUsuario()+"','"+u.getPassword()+"','"+u.getNombre()+"','"+u.getApellido()+"','"+u.getSexo()+"','"+u.getFecha_nac()+"','"+u.getTelefono()+"','"+u.getEstatura()+"','"+u.getCorreo()+"','"+u.isEntrenador()+"','"+u.getCodigo()+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
             return("Se actualizo el usuario");
