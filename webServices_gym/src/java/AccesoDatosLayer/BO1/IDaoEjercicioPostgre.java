@@ -5,10 +5,18 @@
  */
 package AccesoDatosLayer.BO1;
 
+import Comun.Dominio.Entidad;
+import Comun.Dominio.Ejercicio;
+import java.util.ArrayList;
+
+
 /**
  *
- * @author Admin
+ * @author Luis L
  */
 public interface IDaoEjercicioPostgre {
-    
+    public ArrayList<Ejercicio> verEjercicios();
+    public Entidad Agregar (Entidad ent);
+    public Entidad Modificar (Entidad ent);
+    public Entidad Eliminar (Entidad ent);
 }

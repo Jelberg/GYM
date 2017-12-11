@@ -11,6 +11,9 @@ package Comun.Dominio;
  */
 public class Equipo extends Entidad {
 
+   private int _id;
+   private String _nombre;
+    
     /**
      * @return the _id
      */
@@ -39,7 +42,13 @@ public class Equipo extends Entidad {
         this._nombre = _nombre;
     }
     
-private int _id;
-private String _nombre;
+    public Equipo (int _id, String _nombre){
+        this._id=_id;
+        this._nombre=_nombre;
+    }
+    
+    public Equipo (int _id){
+        super(_id);
+    }
     
 }
