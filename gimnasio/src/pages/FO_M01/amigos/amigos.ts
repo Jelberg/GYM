@@ -52,7 +52,7 @@ export class AmigosPage {
 
 
   public cargarAmigos(){
-    let url = "Usuario_Amigo/getUsuario_Amigo?idUsuario="+localStorage.getItem("id");
+    let url = "Usuario_Amigo/getListUsuario_Amigo?idUsuario="+localStorage.getItem("id");
     this.userService.getDato(url).subscribe(data => {    
         this.class = data;
     },
