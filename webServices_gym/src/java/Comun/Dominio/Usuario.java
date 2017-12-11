@@ -60,6 +60,34 @@ public class Usuario extends Persona {
         this.codigo = codigo;
         this.entrenador = entrenador;
     }
+    
+    public Usuario(int id, String usuario, String nombre, String apellido){
+        super(nombre, apellido, id);
+        this.usuario = usuario;
+    }
+
+    public Usuario(String password, String usuario, int estatura, 
+                    String telefono, int codigo, boolean entrenador) {
+        this.password = password;
+        this.usuario = usuario;
+        this.estatura = estatura;
+        this.telefono = telefono;
+        this.codigo = codigo;
+        this.entrenador = entrenador;
+    }
+
+    public Usuario(String password, String usuario, int estatura, 
+                    String telefono, int codigo, boolean entrenador, 
+                    String nombre, String apellido, Date fecha_nac, 
+                    String sexo, String correo) {
+        super(nombre, apellido, fecha_nac, sexo, correo);
+        this.password = password;
+        this.usuario = usuario;
+        this.estatura = estatura;
+        this.telefono = telefono;
+        this.codigo = codigo;
+        this.entrenador = entrenador;
+    }
 
     public boolean isEntrenador() {
         return entrenador;

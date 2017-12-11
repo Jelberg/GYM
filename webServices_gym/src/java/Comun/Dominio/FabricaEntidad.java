@@ -46,6 +46,23 @@ public class FabricaEntidad {
                             sexo, correo);
     }
     
+    static public Usuario InstanciaUsuarioNomApe(int id, String usuario, 
+                                            String nombre, String apellido)
+    {
+        return new Usuario(id, usuario, nombre, apellido);
+    }
+    
+    static public Usuario InstanciaModificaUsuario(String usuario, String password,
+                                            String nombre, String apellido,
+                                            String sexo, Date fecha_nac,
+                                            String telefono, int estatura, 
+                                            String correo, boolean entrenador, int codigo)
+    {
+        return new Usuario(password, usuario, estatura, telefono, codigo, 
+                            entrenador, nombre, apellido, fecha_nac, 
+                            sexo, correo);
+    }
+    
     // Fin de FOM01
     
     // Inicia Fabricas de M04

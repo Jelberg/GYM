@@ -25,9 +25,10 @@ public class ConfiguracionRestGimnasio extends Application{
     @Override
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
-        h.add(FO1_Servicios.class);
         h.add(BOm02_Entrenador.class);
         h.add(BO2_Instructor.class);
+        h.add(FO1_Servicios.class);
+        h.add(FOM01_Usuario.class);
 
 
         return h;
