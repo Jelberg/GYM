@@ -19,7 +19,7 @@ public interface IDaoUsuario {
     public String updatePassword(Usuario u);
     public String updateCodigo(Usuario u);
     public String getUsuarioNomApe(Usuario u);
-    public String eliminaUsuario(Usuario u);
+    public String eliminaUsuario(String s);
     public String getUsuario(Usuario u);
     public String modificaUsuario(Usuario u);
     public ArrayList<Usuario> getListUsuario();

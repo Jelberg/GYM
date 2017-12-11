@@ -20,7 +20,8 @@
 </ion-navbar>
 </ion-header>
 
-<ion-content >
+<ion-content  >
+  <div *ngIf="editar">
   <h1>
     <ion-img class="circle-pic"  width="80" height="80" src="../../assets/imgs/img_usuarios/usuario.png"> </ion-img>
   </h1>
@@ -39,9 +40,9 @@
         </ion-col>
         <ion-col>
           <ion-item text-right >
-          <ion-label floating id="nombre" color="dark">
+          <ion-label floating id="nombre"  color="dark">
           </ion-label>
-          <ion-input type="text" required [disabled]="editar">
+          <ion-input type="text"   required [disabled]="editar">
           </ion-input>
           </ion-item>
         </ion-col>
@@ -55,7 +56,7 @@
           <ion-item text-right >
           <ion-label floating id="usuario" color="dark">
           </ion-label>
-          <ion-input type="text" required [disabled]="editar">
+          <ion-input type="text" id="usuario2"  required [disabled]="editar">
           </ion-input>
           </ion-item>
         </ion-col>
@@ -71,7 +72,7 @@
           <ion-item text-right>
             <ion-label floating id="correo" color="dark">
             </ion-label>
-            <ion-input [disabled]="editar" type="email" required >  
+            <ion-input [disabled]="editar"  id="email" type="email" required >  
             </ion-input>
           </ion-item>
         </ion-col>
@@ -86,7 +87,7 @@
           <ion-item text-right>
             <ion-label floating id="telefono" color ="dark" >
             </ion-label>
-            <ion-input [disabled]="editar" type="tel" required>
+            <ion-input [disabled]="editar"  id="telefono2"  type="tel" required>
             </ion-input>
           </ion-item>
         </ion-col>
@@ -98,7 +99,7 @@
         </ion-col>
         <ion-col >
             <ion-item text-right>
-                <ion-datetime color="dark" id="fechanac" [disabled]="editar" displayFormat="DD/MM/YYYY" [(ngModel)]="myDate"></ion-datetime>
+                <ion-datetime color="dark" id="fechanac" [disabled]="editar" displayFormat="DD/MM/YYYY" [(ngModel)]="fechanac"></ion-datetime>
               </ion-item>
         </ion-col>
       </ion-row>
@@ -111,7 +112,7 @@
           <ion-item text-right>
             <ion-label floating id="estatura" color="dark">
             </ion-label>
-            <ion-input [disabled]="editar" min=120 max=250 type="number" required>
+            <ion-input [disabled]="editar" id="estatura2"  min=120 max=250 type="number" required>
             </ion-input>
           </ion-item>
         </ion-col>
@@ -133,7 +134,54 @@
   <div id="finalp">
 
   </div>
-
+</div>
+<div  *ngIf="!editar">
+<ion-list>
+    <ion-item>
+        <ion-label stacked>Nombre:</ion-label>
+        <ion-input name="nombre2" [(ngModel)]="nombre2" floating id="nombre2" type="text" maxlength="10" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Apellido:</ion-label>
+      <ion-input name="apellido2" [(ngModel)]="apellido2" floating id="apellido2"  type="text" maxlength="10" required></ion-input>
+    </ion-item>
+    <ion-item> 
+        <ion-label stacked>Usuario:</ion-label>
+        <ion-input name="usuario2" [(ngModel)]="usuario2" floating id="usuario2"  type="text" maxlength="14" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked>Contraseña(minimo 5 caracteres):</ion-label>
+        <ion-input name="password2" [(ngModel)]="password2" floating id="password2"  type="password" minlength="5" maxlength="14" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked>Repetir contraseña:</ion-label>
+        <ion-input name="password3" [(ngModel)]="password3" floating id="password3" type="password"  required></ion-input>
+        
+    </ion-item>
+      <ion-item style="color:rgb(255, 0, 0)" class="alert alert-danger"  *ngIf="confirmarpas()">
+        Las contrasenas no coinciden
+      </ion-item>
+    <ion-item>
+        <ion-label stacked>Correo:</ion-label>
+        <ion-input name="correo" [(ngModel)]="correo2"type="email" floating id="correo2" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked>Telefono:</ion-label>
+        <ion-input name="telefono2" [(ngModel)]="telefono2" floating id="telefono2" type='tel' required></ion-input>
+    </ion-item>
+    <ion-item>
+          <ion-label stacked>Estatura(cm)</ion-label>
+          <ion-input  name="estatura2" [(ngModel)]="estatura2" floating id="estatura2" min=120 max=250 type="number" required></ion-input>
+    </ion-item>
+    <ion-item>
+          <ion-label stacked>Genero:</ion-label>
+    </ion-item>
+  <ion-col>
+          <button ion-button id="genero2"    (click)="cambiargenero()">{{genero2}}
+          </button>
+  </ion-col>
+</ion-list>
+</div>
   <ion-fab right bottom>
       <button ion-fab color="secondary" (click)="editarperfil()">
           <ion-icon name="build" *ngIf="editar"></ion-icon>
