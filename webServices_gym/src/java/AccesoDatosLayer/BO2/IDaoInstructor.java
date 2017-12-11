@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public interface IDaoInstructor {
     
     public ArrayList<Instructor> getInstructores();
+    public void insertar (Instructor i);
     public Entidad eliminar( Entidad ent );
     public Entidad modificar( Entidad ent );
     public Entidad actualizar( Entidad ent );
