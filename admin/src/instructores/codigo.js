@@ -1,6 +1,6 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="localhost:8080/webServices_gym/instructor";
+var url="http://localhost:8080/webServices_gym/instructor";
 var correo_busqueda= document.getElementById("text_correo");
 var boton= document.getElementById("boton_consulta");
 var variable;
