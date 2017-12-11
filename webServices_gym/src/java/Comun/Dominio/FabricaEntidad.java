@@ -54,12 +54,12 @@ public class FabricaEntidad {
     
     static public Usuario InstanciaModificaUsuario(int id,String usuario, String password,
                                             String nombre, String apellido,
-                                            String sexo, Date fecha_nac,
+                                            String sexo, 
                                             String telefono, int estatura, 
                                             String correo, boolean entrenador, int codigo)
     {
         return new Usuario(password, usuario, estatura, telefono, codigo, 
-                            entrenador, id, nombre, apellido, fecha_nac, 
+                            entrenador, id, nombre, apellido, null, 
                             sexo, correo);
     }
     

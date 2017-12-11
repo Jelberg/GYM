@@ -227,13 +227,18 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     public String modificaUsuario(Usuario u) {
         try {
             conn = Dao.getPostgreBdConnect();
-            String query = "select * from fo_m01_modifica_usuario('"+u.getId()+"','"+u.getUsuario()+"','"+u.getPassword()+"','"+u.getNombre()+"','"+u.getApellido()+"','"+u.getSexo()+"','"+u.getFecha_nac()+"','"+u.getTelefono()+"','"+u.getEstatura()+"','"+u.getCorreo()+"','"+u.isEntrenador()+"','"+u.getCodigo()+"')";
+            String query = "select * from fo_m01_modifica_usuario('"+u.getId()+"','"+u.getUsuario()+"','"+u.getPassword()+"','"+u.getNombre()+"','"+u.getApellido()+"','"+u.getSexo()+"','"+u.getTelefono()+"','"+u.getEstatura()+"','"+u.getCorreo()+"','"+u.isEntrenador()+"','"+u.getCodigo()+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
             return("Se actualizo el usuario");
         }
         catch (SQLException e){
-            return e.getMessage();           
+            if (e.getMessage().regionMatches(0, "ERROR: llave duplicada viola restricción de unicidad «usuario_usu_usuario_key»", 0, 78))
+            return ("usuario duplicado");
+                    else
+                        if (e.getMessage().regionMatches(0, "ERROR: llave duplicada viola restricción de unicidad «usuario_usu_correo_key»", 0, 77))
+                        return ("correo duplicado");
+                        else return e.getMessage();           
         }
         catch (ParameterNullException e) {
          return e.getMessage();

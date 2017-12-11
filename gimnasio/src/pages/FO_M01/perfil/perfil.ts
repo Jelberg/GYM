@@ -18,6 +18,15 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
   templateUrl: 'perfil.html',
 })
 export class PerfilPage {
+  usuario2 : string;
+  password2 :string;
+  password3: string;
+  nombre2 : string;
+  apellido2 :string;
+  correo2: string;
+  telefono2 :string;
+  estatura2 :number;
+  genero2 :string;
   public users:any;
   private editar: boolean = true;
   private cgenero : any;
@@ -53,6 +62,20 @@ export class PerfilPage {
         document.getElementById("genero").innerHTML= "Masculino"
         else
         document.getElementById("genero").innerHTML= "Femenino"
+
+
+        this.nombre2=this.class[0].nombre;
+        this.apellido2=this.class[0].apellido;
+        this.usuario2=this.class[0].usuario;
+        this.password2=this.class[0].password;
+        this.password3=this.class[0].password;
+        this.correo2=this.class[0].correo;
+        this.telefono2=this.class[0].telefono;
+        this.estatura2= this.class[0].estatura;       
+        if (this.class[0].sexo=="M")
+        this.genero2= "Masculino"
+        else
+        this.genero2= "Femenino"
         this.radioopen=false;
       }
     },
@@ -98,7 +121,7 @@ export class PerfilPage {
             
           }else{
           this.radioopen = false;
-          document.getElementById("genero").innerHTML= this.cgenero;
+          document.getElementById("genero2").innerHTML= this.cgenero;
         }}
       });
       alert.present().then(() => {
@@ -126,8 +149,8 @@ export class PerfilPage {
           {
             text: 'Aceptar',
             handler: () => {
-            //agregar aqui codigo de aceptar
-            this.editar =true;
+            
+            this.editar =this.modificarUsu()
             }
           }
         ]
@@ -137,6 +160,93 @@ export class PerfilPage {
     }
 
 
+    modificarUsu(){
+    if ((this.usuario2) && (this.password2) && (this.password3) && (this.nombre2) &&(this.apellido2) && (this.correo2) && (this.estatura2) && (this.telefono2)){
+      {
+        if (this.password2.length>=5){
+          var x;
+          var gen;
+          if (this.genero2=="Masculino")
+          gen="M"
+          else
+          gen="F"
+          let url = "Registrar_Usuario/modificaUsuario?id="+localStorage.getItem("id")+"&nombre="+this.nombre2+"&apellido="+this.apellido2+"&sexo="+gen+"&correo="+this.correo2+"&usuario="+this.usuario2+"&password="+this.password2+"&estatura="+this.estatura2+"&telefono="+this.telefono2+"&entrenador="+localStorage.getItem("entrenador");
+          this.userService.postDato2(url).subscribe(data => {    
+              let i: number = 0;
+              console.log(data);     
+                x = data;
+                console.log(x);
+              
+              this.radioopen=false;
+              if(x.id=="usuario duplicado")
+              this.mensajeerror("Ya existe ese nombre de usuario en el sistema")
+              else
+              if(x.id=="correo duplicado")
+              this.mensajeerror("Ya existe ese correo en el sistema")
+              else
+              if(x.id=="Se actualizo el usuario")
+              {
+                this.mensajeexito("Usuario actualizado correctamente")
+                this.navCtrl.setRoot(HomePage);
+                return true;
+              }
+              else this.mensajeerror("Problema no identificado")
+                     
+          },
+          (error) =>{
+            console.error(error);
+          }
+        ); return false;
+        }
+        else
+        this.mensajeerror("Contrasena muy corta")
+        return false;
+      }
+    }
+    else
+    this.mensajeerror("Debe llenar todos los campos")
+    return false;
+    }
 
+
+    confirmarpas(){
+      if (this.password2==this.password3)
+      {
+        return false;
+      }
+      else 
+      {
+        return true;
+      }
+    }
+
+
+
+      /* metodo que muestra un  mensaje de error */
+mensajeerror( mensaje )
+{
+  let alert = this.alertCtrl.create();
+  alert.setTitle('Error'); 
+  alert.setMessage(mensaje)
+  alert.addButton({
+    text: 'OK',
+  });
+  alert.present().then(() => {
+    this.radioopen=true;
+  })
+}
+
+mensajeexito( mensaje )
+{
+  let alert = this.alertCtrl.create();
+  alert.setTitle('Exito'); 
+  alert.setMessage(mensaje)
+  alert.addButton({
+    text: 'OK',
+  });
+  alert.present().then(() => {
+    this.radioopen=true;
+  })
+}
 
 }

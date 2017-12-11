@@ -48,6 +48,16 @@ public class Usuario extends Persona {
         this.entrenador = entrenador;
     }
 
+    public Usuario(String password, String usuario, int estatura, String telefono, int codigo, boolean entrenador, String nombre, String apellido, String sexo, String correo, int id) {
+        super(nombre, apellido, sexo, correo, id);
+        this.password = password;
+        this.usuario = usuario;
+        this.estatura = estatura;
+        this.telefono = telefono;
+        this.codigo = codigo;
+        this.entrenador = entrenador;
+    }
+
     public Usuario(String password, String usuario, int estatura, 
                     String telefono, int codigo, boolean entrenador, 
                     int id, String nombre, String apellido, Date fecha_nac, 
