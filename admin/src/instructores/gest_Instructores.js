@@ -1,6 +1,6 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/Instruct";
+var url="localhost:8080/webServices_gym/instructor";
 var correo_busqueda= document.getElementById("correo");
 var x=0
 window.onload = function busquedainstructor()
@@ -97,7 +97,7 @@ function insertarInstructor()
                     var intento=0
                     var res = document.getElementById("nombre").value.split(" ");
                     console.log(res[0]+res[1])
-                    var url_comple="/insertaInstruct?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
+                    var url_comple="/RegistrarInstructor?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
                     fetch(url+url_comple, {
                         method: 'POST'
                     })
