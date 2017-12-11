@@ -287,39 +287,6 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
             return response;
         }
     }
-    
-    
-    /**
-     * Metodo que recibe como parametros el ID del Usuario
-     * para eliminar su cuenta.
-     * @param u usuario
-     * @return Devuelve un json con elemento llamado data, 
-     * contiene el mensaje de la peticion
-     */
-    @Override
-    public String eliminaUsuario( Usuario u)
-    {
-        try{
-            conn = Dao.getPostgreBdConnect();
-            String query = "SELECT fo_m01_elimina_usuario(?)";
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, u.getId());
-            ResultSet rs = st.executeQuery();
-            return ("Se eliminó el usuario");
-        }
-        catch(SQLException e) {
-            return ( e.getMessage());
-        }
-        catch (ParameterNullException e) {
-            return ( e.getMessage());
-        }
-        catch (Exception e) {
-            return ( e.getMessage());
-        }
-        finally {
-            Dao.closePostgreConnection(conn);
-        }
-    }
 
     @Override
     public Entidad consultar(Entidad ent) {
@@ -364,6 +331,38 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
         finally {
             Dao.closePostgreConnection( conn );
             return jsonArray;
+        }
+    }
+
+    /**
+     * Metodo que recibe como parametros el correo del Usuario
+     * para eliminar su cuenta.
+     * @param s string
+     * @return Devuelve un json con elemento llamado data, 
+     * contiene el mensaje de la peticion
+     */
+    @Override
+    public String eliminaUsuario(String s) {
+        try{
+            conn = Dao.getPostgreBdConnect();
+            String query = "SELECT fo_m01_elimina_usuario(?)";
+            PreparedStatement st = conn.prepareStatement(query);
+            Usuario u = new Usuario ();
+            st.setString(1, u.getCorreo());
+            ResultSet rs = st.executeQuery();
+            return ("Se eliminó el usuario");
+        }
+        catch(SQLException e) {
+            return ( e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            return ( e.getMessage());
+        }
+        catch (Exception e) {
+            return ( e.getMessage());
+        }
+        finally {
+            Dao.closePostgreConnection(conn);
         }
     }
     

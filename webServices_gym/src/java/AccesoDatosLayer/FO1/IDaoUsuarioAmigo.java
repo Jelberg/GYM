@@ -5,14 +5,17 @@
  */
 package AccesoDatosLayer.FO1;
 
+import Comun.Dominio.Usuario;
+import Comun.Dominio.Usuario_Amigo;
+import java.util.ArrayList;
+
 /**
  *
  * @author Miguel
  */
 public interface IDaoUsuarioAmigo {
-    public String insertaUsuario_Amigo( int idUsuario,
-                                        int idAmigo);
-     public String getUsuario_Amigo(int idUsuario);
-     public String eliminaUsuario_Amigo(int idUsuario,
-                                       int idAmigo);
+    public String insertaUsuario_Amigo(Usuario_Amigo ua);
+     public String getUsuario_Amigo(Usuario_Amigo ua);
+     public String eliminaUsuario_Amigo(Usuario_Amigo ua);
+     public ArrayList<Usuario> getListUsuario_Amigo();
 }

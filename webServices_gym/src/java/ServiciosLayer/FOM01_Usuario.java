@@ -9,6 +9,7 @@ import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Usuario;
 import Comun.Excepciones.ParameterNullException;
 import Comun.Validaciones.ValidationWS;
+import LogicaLayer.FO1.ComandoEliminaUsuario;
 import LogicaLayer.FO1.ComandoGetUsuario;
 import LogicaLayer.FO1.ComandoGetUsuarioNomApe;
 import LogicaLayer.FO1.ComandoListaUsuario;
@@ -16,10 +17,6 @@ import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -139,43 +136,44 @@ public class FOM01_Usuario {
     }
     
     /**
-     * Metodo que recibe como parametros el ID del Usuario
+     * Metodo que recibe como parametros el correo del Usuario
      * para eliminar su cuenta.
-     * @param idUsuario ID del Usuario.
+     * @param correo correo del Usuario.
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
-//    @DELETE
-//    @Path("/eliminaUsuario")
-//    @Produces("application/json")
-//    public String eliminaUsuario(@QueryParam("idUsuario") int idUsuario){
-//
-//        Map<String, String> response = new HashMap<String, String>();
-//        try{
-//
-//            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-//                put("idUsuario", idUsuario);
-//            }});
-//            Usuario usuario = FabricaEntidad.InstanciaEliminaUsuario
-//            ("", password, "", "", null, "", correo, 0, "", false);        
-//            ComandoEliminaUsuario c = FabricaComando.eliminaUsuario(usuario);
-//            c.ejecutar();
-//            response.put("id",c.getResultado());
-//        }
-//        catch (ParameterNullException e) {
-//            response.put("error", e.getMessage());
-//        }
-//        catch (Exception e) {
-//            response.put("error", e.getMessage());
-//        }
-//        finally {
-//            return gson.toJson(response);
-//        }
-//    }
+    @DELETE
+    @Path("/eliminaUsuario")
+    @Produces("application/json")
+    public String eliminaUsuario(@QueryParam("correo") String correo){
+
+        Map<String, String> response = new HashMap<String, String>();
+        try{
+
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("correo", correo);
+            }});
+            String usuario = FabricaEntidad.InstanciaEliminaUsuario
+            (0,"", "", "", "", "", null, "", 0, correo, false,0);        
+            ComandoEliminaUsuario c = FabricaComando.eliminaUsuario(usuario);
+            c.ejecutar();
+            response.put("correo",c.getResultado());
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            return gson.toJson(response);
+        }
+    }
     
     /**
      * Metodo que recibe como parametros los datos del usuario
      * para modificarlo.
+     * @param id
      * @param usuar
      * @param password
      * @param nombre
