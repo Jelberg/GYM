@@ -43,7 +43,7 @@ export class RecuperarPassPage {
   }
   ionViewDidLoad() {
     this.Nuevacontrasena();
-    console.log("JVAZZZZ"+this.cod);
+
   }
 
 
@@ -60,7 +60,7 @@ export class RecuperarPassPage {
 
   getCodigo( correo )
   {
-    let url = "Registrar_Usuario/getUsuarioCorreo?correo="+correo;
+    let url = "Login/getUsuarioCorreo?correo="+correo;
     this.userService.getDato(url).subscribe(data => {    
         let i: number = 0;
         while ( i < data.length ){
@@ -85,13 +85,13 @@ export class RecuperarPassPage {
     }
   )
   }
-  
+  cargar(){}
   Nuevacontrasena(){
     var correo = localStorage.getItem("correo");
     console.log(localStorage.getItem("correo"))
     this.corre=correo;
     localStorage.removeItem("correo");
-    if (this.validarCorreo(correo)==true)
+    //if (this.validarCorreo(correo,this.cargar())==true)
     {
       var x;
       let url = "Login/updateCodigo?correo="+correo;
@@ -102,24 +102,26 @@ export class RecuperarPassPage {
             console.log(x);
           
           this.radioopen=false;
-          if(x.id!="")
+          if(x.error!="Problema enviando el codigo, por favor intente mas tarde")
           {
              this.cod=parseInt(x.id);
           }
-          else this.mensajeerror("Problema no identificado")
-                 
+          else {
+            this.mensajeerror("No se encontro el correo")
+            this.navCtrl.setRoot(IniciarsesionPage);
+          }     
       },
       (error) =>{
         console.error(error);
       }
     )      
     }
-    else
-    {
-      console.log(this.radioopen)
-      this.mensajeerror("Correo erroneo")
-      this.navCtrl.setRoot(IniciarsesionPage);
-    }
+    //else
+    //{
+    //  console.log(this.radioopen)
+    //  this.mensajeerror("Correo erroneo")
+    //  this.navCtrl.setRoot(IniciarsesionPage);
+    //}
 
 
 
@@ -135,7 +137,6 @@ export class RecuperarPassPage {
 
   cambiarContrasena()
   {
-
     console.log(this.cod)
     if (this.cod==this.codigo)
     {
@@ -175,38 +176,43 @@ export class RecuperarPassPage {
     this.mensajeerror("El codigo es incorrecto ")
   }
 
-  validarCorreo(correo )
+
+  //Valida que el correo este metido en el sistema
+  validarCorreo(correo, callback )
   {
-    
-      
-        let vali;
-        let url = "Registrar_Usuario/getUsuarioCorreo?correo="+correo;
+        
+        let url = "Login/getUsuarioCorreo?correo="+correo;
         this.userService.getDato(url).subscribe(data => {    
-          let i: number = 0;
-          if ( i < data.length ){
-            this.class[i] = data[i];
-            this.radioopen=true;
-            
-          }
-          console.log(this.class[0]);
+          let i: number = 0;       
+            this.radioopen=true;console.log(data.id+"MIRAA");
+            if (data.id=="0")
+            localStorage.setItem("aux","false");
+            else
+            localStorage.setItem("aux","true");
+          
+          console.log(localStorage.getItem("aux"));
       },
       (error) =>{
         console.error(error);
         this.radioopen = false
       }
     ) 
-    if (this.class)
+    callback
+    if (localStorage.getItem("aux")=="true")
     {
       
       this.radioopen=true;
+      localStorage.removeItem("aux")
     }
     else
     {
       
       this.radioopen=false;
+      localStorage.removeItem("aux")
     }
       
       console.log(this.class)
+      console.log(this.radioopen)
       return this.radioopen;
 }
 

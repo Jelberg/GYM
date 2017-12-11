@@ -9,11 +9,11 @@ import LogicaLayer.Comando;
  *
  * @author simon
  */
-public class RegistrarInstructor extends Comando {
+public class ComandoRegistrarInstructor extends Comando {
 
     Instructor instructor;
         
-    public RegistrarInstructor (Instructor instructor){
+    public ComandoRegistrarInstructor (Instructor instructor){
         this.instructor = instructor;
     }
     
@@ -21,6 +21,7 @@ public class RegistrarInstructor extends Comando {
     public void ejecutar() {
         FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
         IDaoInstructor dao = fab.getDaoInstructor();
+        dao.insertar(instructor);
     }
 
 }

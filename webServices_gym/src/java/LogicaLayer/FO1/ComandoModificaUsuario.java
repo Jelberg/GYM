@@ -13,13 +13,14 @@ import LogicaLayer.Comando;
 
 /**
  *
- * @author Miguel
+ * @author YESIMAR
  */
-public class IngresarUsuario extends Comando{
-    Usuario _usuario;
-        
-    public IngresarUsuario (Usuario usuario){
-        _usuario = usuario;
+public class ComandoModificaUsuario extends Comando{
+    private Usuario _usuario;
+    private String resultado;
+
+    public ComandoModificaUsuario(Usuario _usuario) {
+        this._usuario = _usuario;
     }
 
     public Usuario getUsuario() {
@@ -30,12 +31,18 @@ public class IngresarUsuario extends Comando{
         this._usuario = _usuario;
     }
     
+    public String getResultado() {
+        return resultado;
+    }
+    
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
+
     @Override
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre)FabricaAbstracta.getFabrica(1);
         IDaoUsuario dao = fab.getDaoUsuario();
-        _usuario.setNombre(dao.Insertar(_usuario));
+        setResultado(dao.modificaUsuario(_usuario));
     }
-
-    
 }
