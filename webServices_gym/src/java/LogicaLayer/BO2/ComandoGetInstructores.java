@@ -3,7 +3,6 @@ package LogicaLayer.BO2;
 import AccesoDatosLayer.BO2.IDaoInstructor;
 import AccesoDatosLayer.FabricaAbstracta;
 import AccesoDatosLayer.FabricaDaoPostgre;
-import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
 import LogicaLayer.Comando;
 import java.util.ArrayList;

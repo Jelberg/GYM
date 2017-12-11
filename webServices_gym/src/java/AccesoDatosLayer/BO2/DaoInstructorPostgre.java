@@ -5,11 +5,13 @@ import AccesoDatosLayer.DaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
 import Comun.Excepciones.ParameterNullException;
+import Comun.Validaciones.ValidationWS;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -97,6 +99,44 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
     @Override
     public Entidad consultar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Instructor> getInstructorPorCorreo(String correo) {
+        try{
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("correo", correo);
+            }});
+            
+            _conn = Dao.getPostgreBdConnect();
+            String query = "SELECT * FROM bo_m02_get_instructor( ? );";
+            jsonArray = new ArrayList<>();
+            PreparedStatement st = _conn.prepareStatement(query);
+            st.setString(1, correo);
+            ResultSet rs = st.executeQuery();
+            
+            //La variable donde se almacena el resultado de la consulta.
+            while(rs.next()){
+                jsonArray.add(new Instructor());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
+                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fechanac"));
+                jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("sexo")));
+                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
+                          
+            }
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        catch (ParameterNullException e) {
+            e.printStackTrace();
+        }
+        finally {
+            Dao.closePostgreConnection( _conn );
+            return jsonArray;
+        }
     }
 
     
