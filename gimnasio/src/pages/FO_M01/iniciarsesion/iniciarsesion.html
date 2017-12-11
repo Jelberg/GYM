@@ -10,11 +10,11 @@
   <h1 ></h1>
   <h1 style="text-align:center" >Iniciar Sesión</h1>
 
-  <p>
-      <ion-card >
+    <p>
+        <ion-card >
           
             <ion-card-header>
-              Ingrese Cuenta:
+              Ingrese Cuenta
             </ion-card-header>
           
             <ion-card-content>
@@ -32,21 +32,22 @@
                     <h1 ></h1>
                 </ion-list>
 
-                    <button ion-button icon-left block color="secondary" (click)="iniciarSesion()">
-                      <ion-icon name="ios-arrow-forward"></ion-icon>
-                    </button>
-                
-                    <button ion-button icon-left clear small color="secondary" (click)= "recoverPassword()">
-                        Recuperar Contraseña
-                    </button> 
-
-                    <button (click)="irapaginacrear()" ion-button icon-left clear small color="secondary" >
-                        Registrarse
-                    </button> 
+                <button ion-button icon-left block color="secondary" (click)="iniciarSesion()">
+                    <ion-icon name="ios-arrow-forward"></ion-icon>
+                </button>
 
             </ion-card-content>
           
-      </ion-card>
-  </p>
+            <button ion-button icon-left clear small color="secondary" (click)= "recoverPassword()">
+                Recuperar Contraseña
+            </button> 
+    
+            <button (click)="irapaginacrear()" ion-button icon-right clear small color="secondary">
+                Registrarse
+            </button>
+
+        </ion-card>
+
+    </p>
 
 </ion-content>
