@@ -6,21 +6,13 @@ import LogicaLayer.BO2.ComandoGetInstructores;
 import LogicaLayer.Comando;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import java.sql.Date;
 
 /**
  *
@@ -41,11 +33,15 @@ public class BO2_Instructor {
         @QueryParam( "sexo" ) String sexo,
         @QueryParam( "correo" ) String correo){
      
+        try{
         Instructor instructor = (Instructor) FabricaEntidad.InstanciaInstructor
         (1, nombre, apellido, java.sql.Date.valueOf(fechanac), sexo, correo);
-        
         Comando c = FabricaComando.CrearRegInstructor(instructor);
         c.ejecutar();
+        }
+        catch(IllegalArgumentException e){
+            System.out.println("Formato de fecha invalido. Debe ser yyyy-MM-dd ");
+        }
     }
     
     @GET
