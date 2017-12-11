@@ -1,6 +1,6 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/Instruct";
+var url="localhost:8080/webServices_gym/instructor";
 var correo_busqueda= document.getElementById("text_correo");
 var boton= document.getElementById("boton_consulta");
 var variable;
@@ -13,7 +13,7 @@ window.onload = function mostrartabla()
     alert(variable)
     localStorage.clear();    
     }
-    var url_comple="/getListInstruct";
+    var url_comple="/getListInstructores";
     fetch(url+url_comple)
     .then((respuesta) => 
     {

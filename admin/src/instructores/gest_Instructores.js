@@ -1,6 +1,6 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/Instruct";
+var url="localhost:8080/webServices_gym/instructor";
 var correo_busqueda= document.getElementById("correo");
 var x=0
 window.onload = function busquedainstructor()
