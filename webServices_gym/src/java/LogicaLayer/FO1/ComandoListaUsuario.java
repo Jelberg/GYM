@@ -43,6 +43,10 @@ public class ComandoListaUsuario extends Comando{
     public void setResultado(String resultado) {
         this.resultado = resultado;
     }
+
+    public void setListaUsuario(ArrayList<Usuario> _listaUsuario) {
+        this._listaUsuario = _listaUsuario;
+    }
     
     public ArrayList<Usuario> getListUsuario(){
         return _listaUsuario;
@@ -52,7 +56,7 @@ public class ComandoListaUsuario extends Comando{
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
         IDaoUsuario dao = fab.getDaoUsuario();
-        _listaUsuario = dao.getListUsuario();
+        setListaUsuario(dao.getListUsuario());
     }
     
 }

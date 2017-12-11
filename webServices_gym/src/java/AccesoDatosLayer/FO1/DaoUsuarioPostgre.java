@@ -337,19 +337,19 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
             
             while(rs.next()){
                 jsonArray.add(new Usuario());
-                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("idUsuario"));
-                jsonArray.get(jsonArray.size() - 1).setUsuario(rs.getString("usuario"));
-                jsonArray.get(jsonArray.size() - 1).setPassword(rs.getString("password"));
-                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
-                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
-                jsonArray.get(jsonArray.size() - 1).setSexo(rs.getString("sexo"));
-                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fecha_nac"));
-                jsonArray.get(jsonArray.size() - 1).setTelefono(rs.getString("telefono"));
-                jsonArray.get(jsonArray.size() - 1).setEstatura(rs.getInt("estatura"));
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("USU_ID"));
+                jsonArray.get(jsonArray.size() - 1).setUsuario(rs.getString("USU_USUARIO"));
+                jsonArray.get(jsonArray.size() - 1).setPassword(rs.getString("USU_PASSWORD"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("USU_NOMBRE"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("USU_APELLIDO"));
+                jsonArray.get(jsonArray.size() - 1).setSexo(rs.getString("USU_SEXO"));
+                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("USU_FECHA_NAC"));
+                jsonArray.get(jsonArray.size() - 1).setTelefono(rs.getString("USU_TELEFONO"));
+                jsonArray.get(jsonArray.size() - 1).setEstatura(rs.getInt("USU_ESTATURA"));
 //                jsonArray.get(jsonArray.size() - 1).setFoto(rs.getString("foto"));
-                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
-                jsonArray.get(jsonArray.size() - 1).setEntrenador(rs.getBoolean("entrenador"));
-                jsonArray.get(jsonArray.size() - 1).setCodigo(rs.getInt("codigo"));
+                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("USU_CORREO"));
+                jsonArray.get(jsonArray.size() - 1).setEntrenador(rs.getBoolean("USU_ENTRENADOR"));
+                jsonArray.get(jsonArray.size() - 1).setCodigo(rs.getInt("USU_CODIGO"));
             }
         }
         catch(SQLException e) {
