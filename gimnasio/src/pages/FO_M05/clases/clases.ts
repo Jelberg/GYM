@@ -54,8 +54,4 @@ public items: Array<{id: number, titulo: string, descripion: string, img:string,
     console.log('Reserva Agregada');
   }
 
-
-
-
-
 }

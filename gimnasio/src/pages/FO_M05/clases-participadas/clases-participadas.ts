@@ -23,7 +23,7 @@ export class ClasesParticipadasPage {
   
 
 
-  public items:Array<{id:number,titulo:string,instructor:string,fecha:string,hora:string,img:string}>;
+  //public items:Array<{id:number,titulo:string,instructor:string,fecha:string,hora:string,img:string}>;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -47,9 +47,9 @@ export class ClasesParticipadasPage {
    * ultimos 30 dias de los cuales no se han hecho comentario y/o valoracion
    */
   public cargarClasesSinComentar():void{
-    console.log( this.id_user );
+    
     //PENDIENTE DE CAMBIAR EL 3 POR LA ID DEL USUARIO *******
-    let url = "FOM05_Critica/sinCritica?id=4";
+    let url = "FOM05_Critica/sinCritica?id=1";
     this.userService.getDato(url).subscribe(data => {    
         let i: number = 0;
         while ( i < data.length ){
@@ -63,8 +63,8 @@ export class ClasesParticipadasPage {
   )
   }
 
-  goToComentar(){
-    this.navCtrl.push(ComentarClasePage);
+  goToComentar(id:string){
+    this.navCtrl.push(ComentarClasePage,{navParametros: id});
   }
 
   

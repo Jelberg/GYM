@@ -14,12 +14,14 @@ import { CrearusuarioPage } from '../pages/FO_M01/crearusuario/crearusuario';
 import { IniciarsesionPage } from '../pages/FO_M01/iniciarsesion/iniciarsesion';
 import { PerfilPage} from '../pages/FO_M01/perfil/perfil'
 import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clases-participadas';
+import { ListaClasesPage} from '../pages/FO_M05/lista-clases/lista-clases';
 import { TabCalendarClassPage} from '../pages/FO_M05/tab-calendar-class/tab-calendar-class';
 import  { ReservasRealizadasPage} from '../pages/FO_M06/reservas-realizadas/reservas-realizadas';
 import { HorariosEntrenadorPage} from '../pages/FO_M06/horarios-entrenador/horarios-entrenador';
 import { GestiNDeReservasPage} from '../pages/FO_M06/gesti-nde-reservas/gesti-nde-reservas';
 import { DetalleReservaPage} from '../pages/FO_M06/detalle-reserva/detalle-reserva';
 import { ChatPage} from '../pages/FO_M06/chat/chat';
+import { ListaCriticasPage } from '../pages/FO_M05/lista-criticas/lista-criticas';
 
 @Component({
   templateUrl: 'app.html'
@@ -31,7 +33,7 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
 
-    this.rootPage = ClasesParticipadasPage;
+    this.rootPage = IniciarsesionPage;
     /* En el bloque de abajo, pueden agregar la pagina inicial de su modulo
       a la que se accedera desde el menu lateral */
     this.pages = [
@@ -39,12 +41,18 @@ export class MyApp {
       {titulo: "perfil", component: PerfilPage, icon: "person"},
       {titulo: "amigos", component: AmigosPage, icon: "people"},
       {titulo: "Progreso", component: SeleccionarProgresoPage, icon: "stats"},
+      {titulo: "Plan", component: WorkoutPlansPage, icon: "list"},
       { titulo: "Rutinas", component: RutinaPage, icon: "body"},
-      {titulo: 'Clases',component:TabCalendarClassPage, icon: 'bicycle'},
-      {titulo: 'Reservas',component:ReservasPage, icon: 'calendar'} ,
+      {titulo: 'Clases',component: ListaClasesPage, icon: 'bicycle'},
+     
       {titulo: 'Clases Participadas',component:ClasesParticipadasPage, icon: 'done-all'},
+      {titulo: 'Criticas Realizadas',component: ListaCriticasPage, icon: 'chatbubbles'},
+      {titulo: 'Reserva Clases',component:ReservasPage, icon: 'calendar'} ,
       {titulo: 'Reservar entrenador',component:ReservasRealizadasPage, icon: 'calendar'},
       {titulo: 'Chat',component:ChatPage, icon: 'mail'},
+      {titulo: 'Asignar Rutina(entrenador)',component:ChatPage, icon: 'stast'},
+
+    
     ];
 
     platform.ready().then(() => {

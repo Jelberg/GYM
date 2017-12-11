@@ -6,7 +6,6 @@ import 'rxjs/add/operator/do';
 
 /*
   Generated class for the UserServiceProvider provider.
-
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
@@ -17,7 +16,6 @@ export class UserServiceProvider {
   private URL: string = "http://localhost:8080/ServiciosGimnasio/"
   //private URL: string = "http://localhost:8080/web/"
  //private URL: string = "http://190.79.86.82:8080/web/"
- 
   constructor(/*public http: Http,*/ private http: Http ) {
     console.log('Hello UserServiceProvider Provider');
     

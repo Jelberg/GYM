@@ -1,11 +1,9 @@
-
-
----USUARIO
-insert into usuario (usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac) values (25530426,'Minerva', 'Morales', 'F','19/08/1996');
+---PLAN
+insert into plan (pla_nombre,pla_descripcion,fk_usuario) values ('Plan A','Adelgazar 6kg, Dificultad: Media',1);
 
 ---RUTINAS
-insert into rutina (rut_nombre,rut_dia,fk_usuario) values ('Piernas','Lunes',1);  ---Rutina 1
-insert into rutina (rut_nombre,rut_dia,fk_usuario) values ('Biceps','Martes',1);  ---Rutina 2
+insert into rutina (rut_nombre,rut_dia,fk_usuario,fk_plan) values ('Piernas','Lunes',1,1);  ---Rutina 1
+insert into rutina (rut_nombre,rut_dia,fk_usuario,fk_plan) values ('Biceps','Martes',1,1);  ---Rutina 2
 
 ---EQUIPO
 insert into equipo (equ_nombre) values ('Disco'); 

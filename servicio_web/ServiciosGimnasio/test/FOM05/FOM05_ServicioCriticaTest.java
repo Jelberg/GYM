@@ -9,7 +9,7 @@ import Dominio.Sql;
 import Servicios.FOM05_Critica;
 
 import com.google.gson.Gson;
-import io.restassured.RestAssured;
+
 import static io.restassured.RestAssured.given;
 
 import io.restassured.http.ContentType;
@@ -90,6 +90,8 @@ public class FOM05_ServicioCriticaTest {
         catch (Exception e){}
     }
     
+  
+    
     @Ignore
     @Test
     public void testConsultarClasesSinCritica() throws SQLException{
@@ -101,11 +103,8 @@ public class FOM05_ServicioCriticaTest {
     public void testInsertarCritica() throws URISyntaxException
     {
         try{
-        URI prueba = new URI ( "http://localhost:8080/ServiciosGimnasio/FOM05_Critica/insertarCritica?referencia=9999&fecha=12-12-12&comentario=HOLAA&valoracion=5" );     
-         RestAssured.given().accept(ContentType.JSON)
-                .when().get(prueba)
-                .then().log().all()
-                .assertThat().statusCode(HttpStatus.SC_OK);
+        final URI prueba = new URI ( "http://localhost:8080/ServiciosGimnasio/FOM05_Critica/insertarCritica?referencia=9999&fecha=12-12-12&comentario=HOLAA&valoracion=5" );     
+         given().accept(ContentType.JSON).when().get(prueba).then().assertThat().statusCode(HttpStatus.SC_OK);
         
        //   String json = given().accept(ContentType.JSON).when().get(prueba).thenReturn().body().asString();
         

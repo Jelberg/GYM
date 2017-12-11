@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { EjerciciosPage } from '../ejercicios/ejercicios';
 import { TabsLogPage } from '../tabs-log/tabs-log';
 import { UserServiceProvider } from '../../../providers/user-service/user-service';
+import { EjercicioRutinaPage } from '../../FO_M03/ejercicio-rutina/ejercicio-rutina';
 /**
  * Generated class for the ModificarRutinaPage page.
  *
@@ -27,7 +28,7 @@ export class ModificarRutinaPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,  private userService: UserServiceProvider) {
     this.nombreRut = this.navParams.get('nombre');
     this.diaRut = this.navParams.get('dia');
-    this.idUsuario=1;
+    this.idUsuario=this.navParams.get('idUsuario');
     this.getEjercicios();
     console.log(this.rutinaID);
     console.log(this.listaEjercicios);
@@ -67,24 +68,6 @@ export class ModificarRutinaPage {
       });
     }
 
-  /*  alert.addInput({
-      type: 'checkbox',
-      label: 'Curl',
-      value: 'Curl de biceps',
-      checked: true
-    });
-
-    alert.addInput({
-      type: 'checkbox',
-      label: 'press',
-      value: 'Press de Banca'
-    });
-
-    alert.addInput({
-      type: 'checkbox',
-      label: 'barra',
-      value: 'Barra'
-    });*/
 
     alert.addButton('Cancelar');
     alert.addButton({
@@ -97,37 +80,6 @@ export class ModificarRutinaPage {
     });
     alert.present();
   }
-
- /* public indicarFecha() {
-    
-        let prompt = this.alertCtrl.create({
-          title: 'Registro de Trabajo',
-          message: "Ingrese la fecha:",
-          inputs: [
-            {
-              type: 'date',
-              name: 'diaRutina',
-              placeholder: 'Dia'
-            }
-          ],
-          buttons: [
-            {
-              text: 'Aceptar',
-              handler: data => {
-                console.log('Saved clicked');
-              }
-            },
-            {
-              text: 'Cancelar',
-              handler: data => {
-                console.log('Cancel clicked');
-              }
-            }
-            
-          ]
-        });
-        prompt.present();
-      }*/
 
      public cambiarRutina() {
         
@@ -151,7 +103,8 @@ export class ModificarRutinaPage {
                 {
                   text: 'Aceptar',
                   handler: data => {
-                    console.log('Saved clicked');
+                    this.modificarRutina(data.nombreRutina,data.diaRutina);
+                    console.log('Rutina modificada');
                   }
                 },
                 {
@@ -231,7 +184,26 @@ export class ModificarRutinaPage {
     this.navCtrl.push(TabsLogPage);
   }
 
+  public modificarRutina(nombreModif: string, diaModif : string):void
+  {
+    let urlPeticion: string = "FOM03_Rutina/modificarRutina?idUsuario="
+                                +this.idUsuario+"&nombre="
+                                +this.nombreRut+"&dia="+this.diaRut
+                                +"&nombreModif="+nombreModif
+                                +"&diaModif="+diaModif;
+    this.userService.post2(urlPeticion);
+  }
+
   public goToEjercicios(){
-    this.navCtrl.push(EjerciciosPage);
+    this.navCtrl.push(EjerciciosPage, {idUsuario: this.idUsuario, 
+                                       nombreRut: this.nombreRut, 
+                                       diaRut: this.diaRut} );
+  }
+
+  public goToEjercicioRutina(nombEjercicio: string){
+    this.navCtrl.push(EjercicioRutinaPage, {idUsuario: this.idUsuario, 
+                                            nombreRut: this.nombreRut, 
+                                            diaRut: this.diaRut,
+                                            nombreEjercicio: nombEjercicio});
   }
 }

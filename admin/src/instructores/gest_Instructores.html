@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="../css/styles.css">
 <link href="../asset/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
-
 <body>
 
   <!-- Sidebar/menu -->
@@ -93,14 +92,13 @@
         <div class="w3-padding-32 w3-padding-large">
           <h1>Instructores</h1>
           <form class="w3-container w3-card w3-padding-32 w3-white" action="/action_page.php" target="_blank">
-            <script src="gest_Instructores.js"></script>
             <div class="w3-section">
               <label>Nombre Completo:</label>
               <input class="w3-input w3-border" style="width:100%;" type="text" required name="Nombre Completo"id="nombre">
             </div>
             <div class="w3-section">
               <label>Fecha de Nacimiento:</label>
-              <input class="w3-input w3-border" style="width:100%;" type="text" required name="Fecha de Nacimiento" id="fecha">
+              <input class="w3-input w3-border" style="width:100%;" type="text" placeholder="dd/mm/aaaa" required name="Fecha de Nacimiento" id="fecha">
             </div>
             <div class="w3-section">
               <label>Sexo:</label>
@@ -138,12 +136,11 @@
         <div class="w3-padding-64 w3-center">
           <div class="w3-padding-32 w3-center">
             <div class="w3-left-align w3-padding-large">
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Insertar</button>
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Modificar</button>
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Eliminar</button>
-              <a href="./Instructores.html">
-                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton">Consultar</button>
-              </a>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton" onclick="insertarInstructor()">Insertar</button>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom w3-disabled saveButton" onclick="actualizarInstructor()">Modificar</button>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom w3-disabled saveButton" onclick="borrarInstruct()">Eliminar</button>
+                <button type="submit" class="w3-button w3-black w3-block w3-hover-pale-green w3-padding-16 w3-margin-bottom saveButton" onclick="llevaratabla()">Consultar</button>
+
             </div>
           </div>
         </div>
@@ -176,7 +173,7 @@
   </script>
    <script src="../asset/js/jquery.min.js"></script>
    <script src="../asset/js/bootstrap.min.js"></script>
-
+   <script src="gest_instructores.js"></script>
 </body>
 
 </html>

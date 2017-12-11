@@ -175,16 +175,16 @@ BEGIN
 END; $$
   LANGUAGE plpgsql;
 
---Este devuelve todos los progresos compartidos de un usuario.
+--Este devuelve todos los progresos compartidos por el mismo usuario.
 CREATE OR REPLACE FUNCTION fo_m04_get_progresoscompartidos(usuario_id int)
   RETURNS TABLE(id varchar, mensaje varchar, nombre_usuario varchar, fecha varchar)
    AS $$
 DECLARE
    var_r    record;
 BEGIN
-   FOR var_r IN(SELECT com.com_id, com.com_mensaje, usu.usu_nombre, com.com_fecha 
-   FROM comentario as com inner join usuario as usu on usu.usu_id = usuario_id and
-						com.fk_usuariopro = usu.usu_id
+   FOR var_r IN(SELECT com.com_id, com.com_mensaje, usu.usu_nombre, com.com_fecha, com.fk_usuario 
+   FROM comentario as com inner join usuario as usu on usu.usu_id = usuario_id
+   where com.fk_usuario = usuario_id
 	order by com.com_fecha DESC limit 10)
    LOOP
     mensaje = var_r.com_mensaje;
@@ -194,4 +194,47 @@ BEGIN
     RETURN NEXT;
    END LOOP;
 END; $$
+  LANGUAGE plpgsql;
+
+--Este devuelve todos los progresos compartidos por los amigos de un usuario.
+CREATE OR REPLACE FUNCTION fo_m04_get_progresoscompartidosamigos(usuario_id int)
+  RETURNS TABLE(id varchar, mensaje varchar, nombre_usuario varchar, fecha varchar)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(
+		SELECT com.com_id, com.com_mensaje, usu.usu_nombre, com.com_fecha, com.fk_usuario
+		FROM comentario as com
+		inner join usuario as usu
+		on usu.usu_id = com.fk_usuario
+		where
+		com.fk_usuario in(
+		select ami_amigo from usuario_amigo as ua
+		where ua.ami_usuario = usuario_id
+		)
+		order by com.com_fecha DESC limit 10)
+   LOOP
+    mensaje = var_r.com_mensaje;
+    nombre_usuario = var_r.usu_nombre;
+    fecha = var_r.com_fecha;
+    id = var_r.com_id;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+-- INSERTAR UN PROGRESO COMPARTIDO
+CREATE OR REPLACE FUNCTION fo_m04_inserta_progreso_compartido(
+    mensaje character varying,
+    usuario INT)
+  RETURNS void
+   AS $$
+    DECLARE
+	fecha_actual DATE;
+    BEGIN
+	fecha_actual  := current_date;
+        INSERT INTO comentario (com_mensaje, com_fecha, fk_usuario) VALUES
+        ( mensaje, fecha_actual, usuario );
+    END; $$
   LANGUAGE plpgsql;

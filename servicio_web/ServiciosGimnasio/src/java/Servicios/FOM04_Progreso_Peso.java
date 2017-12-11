@@ -90,7 +90,7 @@ public class FOM04_Progreso_Peso {
      * Metodo que recibe como parametros la fecha del mes 
      * correspondiente al peso a eliminar y el id correspondiente
      * al usuario
-     * @param fecha Indica la fecha correspondiente al peso.
+     * 
      * @param id_usuario Identificador del usuario.
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
@@ -142,7 +142,7 @@ public class FOM04_Progreso_Peso {
             boolean verificacion = comprobarInsercion( id_usuario );
             if ( verificacion == true ){
                 
-                response.put( "data", "Error. Ya ha agregado un peso hoy." );
+                response.put( "data", "Error. Ya ha agregado un peso esta semana." );
             }
             else{
                 conn = Sql.getConInstance();
@@ -170,7 +170,7 @@ public class FOM04_Progreso_Peso {
      * Funcion que es llamada cuando el usuario desea actualizar un registro
      * de su peso.
      * @param id_usuario Identificador del usuario.
-     * @param fecha Fecha en la que se inserto el registro.
+     * 
      * @param peso Nuevo peso a actualizar.
      * @return Devuelve un mensaje con el estatus de la peticion.
      */

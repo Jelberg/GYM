@@ -38,7 +38,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Miguel
  */
-@Path("Instruct")
+@Path("/Instruct")
 public class BOM02_Instruct {
 private Connection conn = Sql.getConInstance();
     //Atributo que se utiliza para transformar a formado JSON las consultas.
@@ -52,7 +52,7 @@ private Connection conn = Sql.getConInstance();
      * @param correo del cual se quiere 
      * @return Devuelve todos los datos del instructor
      */
-   /* @GET
+    @GET
     @Path("/getInstruct")
     @Produces("application/json")
     public String getInstructor(@QueryParam("correo") String correo){
@@ -81,7 +81,7 @@ private Connection conn = Sql.getConInstance();
                 Image im = image.getImage();
                 jsonArray.get(jsonArray.size() - 1).setFoto(im);*/
                           
-      /*      }
+            }
             response = gson.toJson(jsonArray);
         }
         catch(SQLException e) {
@@ -99,10 +99,10 @@ private Connection conn = Sql.getConInstance();
     
     /**
      * Funcion que recibe como parametro el correo del instructor 
-     * @param correo del cual se quiere 
+     * 
      * @return Devuelve todos los datos del instructor
      */
-  /*  @GET
+    @GET
     @Path("/getListInstruct")
     @Produces("application/json")
     public String getListInstructor(){
@@ -126,7 +126,7 @@ private Connection conn = Sql.getConInstance();
                 ImageIcon image = new ImageIcon(img);
                 Image im = image.getImage();
                 jsonArray.get(jsonArray.size() - 1).setFoto(im);*/
-  /*                        
+                          
             }
             response = gson.toJson(jsonArray);
         }
@@ -146,13 +146,13 @@ private Connection conn = Sql.getConInstance();
      * Funcion que permite ingresar instructor
      * @param nombre
      * @param apellido
-     * @param fecha_nac
+     * @param fecha
      * @param sexo
      * @param correo
-     * @param jsonMedida 
+     * 
      * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
      */
-    /*
+  
     @POST
     @Path("/insertaInstruct")
     @Produces("application/json")
@@ -181,10 +181,10 @@ private Connection conn = Sql.getConInstance();
             response.put("data", "Se inserto el instructor");
         }
         catch (SQLException e){
-            response.put("error1", e.getMessage());
+            response.put("error", e.getMessage());
         }
         catch (ParameterNullException e) {
-            response.put("error2", e.getMessage());
+            response.put("error", e.getMessage());
         }
         finally {
             Sql.bdClose(conn);
@@ -200,7 +200,7 @@ private Connection conn = Sql.getConInstance();
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
-   /* @DELETE
+   @DELETE
     @Path("/eliminaInstruct")
     @Produces("application/json")
     public String eliminaInstruct(@QueryParam("correo") String correo){
@@ -241,7 +241,7 @@ private Connection conn = Sql.getConInstance();
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */
-   /* @POST
+    /*@POST
     @Path("/actualizaInstruct")
     @Produces("application/json")
     public String actualizaInstruct( @QueryParam("nombre") String nombre,
@@ -276,5 +276,6 @@ private Connection conn = Sql.getConInstance();
             return gson.toJson(response);
         }
         
-    }*/ 
+    } 
+*/
 }
