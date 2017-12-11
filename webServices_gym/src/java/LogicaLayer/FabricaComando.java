@@ -2,6 +2,7 @@ package LogicaLayer;
 
 import Comun.Dominio.Instructor;
 import Comun.Dominio.Usuario;
+import LogicaLayer.BO2.ActualizarInstructor;
 import LogicaLayer.BO2.ComandoGetEntrenadores;
 import LogicaLayer.BO2.ComandoGetInstructorPorCorreo;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
@@ -37,6 +38,13 @@ public class FabricaComando {
     // Crear comando para buscar un instructor dado su correo.
     public static ComandoGetInstructorPorCorreo instanciaInstructorPorCorreo(String correo){
         return new ComandoGetInstructorPorCorreo(correo);
+    }
+    
+    // Crear comando para actualizar los datos de un instructor.
+    public static ActualizarInstructor instanciaActualizarInstructor(
+    String nombre, String apellido, String fecha, String sexo, String correo){
+        return new ActualizarInstructor(
+            nombre, apellido, fecha, sexo, correo);
     }
             
     public static ComandoGetEntrenadores instanciaCmdGetEntrenadores(){

@@ -37,7 +37,7 @@ public class BO2_Instructor {
      * 
      * @param nombre nombre del instructor
      * @param apellido apellido del instructor
-     * @param fechanac fecha de nacimiento del instructor
+     * @param fechanac fecha de nacimiento del instructor (yyyy-MM-dd)
      * @param sexo sexo del instructor (M, F)
      * @param correo correo electronico del instructor
      */
@@ -92,5 +92,26 @@ public class BO2_Instructor {
         _response = _gson.toJson( _instructor );
         return _response;
         
+    }
+    
+    /**
+     * Actualizar los datos de un instructor en la BDD
+     * 
+     * @param nombre nombre del instructor
+     * @param apellido apellido del instructor
+     * @param fechanac fecha de nacimiento del instructor (dd-mm-aaaa)
+     * @param sexo sexo del instructor (M, F)
+     * @param correo correo electronico del instructor
+     */
+    @POST
+    @Path( "/ActualizarInstructor" )
+    public void ActualizarInstructor( @QueryParam( "nombre" ) String nombre,
+        @QueryParam( "apellido" ) String apellido, 
+        @QueryParam( "fecha" ) String fechanac, 
+        @QueryParam( "sexo" ) String sexo,
+        @QueryParam( "correo" ) String correo){
+     
+        Comando c = FabricaComando.instanciaActualizarInstructor(nombre, apellido, fechanac, sexo, correo);
+        c.ejecutar();
     }
 }
