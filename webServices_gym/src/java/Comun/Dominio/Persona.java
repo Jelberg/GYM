@@ -39,8 +39,12 @@ public class Persona extends Entidad implements Serializable{
         this.sexo = sexo;
         this.correo = correo;
     }
-    
-    
+
+    public Persona(String nombre, String apellido, int id) {
+        super(id);
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
 
     public String getNombre() {
         return nombre;
