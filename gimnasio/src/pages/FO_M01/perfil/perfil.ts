@@ -34,7 +34,7 @@ export class PerfilPage {
 
   ionViewDidLoad() {
 
-    let url = "Login/getUsuario?id="+localStorage.getItem("id");
+    let url = "Registrar_Usuario/getUsuario?idUsuario="+localStorage.getItem("id");
     this.userService.getDato(url).subscribe(data => {    
         let i: number = 0;
         while ( i < data.length ){
@@ -44,6 +44,7 @@ export class PerfilPage {
       if (this.class[0])
       {
         document.getElementById("nombre").innerHTML=this.class[0].nombre+" "+this.class[0].apellido;
+        document.getElementById("usuario").innerHTML=this.class[0].usuario;
         document.getElementById("correo").innerHTML=this.class[0].correo;
         document.getElementById("telefono").innerHTML=this.class[0].telefono;
         document.getElementById("estatura").innerHTML= this.class[0].estatura;       
