@@ -16,8 +16,18 @@ import LogicaLayer.Comando;
  * @author YESIMAR
  */
 public class ComandoInsertaUsuario_Amigo extends Comando {
-    Usuario_Amigo _ua;
+    private Usuario_Amigo _ua;
+    private String resultado;
 
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+    
+    
     public ComandoInsertaUsuario_Amigo(Usuario_Amigo _ua) {
         this._ua = _ua;
     }
@@ -34,7 +44,7 @@ public class ComandoInsertaUsuario_Amigo extends Comando {
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre)FabricaAbstracta.getFabrica(1);
         IDaoUsuarioAmigo dao = fab.getDaoUsuarioAmigo();
-//        int foo = Integer.parseInt(dao.insertaUsuario_Amigo);
-//        _ua.setAmi_usuario(dao.foo(_ua));
+        String foo =(dao.insertaUsuario_Amigo(_ua));
+        setResultado(foo);
     }
 }
