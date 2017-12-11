@@ -85,13 +85,13 @@ export class RecuperarPassPage {
     }
   )
   }
-  
+  cargar(){}
   Nuevacontrasena(){
     var correo = localStorage.getItem("correo");
     console.log(localStorage.getItem("correo"))
     this.corre=correo;
     localStorage.removeItem("correo");
-    if (this.validarCorreo(correo)==true)
+    //if (this.validarCorreo(correo,this.cargar())==true)
     {
       var x;
       let url = "Login/updateCodigo?correo="+correo;
@@ -102,24 +102,26 @@ export class RecuperarPassPage {
             console.log(x);
           
           this.radioopen=false;
-          if(x.id!="")
+          if(x.error!="Problema enviando el codigo, por favor intente mas tarde")
           {
              this.cod=parseInt(x.id);
           }
-          else this.mensajeerror("Problema no identificado")
-                 
+          else {
+            this.mensajeerror("No se encontro el correo")
+            this.navCtrl.setRoot(IniciarsesionPage);
+          }     
       },
       (error) =>{
         console.error(error);
       }
     )      
     }
-    else
-    {
-      console.log(this.radioopen)
-      this.mensajeerror("Correo erroneo")
-      this.navCtrl.setRoot(IniciarsesionPage);
-    }
+    //else
+    //{
+    //  console.log(this.radioopen)
+    //  this.mensajeerror("Correo erroneo")
+    //  this.navCtrl.setRoot(IniciarsesionPage);
+    //}
 
 
 
@@ -176,7 +178,7 @@ export class RecuperarPassPage {
 
 
   //Valida que el correo este metido en el sistema
-  validarCorreo(correo )
+  validarCorreo(correo, callback )
   {
         
         let url = "Login/getUsuarioCorreo?correo="+correo;
@@ -195,6 +197,7 @@ export class RecuperarPassPage {
         this.radioopen = false
       }
     ) 
+    callback
     if (localStorage.getItem("aux")=="true")
     {
       
