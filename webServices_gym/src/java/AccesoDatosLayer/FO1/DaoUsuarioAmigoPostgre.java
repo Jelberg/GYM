@@ -135,40 +135,43 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
         }
     }
 
-    @Override
-    public ArrayList<Usuario> getListUsuario_Amigo() {
+   
+        /**
+     * Funcion que recibe como parámetro el ID del Usuario,
+     * para consultarlo y saber sus amigos.
+     * @param idUsuario ID del Usuario.
+     * @return Devuelve los datos en formato json
+     */
+     @Override
+    public ArrayList<Usuario> getListUsuario_Amigo(int idUsuario) {
+        
         try{
             conn = Dao.getPostgreBdConnect();
-            String query = "SELECT * FROM USUARIO";
+            String query = "SELECT * FROM fo_m01_get_usuario_amigo("+idUsuario+")";
             jsonArray = new ArrayList<>();
-            PreparedStatement st = conn.prepareStatement(query);
-            ResultSet rs = st.executeQuery();
-            
+            System.out.println (query);
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
             while(rs.next()){
                 jsonArray.add(new Usuario());
-                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("USU_ID"));
-                jsonArray.get(jsonArray.size() - 1).setUsuario(rs.getString("USU_USUARIO"));
-                jsonArray.get(jsonArray.size() - 1).setPassword(rs.getString("USU_PASSWORD"));
-                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("USU_NOMBRE"));
-                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("USU_APELLIDO"));
-                jsonArray.get(jsonArray.size() - 1).setSexo(rs.getString("USU_SEXO"));
-                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("USU_FECHA_NAC"));
-                jsonArray.get(jsonArray.size() - 1).setTelefono(rs.getString("USU_TELEFONO"));
-                jsonArray.get(jsonArray.size() - 1).setEstatura(rs.getInt("USU_ESTATURA"));
-//                jsonArray.get(jsonArray.size() - 1).setFoto(rs.getString("foto"));
-                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("USU_CORREO"));
-                jsonArray.get(jsonArray.size() - 1).setEntrenador(rs.getBoolean("USU_ENTRENADOR"));
-                jsonArray.get(jsonArray.size() - 1).setCodigo(rs.getInt("USU_CODIGO"));
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
+                jsonArray.get(jsonArray.size() - 1).setUsuario(rs.getString("usuario"));
+                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
             }
         }
         catch(SQLException e) {
-            
+            jsonArray.add(new Usuario());
+            jsonArray.get(jsonArray.size() - 1).setNombre(e.getMessage());
         }
         catch (ParameterNullException e) {
-            response = e.getMessage();
+            jsonArray.add(new Usuario());
+            jsonArray.get(jsonArray.size() - 1).setNombre(e.getMessage());
         }
         catch (Exception e) {
-            response = e.getMessage();
+            jsonArray.add(new Usuario());
+            jsonArray.get(jsonArray.size() - 1).setNombre(e.getMessage());
         }
         finally {
             Dao.closePostgreConnection( conn );

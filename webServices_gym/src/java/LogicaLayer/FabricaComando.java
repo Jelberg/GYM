@@ -102,8 +102,8 @@ public class FabricaComando {
     }
     
     //Comando para listar los amigos.
-    public static ComandoListaUsuario_Amigo getListUsuario_Amigo (){
-        return new ComandoListaUsuario_Amigo();
+    public static ComandoListaUsuario_Amigo getListUsuario_Amigo (Usuario u){
+        return new ComandoListaUsuario_Amigo(u);
     }
     
     //Fin Comandos FOM01

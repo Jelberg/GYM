@@ -74,12 +74,28 @@ public class FOM01_Usuario_Amigo {
     @GET
     @Path("/getListUsuario_Amigo")
     @Produces("application/json")
-    public String getListUsuario_Amigo(){
-        ComandoListaUsuario_Amigo c = FabricaComando.getListUsuario_Amigo();
+    public String getListUsuario_Amigo(@QueryParam("idUsuario") int idUsuario){
+        
+        try{
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("idUsuario", idUsuario);
+            }});
+        Usuario usuario = FabricaEntidad.InstanciaUsuarioId
+        (idUsuario,"","","","","", null,"", 0, "", false, 0);  
+        ComandoListaUsuario_Amigo c = FabricaComando.getListUsuario_Amigo(usuario);
         c.ejecutar();
         listaUsuario = c.getListUsuario_Amigo();
         response = gson.toJson( listaUsuario );
-        return response;
+        }
+        catch (ParameterNullException e) {
+            response = e.getMessage();
+        }
+        catch (Exception e) {
+            response = e.getMessage();
+        }
+        finally {
+            return response;
+        }
     }
     
     /**

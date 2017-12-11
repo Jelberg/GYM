@@ -297,6 +297,9 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     public Entidad consultar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+   
+    
 
     @Override
     public ArrayList<Usuario> getListUsuario() {

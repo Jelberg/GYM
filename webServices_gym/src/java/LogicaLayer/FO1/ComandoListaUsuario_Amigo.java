@@ -19,11 +19,12 @@ import java.util.ArrayList;
  */
 public class ComandoListaUsuario_Amigo extends Comando {
     private Usuario_Amigo _usuarioa;
+    private Usuario _usuario;
     private String resultado;
     private ArrayList<Usuario> _listaUsuario_Amigo;
 
-    public ComandoListaUsuario_Amigo(Usuario_Amigo _usuarioa) {
-        this._usuarioa = _usuarioa;
+    public ComandoListaUsuario_Amigo(Usuario _usuarioa) {
+        this._usuario = _usuarioa;
     }
 
     public ComandoListaUsuario_Amigo() {
@@ -57,7 +58,7 @@ public class ComandoListaUsuario_Amigo extends Comando {
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
         IDaoUsuarioAmigo dao = fab.getDaoUsuarioAmigo();
-        setListUsuario_Amigo(dao.getListUsuario_Amigo());
+        setListUsuario_Amigo(dao.getListUsuario_Amigo(_usuario.getId()));
     }
   
 }

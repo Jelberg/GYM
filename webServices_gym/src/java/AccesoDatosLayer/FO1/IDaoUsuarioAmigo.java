@@ -17,5 +17,5 @@ public interface IDaoUsuarioAmigo {
     public String insertaUsuario_Amigo(Usuario_Amigo ua);
      public String getUsuario_Amigo(Usuario_Amigo ua);
      public String eliminaUsuario_Amigo(Usuario_Amigo ua);
-     public ArrayList<Usuario> getListUsuario_Amigo();
+     public ArrayList<Usuario> getListUsuario_Amigo(int idUsuario);
 }
