@@ -27,8 +27,12 @@ import LogicaLayer.FO1.IngresarUsuario;
  * @author Elberg
  */
 public class FabricaComando {
+	
+	// Comandos BO1
     
-    // Comandos BO2
+	// Fin Comandos BO1
+    
+	// Comandos BO2
     
     // Crear comando para registrar un instructor.
     public static Comando CrearRegInstructor (Instructor instructor){
@@ -54,7 +58,8 @@ public class FabricaComando {
     public static ComandoGetEntrenadores instanciaCmdGetEntrenadores(){
         return new ComandoGetEntrenadores();
     }
-    
+	
+    // Fin Comandos BO2
     
     // comandos FOM01
     //Crear comando para registrar un usuario
