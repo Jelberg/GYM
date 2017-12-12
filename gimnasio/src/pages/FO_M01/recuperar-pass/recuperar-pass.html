@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar  color="secondary" >
-    <ion-title>Recuperar Contrasna</ion-title>
+    <ion-title>Recuperar Contraseña</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -24,12 +24,12 @@
         <form ngNativeValidate #userform="ngForm">
             <ion-list>
                 <ion-item>
-                    <ion-label stacked>Codigo:</ion-label>
+                    <ion-label stacked>Código:</ion-label>
                     <ion-input name="codigo" [(ngModel)]="codigo"  type="number" required></ion-input>
                 </ion-item>
                 
                 <ion-item>
-                    <ion-label stacked>Contraseña(minimo 5 caracteres):</ion-label>
+                    <ion-label stacked>Contraseña(mínimo 5 caracteres):</ion-label>
                     <ion-input name="password" [(ngModel)]="password"  type="password" minlength="5" maxlength="14" required></ion-input>
                 </ion-item>
                 <ion-item>
