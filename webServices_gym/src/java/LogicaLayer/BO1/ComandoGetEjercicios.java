@@ -31,7 +31,7 @@ public class ComandoGetEjercicios extends Comando{
     @Override
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);//POR QUE 1??
-        IDaoEjercicio dao = fab.instanciaDaoEjercicio();
+        IDaoEjercicio dao = fab.getDaoEjercicio();
         _listaEjercicios = dao.consultarEjercicios();
     }
 

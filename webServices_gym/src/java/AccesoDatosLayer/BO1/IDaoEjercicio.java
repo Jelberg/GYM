@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Daniel Goncalves
  */
 public interface IDaoEjercicio {
-    public ArrayList<Ejercicio> getEjercicios();
+    public ArrayList<Ejercicio> consultarEjercicios();
     public Entidad eliminar( Entidad ent );
     public Entidad modificar( Entidad ent );
     public Entidad actualizar( Entidad ent );

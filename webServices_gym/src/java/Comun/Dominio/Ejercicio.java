@@ -14,6 +14,7 @@ public class Ejercicio extends Entidad {
     private String _nombre;
     private String _grupomuscular;
     private String _maquina;
+    private String _equipo;
 
     /**
      * @return the _id
@@ -101,5 +102,9 @@ public class Ejercicio extends Entidad {
     
     public Ejercicio (int _id){
         super (_id);
+    }
+    
+    public Ejercicio (){
+        super();
     }
 }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Daniel Goncalves
  */
 public interface IDaoMaquina {
-    public ArrayList<Maquina> getMaquinas();
+    public ArrayList<Maquina> consultarMaquinas();
     public Entidad eliminar( Entidad ent );
     public Entidad modificar( Entidad ent );
     public Entidad actualizar( Entidad ent );

@@ -11,24 +11,36 @@ import java.io.Serializable;
  *
  * @author Daniel Goncalves
  */
-public class Maquina implements Serializable {
-	private int id;
-    private String nombre;    
+public class Maquina extends Entidad {
+	private int _id;
+    private String _nombre;    
     
      public int getId() {
-        return id;
+        return _id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int _id) {
+        this._id = _id;
     } 
 
     public String getNombre() {
-        return nombre;
+        return _nombre;
     }
 
     public void setNombre(String _nombre) {
-        this.nombre = _nombre;
+        this._nombre = _nombre;
+    }
+
+    public Maquina(int _id, String _nombre) {
+        this._id = _id;
+        this._nombre = _nombre;
+    }
+
+    public Maquina() {
+        super();
     }
     
+    public Maquina(int _id) {
+        super(_id);
+    }
 }

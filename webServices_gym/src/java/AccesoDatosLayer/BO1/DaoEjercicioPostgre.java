@@ -60,7 +60,7 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
                 jsonArray.add(new Ejercicio());
                 jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("EJE_ID"));
                 jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("EJE_NOMBRE"));
-                jsonArray.get(jsonArray.size() - 1).setGrupoMuscular(rs.getString("EJE_GRUPO_MUSCULAR"));                          
+                jsonArray.get(jsonArray.size() - 1).setGrupomuscular(rs.getString("EJE_GRUPO_MUSCULAR"));                          
             }
             
         }

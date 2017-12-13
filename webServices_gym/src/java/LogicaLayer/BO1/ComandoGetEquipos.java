@@ -31,7 +31,7 @@ public class ComandoGetEquipos extends Comando{
     @Override
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);//POR QUE 1??
-        IDaoEquipo dao = fab.instanciaDaoEquipo();
+        IDaoEquipo dao = fab.getDaoEquipo();
         _listaEquipos = dao.consultarEquipos();
     }
 

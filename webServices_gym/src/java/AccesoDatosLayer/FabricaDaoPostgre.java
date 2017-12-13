@@ -7,6 +7,12 @@ import AccesoDatosLayer.FO1.DaoUsuarioAmigoPostgre;
 import AccesoDatosLayer.FO1.DaoUsuarioPostgre;
 import AccesoDatosLayer.FO1.IDaoUsuario;
 import AccesoDatosLayer.FO1.IDaoUsuarioAmigo;
+import AccesoDatosLayer.BO1.DaoEquipoPostgre;
+import AccesoDatosLayer.BO1.DaoEjercicioPostgre;
+import AccesoDatosLayer.BO1.DaoMaquinaPostgre;
+import AccesoDatosLayer.BO1.IDaoEquipo;
+import AccesoDatosLayer.BO1.IDaoEjercicio;
+import AccesoDatosLayer.BO1.IDaoMaquina;
 
 /**
  *
@@ -19,7 +25,7 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
 	@Override
 	public IDaoEquipo getDaoEquipo(){
         return new DaoEquipoPostgre();
-    }
+        }
 	public IDaoEjercicio getDaoEjercicio(){
 		return new DaoEjercicioPostgre();
 	}
