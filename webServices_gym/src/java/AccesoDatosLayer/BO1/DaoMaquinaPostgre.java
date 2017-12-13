@@ -9,7 +9,7 @@ import AccesoDatosLayer.Dao;
 import AccesoDatosLayer.DaoPostgre;
 import AccesoDatosLayer.IDao;
 import Comun.Dominio.Entidad;
-import Comun.Dominio.Equipo;
+import Comun.Dominio.Maquina;
 import Comun.Excepciones.ParameterNullException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,10 +21,10 @@ import java.util.ArrayList;
  *
  * @author Daniel Goncalves
  */
-public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
+public class DaoMaquinaPostgre extends DaoPostgre implements IDaoMaquina{
     private Connection _conn;
-    private ArrayList<Equipo> jsonArray;
-    public DaoEquipoPostgre() {}
+    private ArrayList<Maquina> jsonArray;
+    public DaoMaquinaPostgre() {}
     
     @Override
     public Entidad consultar(Entidad ent) {
@@ -47,19 +47,19 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
     }
 
     @Override
-    public ArrayList<Equipo> consultarEquipos() {
+    public ArrayList<Maquina> consultarMaquinas() {
         try{
             _conn = Dao.getPostgreBdConnect();
-            String query = "SELECT equ_id, equ_nombre FROM equipo;";
+            String query = "SELECT maq_id, maq_nombre FROM maquina;";
             jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
             
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
-                jsonArray.add(new Equipo());
-                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("EQU_ID"));
-                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("EQU_NOMBRE"));                          
+                jsonArray.add(new Maquina());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("MAQ_ID"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("MAQ_NOMBRE"));                          
             }
             
         }
@@ -72,5 +72,7 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
             Dao.closePostgreConnection( _conn );
             return jsonArray;
         }
-    }    
+    }
+    
+    
 }

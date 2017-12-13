@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ModalController, Content } from 'ionic-angular';
 import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
 import { UserServiceProvider } from '../../../providers/user-service/user-service';
 
@@ -16,6 +16,7 @@ import { UserServiceProvider } from '../../../providers/user-service/user-servic
   templateUrl: 'amigos.html',
 })
 export class AmigosPage {
+  
   usuario : string;
   public class : any [];
   buscar:any[]=[];
@@ -52,7 +53,7 @@ export class AmigosPage {
 
 
   public cargarAmigos(){
-    let url = "Usuario_Amigo/getUsuario_Amigo?idUsuario="+localStorage.getItem("id");
+    let url = "Usuario_Amigo/getListUsuario_Amigo?idUsuario="+localStorage.getItem("id");
     this.userService.getDato(url).subscribe(data => {    
         this.class = data;
     },
@@ -61,6 +62,48 @@ export class AmigosPage {
       }
     )
   }
+
+  eliminarAmigo(id){
+    let confirm = this.alertCtrl.create({
+      title: 'Eliminar amigo?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+          // agregar aqui codigo de cancelar
+          }
+        },  
+        {
+          text: 'Aceptar',
+          handler: () => {
+          this.procedeEliminar(id);
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  public procedeEliminar( id ){
+    var x;
+    let url = "Usuario_Amigo/eliminaUsuario_Amigo?idUsuario="+localStorage.getItem("id")+"&idAmigo="+id
+    this.userService.deleteDato(url).subscribe(data => {    
+        let i: number = 0;
+        console.log(data);     
+          x = data;
+          console.log(x);
+        if(x.data=="Se eliminó el amigo"){
+        this.mensajeexito("Usuario eliminado correctamente")
+        this.cargarAmigos()}
+        else
+        this.mensajeerror("Problema desconocido")             
+    },
+    (error) =>{
+      console.error(error);
+    }
+  )
+  }
+
   public agregarAmigos( id ){
     var x;
     let url = "Usuario_Amigo/insertaUsuario_Amigo?idUsuario="+localStorage.getItem("id")+"&idAmigo="+id

@@ -14,7 +14,21 @@ import AccesoDatosLayer.FO1.IDaoUsuarioAmigo;
  */
 public class FabricaDaoPostgre extends FabricaAbstracta {
     public FabricaDaoPostgre(){}
-    // Inicio Daos BO2
+	
+	// Inicio Daos BO1
+	@Override
+	public IDaoEquipo getDaoEquipo(){
+        return new DaoEquipoPostgre();
+    }
+	public IDaoEjercicio getDaoEjercicio(){
+		return new DaoEjercicioPostgre();
+	}
+	public IDaoMaquina getDaoMaquina(){
+		return new DaoMaquinaPostgre();
+	}
+	// Fin Daos BO1
+    
+	// Inicio Daos BO2
     @Override
     public IDaoInstructor getDaoInstructor(){
         return new DaoInstructorPostgre();

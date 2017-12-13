@@ -227,13 +227,18 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     public String modificaUsuario(Usuario u) {
         try {
             conn = Dao.getPostgreBdConnect();
-            String query = "select * from fo_m01_modifica_usuario('"+u.getId()+"','"+u.getUsuario()+"','"+u.getPassword()+"','"+u.getNombre()+"','"+u.getApellido()+"','"+u.getSexo()+"','"+u.getFecha_nac()+"','"+u.getTelefono()+"','"+u.getEstatura()+"','"+u.getCorreo()+"','"+u.isEntrenador()+"','"+u.getCodigo()+"')";
+            String query = "select * from fo_m01_modifica_usuario('"+u.getId()+"','"+u.getUsuario()+"','"+u.getPassword()+"','"+u.getNombre()+"','"+u.getApellido()+"','"+u.getSexo()+"','"+u.getTelefono()+"','"+u.getEstatura()+"','"+u.getCorreo()+"','"+u.isEntrenador()+"','"+u.getCodigo()+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
             return("Se actualizo el usuario");
         }
         catch (SQLException e){
-            return e.getMessage();           
+            if (e.getMessage().regionMatches(0, "ERROR: llave duplicada viola restricción de unicidad «usuario_usu_usuario_key»", 0, 78))
+            return ("usuario duplicado");
+                    else
+                        if (e.getMessage().regionMatches(0, "ERROR: llave duplicada viola restricción de unicidad «usuario_usu_correo_key»", 0, 77))
+                        return ("correo duplicado");
+                        else return e.getMessage();           
         }
         catch (ParameterNullException e) {
          return e.getMessage();
@@ -287,44 +292,14 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
             return response;
         }
     }
-    
-    
-    /**
-     * Metodo que recibe como parametros el ID del Usuario
-     * para eliminar su cuenta.
-     * @param u usuario
-     * @return Devuelve un json con elemento llamado data, 
-     * contiene el mensaje de la peticion
-     */
-    @Override
-    public String eliminaUsuario( Usuario u)
-    {
-        try{
-            conn = Dao.getPostgreBdConnect();
-            String query = "SELECT fo_m01_elimina_usuario(?)";
-            PreparedStatement st = conn.prepareStatement(query);
-            st.setInt(1, u.getId());
-            ResultSet rs = st.executeQuery();
-            return ("Se eliminó el usuario");
-        }
-        catch(SQLException e) {
-            return ( e.getMessage());
-        }
-        catch (ParameterNullException e) {
-            return ( e.getMessage());
-        }
-        catch (Exception e) {
-            return ( e.getMessage());
-        }
-        finally {
-            Dao.closePostgreConnection(conn);
-        }
-    }
 
     @Override
     public Entidad consultar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+   
+    
 
     @Override
     public ArrayList<Usuario> getListUsuario() {
@@ -364,6 +339,38 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
         finally {
             Dao.closePostgreConnection( conn );
             return jsonArray;
+        }
+    }
+
+    /**
+     * Metodo que recibe como parametros el correo del Usuario
+     * para eliminar su cuenta.
+     * @param s string
+     * @return Devuelve un json con elemento llamado data, 
+     * contiene el mensaje de la peticion
+     */
+    @Override
+    public String eliminaUsuario(String s) {
+        try{
+            conn = Dao.getPostgreBdConnect();
+            String query = "SELECT fo_m01_elimina_usuario(?)";
+            PreparedStatement st = conn.prepareStatement(query);
+            Usuario u = new Usuario ();
+            st.setString(1, u.getCorreo());
+            ResultSet rs = st.executeQuery();
+            return ("Se eliminó el usuario");
+        }
+        catch(SQLException e) {
+            return ( e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            return ( e.getMessage());
+        }
+        catch (Exception e) {
+            return ( e.getMessage());
+        }
+        finally {
+            Dao.closePostgreConnection(conn);
         }
     }
     

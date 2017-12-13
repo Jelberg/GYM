@@ -5,28 +5,34 @@
  */
 package LogicaLayer.FO1;
 
-import AccesoDatosLayer.FO1.IDaoUsuario;
+import AccesoDatosLayer.FO1.IDaoUsuarioAmigo;
 import AccesoDatosLayer.FabricaAbstracta;
 import AccesoDatosLayer.FabricaDaoPostgre;
+import Comun.Dominio.Usuario_Amigo;
 import LogicaLayer.Comando;
 
 /**
  *
  * @author YESIMAR
  */
-public class ComandoEliminaUsuario extends Comando{
-    private String _s;
+public class ComandoEliminaUsuario_Amigo extends Comando{
+    Usuario_Amigo _s;
     private String resultado;
-    
-    public ComandoEliminaUsuario(String _s) {
+
+    public ComandoEliminaUsuario_Amigo(Usuario_Amigo _s) {
         this._s = _s;
     }
 
-    public String getUsuario() {
+    public ComandoEliminaUsuario_Amigo(Usuario_Amigo _s, String resultado) {
+        this._s = _s;
+        this.resultado = resultado;
+    }
+
+    public Usuario_Amigo getS() {
         return _s;
     }
 
-    public void setUsuario(String _s) {
+    public void setS(Usuario_Amigo _s) {
         this._s = _s;
     }
     
@@ -41,8 +47,8 @@ public class ComandoEliminaUsuario extends Comando{
     @Override
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre)FabricaAbstracta.getFabrica(1);
-        IDaoUsuario dao = fab.getDaoUsuario();
-        setResultado(dao.eliminaUsuario(_s));
+        IDaoUsuarioAmigo dao = fab.getDaoUsuarioAmigo();
+        setResultado(dao.eliminaUsuario_Amigo(_s));
     }
     
 }

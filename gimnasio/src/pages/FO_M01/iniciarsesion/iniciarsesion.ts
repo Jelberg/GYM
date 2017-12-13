@@ -69,7 +69,7 @@ export class IniciarsesionPage {
       }
       else 
       {
-        this.mensajeerror("Usuario y/o contrasena invalido")
+        this.mensajeerror("Usuario y/o contraseña inválido")
       }
     },
     (error) =>{
@@ -95,7 +95,7 @@ mensajeerror( mensaje )
 recoverPassword() {
   const alert = this.alertCtrl.create({
     title: 'Recuperar Contraseña',
-    subTitle:'Ingrese Correo Electronico',
+    subTitle:'Ingrese Correo Electrónico',
     inputs: [
       {
         name: 'Correo',

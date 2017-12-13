@@ -49,6 +49,5 @@ public class Equipo extends Entidad {
     
     public Equipo (int _id){
         super(_id);
-    }
-    
+    }   
 }
