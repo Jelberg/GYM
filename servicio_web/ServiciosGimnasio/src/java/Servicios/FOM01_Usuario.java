@@ -260,7 +260,7 @@ public class FOM01_Usuario {
      * @param nombre
      * @param apellido
      * @param sexo
-     * @param fecha
+     * @param fecha_nac
      * @param telefono
      * @param estatura
      * @param correo

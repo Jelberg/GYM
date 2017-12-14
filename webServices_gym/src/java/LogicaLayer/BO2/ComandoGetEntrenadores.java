@@ -34,5 +34,5 @@ public class ComandoGetEntrenadores extends Comando{
         IDaoEntrenador dao = fab.instanciaDaoEntrenador();
         _listaEntrenadores = dao.consultarEntrenadores();
     }
-    
+
 }

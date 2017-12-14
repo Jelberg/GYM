@@ -1,6 +1,7 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/Instruct";
+var url="http://localhost:8080/webServices_gym/instructor";
+//var url="http://localhost:8080/ServiciosGimnasio/Instruct";
 var correo_busqueda= document.getElementById("text_correo");
 var boton= document.getElementById("boton_consulta");
 var variable;
@@ -13,7 +14,8 @@ window.onload = function mostrartabla()
     alert(variable)
     localStorage.clear();    
     }
-    var url_comple="/getListInstruct";
+    var url_comple="/getListInstructores";
+    //var url_comple="/getListInstruct";
     fetch(url+url_comple)
     .then((respuesta) => 
     {
@@ -27,7 +29,7 @@ window.onload = function mostrartabla()
        var ncampos =campos.length;
        for (var i = 0; i < ncampos; i++)
        {
-           if (i!=0)
+           if (i!=5)
            {
             contenido += "<th><font color ='white'>";
             contenido += campos[i];
@@ -41,13 +43,14 @@ window.onload = function mostrartabla()
             if (i!=0)
             {
                 fila =respuesta[i];
+                console.log(fila);
                 contenido += "<tr>";
                 for (var j = 0; j < ncampos; j++)
                 {
-                    if (j!=0)
+                    if (j!=5)
                     {
                     contenido += "<td>";
-                    if (j!=3)
+                    if (j!=2)
                     contenido += fila[campos[j]];
                     else
                     {

@@ -2,6 +2,8 @@ package AccesoDatosLayer;
 
 import AccesoDatosLayer.BO2.IDaoEntrenador;
 import AccesoDatosLayer.BO2.IDaoInstructor;
+import AccesoDatosLayer.FO1.IDaoUsuario;
+import AccesoDatosLayer.FO1.IDaoUsuarioAmigo;
 
 /**
  *
@@ -22,4 +24,7 @@ public abstract class FabricaAbstracta {
     // Gets BO2
     public abstract IDaoInstructor getDaoInstructor();
     public abstract IDaoEntrenador instanciaDaoEntrenador();
+    // gets FO1
+    public abstract IDaoUsuario getDaoUsuario();
+    public abstract IDaoUsuarioAmigo getDaoUsuarioAmigo();
 }

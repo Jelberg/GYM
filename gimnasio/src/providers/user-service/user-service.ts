@@ -14,7 +14,7 @@ import 'rxjs/add/operator/do';
 export class UserServiceProvider {
   private id: string;
 
-  private URL: string = "http://localhost:8080/ServiciosGimnasio/"
+  private URL: string = "http://localhost:8080/webServices_gym/"
   //private URL: string = "http://localhost:8080/web/"
  //private URL: string = "http://190.79.86.82:8080/web/"
 

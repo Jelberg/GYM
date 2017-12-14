@@ -5,6 +5,7 @@
  */
 package Comun.Dominio;
 
+import java.awt.Image;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,9 +15,22 @@ import java.util.Date;
  */
 public class Instructor extends Persona implements Serializable {
     
+    private Image foto;
+
+ 
+    
+    
     public Instructor( int id, String nombre, String apellido, Date fecha_nac, String sexo, String correo) {
         super(id, nombre, apellido, fecha_nac, sexo, correo);
     }
     public Instructor(){}
+    
+    public Image getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Image foto) {
+        this.foto = foto;
+    }
     
 }
