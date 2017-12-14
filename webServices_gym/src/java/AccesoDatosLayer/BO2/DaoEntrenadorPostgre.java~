@@ -42,7 +42,7 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
     }
 
     @Override
-    public Entidad insertar(Entidad ent) {
+    public Entidad actualizar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
