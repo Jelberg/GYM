@@ -14,6 +14,5 @@ import Comun.Dominio.Entidad;
 public abstract class Comando {
  
     public abstract void ejecutar();
-    public abstract void ejecutar(Entidad entidad);
     
 }
