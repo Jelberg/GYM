@@ -16,6 +16,14 @@ import LogicaLayer.Comando;
  */
 public class AgregarComentarioComando extends Comando {
     
+    int _idUsuario;
+    String _mensaje;
+    
+    public AgregarComentarioComando(int idUsuario, String mensaje) {
+        _idUsuario = idUsuario;
+        _mensaje = mensaje;
+    }
+    
     @Override
     public void ejecutar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

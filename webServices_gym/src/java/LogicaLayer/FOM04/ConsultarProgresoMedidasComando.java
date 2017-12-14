@@ -16,6 +16,12 @@ import LogicaLayer.Comando;
  */
 public class ConsultarProgresoMedidasComando extends Comando {
     
+    int _idUsuario;
+    
+    public ConsultarProgresoMedidasComando(int idUsuario){
+        _idUsuario = idUsuario;
+    }
+    
     @Override
     public void ejecutar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

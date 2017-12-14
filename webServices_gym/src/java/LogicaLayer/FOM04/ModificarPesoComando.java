@@ -16,6 +16,14 @@ import LogicaLayer.Comando;
  */
 public class ModificarPesoComando extends Comando {
     
+    int _idUsuario;
+    int _peso;
+    
+    public ModificarPesoComando(int idUsuario, int peso){
+        _idUsuario = idUsuario;
+        _peso = peso;
+    }
+    
     @Override
     public void ejecutar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

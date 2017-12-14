@@ -16,6 +16,16 @@ import LogicaLayer.Comando;
  */
 public class ModificarMedidasComando extends Comando {
     
+    int _idUsuario;
+    int _medida;
+    int _tipo_medida;
+    
+    public ModificarMedidasComando(int idUsuario, int medida, int tipo_medida){
+        _idUsuario = idUsuario;
+        _medida = medida;
+        _tipo_medida = tipo_medida;
+    }
+    
     @Override
     public void ejecutar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
