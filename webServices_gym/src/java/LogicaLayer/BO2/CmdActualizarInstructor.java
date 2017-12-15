@@ -9,14 +9,14 @@ import LogicaLayer.Comando;
  *
  * @author simon
  */
-public class ActualizarInstructor extends Comando{
+public class CmdActualizarInstructor extends Comando{
     String _nombre;
     String _apellido;
     String _fecha;
     String _sexo;
     String _correo;
     
-    public ActualizarInstructor(String n, String a, String f, String s, String c){
+    public CmdActualizarInstructor(String n, String a, String f, String s, String c){
         _nombre = n;
         _apellido = a;
         _fecha = f;

@@ -16,12 +16,12 @@ import java.util.ArrayList;
  *
  * @author simon
  */
-public class ComandoGetInstructorPorCorreo extends Comando {
+public class CmdGetInstructorPorCorreo extends Comando {
 
     private String _correo;
     private ArrayList<Instructor> _instructor;
     
-    public ComandoGetInstructorPorCorreo (String correo){
+    public CmdGetInstructorPorCorreo (String correo){
         _correo = correo;
     }
 

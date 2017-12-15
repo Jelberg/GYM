@@ -11,11 +11,11 @@ import java.util.ArrayList;
  *
  * @author simon
  */
-public class ComandoGetInstructores extends Comando {
+public class CmdGetInstructores extends Comando {
     
     private ArrayList<Instructor> _listaInstructores;
     
-    public ComandoGetInstructores(){}
+    public CmdGetInstructores(){}
     
     public ArrayList<Instructor> getInstructores(){
         return _listaInstructores;
