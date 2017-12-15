@@ -3,6 +3,7 @@ package LogicaLayer;
 import LogicaLayer.FOM04.ActualizarPesoComando;
 import Comun.Dominio.Comentario;
 import Comun.Dominio.Instructor;
+import Comun.Dominio.Progreso_Medida;
 import Comun.Dominio.Progreso_Peso;
 import Comun.Dominio.Usuario;
 import LogicaLayer.BO2.ActualizarInstructor;
@@ -150,6 +151,10 @@ public class FabricaComando {
     
     public static ActualizarPesoComando actualizarPesoComando(Progreso_Peso progreso_peso){
         return new ActualizarPesoComando(progreso_peso);
+    }
+    
+    public static ActualizarMedidaComando actualizarMedidaComando(Progreso_Medida progreso_Medida){
+        return new ActualizarMedidaComando(progreso_Medida);
     }
     
     // Fin Comando FO_M05

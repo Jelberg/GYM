@@ -12,36 +12,53 @@ import java.sql.Date;
  * @author marvian
  */
 public class Progreso_Medida extends Entidad {
-    private int _id;
+    private int _idUsuario;
     private int _medida;
     private String _tipo;
     private String _fechaM;
     private String _sobrenombre;
     
     public Progreso_Medida(){
+        
     }
     
-    public Progreso_Medida(int id, int medida, String tipo, 
-    String fechaM, String sobrenombre){
-        this._id = id;
+    public Progreso_Medida(int idUsuario, int medida, String tipo_Medida){
+        this._idUsuario = idUsuario;
         this._medida = medida;
-        this._tipo = tipo;
-        this._fechaM = fechaM;
-        this._sobrenombre = sobrenombre;
+        this._tipo = tipo_Medida;
     }
+    
+    public Progreso_Medida(int _idUsuario, int _medida, String _tipo, String _fechaM, String _sobrenombre, int id) {
+        super(id);
+        this._idUsuario = _idUsuario;
+        this._medida = _medida;
+        this._tipo = _tipo;
+        this._fechaM = _fechaM;
+        this._sobrenombre = _sobrenombre;
+    }
+
+    public Progreso_Medida(int _idUsuario, int _medida, String _tipo, String _fechaM, String _sobrenombre) {
+        this._idUsuario = _idUsuario;
+        this._medida = _medida;
+        this._tipo = _tipo;
+        this._fechaM = _fechaM;
+        this._sobrenombre = _sobrenombre;
+    }
+    
+    
 
     /**
      * @return the _id
      */
-    public int getId() {
-        return _id;
+    public int getIdUsuario() {
+        return _idUsuario;
     }
 
     /**
      * @param _id the _id to set
      */
-    public void setId(int _id) {
-        this._id = _id;
+    public void setIdUsuario(int _idUsuario) {
+        this._idUsuario = _idUsuario;
     }
 
     /**
