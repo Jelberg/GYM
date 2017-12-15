@@ -9,6 +9,6 @@ package AccesoDatosLayer.FOM04Postgre;
  *
  * @author Elberg
  */
-public class IDaoProgresoPesoPostgre{
+public class IDaoProgresoPeso{
     
 }

@@ -5,6 +5,7 @@
  */
 package LogicaLayer.FOM04;
 
+import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
 
 
@@ -14,6 +15,10 @@ import LogicaLayer.Comando;
  * @author Leonardo
  */
 public class CompartirProgresoComando extends Comando {
+    
+    public CompartirProgresoComando(){
+        
+    }
     
     @Override
     public void ejecutar() {

@@ -5,57 +5,39 @@
  */
 package Comun.Dominio;
 
+import java.io.Serializable;
+
 /**
  *
- * @author Leonardo
+ * @author marvian
  */
 public class Comentario extends Entidad {
-    
     private int _idUsuario;
-    private String _sobreNombre;
     private String _mensaje;
+    private String _NombreUsuario;
     private String _fecha;
-
+    
     public Comentario(){
-
     }
 
-    public Comentario(int idUsuario, String mensaje){
-        this._idUsuario = idUsuario;
-        this._mensaje = mensaje;
-    }
-
-    public Comentario(int _idUsuario, String _sobreNombre, String _mensaje, String _fecha, int id) {
-        super(id);
-        this._idUsuario = _idUsuario;
-        this._sobreNombre = _sobreNombre;
+    public Comentario(int _idUsuario, String _mensaje) {
+        this._idUsuario = _id;
         this._mensaje = _mensaje;
+    }
+
+    public Comentario(int _idUsuario, String _mensaje, String _NombreUsuario, String _fecha) {
+        this._idUsuario = _idUsuario;
+        this._mensaje = _mensaje;
+        this._NombreUsuario = _NombreUsuario;
         this._fecha = _fecha;
     }
-
-    public Comentario(int _idUsuario, String _sobreNombre, String _mensaje, String _fecha) {
-        this._idUsuario = _idUsuario;
-        this._sobreNombre = _sobreNombre;
-        this._mensaje = _mensaje;
-        this._fecha = _fecha;
-    }
-
-   
 
     public int getIdUsuario() {
-        return _idUsuario;
+        return _id;
     }
 
-    public void setIdUsuario(int _idUsuario) {
-        this._idUsuario = _idUsuario;
-    }
-
-    public String getSobreNombre() {
-        return _sobreNombre;
-    }
-
-    public void setSobreNombre(String _sobreNombre) {
-        this._sobreNombre = _sobreNombre;
+    public void setIdUsuario(int _id) {
+        this._id = _id;
     }
 
     public String getMensaje() {
@@ -64,6 +46,14 @@ public class Comentario extends Entidad {
 
     public void setMensaje(String _mensaje) {
         this._mensaje = _mensaje;
+    }
+
+    public String getNombreUsuario() {
+        return _NombreUsuario;
+    }
+
+    public void setNombreUsuario(String _NombreUsuario) {
+        this._NombreUsuario = _NombreUsuario;
     }
 
     public String getFecha() {
@@ -83,5 +73,7 @@ public class Comentario extends Entidad {
     }
     
     
-    
+   
+
+     
 }

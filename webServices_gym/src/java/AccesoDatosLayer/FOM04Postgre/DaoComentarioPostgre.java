@@ -14,6 +14,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import AccesoDatosLayer.DaoPostgre;
+import Comun.Dominio.Comentario;
+import Comun.Dominio.Entidad;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *

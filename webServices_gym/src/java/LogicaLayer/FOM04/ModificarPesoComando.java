@@ -5,6 +5,7 @@
  */
 package LogicaLayer.FOM04;
 
+import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
 
 
@@ -14,6 +15,14 @@ import LogicaLayer.Comando;
  * @author Leonardo
  */
 public class ModificarPesoComando extends Comando {
+    
+    int _idUsuario;
+    int _peso;
+    
+    public ModificarPesoComando(int idUsuario, int peso){
+        _idUsuario = idUsuario;
+        _peso = peso;
+    }
     
     @Override
     public void ejecutar() {

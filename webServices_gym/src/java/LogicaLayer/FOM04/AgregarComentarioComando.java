@@ -8,6 +8,8 @@ package LogicaLayer.FOM04;
 import AccesoDatosLayer.FOM04Postgre.IDaoComentario;
 import AccesoDatosLayer.FabricaAbstracta;
 import Comun.Dominio.Comentario;
+import AccesoDatosLayer.FabricaAbstracta;
+import Comun.Dominio.Comentario;
 import LogicaLayer.Comando;
 
 
@@ -23,7 +25,6 @@ public class AgregarComentarioComando extends Comando {
     public AgregarComentarioComando(Comentario comentario){
         
         this._comentario = comentario;
-        
     }
     
     @Override
