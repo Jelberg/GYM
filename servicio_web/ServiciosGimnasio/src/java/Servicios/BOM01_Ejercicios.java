@@ -134,7 +134,7 @@ public class BOM01_Ejercicios {
                 }
             });
 
-            String query = "select * from bo_m01_insertar_ejercicio_maquina(?,?,?)";
+            String query = "SELECT * FROM bo_m01_insertar_ejercicio_maquina(?,?,?)";
             PreparedStatement st = conn.prepareStatement(query);
             java.lang.reflect.Type type = new TypeToken<Ejercicio_Maquina_Equipo[]>() {
             }.getType();
@@ -173,7 +173,7 @@ public class BOM01_Ejercicios {
                 }
             });
 
-            String query = "select * from bo_m01_insertar_ejercicio_equipo(?,?,?)";
+            String query = "SELECT * FROM bo_m01_insertar_ejercicio_equipo(?,?,?)";
             PreparedStatement st = conn.prepareStatement(query);
             java.lang.reflect.Type type = new TypeToken<Ejercicio_Maquina_Equipo[]>() {
             }.getType();

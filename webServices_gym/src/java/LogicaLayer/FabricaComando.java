@@ -24,12 +24,22 @@ import LogicaLayer.FO1.ComandoListaUsuario;
 import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
+import LogicaLayer.BO1.ComandoGetEquipos;
 
 /**
  *
  * @author Elberg
  */
 public class FabricaComando {
+	
+    // Comandos BO1    
+	
+    // Crear comando para leer lista de todos los equipos.
+    public static ComandoGetEquipos instanciaGetEquipos(){
+        return new ComandoGetEquipos();
+    }
+
+    // Fin Comandos BO1
     
     // Comandos BO2
     
@@ -63,11 +73,16 @@ public class FabricaComando {
     public static ComandoConsultaEntrenadores instanciaCmdConsultaEntrenadores(){
         return new ComandoConsultaEntrenadores();
     }
+<<<<<<< HEAD
     
     //Crear comando para consultar los entrenadores buscados segun su correo.
     public static ComandoConsultaEntrenadorCorreo instanciaCmdConsultaEntCorreo( Entidad ent ){
         return new ComandoConsultaEntrenadorCorreo( ent );
     }
+=======
+	
+    // Fin Comandos BO2
+>>>>>>> 88a7b2066f9e2b3f1b731010ffdc5d9cca92d577
     
     // comandos FOM01
     //Crear comando para registrar un usuario

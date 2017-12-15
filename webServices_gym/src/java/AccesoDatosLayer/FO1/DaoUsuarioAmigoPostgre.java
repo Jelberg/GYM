@@ -117,6 +117,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
             String query = "SELECT fo_m01_elimina_usuario_amigo(?,?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, ua.getAmi_usuario());
+            st.setInt(2, ua.getAmi_amigo());
             ResultSet rs = st.executeQuery();
             return( "Se eliminó el amigo");
         }
