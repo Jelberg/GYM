@@ -1,5 +1,6 @@
 package LogicaLayer;
 
+import Comun.Dominio.Comentario;
 import Comun.Dominio.Instructor;
 import Comun.Dominio.Usuario;
 import LogicaLayer.BO2.ActualizarInstructor;
@@ -22,6 +23,7 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.FOM04.AgregarComentarioComando;
 
 /**
  *
@@ -130,5 +132,14 @@ public class FabricaComando {
     }
     
     //Fin Comandos FOM01
+    
+    
+    // Inicio Comando FO_M05
+    
+    public static AgregarComentarioComando insertarComentarioComando(Comentario comentario){
+        return new AgregarComentarioComando(comentario);
+    }
+    
+    // Fin Comando FO_M05
     
 }

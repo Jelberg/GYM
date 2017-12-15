@@ -13,6 +13,8 @@ import AccesoDatosLayer.BO1.DaoMaquinaPostgre;
 import AccesoDatosLayer.BO1.IDaoEquipo;
 import AccesoDatosLayer.BO1.IDaoEjercicio;
 import AccesoDatosLayer.BO1.IDaoMaquina;
+import AccesoDatosLayer.FOM04Postgre.DaoComentarioPostgre;
+import AccesoDatosLayer.FOM04Postgre.IDaoComentario;
 
 /**
  *
@@ -60,6 +62,11 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
         return new DaoUsuarioAmigoPostgre();
     }
     // Fin Daos F01
+
+    @Override
+    public IDaoComentario instanciaDaoComentario() {
+        return new DaoComentarioPostgre();
+    }
 
     
 }

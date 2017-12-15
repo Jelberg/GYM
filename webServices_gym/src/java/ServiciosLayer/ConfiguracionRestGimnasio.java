@@ -30,6 +30,7 @@ public class ConfiguracionRestGimnasio extends Application{
         h.add(FO1_Servicios.class);
         h.add(FOM01_Usuario.class);
         h.add(FOM01_Usuario_Amigo.class);
+        h.add(FO_M05_Comentario.class);
 
 
         return h;

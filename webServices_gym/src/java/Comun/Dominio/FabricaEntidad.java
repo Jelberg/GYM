@@ -114,9 +114,9 @@ public class FabricaEntidad {
     // Fin de FOM01
     
     // Inicia Fabricas de M04
-    /*static public Entidad InstaciaProgresoPeso(int id, int peso, Date fechaP, String sobrenombre){
-    return new Progreso_Peso(id, peso, fechaP,sobrenombre);
-    }*/
+    static public Comentario InstaciaInsertarComentario(int idUsuario, String mensaje){
+    return new Comentario(idUsuario, mensaje);
+    }
     // Fin de M04        
     
 }

@@ -5,6 +5,9 @@
  */
 package LogicaLayer.FOM04;
 
+import AccesoDatosLayer.FOM04Postgre.IDaoComentario;
+import AccesoDatosLayer.FabricaAbstracta;
+import Comun.Dominio.Comentario;
 import LogicaLayer.Comando;
 
 
@@ -15,9 +18,19 @@ import LogicaLayer.Comando;
  */
 public class AgregarComentarioComando extends Comando {
     
+    private Comentario _comentario;
+    
+    public AgregarComentarioComando(Comentario comentario){
+        
+        this._comentario = comentario;
+        
+    }
+    
     @Override
     public void ejecutar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FabricaAbstracta _fab = FabricaAbstracta.getFabrica(1);
+        IDaoComentario _dao = _fab.instanciaDaoComentario();
+        _dao.insertar(_comentario);
     }
 
 }
