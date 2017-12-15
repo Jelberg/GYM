@@ -24,9 +24,8 @@ public class FabricaEntidad {
         return new Progreso_Medida(id, medida, tipo, fechaM, sobreNombre);
     }
     
-    static public Entidad InstanciaComentario(int id, String mensaje, 
-            String nombreUsuario, String fecha){
-        return new Comentario(id, mensaje, nombreUsuario, fecha);
+    static public Entidad InstanciaComentario(int id, String mensaje){
+        return new Comentario(id, mensaje);
     }
     // Fin de M04        
     

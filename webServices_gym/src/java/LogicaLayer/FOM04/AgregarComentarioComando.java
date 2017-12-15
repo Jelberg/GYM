@@ -5,6 +5,8 @@
  */
 package LogicaLayer.FOM04;
 
+import AccesoDatosLayer.FabricaAbstracta;
+import Comun.Dominio.Comentario;
 import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
 
@@ -16,17 +18,18 @@ import LogicaLayer.Comando;
  */
 public class AgregarComentarioComando extends Comando {
     
-    int _idUsuario;
-    String _mensaje;
+    Comentario _comentario;
     
-    public AgregarComentarioComando(int idUsuario, String mensaje) {
-        _idUsuario = idUsuario;
-        _mensaje = mensaje;
+    public AgregarComentarioComando(Comentario comentario) {
+        this._comentario = comentario;
     }
     
     @Override
     public void ejecutar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        FabricaAbstracta _fabrica = FabricaAbstracta.getFabrica(1);
+        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -20,6 +20,11 @@ public class Comentario extends Entidad {
     public Comentario(){
     }
 
+    public Comentario(int _id, String _mensaje) {
+        this._id = _id;
+        this._mensaje = _mensaje;
+    }
+
     public Comentario(int _id, String _mensaje, String _NombreUsuario, String _fecha) {
         this._id = _id;
         this._mensaje = _mensaje;
