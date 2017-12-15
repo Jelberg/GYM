@@ -21,18 +21,19 @@ import AccesoDatosLayer.BO1.IDaoMaquina;
 public class FabricaDaoPostgre extends FabricaAbstracta {
     public FabricaDaoPostgre(){}
 	
-	// Inicio Daos BO1
-	@Override
-	public IDaoEquipo getDaoEquipo(){
+    // Inicio Daos BO1
+    
+    @Override
+    public IDaoEquipo getDaoEquipo(){
         return new DaoEquipoPostgre();
-        }
-	public IDaoEjercicio getDaoEjercicio(){
-		return new DaoEjercicioPostgre();
-	}
-	public IDaoMaquina getDaoMaquina(){
-		return new DaoMaquinaPostgre();
-	}
-	// Fin Daos BO1
+    }
+    public IDaoEjercicio getDaoEjercicio(){
+        return new DaoEjercicioPostgre();
+    }
+    public IDaoMaquina getDaoMaquina(){
+        return new DaoMaquinaPostgre();
+    }
+    // Fin Daos BO1
     
 	// Inicio Daos BO2
     @Override

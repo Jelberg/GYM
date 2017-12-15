@@ -4,10 +4,8 @@
  * and open the template in the editor.
  */
 package AccesoDatosLayer.BO1;
-
 import AccesoDatosLayer.Dao;
 import AccesoDatosLayer.DaoPostgre;
-import AccesoDatosLayer.IDao;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Equipo;
 import Comun.Excepciones.ParameterNullException;
@@ -35,7 +33,7 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
     public ArrayList<Equipo> consultarEquipos() {
         try{
             _conn = Dao.getPostgreBdConnect();
-            String query = "SELECT equ_id, equ_nombre FROM equipo;";
+            String query = "SELECT id, nombre FROM bo_m01_getallequipments;";
             jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
@@ -43,8 +41,8 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 jsonArray.add(new Equipo());
-                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("EQU_ID"));
-                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("EQU_NOMBRE"));                          
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));                          
             }
             
         }

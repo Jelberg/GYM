@@ -23,9 +23,9 @@ public abstract class FabricaAbstracta {
         return new FabricaDaoPostgre();
     }
     //Gets BO1
-	public abstract IDaoEjercicio getDaoEjercicio();
-	public abstract IDaoEquipo getDaoEquipo();
-	public abstract IDaoMaquina getDaoMaquina();
+    public abstract IDaoEjercicio getDaoEjercicio();
+    public abstract IDaoEquipo getDaoEquipo();
+    public abstract IDaoMaquina getDaoMaquina();
     // Gets BO2
     public abstract IDaoInstructor getDaoInstructor();
     public abstract IDaoEntrenador instanciaDaoEntrenador();

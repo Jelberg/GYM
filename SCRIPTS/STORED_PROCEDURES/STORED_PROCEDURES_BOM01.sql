@@ -413,3 +413,33 @@ $BODY$;
 
 ALTER FUNCTION public.bo_m01_modificar_maquina(integer, character varying)
     OWNER TO gymucab;
+	
+
+---- OBTENER TODOS LOS EQUIPOS
+
+CREATE OR REPLACE FUNCTION public.bo_m01_getallequipments()
+    RETURNS TABLE(id integer, nombre character varying) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+
+DECLARE
+   var_r    record;
+BEGIN 
+    FOR var_r IN(select equ_id, equ_nombre
+from 
+	equipo)
+   LOOP
+    id = var_r.equ_id;
+    nombre = var_r.equ_nombre;
+    RETURN NEXT;
+   END LOOP;        
+END; 
+
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_getallequipments()
+    OWNER TO gymucab;	
