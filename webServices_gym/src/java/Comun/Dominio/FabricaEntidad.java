@@ -5,7 +5,8 @@
  */
 package Comun.Dominio;
 
-import java.sql.Date;
+//import java.sql.Date;
+import java.util.Date;
 
 /**
  *
