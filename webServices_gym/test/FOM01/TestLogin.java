@@ -24,7 +24,7 @@ public class TestLogin {
     ResultSet _rs;
     FO1_Servicios _loginServicios;
     Usuario _usuarioDominio;
-    ArrayList<Usuario> _arrayUsuario;
+
     
     @Before
     public void comenzarPrueba() {
@@ -45,6 +45,17 @@ public class TestLogin {
         assertNotNull( respuesta );
     }
     
-    
+      @After
+    public void terminarPrueba(){
+
+        
+        try {
+            
+        }catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        catch (Exception e){}   
+    }
+      
     
 }
