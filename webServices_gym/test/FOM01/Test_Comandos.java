@@ -7,6 +7,7 @@ package FOM01;
 
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Usuario;
+import Comun.Dominio.Usuario_Amigo;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
 import LogicaLayer.FO1.ComandoActualizarPassword;
 import LogicaLayer.FO1.ComandoEliminaUsuario;
@@ -21,12 +22,11 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.FabricaComando;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 import org.junit.After;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,9 +48,11 @@ public class Test_Comandos {
     ComandoListaUsuario _comandoLU;
     ComandoListaUsuario_Amigo _comandoLUA;
     ComandoModificaUsuario _comandoMU;
-    IngresarUsuario _ingesarU;
+    IngresarUsuario _ingresarU;
     Usuario _usuarioDominio;
+    Usuario_Amigo _usuario_AmigoDominio;
     ArrayList<Usuario> _arrayUsu;
+    String _s;
     
     @Before
     public void comenzarPrueba() {
@@ -63,25 +65,145 @@ public class Test_Comandos {
     //Prueba ComandoActualizarCodigo
     //Función: recuperarContrasena
     @Test
-    public void puebaRecuperarContrasena(){
-        Gson gson = new Gson();
+    public void pruebaRecuperarContrasena(){
         _comandoAC = new ComandoActualizarCodigo(_usuarioDominio);
-        _arrayUsu = new ArrayList<>();
-        //_arrayUsu = gson.fromJson(_comandoAC.recuperarContrasena("yyhernandez.13@gmail.com"), new TypeToken<List<Usuario>>(){}.getType());
+        int codigo = (_comandoAC.recuperarContrasena("yyhernandez.13@gmail.com"));
+        assertNotEquals(codigo, 0);
     }
     
     //Prueba ComandoActualizarCodigo
     //Función: sendEmail
     @Test
     public void pruebaSendEmail(){
-        
+        _comandoAC = new ComandoActualizarCodigo(_usuarioDominio);
+        boolean codigo = (_comandoAC.sendEmail("yyhernandez.13@gmail.com",0));
+        assertNotEquals(codigo, 0);
     }
     
     //Prueba ComandoActualizarCodigo
     //Función: randInt
     @Test
     public void pruebaRandInt(){
-        
+        _comandoAC = new ComandoActualizarCodigo(_usuarioDominio);
+        int rango = (_comandoAC.randInt(100000,999999));
+        assertNotEquals(rango,0);
+    }
+    
+    //Prueba ComandoActualizarCodigo
+    //Función: ejecutar
+//    @Test
+//    public void pruebaEjecutarComandoActualizarCodigo(){
+//        _comandoAC = new ComandoActualizarCodigo(_usuarioDominio);
+//        _comandoAC.ejecutar();
+//        String mensaje = (_comandoAC.getResultado());
+//    }
+    
+    //Prueba ComandoActualizarPassword
+    //Función: ejecutar
+    @Test
+    public void pruebaEjecutarComandoActualizarPassword(){
+        _comandoAP = new ComandoActualizarPassword(_usuarioDominio);
+        _comandoAP.ejecutar();
+        String mensaje = (_comandoAP.getResultado());
+    }
+    
+    //Prueba ComandoEliminaUsuario
+    //Función: ejecutar
+    @Test
+    public void pruebaEjecutarComandoEliminaUsuario(){
+        _comandoEU = new ComandoEliminaUsuario(_s);
+        _comandoEU.ejecutar();
+        String mensaje = (_comandoEU.getResultado());
+    }
+    
+    //Prueba ComandoEliminaUsuario_Amigo
+    //Función: ejecutar
+    @Test
+    public void pruebaEjecutarComandoEliminaUsuario_Amigo(){
+        _comandoEUA = new ComandoEliminaUsuario_Amigo(_usuario_AmigoDominio);
+        _comandoEUA.ejecutar();
+        String mensaje = (_comandoEUA.getResultado());
+    }
+    
+    //Prueba ComandoGetCorreo
+    //Función: ejecutar
+    @Test
+    public void pruebaEjecutarComandoGetCorreo(){
+        _comandoGC = new ComandoGetCorreo(_usuarioDominio);
+        _comandoGC.ejecutar();
+        String mensaje = (_comandoGC.getResultado());
+    }
+    
+    //Prueba ComandoGetUsuario
+    //Función: ejecutar
+    @Test
+    public void pruebaEjecutarComandoGetUsuario(){
+        _comandoGU = new ComandoGetUsuario(_usuarioDominio);
+        _comandoGU.ejecutar();
+        String mensaje = (_comandoGU.getResultado());
+    }
+    
+    //Prueba ComandoGetUsuarioNomApe
+    //Función: ejecutar
+    @Test
+    public void pruebaEjecutarComandoGetUsuarioNomApe(){
+        _comandoGUNA = new ComandoGetUsuarioNomApe(_usuarioDominio);
+        _comandoGUNA.ejecutar();
+        String mensaje = (_comandoGUNA.getResultado());
+    }
+    
+    //Prueba ComandoIniciarSesion
+    //Función: ejecutar
+    @Test
+    public void pruebaEjecutarComandoIniciarSesion(){
+        _comandoIS = new ComandoIniciarSesion(_usuarioDominio);
+        _comandoIS.ejecutar();
+        String mensaje = (_comandoIS.getResultado());
+    }
+    
+    //Prueba ComandoInsertaUsuario_Amigo
+    //Función: ejecutar
+    @Test
+    public void pruebaEjecutarComandoInsertaUsuario_Amigo(){
+        _comandoIUA = new ComandoInsertaUsuario_Amigo(_usuario_AmigoDominio);
+        _comandoIUA.ejecutar();
+        String mensaje = (_comandoIUA.getResultado());
+    }
+    
+    //Prueba ComandoListaUsuario
+    //Función: ejecutar
+    @Test
+    public void pruebaEjecutarComandoListaUsuario(){
+        _comandoLU = new ComandoListaUsuario(_usuarioDominio);
+        _comandoLU.ejecutar();
+        String mensaje = (_comandoLU.getResultado());
+    }
+    
+    //Prueba ComandoListaUsuario_Amigo
+    //Función: ejecutar
+    @Test
+    public void pruebaEjecutarComandoListaUsuario_Amigo(){
+        _comandoLUA = new ComandoListaUsuario_Amigo(_usuarioDominio);
+        _comandoLUA.ejecutar();
+        String mensaje = (_comandoLUA.getResultado());
+    }
+    
+    //Prueba ComandoModificaUsuario
+    //Función: ejecutar
+    @Test
+    public void pruebaEjecutarComandoModificaUsuario(){
+        _comandoMU = new ComandoModificaUsuario(_usuarioDominio);
+        _comandoMU.ejecutar();
+        String mensaje = (_comandoMU.getResultado());
+    }
+    
+    //Prueba IngresarUsuario
+    //Función: ejecutar
+    @Test
+    public void pruebaEjecutarIngresarUsuario(){
+        _ingresarU = new IngresarUsuario(_usuarioDominio);
+        _ingresarU.ejecutar();
+//        String mensaje = (_ingresarU.getResultado());
     }
     
     @After
