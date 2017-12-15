@@ -8,9 +8,11 @@ package ServiciosLayer;
 import Comun.Dominio.Comentario;
 import Comun.Dominio.FabricaEntidad;
 import LogicaLayer.Comando;
+import LogicaLayer.FOM04.ComandoObtenerComentariosProgMedidas;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.util.ArrayList;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -36,4 +38,24 @@ public class FO_M05_Comentario{
         Comando _comando = FabricaComando.insertarComentarioComando(_comentario);
         _comando.ejecutar();
     }
+    
+    @GET
+    @Path("/getComentarioProM")
+    @Produces("aplication/json")
+    public String obtenerComentariosProgresoMedidas(
+                                    @QueryParam("idUsuario") int idusuario,
+                                    @QueryParam("idprogresom") int idprogresom){
+        ComandoObtenerComentariosProgMedidas _comando =
+                FabricaComando.instanciaObtenerComentariosProgMedida
+                (idusuario, idprogresom);
+        _comando.ejecutar();
+        
+        _listaComentarios = _comando.ObtenerComentarioProgMedidas();
+        
+        _response = _gson.toJson(_listaComentarios);
+        
+        return _response;
+    }
+    
+    
 }

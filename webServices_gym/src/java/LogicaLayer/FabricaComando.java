@@ -29,6 +29,7 @@ import LogicaLayer.BO1.ComandoGetEquipos;
 import LogicaLayer.FOM04.AgregarComentarioComando;
 import LogicaLayer.FOM04.AgregarMedidaComando;
 import LogicaLayer.FOM04.AgregarPesoComando;
+import LogicaLayer.FOM04.ComandoObtenerComentariosProgMedidas;
 import LogicaLayer.FOM04.ComandoObtenerMedidas;
 import LogicaLayer.FOM04.CompartirProgresoComando;
 import LogicaLayer.FOM04.ConsultarProgresoMedidasComando;
@@ -160,6 +161,11 @@ public class FabricaComando {
     
     public static ComandoObtenerMedidas instanciaObtenerMedidas(int idUsuario){
         return new ComandoObtenerMedidas(idUsuario);
+    }
+    
+    public static ComandoObtenerComentariosProgMedidas instanciaObtenerComentariosProgMedida
+        (int idUsuario, int idProgresoMedida){
+        return new ComandoObtenerComentariosProgMedidas(idUsuario, idProgresoMedida);
     }
     
     

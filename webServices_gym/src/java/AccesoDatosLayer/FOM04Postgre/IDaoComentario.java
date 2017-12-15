@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public interface IDaoComentario {
     
-    public ArrayList<Comentario> getComentarios();
+    public ArrayList<Comentario> getComentariosProgMedida(int idUsuario, int idProgresoM);
     public void insertar(Comentario comentario);
     public void eliminar(Comentario comentario);
     public void actualizar(Comentario comentario);

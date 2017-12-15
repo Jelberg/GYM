@@ -48,7 +48,8 @@ public class FO_M05_Medida {
     @Produces("application/json")
     public String getProgresoMedida(@QueryParam("id_usuario") int idUsuario){
         
-        ComandoObtenerMedidas _comando = FabricaComando.instanciaObtenerMedidas(idUsuario);
+        ComandoObtenerMedidas _comando = FabricaComando.instanciaObtenerMedidas
+                                            (idUsuario);
         
         _comando.ejecutar();
         
