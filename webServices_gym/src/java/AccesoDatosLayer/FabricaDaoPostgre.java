@@ -1,5 +1,6 @@
 package AccesoDatosLayer;
 
+import AccesoDatosLayer.BO2.DaoClasePostgre;
 import AccesoDatosLayer.BO2.DaoEntrenadorPostgre;
 import AccesoDatosLayer.BO2.DaoInstructorPostgre;
 import AccesoDatosLayer.BO2.IDaoInstructor;
@@ -25,6 +26,11 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
      */
     public DaoEntrenadorPostgre instanciaDaoEntrenador(){
         return new DaoEntrenadorPostgre();
+    }
+    
+    
+    public DaoClasePostgre instanciaDaoClase(){
+        return new DaoClasePostgre();
     }
     // Fin Daos BO2
     
