@@ -73,16 +73,12 @@ public class FabricaComando {
     public static ComandoConsultaEntrenadores instanciaCmdConsultaEntrenadores(){
         return new ComandoConsultaEntrenadores();
     }
-<<<<<<< HEAD
     
     //Crear comando para consultar los entrenadores buscados segun su correo.
     public static ComandoConsultaEntrenadorCorreo instanciaCmdConsultaEntCorreo( Entidad ent ){
         return new ComandoConsultaEntrenadorCorreo( ent );
     }
-=======
-	
     // Fin Comandos BO2
->>>>>>> 88a7b2066f9e2b3f1b731010ffdc5d9cca92d577
     
     // comandos FOM01
     //Crear comando para registrar un usuario
