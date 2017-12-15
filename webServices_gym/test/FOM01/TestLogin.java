@@ -10,6 +10,7 @@ import LogicaLayer.FO1.ComandoEliminaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.FabricaComando;
 import ServiciosLayer.FO1_Servicios;
+import ServiciosLayer.FOM01_Usuario;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -37,6 +38,7 @@ import org.junit.Test;
 public class TestLogin {
     ResultSet _rs;
     FO1_Servicios _loginServicios;
+    FOM01_Usuario _usu;
     Usuario _usuarioDominio;
     ArrayList<Usuario> _arrayUsu;
 
@@ -44,10 +46,11 @@ public class TestLogin {
     @Before
     public void comenzarPrueba() {
         
-        Usuario usuario = FabricaEntidad.InstanciaUsuario
-        ("Prueba","hola","Yesimar", "Hernandez",null,"F", "yyhernand3@gmail.com", 173,"04265121963",false);        
-        IngresarUsuario c = FabricaComando.CrearRegUsuario(usuario);
-        c.ejecutar();
+        _loginServicios = new FO1_Servicios();
+        _arrayUsu = new ArrayList<>();
+        JsonParser parser = new JsonParser();
+        JsonObject obj = parser.parse(_loginServicios.insertaUsuario("Miguel", "Pinto", parseFecha("10/10/1995"), "M", "prueba@gma.vom", "Prueba", "123456mp", 0, "02129756419", false)).getAsJsonObject();
+
       
     }
     
@@ -57,7 +60,7 @@ public class TestLogin {
         Gson gson = new Gson();
         _loginServicios = new FO1_Servicios();
         _arrayUsu = new ArrayList<>();
-        _arrayUsu = gson.fromJson(_loginServicios.iniciarSesion("jorgepm", "123456jp"), new TypeToken<List<Usuario>>(){}.getType());
+        _arrayUsu = gson.fromJson(_loginServicios.iniciarSesion("Prueba", "123456mp"), new TypeToken<List<Usuario>>(){}.getType());
         assertNotEquals(0, _arrayUsu.get(0).getId());
     }
     
@@ -66,7 +69,7 @@ public class TestLogin {
         Gson gson = new Gson();
         _loginServicios = new FO1_Servicios();
         _arrayUsu = new ArrayList<>();
-        _arrayUsu = gson.fromJson(_loginServicios.iniciarSesion("jorge", "123456jp"), new TypeToken<List<Usuario>>(){}.getType());
+        _arrayUsu = gson.fromJson(_loginServicios.iniciarSesion("PruebaFallida", "123456mp"), new TypeToken<List<Usuario>>(){}.getType());
         assertTrue( _arrayUsu.isEmpty());
     }
     
@@ -92,13 +95,35 @@ public class TestLogin {
         assertEquals("Se inserto el usuario", obj.get("id").getAsString());
     }
     
+    @Test
+    public void pruebaEliminarUsuario(){
+        _usu = new FOM01_Usuario();
+        _arrayUsu = new ArrayList<>();
+        JsonParser parser = new JsonParser();
+        JsonObject obj = parser.parse(_usu.eliminaUsuario("migue@gmail.com")).getAsJsonObject();
+        assertEquals("Se eliminó el usuario", obj.get("correo").getAsString());
+    }
+    
+    @Test
+    public void pruebaIngresarUsuarioExistente(){
+        _loginServicios = new FO1_Servicios();
+        _arrayUsu = new ArrayList<>();
+        JsonParser parser = new JsonParser();
+        JsonObject obj = parser.parse(_loginServicios.insertaUsuario("Miguel", "Pinto", parseFecha("10/10/1995"), "M", "lepe", "Prueba", "123456mp", 0, "02129756419", false)).getAsJsonObject();
+        assertEquals("usuario duplicado", obj.get("id").getAsString());
+    }
+    
       @After
     public void terminarPrueba(){
 
         
         try {      
-            ComandoEliminaUsuario c = FabricaComando.eliminaUsuario("yyhernand3@gmail.com");
-            c.ejecutar();
+        _usu = new FOM01_Usuario();
+        _arrayUsu = new ArrayList<>();
+        JsonParser parser = new JsonParser();
+        JsonObject obj = parser.parse(_usu.eliminaUsuario("prueba@gma.vom")).getAsJsonObject();
+        assertEquals("Se eliminó el usuario", obj.get("correo").getAsString());
+      
         }catch (NullPointerException e) {
             e.printStackTrace();
         }
