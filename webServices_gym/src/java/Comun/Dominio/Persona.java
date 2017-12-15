@@ -28,7 +28,9 @@ public class Persona extends Entidad implements Serializable{
         this.sexo = sexo;
         this.correo = correo;
     }
-
+    public Persona( String correo ){
+        this.correo = correo;
+    }
     public Persona( int id, String nombre, String apellido, Date fecha_nac,
                     String sexo, String correo){
         super(id);

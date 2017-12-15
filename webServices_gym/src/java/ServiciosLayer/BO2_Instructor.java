@@ -14,11 +14,17 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import java.sql.Date;
+//import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -50,13 +56,19 @@ public class BO2_Instructor {
         @QueryParam( "correo" ) String correo){
      
         try{
-        Instructor instructor = (Instructor) FabricaEntidad.InstanciaInstructor
-        (1, nombre, apellido, java.sql.Date.valueOf(fechanac), sexo, correo);
+            
+        SimpleDateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = sourceFormat.parse(fechanac);
+            
+        Instructor instructor = (Instructor) FabricaEntidad.InstanciaInstructor(
+                1, nombre, apellido, /*java.sql.Date.valueOf(fechanac)*/date, sexo, correo);
         Comando c = FabricaComando.CrearRegInstructor(instructor);
         c.ejecutar();
         }
         catch(IllegalArgumentException e){
             System.out.println("Formato de fecha invalido. Debe ser yyyy-MM-dd ");
+        } catch (ParseException ex) {
+            Logger.getLogger(BO2_Instructor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
