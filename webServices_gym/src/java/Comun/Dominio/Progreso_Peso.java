@@ -13,39 +13,53 @@ import java.time.LocalDate;
  * @author marvian
  */
 public class Progreso_Peso extends Entidad{
-    private int _id;
+    private int _idUsuario;
     private int _peso;
     private Date _fechaP;
     private String _sobrenombre;
 
-    public Progreso_Peso(int id) {
-        super(id);
+    public Progreso_Peso(){
+        
     }
-
-    /*Progreso_Peso(int id, int peso, Date fechaP, String sobrenombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
     
-    /*public Progreso_Peso(){    
+    public Progreso_Peso(int idUsuario, int peso){
+        this._idUsuario = _idUsuario;
+    }
+    
+    public Progreso_Peso(int _idUsuario, int _peso, Date _fechaP, String _sobrenombre, int id) {
+        super(id);
+        this._idUsuario = _id;
+        this._peso = _peso;
+        this._fechaP = _fechaP;
+        this._sobrenombre = _sobrenombre;
     }
 
-    public Progreso_Peso(int id, int peso, Date fechaP,
-    String sobrenombre){
-        this._id = id;
-        this._peso = peso;
-        this._fechaP = fechaP;
-        this._sobrenombre = sobrenombre;
-    }*/
+    public Progreso_Peso(int _idUsuario, int _peso, Date _fechaP, String _sobrenombre) {
+        this._idUsuario = _idUsuario;
+        this._peso = _peso;
+        this._fechaP = _fechaP;
+        this._sobrenombre = _sobrenombre;
+    }
+
+    
     /**
      * @return the _id
      */
-    public int getId() {
-        return _id;
+    public int getIdUsuario() {
+        return _idUsuario;
     }
 
     /**
      * @param _id the _id to set
      */
+    public void setIdUsuario(int _idUsuario) {
+        this._idUsuario = _idUsuario;
+    }
+
+    public int getId() {
+        return _id;
+    }
+
     public void setId(int _id) {
         this._id = _id;
     }

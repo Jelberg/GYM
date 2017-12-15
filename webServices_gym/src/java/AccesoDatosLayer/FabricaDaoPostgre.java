@@ -15,6 +15,7 @@ import AccesoDatosLayer.BO1.IDaoEjercicio;
 import AccesoDatosLayer.BO1.IDaoMaquina;
 import AccesoDatosLayer.FOM04Postgre.DaoComentarioPostgre;
 import AccesoDatosLayer.FOM04Postgre.IDaoComentario;
+import AccesoDatosLayer.FOM04Postgre.IDaoProgresoPeso;
 
 /**
  *
@@ -66,6 +67,11 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
     @Override
     public IDaoComentario instanciaDaoComentario() {
         return new DaoComentarioPostgre();
+    }
+
+    @Override
+    public IDaoProgresoPeso instanciaDaoProgresoPeso() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

@@ -20,7 +20,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author Leonardo
  */
-@Path("/FO_M05_COmentario")
+@Path("/FO_M05_Comentario")
 public class FO_M05_Comentario{
     private Gson _gson = new Gson();
     private String _response;

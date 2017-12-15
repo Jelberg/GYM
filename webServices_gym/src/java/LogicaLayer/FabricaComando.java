@@ -1,7 +1,9 @@
 package LogicaLayer;
 
+import LogicaLayer.FOM04.ActualizarPesoComando;
 import Comun.Dominio.Comentario;
 import Comun.Dominio.Instructor;
+import Comun.Dominio.Progreso_Peso;
 import Comun.Dominio.Usuario;
 import LogicaLayer.BO2.ActualizarInstructor;
 import Comun.Dominio.Usuario_Amigo;
@@ -146,13 +148,15 @@ public class FabricaComando {
         return new AgregarComentarioComando(comentario);
     }
     
+    public static ActualizarPesoComando actualizarPesoComando(Progreso_Peso progreso_peso){
+        return new ActualizarPesoComando(progreso_peso);
+    }
+    
     // Fin Comando FO_M05
     
     //  FO_M05
     
-    public static AgregarComentarioComando instanciaCmdAgregarComentario (Comentario comentario){
-        return new AgregarComentarioComando(comentario);
-    }
+    
     
     public static AgregarMedidaComando instanciaCmdAgregarMedida (int id, int medida, int tipo_medida){
         return new AgregarMedidaComando(id, medida, tipo_medida);
@@ -179,15 +183,5 @@ public class FabricaComando {
     }
     
     //  FO_M05
-    
-    /*
-    public abstract AgregarComentarioComando instanciaCmdAgregarComentario(Comentario comentario);
-    public abstract AgregarMedidaComando instanciaCmdAgregarMedida(Progreso_Medida progresoMedida);
-    public abstract AgregarPesoComando instanciaCmdAgregarPeso(Progreso_Peso progresoPeso);
-    public abstract CompartirProgresoComando instanciaCmdCompartirProgreso();
-    public abstract ConsultarProgresoMedidasComando instanciaCmdConsultarProgresoMedidas(Progreso_Medida progresoMedida);
-    public abstract ModificarMedidasComando instanciaCmdModificarMedidas(Progreso_Medida progresoMedida);
-    public abstract ModificarPesoComando instanciaCmdModificarPeso(Progreso_Peso progresoPeso);
-*/
-    
+       
 }

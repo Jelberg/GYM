@@ -5,10 +5,18 @@
  */
 package AccesoDatosLayer.FOM04Postgre;
 
+import Comun.Dominio.Progreso_Peso;
+import java.util.ArrayList;
+
 /**
  *
  * @author Elberg
  */
-public class IDaoProgresoPeso{
+public interface IDaoProgresoPeso{
+    
+    public ArrayList<Progreso_Peso> getPesos();
+    public void insertar(Progreso_Peso progreso_Peso);
+    public void eliminar(Progreso_Peso progreso_Peso);
+    public void actualizar(Progreso_Peso progreso_Peso);
     
 }
