@@ -1,10 +1,12 @@
 package LogicaLayer;
 
+import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
 import Comun.Dominio.Usuario;
 import LogicaLayer.BO2.ActualizarInstructor;
 import Comun.Dominio.Usuario_Amigo;
-import LogicaLayer.BO2.ComandoGetEntrenadores;
+import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
+import LogicaLayer.BO2.ComandoConsultaEntrenadores;
 import LogicaLayer.BO2.ComandoGetInstructorPorCorreo;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
 import LogicaLayer.FO1.ComandoActualizarPassword;
@@ -51,10 +53,12 @@ public class FabricaComando {
             nombre, apellido, fecha, sexo, correo);
     }
             
-    public static ComandoGetEntrenadores instanciaCmdGetEntrenadores(){
-        return new ComandoGetEntrenadores();
+    public static ComandoConsultaEntrenadores instanciaCmdConsultaEntrenadores(){
+        return new ComandoConsultaEntrenadores();
     }
-    
+    public static ComandoConsultaEntrenadorCorreo instanciaCmdConsultaEntCorreo( Entidad ent ){
+        return new ComandoConsultaEntrenadorCorreo( ent );
+    }
     
     // comandos FOM01
     //Crear comando para registrar un usuario

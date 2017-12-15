@@ -15,7 +15,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -24,11 +26,44 @@ import java.util.ArrayList;
 public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
     private Connection _conn;
     private ArrayList<Entrenador> jsonArray;
-    public DaoEntrenadorPostgre() {}
+    public DaoEntrenadorPostgre(){}
     
     @Override
     public Entidad consultar(Entidad ent) {
-        return ent;
+        try{
+            String query = "SELECT * FROM bo_m02_get_entrenadores( ? );";
+            _conn = Dao.getPostgreBdConnect();
+            Entrenador entrenador = ( Entrenador ) ent;
+            jsonArray = new ArrayList<>();
+            PreparedStatement st = _conn.prepareStatement(query);
+            st.setString( 1, entrenador.getCorreo() );
+            ResultSet rs = st.executeQuery();
+            //La variable donde se almacena el resultado de la consulta.
+            while(rs.next()){
+                jsonArray.add(new Entrenador());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
+                jsonArray.get(jsonArray.size() - 1).setApellido(rs.getString("apellido"));
+                Date dte;
+                Date dte1=rs.getDate("fechanac");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                String formattedDate = formatter.format(dte1);
+                dte  = formatter.parse(formattedDate);
+                jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fechanac"));
+                jsonArray.get(jsonArray.size() - 1).setSexo(rs.getString("sexo"));
+                jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
+                jsonArray.get(jsonArray.size() - 1).setHistorial(rs.getString("historial"));           
+                }
+            
+        }
+        catch(SQLException | ParameterNullException e) {
+            
+        }
+        finally {
+            Dao.closePostgreConnection( _conn );
+            return jsonArray.get(0);
+        }
+        
     }
 
     @Override

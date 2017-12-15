@@ -18,19 +18,19 @@ import java.util.ArrayList;
  *
  * @author gilbert
  */
-public class ComandoGetEntrenadores extends Comando{
+public class ComandoConsultaEntrenadores extends Comando{
     private Entidad _entrenador;
     private ArrayList<Entrenador> _listaEntrenadores;
-    public ComandoGetEntrenadores(Entidad entrenador) {
+    public ComandoConsultaEntrenadores(Entidad entrenador) {
         _entrenador = entrenador;
     }
-    public ComandoGetEntrenadores() {}
+    public ComandoConsultaEntrenadores() {}
     public ArrayList<Entrenador> getEntrenadores(){
         return _listaEntrenadores;
     }
     @Override
     public void ejecutar() {
-        FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
+        FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
         IDaoEntrenador dao = fab.instanciaDaoEntrenador();
         _listaEntrenadores = dao.consultarEntrenadores();
     }
