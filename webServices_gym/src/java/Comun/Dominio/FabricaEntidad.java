@@ -18,9 +18,8 @@ public class FabricaEntidad {
                                     Date fecha_nac, String sexo, String correo){
         return new Instructor(id, nombre, apellido, fecha_nac, sexo, correo);
     }
-    static public Entidad instanciaEntrenador ( int id, String nombre, String apellido,
-                                    Date fecha_nac, String sexo, String correo, String historial ){
-        return new Entrenador( id, nombre, apellido, fecha_nac, sexo, correo, historial );
+    static public Entidad instanciaEntrenadorCorreo( String correo ){
+        return new Entrenador( correo );
     }
     // Fin de BO2
     

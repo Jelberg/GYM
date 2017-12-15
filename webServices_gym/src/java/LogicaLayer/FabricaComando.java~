@@ -7,7 +7,6 @@ import LogicaLayer.BO2.ActualizarInstructor;
 import Comun.Dominio.Usuario_Amigo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadores;
-import LogicaLayer.BO2.ComandoConsultarClase;
 import LogicaLayer.BO2.ComandoGetInstructorPorCorreo;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
 import LogicaLayer.FO1.ComandoActualizarPassword;
@@ -54,17 +53,14 @@ public class FabricaComando {
             nombre, apellido, fecha, sexo, correo);
     }
 
-    //Crear comando para consultar las clases.
-    public static ComandoConsultarClase instanciaCmdConsultaClase(){
-        return new ComandoConsultarClase();
+	//Crear comando para consultar las clases.
+public static ComandoConsultaClase instanciaCmdConsultaClase(){
+        return new ComandoConsultaClase();
     }
-    
-    //Crear comando para consultar los entrenadores.
+            
     public static ComandoConsultaEntrenadores instanciaCmdConsultaEntrenadores(){
         return new ComandoConsultaEntrenadores();
     }
-    
-    //Crear comando para consultar los entrenadores buscados segun su correo.
     public static ComandoConsultaEntrenadorCorreo instanciaCmdConsultaEntCorreo( Entidad ent ){
         return new ComandoConsultaEntrenadorCorreo( ent );
     }
