@@ -9,7 +9,6 @@ import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Usuario;
 import Comun.Excepciones.ParameterNullException;
 import Comun.Validaciones.ValidationWS;
-import LogicaLayer.Comando;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
 import LogicaLayer.FO1.ComandoActualizarPassword;
 import LogicaLayer.FO1.ComandoGetCorreo;
@@ -31,7 +30,7 @@ import javax.ws.rs.QueryParam;
  * @author Miguel
  */
 @Path("/Login")
-public class FO1_Servicios {
+public class FOM01_Login {
     private Gson gson = new Gson();
     private String response;
     
@@ -84,9 +83,9 @@ public class FO1_Servicios {
     
     
     /**
-     * Funcion que recibe como parámetro el usuario y contrasena del cliente,
+     * Funcion que recibe como parámetro el usuario y contraseña del cliente,
      * para consultarla y saber sus datos.
-     * @param usuario
+     * @param usuar
      * @param password
      * @return Devuelve el usuario 
      */
@@ -120,17 +119,15 @@ public class FO1_Servicios {
     
     /**
      * Funcion que recibe como parámetro el correo,
-     * para actualizar el codigo de recuperar contrasena.
+     * para actualizar el codigo de recuperar contraseña.
      * @param correo
      * @return Devuelve el codigo 
      */
     @POST
     @Path("/updateCodigo")
     @Produces("application/json")
-    public String updateCod(
-                                    @QueryParam("correo") String correo                          
-                                    )
-    {
+    public String updateCod(@QueryParam("correo") String correo){
+        
         Map<String, String> response = new HashMap<String, String>();
         try{    
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
@@ -160,8 +157,8 @@ public class FO1_Servicios {
     }
     
     /**
-     * Funcion que recibe como parámetro el correo y contrasena,
-     * para actualizar la contrasena.
+     * Funcion que recibe como parámetro el correo y contraseña,
+     * para actualizar la contraseña.
      * @param correo
      * @param password
      * @return Devuelve el resultado 
@@ -169,11 +166,8 @@ public class FO1_Servicios {
     @POST
     @Path("/updatePass")
     @Produces("application/json")
-    public String updatePass(
-                                    @QueryParam("correo") String correo, 
-                                    @QueryParam("password") String password
-                                    )
-    {
+    public String updatePass(@QueryParam("correo") String correo, 
+                             @QueryParam("password") String password){
         Map<String, String> response = new HashMap<String, String>();
         try{    
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
@@ -209,27 +203,27 @@ public class FO1_Servicios {
     @Path("/getUsuarioCorreo")
     @Produces("application/json")
     public String getUsuarioCorreo(@QueryParam("correo") String correo) {
-    Map<String, String> response = new HashMap<String, String>();
-    try
-    {
-       
-        ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-        put("correo", correo);
-        }});
-        Usuario usuario = FabricaEntidad.InstanciaUsuario
-        ("", "", "", "", null, "", correo, 0, "", false);        
-        ComandoGetCorreo c = FabricaComando.getCorreo(usuario);
-        c.ejecutar();
-        response.put("id",c.getResultado());
-    }
-    catch (ParameterNullException e) {
-            response.put("error",e.getMessage());
+        Map<String, String> response = new HashMap<String, String>();
+        try
+        {
+
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+            put("correo", correo);
+            }});
+            Usuario usuario = FabricaEntidad.InstanciaUsuario
+            ("", "", "", "", null, "", correo, 0, "", false);        
+            ComandoGetCorreo c = FabricaComando.getCorreo(usuario);
+            c.ejecutar();
+            response.put("id",c.getResultado());
         }
-        catch (Exception e) {
-            response.put("error",e.getMessage());
+        catch (ParameterNullException e) {
+                response.put("error",e.getMessage());
+            }
+            catch (Exception e) {
+                response.put("error",e.getMessage());
+            }
+            finally {
+                return gson.toJson(response);
+            }
         }
-        finally {
-            return gson.toJson(response);
-        }
-    }
 }
