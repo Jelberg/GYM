@@ -31,8 +31,8 @@ public class TestLogin {
         
         Usuario usuario = FabricaEntidad.InstanciaUsuario
         ("Yesi","hola","Yesimar", "Hernandez",null,"F", "yyhernandez.13@gmail.com", 173,"04265121963",false);        
-        IngresarUsuario respuesta = FabricaComando.CrearRegUsuario(usuario);
-        respuesta.ejecutar();
+        IngresarUsuario c = FabricaComando.CrearRegUsuario(usuario);
+        c.ejecutar();
       
     }
     
