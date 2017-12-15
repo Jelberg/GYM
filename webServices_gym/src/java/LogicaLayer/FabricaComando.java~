@@ -7,7 +7,6 @@ import LogicaLayer.BO2.ActualizarInstructor;
 import Comun.Dominio.Usuario_Amigo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadores;
-import LogicaLayer.BO2.ComandoConsultarClase;
 import LogicaLayer.BO2.ComandoGetInstructorPorCorreo;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
 import LogicaLayer.FO1.ComandoActualizarPassword;
@@ -24,22 +23,12 @@ import LogicaLayer.FO1.ComandoListaUsuario;
 import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
-import LogicaLayer.BO1.ComandoGetEquipos;
 
 /**
  *
  * @author Elberg
  */
 public class FabricaComando {
-	
-    // Comandos BO1    
-	
-    // Crear comando para leer lista de todos los equipos.
-    public static ComandoGetEquipos instanciaGetEquipos(){
-        return new ComandoGetEquipos();
-    }
-
-    // Fin Comandos BO1
     
     // Comandos BO2
     
@@ -64,21 +53,17 @@ public class FabricaComando {
             nombre, apellido, fecha, sexo, correo);
     }
 
-    //Crear comando para consultar las clases.
-    public static ComandoConsultarClase instanciaCmdConsultaClase(){
-        return new ComandoConsultarClase();
+	//Crear comando para consultar las clases.
+public static ComandoConsultaClase instanciaCmdConsultaClase(){
+        return new ComandoConsultaClase();
     }
-    
-    //Crear comando para consultar los entrenadores.
+            
     public static ComandoConsultaEntrenadores instanciaCmdConsultaEntrenadores(){
         return new ComandoConsultaEntrenadores();
     }
-    
-    //Crear comando para consultar los entrenadores buscados segun su correo.
     public static ComandoConsultaEntrenadorCorreo instanciaCmdConsultaEntCorreo( Entidad ent ){
         return new ComandoConsultaEntrenadorCorreo( ent );
     }
-    // Fin Comandos BO2
     
     // comandos FOM01
     //Crear comando para registrar un usuario

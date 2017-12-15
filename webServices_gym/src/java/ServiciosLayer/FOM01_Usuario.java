@@ -152,10 +152,8 @@ public class FOM01_Usuario {
 
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("correo", correo);
-            }});
-            String usuario = FabricaEntidad.InstanciaEliminaUsuario
-            (0,"", "", "", "", "", null, "", 0, correo, false,0);        
-            ComandoEliminaUsuario c = FabricaComando.eliminaUsuario(usuario);
+            }});        
+            ComandoEliminaUsuario c = FabricaComando.eliminaUsuario(correo);
             c.ejecutar();
             response.put("correo",c.getResultado());
         }

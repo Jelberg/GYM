@@ -1,16 +1,17 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="localhost:8080/webServices_gym/instructor";
+var url="http://localhost:8080/webServices_gym/instructor";
+//var url="http://localhost:8080/ServiciosGimnasio/Instruct";
 var correo_busqueda= document.getElementById("correo");
 var x=0
 window.onload = function busquedainstructor()
 {
     variable=localStorage.getItem("id");
-    console.log(variable);
     if (variable)
         {
 
-            var url_comple="/getInstruct?correo="+variable;
+            var url_comple="/getInstructorPorCorreo?correo="+variable;
+            //var url_comple="/getInstruct?correo="+variable;
             fetch(url+url_comple)
             .then((respuesta) => 
             {            
@@ -27,23 +28,23 @@ window.onload = function busquedainstructor()
                     fila =respuesta[i];
                     for (var j = 0; j < ncampos; j++)
                     {
-                        if (j!=0)
+                        if (j!=5)
                         {
                             console.log(fila[campos[j]]);
                             switch(j) {
-                                case 1:
+                                case 0:
                                 document.getElementById('nombre').value = fila[campos[j]] +" "+fila[campos[j+1]];
                                 break;
-                                case 3:
+                                case 2:
                                 document.getElementById('fecha').value = cambiarFormato(fila[campos[j]]);
                                 break;
-                                case 4:
+                                case 3:
                                 if((fila[campos[j]]=="M"))
                                 document.getElementById('masculino').checked = true
                                 else
                                 document.getElementById('femenino').checked = true;
                                 break;
-                                case 5:
+                                case 4:
                                 document.getElementById('correo').value = fila[campos[j]];
                                 break;                           
                             }
@@ -97,7 +98,7 @@ function insertarInstructor()
                     var intento=0
                     var res = document.getElementById("nombre").value.split(" ");
                     console.log(res[0]+res[1])
-                    var url_comple="/RegistrarInstructor?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
+                    var url_comple="/RegistrarInstructor?nombre="+res[0]+"&apellido="+res[1]+"&fecha="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
                     fetch(url+url_comple, {
                         method: 'POST'
                     })
