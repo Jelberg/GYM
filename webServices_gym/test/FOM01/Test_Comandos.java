@@ -56,9 +56,9 @@ public class Test_Comandos {
     
     @Before
     public void comenzarPrueba() {
-        Usuario usuario = FabricaEntidad.InstanciaUsuario
+        _usuarioDominio = FabricaEntidad.InstanciaUsuario
         ("Yesi","hola","Yesimar", "Hernandez",null,"F", "yyhernandez.13@gmail.com", 173,"04265121963",false);        
-        IngresarUsuario c = FabricaComando.CrearRegUsuario(usuario);
+        IngresarUsuario c = FabricaComando.CrearRegUsuario(_usuarioDominio);
         c.ejecutar();
     }
     
