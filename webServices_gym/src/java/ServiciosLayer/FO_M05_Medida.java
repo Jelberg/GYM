@@ -8,10 +8,12 @@ package ServiciosLayer;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Progreso_Medida;
 import LogicaLayer.Comando;
+import LogicaLayer.FOM04.ComandoObtenerMedidas;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.util.ArrayList;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -27,7 +29,7 @@ public class FO_M05_Medida {
     private Connection _connection;
     private Gson _gson = new Gson();
     private String _response;
-    private ArrayList<Progreso_Medida> jsonArray;
+    private ArrayList<Progreso_Medida> _jsonArray;
     
     @POST
     @Path("/actualizarMedida")
@@ -39,6 +41,23 @@ public class FO_M05_Medida {
                 FabricaEntidad.InstanciaActualizarMedida(idUsuario, medida, tipo_medida);
         Comando _comando = FabricaComando.actualizarMedidaComando(_progresoMedida);
         _comando.ejecutar();
+    }
+    
+    @GET
+    @Path("/getProgresoM")
+    @Produces("application/json")
+    public String getProgresoMedida(@QueryParam("id_usuario") int idUsuario){
+        
+        ComandoObtenerMedidas _comando = FabricaComando.instanciaObtenerMedidas(idUsuario);
+        
+        _comando.ejecutar();
+        
+        _jsonArray = _comando.obtenerComentario();
+        
+        _response = _gson.toJson(_jsonArray);
+        
+        return _response;
+        
     }
     
 }

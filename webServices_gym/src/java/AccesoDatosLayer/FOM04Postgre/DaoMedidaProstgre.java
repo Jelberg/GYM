@@ -12,6 +12,7 @@ import Comun.Dominio.Progreso_Medida;
 import Comun.Excepciones.ParameterNullException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -30,8 +31,31 @@ public class DaoMedidaProstgre extends DaoPostgre implements IDaoMedida {
     }
 
     @Override
-    public ArrayList<Progreso_Medida> getMedidas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Progreso_Medida> getMedidas(int idUsuario) {
+        try {
+            _connection = Dao.getPostgreBdConnect();
+            
+            String _query = "SELECT * FROM fo_m04_get_progresom("+idUsuario+")";
+            
+            PreparedStatement _st = _connection.prepareCall(_query);
+            ResultSet _rs = _st.executeQuery();
+            
+            while(_rs.next()){
+                jsonArray.add(new Progreso_Medida());
+                jsonArray.get(jsonArray.size()-1).setMedida(_rs.getInt("medida"));
+                jsonArray.get(jsonArray.size()-1).setTipo(_rs.getString("tipo"));
+                jsonArray.get(jsonArray.size()-1).setFechaM(_rs.getString("fecha"));
+            }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            Dao.closePostgreConnection(_connection);
+            return jsonArray;
+        }
     }
 
     @Override

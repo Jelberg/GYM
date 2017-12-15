@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public interface IDaoMedida {
     
-    public ArrayList<Progreso_Medida> getMedidas();
+    public ArrayList<Progreso_Medida> getMedidas(int idUsuario);
     public void insertar(Progreso_Medida progreso_Medida);
     public void eliminar(Progreso_Medida progreso_Medida);
     public void actualizar(Progreso_Medida progreso_Medida);

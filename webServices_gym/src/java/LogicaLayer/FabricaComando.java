@@ -29,6 +29,7 @@ import LogicaLayer.BO1.ComandoGetEquipos;
 import LogicaLayer.FOM04.AgregarComentarioComando;
 import LogicaLayer.FOM04.AgregarMedidaComando;
 import LogicaLayer.FOM04.AgregarPesoComando;
+import LogicaLayer.FOM04.ComandoObtenerMedidas;
 import LogicaLayer.FOM04.CompartirProgresoComando;
 import LogicaLayer.FOM04.ConsultarProgresoMedidasComando;
 import LogicaLayer.FOM04.ModificarMedidasComando;
@@ -157,6 +158,11 @@ public class FabricaComando {
         return new ActualizarMedidaComando(progreso_Medida);
     }
     
+    public static ComandoObtenerMedidas instanciaObtenerMedidas(int idUsuario){
+        return new ComandoObtenerMedidas(idUsuario);
+    }
+    
+    
     // Fin Comando FO_M05
     
     //  FO_M05
@@ -167,24 +173,8 @@ public class FabricaComando {
         return new AgregarMedidaComando(id, medida, tipo_medida);
     }
     
-    public static AgregarPesoComando instanciaCmdAgregarPeso (int id, int peso){
-        return new AgregarPesoComando(id, peso);
-    }
-    
     public static CompartirProgresoComando instanciaCmdCompartirProgreso (){
         return new CompartirProgresoComando();
-    }
-    
-    public static ConsultarProgresoMedidasComando instanciaCmdConsultarProgresoMedidas (int id){
-        return new ConsultarProgresoMedidasComando(id);
-    }
-    
-    public static ModificarMedidasComando instanciaCmdModificarMedidas (int id, int medida, int tipo_medida){
-        return new ModificarMedidasComando(id, medida, tipo_medida);
-    }
-    
-    public static ModificarPesoComando instanciaCmdModificarPeso (int id, int peso){
-        return new ModificarPesoComando(id, peso);
     }
     
     //  FO_M05
