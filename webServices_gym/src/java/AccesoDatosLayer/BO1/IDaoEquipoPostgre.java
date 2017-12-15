@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public interface IDaoEquipoPostgre {
     public ArrayList<Equipo> consultarEquipos();
-    public Entidad Eliminar (Entidad ent);
-    public Entidad Agregar (Entidad ent);
-    public Entidad Actualizar (Entidad ent);
-    
+    public Entidad eliminar (Entidad ent);
+    public Entidad agregar (Entidad ent);
+    public Entidad actualizar (Entidad ent);
+    public Entidad consultarEquipoPorId(int id);    
 }

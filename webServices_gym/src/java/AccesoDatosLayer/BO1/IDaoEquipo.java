@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public interface IDaoEquipo {
     public ArrayList<Equipo> consultarEquipos();
-    public Entidad eliminar( Entidad ent );
-    public Entidad modificar( Entidad ent );
-    public Entidad actualizar( Entidad ent );
-    
+    public Entidad eliminar (Entidad ent);
+    public Entidad agregar (Entidad ent);
+    public Entidad actualizar (Entidad ent);
+    public Entidad consultarEquipoPorId(int id);  
 }
