@@ -355,8 +355,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
             conn = Dao.getPostgreBdConnect();
             String query = "SELECT fo_m01_elimina_usuario(?)";
             PreparedStatement st = conn.prepareStatement(query);
-            Usuario u = new Usuario ();
-            st.setString(1, u.getCorreo());
+            st.setString(1, s);
             ResultSet rs = st.executeQuery();
             return ("Se eliminó el usuario");
         }
