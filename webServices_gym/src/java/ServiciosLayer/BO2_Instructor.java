@@ -3,8 +3,8 @@ package ServiciosLayer;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Instructor;
 import Comun.Validaciones.ValidationWS;
-import LogicaLayer.BO2.ComandoGetInstructorPorCorreo;
-import LogicaLayer.BO2.ComandoGetInstructores;
+import LogicaLayer.BO2.CmdGetInstructorPorCorreo;
+import LogicaLayer.BO2.CmdGetInstructores;
 import LogicaLayer.Comando;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
@@ -80,7 +80,7 @@ public class BO2_Instructor {
     @Path("/getListInstructores")
     @Produces("application/json")
     public String getListInstructor(){
-        ComandoGetInstructores cmd = FabricaComando.instanciaGetInstructores();
+        CmdGetInstructores cmd = FabricaComando.instanciaGetInstructores();
         cmd.ejecutar();
         _listaInstructores = cmd.getInstructores();
         _response = _gson.toJson( _listaInstructores );
@@ -97,7 +97,7 @@ public class BO2_Instructor {
     @Produces("application/json")
     public String getInstructor(@QueryParam("correo") String correo){
          
-        ComandoGetInstructorPorCorreo cmd;
+        CmdGetInstructorPorCorreo cmd;
         cmd = FabricaComando.instanciaInstructorPorCorreo(correo);
         cmd.ejecutar();
         _instructor = cmd.getInstructor();

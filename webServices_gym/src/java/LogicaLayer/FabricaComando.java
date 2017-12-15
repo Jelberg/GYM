@@ -3,18 +3,18 @@ package LogicaLayer;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
 import Comun.Dominio.Usuario;
-import LogicaLayer.BO2.ActualizarInstructor;
+import LogicaLayer.BO2.CmdActualizarInstructor;
 import Comun.Dominio.Usuario_Amigo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadores;
 import LogicaLayer.BO2.ComandoConsultarClase;
-import LogicaLayer.BO2.ComandoGetInstructorPorCorreo;
+import LogicaLayer.BO2.CmdGetInstructorPorCorreo;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
 import LogicaLayer.FO1.ComandoActualizarPassword;
 import LogicaLayer.FO1.ComandoGetCorreo;
 import LogicaLayer.FO1.ComandoIniciarSesion;
-import LogicaLayer.BO2.ComandoGetInstructores;
-import LogicaLayer.BO2.ComandoRegistrarInstructor;
+import LogicaLayer.BO2.CmdGetInstructores;
+import LogicaLayer.BO2.CmdRegistrarInstructor;
 import LogicaLayer.FO1.ComandoEliminaUsuario;
 import LogicaLayer.FO1.ComandoEliminaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoGetUsuario;
@@ -45,22 +45,22 @@ public class FabricaComando {
     
     // Crear comando para registrar un instructor.
     public static Comando CrearRegInstructor (Instructor instructor){
-        return new ComandoRegistrarInstructor(instructor);
+        return new CmdRegistrarInstructor(instructor);
     }
     // Crear comando para leer lista de todos los instructores.
-    public static ComandoGetInstructores instanciaGetInstructores(){
-        return new ComandoGetInstructores();
+    public static CmdGetInstructores instanciaGetInstructores(){
+        return new CmdGetInstructores();
     }
     
     // Crear comando para buscar un instructor dado su correo.
-    public static ComandoGetInstructorPorCorreo instanciaInstructorPorCorreo(String correo){
-        return new ComandoGetInstructorPorCorreo(correo);
+    public static CmdGetInstructorPorCorreo instanciaInstructorPorCorreo(String correo){
+        return new CmdGetInstructorPorCorreo(correo);
     }
     
     // Crear comando para actualizar los datos de un instructor.
-    public static ActualizarInstructor instanciaActualizarInstructor(
+    public static CmdActualizarInstructor instanciaActualizarInstructor(
     String nombre, String apellido, String fecha, String sexo, String correo){
-        return new ActualizarInstructor(
+        return new CmdActualizarInstructor(
             nombre, apellido, fecha, sexo, correo);
     }
 
