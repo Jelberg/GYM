@@ -156,24 +156,22 @@ public class Test_Servicios {
     }
     
     //Prueba para consultar un usuario por nombre y apellido
-//    @Test 
-//    public void pruebaGetUsuarioNomApe(){
-//        _usuarioServicios = new FOM01_Usuario();
-//        JsonParser parser = new JsonParser();
-//        JsonObject obj = parser.parse(_usuarioServicios.getUsuarioNomApe("Yesimar",
-//                                     "Hernández")).getAsJsonObject();
-//        assertNotNull(obj);
-//    }
+    @Test 
+    public void pruebaGetUsuarioNomApe(){
+        _usuarioServicios = new FOM01_Usuario();
+        JsonParser parser = new JsonParser();
+        JsonArray obj = parser.parse(_usuarioServicios.getUsuarioNomApe("Yesimar","Hernández")).getAsJsonArray();
+        assertNotNull( obj );
+    }
     
     //Prueba para la lista de Usuarios
-//    @Test 
-//    public void pruebaGetListUsuario(){
-//        _usuarioServicios = new FOM01_Usuario();
-//        _arrayUsu = new ArrayList<>();
-//        JsonParser parser = new JsonParser();
-//        JsonObject obj = parser.parse(_usuarioServicios.getListUsuario()).getAsJsonObject();
-//        assertNotNull(obj);
-//    }
+    @Test 
+    public void pruebaGetListUsuario(){
+        _usuarioServicios = new FOM01_Usuario();
+        JsonParser parser = new JsonParser();
+        JsonArray obj = parser.parse(_usuarioServicios.getListUsuario()).getAsJsonArray();
+        assertNotNull(obj);
+    }
     
     //Prueba Eliminar Usuario
     @Test
@@ -187,16 +185,16 @@ public class Test_Servicios {
     }
     
     //Prueba para modificar un usuario
-//    @Test 
-//    public void pruebaModificaUsuario(){
-//        _usuarioServicios = new FOM01_Usuario();
-//        _arrayUsu = new ArrayList<>();
-//        JsonParser parser = new JsonParser();
-//        JsonObject obj = parser.parse(_usuarioServicios.modificaUsuario(1, "YessyHeer",
-//                "hola", "Yesimar", "Hernández", "F", "04265121963", 173,
-//                "yyhernandez.13@gmail.com", false, 0)).getAsJsonObject();
-//        assertEquals("Se modificó el usuario", obj.get("id").getAsString());
-//    }
+    @Test 
+    public void pruebaModificaUsuario(){
+        _usuarioServicios = new FOM01_Usuario();
+        _arrayUsu = new ArrayList<>();
+        JsonParser parser = new JsonParser();
+        JsonObject obj = parser.parse(_usuarioServicios.modificaUsuario(1, "YessyHeer",
+                "hola", "Yesimar", "Hernández", "F", "04265121963", 173,
+                "yyhernandez.13@gmail.com", false, 0)).getAsJsonObject();
+        assertEquals("Se modificó el usuario", obj.get("id").getAsString());
+    }
     //Fin Pruebas Usuario
     
     //Inicio Pruebas Usuario_Amigo
@@ -211,14 +209,13 @@ public class Test_Servicios {
     }
     
     //Prueba para listar los amigos
-//    @Test
-//    public void pruebaGetListUsuario_Amigo(){
-//        _usuario_AmigoServicios = new FOM01_Usuario_Amigo();
-//        JsonParser parser = new JsonParser();
-//        JsonObject obj = parser.parse(_usuario_AmigoServicios.getListUsuario_Amigo(1))
-//                                       .getAsJsonObject();
-//        assertNotNull(obj);
-//    }
+    @Test
+    public void pruebaGetListUsuario_Amigo(){
+        _usuario_AmigoServicios = new FOM01_Usuario_Amigo();
+        JsonParser parser = new JsonParser();
+        JsonArray obj = parser.parse(_usuario_AmigoServicios.getListUsuario_Amigo(1)).getAsJsonArray();
+        assertNotNull(obj);
+    }
     
     //Prueba para agregar un amigo
     public void pruebaInsertaUsuario_Amigo(){
