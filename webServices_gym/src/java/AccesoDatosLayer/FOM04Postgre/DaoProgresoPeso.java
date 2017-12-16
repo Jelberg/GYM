@@ -49,7 +49,7 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
     @Override
     public ArrayList<Progreso_Peso> consultarProgresoPeso(int id_usuario) {
        try{
-           _conn = Dao.getPostgreBdConnect();
+           _conn = getConexion();
             String query = "SELECT * FROM fo_m04_get_progresop(?)";
             _jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
@@ -70,7 +70,7 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
             
         }
         finally {
-            Dao.closePostgreConnection(_conn);
+            cerrarConexion( _conn );
             return _aux;
         } 
     }
@@ -84,7 +84,7 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
          Progreso_Peso pp = (Progreso_Peso) _pp;
         try {
            
-                _conn = Dao.getPostgreBdConnect();
+                _conn = getConexion();
                 String query = "select * from fo_m04_insert_progresop(?,?);";
                 PreparedStatement st = _conn.prepareStatement( query );
                 st.setInt( 1 , pp.getId() );
@@ -100,7 +100,7 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
         }
         
         finally {
-            Dao.closePostgreConnection(_conn);
+            cerrarConexion( _conn );
             
         }
         

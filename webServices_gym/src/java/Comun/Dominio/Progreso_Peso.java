@@ -31,19 +31,6 @@ public class Progreso_Peso extends Entidad{
         this._peso=peso;
     }
 
-    /**
-     * @return the _id
-     */
-    public int getId() {
-        return _id;
-    }
-
-    /**
-     * @param _id the _id to set
-     */
-    public void setId(int _id) {
-        this._id = _id;
-    }
 
     /**
      * @return the _peso
