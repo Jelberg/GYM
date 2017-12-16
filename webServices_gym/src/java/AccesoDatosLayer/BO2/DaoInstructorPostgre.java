@@ -28,7 +28,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
     @Override
     public ArrayList<Instructor> getInstructores() {
          try{
-            _conn = Dao.getPostgreBdConnect();
+            _conn = getConexion();
             String query = "SELECT * FROM instructor;";
             jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
@@ -50,7 +50,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
         catch (ParameterNullException e) {
         }
         finally {
-            Dao.closePostgreConnection( _conn );
+            cerrarConexion( _conn );
             return jsonArray;
         }
 
@@ -59,7 +59,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
     @Override
     public void insertar(Instructor i) {
         try {
-            _conn = Dao.getPostgreBdConnect(); 
+            _conn = getConexion();
             
             // Adaptando la fecha de nacimiento al formato usado en la BDD
             int dia = i.getFecha_nac().getDate();
@@ -85,7 +85,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             System.out.println(e.getMessage());
         }
         finally {
-            Dao.closePostgreConnection( _conn );
+            cerrarConexion( _conn );
         }
     }
 
@@ -103,7 +103,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
                 put("correo", correo);
             }});
             
-            _conn = Dao.getPostgreBdConnect();
+            _conn = getConexion();
             String query = "SELECT * FROM bo_m02_get_instructor( ? );";
             jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
@@ -129,7 +129,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             e.printStackTrace();
         }
         finally {
-            Dao.closePostgreConnection( _conn );
+            cerrarConexion( _conn );
             return jsonArray;
         }
     }
@@ -143,7 +143,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
     public void actualizar(String nombre, String apellido, String fecha, String sexo, String correo) {
           Map<String, String> response = new HashMap<String, String>();
         
-          _conn = Dao.getPostgreBdConnect();
+          _conn = getConexion();
           
           try {
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
@@ -167,7 +167,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             response.put("error", e.getMessage());
         }
         finally {
-            Dao.closePostgreConnection( _conn );
+            cerrarConexion(_conn);
         }
     }
 

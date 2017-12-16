@@ -21,7 +21,7 @@ public class TestDaoInstructor {
     @Before
     public void PrepararPrueba(){
         try{
-            _conn = Dao.getPostgreBdConnect();
+            _conn = getConexion();
         }
         catch(Exception e){
             e.printStackTrace();
