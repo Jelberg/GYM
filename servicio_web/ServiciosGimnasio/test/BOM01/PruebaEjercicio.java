@@ -24,6 +24,7 @@ import org.junit.Test;
  * @author Daniel Goncalves
  */
 public class PruebaEjercicio {
+    /*
      Sql _conn;
     ResultSet _rs;
     BOM01_Ejercicio _claseServicios;
@@ -86,4 +87,5 @@ public class PruebaEjercicio {
         }
         catch (Exception e){}   
     }
+*/
 }

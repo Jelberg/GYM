@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LogicaLayer.FOM04;
+package LogicaLayer.FO4;
 
 import LogicaLayer.Comando;
 
@@ -13,7 +13,7 @@ import LogicaLayer.Comando;
  *
  * @author Leonardo
  */
-public class CompartirProgresoComando extends Comando {
+public class AgregarComentarioComando extends Comando {
     
     @Override
     public void ejecutar() {
