@@ -64,7 +64,8 @@ public class BOm02_Entrenador {
         ComandoConsultaEntrenadorCorreo cmd = FabricaComando.instanciaCmdConsultaEntCorreo( entrenador );
         cmd.ejecutar();
         _entrenador = cmd.getEntrenador();
-        _response = _gson.toJson( _entrenador );
+        Entrenador ent = ( Entrenador ) _entrenador;
+        _response = _gson.toJson( ent );
         return _response;
     }
     /**
@@ -101,6 +102,8 @@ public class BOm02_Entrenador {
             }});
             Entidad entrenador = FabricaEntidad.instanciaEntrenador(nombre, apellido,
                                     Date.valueOf(fecha), sexo, correo, historial);
+            System.out.println(entrenador);
+            
             ComandoInsertarEntrenador cmd = FabricaComando.instanciaCmdInsertarEntrenador(entrenador);
             cmd.ejecutar();
             entrenador = cmd.getMensaje();

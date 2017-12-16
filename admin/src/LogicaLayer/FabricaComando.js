@@ -1,3 +1,0 @@
-class FabricaComando{
-	static instanciaComandoEntrenador(  )
-}
