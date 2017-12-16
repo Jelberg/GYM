@@ -54,7 +54,8 @@ public class FOM01_Login {
                                     @QueryParam("telefono") String telefono,
                                     @QueryParam("entrenador") boolean entrenador){
         Map<String, String> response = new HashMap<String, String>();
-          
+              ConfigurarLogger cl = new ConfigurarLogger();
+    Logger logr = cl.getLogr();
         try{    
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("nombre", nombre);
