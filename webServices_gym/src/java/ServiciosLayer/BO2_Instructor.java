@@ -3,8 +3,8 @@ package ServiciosLayer;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Instructor;
 import Comun.Validaciones.ValidationWS;
-import LogicaLayer.BO2.ComandoGetInstructorPorCorreo;
-import LogicaLayer.BO2.ComandoGetInstructores;
+import LogicaLayer.BO2.CmdGetInstructorPorCorreo;
+import LogicaLayer.BO2.CmdGetInstructores;
 import LogicaLayer.Comando;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
@@ -14,11 +14,17 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import java.sql.Date;
+//import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -50,13 +56,19 @@ public class BO2_Instructor {
         @QueryParam( "correo" ) String correo){
      
         try{
-        Instructor instructor = (Instructor) FabricaEntidad.InstanciaInstructor
-        (1, nombre, apellido, java.sql.Date.valueOf(fechanac), sexo, correo);
+            
+        SimpleDateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = sourceFormat.parse(fechanac);
+            
+        Instructor instructor = (Instructor) FabricaEntidad.InstanciaInstructor(
+                1, nombre, apellido, /*java.sql.Date.valueOf(fechanac)*/date, sexo, correo);
         Comando c = FabricaComando.CrearRegInstructor(instructor);
         c.ejecutar();
         }
         catch(IllegalArgumentException e){
             System.out.println("Formato de fecha invalido. Debe ser yyyy-MM-dd ");
+        } catch (ParseException ex) {
+            Logger.getLogger(BO2_Instructor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -68,7 +80,7 @@ public class BO2_Instructor {
     @Path("/getListInstructores")
     @Produces("application/json")
     public String getListInstructor(){
-        ComandoGetInstructores cmd = FabricaComando.instanciaGetInstructores();
+        CmdGetInstructores cmd = FabricaComando.instanciaGetInstructores();
         cmd.ejecutar();
         _listaInstructores = cmd.getInstructores();
         _response = _gson.toJson( _listaInstructores );
@@ -85,7 +97,7 @@ public class BO2_Instructor {
     @Produces("application/json")
     public String getInstructor(@QueryParam("correo") String correo){
          
-        ComandoGetInstructorPorCorreo cmd;
+        CmdGetInstructorPorCorreo cmd;
         cmd = FabricaComando.instanciaInstructorPorCorreo(correo);
         cmd.ejecutar();
         _instructor = cmd.getInstructor();

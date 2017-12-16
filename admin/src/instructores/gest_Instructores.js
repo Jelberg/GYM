@@ -98,7 +98,7 @@ function insertarInstructor()
                     var intento=0
                     var res = document.getElementById("nombre").value.split(" ");
                     console.log(res[0]+res[1])
-                    var url_comple="/RegistrarInstructor?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
+                    var url_comple="/RegistrarInstructor?nombre="+res[0]+"&apellido="+res[1]+"&fecha="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
                     fetch(url+url_comple, {
                         method: 'POST'
                     })

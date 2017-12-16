@@ -59,11 +59,18 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
     @Override
     public void insertar(Instructor i) {
         try {
-            _conn = Dao.getPostgreBdConnect();       
+            _conn = Dao.getPostgreBdConnect(); 
+            
+            // Adaptando la fecha de nacimiento al formato usado en la BDD
+            int dia = i.getFecha_nac().getDate();
+            int mes = i.getFecha_nac().getMonth()+1;
+            int año = i.getFecha_nac().getYear() + 1900;
+            String fecha = String.valueOf(dia)+"/"+String.valueOf(mes)+"/"+String.valueOf(año);
+            System.out.println("fecha = " + fecha);
             
             String query = "select * from bo_m02_inserta_instructor('"+
                     i.getNombre()+"', '"+i.getApellido()+
-                    "', '"+i.getFecha_nac()+"', '"+i.getSexo()+
+                    "', '"+fecha+"', '"+i.getSexo()+
                     "', '"+i.getCorreo()+"')";
             
             PreparedStatement st = _conn.prepareStatement(query); 

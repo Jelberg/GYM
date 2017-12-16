@@ -128,7 +128,7 @@ public class BOM01_Equipamiento {
                     put("nombre", nombre);
                 }
             });
-            String query = "select * from bo_m01_modificar_equipo('" + id + "','" + nombre + "')";
+            String query = "SELECT * FROM bo_m01_modificar_equipo('" + id + "','" + nombre + "')";
             PreparedStatement st = conn.prepareStatement(query);
 
             st.executeQuery();
@@ -225,12 +225,12 @@ public class BOM01_Equipamiento {
                     put("nombre", nombre);
                 }
             });
-            String query = "select * from bo_m01_modificar_maquina('" + id + "','" + nombre + "')";
+            String query = "SELECT * FROM bo_m01_modificar_maquina('" + id + "','" + nombre + "')";
             PreparedStatement st = conn.prepareStatement(query);
 
             st.executeQuery();
 
-            response.put("data", "Se actualizo la maquina");
+            response.put("data", "Se actualizó la máquina");
         } catch (SQLException e) {
             response.put("error", e.getMessage());
         } catch (ParameterNullException e) {
@@ -256,7 +256,7 @@ public class BOM01_Equipamiento {
                 }
             });
 
-            String query = "select * from bo_m01_insertar_equipo(?)";
+            String query = "SELECT * FROM bo_m01_insertar_equipo(?)";
             PreparedStatement st = conn.prepareStatement(query);
             java.lang.reflect.Type type = new TypeToken<Equipo[]>() {
             }.getType();
@@ -290,7 +290,7 @@ public class BOM01_Equipamiento {
                 }
             });
 
-            String query = "select * from bo_m01_insertar_maquina(?)";
+            String query = "SELECT * FROM bo_m01_insertar_maquina(?)";
             PreparedStatement st = conn.prepareStatement(query);
             java.lang.reflect.Type type = new TypeToken<Maquina[]>() {
             }.getType();
@@ -323,7 +323,7 @@ public class BOM01_Equipamiento {
                 }
             });
 
-            String query = "select * from bo_m01_eliminar_equipo(?)";
+            String query = "SELECT * FROM bo_m01_eliminar_equipo(?)";
             PreparedStatement st = conn.prepareStatement(query);
             java.lang.reflect.Type type = new TypeToken<Equipo[]>() {
             }.getType();
@@ -355,7 +355,7 @@ public class BOM01_Equipamiento {
                 }
             });
 
-            String query = "select * from bo_m01_eliminar_maquina(?)";
+            String query = "SELECT * FROM bo_m01_eliminar_maquina(?)";
             PreparedStatement st = conn.prepareStatement(query);
             java.lang.reflect.Type type = new TypeToken<Maquina[]>() {
             }.getType();
