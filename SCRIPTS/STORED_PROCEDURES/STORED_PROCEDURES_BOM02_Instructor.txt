@@ -43,7 +43,7 @@ LANGUAGE plpgsql;
 
 --------Este elimina instructor------------------------------------------------
 
-CREATE OR REPLACE FUNCTION fo_m04_elimina_instructor(correo character varying)
+CREATE OR REPLACE FUNCTION bo_m02_elimina_instructor(correo character varying)
 	RETURNS void AS $$
     DECLARE
     BEGIN
