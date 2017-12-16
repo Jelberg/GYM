@@ -1,6 +1,6 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/BOM02_Entrenador";
+var url="http://localhost:8080/build/BOM02_Entrenador"; 
 var correo_busqueda= document.getElementById("correo");
 
 
@@ -111,22 +111,23 @@ function insertarEntrenador()
 {
     date= new Date();
     alert(document.getElementById("fecha").value);
-   var intento = 0
+    var input = document.getElementById("fecha").value;
+    var output = input.replace(/(\d\d)\/(\d\d)\/(\d{4})/, "$3-$1-$2");
+    var intento = 0
     {
         var sex;
         if(document.getElementById('femenino').checked)
-        sex="f"
+        sex="F"
         else
         if(document.getElementById('masculino').checked)
-        sex="m"
+        sex="M"
         if ((document.getElementById("correo").value) &&  (document.getElementById("nombre").value) && (document.getElementById("fecha").value) && (document.getElementById("historial").value))
-            if(validatedate(document.getElementById("fecha"))==true)
                 if(ValidateEmail(document.getElementById("correo").value)==true)
                 {
                     var intento=0
                     var res = document.getElementById("nombre").value.split(" ");
                     console.log(res[0]+res[1])
-                    var url_comple="/insertarEntrenador?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value+"&historial="+document.getElementById('historial').value;
+                    var url_comple="/insertarEntrenador?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+output+"&sexo="+sex+"&correo="+document.getElementById('correo').value+"&historial="+document.getElementById('historial').value;
                     fetch(url+url_comple, {
                         method: 'POST'
                     })
@@ -140,7 +141,7 @@ function insertarEntrenador()
                             if(fila.error)
                             alert("Ya existe ese correo")
                             else
-                            alert("ingresado correctamente")
+                            alert(response.data)
                             
 
                         })
@@ -148,8 +149,6 @@ function insertarEntrenador()
                 }
                 else 
                 alert("Correo invalido")   
-            else
-            alert("Fecha invalida")
         else
         alert("Debe Llenar todas las casillas")
     }
