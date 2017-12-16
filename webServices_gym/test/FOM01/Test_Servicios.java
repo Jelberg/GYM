@@ -8,6 +8,7 @@ import Comun.Dominio.Usuario;
 import ServiciosLayer.FOM01_Login;
 import ServiciosLayer.FOM01_Usuario;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
@@ -116,7 +117,7 @@ public class Test_Servicios {
 //        JsonParser parser = new JsonParser();
 //        JsonObject obj = parser.parse(_loginServicios.updateCod("yyhernandez.13@gmail.com"))
 //                                     .getAsJsonObject();
-//        assertNotNull("yyhernandez.13@gmail.com");
+//        assertEquals("Se actualizo el codigo", obj.get("id").getAsString());
 //    }
 
     //Prueba para actualizar la contraseña
@@ -127,32 +128,30 @@ public class Test_Servicios {
         JsonParser parser = new JsonParser();
         JsonObject obj = parser.parse(_loginServicios.updatePass("yyhernandez.13@gmail.com"
                                       ,"hola")).getAsJsonObject();
-        assertNotNull("yyhernandez.13@gmail.com","hola");
+        assertEquals("Se actualizo la contrasena", obj.get("id").getAsString());
     }
     
     //Prueba para consultar un usuario por correo
     @Test
     public void pruebaGetUsuarioCorreo(){
         _loginServicios = new FOM01_Login();
-        _arrayUsu = new ArrayList<>();
         JsonParser parser = new JsonParser();
         JsonObject obj = parser.parse(_loginServicios.getUsuarioCorreo("yyhernandez.13@gmail.com"))
                                      .getAsJsonObject();
-        assertNotNull("yyhernandez.13@gmail.com");
+        assertNotEquals(0, obj.get("id").getAsString());
     }
     //Fin Pruebas Login
     
     //Inicio Pruebas Usuario
     //Prueba para consultar un usuario por id
-//    @Test 
-//    public void pruebaGetUsuario(){
-//        Gson gson = new Gson();
-//        _usuarioServicios = new FOM01_Usuario();
-//        _arrayUsu = new ArrayList<>();
-//        _arrayUsu = gson.fromJson(_usuarioServicios.getUsuario(1),
-//                    new TypeToken<List<Usuario>>(){}.getType());
-//        assertNotEquals(1, _arrayUsu.get(1).getId());
-//    }
+    @Test 
+    public void pruebaGetUsuario(){
+        _usuarioServicios = new FOM01_Usuario();
+        JsonParser parser = new JsonParser();
+        JsonArray obj = parser.parse(_usuarioServicios.getUsuario(1))
+                                     .getAsJsonArray();
+        assertNotNull( obj );
+    }
     
     //Prueba para consultar un usuario por nombre y apellido
 //    @Test 
