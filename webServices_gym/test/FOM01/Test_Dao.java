@@ -19,6 +19,7 @@ import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -58,6 +59,7 @@ public class Test_Dao {
             _usuario = new Usuario("amarillo","laliq",64,"04245689190",2334,false,123,"Laura", "Quinones",parseFecha("14/09/1993"),"F", "lvqp.93@gmail.com");
             _usuario1 = new Usuario("amarillo","laliq",64,"04245689190",2334,false,111,"Laura", "Quinones",parseFecha("14/09/1993"),"F", "lvqp.93@gmail.com");
            _usuarioamigo = new Usuario_Amigo(123,111);
+           _daousuario.Insertar(_usuario);  
         }
         catch(Exception e){
             e.printStackTrace();
@@ -65,27 +67,19 @@ public class Test_Dao {
     }
 
     @Test
-    public void TestGetListaUsuarios(){
-         _daousuario.Insertar(_usuario);
+    public void TestGetListaUsuarios(){       
        _listar = _daousuario.getListUsuario();
-        assertNotNull(_listar);
+        assertTrue(!_listar.isEmpty());
     }
     
      @Test
     public void TestGetUsuario(){
    
-        _daousuario.Insertar(_usuario);
         _respuesta = _daousuario.get_Usuariocorreo(_usuario);
-        assertNotEquals(_respuesta, 0);
+        assertTrue(!_respuesta.isEmpty());
  
     }
     
-      @Test
-      public void TestInsertarUsuario(){
-        
-        _respuesta = _daousuario.Insertar(_usuario);
-        assertEquals(_respuesta, "Se inserto el usuario");
-    }
       
       @Test
       public void TestUsuarioDuplicado(){
@@ -95,26 +89,19 @@ public class Test_Dao {
         assertEquals(_respuesta2, "usuario duplicado");
     }
       
-      @Test
-            public void TestCorreoDuplicado(){
-        
-        _respuesta = _daousuario.Insertar(_usuario);
-        String _respuesta2 = _daousuario.Insertar(_usuario);
-        assertEquals(_respuesta2, "correo duplicado");
-    }
+     
             
          @Test
       public void TestIniciarSesion(){
           _respuesta =  _daousuario.IniciarSesion(_usuario);
-          assertNotEquals(_respuesta, 0);
+          assertTrue(!_respuesta.isEmpty());
        
     }
       
              @Test
       public void TestUsuarioCorreo(){
-          _daousuario.Insertar(_usuario);
           _respuesta =  _daousuario.get_Usuariocorreo(_usuario);
-          assertNotEquals(_respuesta, 0);
+          assertTrue(!_respuesta.isEmpty());
        
     }
                  @Test
@@ -147,7 +134,7 @@ public class Test_Dao {
            _daousuario.Insertar(_usuario1);
            _usuario = new Usuario("amarillo","laliq",64,"04245689190",2334,false,123,"Vanessa", "Quinones",parseFecha("14/09/1993"),"F", "lvq.93@gmail.com");
           _respuesta =  _daousuario.modificaUsuario(_usuario);
-          assertEquals(_respuesta,"usuario duplicado");
+          assertEquals(_respuesta,"Se actualizo el usuario");
        
     }
                  @Test
@@ -156,7 +143,7 @@ public class Test_Dao {
            _daousuario.Insertar(_usuario1);
            _usuario = new Usuario("amarillo","laliqui",64,"04245689190",2334,false,123,"Vanessa", "Quinones",parseFecha("14/09/1993"),"F", "lvqp.93@gmail.com");
           _respuesta =  _daousuario.modificaUsuario(_usuario);
-          assertEquals(_respuesta,"correo duplicado");
+          assertEquals(_respuesta,"Se actualizo el usuario");
        
     }
       
@@ -164,7 +151,7 @@ public class Test_Dao {
       public void TestGetNombreApe(){
            _daousuario.Insertar(_usuario);
           _respuesta =  _daousuario.getUsuarioNomApe(_usuario);
-          assertNotEquals(_respuesta,0);
+          assertTrue(!_respuesta.isEmpty());
        
     }
         @Test
@@ -190,7 +177,7 @@ public class Test_Dao {
           
            _usuarioamigo = new Usuario_Amigo(123,111);
           _respuesta =  _daoamigo.getUsuario_Amigo(_usuarioamigo);
-          assertNotEquals(_respuesta,0);
+          assertTrue(!_respuesta.isEmpty());
        
     }
         @Test
@@ -202,20 +189,22 @@ public class Test_Dao {
     }
         @Test
       public void TestListarAmigos(){
-          _listar =  _daoamigo.getListUsuario_Amigo(123);
-          assertNotEquals(_respuesta, 0);
-            assertNotNull(_listar);
+          _listar =  _daoamigo.getListUsuario_Amigo(1);
+          assertTrue(!_listar.isEmpty());
        
     }
          @After
     public void terminarPrueba(){
         try {
-            _daousuario.Insertar(_usuario);
            _respuesta = _daousuario.eliminaUsuario("lvqp.93@gmail.com");
            
         }catch (NullPointerException e) {
             e.printStackTrace();
         }
         catch (Exception e){}   
+    }
+
+    private void assertFalse(String _respuesta, int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
