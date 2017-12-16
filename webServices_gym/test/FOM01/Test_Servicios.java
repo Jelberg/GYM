@@ -21,7 +21,6 @@ import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +32,7 @@ import org.junit.Test;
 public class Test_Servicios {
     ResultSet _rs;
     FOM01_Login _loginServicios;
-    FOM01_Usuario _usu;
+    FOM01_Usuario _usuarioServicios;
     Usuario _usuarioDominio;
     ArrayList<Usuario> _arrayUsu;
 
@@ -109,7 +108,7 @@ public class Test_Servicios {
         assertEquals("usuario duplicado", obj.get("id").getAsString());
     }
     
-    //Prueba para el código de recuperar contraseña
+    //Prueba para para actualizar el codigo de recuperar contraseña.
     @Test
     public void pruebaUpdateCod(){
         _loginServicios = new FOM01_Login();
@@ -118,24 +117,77 @@ public class Test_Servicios {
         JsonObject obj = parser.parse(_loginServicios.updateCod("yyhernandez.13@gmail.com")).getAsJsonObject();
         assertNotNull("yyhernandez.13@gmail.com");
     }
-    
+
     //Prueba para actualizar la contraseña
     @Test
     public void pruebaUpdatePass(){
-        
+        _loginServicios = new FOM01_Login();
+        _arrayUsu = new ArrayList<>();
+        JsonParser parser = new JsonParser();
+        JsonObject obj = parser.parse(_loginServicios.updatePass("yyhernandez.13@gmail.com", "hola")).getAsJsonObject();
+        assertNotNull("yyhernandez.13@gmail.com","hola");
+    }
+    
+    //Prueba para consultar un usuario por correo
+    @Test
+    public void pruebaGetUsuarioCorreo(){
+        _loginServicios = new FOM01_Login();
+        _arrayUsu = new ArrayList<>();
+        JsonParser parser = new JsonParser();
+        JsonObject obj = parser.parse(_loginServicios.getUsuarioCorreo("yyhernandez.13@gmail.com")).getAsJsonObject();
+        assertNotNull("yyhernandez.13@gmail.com");
     }
     //Fin Pruebas Login
     
     //Inicio Pruebas Usuario
+    //Prueba para consultar un usuario por id
+//    @Test 
+//    public void pruebaGetUsuario(){
+//        _usuarioServicios = new FOM01_Usuario();
+//        _arrayUsu = new ArrayList<>();
+//        JsonParser parser = new JsonParser();
+//        JsonObject obj = parser.parse(_usuarioServicios.getUsuario(0)).getAsJsonObject();
+//        assertNotNull(9999);
+//    }
+    
+    //Prueba para consultar un usuario por nombre y apellido
+//    @Test 
+//    public void pruebaGetUsuarioNomApe(){
+//        _usuarioServicios = new FOM01_Usuario();
+//        _arrayUsu = new ArrayList<>();
+//        JsonParser parser = new JsonParser();
+//        JsonObject obj = parser.parse(_usuarioServicios.getUsuarioNomApe("Yesimar", "Hernández")).getAsJsonObject();
+//        assertNotNull("Yesimar","Hernández");
+//    }
+    
+    //Prueba para la lista de Usuarios
+//    @Test 
+//    public void pruebaGetUsuarioNomApe(){
+//        _usuarioServicios = new FOM01_Usuario();
+//        _arrayUsu = new ArrayList<>();
+//        JsonParser parser = new JsonParser();
+//        JsonObject obj = parser.parse(_usuarioServicios.getListUsuario()).getAsJsonObject();
+//    }
+    
     //Prueba Eliminar Usuario
     @Test
-    public void pruebaEliminarUsuario(){
-        _usu = new FOM01_Usuario();
+    public void pruebaEliminaUsuario(){
+        _usuarioServicios = new FOM01_Usuario();
         _arrayUsu = new ArrayList<>();
         JsonParser parser = new JsonParser();
-        JsonObject obj = parser.parse(_usu.eliminaUsuario("migue@gmail.com")).getAsJsonObject();
+        JsonObject obj = parser.parse(_usuarioServicios.eliminaUsuario("migue@gmail.com")).getAsJsonObject();
         assertEquals("Se eliminó el usuario", obj.get("correo").getAsString());
     }
+    
+    //Prueba para modificar un usuario
+//    @Test 
+//    public void pruebaGetUsuarioNomApe(){
+//        _usuarioServicios = new FOM01_Usuario();
+//        _arrayUsu = new ArrayList<>();
+//        JsonParser parser = new JsonParser();
+//        JsonObject obj = parser.parse(_usuarioServicios.getUsuarioNomApe("Yesimar", "Hernández")).getAsJsonObject();
+//        assertNotNull("Yesimar","Hernández");
+//    }
     
     //Fin Pruebas Usuario
     
@@ -144,10 +196,10 @@ public class Test_Servicios {
     @After
     public void terminarPrueba(){
         try {      
-            _usu = new FOM01_Usuario();
+            _usuarioServicios = new FOM01_Usuario();
             _arrayUsu = new ArrayList<>();
             JsonParser parser = new JsonParser();
-            JsonObject obj = parser.parse(_usu.eliminaUsuario("prueba@gma.vom")).getAsJsonObject();
+            JsonObject obj = parser.parse(_usuarioServicios.eliminaUsuario("prueba@gma.vom")).getAsJsonObject();
             assertEquals("Se eliminó el usuario", obj.get("correo").getAsString());
         }catch (NullPointerException e) {
             e.printStackTrace();

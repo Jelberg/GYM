@@ -194,7 +194,7 @@ public class FOM01_Login {
     }
     
     /**
-     * Funcion que recibe como parámetro el correodel usuario,
+     * Funcion que recibe como parámetro el correo del usuario,
      * para consultarla y saber sus datos.
      * @param correo
      * @return Devuelve el usuario 
