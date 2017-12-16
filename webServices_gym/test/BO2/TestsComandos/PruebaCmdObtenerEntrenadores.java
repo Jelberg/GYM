@@ -26,7 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- *
+ * Clase a traves de la cual se realizan las pruebas de las consultas a entrenadores.
  * @author gilbert
  */
 public class PruebaCmdObtenerEntrenadores {
