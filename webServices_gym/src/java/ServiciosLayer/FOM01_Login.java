@@ -34,7 +34,6 @@ public class FOM01_Login {
     private Gson gson = new Gson();
     private String response;
     
-    
     @POST
     @Path("/insertausuario")
     @Produces("application/json")
@@ -47,9 +46,7 @@ public class FOM01_Login {
                                     @QueryParam("password") String password,
                                     @QueryParam("estatura") int estatura,
                                     @QueryParam("telefono") String telefono,
-                                    @QueryParam("entrenador") boolean entrenador
-                                    )
-    {
+                                    @QueryParam("entrenador") boolean entrenador){
         Map<String, String> response = new HashMap<String, String>();
         try{    
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
@@ -64,11 +61,11 @@ public class FOM01_Login {
             put("telefono", telefono); 
             put("entrenador", entrenador);
             }});              
-        Usuario usuario = FabricaEntidad.InstanciaUsuario
-        (usuar, password, nombre, apellido, fecha, sexo, correo, estatura, telefono, entrenador);        
-        IngresarUsuario c = FabricaComando.CrearRegUsuario(usuario);
-        c.ejecutar();
-        response.put("id", c.getUsuario().getNombre());
+            Usuario usuario = FabricaEntidad.InstanciaUsuario
+            (usuar, password, nombre, apellido, fecha, sexo, correo, estatura, telefono, entrenador);        
+            IngresarUsuario c = FabricaComando.CrearRegUsuario(usuario);
+            c.ejecutar();
+            response.put("id", c.getUsuario().getNombre());
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
@@ -94,19 +91,19 @@ public class FOM01_Login {
     @Produces("application/json")
     public String iniciarSesion(@QueryParam("usuario") String usuar,
                                 @QueryParam("password") String password) {
-    try
-    {
-        ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-        put("usuario", usuar);
-        put("password", password);
-        }});
-        Usuario usuario = FabricaEntidad.InstanciaUsuario
-        (usuar, password, "", "", null, "", "", 0, "", false);        
-        ComandoIniciarSesion c = FabricaComando.IniciarUsuario(usuario);
-        c.ejecutar();
-        response = c.getResultado();
-    }
-    catch (ParameterNullException e) {
+        try
+        {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+            put("usuario", usuar);
+            put("password", password);
+            }});
+            Usuario usuario = FabricaEntidad.InstanciaUsuario
+            (usuar, password, "", "", null, "", "", 0, "", false);        
+            ComandoIniciarSesion c = FabricaComando.IniciarUsuario(usuario);
+            c.ejecutar();
+            response = c.getResultado();
+        }
+        catch (ParameterNullException e) {
             response = e.getMessage();
         }
         catch (Exception e) {
@@ -178,8 +175,7 @@ public class FOM01_Login {
             ("", password, "", "", null, "", correo, 0, "", false);        
             ComandoActualizarPassword c = FabricaComando.actualizarPassword(usuario);
             c.ejecutar();
-            response.put("id",c.getResultado());
-            
+            response.put("id",c.getResultado());  
         }
         catch (ParameterNullException e) {
             response.put("id","");
@@ -190,7 +186,6 @@ public class FOM01_Login {
         finally {
             return gson.toJson(response);
         }
-        
     }
     
     /**
@@ -206,7 +201,6 @@ public class FOM01_Login {
         Map<String, String> response = new HashMap<String, String>();
         try
         {
-
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("correo", correo);
             }});

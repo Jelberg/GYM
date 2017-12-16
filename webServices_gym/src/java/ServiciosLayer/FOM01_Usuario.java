@@ -96,7 +96,6 @@ public class FOM01_Usuario {
     @Produces("application/json")
     public String getUsuarioNomApe(@QueryParam("nombre") String nombre, 
                                     @QueryParam("apellido") String apellido){
-        
         try{
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("nombre", nombre);
@@ -148,7 +147,6 @@ public class FOM01_Usuario {
 
         Map<String, String> response = new HashMap<String, String>();
         try{
-
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("correo", correo);
             }});        
@@ -220,7 +218,6 @@ public class FOM01_Usuario {
             c.ejecutar();
             response.put("id",c.getResultado());
         }
-
         catch (ParameterNullException e) {
             response.put("id", e.getMessage());
         }
