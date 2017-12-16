@@ -9,6 +9,6 @@ package BO2.TestsComandos;
  *
  * @author simon
  */
-public class TestCmdRegistrarInstructor {
+public class TestComandosInstructor {
     
 }

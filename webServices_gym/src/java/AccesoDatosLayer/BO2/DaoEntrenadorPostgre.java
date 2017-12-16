@@ -24,7 +24,7 @@ import java.util.Date;
  * @author gilbert
  */
 public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
-    private Connection _conn;
+    private Connection _conn = Dao.getConInstance();
     private ArrayList<Entrenador> jsonArray;
     public DaoEntrenadorPostgre(){}
     
@@ -56,7 +56,7 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
                 }
             
         }
-        catch(SQLException | ParameterNullException e) {
+        catch(SQLException e) {
             
         }
         finally {
@@ -78,7 +78,27 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
 
     @Override
     public Entidad insertar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            String query = "select * from bo_m02_insertar_entrenador(?,?,?,?,?,?)";
+            _conn = Dao.getPostgreBdConnect();
+            Entrenador entrenador = ( Entrenador ) ent;
+            PreparedStatement st = _conn.prepareStatement(query); 
+            st.setString( 1, entrenador.getNombre() );
+            st.setString( 2, entrenador.getApellido() );
+            st.setString( 3, String.valueOf( entrenador.getFecha_nac() ));
+            st.setString( 4, entrenador.getSexo() );
+            st.setString( 5, entrenador.getCorreo() );
+            st.setString( 6, entrenador.getHistorial() );
+            st.executeQuery();
+            ent.setMensaje( "Se ha insertado correctamente." );
+        }
+        catch(SQLException e) {
+            ent.setMensaje( "Error con la conexion, intente de nuevo." );
+        }
+        finally {
+            Dao.closePostgreConnection( _conn );
+            return ent;
+        }
     }
 
     @Override
@@ -105,9 +125,8 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
             
         }
         catch(SQLException e) {
-            
-        }
-        catch (ParameterNullException e) {
+            jsonArray.add( new Entrenador() );
+            jsonArray.get(0).setMensaje( "Error con la conexion, intente de nuevo." );
         }
         finally {
             Dao.closePostgreConnection( _conn );
