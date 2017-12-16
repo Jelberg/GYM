@@ -11,6 +11,8 @@ import { ToastController } from 'ionic-angular';
 export class CambiarPesoPage {
 
   nuevoPeso: number;
+  agregarpeso: any[]=[];
+
   constructor( public navCtrl: NavController, public navParams: NavParams,
                private userService: UserServiceProvider, public toastCtrl: ToastController )
   {
@@ -22,19 +24,32 @@ export class CambiarPesoPage {
     console.log('ionViewDidLoad CambiarPesoPage');
   }
 
-  //Metodo que insetar el peso del usuario
-  public cargarPeso():void{
+   //Metodo que insetar el peso del usuario
+   public cargarPeso():void{
     console.log( this.nuevoPeso );
     let urlPeticion = "F0M04_Progreso_Peso/insertaProgresoPeso?id_usuario=1&peso="+this.nuevoPeso;
-    this.userService.postDato( urlPeticion ).subscribe( datas => {
-      let mensaje: string = "";
-      let keys = Object.keys(datas);
-      let key: string = "";
-      key = keys[0];
-      mensaje = datas[key];
-      this.abrirToast( mensaje );
-    });
+    this.userService.getDato(urlPeticion).subscribe(data => {    
+      let i: number = 0;
+      while ( i < data.length ){
+      this.agregarpeso[i] = data[i];
+      i++;}
+    console.log(this.agregarpeso[0]);
+  },
+  (error) =>{
+    console.error(error);
   }
+)
+    /*  let mensaje:string="";
+      let keys = Object.keys(data);
+      let key: string ="";
+      key = keys[0];
+      mensaje = data[key];
+      this.abrirToast(mensaje);
+    });
+    */
+  }
+
+
   //Metodo que abre mensaje al realizar una accion.
   public abrirToast( mensaje: string ):void {
     let toast = this.toastCtrl.create({

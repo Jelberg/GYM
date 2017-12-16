@@ -11,6 +11,7 @@ import Comun.Dominio.Progreso_Peso;
 import LogicaLayer.Comando;
 import LogicaLayer.FO4.AgregarPesoComando;
 import LogicaLayer.FO4.ConsultarProgresoPesoComando;
+import LogicaLayer.FO4.EliminarPesoComando;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.util.ArrayList;
@@ -65,5 +66,22 @@ public class FOM04_Progreso_Peso {
         cmd.ejecutar();
         _response = cmd.getResultado();
         return _gson.toJson( _response );
+    }
+    
+    
+    /**
+     * Servicio que recibe y responde a la solicitud de eliminacion del peso del usuario
+     * @param id_usuario
+     * @return 
+     */
+    @GET
+    @Path( "/eliminarPeso" )
+    @Produces( "application/json" )
+    public String eliminaPeso(@QueryParam( "id_usuario" ) int id_usuario) {
+        Comando comando = FabricaComando.instanciaCmdEliminarProgresoPeso(id_usuario);
+        EliminarPesoComando cmd = (EliminarPesoComando) comando;
+        cmd.ejecutar();
+        _response = cmd.getRespuestaEliminarPeso();
+        return  _response ;
     }
 }

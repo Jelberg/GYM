@@ -29,4 +29,10 @@ public interface IDaoProgresoPeso extends IDao{
      */
     public String agregarPeso(Entidad pp);
             
+    /**
+     * Firma de metodo para eliminar el peso del usuario en base al id del mismo
+     * @param id_usuario
+     * @return 
+     */
+    public String eliminarPeso (int id_usuario);
 }
