@@ -7,6 +7,7 @@ package FOM01;
 import Comun.Dominio.Usuario;
 import ServiciosLayer.FOM01_Login;
 import ServiciosLayer.FOM01_Usuario;
+import ServiciosLayer.FOM01_Usuario_Amigo;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -34,6 +35,7 @@ public class Test_Servicios {
     ResultSet _rs;
     FOM01_Login _loginServicios;
     FOM01_Usuario _usuarioServicios;
+    FOM01_Usuario_Amigo _usuario_AmigoServicios;
     Usuario _usuarioDominio;
     ArrayList<Usuario> _arrayUsu;
 
@@ -157,10 +159,10 @@ public class Test_Servicios {
 //    @Test 
 //    public void pruebaGetUsuarioNomApe(){
 //        _usuarioServicios = new FOM01_Usuario();
-//        _arrayUsu = new ArrayList<>();
 //        JsonParser parser = new JsonParser();
-//        JsonObject obj = parser.parse(_usuarioServicios.getUsuarioNomApe("Yesimar", "Hernández")).getAsJsonObject();
-//        assertNotNull("Yesimar","Hernández");
+//        JsonObject obj = parser.parse(_usuarioServicios.getUsuarioNomApe("Yesimar",
+//                                     "Hernández")).getAsJsonObject();
+//        assertNotNull(obj);
 //    }
     
     //Prueba para la lista de Usuarios
@@ -170,6 +172,7 @@ public class Test_Servicios {
 //        _arrayUsu = new ArrayList<>();
 //        JsonParser parser = new JsonParser();
 //        JsonObject obj = parser.parse(_usuarioServicios.getListUsuario()).getAsJsonObject();
+//        assertNotNull(obj);
 //    }
     
     //Prueba Eliminar Usuario
@@ -178,7 +181,8 @@ public class Test_Servicios {
         _usuarioServicios = new FOM01_Usuario();
         _arrayUsu = new ArrayList<>();
         JsonParser parser = new JsonParser();
-        JsonObject obj = parser.parse(_usuarioServicios.eliminaUsuario("migue@gmail.com")).getAsJsonObject();
+        JsonObject obj = parser.parse(_usuarioServicios.eliminaUsuario("migue@gmail.com"))
+                                     .getAsJsonObject();
         assertEquals("Se eliminó el usuario", obj.get("correo").getAsString());
     }
     
@@ -196,11 +200,46 @@ public class Test_Servicios {
     //Fin Pruebas Usuario
     
     //Inicio Pruebas Usuario_Amigo
+    //Prueba para consultar Amigos
     @Test
-    public void pruebaGetUsuarioAmigo(){
-        
+    public void pruebaGetUsuario_Amigo(){
+        _usuario_AmigoServicios = new FOM01_Usuario_Amigo();
+        JsonParser parser = new JsonParser();
+        JsonArray obj = parser.parse(_usuario_AmigoServicios.getUsuario_Amigo(1))
+                                    .getAsJsonArray();
+        assertNotNull( obj );
+    }
+    
+    //Prueba para listar los amigos
+//    @Test
+//    public void pruebaGetListUsuario_Amigo(){
+//        _usuario_AmigoServicios = new FOM01_Usuario_Amigo();
+//        JsonParser parser = new JsonParser();
+//        JsonObject obj = parser.parse(_usuario_AmigoServicios.getListUsuario_Amigo(1))
+//                                       .getAsJsonObject();
+//        assertNotNull(obj);
+//    }
+    
+    //Prueba para agregar un amigo
+    public void pruebaInsertaUsuario_Amigo(){
+        _usuario_AmigoServicios = new FOM01_Usuario_Amigo();
+        JsonParser parser = new JsonParser();
+        JsonObject obj = parser.parse(_usuario_AmigoServicios.insertaUsuario_Amigo(1, 2))
+                                     .getAsJsonObject();
+        assertEquals("Se agregó el amigo", obj.get("idAmigo").getAsString());
+    }
+    
+    //Prueba
+    public void pruebaEliminaUsuario_Amigo(){
+        _usuario_AmigoServicios = new FOM01_Usuario_Amigo();
+        _arrayUsu = new ArrayList<>();
+        JsonParser parser = new JsonParser();
+        JsonObject obj = parser.parse(_usuario_AmigoServicios.eliminaUsuario_Amigo(1, 2))
+                                    .getAsJsonObject();
+        assertEquals("Se eliminó el amigo", obj.get("idAmigo").getAsString());
     }
     //Fin Pruebas Usuario_Amigo
+    
     @After
     public void terminarPrueba(){
         try {      
