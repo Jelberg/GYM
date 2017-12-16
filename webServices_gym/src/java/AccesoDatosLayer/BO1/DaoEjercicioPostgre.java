@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
     private Connection _conn;
     private ArrayList<Ejercicio> jsonArray;
+    public String response;
     public DaoEjercicioPostgre() {}
     
     @Override
@@ -42,11 +43,6 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
     }
 
     @Override
-    public Entidad actualizar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public ArrayList<Ejercicio> consultarEjercicios() {
         try{
             _conn = Dao.getPostgreBdConnect();
@@ -60,7 +56,7 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
                 jsonArray.add(new Ejercicio());
                 jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("EJE_ID"));
                 jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("EJE_NOMBRE"));
-                jsonArray.get(jsonArray.size() - 1).setGrupomuscular(rs.getString("EJE_GRUPO_MUSCULAR"));                          
+                jsonArray.get(jsonArray.size() - 1).setGrupoMuscular(rs.getString("EJE_GRUPO_MUSCULAR"));                          
             }
             
         }
@@ -74,4 +70,60 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
             return jsonArray;
         }
     }
+
+    @Override
+    public Entidad consultarID(int id) {
+        try{
+            _conn = Dao.getPostgreBdConnect();
+            String query = "SELECT eje_id, eje_nombre, eje_grupo_muscular FROM ejercicio WHERE eje_id = " + id + ";";
+            PreparedStatement st = _conn.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            
+            //Verifico si ResultSet esta lleno
+            if(rs.first())
+            {
+                Dao.closePostgreConnection( _conn );
+                return(new Ejercicio(rs.getInt("EJE_ID"),rs.getString("EQU_NOMBRE"),rs.getString("EJE_GRUPO_MUSCULAR")));                       
+            }            
+        }
+        catch(SQLException e) {
+            
+        }
+        catch (ParameterNullException e) {
+        }
+        finally {
+            Dao.closePostgreConnection( _conn );
+            return null;
+        }
+    } 
+
+    @Override
+    public Entidad agregar(Entidad _ent) {
+        Ejercicio ent = (Ejercicio) _ent; 
+        try {
+            _conn = Dao.getPostgreBdConnect();       
+            
+            String query = "select * bo_m01_insertar_ejercicio(?,?,?);";
+            PreparedStatement st = _conn.prepareStatement( query );
+                st.setInt( 1 , ent.getId() );
+                st.setString( 2 , ent.getNombre() );
+                st.setString( 3 , ent.getGrupoMuscular() );
+                st.executeQuery();
+                response.put("Se ha insertado un ejercicio");    
+            
+        }
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            Dao.closePostgreConnection( _conn );
+            return null;
+        }
+    
+    }
 }
+
+    

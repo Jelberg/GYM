@@ -23,8 +23,8 @@ public class FabricaEntidad {
         return new Maquina(id, nombre);
     }
 	
-	static public Entidad InstanciaEjercicio( int id, String nombre, String grupoMusc, String equipo, String maquina){
-        return new Ejercicio(id, nombre, grupoMusc, equipo, maquina);
+	static public Entidad InstanciaEjercicio( int id, String nombre, String grupoMusc){
+        return new Ejercicio(id, nombre, grupoMusc);
     }
 	
 	
