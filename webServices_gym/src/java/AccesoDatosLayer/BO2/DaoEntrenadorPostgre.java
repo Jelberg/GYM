@@ -25,7 +25,7 @@ import java.util.Date;
  * @author gilbert
  */
 public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
-    private Connection _conn = super.getInstancia();
+    private Connection _conn = getInstancia();
     private ArrayList<Entrenador> jsonArray;
     public DaoEntrenadorPostgre(){}
     /**
@@ -73,17 +73,36 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
         }
         
     }
-
+    /**
+     * Metodo que es llamado cuando se desea eliminar a un entrenador.
+     * @param ent Recibe los datos pertinentes para realizar la busqueda del 
+     * entrenador que se desea eliminar.
+     * @return devuelve un objeto entidad con un mensaje que indica si fue 
+     * realizada correctamente la accion.
+     * @see Entidad
+     */
     @Override
     public Entidad eliminar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    /**
+     * Metodo que es llamado cuando se desea actualizar a un entrenador.
+     * @param ent recibe los datos del entrenador a modificar.
+     * @return Devuelve un objeto Entidad con un mensaje que indica si se
+     * realizo la accion.
+     * @see Entidad
+     */
     @Override
     public Entidad modificar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    /**
+     * Metodo que es llamado cuando se desea insertar un nuevo entrenador.
+     * @param ent Recibe un objeto Entidad con los datos encapsulados del entrenador
+     * @return Devuelve un objeto Entidad con un mensaje que indica si la accion
+     * fue realizada
+     * @see Entidad
+     */
     @Override
     public Entidad insertar(Entidad ent) {
         try{
@@ -108,7 +127,10 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
             return ent;
         }
     }
-
+    /**
+     * Metodo que es llamado cuando se desea obtener a todos los entrenadores.
+     * @return Devuelve una lista de objetos Entrenador con todos los entrenadores.
+     */
     @Override
     public ArrayList<Entrenador> consultarEntrenadores() {
         try{

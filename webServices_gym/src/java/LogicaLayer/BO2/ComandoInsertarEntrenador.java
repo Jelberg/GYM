@@ -11,18 +11,31 @@ import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
 
 /**
- *
+ * Clase a traves de la cual se realizan las inserciones de entrenadores.
  * @author gilbert
  */
 public class ComandoInsertarEntrenador extends Comando{
     private Entidad _entrenador;
-    
+    /**
+     * Constructor de clase.
+     * @param entrenador Recibe un objeto Entidad con los datos del entrenador
+     * a insertar.
+     * @see Entidad.
+     */
     public ComandoInsertarEntrenador( Entidad entrenador ){
         this._entrenador = entrenador;
     }
+    /**
+     * Metodo para obtener el mensaje que indica el estatus de la peticion.
+     * @return Devuelve un objeto Entidad en el cual se encuentra encapsulado
+     * el mensaje dele estatus.
+     */
     public Entidad getMensaje(){
         return _entrenador;
     }
+    /**
+     * Metodo que es llamado para realizar la insercion del entrenador.
+     */
     @Override
     public void ejecutar() {
         FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
