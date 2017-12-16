@@ -9,8 +9,10 @@ import Comun.Dominio.Entidad;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Progreso_Peso;
 import LogicaLayer.Comando;
+import LogicaLayer.FO4.ActualizarPesoComando;
 import LogicaLayer.FO4.AgregarPesoComando;
 import LogicaLayer.FO4.ConsultarProgresoPesoComando;
+import LogicaLayer.FO4.EliminarPesoComando;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.util.ArrayList;
@@ -65,5 +67,41 @@ public class FOM04_Progreso_Peso {
         cmd.ejecutar();
         _response = cmd.getResultado();
         return _gson.toJson( _response );
+    }
+    
+    
+    /**
+     * Servicio que recibe y responde a la solicitud de eliminacion del peso del usuario
+     * @param id_usuario
+     * @return 
+     */
+    @GET
+    @Path( "/eliminarPeso" )
+    @Produces( "application/json" )
+    public String eliminaPeso(@QueryParam( "id_usuario" ) int id_usuario) {
+        Comando comando = FabricaComando.instanciaCmdEliminarProgresoPeso(id_usuario);
+        EliminarPesoComando cmd = (EliminarPesoComando) comando;
+        cmd.ejecutar();
+        _response = cmd.getRespuestaEliminarPeso();
+        return  _response ;
+    }
+    
+    /**
+     * Servicio que recibe y responde a la solicitud de actualizacion del peso del usuario
+     * @param id_usuario
+     * @param peso
+     * @return 
+     */
+    @GET
+    @Path( "/actualizaProgresoPeso" )
+    @Produces( "application/json" )
+    public String actualizarPeso ( @QueryParam ( "id_usuario" ) int id_usuario,
+                                   @QueryParam ( "peso" ) int peso){
+        Entidad progresoPeso = FabricaEntidad.InstaciaProgresoPeso(id_usuario, peso);
+        Comando comando = FabricaComando.instanciaCmdActializarProgresoPeso(progresoPeso);
+        ActualizarPesoComando cmd = (ActualizarPesoComando) comando;
+        cmd.ejecutar();
+        _response = cmd.getRespuestActulizaPeso();
+        return _response;
     }
 }

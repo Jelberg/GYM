@@ -1,4 +1,0 @@
-class Comando{
-
-	abstract ejecutar();
-}
