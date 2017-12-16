@@ -57,7 +57,7 @@ public class Test_Comandos {
     @Before
     public void comenzarPrueba() {
         _usuarioDominio = FabricaEntidad.InstanciaUsuario
-        ("Yesi","hola","Yesimar", "Hernandez",null,"F", "yyhernandez.13@gmail.com", 173,"04265121963",false);        
+        ("Yesi","hola","Yesimar", "Hernandez",null,"F", "yyhernandez@gmail.com", 173,"04265121963",false);        
         IngresarUsuario c = FabricaComando.CrearRegUsuario(_usuarioDominio);
         c.ejecutar();
     }
@@ -67,7 +67,7 @@ public class Test_Comandos {
     @Test
     public void pruebaRecuperarContrasena(){
         _comandoAC = new ComandoActualizarCodigo(_usuarioDominio);
-        int codigo = (_comandoAC.recuperarContrasena("yyhernandez.13@gmail.com"));
+        int codigo = (_comandoAC.recuperarContrasena("yyhernandez@gmail.com"));
         assertNotEquals(codigo, 0);
     }
     
@@ -100,6 +100,7 @@ public class Test_Comandos {
     
     //Prueba ComandoActualizarPassword
     //Función: ejecutar
+    //QUIIIIIIIIII
     @Test
     public void pruebaEjecutarComandoActualizarPassword(){
         _comandoAP = new ComandoActualizarPassword(_usuarioDominio);

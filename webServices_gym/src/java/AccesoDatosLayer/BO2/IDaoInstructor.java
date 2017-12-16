@@ -1,5 +1,6 @@
 package AccesoDatosLayer.BO2;
 
+import AccesoDatosLayer.IDao;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  *
  * @author simon
  */
-public interface IDaoInstructor {
+public interface IDaoInstructor extends IDao {
     
     public ArrayList<Instructor> getInstructores();
     public ArrayList<Instructor> getInstructorPorCorreo(String correo);

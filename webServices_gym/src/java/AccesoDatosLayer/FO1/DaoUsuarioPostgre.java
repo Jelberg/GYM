@@ -25,7 +25,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     @Override     
     public String getUsuario( Usuario u){
         try{
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "SELECT * FROM fo_m01_getusuario("+u.getId()+")";
             jsonArray = new ArrayList<>();
             Statement st = conn.createStatement();
@@ -57,7 +57,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
             response = e.getMessage();
         }
         finally {
-            Dao.closePostgreConnection(conn);
+            cerrarConexion(conn);
             return response;
         }
      }
@@ -66,7 +66,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     public String IniciarSesion(Usuario u){
         
         try{
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "SELECT * FROM fo_m01_iniciarsesion('"+u.getUsuario()+"','"+u.getPassword()+"')";
             jsonArray = new ArrayList<>();
             Statement st = conn.createStatement();
@@ -88,7 +88,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
             response = e.getMessage();
         }
         finally {
-            Dao.closePostgreConnection(conn);
+            cerrarConexion(conn);
             return response;
         }
         
@@ -98,7 +98,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     public String get_Usuariocorreo(Usuario u)
     {int x=0;
         try{
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "SELECT * FROM fo_m01_getusuariocorreo('"+u.getCorreo()+"')";
             jsonArray = new ArrayList<>();
             Statement st = conn.createStatement();
@@ -134,7 +134,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
             response = e.getMessage();
         }
         finally {
-            Dao.closePostgreConnection(conn);
+            cerrarConexion(conn);
             return response;
         }
     }
@@ -143,7 +143,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     @Override
     public String Insertar(  Usuario u ){
         try {
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "select * from fo_m01_inserta_usuario('"+u.getNombre()+"', '"+u.getApellido()+"', '"+u.getFecha_nac()+"', '"+u.getSexo()+"', '"+u.getCorreo()+"', '"+u.getUsuario()+"', '"+u.getPassword()+ "', "+u.getEstatura()+", '"+u.getTelefono()+"','"+u.isEntrenador()+"')";
             PreparedStatement st = conn.prepareStatement(query);
             st.executeQuery();           
@@ -165,14 +165,14 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
          return e.getMessage();
         }
         finally {
-            Dao.closePostgreConnection(conn);
+            cerrarConexion(conn);
         }
     }
     
     @Override
     public String updateCodigo(Usuario u ){
         try {
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "select * from fo_m01_update_codigo('"+u.getCorreo()+"','"+u.getCodigo()+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
@@ -188,7 +188,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
          return e.getMessage();
         }
         finally {
-            Dao.closePostgreConnection(conn);
+            cerrarConexion(conn);
         }
     }
     
@@ -196,7 +196,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     public String updatePassword( Usuario u)
     {
         try {
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "select * from fo_m01_update_pass('"+u.getCorreo()+"','"+u.getPassword()+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
@@ -212,7 +212,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
          return e.getMessage();
         }
         finally {
-            Dao.closePostgreConnection(conn);
+            cerrarConexion(conn);
         }
     }
 
@@ -226,7 +226,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     @Override
     public String modificaUsuario(Usuario u) {
         try {
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "select * from fo_m01_modifica_usuario('"+u.getId()+"','"+u.getUsuario()+"','"+u.getPassword()+"','"+u.getNombre()+"','"+u.getApellido()+"','"+u.getSexo()+"','"+u.getTelefono()+"','"+u.getEstatura()+"','"+u.getCorreo()+"','"+u.isEntrenador()+"','"+u.getCodigo()+"')";
             PreparedStatement st = conn.prepareStatement(query); 
             st.executeQuery();           
@@ -247,7 +247,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
          return e.getMessage();
         }
         finally {
-            Dao.closePostgreConnection(conn);
+            cerrarConexion(conn);
         }
     }
 
@@ -263,7 +263,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     public String getUsuarioNomApe( Usuario u){
         
         try{
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "SELECT * FROM fo_m01_get_usuarioNA('"+u.getNombre()+"','"+u.getApellido()+"')";
             jsonArray = new ArrayList<>();
             System.out.println (query);
@@ -288,7 +288,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
             response = e.getMessage();
         }
         finally {
-            Dao.closePostgreConnection(conn);
+            cerrarConexion(conn);
             return response;
         }
     }
@@ -304,7 +304,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     @Override
     public ArrayList<Usuario> getListUsuario() {
         try{
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "SELECT * FROM USUARIO";
             jsonArray = new ArrayList<>();
             PreparedStatement st = conn.prepareStatement(query);
@@ -337,7 +337,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
             response = e.getMessage();
         }
         finally {
-            Dao.closePostgreConnection( conn );
+            cerrarConexion(conn);
             return jsonArray;
         }
     }
@@ -352,7 +352,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     @Override
     public String eliminaUsuario(String s) {
         try{
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "SELECT fo_m01_elimina_usuario(?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setString(1, s);
@@ -369,7 +369,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
             return ( e.getMessage());
         }
         finally {
-            Dao.closePostgreConnection(conn);
+            cerrarConexion(conn);
         }
     }
     

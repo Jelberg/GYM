@@ -25,6 +25,7 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO2.ComandoInsertarEntrenador;
 
 /**
  *
@@ -69,14 +70,31 @@ public class FabricaComando {
         return new ComandoConsultarClase();
     }
     
-    //Crear comando para consultar los entrenadores.
+    /**
+     * Metodo llamado para realizar la consulta de todos los entrenadores.
+     * @return Devuelve un comando para realizar la accion.
+     */
     public static ComandoConsultaEntrenadores instanciaCmdConsultaEntrenadores(){
         return new ComandoConsultaEntrenadores();
     }
     
-    //Crear comando para consultar los entrenadores buscados segun su correo.
+    /**
+     * Metodo llamado para realizar la consulta de un entrenador a traves de
+     * su correo
+     * @param ent Objeto de tipo Entidad en el cual esta encapsulado el correo
+     * del entrenador
+     * @return devuelve un comando para realizar la accion.
+     */
     public static ComandoConsultaEntrenadorCorreo instanciaCmdConsultaEntCorreo( Entidad ent ){
         return new ComandoConsultaEntrenadorCorreo( ent );
+    }
+    /**
+     * Metodo que crea un comando para realizar la insercion a base de datos.
+     * @param ent
+     * @return 
+     */
+    public static ComandoInsertarEntrenador instanciaCmdInsertarEntrenador( Entidad ent ){
+        return new ComandoInsertarEntrenador( ent );
     }
     // Fin Comandos BO2
     
