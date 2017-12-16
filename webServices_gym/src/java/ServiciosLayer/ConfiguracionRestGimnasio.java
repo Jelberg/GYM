@@ -27,12 +27,13 @@ public class ConfiguracionRestGimnasio extends Application{
         HashSet h = new HashSet<Class<?>>();
         h.add(BOm02_Entrenador.class);
         h.add(BO2_Instructor.class);
-        h.add(FO1_Servicios.class);
+        h.add(FOM01_Login.class);
         h.add(FOM01_Usuario.class);
         h.add(FOM01_Usuario_Amigo.class);
         h.add(FO_M04_Comentario.class);
         h.add(FO_M04_Peso.class);
         h.add(FO_M04_Medida.class);
+        h.add(FOM04_Progreso_Peso.class);
 
 
         return h;
