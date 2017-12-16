@@ -8,6 +8,7 @@ package ServiciosLayer;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Usuario;
 import Comun.Excepciones.ParameterNullException;
+import Comun.Util.ConfigurarLogger;
 import Comun.Validaciones.ValidationWS;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
 import LogicaLayer.FO1.ComandoActualizarPassword;
@@ -19,6 +20,8 @@ import com.google.gson.Gson;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -31,8 +34,11 @@ import javax.ws.rs.QueryParam;
  */
 @Path("/Login")
 public class FOM01_Login {
+    
     private Gson gson = new Gson();
     private String response;
+    ConfigurarLogger cl = new ConfigurarLogger();
+    Logger logr = cl.getLogr();
     
     @POST
     @Path("/insertausuario")
@@ -48,6 +54,7 @@ public class FOM01_Login {
                                     @QueryParam("telefono") String telefono,
                                     @QueryParam("entrenador") boolean entrenador){
         Map<String, String> response = new HashMap<String, String>();
+          
         try{    
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("nombre", nombre);
@@ -69,9 +76,13 @@ public class FOM01_Login {
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
+            Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
+            Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return gson.toJson(response);
@@ -105,9 +116,13 @@ public class FOM01_Login {
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+            Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+          Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return response;
@@ -143,9 +158,13 @@ public class FOM01_Login {
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
+            Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
+           Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return gson.toJson(response);
@@ -179,9 +198,13 @@ public class FOM01_Login {
         }
         catch (ParameterNullException e) {
             response.put("id","");
+             Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, "Error");
         }
         catch (Exception e) {
             response.put("id","");
+             Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, "Error");
         }
         finally {
             return gson.toJson(response);
@@ -212,9 +235,13 @@ public class FOM01_Login {
         }
         catch (ParameterNullException e) {
                 response.put("error",e.getMessage());
+                 Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, "Error");
             }
             catch (Exception e) {
                 response.put("error",e.getMessage());
+                 Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, "Error");
             }
             finally {
                 return gson.toJson(response);
