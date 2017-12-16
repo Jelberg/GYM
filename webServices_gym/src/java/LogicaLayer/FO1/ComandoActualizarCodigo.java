@@ -25,7 +25,7 @@ import javax.mail.internet.MimeMessage;
  * @author Miguel
  */
 public class ComandoActualizarCodigo extends Comando{
-     private Usuario _usuario;
+    private Usuario _usuario;
     private String resultado;
 
     public String getResultado() {
@@ -55,19 +55,18 @@ public class ComandoActualizarCodigo extends Comando{
      * @param correo
      * @return Devuelve el codigo o 0 si salio mal algo
      */
-   public int recuperarContrasena( String correo)
-   {
-    int codigo =  randInt(100000,900000);
-    boolean envio = sendEmail(correo,codigo);
-    if (envio==true)
-    {
-        return codigo;
+    public int recuperarContrasena( String correo){
+        int codigo =  randInt(100000,900000);
+        boolean envio = sendEmail(correo,codigo);
+        if (envio==true)
+        {
+            return codigo;
+        }
+        else
+        {
+            return 0;
+        }
     }
-    else
-    {
-        return 0;
-    }
-   }
    
    /**
      * Funcion que recibe como parámetro el correo y el codigo de recuperacion de contrasena del cliente,
@@ -76,8 +75,7 @@ public class ComandoActualizarCodigo extends Comando{
      * @param codigo
      * @return Devuelve verdadero si todo salio bien
      */
-    public boolean sendEmail( String correo, int codigo )
-    {
+    public boolean sendEmail( String correo, int codigo ){
         final String username = "jorgepintomendes22@gmail.com";
         final String password = "mkkdalgddbbocrvt";
         try{
@@ -117,8 +115,7 @@ public class ComandoActualizarCodigo extends Comando{
 		}
             
         }
-        catch (Exception e)
-        {
+        catch (Exception e){
             return false;
         }
     }
@@ -132,10 +129,10 @@ public class ComandoActualizarCodigo extends Comando{
      * @return Devuelve el codigo aleatorio en cuestion
      */
     public static int randInt(int min, int max) {
-    Random rand = new Random();
-    int randomNum = rand.nextInt((max - min) + 1) + min;
-    return randomNum;
-}
+        Random rand = new Random();
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+        return randomNum;
+    }
     
     
     @Override

@@ -5,22 +5,39 @@
  */
 package Comun.Dominio;
 
-import java.sql.Date;
+//import java.sql.Date;
+import java.util.Date;
 
 /**
  *
  * @author Elberg
  */
 public class FabricaEntidad {
+	
+	// Inicia Fabricas de BO1
+	
+	static public Entidad InstanciaEquipo( int id, String nombre){
+        return new Equipo(id, nombre);
+    }
+	
+	static public Entidad InstanciaMaquina( int id, String nombre){
+        return new Maquina(id, nombre);
+    }
+	
+	static public Entidad InstanciaEjercicio( int id, String nombre, String grupoMusc, String equipo, String maquina){
+        return new Ejercicio(id, nombre, grupoMusc, equipo, maquina);
+    }
+	
+	
+	// Fin de BO1
     
     // Inicia Fabricas de BO2
     static public Entidad InstanciaInstructor( int id, String nombre, String apellido,
                                     Date fecha_nac, String sexo, String correo){
         return new Instructor(id, nombre, apellido, fecha_nac, sexo, correo);
     }
-    static public Entidad instanciaEntrenador ( int id, String nombre, String apellido,
-                                    Date fecha_nac, String sexo, String correo, String historial ){
-        return new Entrenador( id, nombre, apellido, fecha_nac, sexo, correo, historial );
+    static public Entidad instanciaEntrenadorCorreo( String correo ){
+        return new Entrenador( correo );
     }
     // Fin de BO2
     

@@ -15,7 +15,20 @@ import java.util.logging.Logger;
  * @author gilbert
  */
 public abstract class Dao implements IDao{
-    private static Connection _conn = null;    
+    private static Connection _conn = null;
+    private static Connection _conInstance;    
+    
+    /**
+     * Metodo para devolver una unica instancia de la conexion (Singleton)
+     * @return instancia de la conexion
+     */
+    public static Connection getConInstance(){
+
+            _conInstance = getPostgreBdConnect();
+
+        return _conInstance;
+    }
+    
     /**
      * Metodo que realiza la conexion con la base de datos
      * @return Conexion hecha a la base de datos

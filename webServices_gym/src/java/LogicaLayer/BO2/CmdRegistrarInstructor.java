@@ -9,11 +9,11 @@ import LogicaLayer.Comando;
  *
  * @author simon
  */
-public class ComandoRegistrarInstructor extends Comando {
+public class CmdRegistrarInstructor extends Comando {
 
     Instructor instructor;
         
-    public ComandoRegistrarInstructor (Instructor instructor){
+    public CmdRegistrarInstructor (Instructor instructor){
         this.instructor = instructor;
     }
     
