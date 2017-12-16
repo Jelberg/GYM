@@ -82,9 +82,6 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
         catch (SQLException e){
             System.out.println(e.getMessage());
         }
-        catch (ParameterNullException e) {
-            System.out.println(e.getMessage());
-        }
         finally {
             Dao.closePostgreConnection( _conn );
         }

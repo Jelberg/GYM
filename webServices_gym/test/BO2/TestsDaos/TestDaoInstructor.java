@@ -3,6 +3,7 @@ package BO2.TestsDaos;
 import AccesoDatosLayer.BO2.DaoInstructorPostgre;
 import AccesoDatosLayer.Dao;
 import Comun.Dominio.Instructor;
+import Comun.Excepciones.ParameterNullException;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,5 +59,12 @@ public class TestDaoInstructor {
         String correo = _lista.get(0).getCorreo();
         assertEquals("a@gmail.com", correo);
     }
+    
+    @Test(expected = ParameterNullException.class)
+    public void NullParameterRegistrarInstructor(){
+        _instructor.setApellido(null);
+        _DaoInstructor.insertar(_instructor);
+    }
+    
     
 }
