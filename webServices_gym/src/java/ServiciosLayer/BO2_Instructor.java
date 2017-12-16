@@ -2,7 +2,7 @@ package ServiciosLayer;
 
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Instructor;
-import Comun.Validaciones.ValidationWS;
+import Comun.Util.ConfigurarLogger;
 import LogicaLayer.BO2.CmdGetInstructorPorCorreo;
 import LogicaLayer.BO2.CmdGetInstructores;
 import LogicaLayer.Comando;
@@ -16,13 +16,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 //import java.sql.Date;
 import java.util.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -80,6 +75,12 @@ public class BO2_Instructor {
     @Path("/getListInstructores")
     @Produces("application/json")
     public String getListInstructor(){
+
+        ConfigurarLogger cl = new ConfigurarLogger();
+        Logger logr = cl.getLogr();
+        logr.log(Level.WARNING, "Prueba Log");
+        
+
         CmdGetInstructores cmd = FabricaComando.instanciaGetInstructores();
         cmd.ejecutar();
         _listaInstructores = cmd.getInstructores();

@@ -1,7 +1,7 @@
-//import Formato './probando.js';
+
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/web/BOM02_Entrenador";
+var url="http://localhost:8080/build/BOM02_Entrenador";
 var correo_busqueda= document.getElementById("text_correo");
 var boton= document.getElementById("boton_consulta");
 var variable;
@@ -21,7 +21,8 @@ window.onload = function mostrartabla()
         
         return respuesta.json();
     } ).then((respuesta) => 
-    {
+    {  
+       console.log(respuesta);
        var contenido= "<link rel='stylesheet' href='../css/styles.css'><link rel='stylesheet' href='./style.css'><link rel='stylesheet' href='../css/font-awesome/css/font-awesome.min.css'><div class='row'><div class='content'><div class='w3-row' ><table class='table table-bordered table-striped'><thead ><tr style='border: 1px solid black; background-color: #008080;'>";
        var fila= respuesta[0];
        var campos = Object.keys(fila);
@@ -52,8 +53,6 @@ window.onload = function mostrartabla()
                     contenido += fila[campos[j]];
                     else
                     {
-                        //let formato = new Formato();
-                        //contenido += formato.cambiarFormato( fila[campos[j]] );
                         contenido +=cambiarFormato( fila[campos[j]] );
                     }
                     contenido += "</td>";
@@ -112,8 +111,9 @@ function buscarEntrenador()
             return respuesta.json();
         } ).then((respuesta) => 
         {
+        console.log(respuesta);
         var contenido= "<link rel='stylesheet' href='../css/styles.css'><link rel='stylesheet' href='./style.css'><link rel='stylesheet' href='../css/font-awesome/css/font-awesome.min.css'><div class='row'><div class='content'><div class='w3-row' ><table class='table table-bordered table-striped'><thead ><tr style='border: 1px solid black; background-color: #008080;'>";
-        var fila= respuesta[0];
+        var fila= respuesta;
 
         if (fila)
         {
@@ -188,5 +188,3 @@ function crud( guardar ){
     document.location.href="./gest_Entrenadores2.html";
 }
     
-
-
