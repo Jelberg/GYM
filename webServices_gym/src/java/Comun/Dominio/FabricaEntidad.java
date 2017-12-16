@@ -21,6 +21,11 @@ public class FabricaEntidad {
     static public Entidad instanciaEntrenadorCorreo( String correo ){
         return new Entrenador( correo );
     }
+    static public Entidad instanciaEntrenador( String nombre, String apellido, 
+                                                Date fecha, String sexo, String correo,
+                                                String historial){
+        return new Entrenador( nombre, apellido, fecha, sexo, correo, historial );
+    }
     // Fin de BO2
     
     // Inicia Fabricas de FOM01

@@ -8,12 +8,19 @@ package ServiciosLayer;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Entrenador;
 import Comun.Dominio.FabricaEntidad;
+import Comun.Excepciones.ParameterNullException;
+import Comun.Validaciones.ValidationWS;
 import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadores;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
+import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -53,6 +60,38 @@ public class BOm02_Entrenador {
         _entrenador = cmd.getEntrenador();
         _response = _gson.toJson( _entrenador );
         return _response;
+    }
+    @POST
+    @Path("/insertarEntrenador")
+    @Produces("application/json")
+    public String insertarEntrenador(@QueryParam("nombre") String nombre,
+                                    @QueryParam("apellido") String apellido,
+                                    @QueryParam("fechanac") String fecha,
+                                    @QueryParam("sexo") String sexo,
+                                    @QueryParam("correo") String correo,
+                                    @QueryParam("historial") String historial
+                                    ){
+        
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("nombre", nombre );
+                put("apellido", apellido );
+                put("fechanac", fecha);
+                put("sexo", sexo );
+                put("correo", correo );
+                put("historial", historial );
+            }});
+            Entidad entrenador = FabricaEntidad.instanciaEntrenador(nombre, apellido,
+                                    Date.valueOf(fecha), sexo, correo, historial);
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            //return gson.toJson(response);
+        }
+        return "";
     }
     
     
