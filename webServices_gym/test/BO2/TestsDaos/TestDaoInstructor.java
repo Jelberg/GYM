@@ -5,6 +5,7 @@ import AccesoDatosLayer.Dao;
 import Comun.Dominio.Instructor;
 import Comun.Excepciones.ParameterNullException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,7 +35,7 @@ public class TestDaoInstructor {
             //Limpiando la lista de instructores
             _lista.clear();
             
-            
+            _DaoInstructor.eliminar("a@gmail.com");
             //Creando un instructor para las pruebas
             SimpleDateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date date = sourceFormat.parse(_fechanacimiento);
@@ -45,12 +46,17 @@ public class TestDaoInstructor {
         }
     }
     
+    /**
+     * Prueba la busqueda exitosa de todos los instructores de la BDD
+     */
     @Test
     public void TestGetInstructores(){
         _lista = _DaoInstructor.getInstructores();
         assertNotNull(_lista);
     }
-    
+    /**
+     * Se comprueba el registro exitoso de un instructor.
+     */
     @Test
     public void TestRegistrarInstructor(){
         _DaoInstructor.insertar(_instructor);
@@ -60,10 +66,21 @@ public class TestDaoInstructor {
         assertEquals("a@gmail.com", correo);
     }
     
-    @Test(expected = ParameterNullException.class)
-    public void NullParameterRegistrarInstructor(){
-        _instructor.setApellido(null);
+    /**
+     * Prueba que dos instructores no puedan tener el mismo correo.
+     * El correo es UNIQUE en la BDD por lo que en DaoPostgre se
+     * captura un SqlException.
+     */
+    @Test
+    public void InstructorRepetido(){
         _DaoInstructor.insertar(_instructor);
+        
+        //Segundo instructor con el mismo correo. 
+        _DaoInstructor.insertar(_instructor);
+        
+        _lista = _DaoInstructor.getInstructorPorCorreo("a@gmail.com");
+        // Solo hay 1 con la direccion "a@gmail.com"
+        assertEquals(1, _lista.size());
     }
     
     

@@ -80,6 +80,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             
         }
         catch (SQLException e){
+            System.out.println("########## INSTRUCTOR REPETIDO");
             System.out.println(e.getMessage());
         }
         finally {
