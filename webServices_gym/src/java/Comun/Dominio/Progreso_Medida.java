@@ -28,6 +28,11 @@ public class Progreso_Medida extends Entidad {
         this._tipo = tipo_Medida;
     }
     
+    public Progreso_Medida(int idUsuario, String tipo_Medida){
+        this._idUsuario = idUsuario;
+        this._tipo = tipo_Medida;
+    }
+    
     public Progreso_Medida(int _idUsuario, int _medida, String _tipo, String _fechaM, String _sobrenombre, int id) {
         super(id);
         this._idUsuario = _idUsuario;

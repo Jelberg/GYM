@@ -29,6 +29,7 @@ import LogicaLayer.BO1.ComandoGetEquipos;
 import LogicaLayer.FOM04.AgregarComentarioComando;
 import LogicaLayer.FOM04.AgregarMedidaComando;
 import LogicaLayer.FOM04.AgregarPesoComando;
+import LogicaLayer.FOM04.ComandoEliminarMedida;
 import LogicaLayer.FOM04.ComandoObtenerComentariosProgMedidas;
 import LogicaLayer.FOM04.ComandoObtenerMedidas;
 import LogicaLayer.FOM04.CompartirProgresoComando;
@@ -168,6 +169,9 @@ public class FabricaComando {
         return new ComandoObtenerComentariosProgMedidas(idUsuario, idProgresoMedida);
     }
     
+    public static ComandoEliminarMedida instanciaEliminarMedida(Progreso_Medida progreso_Medida){
+        return new ComandoEliminarMedida(progreso_Medida);
+    }
     
     // Fin Comando FO_M05
     

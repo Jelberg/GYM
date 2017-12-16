@@ -132,6 +132,10 @@ public class FabricaEntidad {
         return new Progreso_Medida(idUsuario, medida, tipo_medida);
     }
     
+    static public Progreso_Medida InstanciaEliminarMedida(int idUsuario, String tipo_medida){
+        return new Progreso_Medida(idUsuario, tipo_medida);
+    }
+    
     // Fin de M04        
     
 }

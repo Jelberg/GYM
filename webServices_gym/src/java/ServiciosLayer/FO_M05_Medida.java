@@ -8,11 +8,13 @@ package ServiciosLayer;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Progreso_Medida;
 import LogicaLayer.Comando;
+import LogicaLayer.FOM04.ComandoEliminarMedida;
 import LogicaLayer.FOM04.ComandoObtenerMedidas;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.util.ArrayList;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -59,6 +61,18 @@ public class FO_M05_Medida {
         
         return _response;
         
+    }
+    
+    @DELETE
+    @Path("/eliminarMedidas")
+    @Produces("aplication/json")
+    public void eliminarMedida(@QueryParam("id_usuario") int id_usuario,
+                                @QueryParam("tipo_medida") String tipo_medida){
+        Progreso_Medida progreso_Medida = FabricaEntidad.InstanciaEliminarMedida
+                                            (id_usuario, tipo_medida);
+        ComandoEliminarMedida _comando = FabricaComando.instanciaEliminarMedida
+                                        (progreso_Medida);
+        _comando.ejecutar();
     }
     
 }

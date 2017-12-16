@@ -65,7 +65,25 @@ public class DaoMedidaProstgre extends DaoPostgre implements IDaoMedida {
 
     @Override
     public void eliminar(Progreso_Medida progreso_Medida) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            _connection = Dao.getPostgreBdConnect();
+            
+            String _query = "SELECT fo_m04_elimina_medidas("+
+                    progreso_Medida.getIdUsuario()+",'"+
+                    progreso_Medida.getTipo()+"')";
+            
+            PreparedStatement _st = _connection.prepareStatement(_query);
+            
+            _st.executeQuery();
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            Dao.closePostgreConnection( _connection );
+        }
     }
 
     @Override
