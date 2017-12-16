@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
@@ -205,5 +206,16 @@ public class Test_Dao {
           assertNotEquals(_respuesta, 0);
             assertNotNull(_listar);
        
+    }
+         @After
+    public void terminarPrueba(){
+        try {
+            _daousuario.Insertar(_usuario);
+           _respuesta = _daousuario.eliminaUsuario("lvqp.93@gmail.com");
+           
+        }catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        catch (Exception e){}   
     }
 }
