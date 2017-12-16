@@ -15,7 +15,8 @@ import LogicaLayer.Comando;
 import java.util.ArrayList;
 
 /**
- *
+ * A traves de esta clase se realizan los llamados para realizar la consulta
+ * de todos los entrenadores.
  * @author gilbert
  */
 public class ComandoConsultaEntrenadores extends Comando{
@@ -25,9 +26,18 @@ public class ComandoConsultaEntrenadores extends Comando{
         _entrenador = entrenador;
     }
     public ComandoConsultaEntrenadores() {}
+    /**
+     * Metodo que es llamado para obtener la lista de los entrenadores obtenida
+     * de a consulta.
+     * @return Devuelve una lista con todos los entrenadores.
+     */
     public ArrayList<Entrenador> getEntrenadores(){
         return _listaEntrenadores;
     }
+    /**
+     * Metodo que es llamado para realizar la accion, este llama a los objetos
+     * necesarios para realizar la misma.
+     */
     @Override
     public void ejecutar() {
         FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);

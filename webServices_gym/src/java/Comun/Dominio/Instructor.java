@@ -23,6 +23,11 @@ public class Instructor extends Persona implements Serializable {
     public Instructor( int id, String nombre, String apellido, Date fecha_nac, String sexo, String correo) {
         super(id, nombre, apellido, fecha_nac, sexo, correo);
     }
+    
+    public Instructor(String nombre, String apellido, Date fecha_nac, String sexo, String correo) {
+        super(nombre, apellido, fecha_nac, sexo, correo);
+    }
+    
     public Instructor(){}
     
     public Image getFoto() {
