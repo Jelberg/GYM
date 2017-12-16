@@ -34,7 +34,7 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
     @Override
     public ArrayList<Clase> consultarClases() {
         try{
-            
+            _conn = getConexion();
             String query = "SELECT cla_nombre, cla_descripcion FROM clase";
             jsonArray = new ArrayList<>();
             System.out.println (query);
@@ -56,7 +56,7 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
             
         }
         finally {
-           Dao.closePostgreConnection( _conn );
+           cerrarConexion( _conn );
             return jsonArray;
         }
     }

@@ -5,6 +5,7 @@
  */
 package AccesoDatosLayer.BO1;
 
+import AccesoDatosLayer.IDao;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Ejercicio;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author Luis L
  */
-public interface IDaoEjercicioPostgre {
+public interface IDaoEjercicioPostgre extends IDao {
     public ArrayList<Ejercicio> verEjercicios();
     public Entidad Agregar (Entidad ent);
     public Entidad Modificar (Entidad ent);

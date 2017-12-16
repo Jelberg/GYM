@@ -32,7 +32,7 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
     @Override
     public ArrayList<Equipo> consultarEquipos() {
         try{
-            _conn = Dao.getPostgreBdConnect();
+            _conn = super.getConexion();
             String query = "SELECT id, nombre FROM bo_m01_getallequipments;";
             jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
@@ -52,7 +52,7 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
         catch (ParameterNullException e) {
         }
         finally {
-            Dao.closePostgreConnection( _conn );
+            super.cerrarConexion(_conn);
             return jsonArray;
         }
     }
@@ -60,7 +60,7 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
     @Override
     public Entidad consultarEquipoPorId(int id) {
         try{
-            _conn = Dao.getPostgreBdConnect();
+            _conn = super.getConexion();
             String query = "SELECT equ_id, equ_nombre FROM equipo WHERE equ_id = " + id + ";";
             PreparedStatement st = _conn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
@@ -68,7 +68,7 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
             //Verifico si ResultSet esta lleno
             if(rs.first())
             {
-                Dao.closePostgreConnection( _conn );
+                super.cerrarConexion(_conn);
                 return(new Equipo(rs.getInt("EQU_ID"),rs.getString("EQU_NOMBRE")));                       
             }            
         }
@@ -78,7 +78,7 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
         catch (ParameterNullException e) {
         }
         finally {
-            Dao.closePostgreConnection( _conn );
+            super.cerrarConexion(_conn);
             return null;
         }
     } 

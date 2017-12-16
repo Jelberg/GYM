@@ -27,6 +27,7 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO2.ComandoInsertarEntrenador;
 
 /**
  *
@@ -79,6 +80,9 @@ public class FabricaComando {
     //Crear comando para consultar los entrenadores buscados segun su correo.
     public static ComandoConsultaEntrenadorCorreo instanciaCmdConsultaEntCorreo( Entidad ent ){
         return new ComandoConsultaEntrenadorCorreo( ent );
+    }
+    public static ComandoInsertarEntrenador instanciaCmdInsertarEntrenador( Entidad ent ){
+        return new ComandoInsertarEntrenador( ent );
     }
     // Fin Comandos BO2
     

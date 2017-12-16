@@ -20,19 +20,27 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- *
+ * Clase que es utilizada para el manejo de la interaccion con la base de datos
+ * en las tablas referentes al entrenador.
  * @author gilbert
  */
 public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
-    private Connection _conn;
+    private Connection _conn = super.getInstancia();
     private ArrayList<Entrenador> jsonArray;
     public DaoEntrenadorPostgre(){}
-    
+    /**
+     * Metodo que es llamado cuando se desea consultar a un enrenador en particular
+     * @param ent recibe un objeto de tipo entidad en el cual estan encapsulados
+     * los datos necesarios para la consulta.
+     * @return Devuelve un objeto de tipo entidad con los datos del entrenador a
+     * consultar
+     * @see Entidad
+     */
     @Override
     public Entidad consultar(Entidad ent) {
         try{
             String query = "SELECT * FROM bo_m02_get_entrenadores( ? );";
-            _conn = Dao.getPostgreBdConnect();
+            _conn = getConexion();
             Entrenador entrenador = ( Entrenador ) ent;
             jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
@@ -56,11 +64,11 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
                 }
             
         }
-        catch(SQLException | ParameterNullException e) {
+        catch(SQLException e) {
             
         }
         finally {
-            Dao.closePostgreConnection( _conn );
+            cerrarConexion( _conn );
             return jsonArray.get(0);
         }
         
@@ -78,13 +86,33 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
 
     @Override
     public Entidad insertar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            String query = "select * from bo_m02_insertar_entrenador(?,?,?,?,?,?)";
+            _conn = getConexion();
+            Entrenador entrenador = ( Entrenador ) ent;
+            PreparedStatement st = _conn.prepareStatement(query); 
+            st.setString( 1, entrenador.getNombre() );
+            st.setString( 2, entrenador.getApellido() );
+            st.setString( 3, String.valueOf( entrenador.getFecha_nac() ));
+            st.setString( 4, entrenador.getSexo() );
+            st.setString( 5, entrenador.getCorreo() );
+            st.setString( 6, entrenador.getHistorial() );
+            st.executeQuery();
+            ent.setMensaje( "Se ha insertado correctamente." );
+        }
+        catch(SQLException e) {
+            ent.setMensaje( "Error con la conexion, intente de nuevo." );
+        }
+        finally {
+            cerrarConexion( _conn );
+            return ent;
+        }
     }
 
     @Override
     public ArrayList<Entrenador> consultarEntrenadores() {
         try{
-            _conn = Dao.getPostgreBdConnect();
+            _conn = getConexion();
             String query = "SELECT ent_id, ent_nombre, ent_apellido, ent_fecha_nac, ent_sexo, ent_correo, ent_historial FROM entrenador;";
             jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
@@ -105,12 +133,11 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
             
         }
         catch(SQLException e) {
-            
-        }
-        catch (ParameterNullException e) {
+            jsonArray.add( new Entrenador() );
+            jsonArray.get(0).setMensaje( "Error con la conexion, intente de nuevo." );
         }
         finally {
-            Dao.closePostgreConnection( _conn );
+            cerrarConexion( _conn );
             return jsonArray;
         }
     }

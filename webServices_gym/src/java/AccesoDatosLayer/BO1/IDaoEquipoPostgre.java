@@ -5,6 +5,7 @@
  */
 package AccesoDatosLayer.BO1;
 
+import AccesoDatosLayer.IDao;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Equipo;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Luis L
  */
-public interface IDaoEquipoPostgre {
+public interface IDaoEquipoPostgre extends IDao {
     public ArrayList<Equipo> consultarEquipos();
     public Entidad eliminar (Entidad ent);
     public Entidad agregar (Entidad ent);
