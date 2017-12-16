@@ -61,8 +61,25 @@ public class DaoProgresoPesoPostgre extends DaoPostgre implements IDaoProgresoPe
     }
 
     @Override
-    public void eliminar(Progreso_Peso progreso_Peso) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void eliminar(int idUsuario) {
+        try {
+            _connection = Dao.getPostgreBdConnect();
+            
+            String _query = "SELECT fo_m04_elimina_progresop("+idUsuario+")";
+            
+            PreparedStatement _st = _connection.prepareStatement(_query);
+            
+            _st.executeQuery();
+            
+        } catch ( SQLException e ) {
+            System.out.println(e.getMessage());
+        }
+        catch ( ParameterNullException e ) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            Dao.closePostgreConnection( _connection );
+        }
     }
     
 }

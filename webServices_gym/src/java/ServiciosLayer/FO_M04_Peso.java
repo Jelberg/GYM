@@ -8,9 +8,11 @@ package ServiciosLayer;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Progreso_Peso;
 import LogicaLayer.Comando;
+import LogicaLayer.FOM04.ComandoEliminarPeso;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.util.ArrayList;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -38,6 +40,17 @@ public class FO_M04_Peso {
                 FabricaEntidad.InstanciaActualizarPeso(id_usuario, peso);
         
         Comando _comando = FabricaComando.actualizarPesoComando(_progresoPeso);
+        _comando.ejecutar();
+        
+    }
+    
+    @DELETE
+    @Path("eliminarPeso")
+    @Produces("aplication/json")
+    public void eliminarPeso(@QueryParam( "id_usuario" ) int id_usuario){
+        
+        ComandoEliminarPeso _comando = FabricaComando.InstanciaEliminarPeso(id_usuario);
+        
         _comando.ejecutar();
         
     }

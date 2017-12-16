@@ -16,7 +16,7 @@ public interface IDaoProgresoPeso{
     
     public ArrayList<Progreso_Peso> getPesos();
     public void insertar(Progreso_Peso progreso_Peso);
-    public void eliminar(Progreso_Peso progreso_Peso);
+    public void eliminar(int idUsuario);
     public void actualizar(Progreso_Peso progreso_Peso);
     
 }

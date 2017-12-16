@@ -31,6 +31,7 @@ import LogicaLayer.FOM04.AgregarMedidaComando;
 import LogicaLayer.FOM04.AgregarPesoComando;
 import LogicaLayer.FOM04.ComandoConsultarMedidasAnual;
 import LogicaLayer.FOM04.ComandoEliminarMedida;
+import LogicaLayer.FOM04.ComandoEliminarPeso;
 import LogicaLayer.FOM04.ComandoObtenerComentariosProgMedidas;
 import LogicaLayer.FOM04.ComandoObtenerMedidas;
 import LogicaLayer.FOM04.CompartirProgresoComando;
@@ -177,6 +178,10 @@ public class FabricaComando {
     public static ComandoConsultarMedidasAnual instanciaObtenerMedidasAnual
         (Progreso_Medida progreso_Medida){
         return new ComandoConsultarMedidasAnual(progreso_Medida);
+    }
+        
+    public static ComandoEliminarPeso InstanciaEliminarPeso(int idUsuario){
+        return new ComandoEliminarPeso(idUsuario);
     }
     
     // Fin Comando FO_M05
