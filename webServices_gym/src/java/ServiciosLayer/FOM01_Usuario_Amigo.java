@@ -69,6 +69,9 @@ public class FOM01_Usuario_Amigo {
     }
     
     /**
+     * Funcion que recibe como parámetro el ID del Usuario,
+     * para consultar sus amigos.
+     * @param idUsuario ID del Usuario.
      * @return Devuelve una lista de amigos.
     */
     @GET

@@ -1,5 +1,6 @@
 package AccesoDatosLayer;
 
+import AccesoDatosLayer.BO2.DaoClasePostgre;
 import AccesoDatosLayer.BO2.DaoEntrenadorPostgre;
 import AccesoDatosLayer.BO2.DaoInstructorPostgre;
 import AccesoDatosLayer.BO2.IDaoInstructor;
@@ -13,6 +14,8 @@ import AccesoDatosLayer.BO1.DaoMaquinaPostgre;
 import AccesoDatosLayer.BO1.IDaoEquipo;
 import AccesoDatosLayer.BO1.IDaoEjercicio;
 import AccesoDatosLayer.BO1.IDaoMaquina;
+import AccesoDatosLayer.FOM04Postgre.DaoProgresoPeso;
+import AccesoDatosLayer.FOM04Postgre.IDaoProgresoPeso;
 
 /**
  *
@@ -47,6 +50,11 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
     public DaoEntrenadorPostgre instanciaDaoEntrenador(){
         return new DaoEntrenadorPostgre();
     }
+    
+    
+    public DaoClasePostgre instanciaDaoClase(){
+        return new DaoClasePostgre();
+    }
     // Fin Daos BO2
     
     // Inicio Daos FO1
@@ -60,6 +68,14 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
         return new DaoUsuarioAmigoPostgre();
     }
     // Fin Daos F01
+
+    //INICIO FO4
+    public DaoProgresoPeso getDaoProgresoPeso(){
+        return new DaoProgresoPeso();
+    }
+
+    
+    //FIN FO4
 
     
 }

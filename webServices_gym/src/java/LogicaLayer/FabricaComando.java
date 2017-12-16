@@ -1,17 +1,22 @@
 package LogicaLayer;
 
+import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
+import Comun.Dominio.Progreso_Peso;
 import Comun.Dominio.Usuario;
-import LogicaLayer.BO2.ActualizarInstructor;
+import LogicaLayer.FO4.*;
+import LogicaLayer.BO2.CmdActualizarInstructor;
 import Comun.Dominio.Usuario_Amigo;
-import LogicaLayer.BO2.ComandoGetEntrenadores;
-import LogicaLayer.BO2.ComandoGetInstructorPorCorreo;
+import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
+import LogicaLayer.BO2.ComandoConsultaEntrenadores;
+import LogicaLayer.BO2.ComandoConsultarClase;
+import LogicaLayer.BO2.CmdGetInstructorPorCorreo;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
 import LogicaLayer.FO1.ComandoActualizarPassword;
 import LogicaLayer.FO1.ComandoGetCorreo;
 import LogicaLayer.FO1.ComandoIniciarSesion;
-import LogicaLayer.BO2.ComandoGetInstructores;
-import LogicaLayer.BO2.ComandoRegistrarInstructor;
+import LogicaLayer.BO2.CmdGetInstructores;
+import LogicaLayer.BO2.CmdRegistrarInstructor;
 import LogicaLayer.FO1.ComandoEliminaUsuario;
 import LogicaLayer.FO1.ComandoEliminaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoGetUsuario;
@@ -22,6 +27,7 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO2.ComandoInsertarEntrenador;
 
 /**
  *
@@ -42,29 +48,56 @@ public class FabricaComando {
     
     // Crear comando para registrar un instructor.
     public static Comando CrearRegInstructor (Instructor instructor){
-        return new ComandoRegistrarInstructor(instructor);
+        return new CmdRegistrarInstructor(instructor);
     }
     // Crear comando para leer lista de todos los instructores.
-    public static ComandoGetInstructores instanciaGetInstructores(){
-        return new ComandoGetInstructores();
+    public static CmdGetInstructores instanciaGetInstructores(){
+        return new CmdGetInstructores();
     }
     
     // Crear comando para buscar un instructor dado su correo.
-    public static ComandoGetInstructorPorCorreo instanciaInstructorPorCorreo(String correo){
-        return new ComandoGetInstructorPorCorreo(correo);
+    public static CmdGetInstructorPorCorreo instanciaInstructorPorCorreo(String correo){
+        return new CmdGetInstructorPorCorreo(correo);
     }
     
     // Crear comando para actualizar los datos de un instructor.
-    public static ActualizarInstructor instanciaActualizarInstructor(
+    public static CmdActualizarInstructor instanciaActualizarInstructor(
     String nombre, String apellido, String fecha, String sexo, String correo){
-        return new ActualizarInstructor(
+        return new CmdActualizarInstructor(
             nombre, apellido, fecha, sexo, correo);
     }
-            
-    public static ComandoGetEntrenadores instanciaCmdGetEntrenadores(){
-        return new ComandoGetEntrenadores();
+
+    //Crear comando para consultar las clases.
+    public static ComandoConsultarClase instanciaCmdConsultaClase(){
+        return new ComandoConsultarClase();
     }
-	
+    
+    /**
+     * Metodo llamado para realizar la consulta de todos los entrenadores.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoConsultaEntrenadores instanciaCmdConsultaEntrenadores(){
+        return new ComandoConsultaEntrenadores();
+    }
+    
+    /**
+     * Metodo llamado para realizar la consulta de un entrenador a traves de
+     * su correo
+     * @param ent Objeto de tipo Entidad en el cual esta encapsulado el correo
+     * del entrenador
+     * @return devuelve un comando para realizar la accion.
+     */
+    public static ComandoConsultaEntrenadorCorreo instanciaCmdConsultaEntCorreo( Entidad ent ){
+        return new ComandoConsultaEntrenadorCorreo( ent );
+    }
+    /**
+     * Metodo que crea un comando para realizar la insercion a base de datos.
+     * @param ent
+     * @return 
+     */
+    public static ComandoInsertarEntrenador instanciaCmdInsertarEntrenador( Entidad ent ){
+        return new ComandoInsertarEntrenador( ent );
+    }
     // Fin Comandos BO2
     
     // comandos FOM01
@@ -130,5 +163,45 @@ public class FabricaComando {
     }
     
     //Fin Comandos FOM01
+    
+    //INICIO F04
+ 
+    /**
+     * instancia del comando para agregar peso
+     * @return Agregar
+     */
+    public static AgregarPesoComando instanciaCmdAgregarPeso (Entidad pp){
+        return new AgregarPesoComando(pp);
+    }
+    
+    /**
+     * instancia del comando para consultar el progreso del peso
+     * @param pp
+     * @return 
+     */
+     public static ConsultarProgresoPesoComando instanciaCmdConsultarProgresoPeso (int pp){
+        return new ConsultarProgresoPesoComando(pp);
+    }
+    
+     /**
+      * Instancia del comando para eliminar el peso
+      * @param id
+      * @return 
+      */
+     public static EliminarPesoComando instanciaCmdEliminarProgresoPeso (int id){
+        return new EliminarPesoComando(id);
+    }
+     
+     /**
+      * instancia del comando para la actualizacion del peso del usuario
+      * @param pp
+      * @return 
+      */
+     public static ActualizarPesoComando instanciaCmdActializarProgresoPeso (Entidad pp){
+        return new ActualizarPesoComando(pp);
+    }
+    //FIN F04
+
+   
     
 }

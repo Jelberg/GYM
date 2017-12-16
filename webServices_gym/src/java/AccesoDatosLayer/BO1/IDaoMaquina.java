@@ -5,6 +5,7 @@
  */
 package AccesoDatosLayer.BO1;
 
+import AccesoDatosLayer.IDao;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Maquina;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Daniel Goncalves
  */
-public interface IDaoMaquina {
+public interface IDaoMaquina extends IDao {
     public ArrayList<Maquina> consultarMaquinas();
     public Entidad eliminar( Entidad ent );
     public Entidad modificar( Entidad ent );
