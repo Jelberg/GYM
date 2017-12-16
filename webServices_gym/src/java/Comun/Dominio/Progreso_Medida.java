@@ -22,6 +22,10 @@ public class Progreso_Medida extends Entidad {
         
     }
     
+    public Progreso_Medida(String sobrenombre){
+        this._sobrenombre = sobrenombre;
+    }
+    
     public Progreso_Medida(int idUsuario, int medida, String tipo_Medida){
         this._idUsuario = idUsuario;
         this._medida = medida;

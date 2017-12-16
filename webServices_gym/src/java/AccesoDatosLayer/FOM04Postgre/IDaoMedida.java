@@ -6,6 +6,7 @@
 package AccesoDatosLayer.FOM04Postgre;
 
 import Comun.Dominio.Progreso_Medida;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -18,5 +19,7 @@ public interface IDaoMedida {
     public void insertar(Progreso_Medida progreso_Medida);
     public void eliminar(Progreso_Medida progreso_Medida);
     public void actualizar(Progreso_Medida progreso_Medida);
+    public ArrayList<Progreso_Medida> getMedidasAnuales
+        (Progreso_Medida sobrenombre,String fechaini, String fechafin);
     
 }

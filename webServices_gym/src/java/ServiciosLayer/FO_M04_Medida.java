@@ -8,6 +8,7 @@ package ServiciosLayer;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Progreso_Medida;
 import LogicaLayer.Comando;
+import LogicaLayer.FOM04.ComandoConsultarMedidasAnual;
 import LogicaLayer.FOM04.ComandoEliminarMedida;
 import LogicaLayer.FOM04.ComandoObtenerMedidas;
 import LogicaLayer.FabricaComando;
@@ -26,7 +27,7 @@ import javax.ws.rs.QueryParam;
  * @author Leonardo
  */
 @Path("/F0M04_Progreso_Medida")
-public class FO_M05_Medida {
+public class FO_M04_Medida {
     
     private Connection _connection;
     private Gson _gson = new Gson();
@@ -73,6 +74,25 @@ public class FO_M05_Medida {
         ComandoEliminarMedida _comando = FabricaComando.instanciaEliminarMedida
                                         (progreso_Medida);
         _comando.ejecutar();
+    }
+    
+    @GET
+    @Path("/getMedidasDelAno")
+    @Produces("aplication/json")
+    public String obtenerMedidasDelAno(@QueryParam("sobrenombre") String sobrenombre){
+        Progreso_Medida _progreso_medida = 
+                FabricaEntidad.InstanciaConsultarMedidasAnuales(sobrenombre);
+        ComandoConsultarMedidasAnual _comando = 
+                FabricaComando.instanciaObtenerMedidasAnual(_progreso_medida);
+        
+        _comando.ejecutar();
+        
+        _jsonArray = _comando.obtenerMedidasAnuales();
+        
+        _response = _gson.toJson(_jsonArray);
+        
+        return _response;
+        
     }
     
 }

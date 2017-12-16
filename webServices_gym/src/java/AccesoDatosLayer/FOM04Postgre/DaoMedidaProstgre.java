@@ -11,6 +11,7 @@ import Comun.Dominio.Entidad;
 import Comun.Dominio.Progreso_Medida;
 import Comun.Excepciones.ParameterNullException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -107,6 +108,45 @@ public class DaoMedidaProstgre extends DaoPostgre implements IDaoMedida {
         }
         finally {
             Dao.closePostgreConnection( _connection );
+        }
+    }
+
+    @Override
+    public ArrayList<Progreso_Medida> getMedidasAnuales(Progreso_Medida progreso_Medida, String fechaini, String fechafin) {
+        try {
+            _connection = Dao.getPostgreBdConnect();
+            
+            String _query = "select * from m04_get_medidas_ano('"+
+                            progreso_Medida.getSobrenombre()+"','"+fechaini
+                            +"','"+fechafin+"')";
+            
+            PreparedStatement _st = _connection.prepareStatement(_query);
+            
+            ResultSet _rs;
+            
+            for(int i=1; i<=11; i++)
+            {
+                _rs = _st.executeQuery();
+                jsonArray.add(new Progreso_Medida());
+                if(_rs.wasNull()){
+                    jsonArray.get(jsonArray.size() - 1).setMedida(0);
+                    jsonArray.get(jsonArray.size() - 1).setFechaM(fechaini);
+                }else{
+                    while (_rs.next()) {
+                        jsonArray.get(jsonArray.size() - 1).setMedida(_rs.getInt("medida"));
+                        jsonArray.get(jsonArray.size() - 1).setFechaM(fechaini);
+                    }
+                }
+            }
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            Dao.closePostgreConnection( _connection );
+            return jsonArray;
         }
     }
     

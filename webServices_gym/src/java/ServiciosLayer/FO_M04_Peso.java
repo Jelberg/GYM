@@ -21,7 +21,7 @@ import javax.ws.rs.QueryParam;
  * @author Leonardo
  */
 @Path("/F0M04_Progreso_Peso")
-public class FO_M05_Peso {
+public class FO_M04_Peso {
     
     private Gson _gson = new Gson();
     private String _response;
