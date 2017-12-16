@@ -7,13 +7,24 @@ package ServiciosLayer;
 
 import Comun.Dominio.Clase;
 import Comun.Dominio.Entidad;
+import Comun.Dominio.FabricaEntidad;
+import Comun.Excepciones.ParameterNullException;
+import Comun.Validaciones.ValidationWS;
 import LogicaLayer.BO2.ComandoConsultarClase;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import static javax.swing.UIManager.put;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 /**
  *
@@ -37,4 +48,36 @@ public class BO2_Clase {
         return _response;
     }
     
+    @POST
+    @Path("/insertaClase")
+    @Produces("application/json")
+    public String insertaClase(  @QueryParam("nombre") String nombre,
+                                 @QueryParam("descripcion") String descripcion){
+
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("nombre", nombre );
+                put("descripcion", descripcion );
+            }});
+            
+            Entidad clase = FabricaEntidad.instanciaInsertarClase(nombre, descripcion);
+            
+           
+            }
+        
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            
+            return _gson.toJson(response);
+        }
+    
+    }
+ 
 }

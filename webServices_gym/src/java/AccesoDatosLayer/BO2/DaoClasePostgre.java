@@ -11,7 +11,9 @@ import AccesoDatosLayer.IDao;
 import Comun.Dominio.Clase;
 import Comun.Dominio.Entidad;
 import Comun.Excepciones.ParameterNullException;
+import com.google.gson.reflect.TypeToken;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -80,7 +82,29 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
      */
     @Override
     public Entidad insertar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     
+      try{
+            String query = "select * from bo_m02_inserta_clase(?,?)";
+            _conn = getConexion();
+            Clase clase = ( Clase ) ent;
+            PreparedStatement st = _conn.prepareStatement(query);
+            java.lang.reflect.Type type = new TypeToken<Clase[]>(){}.getType();
+                st.setString(1, clase.getNombre());
+                st.setString(2, clase.getDescripcion());
+                st.executeQuery();
+            
+            ent.setMensaje("Se insertaron las clases.");
+        }
+        catch (SQLException e){
+            ent.setMensaje( "Error con la conexion, intente de nuevo." );
+        }
+        catch (ParameterNullException e) {
+            ent.setMensaje( "Error al ingresa valor, intente de nuevo." );
+        }
+        finally {
+            cerrarConexion(_conn);
+            return ent;
+        }
     }
     /**
      * Metodo que sera llamado cuando se desee modificar una clase.

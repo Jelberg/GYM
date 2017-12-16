@@ -44,17 +44,6 @@ public class FabricaEntidad {
                                                 String historial){
         return new Entrenador( nombre, apellido, fecha, sexo, correo, historial );
     }
-    static public Entidad instanciaClase (int id, String nombre, 
-            String descripcion, String Instructor,Date fecha, Date horaInicio, 
-            Date horaFin, int capacidad){
-        return new Clase (nombre, descripcion, Instructor,
-      fecha, horaInicio, horaFin, capacidad);
-    
-    }
-    
-    static public Entidad instanciaInsertarClase(String nombre, String descripcion){
-            return new Clase(nombre, descripcion);
-    }
     // Fin de BO2
     
     // Inicia Fabricas de FOM01

@@ -25,6 +25,7 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
 
 /**
@@ -68,6 +69,10 @@ public class FabricaComando {
     //Crear comando para consultar las clases.
     public static ComandoConsultarClase instanciaCmdConsultaClase(){
         return new ComandoConsultarClase();
+    }
+    
+    public static ComandoInsertarClase instanciaCmdInsertaClase( Entidad ent){
+        return new ComandoInsertarClase( ent );
     }
     
     /**
