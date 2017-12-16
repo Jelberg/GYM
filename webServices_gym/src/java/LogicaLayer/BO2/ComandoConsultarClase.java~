@@ -25,7 +25,7 @@ public class ComandoConsultarClase extends Comando {
         _clase = clase;
     }
     public ComandoConsultarClase() {}
-    public ArrayList<Clase> consultarClase(){
+    public ArrayList<Clase> consultarEntrenadores(){
         return _listaClase;
     }
 
