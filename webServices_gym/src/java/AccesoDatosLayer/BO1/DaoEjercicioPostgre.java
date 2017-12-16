@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.ws.rs.PUT;
 
 /**
  *
@@ -108,8 +109,7 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
                 st.setInt( 1 , ent.getId() );
                 st.setString( 2 , ent.getNombre() );
                 st.setString( 3 , ent.getGrupoMuscular() );
-                st.executeQuery();
-                response.put("Se ha insertado un ejercicio");    
+                st.executeQuery();    
             
         }
         catch (SQLException e){

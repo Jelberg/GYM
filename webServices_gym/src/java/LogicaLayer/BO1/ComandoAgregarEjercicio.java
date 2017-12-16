@@ -19,14 +19,14 @@ import java.util.ArrayList;
  * @author Luis L
  */
 public class ComandoAgregarEjercicio extends Comando {
-    private Entidad _ejercicio;
+    private Entidad ejercicio;
 
     /**
      *
      * @param ejercicio
      */
     public ComandoAgregarEjercicio(Entidad ejercicio) {
-       this._ejercicio = ejercicio;
+       this.ejercicio = ejercicio;
     
     }
         
@@ -34,7 +34,7 @@ public class ComandoAgregarEjercicio extends Comando {
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
         IDaoEjercicio dao = fab.getDaoEjercicio();
-        dao.agregar(_ejercicio);
+        dao.agregar(ejercicio);
     }
     
     
