@@ -3,19 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LogicaLayer.FOM04;
+package LogicaLayer.FO4;
 
+import AccesoDatosLayer.FabricaAbstracta;
+import AccesoDatosLayer.FabricaDaoPostgre;
 import LogicaLayer.Comando;
 
 /**
  *
- * @author Elberg
+ * @author elberg
  */
-public class AgregarMedidaComando extends Comando {
+
+public class ConsultarProgresoPesoComando extends Comando {
 
     @Override
     public void ejecutar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
     }
-
+    
 }

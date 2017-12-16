@@ -114,9 +114,17 @@ public class FabricaEntidad {
     // Fin de FOM01
     
     // Inicia Fabricas de M04
-    /*static public Entidad InstaciaProgresoPeso(int id, int peso, Date fechaP, String sobrenombre){
-    return new Progreso_Peso(id, peso, fechaP,sobrenombre);
-    }*/
+    /**
+     * Intancia de la clase Progreso_Peso
+     * @param id
+     * @param peso
+     * @param fechaP
+     * @param sobrenombre
+     * @return 
+     */
+    static public Entidad InstaciaProgresoPeso(int id, int peso, Date fechaP, String sobrenombre){
+    return new Progreso_Peso(id, peso, (java.sql.Date) fechaP,sobrenombre);
+    }
     // Fin de M04        
     
 }

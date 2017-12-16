@@ -5,10 +5,13 @@
  */
 package AccesoDatosLayer.FOM04Postgre;
 
+import AccesoDatosLayer.IDao;
+import Comun.Dominio.Entidad;
+
 /**
  *
  * @author Elberg
  */
-public class DaoProgresoPesoPostgre {
-    
+public interface IDaoProgresoPeso extends IDao{
+    public Entidad consultarProgresoPeso(int idusuario);
 }

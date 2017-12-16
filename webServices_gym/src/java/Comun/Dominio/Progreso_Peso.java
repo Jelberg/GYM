@@ -6,36 +6,26 @@
 package Comun.Dominio;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
-/**
- *
- * @author marvian
- */
+
+
 public class Progreso_Peso extends Entidad{
-    private int _id;
+
     private int _peso;
     private Date _fechaP;
     private String _sobrenombre;
 
-    public Progreso_Peso(int id) {
-        super(id);
-    }
-
-    /*Progreso_Peso(int id, int peso, Date fechaP, String sobrenombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
     
-    /*public Progreso_Peso(){    
+    public Progreso_Peso(){
     }
-
-    public Progreso_Peso(int id, int peso, Date fechaP,
-    String sobrenombre){
-        this._id = id;
+    
+    public Progreso_Peso(int id, int peso, Date fechaP, String sobrenombre) {
+        super(id);
         this._peso = peso;
         this._fechaP = fechaP;
         this._sobrenombre = sobrenombre;
-    }*/
+    }
+
     /**
      * @return the _id
      */

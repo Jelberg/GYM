@@ -3,6 +3,7 @@ package LogicaLayer;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
 import Comun.Dominio.Usuario;
+import LogicaLayer.FO4.*;
 import LogicaLayer.BO2.CmdActualizarInstructor;
 import Comun.Dominio.Usuario_Amigo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
@@ -143,5 +144,16 @@ public class FabricaComando {
     }
     
     //Fin Comandos FOM01
+    
+    //INICIO F04
+    /**
+     * Metodo que devuelve la instancia del comando Para la consulta del progreso del peso
+     * @return comando progreso del peso
+     */
+    public static ConsultarProgresoPesoComando instanciaCmdConsultarProgresoPeso (){
+        return new ConsultarProgresoPesoComando();
+    }
+    
+    //FIN F04
     
 }
