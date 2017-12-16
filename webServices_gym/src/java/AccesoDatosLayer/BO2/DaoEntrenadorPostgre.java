@@ -25,7 +25,7 @@ import java.util.Date;
  * @author gilbert
  */
 public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
-    private Connection _conn = super.getInstancia();
+    private Connection _conn = getInstancia();
     private ArrayList<Entrenador> jsonArray;
     public DaoEntrenadorPostgre(){}
     /**
