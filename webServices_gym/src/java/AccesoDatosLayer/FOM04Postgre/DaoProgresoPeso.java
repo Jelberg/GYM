@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -25,9 +26,9 @@ import java.util.HashMap;
  */
 public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
     private Connection _conn;
-    private String response;
-    private ArrayList<Progreso_Peso> jsonArray;
+    private ArrayList<Progreso_Peso> _jsonArray;
     private Entidad _progresoPeso;
+    private ArrayList<Progreso_Peso> _aux;
     
     
     /**
@@ -37,36 +38,72 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
      */
     @Override
     public Entidad consultar(Entidad ent) {
-      
+        return null;
     }
 
+    /**
+     * Realiza la consulta a la bd y usa el stored procedure para el prgreso del peso
+     * @param id_usuario
+     * @return ArrayList del tipo progreso_peso 
+     */
     @Override
-    public Entidad consultarProgresoPeso(int id_usuario) {
+    public ArrayList<Progreso_Peso> consultarProgresoPeso(int id_usuario) {
        try{
-            
-             
+           _conn = Dao.getPostgreBdConnect();
             String query = "SELECT * FROM fo_m04_get_progresop(?)";
-            jsonArray = new ArrayList<>();
+            _jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
             st.setInt( 1 , id_usuario );
             ResultSet rs = st.executeQuery();
             
             while( rs.next() ){
-                jsonArray.add( new Progreso_Peso() );
-                jsonArray.get( jsonArray.size() - 1 ).setPeso( rs.getInt( "peso" ) );
-                jsonArray.get( jsonArray.size() - 1 ).setFechaP(rs.getDate( "fecha" ) );
-                jsonArray.get( jsonArray.size() - 1 ).setId( rs.getInt( "id" ) );
+                _jsonArray.add( new Progreso_Peso() );
+                _jsonArray.get( _jsonArray.size() - 1 ).setPeso( rs.getInt( "peso" ) );
+                _jsonArray.get( _jsonArray.size() - 1 ).setFechaP(rs.getDate( "fecha" ) );
+                _jsonArray.get( _jsonArray.size() - 1 ).setId( rs.getInt( "id" ) );
             }
-            ArrayList<Progreso_Peso> aux;
-            aux = CompararProgreso.compararProgresoPeso( jsonArray );
+            
+            _aux = CompararProgreso.compararProgresoPeso( _jsonArray );
             
         }
         catch ( SQLException e ) {
-            response = e.getMessage();
+            
         }
         finally {
             Dao.closePostgreConnection(_conn);
+            return _aux;
         } 
+    }
+
+    /**
+     * Conexion a la base de datos para agregar peso al usuario
+     * @return 
+     */
+    @Override
+    public String agregarPeso(Entidad _pp) {
+         Progreso_Peso pp = (Progreso_Peso) _pp;
+        try {
+           
+                _conn = Dao.getPostgreBdConnect();
+                String query = "select * from fo_m04_insert_progresop(?,?);";
+                PreparedStatement st = _conn.prepareStatement( query );
+                st.setInt( 1 , pp.getId() );
+                st.setInt( 2 , pp.getPeso() );
+                st.executeQuery();
+                
+                return "PESO AGREGADO";
+            
+        }
+        catch (SQLException e){
+            //response.put( "error", e.getMessage() );
+            return null;
+        }
+        
+        finally {
+            Dao.closePostgreConnection(_conn);
+            
+        }
+        
     }
  
 }

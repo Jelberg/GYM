@@ -125,6 +125,10 @@ public class FabricaEntidad {
     static public Entidad InstaciaProgresoPeso(int id, int peso, Date fechaP, String sobrenombre){
     return new Progreso_Peso(id, peso, (java.sql.Date) fechaP,sobrenombre);
     }
+    
+    static public Entidad InstaciaProgresoPeso(int id, int peso){
+    return new Progreso_Peso(id, peso);
+    }
     // Fin de M04        
     
 }

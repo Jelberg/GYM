@@ -26,6 +26,11 @@ public class Progreso_Peso extends Entidad{
         this._sobrenombre = sobrenombre;
     }
 
+    Progreso_Peso(int id, int peso) {
+        super(id);
+        this._peso=peso;
+    }
+
     /**
      * @return the _id
      */

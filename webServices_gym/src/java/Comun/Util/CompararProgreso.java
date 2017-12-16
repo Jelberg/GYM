@@ -6,7 +6,11 @@
 package Comun.Util;
 
 import Comun.Dominio.Progreso_Peso;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -32,4 +36,29 @@ public class CompararProgreso {
         }
         return aux;
     }
+    
+    /**
+     * Funcion que se llama para comprobar que el usuario no tenga ningun
+     * registro de pesos en el dia actual, retorna verdadero si el usuario
+     * ya posee un registro, falso de lo contrario.
+     * @param idUsuario identificador del usuario
+     * @return 
+     */
+    /*public boolean comprobarInsercion( int idUsuario){
+        ArrayList<Progreso_Peso> progresoPeso = new ArrayList<Progreso_Peso>();
+        Gson gson = new Gson();
+        String respuesta = getProgresoP( idUsuario );
+        progresoPeso = gson.fromJson( respuesta, new TypeToken<List<Progreso_Peso>>(){}.getType());
+        SimpleDateFormat sdft = new SimpleDateFormat( "yyyy-MM-dd" );
+        java.util.Date fecha = new java.util.Date();
+        String fechaActual = sdft.format( fecha );
+        int tamanoArreglo = progresoPeso.size();
+        java.util.Date ultimoProgreso = progresoPeso.get( tamanoArreglo - 1).getFechaP();
+        if ( fechaActual.equals( String.valueOf( ultimoProgreso ) ) ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }*/
 }

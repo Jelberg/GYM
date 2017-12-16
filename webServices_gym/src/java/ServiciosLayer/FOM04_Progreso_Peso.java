@@ -5,7 +5,12 @@
  */
 package ServiciosLayer;
 
+import Comun.Dominio.Entidad;
+import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Progreso_Peso;
+import LogicaLayer.Comando;
+import LogicaLayer.FO4.AgregarPesoComando;
+import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -20,8 +25,8 @@ import javax.ws.rs.QueryParam;
  */
 @Path("/F0M04_Progreso_Peso")
 public class FOM04_Progreso_Peso {
-    private Gson gson = new Gson();
-    private String response;
+    private Gson _gson = new Gson();
+    private String _response;
     private ArrayList<Progreso_Peso> jsonArray;
     
     @GET
@@ -33,4 +38,16 @@ public class FOM04_Progreso_Peso {
         
     }
     
+    @GET
+    @Path( "/insertaProgresoPeso" )
+    @Produces( "application/json" )
+    public String insertaPeso( @QueryParam ( "id_usuario" ) int id_usuario,
+                               @QueryParam ( "peso" ) int peso ){
+        Entidad progresoPeso = FabricaEntidad.InstaciaProgresoPeso(id_usuario, peso);
+        Comando comando = FabricaComando.instanciaCmdAgregarPeso(progresoPeso);
+        AgregarPesoComando cmd = (AgregarPesoComando) comando;
+        cmd.ejecutar();
+        _response = cmd.getResultado();
+        return _gson.toJson( _response );
+    }
 }

@@ -2,6 +2,7 @@ package LogicaLayer;
 
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
+import Comun.Dominio.Progreso_Peso;
 import Comun.Dominio.Usuario;
 import LogicaLayer.FO4.*;
 import LogicaLayer.BO2.CmdActualizarInstructor;
@@ -152,6 +153,14 @@ public class FabricaComando {
      */
     public static ConsultarProgresoPesoComando instanciaCmdConsultarProgresoPeso (){
         return new ConsultarProgresoPesoComando();
+    }
+    
+    /**
+     * instancia del comando para agregar peso
+     * @return Agregar
+     */
+    public static AgregarPesoComando instanciaCmdAgregarPeso (Entidad pp){
+        return new AgregarPesoComando(pp);
     }
     
     //FIN F04
