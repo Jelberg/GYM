@@ -19,12 +19,20 @@ import java.util.logging.Logger;
 public abstract class DaoPostgre extends Dao{
     private static Connection _conn = null;
     private static Connection _conInstance;
-    
+    /**
+     * Metodo que es llamado para obtener la instancia de la conexion a la base
+     * de datos
+     * @return Devuelve la instancia de la conexion a la base de datos
+     */
     @Override
     public Connection getInstancia(){
         _conInstance = getConexion();
         return _conInstance;
     }
+    /**
+     * Metodo que realiza la conexion a la base de datos
+     * @return Devuelve un objeto con la conexion de la base de datos.
+     */
     @Override 
     public Connection getConexion(){
         try
@@ -42,6 +50,10 @@ public abstract class DaoPostgre extends Dao{
         }
         return _conn;
     }
+    /**
+     * Metodo llamado para cerrar la conexion con la base de datos.
+     * @param conn Recibe el objeto con la conexion a cerrar.
+     */
     @Override
     public void cerrarConexion( Connection conn ){
         try {
