@@ -9,6 +9,7 @@ import Comun.Dominio.Entidad;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Progreso_Peso;
 import LogicaLayer.Comando;
+import LogicaLayer.FO4.ActualizarPesoComando;
 import LogicaLayer.FO4.AgregarPesoComando;
 import LogicaLayer.FO4.ConsultarProgresoPesoComando;
 import LogicaLayer.FO4.EliminarPesoComando;
@@ -83,5 +84,24 @@ public class FOM04_Progreso_Peso {
         cmd.ejecutar();
         _response = cmd.getRespuestaEliminarPeso();
         return  _response ;
+    }
+    
+    /**
+     * Servicio que recibe y responde a la solicitud de actualizacion del peso del usuario
+     * @param id_usuario
+     * @param peso
+     * @return 
+     */
+    @GET
+    @Path( "/actualizaProgresoPeso" )
+    @Produces( "application/json" )
+    public String actualizarPeso ( @QueryParam ( "id_usuario" ) int id_usuario,
+                                   @QueryParam ( "peso" ) int peso){
+        Entidad progresoPeso = FabricaEntidad.InstaciaProgresoPeso(id_usuario, peso);
+        Comando comando = FabricaComando.instanciaCmdActializarProgresoPeso(progresoPeso);
+        ActualizarPesoComando cmd = (ActualizarPesoComando) comando;
+        cmd.ejecutar();
+        _response = cmd.getRespuestActulizaPeso();
+        return _response;
     }
 }

@@ -131,5 +131,29 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
         }
     
     }
+
+    @Override
+    public String actualizarPeso(Entidad en) {
+        try {
+            Progreso_Peso pp = (Progreso_Peso) en;
+            _conn = getConexion();
+            String query = "select * from fo_m04_act_progresop(?,?);";
+            PreparedStatement st = _conn.prepareStatement( query );
+            st.setInt( 1 , pp.getId() );
+            st.setInt( 2 , pp.getPeso() );
+            st.executeQuery();
+            return "PESO ACTUALIZADO";
+        }
+        catch (SQLException e){
+            return null;
+        }
+        catch ( ParameterNullException e ) {
+            return null;
+        }
+        finally {
+            cerrarConexion( _conn );
+        }
+    
+    }
  
 }

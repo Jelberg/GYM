@@ -191,6 +191,15 @@ public class FabricaComando {
      public static EliminarPesoComando instanciaCmdEliminarProgresoPeso (int id){
         return new EliminarPesoComando(id);
     }
+     
+     /**
+      * instancia del comando para la actualizacion del peso del usuario
+      * @param pp
+      * @return 
+      */
+     public static ActualizarPesoComando instanciaCmdActializarProgresoPeso (Entidad pp){
+        return new ActualizarPesoComando(pp);
+    }
     //FIN F04
 
    
