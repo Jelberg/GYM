@@ -46,8 +46,10 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             }
         }
         catch(SQLException e) {
+            System.out.println(e);
         }
         catch (ParameterNullException e) {
+            System.out.println(e);
         }
         finally {
             Dao.closePostgreConnection( _conn );
@@ -66,7 +68,6 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             int mes = i.getFecha_nac().getMonth()+1;
             int año = i.getFecha_nac().getYear() + 1900;
             String fecha = String.valueOf(dia)+"/"+String.valueOf(mes)+"/"+String.valueOf(año);
-            System.out.println("fecha = " + fecha);
             
             String query = "select * from bo_m02_inserta_instructor('"+
                     i.getNombre()+"', '"+i.getApellido()+
@@ -88,13 +89,6 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             Dao.closePostgreConnection( _conn );
         }
     }
-
-    @Override
-    public void eliminar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
 
     @Override
     public ArrayList<Instructor> getInstructorPorCorreo(String correo) {
@@ -133,12 +127,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             return jsonArray;
         }
     }
-
-    @Override
-    public Entidad consultar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public void actualizar(String nombre, String apellido, String fecha, String sexo, String correo) {
           Map<String, String> response = new HashMap<String, String>();
@@ -169,6 +158,28 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
         finally {
             Dao.closePostgreConnection( _conn );
         }
+    }
+
+    @Override
+    public void eliminar(String correo) {
+        try{
+            _conn = Dao.getPostgreBdConnect(); 
+            String query = "SELECT * from bo_m02_elimina_instructor('"+correo+"')";
+            PreparedStatement st = _conn.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+        }
+        catch(SQLException e) {
+        }
+        catch (ParameterNullException e) {
+        }
+        finally {
+              Dao.closePostgreConnection( _conn );
+        }
+    }
+    
+    @Override
+    public Entidad consultar(Entidad ent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
