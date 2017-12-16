@@ -69,7 +69,7 @@ public class PruebaDaoEntrenador {
     @Test
     public void pruebaInsertar(){
         _entrenador = _dao.insertar( _entrenador );
-        assertNotNull( _entrenador.getMensaje() );
+        assertEquals( "Se ha insertado correctamente." ,  _entrenador.getMensaje() );
     }
     @Test
     public void pruebaConsultaPorCorreo(){
