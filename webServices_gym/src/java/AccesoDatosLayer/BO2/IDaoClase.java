@@ -5,6 +5,7 @@
  */
 package AccesoDatosLayer.BO2;
 
+import AccesoDatosLayer.IDao;
 import java.util.ArrayList;
 import Comun.Dominio.Clase;
 import Comun.Dominio.Entidad;
@@ -13,7 +14,7 @@ import Comun.Dominio.Entidad;
  *
  * @author marvian
  */
-public interface IDaoClase {
+public interface IDaoClase extends IDao {
     
     public ArrayList <Clase> consultarClases();
     public Entidad insertar (Entidad ent);

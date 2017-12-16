@@ -51,6 +51,11 @@ public class BOm02_Entrenador {
         _response = _gson.toJson( _listaEntrenadores );
         return _response;
     }
+    /**
+     * Metodo que busca a un entrenador por su correo y devuelve sus datos
+     * @param correo El correo personal del entrenador.
+     * @return devuelve un JSON con los datos del entrenador.
+     */
     @GET
     @Path("/getEntrenador")
     @Produces("application/json")
@@ -62,6 +67,17 @@ public class BOm02_Entrenador {
         _response = _gson.toJson( _entrenador );
         return _response;
     }
+    /**
+     * Metodo que es llamado cuando se va a realizar la insercion de un nuevo
+     * entrenador en la base de datos.
+     * @param nombre Nombre del entrenador.
+     * @param apellido Apellido del entrenador.
+     * @param fecha Fecha de naciminto del entrenador.
+     * @param sexo Sexo del entrenador
+     * @param correo Correo personal del entrenador.
+     * @param historial Historial del entrenador.
+     * @return Devuelve un mensaje que indiva si fue realizada la insercion.
+     */
     @POST
     @Path("/insertarEntrenador")
     @Produces("application/json")
