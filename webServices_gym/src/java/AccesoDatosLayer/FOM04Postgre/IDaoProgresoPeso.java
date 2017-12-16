@@ -7,8 +7,7 @@ package AccesoDatosLayer.FOM04Postgre;
 
 import AccesoDatosLayer.IDao;
 import Comun.Dominio.Entidad;
-import Comun.Dominio.Progreso_Peso;
-import java.util.ArrayList;
+
 
 /**
  *
@@ -21,7 +20,7 @@ public interface IDaoProgresoPeso extends IDao{
      * @param idusuario
      * @return 
      */
-    public ArrayList<Progreso_Peso> consultarProgresoPeso(int idusuario);
+    public String consultarProgresoPeso(int idusuario);
     
     /**
      * Metodo para agregar el peso

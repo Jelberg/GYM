@@ -10,9 +10,9 @@ import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Progreso_Peso;
 import LogicaLayer.Comando;
 import LogicaLayer.FO4.AgregarPesoComando;
+import LogicaLayer.FO4.ConsultarProgresoPesoComando;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
-import java.sql.Connection;
 import java.util.ArrayList;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -29,14 +29,30 @@ public class FOM04_Progreso_Peso {
     private String _response;
     private ArrayList<Progreso_Peso> jsonArray;
     
+    
+    /**
+     * Servicio que recibe y responde a la solicitud de consulta del progreso del peso
+     * @param id_usuario
+     * @return 
+     */
     @GET
     @Path( "/getProgresoP" )
     @Produces( "application/json" )
     public String getProgresoP( @QueryParam( "id_usuario" ) int id_usuario ){
-        
-        return null;
+        Comando comando = FabricaComando.instanciaCmdConsultarProgresoPeso(id_usuario);
+        ConsultarProgresoPesoComando cmd = (ConsultarProgresoPesoComando) comando;
+        cmd.ejecutar();
+        _response = cmd.getResultadoConsultaProgresoPeso();
+        return  _response ;
         
     }
+    
+    /**
+     * Servicio que recibe y responde a la solicitud de insercion del peso del usuario
+     * @param id_usuario
+     * @param peso
+     * @return 
+     */
     
     @GET
     @Path( "/insertaProgresoPeso" )

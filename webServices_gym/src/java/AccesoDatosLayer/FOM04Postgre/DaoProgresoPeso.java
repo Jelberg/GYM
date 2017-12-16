@@ -12,6 +12,7 @@ import Comun.Dominio.Entidad;
 import Comun.Dominio.Progreso_Peso;
 import Comun.Util.CompararProgreso;
 import Comun.Validaciones.ValidationWS;
+import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,6 +27,8 @@ import java.util.Map;
  */
 public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
     private Connection _conn;
+    private String _resp;
+    private Gson _gson = new Gson();
     private ArrayList<Progreso_Peso> _jsonArray;
     private Entidad _progresoPeso;
     private ArrayList<Progreso_Peso> _aux;
@@ -47,7 +50,7 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
      * @return ArrayList del tipo progreso_peso 
      */
     @Override
-    public ArrayList<Progreso_Peso> consultarProgresoPeso(int id_usuario) {
+    public String consultarProgresoPeso(int id_usuario) {
        try{
            _conn = getConexion();
             String query = "SELECT * FROM fo_m04_get_progresop(?)";
@@ -64,6 +67,7 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
             }
             
             _aux = CompararProgreso.compararProgresoPeso( _jsonArray );
+            _resp = _gson.toJson(_aux);
             
         }
         catch ( SQLException e ) {
@@ -71,7 +75,7 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
         }
         finally {
             cerrarConexion( _conn );
-            return _aux;
+            return _resp;
         } 
     }
 
