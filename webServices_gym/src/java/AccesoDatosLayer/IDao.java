@@ -8,4 +8,5 @@ import Comun.Dominio.Entidad;
  */
 public interface IDao {
     public Entidad consultar(Entidad ent);
+
 }
