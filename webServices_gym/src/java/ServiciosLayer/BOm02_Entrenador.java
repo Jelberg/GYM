@@ -38,8 +38,8 @@ public class BOm02_Entrenador {
     private Entidad _entrenador;
     
     /**
-     * 
-     * @return 
+     * Metodo que es llamado cuando se desea obtener a todos los entrenadores.
+     * @return devuelve la lista de todos los entrenadores y sus atributos.
      */
     @GET
     @Path("/getListEntrenador")
