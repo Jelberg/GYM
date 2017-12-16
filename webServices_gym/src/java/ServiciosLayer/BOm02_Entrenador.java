@@ -12,6 +12,7 @@ import Comun.Excepciones.ParameterNullException;
 import Comun.Validaciones.ValidationWS;
 import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadores;
+import LogicaLayer.BO2.ComandoInsertarEntrenador;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Date;
@@ -84,14 +85,17 @@ public class BOm02_Entrenador {
             }});
             Entidad entrenador = FabricaEntidad.instanciaEntrenador(nombre, apellido,
                                     Date.valueOf(fecha), sexo, correo, historial);
+            ComandoInsertarEntrenador cmd = FabricaComando.instanciaCmdInsertarEntrenador(entrenador);
+            cmd.ejecutar();
+            entrenador = cmd.getMensaje();
+            response.put ( "data", entrenador.getMensaje() );
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
         }
         finally {
-            //return gson.toJson(response);
+            return _gson.toJson(response);
         }
-        return "";
     }
     
     
