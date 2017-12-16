@@ -31,6 +31,10 @@ public class Progreso_Peso extends Entidad{
         this._peso=peso;
     }
 
+    Progreso_Peso(int id) {
+        super(id);
+    }
+
 
     /**
      * @return the _peso

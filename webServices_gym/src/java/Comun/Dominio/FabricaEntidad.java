@@ -131,9 +131,25 @@ public class FabricaEntidad {
     return new Progreso_Peso(id, peso, (java.sql.Date) fechaP,sobrenombre);
     }
     
+    /**
+     * Instancia del progreso del peso que solo recibe id y peso
+     * @param id
+     * @param peso
+     * @return 
+     */
     static public Entidad InstaciaProgresoPeso(int id, int peso){
     return new Progreso_Peso(id, peso);
     }
+    
+    /**
+     * instancia del progreso del peso que solo recivçbe id
+     * @param id
+     * @return 
+     */
+    static public Entidad InstaciaProgresoPeso(int id){
+    return new Progreso_Peso(id);
+    }
     // Fin de M04        
+
     
 }

@@ -151,20 +151,17 @@ public class FabricaComando {
     //Fin Comandos FOM01
     
     //INICIO F04
-    /**
-     * Metodo que devuelve la instancia del comando Para la consulta del progreso del peso
-     * @return comando progreso del peso
-     */
-    public static ConsultarProgresoPesoComando instanciaCmdConsultarProgresoPeso (){
-        return new ConsultarProgresoPesoComando();
-    }
-    
+ 
     /**
      * instancia del comando para agregar peso
      * @return Agregar
      */
     public static AgregarPesoComando instanciaCmdAgregarPeso (Entidad pp){
         return new AgregarPesoComando(pp);
+    }
+    
+     public static ConsultarProgresoPesoComando instanciaCmdConsultarProgresoPeso (int pp){
+        return new ConsultarProgresoPesoComando(pp);
     }
     
     //FIN F04
