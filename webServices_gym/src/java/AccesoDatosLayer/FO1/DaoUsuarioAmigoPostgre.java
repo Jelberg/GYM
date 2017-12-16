@@ -44,7 +44,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
     @Override
     public String insertaUsuario_Amigo(Usuario_Amigo ua) {
         try {
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "select * from fo_m01_inserta_usuario_amigo('"+ua.getAmi_usuario()+"', '"+ua.getAmi_amigo()+"')";
             PreparedStatement st = conn.prepareStatement(query);
             st.executeQuery();   
@@ -60,7 +60,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
             return( e.getMessage());
         }
         finally {
-            Dao.closePostgreConnection(conn);
+            cerrarConexion(conn);
         }
     }
 
@@ -73,7 +73,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
     @Override
     public String getUsuario_Amigo(Usuario_Amigo ua) {
         try{
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "SELECT * FROM fo_m01_get_usuario_amigo("+ua.getAmi_usuario()+")";
             jsonArray2 = new ArrayList<>();
             System.out.println (query);
@@ -98,7 +98,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
             response = e.getMessage();
         }
         finally {
-            Dao.closePostgreConnection(conn);
+            cerrarConexion(conn);
             return response;
         }
     }
@@ -113,10 +113,11 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
     @Override
     public String eliminaUsuario_Amigo(Usuario_Amigo ua) {
         try{
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "SELECT fo_m01_elimina_usuario_amigo(?,?)";
             PreparedStatement st = conn.prepareStatement(query);
             st.setInt(1, ua.getAmi_usuario());
+            st.setInt(2, ua.getAmi_amigo());
             ResultSet rs = st.executeQuery();
             return( "Se eliminó el amigo");
         }
@@ -130,7 +131,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
             return(e.getMessage());
         }
         finally {
-            Dao.closePostgreConnection(conn);
+            cerrarConexion(conn);
             
         }
     }
@@ -146,7 +147,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
     public ArrayList<Usuario> getListUsuario_Amigo(int idUsuario) {
         
         try{
-            conn = Dao.getPostgreBdConnect();
+            conn = getConexion();
             String query = "SELECT * FROM fo_m01_get_usuario_amigo("+idUsuario+")";
             jsonArray = new ArrayList<>();
             System.out.println (query);
@@ -174,7 +175,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
             jsonArray.get(jsonArray.size() - 1).setNombre(e.getMessage());
         }
         finally {
-            Dao.closePostgreConnection( conn );
+            cerrarConexion(conn);
             return jsonArray;
         }
     }

@@ -5,20 +5,62 @@
  */
 package AccesoDatosLayer;
 
+import Comun.Dominio.Registro;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Elberg
  */
 public abstract class DaoPostgre extends Dao{
-    
-    // Conexion con la base de datos
-    
-
-    
+    private static Connection _conn = null;
+    private static Connection _conInstance;
+    /**
+     * Metodo que es llamado para obtener la instancia de la conexion a la base
+     * de datos
+     * @return Devuelve la instancia de la conexion a la base de datos
+     */
+    @Override
+    public Connection getInstancia(){
+        _conInstance = getConexion();
+        return _conInstance;
+    }
+    /**
+     * Metodo que realiza la conexion a la base de datos
+     * @return Devuelve un objeto con la conexion de la base de datos.
+     */
+    @Override 
     public Connection getConexion(){
-        return Dao.getPostgreBdConnect();
+        try
+        {
+            Class.forName( Registro.POSTGRE_BD_CLASS_FOR_NAME );
+            _conn = DriverManager.getConnection( Registro.POSTGRE_BD_URL, Registro.POSTGRE_BD_USER, Registro.POSTGRE_BD_PASSWORD );
+        }
+        catch (ClassNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return _conn;
+    }
+    /**
+     * Metodo llamado para cerrar la conexion con la base de datos.
+     * @param conn Recibe el objeto con la conexion a cerrar.
+     */
+    @Override
+    public void cerrarConexion( Connection conn ){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

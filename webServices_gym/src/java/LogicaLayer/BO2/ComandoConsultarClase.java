@@ -14,13 +14,19 @@ import LogicaLayer.Comando;
 import java.util.ArrayList;
 
 /**
- *
+ * Clase a traves de la cual se realizan los llamados para consultar clases.
  * @author marvian
  */
 public class ComandoConsultarClase extends Comando {
     
     private Entidad _clase;
     private ArrayList<Clase> _listaClase;
+    /**
+     * Constructor de clase con una Entidad que es recibida por quien lo llama.
+     * @param clase Entidad que tiene los datos necesarios para realizar la 
+     * accion.
+     * @see Clase
+     */
     public ComandoConsultarClase(Entidad clase) {
         _clase = clase;
     }
@@ -28,7 +34,10 @@ public class ComandoConsultarClase extends Comando {
     public ArrayList<Clase> consultarClase(){
         return _listaClase;
     }
-
+    /**
+     * Metodo que es llamado para ejecutar los llamados y asi realizar la accion
+     * de consulta de clase.
+     */
     @Override
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);

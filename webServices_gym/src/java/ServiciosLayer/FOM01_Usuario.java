@@ -16,7 +16,6 @@ import LogicaLayer.FO1.ComandoListaUsuario;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -107,7 +106,7 @@ public class FOM01_Usuario {
             (0, "", nombre, apellido);        
             ComandoGetUsuarioNomApe c = FabricaComando.getUsuarioNomApe(usuario);
             c.ejecutar();
-        response = c.getResultado();
+            response = c.getResultado();
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
@@ -152,10 +151,8 @@ public class FOM01_Usuario {
 
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("correo", correo);
-            }});
-            String usuario = FabricaEntidad.InstanciaEliminaUsuario
-            (0,"", "", "", "", "", null, "", 0, correo, false,0);        
-            ComandoEliminaUsuario c = FabricaComando.eliminaUsuario(usuario);
+            }});        
+            ComandoEliminaUsuario c = FabricaComando.eliminaUsuario(correo);
             c.ejecutar();
             response.put("correo",c.getResultado());
         }
@@ -179,7 +176,6 @@ public class FOM01_Usuario {
      * @param nombre
      * @param apellido
      * @param sexo
-     * @param fecha_nac
      * @param telefono
      * @param estatura
      * @param correo

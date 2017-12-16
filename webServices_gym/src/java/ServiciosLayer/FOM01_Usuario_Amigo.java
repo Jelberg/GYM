@@ -104,34 +104,33 @@ public class FOM01_Usuario_Amigo {
      * @param idAmigo ID del Amigo.
      * @return Devuelve un json con mensaje del estatus de la peticion.
      */
-//    @POST
-//    @Path("/insertaUsuario_Amigo")
-//    @Produces("application/json")
-//    public String insertaUsuario_Amigo(  @QueryParam("idUsuario") int idUsuario,
-//                                 @QueryParam("idAmigo") int idAmigo){
-//
-//        Map<String, String> response = new HashMap<String, String>();
-//        try {
-//            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-//                put("idUsuario", idUsuario );
-//                put("idAmigo", idAmigo );
-//            }});
-//            Usuario_Amigo usuarioamigo = FabricaEntidad.InstanciaUsuario_Amigo
-//                                                        (idUsuario, idAmigo);        
-//            ComandoInsertaUsuario_Amigo c = FabricaComando.insertaUsuario_Amigo(usuarioamigo);
-//            c.ejecutar();
-//            response.put("idUsuario", c.insertaUsuario_Amigo().getNombre());
-//        }
-//        catch (ParameterNullException e) {
-//            response.put("error", e.getMessage());
-//        }
-//        catch (Exception e) {
-//            response.put("error", e.getMessage());
-//        }
-//        finally {
-//            return gson.toJson(response);
-//        }
-//    }
+    @POST
+    @Path("/insertaUsuario_Amigo")
+    @Produces("application/json")
+    public String insertaUsuario_Amigo(  @QueryParam("idUsuario") int idUsuario,
+            @QueryParam("idAmigo") int idAmigo){
+
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("idUsuario", idUsuario );
+                put("idAmigo", idAmigo );
+            }});
+            Usuario_Amigo usuarioamigo = FabricaEntidad.InstanciaUsuario_Amigo(idUsuario, idAmigo);        
+            ComandoInsertaUsuario_Amigo c = FabricaComando.insertaUsuario_Amigo(usuarioamigo);
+            c.ejecutar();
+            response.put("data", c.getResultado());
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            return gson.toJson(response);
+        }
+    }
     
     /**
      * Metodo que recibe como parametros el ID del Usuario
@@ -158,7 +157,7 @@ public class FOM01_Usuario_Amigo {
                                                         (idUsuario, idAmigo);        
             ComandoEliminaUsuario_Amigo c = FabricaComando.eliminaUsuario_Amigo(usuarioamigo);
             c.ejecutar();
-            response.put("correo",c.getResultado());
+            response.put("data",c.getResultado());
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
