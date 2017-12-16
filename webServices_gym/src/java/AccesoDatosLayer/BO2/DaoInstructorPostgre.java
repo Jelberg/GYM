@@ -1,6 +1,5 @@
 package AccesoDatosLayer.BO2;
 
-import AccesoDatosLayer.Dao;
 import AccesoDatosLayer.DaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
@@ -161,7 +160,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
     @Override
     public void eliminar(String correo) {
         try{
-            _conn = Dao.getPostgreBdConnect(); 
+            _conn = getConexion(); 
             String query = "SELECT * from bo_m02_elimina_instructor('"+correo+"')";
             PreparedStatement st = _conn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
@@ -171,7 +170,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
         catch (ParameterNullException e) {
         }
         finally {
-              Dao.closePostgreConnection( _conn );
+              cerrarConexion( _conn );
         }
     }
     

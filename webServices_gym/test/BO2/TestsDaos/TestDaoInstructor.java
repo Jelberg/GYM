@@ -30,7 +30,7 @@ public class TestDaoInstructor {
     public void PrepararPrueba(){
         try{
             //Conexion a la BDD para hacer las pruebas
-            _conn = Dao.getPostgreBdConnect();
+            _conn = _DaoInstructor.getConexion();
             
             //Limpiando la lista de instructores
             _lista.clear();
