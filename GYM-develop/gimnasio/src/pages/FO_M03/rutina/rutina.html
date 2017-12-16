@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-navbar color="secondary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+        <ion-title>Mis Rutinas</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+  
+      <ion-list>       
+        <ion-title><h3>Recientes</h3></ion-title>
+        <ion-item-sliding *ngFor="let rutina of listaRutinas">
+            <ion-item detail-push (click)="goToModificar(rutina._nombre, rutina._dia)">
+                <ion-avatar item-start> 
+                    <img src="../assets/imgs/imgsM03/pecho.png">
+                </ion-avatar>
+                  <h1>Rutina {{rutina._nombre}}</h1>
+                  <h2>Dia: {{rutina._dia}}</h2><!--Esta variable es el nombre de la clase-->
+                  <h3 *ngIf="rutina.cantidadEjercicios !=0">Ejercicios: {{rutina.cantidadEjercicios}}</h3>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button  color="calm">
+                    <ion-icon name="share"></ion-icon>
+                </button>
+               <!--   <button ion-button color="energized" (click)="goToModificar()">
+                    <ion-icon name="create"></ion-icon>
+                </button>-->
+                <button ion-button  color="pomegranate" (click)="presentConfirm(rutina._nombre,rutina._dia)">
+                    <ion-icon name="trash"></ion-icon>
+                </button>
+            </ion-item-options>  
+        </ion-item-sliding>
+      </ion-list>
+
+    <ion-fab right bottom #fab>
+      <button ion-fab color="secondary"><ion-icon name="arrow-up"></ion-icon></button>
+      <ion-fab-list side="top">
+          <button ion-fab color="secondary" (click)="agregarRutina()"><ion-icon name="add"></ion-icon></button>
+          <button ion-fab color="secondary" (click)="goToLog()"><ion-icon name="calendar"></ion-icon></button>
+      </ion-fab-list>
+    </ion-fab>

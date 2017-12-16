@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>Progreso Ejercicios</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only>
+            <ion-icon name='calendar'></ion-icon>
+          </button>
+      <button ion-button icon-only (click)="goToListaContactosPage()">
+        <ion-icon name='share'></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-tabs class="tabs-icon" color="secondary">
+    <ion-tab tabIcon="md-stats" [root]="grafica" [rootParams]="listaRecibida" tabTittle="Grafica"></ion-tab>
+    <ion-tab tabIcon="md-chatbubbles" [root]="comentarios" tabTittle="Comentarios"></ion-tab>
+</ion-tabs>

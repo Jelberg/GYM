@@ -1,0 +1,48 @@
+<!--
+  Generated template for the ReservasPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Reservas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <ion-item-sliding *ngFor="let reservas of reservas; let i = index">
+        <!--  Hay que buscar la manera de eliminar el item o ocultarlo al eliminar la reserva-->
+        <ion-item>
+            <ion-grid>
+                <ion-row id="claseReservada">
+                    <!--
+                    <ion-col col-5>
+                        <ion-avatar>
+                            <img src="{{item.img}}" alt="" class="imagen">
+                        </ion-avatar>
+                    </ion-col>-->
+                    <ion-col col-12>
+                        <h2>{{reservas.nombreclase}}</h2>
+                        <h3>{{reservas.instructor}}</h3>
+                        <p>{{reservas.fecha}}</p>
+                        <p> {{reservas.dia}} </p>
+         
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+        <ion-item-options side="right ">
+            <button ion-button color="danger" icon-only
+            (click)="presentAlert(reservas.id,i)"><ion-icon name="trash"></ion-icon>
+            </button>
+        </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>
+
