@@ -132,6 +132,11 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
     
     }
 
+    /**
+     * Metodo para actualizar peso en base de dato
+     * @param en
+     * @return 
+     */
     @Override
     public String actualizarPeso(Entidad en) {
         try {
