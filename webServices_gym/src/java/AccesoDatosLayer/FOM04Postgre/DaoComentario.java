@@ -34,25 +34,27 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
         try {
             Comentario comentario = (Comentario) _comentario;
             _connection = getConexion();
-            
-            String  _query = "select * from fo_m04_inserta_progreso_compartido("
-                +comentario+",'"+comentario.getMensaje()+"')";
-            
-            PreparedStatement _st = _connection.prepareStatement(_query);
-            
-            _st.executeQuery();
-            
-            return "Comentario Agregado";
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+ 
+            String query = "select * from fo_m04_inserta_progreso_compartido(?, ?)";
+            PreparedStatement st = _connection.prepareStatement(query);
+                st.setInt(2, comentario.getIdU());
+                st.setString(1, comentario.getMensajeC());
+                st.executeQuery();
+                
+                return "Comentario Agregado";
+           
         }
-        catch (ParameterNullException e){
-            System.out.println(e.getMessage());
-        }
-        finally{
-            cerrarConexion(_connection);
+        catch (SQLException e){
             return null;
         }
+        catch (ParameterNullException e) {
+            return null;
+        }
+        finally {
+           cerrarConexion(_connection);
+        }
+
+    
     }
 
     /**
@@ -65,8 +67,8 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
         try {
             _connection = getConexion();
             
-            String _query = "SELECT * FROM fo_m04_get_comentarioprom("+
-                            idUsuario+","+idProgMedida+")";
+            String _query = "SELECT * FROM fo_m04_get_comentarioprom('"+
+                            idUsuario+"',"+idProgMedida+")";
             
             PreparedStatement _st = _connection.prepareCall(_query);
             ResultSet _rs = _st.executeQuery();
@@ -89,10 +91,6 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
         }
     }
 
-    @Override
-    public ArrayList<Comentario> getComentarios() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public String eliminar(Comentario comentario) {
@@ -161,10 +159,7 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public String insertar(Comentario comentario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
     
 }

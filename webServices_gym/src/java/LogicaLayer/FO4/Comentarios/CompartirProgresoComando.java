@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LogicaLayer.FO4;
+package LogicaLayer.FO4.Comentarios;
 
 import LogicaLayer.Comando;
 
