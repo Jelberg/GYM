@@ -19,10 +19,18 @@ public class AgregarMedidaComando extends Comando {
     private Entidad _pm;
     private static String _respuesta;
 
+    /**
+     * Constructor para agregar medida de comando
+     * @param _pm 
+     */
     public AgregarMedidaComando(Entidad _pm) {
         this._pm = _pm;
     }
 
+    /**
+     * Metodo estatico que guarda la respuesta de la consulta
+     * @return 
+     */
     public static String getRespuestaAgregarMedida(){
         return _respuesta;
     }

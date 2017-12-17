@@ -2698,10 +2698,10 @@ insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('M
 insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('¡¡Vas mejorando!!', 2, 3);
 insert into interaccion_comentario (mensaje, fk_usuario, fk_progreso) values ('¡¡Excelente!!', 3, 3);
 --TIPOS DE MEDIDAS
-INSERT INTO MEDIDA ( med_tipo ) VALUES ( 'Escapula' );
-INSERT INTO MEDIDA ( med_tipo ) VALUES ( 'Tricep' );
-INSERT INTO MEDIDA ( med_tipo ) VALUES ( 'Abdomen' );
-INSERT INTO MEDIDA ( med_tipo ) VALUES ( 'Cuadricep' );
+INSERT INTO MEDIDA ( med_id,med_tipo ) VALUES ( 1,'Escapula' );
+INSERT INTO MEDIDA ( med_id, med_tipo ) VALUES ( 2,'Tricep' );
+INSERT INTO MEDIDA ( med_id, med_tipo ) VALUES ( 3,'Abdomen' );
+INSERT INTO MEDIDA ( med_id, med_tipo ) VALUES ( 4,'Cuadricep' );
 INSERT INTO PROGRESO_MEDIDA ( pm_medida, pm_fecha, fk_usuario, fk_medida) VALUES ( 5, '12-10-2017', 1, 1 );
 INSERT INTO PROGRESO_MEDIDA ( pm_medida, pm_fecha, fk_usuario, fk_medida) VALUES ( 7, '12-10-2017', 1, 4 );
 INSERT INTO PROGRESO_MEDIDA ( pm_medida, pm_fecha, fk_usuario, fk_medida) VALUES ( 8, '12-10-2017', 1, 3 );

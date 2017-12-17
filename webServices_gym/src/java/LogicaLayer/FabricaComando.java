@@ -38,6 +38,7 @@ import LogicaLayer.BO1.ComandoGetEquipos;
 import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
 import LogicaLayer.BO2.ComandoModificarEntrenador;
+import LogicaLayer.F03.ConsultarEjerciciosRealizadosComando;
 import LogicaLayer.FO4.ProgresoMedida.AgregarMedidaComando;
 import LogicaLayer.FO4.ProgresoMedida.ConsultarProgesoMedidasComando;
 
@@ -281,6 +282,9 @@ public class FabricaComando {
   
     //FIN F04
 
-   
+   //fo3
+    public static ConsultarEjerciciosRealizadosComando instanciaCmdConsultaEjerciciosH(int id){
+        return new ConsultarEjerciciosRealizadosComando(id);
+    }
     
 }

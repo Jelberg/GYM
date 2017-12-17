@@ -15,6 +15,7 @@ import AccesoDatosLayer.BO1.IDaoEquipo;
 import AccesoDatosLayer.BO1.IDaoEjercicio;
 import AccesoDatosLayer.BO1.IDaoMaquina;
 import AccesoDatosLayer.BO2.IDaoEntrenador;
+import AccesoDatosLayer.FO3.DaoRutina;
 
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoMedida;
 
@@ -99,6 +100,10 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
         return new DaoProgresoMedida();
     }
     //FIN FO4
+
+    public DaoRutina getDaoRutina() {
+        return new DaoRutina();
+    }
 
     
 
