@@ -10,7 +10,7 @@ CREATE OR REPLACE FUNCTION bo_m02_get_instructor(mail character varying)
 DECLARE
    var_r    record;
 BEGIN
-   FOR var_r IN(SELECT ins_id, ins_nombre, ins_apellido, ins_fecha_nac, ins_sexo, ins_correo
+   FOR var_r IN(SELECT ins_id, ins_nombre, ins_apellido, ins_fecha_nac, ins_sexo, ins_correo, ins_activo
         FROM instructor
         WHERE ins_correo = mail)
    LOOP
@@ -20,6 +20,7 @@ BEGIN
     fechanac = var_r.ins_fecha_nac;
     sexo = var_r.ins_sexo;
     correo = var_r.ins_correo;
+    activo = var_r.ins_activo;
     RETURN NEXT;
    END LOOP;
 END; $$

@@ -29,6 +29,8 @@ import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.BO1.ComandoGetEquipos;
 import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
+import LogicaLayer.BO2.CmdActivarInstructor;
+import LogicaLayer.BO2.CmdInactivarInstructor;
 
 /**
  *
@@ -54,6 +56,14 @@ public class FabricaComando {
     // Crear comando para leer lista de todos los instructores.
     public static CmdGetInstructores instanciaGetInstructores(){
         return new CmdGetInstructores();
+    }
+    
+    public static CmdActivarInstructor instanciaActivarInstructor(String correo){
+        return new CmdActivarInstructor(correo);
+    }
+    
+    public static CmdInactivarInstructor instanciaInactivarInstructor(String correo){
+        return new CmdInactivarInstructor(correo);
     }
     
     // Crear comando para buscar un instructor dado su correo.

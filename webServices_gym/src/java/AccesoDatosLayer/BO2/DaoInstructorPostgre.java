@@ -112,7 +112,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
                 jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fechanac"));
                 jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("sexo")));
                 jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
-                          
+                jsonArray.get(jsonArray.size() - 1).setActivo(rs.getString("activo"));
             }
         }
         catch(SQLException e) {
@@ -184,7 +184,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
     @Override
     public void activar(String correo) {
         _conn = getConexion();
-        String query = "select * from bo_m02_activa_instructor("+correo+")";
+        String query = "select * from bo_m02_activa_instructor('"+correo+"')";
         PreparedStatement st; 
         try {
             st = _conn.prepareStatement(query);
@@ -197,7 +197,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
     @Override
     public void inactivar(String correo) {
         _conn = getConexion();
-        String query = "select * from bo_m02_inactiva_instructor("+correo+")";
+        String query = "select * from bo_m02_inactiva_instructor('"+correo+"')";
         PreparedStatement st; 
         try {
             st = _conn.prepareStatement(query);
