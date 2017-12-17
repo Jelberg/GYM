@@ -18,21 +18,32 @@ import java.util.ArrayList;
  *
  * @author Daniel Goncalves
  */
-public class ComandoGetEquipos extends Comando{
+public class ComandoEliminarEquipo extends Comando{
     private Entidad _equipo;
-    private ArrayList<Equipo> _listaEquipos;
    
     /**
      * Builder
      */
-    public ComandoGetEquipos() {}
+    public ComandoEliminarEquipo() {}
+    
+    public ComandoEliminarEquipo (int id, String nombre){
+        _equipo.setId(id);
+        _equipo.setMensaje(nombre);
+    }
+    
+    public ComandoEliminarEquipo (Entidad ent){
+        _equipo.setId(ent.getId());
+        _equipo.setMensaje(ent.getMensaje());
+    }
     
     /**
-     * Comando para traer equipos
-     * @return listado de equipos
+     * Comando para eliminar equipos
+     * @return equipo eliminado
      */
-    public ArrayList<Equipo> getEquipos(){
-        return _listaEquipos;
+    public Entidad eliminarEquipo(int id, String nombre){
+        _equipo.setId(id);
+        _equipo.setMensaje(nombre);
+        return _equipo;
     }
     
     /**
@@ -42,7 +53,7 @@ public class ComandoGetEquipos extends Comando{
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
         IDaoEquipo dao = fab.getDaoEquipo();
-        _listaEquipos = dao.consultarEquipos();
+        _equipo = dao.eliminar(_equipo);
     }
 
 }

@@ -69,7 +69,6 @@ public class FOM04_Progreso_Peso {
         return _gson.toJson( _response );
     }
     
-    
     /**
      * Servicio que recibe y responde a la solicitud de eliminacion del peso del usuario
      * @param id_usuario

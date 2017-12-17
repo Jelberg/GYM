@@ -5,44 +5,37 @@
  */
 package LogicaLayer.BO1;
 
-import AccesoDatosLayer.BO1.IDaoEquipo;
+import AccesoDatosLayer.BO1.IDaoEjercicio;
 import AccesoDatosLayer.DaoPostgre;
 import AccesoDatosLayer.FabricaAbstracta;
 import AccesoDatosLayer.FabricaDaoPostgre;
 import Comun.Dominio.Entidad;
-import Comun.Dominio.Equipo;
+import Comun.Dominio.Ejercicio;
 import LogicaLayer.Comando;
 import java.util.ArrayList;
 
 /**
  *
- * @author Daniel Goncalves
+ * @author Luis L
  */
-public class ComandoGetEquipos extends Comando{
-    private Entidad _equipo;
-    private ArrayList<Equipo> _listaEquipos;
-   
+public class ComandoAgregarEjercicio extends Comando {
+    private Entidad ejercicio;
+
     /**
-     * Builder
+     *
+     * @param ejercicio
      */
-    public ComandoGetEquipos() {}
+    public ComandoAgregarEjercicio(Entidad ejercicio) {
+       this.ejercicio = ejercicio;
     
-    /**
-     * Comando para traer equipos
-     * @return listado de equipos
-     */
-    public ArrayList<Equipo> getEquipos(){
-        return _listaEquipos;
     }
-    
-    /**
-     * Metodo Ejecucion Comando
-     */
+        
     @Override
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
-        IDaoEquipo dao = fab.getDaoEquipo();
-        _listaEquipos = dao.consultarEquipos();
+        IDaoEjercicio dao = fab.getDaoEjercicio();
+        dao.agregar(ejercicio);
     }
-
+    
+    
 }
