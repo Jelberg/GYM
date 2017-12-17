@@ -46,6 +46,18 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.FO4.*;
+import LogicaLayer.BO1.ComandoGetEquipoById;
+import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO2.ComandoBuscaClasePorId;
+import LogicaLayer.BO2.ComandoClaseConsultaDescripcion;
+import LogicaLayer.BO2.ComandoInsertarClase;
+import LogicaLayer.BO2.ComandoInsertarEntrenador;
+import LogicaLayer.BO2.CmdActivarInstructor;
+import LogicaLayer.BO2.CmdInactivarInstructor;
+import LogicaLayer.BO2.ComandoEliminaEntrenador;
+import LogicaLayer.BO2.ComandoModificarClase;
+import LogicaLayer.BO2.ComandoModificarEntrenador;
+import LogicaLayer.F03.ConsultarEjerciciosRealizadosComando;
 import LogicaLayer.FO4.Comentarios.AgregarComentarioComando;
 import LogicaLayer.FO4.Comentarios.ComandoObtenerComentariosProgMedidas;
 import LogicaLayer.FO4.Comentarios.CompartirProgresoComando;
@@ -192,6 +204,9 @@ public class FabricaComando {
      */
     public static ComandoConsultaEntrenadores instanciaCmdConsultaEntrenadores(){
         return new ComandoConsultaEntrenadores();
+    }
+    public static ComandoEliminaEntrenador instanciaCmdEliminaEntrenador( Entidad ent){
+        return new ComandoEliminaEntrenador( ent );
     }
     /**
      * Metodo que es llamado cuando se necesita una instancia del comando para
