@@ -49,26 +49,27 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
         try {
             Comentario comentario = (Comentario) _comentario;
             _connection = getConexion();
-            
-            String  _query = "select * from fo_m04_inserta_progreso_compartido("
-                +comentario+",'"+comentario.getMensaje()+"')";
-            
-            PreparedStatement _st = _connection.prepareStatement(_query);
-            
-            _st.executeQuery();
-            
-            return "Comentario Agregado";
-        } catch (SQLException e) {
-            _logger.log(Level.SEVERE, "Error en conexion a la BD: {0}",e.getMessage());
+ 
+            String query = "select * from fo_m04_inserta_progreso_compartido(?, ?)";
+            PreparedStatement st = _connection.prepareStatement(query);
+                st.setInt(2, comentario.getIdU());
+                st.setString(1, comentario.getMensajeC());
+                st.executeQuery();
+                
+                return "Comentario Agregado";
+           
+        }
+        catch (SQLException e){
             return null;
         }
-        catch (ParameterNullException e){
-            _logger.log(Level.SEVERE, "Parametro Nulo: {0}",e.getMessage());
+        catch (ParameterNullException e) {
             return null;
         }
-        finally{
-            cerrarConexion(_connection);
+        finally {
+           cerrarConexion(_connection);
         }
+
+    
     }
 
     /**
@@ -81,8 +82,8 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
         try {
             _connection = getConexion();
             
-            String _query = "SELECT * FROM fo_m04_get_comentarioprom("+
-                            idUsuario+","+idProgMedida+")";
+            String _query = "SELECT * FROM fo_m04_get_comentarioprom('"+
+                            idUsuario+"',"+idProgMedida+")";
             
             PreparedStatement _st = _connection.prepareCall(_query);
             ResultSet _rs = _st.executeQuery();
@@ -107,15 +108,6 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
         }
     }
 
-    /**
-     * Metodo para obtener comentarios de la BD
-     * @return 
-     */
-    @Override
-    public ArrayList<Comentario> getComentarios() {
-        _logger.log(Level.INFO, "Metodo aun no funcional");
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     /**
      * Metodo para eliminar comentarios de la BD
@@ -206,16 +198,6 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     * Metodo para insertar comentarios en la BD
-     * @param comentario
-     * @return 
-     */
-    @Override
-    public String insertar(Comentario comentario) {
-        _logger.log(Level.INFO, "Metodo aun no funcional");
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     
 }

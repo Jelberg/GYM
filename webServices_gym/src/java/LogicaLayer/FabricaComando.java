@@ -1,6 +1,8 @@
 package LogicaLayer;
 
 
+import LogicaLayer.FO4.Comentarios.CompartirProgresoComando;
+import LogicaLayer.FO4.Comentarios.ComandoObtenerComentariosProgMedidas;
 import LogicaLayer.FO4.ProgresoPeso.EliminarPesoComando;
 import LogicaLayer.FO4.ProgresoPeso.AgregarPesoComando;
 import LogicaLayer.FO4.ProgresoPeso.ConsultarProgresoPesoComando;
@@ -13,7 +15,6 @@ import Comun.Dominio.Instructor;
 import Comun.Dominio.Progreso_Medida;
 import Comun.Dominio.Progreso_Peso;
 import Comun.Dominio.Usuario;
-import LogicaLayer.FO4.*;
 import LogicaLayer.BO2.CmdActualizarInstructor;
 import Comun.Dominio.Usuario_Amigo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;

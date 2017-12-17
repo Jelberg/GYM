@@ -8,7 +8,7 @@ package LogicaLayer.FO4.Comentarios;
 import AccesoDatosLayer.FOM04Postgre.IDaoComentario;
 import AccesoDatosLayer.FabricaAbstracta;
 import AccesoDatosLayer.FabricaDaoPostgre;
-import Comun.Dominio.Comentario;
+
 import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
 

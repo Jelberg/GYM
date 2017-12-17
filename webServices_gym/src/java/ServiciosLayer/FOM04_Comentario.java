@@ -6,6 +6,7 @@
 package ServiciosLayer;
 
 import Comun.Dominio.Comentario;
+import Comun.Dominio.Entidad;
 import Comun.Dominio.FabricaEntidad;
 import LogicaLayer.Comando;
 
@@ -14,7 +15,7 @@ import LogicaLayer.FO4.Comentarios.AgregarComentarioComando;
 import LogicaLayer.FO4.Comentarios.ConsultarComentarioProgresosComando;
 
 
-import LogicaLayer.FO4.ComandoObtenerComentariosProgMedidas;
+import LogicaLayer.FO4.Comentarios.ComandoObtenerComentariosProgMedidas;
 import LogicaLayer.FabricaComando;
 
 
@@ -41,23 +42,27 @@ public class FOM04_Comentario{
     private ArrayList<Comentario> _listaComentarios = 
             new ArrayList<Comentario>();
 
-    /**
-     * Servicio que recibe y responde las solicitudes de realizar comentario de los usuarios
-     * @param idUsuario
+     /**
+     * Funcion que permite ingresar comentarios a un progreso
+     * @param id_usuariocomentario
      * @param mensaje
-     * @return 
+     * @param jsonMedida 
+     * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
      */
     @GET
-    @Path("/insertarComentario")
-    @Produces("applicacion/json")
-    public String insertarComentario(@QueryParam("id_usuariocomentario") int idUsuario, 
-                                @QueryParam("mensaje") String mensaje){
-        Comentario _comentario = (Comentario) FabricaEntidad.InstaciaInsertarComentario(idUsuario,mensaje);
-        AgregarComentarioComando _comando = FabricaComando.insertarComentarioComando(_comentario);
+    @Path("/insertaComentario")
+    @Produces("aplicacion/json")
+    public String insertaComentario(@QueryParam("id_usuariocomentario") int id_usuariocomentario,
+                                    @QueryParam("mensaje") String mensaje){
+        Entidad en = FabricaEntidad.InstaciaInsertarComentario(id_usuariocomentario,mensaje);
+        Comentario comentario = (Comentario) en;
+        AgregarComentarioComando _comando = FabricaComando.insertarComentarioComando(comentario);
         _comando.ejecutar();
+        
         _response = _comando.obtenerRespuesta();
         
         return _response;
+
     }
      
     /**

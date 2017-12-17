@@ -16,22 +16,11 @@ import java.util.ArrayList;
  */
 public interface IDaoComentario extends IDao {
     
-    /**
-     * Firma de metodo apra obterner comentarios
-     * @return 
-     */
-    public ArrayList<Comentario> getComentarios();
 
     public String insertar(Entidad comentario);
 
     /**
      * Firma de metodos para insertar comentario
-     * @param comentario
-     * @return 
-     */
-    public String insertar(Comentario comentario);
-    /**
-     * Firma de metodo para eliminar comentario
      * @param comentario
      * @return 
      */
