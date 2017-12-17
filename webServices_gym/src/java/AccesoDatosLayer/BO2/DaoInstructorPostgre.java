@@ -34,7 +34,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
     @Override
     public ArrayList<Instructor> getInstructores() {
          try{
-            _conn = getConexion();
+            _conn = getInstancia();
             String query = "SELECT * FROM instructor;";
             jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
