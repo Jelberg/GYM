@@ -167,14 +167,15 @@ CONSTRAINT PK_SER_ID PRIMARY KEY (SER_ID,FK_TRABAJO_RUTINA)
 
 CREATE TABLE INSTRUCTOR
 (
- 	INS_ID                  	SERIAL NOT NULL,
- 	INS_NOMBRE                 	CHARACTER VARYING(10) NOT NULL,
- 	INS_APELLIDO                	CHARACTER VARYING(10) NOT NULL,
- 	INS_FECHA_NAC   DATE NOT NULL,
- 	INS_SEXO            	CHARACTER(1) NOT NULL,
- 	INS_CORREO                 	CHARACTER VARYING(20) NOT NULL UNIQUE,
-    INS_FOTO            	BYTEA,
- 	CONSTRAINT INSTRUCTOR_PKEY PRIMARY KEY (INS_ID)
+ 	INS_ID           SERIAL NOT NULL,
+ 	INS_NOMBRE       CHARACTER VARYING(10) NOT NULL,
+ 	INS_APELLIDO     CHARACTER VARYING(10) NOT NULL,
+ 	INS_FECHA_NAC    DATE NOT NULL,
+ 	INS_SEXO         CHARACTER(1) NOT NULL,
+ 	INS_CORREO       CHARACTER VARYING(20) NOT NULL UNIQUE,
+ 	INS_FOTO         BYTEA,
+	INS_ACTIVO		   CHARACTER(2),	 
+ CONSTRAINT INSTRUCTOR_PKEY PRIMARY KEY (INS_ID)
 );
  
 CREATE TABLE CLASE
@@ -990,7 +991,7 @@ CREATE OR REPLACE FUNCTION bo_m02_get_instructor(mail character varying)
 DECLARE
    var_r    record;
 BEGIN
-   FOR var_r IN(SELECT ins_id, ins_nombre, ins_apellido, ins_fecha_nac, ins_sexo, ins_correo
+   FOR var_r IN(SELECT ins_id, ins_nombre, ins_apellido, ins_fecha_nac, ins_sexo, ins_correo, ins_activo
         FROM instructor
         WHERE ins_correo = mail)
    LOOP
@@ -1000,6 +1001,7 @@ BEGIN
     fechanac = var_r.ins_fecha_nac;
     sexo = var_r.ins_sexo;
     correo = var_r.ins_correo;
+    activo = var_r.ins_activo;
     RETURN NEXT;
    END LOOP;
 END; $$
@@ -1021,9 +1023,9 @@ CREATE OR REPLACE FUNCTION bo_m02_inserta_instructor (
     END; $$
 LANGUAGE plpgsql;
 
---------Este elimina instructor------------------------------------------------
+-------- Elimina instructor ------------------------------------------------
 
-CREATE OR REPLACE FUNCTION fo_m04_elimina_instructor(correo character varying)
+CREATE OR REPLACE FUNCTION bo_m02_elimina_instructor(correo character varying)
 	RETURNS void AS $$
     DECLARE
     BEGIN
@@ -1046,6 +1048,28 @@ CREATE OR REPLACE FUNCTION bo_m02_actualiza_instructor (
     BEGIN
         UPDATE instructor
         SET ins_nombre = nombre , ins_apellido = apellido, ins_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ins_sexo = sexo
+ 	where ins_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION bo_m02_inactiva_instructor (
+    correo character varying)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        UPDATE instructor
+        SET ins_activo = 'no'
+ 	where ins_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION bo_m02_activa_instructor (
+    correo character varying)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        UPDATE instructor
+        SET ins_activo = 'si'
  	where ins_correo = correo;
     END; $$
 LANGUAGE plpgsql;
@@ -2435,16 +2459,16 @@ INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Spinning','Esta actividad
 
 --INSTRUCTOR
 
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Maria','Cardenas','13-12-82','F','mariaca@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Julieta','Colmenares','24-01-74','F','julicol@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Francisco','Zambrano','18-10-82','M','franza@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Pedro','Pe�aloza','15-08-75','M','pedrope@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Jos�','Mendez','23-05-96','M','josefa@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Juan','Mart�nez','31-01-82','M','juanma@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Maria','Colmenares','05-12-81','F','mariaco@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Gabriela','D�az','12-09-76','F','gabridi@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Leonor','Hern�ndez','21-02-87','F','leoher@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Leonardo','Padr�n','21-02-75','M','leopa@gmail.com',null);
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Maria','Cardenas','13-12-82','F','mariaca@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Julieta','Colmenares','24-01-74','F','julicol@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Francisco','Zambrano','18-10-82','M','franza@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Pedro','Pe�aloza','15-08-75','M','pedrope@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Jos�','Mendez','23-05-96','M','josefa@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Juan','Mart�nez','31-01-82','M','juanma@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Maria','Colmenares','05-12-81','F','mariaco@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Gabriela','D�az','12-09-76','F','gabridi@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Leonor','Hern�ndez','21-02-87','F','leoher@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Leonardo','Padr�n','21-02-75','M','leopa@gmail.com',null, 'si');
 
 
 --HORARIO_CLASE
