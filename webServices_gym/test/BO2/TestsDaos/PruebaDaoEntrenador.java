@@ -34,6 +34,7 @@ public class PruebaDaoEntrenador {
     Statement _st;
     Entidad _entrenador;
     Entidad _entCorreo;
+    Entidad _entModificar;
     @Before
     public void iniciarPruebas() throws SQLException{
         _conn = _dao.getConexion();
@@ -58,6 +59,7 @@ public class PruebaDaoEntrenador {
         st.executeQuery();
         _entCorreo = FabricaEntidad.instanciaEntrenador("PRUEBA1", "PRUEBA1", Date.valueOf("2017-12-12"), "M", "PRUEBA1@GMAIL.COM", "PUEBA1HIST");
         _entrenador = FabricaEntidad.instanciaEntrenador("PRUEBAENT", "PRUEBAENT", Date.valueOf("2017-12-12"), "M", "PRUEBAENT@GMIAL.COM", "PRUEBANEHHIST");
+        _entModificar = FabricaEntidad.instanciaEntrenador("PRUEBAMOD", "PRUEBAMOD", Date.valueOf("2017-12-12"), "M", "PRUEBA1@GMAIL.COM", "PUEBA1HIST"); 
         
     }
     @Test
@@ -76,6 +78,11 @@ public class PruebaDaoEntrenador {
         _entCorreo = _dao.consultar( _entCorreo );
         Entrenador ent = (Entrenador) _entCorreo;
         assertEquals( "PRUEBA1@GMAIL.COM", ent.getCorreo() );
+    }
+    @Test
+    public void pruebaModificarEntrenador(){
+        _entModificar = _dao.modificar(_entModificar );
+        assertEquals( "Se realizo correctamente la actualizacion." , _entModificar.getMensaje());
     }
     @After
     public void terminarPruebas() throws SQLException{

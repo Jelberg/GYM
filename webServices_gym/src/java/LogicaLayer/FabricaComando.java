@@ -27,7 +27,14 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO2.ComandoBuscaClasePorId;
+import LogicaLayer.BO2.ComandoClaseConsultaDescripcion;
+import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
+import LogicaLayer.BO2.CmdActivarInstructor;
+import LogicaLayer.BO2.CmdInactivarInstructor;
+import LogicaLayer.BO2.ComandoModificarClase;
+import LogicaLayer.BO2.ComandoModificarEntrenador;
 
 /**
  *
@@ -55,6 +62,14 @@ public class FabricaComando {
         return new CmdGetInstructores();
     }
     
+    public static CmdActivarInstructor instanciaActivarInstructor(String correo){
+        return new CmdActivarInstructor(correo);
+    }
+    
+    public static CmdInactivarInstructor instanciaInactivarInstructor(String correo){
+        return new CmdInactivarInstructor(correo);
+    }
+    
     // Crear comando para buscar un instructor dado su correo.
     public static CmdGetInstructorPorCorreo instanciaInstructorPorCorreo(String correo){
         return new CmdGetInstructorPorCorreo(correo);
@@ -67,9 +82,52 @@ public class FabricaComando {
             nombre, apellido, fecha, sexo, correo);
     }
 
-    //Crear comando para consultar las clases.
+    /**
+     * Metodo llamado para realizar la consulta de todas las clases.
+     * @return Devuelve un comando para realizar la accion.
+     */
     public static ComandoConsultarClase instanciaCmdConsultaClase(){
         return new ComandoConsultarClase();
+    }
+    
+    /**
+     * Metodo llamado para realizar el insert de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoInsertarClase instanciaCmdInsertaClase( Entidad ent){
+        return new ComandoInsertarClase( ent );
+    }
+    
+    /**
+     * Metodo llamado para realizar la eliminacion de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoInsertarClase instanciaCmdEliminaClase( Entidad ent){
+        return new ComandoInsertarClase( ent );
+    }
+    
+    /**
+     * Metodo llamado para realizar la modificacion de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoModificarClase instanciaCmdModificarClase( Entidad ent){
+        return new ComandoModificarClase( ent );
+    }
+    
+    /**
+     * Metodo llamado para realizar la modificacion de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoBuscaClasePorId instanciaCmdBuscaClasePorId(){
+        return new ComandoBuscaClasePorId();
+    }
+    
+    /**
+     * Metodo llamado para realizar la modificacion de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */    
+    public static ComandoClaseConsultaDescripcion instanciaCmdClaseConsultaDescripcion(){
+        return new ComandoClaseConsultaDescripcion();
     }
     
     /**
@@ -78,6 +136,18 @@ public class FabricaComando {
      */
     public static ComandoConsultaEntrenadores instanciaCmdConsultaEntrenadores(){
         return new ComandoConsultaEntrenadores();
+    }
+    /**
+     * Metodo que es llamado cuando se necesita una instancia del comando para
+     * realizar actualizaciones a un entrenador.
+     * @param entrenador Recibe un objeto Entidad en el cual estan encapsulados
+     * los datos del entrenador.
+     * @return Devuelve el comando con los datos necesarios para realizar los llamados.
+     * @see Entidad
+     * @see ComandoModificarEntrenador
+     */
+    public static ComandoModificarEntrenador instanciaCmdModificarEntrenador( Entidad entrenador){
+        return new ComandoModificarEntrenador( entrenador );
     }
     
     /**
@@ -201,6 +271,8 @@ public class FabricaComando {
         return new ActualizarPesoComando(pp);
     }
     //FIN F04
+
+   
 
    
     

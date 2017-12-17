@@ -44,25 +44,6 @@ public class FabricaEntidad {
                                                 String historial){
         return new Entrenador( nombre, apellido, fecha, sexo, correo, historial );
     }
-    static public Entidad instanciaClase (int id, String nombre, 
-            String descripcion, String Instructor,Date fecha, Date horaInicio, 
-            Date horaFin, int capacidad){
-        return new Clase (nombre, descripcion, Instructor,
-      fecha, horaInicio, horaFin, capacidad);
-    
-    }
-    
-    static public Entidad instanciaInsertarClase(String nombre, String descripcion){
-            return new Clase(nombre, descripcion);
-    }
-    
-    static public Entidad instanciaEliminaClase(String nombre){
-            return new Clase(nombre);
-    }
-    
-    static public Entidad instanciaModificarClase(String nombre, String descripcion){
-            return new Clase(nombre, descripcion);
-    }
     // Fin de BO2
     
     // Inicia Fabricas de FOM01
@@ -138,37 +119,9 @@ public class FabricaEntidad {
     // Fin de FOM01
     
     // Inicia Fabricas de M04
-    /**
-     * Intancia de la clase Progreso_Peso
-     * @param id
-     * @param peso
-     * @param fechaP
-     * @param sobrenombre
-     * @return 
-     */
-    static public Entidad InstaciaProgresoPeso(int id, int peso, Date fechaP, String sobrenombre){
-    return new Progreso_Peso(id, peso, (java.sql.Date) fechaP,sobrenombre);
-    }
-    
-    /**
-     * Instancia del progreso del peso que solo recibe id y peso
-     * @param id
-     * @param peso
-     * @return 
-     */
-    static public Entidad InstaciaProgresoPeso(int id, int peso){
-    return new Progreso_Peso(id, peso);
-    }
-    
-    /**
-     * instancia del progreso del peso que solo recivçbe id
-     * @param id
-     * @return 
-     */
-    static public Entidad InstaciaProgresoPeso(int id){
-    return new Progreso_Peso(id);
-    }
+    /*static public Entidad InstaciaProgresoPeso(int id, int peso, Date fechaP, String sobrenombre){
+    return new Progreso_Peso(id, peso, fechaP,sobrenombre);
+    }*/
     // Fin de M04        
-
     
 }
