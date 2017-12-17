@@ -64,6 +64,16 @@ public class Progreso_Medida extends Entidad {
         this._medida = _medida;
         this._tipo = _tipo;
     }
+    
+    /**
+     * Constructor Progreso Medida
+     * @param _id
+     * @param _tipo 
+     */
+    public Progreso_Medida(int _id, String _tipo){
+        this._id = _id;
+        this._tipo = _tipo;
+    }
 
     /**
      * @return the _id

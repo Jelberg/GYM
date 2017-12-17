@@ -9,14 +9,21 @@ import Comun.Dominio.Comentario;
 import Comun.Dominio.FabricaEntidad;
 import LogicaLayer.Comando;
 
+
 import LogicaLayer.FO4.Comentarios.AgregarComentarioComando;
 import LogicaLayer.FO4.Comentarios.ConsultarComentarioProgresosComando;
 
+
+import LogicaLayer.FO4.ComandoObtenerComentariosProgMedidas;
 import LogicaLayer.FabricaComando;
+
+
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import javax.ws.rs.GET;
+
+
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -40,9 +47,9 @@ public class FOM04_Comentario{
      * @param mensaje
      * @return 
      */
-    @POST
+    @GET
     @Path("/insertarComentario")
-    @Produces("aplicacion/json")
+    @Produces("applicacion/json")
     public String insertarComentario(@QueryParam("id_usuariocomentario") int idUsuario, 
                                 @QueryParam("mensaje") String mensaje){
         Comentario _comentario = (Comentario) FabricaEntidad.InstaciaInsertarComentario(idUsuario,mensaje);
@@ -53,6 +60,7 @@ public class FOM04_Comentario{
         return _response;
     }
     
+
      
     /**
      * Funcion que recibe como parametro el id del progreso correspondiente a medidas
@@ -72,4 +80,24 @@ public class FOM04_Comentario{
         return _response;
     }
     
-   }
+
+    @GET
+    @Path("/getComentarioProM")
+    @Produces("application/json")
+    public String obtenerComentariosProgresoMedidas(
+                                    @QueryParam("idUsuario") int idusuario,
+                                    @QueryParam("idprogresom") int idprogresom){
+        ComandoObtenerComentariosProgMedidas _comando =
+                FabricaComando.instanciaObtenerComentariosProgMedida
+                (idusuario, idprogresom);
+        _comando.ejecutar();
+        
+        _listaComentarios = _comando.ObtenerComentarioProgMedidas();
+        
+        _response = _gson.toJson(_listaComentarios);
+        
+        return _response;
+    }
+
+}
+

@@ -16,10 +16,40 @@ import java.util.ArrayList;
  */
 public interface IDaoComentario extends IDao {
     
+    /**
+     * Firma de metodo apra obterner comentarios
+     * @return 
+     */
     public ArrayList<Comentario> getComentarios();
+<<<<<<< HEAD
     public String insertar(Entidad comentario);
+=======
+    /**
+     * Firma de metodos para insertar comentario
+     * @param comentario
+     * @return 
+     */
+    public String insertar(Comentario comentario);
+    /**
+     * Firma de metodo para eliminar comentario
+     * @param comentario
+     * @return 
+     */
+>>>>>>> 56d17d0f837f8bcb3d214937cc9fa23f8bba85b7
     public String eliminar(Comentario comentario);
+    /**
+     * Firma de metodo para actualizar comentario
+     * @param comentario
+     * @return 
+     */
     public String actualizar(Comentario comentario);
+    /**
+     * Firma de metodo para obtener una lista de los comentarios por idProgMedida
+     * @param idUsuario
+     * @param idProgMedida
+     * @return 
+     */
+    public ArrayList<Comentario> getComentariosProgMedida(int idUsuario,int idProgMedida);
     
     /**
      * Firma de metodo para la consulta de los progresos

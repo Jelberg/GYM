@@ -44,6 +44,7 @@ import LogicaLayer.FO4.Comentarios.AgregarComentarioComando;
 import LogicaLayer.FO4.Comentarios.ConsultarComentarioProgresosComando;
 import LogicaLayer.FO4.ProgresoMedida.ActualizarMedidaComando;
 import LogicaLayer.FO4.ProgresoMedida.AgregarMedidaComando;
+import LogicaLayer.FO4.ProgresoMedida.ComandoEliminarMedida;
 import LogicaLayer.FO4.ProgresoMedida.ConsultarProgesoMedidasComando;
 
 /**
@@ -315,6 +316,7 @@ public class FabricaComando {
     }
     
     /**
+<<<<<<< HEAD
      * Instancia de la consulta comentario Progresos comenado 
      * @param id
      * @return 
@@ -322,6 +324,27 @@ public class FabricaComando {
     public static ConsultarComentarioProgresosComando instanciaCmdGetComentarioProgresos(int id){
         return new ConsultarComentarioProgresosComando(id);
     }
+=======
+     * Instancia del Comando Obtener Comentarios Progreso medida
+     * @param idUsuario
+     * @param idProgresoMedida
+     * @return 
+     */
+    public static ComandoObtenerComentariosProgMedidas instanciaObtenerComentariosProgMedida
+        (int idUsuario, int idProgresoMedida){
+        return new ComandoObtenerComentariosProgMedidas(idUsuario, idProgresoMedida);
+    }
+        
+    /**
+     * Instancia del Comando para Eliminar Medida
+     * @param progreso_Medida
+     * @return 
+     */    
+    public static ComandoEliminarMedida instanciaEliminarMedida(Progreso_Medida progreso_Medida){
+      return new ComandoEliminarMedida(progreso_Medida);
+    }
+    
+>>>>>>> 56d17d0f837f8bcb3d214937cc9fa23f8bba85b7
      
     //FIN F04
 
