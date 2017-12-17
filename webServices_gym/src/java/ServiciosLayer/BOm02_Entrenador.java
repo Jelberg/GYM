@@ -12,16 +12,19 @@ import Comun.Excepciones.ParameterNullException;
 import Comun.Validaciones.ValidationWS;
 import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadores;
+import LogicaLayer.BO2.ComandoEliminaEntrenador;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
 import LogicaLayer.BO2.ComandoModificarEntrenador;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -158,7 +161,37 @@ public class BOm02_Entrenador {
             response.put("data", e.getMessage());
         }
         finally {
-            return _gson.toJson(response);
+            return _gson.toJson( response );
+        }
+    }
+    /**
+     * Metodo que recibe como parametros el correo del entrenador
+     * para eliminarlo.
+     * @param correo correo del entrenador.
+     * @return Devuelve un json con elemento llamado data que contiene el mensaje de la peticion
+     */
+   @DELETE
+    @Path("/eliminarEntrenador")
+    @Produces("application/json")
+    public String eliminarEntrenador(@QueryParam("correo") String correo){
+
+        Map<String, String> response = new HashMap<String, String>();
+        try{
+
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("correo", correo);
+            }});
+            _entrenador = FabricaEntidad.instanciaEntrenadorCorreo(correo);
+            ComandoEliminaEntrenador cmd = FabricaComando.instanciaCmdEliminaEntrenador( _entrenador );
+            cmd.ejecutar();
+            _entrenador =  cmd.getMensaje();
+            response.put("data", _entrenador.getMensaje());
+        }
+        catch (ParameterNullException e) {
+            response.put("data", e.getMessage());
+        }
+        finally {
+            return _gson.toJson( response );
         }
     }
     
