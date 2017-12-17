@@ -2,7 +2,9 @@ package LogicaLayer;
 
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
+import Comun.Dominio.Progreso_Peso;
 import Comun.Dominio.Usuario;
+import LogicaLayer.FO4.*;
 import LogicaLayer.BO2.CmdActualizarInstructor;
 import Comun.Dominio.Usuario_Amigo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
@@ -25,6 +27,7 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
 import LogicaLayer.BO2.ComandoModificarEntrenador;
 
@@ -66,9 +69,28 @@ public class FabricaComando {
             nombre, apellido, fecha, sexo, correo);
     }
 
-    //Crear comando para consultar las clases.
+    /**
+     * Metodo llamado para realizar la consulta de todas las clases.
+     * @return Devuelve un comando para realizar la accion.
+     */
     public static ComandoConsultarClase instanciaCmdConsultaClase(){
         return new ComandoConsultarClase();
+    }
+    
+    /**
+     * Metodo llamado para realizar el insert de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoInsertarClase instanciaCmdInsertaClase( Entidad ent){
+        return new ComandoInsertarClase( ent );
+    }
+    
+    /**
+     * Metodo llamado para realizar la eliminacion de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoInsertarClase instanciaCmdEliminaClase( Entidad ent){
+        return new ComandoInsertarClase( ent );
     }
     
     /**
@@ -174,5 +196,45 @@ public class FabricaComando {
     }
     
     //Fin Comandos FOM01
+    
+    //INICIO F04
+ 
+    /**
+     * instancia del comando para agregar peso
+     * @return Agregar
+     */
+    public static AgregarPesoComando instanciaCmdAgregarPeso (Entidad pp){
+        return new AgregarPesoComando(pp);
+    }
+    
+    /**
+     * instancia del comando para consultar el progreso del peso
+     * @param pp
+     * @return 
+     */
+     public static ConsultarProgresoPesoComando instanciaCmdConsultarProgresoPeso (int pp){
+        return new ConsultarProgresoPesoComando(pp);
+    }
+    
+     /**
+      * Instancia del comando para eliminar el peso
+      * @param id
+      * @return 
+      */
+     public static EliminarPesoComando instanciaCmdEliminarProgresoPeso (int id){
+        return new EliminarPesoComando(id);
+    }
+     
+     /**
+      * instancia del comando para la actualizacion del peso del usuario
+      * @param pp
+      * @return 
+      */
+     public static ActualizarPesoComando instanciaCmdActializarProgresoPeso (Entidad pp){
+        return new ActualizarPesoComando(pp);
+    }
+    //FIN F04
+
+   
     
 }

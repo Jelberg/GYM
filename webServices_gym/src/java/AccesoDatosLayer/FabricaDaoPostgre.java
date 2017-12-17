@@ -15,6 +15,9 @@ import AccesoDatosLayer.BO1.IDaoEquipo;
 import AccesoDatosLayer.BO1.IDaoEjercicio;
 import AccesoDatosLayer.BO1.IDaoMaquina;
 import AccesoDatosLayer.BO2.IDaoEntrenador;
+import AccesoDatosLayer.FOM04Postgre.DaoProgresoPeso;
+import AccesoDatosLayer.FOM04Postgre.IDaoProgresoPeso;
+
 
 /**
  *
@@ -69,7 +72,13 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
     }
     // Fin Daos F01
 
+    //INICIO FO4
+    public DaoProgresoPeso getDaoProgresoPeso(){
+        return new DaoProgresoPeso();
+    }
+
     
+    //FIN FO4
 
     
 }

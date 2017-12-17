@@ -2,7 +2,7 @@
 INSERT INTO ENTRENADOR(ENT_NOMBRE,ENT_APELLIDO,ENT_FECHA_NAC,ENT_SEXO,ENT_CORREO,ENT_historial,ENT_FOTO) VALUES('Alejandro','Alvares','13-12-94','M','alealvares04@gmail.com','Crossfit',null);
 INSERT INTO ENTRENADOR(ENT_NOMBRE,ENT_APELLIDO,ENT_FECHA_NAC,ENT_SEXO,ENT_CORREO,ENT_historial,ENT_FOTO) VALUES('Pedro','Contreras','14-10-90','M','pcmendoza12@gmail.com','Pesas',null);
 INSERT INTO ENTRENADOR(ENT_NOMBRE,ENT_APELLIDO,ENT_FECHA_NAC,ENT_SEXO,ENT_CORREO,ENT_historial,ENT_FOTO) VALUES('Ana','Gonzalez','02-09-91','F','anitagonzalez@gmail.com','Yoga',null);
-INSERT INTO ENTRENADOR(ENT_NOMBRE,ENT_APELLIDO,ENT_FECHA_NAC,ENT_SEXO,ENT_CORREO,ENT_historial,ENT_FOTO) VALUES('Alejandra','Peña','04-02-94','F','alejandrape@gmail.com','Crossfit',null);
+INSERT INTO ENTRENADOR(ENT_NOMBRE,ENT_APELLIDO,ENT_FECHA_NAC,ENT_SEXO,ENT_CORREO,ENT_historial,ENT_FOTO) VALUES('Alejandra','Peï¿½a','04-02-94','F','alejandrape@gmail.com','Crossfit',null);
 INSERT INTO ENTRENADOR(ENT_NOMBRE,ENT_APELLIDO,ENT_FECHA_NAC,ENT_SEXO,ENT_CORREO,ENT_historial,ENT_FOTO) VALUES('Jorge','Mendez','17-11-90','M','jorge0392@gmail.com','Pesas',null);
 INSERT INTO ENTRENADOR(ENT_NOMBRE,ENT_APELLIDO,ENT_FECHA_NAC,ENT_SEXO,ENT_CORREO,ENT_historial,ENT_FOTO) VALUES('Maria','Gonzalez','25-07-91','F','mariagon3@gmail.com','Yoga',null);
 INSERT INTO ENTRENADOR(ENT_NOMBRE,ENT_APELLIDO,ENT_FECHA_NAC,ENT_SEXO,ENT_CORREO,ENT_historial,ENT_FOTO) VALUES('Azucena','Perez','06-02-94','F','azucepe92@gmail.com','Crossfit',null);
@@ -46,26 +46,26 @@ INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Yoga','yoga master class'
 INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('TRX','TRX master class') ;
 INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Pilates','Pilates master class') ;
 INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Aerobic','quemar calorias con ejercicio cardiovascular') ;
-INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Step','realización de movimientos aeróbicos coreografiados ') ;
-INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Bodycombat','rutinas y la repetición de movimientos') ;
-INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Crossfit','combina trabajo cardiovascular con ejercicios de fuerza y se basa en los entrenamientos interválicos de alta intensidad') ;
-INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Zumba','fortalecer los músculos, liberar tensiones y mejorar la coordinación. ') ;
-INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Body pump','Entrenamiento de fuerza en el que se trabajan distintas zonas musculares al ritmo de la música.') ;
-INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Spinning','Esta actividad cardiovascular lleva al corazón a sus máximas pulsaciones a través del pedaleo siguiendo el ritmo de la música.') ;
+INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Step','realizaciï¿½n de movimientos aerï¿½bicos coreografiados ') ;
+INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Bodycombat','rutinas y la repeticiï¿½n de movimientos') ;
+INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Crossfit','combina trabajo cardiovascular con ejercicios de fuerza y se basa en los entrenamientos intervï¿½licos de alta intensidad') ;
+INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Zumba','fortalecer los mï¿½sculos, liberar tensiones y mejorar la coordinaciï¿½n. ') ;
+INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Body pump','Entrenamiento de fuerza en el que se trabajan distintas zonas musculares al ritmo de la mï¿½sica.') ;
+INSERT INTO CLASE(CLA_NOMBRE,CLA_DESCRIPCION) VALUES ('Spinning','Esta actividad cardiovascular lleva al corazï¿½n a sus mï¿½ximas pulsaciones a travï¿½s del pedaleo siguiendo el ritmo de la mï¿½sica.') ;
 
 
 --INSTRUCTOR
 
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Maria','Cardenas','13-12-82','F','mariaca@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Julieta','Colmenares','24-01-74','F','julicol@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Francisco','Zambrano','18-10-82','M','franza@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Pedro','Peñaloza','15-08-75','M','pedrope@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('José','Mendez','23-05-96','M','josefa@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Juan','Martínez','31-01-82','M','juanma@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Maria','Colmenares','05-12-81','F','mariaco@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Gabriela','Díaz','12-09-76','F','gabridi@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Leonor','Hernández','21-02-87','F','leoher@gmail.com',null);
-INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO) VALUES ('Leonardo','Padrón','21-02-75','M','leopa@gmail.com',null);
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Maria','Cardenas','13-12-82','F','mariaca@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Julieta','Colmenares','24-01-74','F','julicol@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Francisco','Zambrano','18-10-82','M','franza@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Pedro','Peï¿½aloza','15-08-75','M','pedrope@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Josï¿½','Mendez','23-05-96','M','josefa@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Juan','Martï¿½nez','31-01-82','M','juanma@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Maria','Colmenares','05-12-81','F','mariaco@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Gabriela','Dï¿½az','12-09-76','F','gabridi@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Leonor','Hernï¿½ndez','21-02-87','F','leoher@gmail.com',null, 'si');
+INSERT INTO INSTRUCTOR(INS_NOMBRE,INS_APELLIDO,INS_FECHA_NAC,INS_SEXO,INS_CORREO,INS_FOTO, INS_ACTIVO) VALUES ('Leonardo','Padrï¿½n','21-02-75','M','leopa@gmail.com',null, 'si');
 
 
 --HORARIO_CLASE

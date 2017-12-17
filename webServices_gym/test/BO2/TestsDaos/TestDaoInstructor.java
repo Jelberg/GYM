@@ -1,11 +1,8 @@
 package BO2.TestsDaos;
 
 import AccesoDatosLayer.BO2.DaoInstructorPostgre;
-import AccesoDatosLayer.Dao;
 import Comun.Dominio.Instructor;
-import Comun.Excepciones.ParameterNullException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
