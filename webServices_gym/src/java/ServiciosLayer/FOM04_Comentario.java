@@ -8,10 +8,16 @@ package ServiciosLayer;
 import Comun.Dominio.Comentario;
 import Comun.Dominio.FabricaEntidad;
 import LogicaLayer.Comando;
-import LogicaLayer.FO4.AgregarComentarioComando;
+
+import LogicaLayer.FO4.Comentarios.AgregarComentarioComando;
+import LogicaLayer.FO4.Comentarios.ConsultarComentarioProgresosComando;
+
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
+
 import java.util.ArrayList;
+import javax.ws.rs.GET;
+
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -21,7 +27,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author Leonardo
  */
-@Path("/FO_M05_COmentario")
+@Path("/FOM04_Comentario")
 public class FOM04_Comentario{
     private Gson _gson = new Gson();
     private String _response;
@@ -46,4 +52,24 @@ public class FOM04_Comentario{
         
         return _response;
     }
-}
+    
+     
+    /**
+     * Funcion que recibe como parametro el id del progreso correspondiente a medidas
+     * y el id usuario
+     * @param usuario_id
+     * @return Devuelve los comentarios correspondientes a ese progreso de medidas
+     */
+    @GET
+    @Path("/getProgresos")
+    @Produces("application/json")
+    public String getProgresos(@QueryParam("usuario_id") int usuario_id){
+        Comando comando = FabricaComando.instanciaCmdGetComentarioProgresos(usuario_id);
+        ConsultarComentarioProgresosComando cmd = (ConsultarComentarioProgresosComando) comando;
+        cmd.ejecutar();
+        _response = cmd.getResultadoComentarioProgresos();
+        
+        return _response;
+    }
+    
+   }

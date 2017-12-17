@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LogicaLayer.FO4;
+package LogicaLayer.FO4.Comentarios;
 
 import AccesoDatosLayer.FOM04Postgre.IDaoComentario;
 import AccesoDatosLayer.FabricaAbstracta;
 import AccesoDatosLayer.FabricaDaoPostgre;
 import Comun.Dominio.Comentario;
+import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
 
 
@@ -19,15 +20,18 @@ import LogicaLayer.Comando;
  */
 public class AgregarComentarioComando extends Comando {
     
-    private Comentario _comentario;
+    private Entidad _comentario;
     private String _response;
     
-    /**
+
+     /**
      * Constructor del comentario a ser agregado
      * @param comentario 
      */
-    public AgregarComentarioComando(Comentario comentario){
-        
+    
+    public AgregarComentarioComando(Entidad comentario){
+
+   
         this._comentario = comentario;
         
     }

@@ -104,14 +104,7 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
          return new DaoProgresoPeso();
      }
     
-    /**
-     * Instancia pra obtener DaoProgreosMedida
-     * @return 
-     */
-    @Override
-    public IDaoProgresoMedida getDaoProgresoMedida(){
-        return new DaoProgresoMedida();
-    }
+ 
     
     /**
      * Instancia para obtener DaoComentario
@@ -121,8 +114,24 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
        return new DaoComentario();
     }
     
+     @Override
+    public DaoProgresoMedida getDaoProgresoMedida() {
+        return new DaoProgresoMedida();
+         }
+
+    @Override
+    public DaoComentario instanciaDaoComentario() {
+        return new DaoComentario();
+       }
+
+    @Override
+    public DaoProgresoMedida instanciaDaoProgresoMedida() {
+        return new DaoProgresoMedida();
+    }
     
     //FIN FO4
+
+   
 
     
 

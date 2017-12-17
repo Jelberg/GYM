@@ -7,6 +7,7 @@ package AccesoDatosLayer.FOM04Postgre;
 
 import AccesoDatosLayer.IDao;
 import Comun.Dominio.Comentario;
+import Comun.Dominio.Entidad;
 import java.util.ArrayList;
 
 /**
@@ -16,8 +17,16 @@ import java.util.ArrayList;
 public interface IDaoComentario extends IDao {
     
     public ArrayList<Comentario> getComentarios();
-    public String insertar(Comentario comentario);
+    public String insertar(Entidad comentario);
     public String eliminar(Comentario comentario);
     public String actualizar(Comentario comentario);
+    
+    /**
+     * Firma de metodo para la consulta de los progresos
+     * @param id
+     * @return 
+     */
+    public String consultaProgresos(int id);
+    
     
 }

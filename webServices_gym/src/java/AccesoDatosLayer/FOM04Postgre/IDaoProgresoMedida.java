@@ -7,8 +7,6 @@ package AccesoDatosLayer.FOM04Postgre;
 
 import AccesoDatosLayer.IDao;
 import Comun.Dominio.Entidad;
-import Comun.Dominio.Progreso_Medida;
-import java.util.ArrayList;
 
 /**
  *
