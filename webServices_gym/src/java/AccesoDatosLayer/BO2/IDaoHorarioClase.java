@@ -6,21 +6,17 @@
 package AccesoDatosLayer.BO2;
 
 import AccesoDatosLayer.IDao;
-import java.util.ArrayList;
-import Comun.Dominio.Clase;
+import Comun.Dominio.HorarioClase;
 import Comun.Dominio.Entidad;
+import java.util.ArrayList;
 
 /**
  *
  * @author marvian
  */
-public interface IDaoClase extends IDao {
-    
-    public ArrayList <Clase> consultarClases();
+public interface IDaoHorarioClase extends IDao {
+    public ArrayList <HorarioClase> consultarHorarioClase();
     public Entidad insertar (Entidad ent);
     public Entidad modificar (Entidad ent);
     public Entidad eliminar (Entidad ent);
-    public Entidad buscaPorId (Entidad ent);
-    public Entidad buscaDescripcion (Entidad ent);
-    
 }

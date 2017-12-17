@@ -106,8 +106,7 @@ public class FOM01_Login {
                                 @QueryParam("password") String password) {
         try
         {
-            ConfigurarLogger cl = new ConfigurarLogger();
-            Logger logr = cl.getLogr();
+            
             logr.log(Level.WARNING, "prueba");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("usuario", usuar);
