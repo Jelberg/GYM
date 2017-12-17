@@ -54,9 +54,10 @@ public class FOM01_Login {
                                     @QueryParam("telefono") String telefono,
                                     @QueryParam("entrenador") boolean entrenador){
         Map<String, String> response = new HashMap<String, String>();
-              ConfigurarLogger cl = new ConfigurarLogger();
-    Logger logr = cl.getLogr();
-        try{    
+        ConfigurarLogger cl = new ConfigurarLogger();
+        Logger logr = cl.getLogr();
+        try{
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("nombre", nombre);
             put("apellido", apellido);
@@ -78,12 +79,10 @@ public class FOM01_Login {
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
             Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
-            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
             Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
-            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return gson.toJson(response);
@@ -104,8 +103,7 @@ public class FOM01_Login {
     public String iniciarSesion(@QueryParam("usuario") String usuar,
                                 @QueryParam("password") String password) {
         try
-        {
-            
+        { 
             logr.log(Level.WARNING, "prueba");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("usuario", usuar);
@@ -123,8 +121,7 @@ public class FOM01_Login {
         }
         catch (Exception e) {
             response = e.getMessage();
-          Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
-            
+            Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);    
         }
         finally {
             return response;
@@ -143,7 +140,8 @@ public class FOM01_Login {
     public String updateCod(@QueryParam("correo") String correo){
         
         Map<String, String> response = new HashMap<String, String>();
-        try{    
+        try{
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("correo", correo);
             }});   
@@ -161,17 +159,14 @@ public class FOM01_Login {
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
             Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
-            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
-           Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
-            logr.log(Level.WARNING, e.getMessage());
+            Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
         }
         finally {
             return gson.toJson(response);
-        }
-        
+        }  
     }
     
     /**
@@ -187,7 +182,8 @@ public class FOM01_Login {
     public String updatePass(@QueryParam("correo") String correo, 
                              @QueryParam("password") String password){
         Map<String, String> response = new HashMap<String, String>();
-        try{    
+        try{
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("correo", correo);
             put("password", password);
@@ -200,13 +196,11 @@ public class FOM01_Login {
         }
         catch (ParameterNullException e) {
             response.put("id","");
-             Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
-            logr.log(Level.WARNING, "Error");
+            Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
         }
         catch (Exception e) {
             response.put("id","");
-             Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
-            logr.log(Level.WARNING, "Error");
+            Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
         }
         finally {
             return gson.toJson(response);
@@ -226,6 +220,7 @@ public class FOM01_Login {
         Map<String, String> response = new HashMap<String, String>();
         try
         {
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("correo", correo);
             }});
@@ -236,17 +231,16 @@ public class FOM01_Login {
             response.put("id",c.getResultado());
         }
         catch (ParameterNullException e) {
-                response.put("error",e.getMessage());
-                 Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
-            logr.log(Level.WARNING, "Error");
-            }
-            catch (Exception e) {
-                response.put("error",e.getMessage());
-                 Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
-            logr.log(Level.WARNING, "Error");
-            }
-            finally {
-                return gson.toJson(response);
-            }
+            response.put("error",e.getMessage());
+            Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
         }
+        catch (Exception e) {
+            response.put("error",e.getMessage());
+            Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
+        }
+        finally {
+            return gson.toJson(response);
+        }
+    }
+    
 }
