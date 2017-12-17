@@ -1,36 +1,37 @@
 package LogicaLayer;
 
 
-import LogicaLayer.FO4.Comentarios.CompartirProgresoComando;
-import LogicaLayer.FO4.Comentarios.ComandoObtenerComentariosProgMedidas;
-import LogicaLayer.FO4.ProgresoPeso.EliminarPesoComando;
-import LogicaLayer.FO4.ProgresoPeso.AgregarPesoComando;
-import LogicaLayer.FO4.ProgresoPeso.ConsultarProgresoPesoComando;
-import LogicaLayer.FO4.ProgresoPeso.ActualizarPesoComando;
-
 import Comun.Dominio.Comentario;
-
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Equipo;
 import Comun.Dominio.Instructor;
 import Comun.Dominio.Progreso_Medida;
 import Comun.Dominio.Progreso_Peso;
 import Comun.Dominio.Usuario;
-
-import LogicaLayer.BO2.CmdActualizarInstructor;
 import Comun.Dominio.Usuario_Amigo;
 import LogicaLayer.BO1.ComandoAddEquipo;
+import LogicaLayer.BO1.ComandoAgregarEjercicio;
 import LogicaLayer.BO1.ComandoEliminarEquipo;
+import LogicaLayer.BO1.ComandoGetEjercicios;
+import LogicaLayer.BO1.ComandoGetEquipoById;
 import LogicaLayer.BO1.ComandoGetEquipos;
 import LogicaLayer.BO1.ComandoUpdateEquipo;
+import LogicaLayer.BO2.CmdActivarInstructor;
 import LogicaLayer.BO2.CmdActualizarInstructor;
 import LogicaLayer.BO2.CmdGetInstructorPorCorreo;
 import LogicaLayer.BO2.CmdGetInstructores;
+import LogicaLayer.BO2.CmdInactivarInstructor;
 import LogicaLayer.BO2.CmdRegistrarInstructor;
+import LogicaLayer.BO2.ComandoBuscaClasePorId;
+import LogicaLayer.BO2.ComandoClaseConsultaDescripcion;
 import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadores;
 import LogicaLayer.BO2.ComandoConsultarClase;
+import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
+import LogicaLayer.BO2.ComandoModificarClase;
+import LogicaLayer.BO2.ComandoModificarEntrenador;
+import LogicaLayer.F03.ConsultarEjerciciosRealizadosComando;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
 import LogicaLayer.FO1.ComandoActualizarPassword;
 import LogicaLayer.FO1.ComandoEliminaUsuario;
@@ -45,25 +46,19 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.FO4.*;
-import LogicaLayer.BO1.ComandoGetEquipos;
-import LogicaLayer.BO2.ComandoBuscaClasePorId;
-import LogicaLayer.BO2.ComandoClaseConsultaDescripcion;
-import LogicaLayer.BO2.ComandoInsertarClase;
-import LogicaLayer.BO2.ComandoInsertarEntrenador;
-import LogicaLayer.BO2.CmdActivarInstructor;
-import LogicaLayer.BO2.CmdInactivarInstructor;
-import LogicaLayer.BO2.ComandoModificarClase;
-import LogicaLayer.BO2.ComandoModificarEntrenador;
-import LogicaLayer.F03.ConsultarEjerciciosRealizadosComando;
 import LogicaLayer.FO4.Comentarios.AgregarComentarioComando;
+import LogicaLayer.FO4.Comentarios.ComandoObtenerComentariosProgMedidas;
+import LogicaLayer.FO4.Comentarios.CompartirProgresoComando;
 import LogicaLayer.FO4.Comentarios.ConsultarComentarioProgresosComando;
 import LogicaLayer.FO4.ProgresoMedida.ActualizarMedidaComando;
 import LogicaLayer.FO4.ProgresoMedida.AgregarMedidaComando;
 import LogicaLayer.FO4.ProgresoMedida.ComandoConsultarMedidasAnual;
 import LogicaLayer.FO4.ProgresoMedida.ComandoEliminarMedida;
 import LogicaLayer.FO4.ProgresoMedida.ConsultarProgesoMedidasComando;
-import LogicaLayer.BO1.ComandoGetEjercicios;
-import LogicaLayer.BO1.ComandoAgregarEjercicio;
+import LogicaLayer.FO4.ProgresoPeso.ActualizarPesoComando;
+import LogicaLayer.FO4.ProgresoPeso.AgregarPesoComando;
+import LogicaLayer.FO4.ProgresoPeso.ConsultarProgresoPesoComando;
+import LogicaLayer.FO4.ProgresoPeso.EliminarPesoComando;
 
 /**
  *
