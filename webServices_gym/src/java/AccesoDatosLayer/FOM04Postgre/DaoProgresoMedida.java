@@ -12,6 +12,7 @@ import Comun.Excepciones.ParameterNullException;
 import Comun.Validaciones.ValidationWS;
 import com.google.gson.Gson;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -180,5 +181,53 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
             return null;
         }
     }
-    
+
+    /**
+     * Metodo para obtener Medidas Anuales de la base de datos
+     * @param progreso_Medida
+     * @param fechaini
+     * @param fechafin
+     * @return 
+     */
+    @Override
+    public ArrayList<Progreso_Medida> getMedidasAnuales
+        (Progreso_Medida progreso_Medida, String fechaini, String fechafin) {
+        try {
+            _conn = getConexion();
+            
+            String _query = "select * from m04_get_medidas_ano('"+
+                            progreso_Medida.getSobrenombre()+"','"+fechaini
+                            +"','"+fechafin+"')";
+            
+            PreparedStatement _st = _conn.prepareStatement(_query);
+            
+            ResultSet _rs;
+            
+            for(int i=1; i<=11; i++)
+            {
+                _rs = _st.executeQuery();
+                _jsonArray.add(new Progreso_Medida());
+                if(_rs.wasNull()){
+                    _jsonArray.get(_jsonArray.size() - 1).setMedida(0);
+                    _jsonArray.get(_jsonArray.size() - 1).setFechaM(Date.valueOf(fechaini));
+                }else{
+                    while (_rs.next()) {
+                        _jsonArray.get(_jsonArray.size() - 1).setMedida(_rs.getInt("medida"));
+                        _jsonArray.get(_jsonArray.size() - 1).setFechaM(Date.valueOf(fechaini));
+                    }
+                }
+            }
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            cerrarConexion(_conn);
+            return _jsonArray;
+        }
+    }
 }
+    
+

@@ -44,4 +44,14 @@ public interface IDaoProgresoMedida extends IDao {
      * @return 
      */
     public String eliminarMedida(Entidad ent);
+    
+    /**
+     * Firma de Metodo para consultar medidas anuales
+     * @param progreso_Medida
+     * @param fechaini
+     * @param fechafin
+     * @return 
+     */
+    public ArrayList<Progreso_Medida> getMedidasAnuales
+        (Progreso_Medida progreso_Medida, String fechaini, String fechafin);
 }

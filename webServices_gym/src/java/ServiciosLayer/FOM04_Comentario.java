@@ -49,6 +49,12 @@ public class FOM04_Comentario{
         return _response;
     }
     
+    /**
+     * Servicio que obtiene los comentarios hechos a un progrso de medida particular
+     * @param idusuario
+     * @param idprogresom
+     * @return 
+     */
     @GET
     @Path("/getComentarioProM")
     @Produces("application/json")

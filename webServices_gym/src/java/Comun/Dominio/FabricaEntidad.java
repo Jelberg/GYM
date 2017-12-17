@@ -242,6 +242,15 @@ public class FabricaEntidad {
         return new Progreso_Medida(idUsuario, tipo_medida);
     }
     
+    /**
+     * Instancia del Progresi Medida para consultar medidas anuales
+     * @param sobrenombre
+     * @return 
+     */
+    static public Progreso_Medida InstanciaConsultarMedidasAnuales(String sobrenombre){
+        return new Progreso_Medida(sobrenombre);
+    } 
+    
     // Fin de M04        
 
     

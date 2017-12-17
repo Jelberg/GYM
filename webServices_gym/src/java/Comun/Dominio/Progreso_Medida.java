@@ -75,6 +75,10 @@ public class Progreso_Medida extends Entidad {
         this._tipo = _tipo;
     }
 
+    public Progreso_Medida(String sobrenombre){
+        this._sobrenombre = sobrenombre;
+    }
+    
     /**
      * @return the _id
      */

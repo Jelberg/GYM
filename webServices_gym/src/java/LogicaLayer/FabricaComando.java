@@ -42,6 +42,7 @@ import LogicaLayer.BO2.ComandoModificarEntrenador;
 import LogicaLayer.F03.ConsultarEjerciciosRealizadosComando;
 import LogicaLayer.FO4.ProgresoMedida.ActualizarMedidaComando;
 import LogicaLayer.FO4.ProgresoMedida.AgregarMedidaComando;
+import LogicaLayer.FO4.ProgresoMedida.ComandoConsultarMedidasAnual;
 import LogicaLayer.FO4.ProgresoMedida.ComandoEliminarMedida;
 import LogicaLayer.FO4.ProgresoMedida.ConsultarProgesoMedidasComando;
 
@@ -332,6 +333,15 @@ public class FabricaComando {
       return new ComandoEliminarMedida(progreso_Medida);
     }
     
+    /**
+     * Instancia del Comando Consultar Medidas Anuales
+     * @param progreso_Medida
+     * @return 
+     */
+    public static ComandoConsultarMedidasAnual instanciaObtenerMedidasAnual
+        (Progreso_Medida progreso_Medida){
+        return new ComandoConsultarMedidasAnual(progreso_Medida);
+    }
      
     //FIN F04
 
