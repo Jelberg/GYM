@@ -206,6 +206,25 @@ public class FabricaComando {
          return new AgregarComentarioComando(comentario);
      }
      
+    
+    public static AgregarMedidaComando instanciaCmdAgregarMedida (int id, int medida, int tipo_medida){
+        return new AgregarMedidaComando(id, medida, tipo_medida);
+    }
+    
+    public static CompartirProgresoComando instanciaCmdCompartirProgreso (){
+        return new CompartirProgresoComando();
+    }
+    
+    public static ConsultarProgresoMedidasComando instanciaCmdConsultarProgresoMedidas (int id){
+        return new ConsultarProgresoMedidasComando(id);
+    }
+    
+    public static ModificarMedidasComando instanciaCmdModificarMedidas (int id, int medida, int tipo_medida){
+        return new ModificarMedidasComando(id, medida, tipo_medida);
+    }
+    
+    //  FO_M05
+     
     //FIN F04
 
    

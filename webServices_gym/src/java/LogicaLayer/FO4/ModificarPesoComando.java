@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LogicaLayer.FO4;
+package LogicaLayer.FOM04;
 
+import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
 
 
@@ -13,16 +14,14 @@ import LogicaLayer.Comando;
  *
  * @author Leonardo
  */
-public class ModificarMedidasComando extends Comando {
+public class ModificarPesoComando extends Comando {
     
     int _idUsuario;
-    int _medida;
-    int _tipo_medida;
+    int _peso;
     
-    public ModificarMedidasComando(int idUsuario, int medida, int tipo_medida){
+    public ModificarPesoComando(int idUsuario, int peso){
         _idUsuario = idUsuario;
-        _medida = medida;
-        _tipo_medida = tipo_medida;
+        _peso = peso;
     }
     
     @Override

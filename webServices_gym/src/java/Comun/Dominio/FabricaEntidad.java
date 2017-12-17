@@ -154,6 +154,11 @@ public class FabricaEntidad {
     return new Comentario(idUsuario, mensaje);
     }
     
+    static public Entidad InstanciaProgresoMedida(int id, int medida, 
+            String tipo, String fechaM, String sobreNombre){
+        return new Progreso_Medida(id, medida, tipo, fechaM, sobreNombre);
+    }
+    
     // Fin de M04        
 
     
