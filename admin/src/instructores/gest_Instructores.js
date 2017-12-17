@@ -28,23 +28,23 @@ window.onload = function busquedainstructor()
                     fila =respuesta[i];
                     for (var j = 0; j < ncampos; j++)
                     {
-                        if (j!=5)
+                        if (j!=6)
                         {
                             console.log(fila[campos[j]]);
                             switch(j) {
-                                case 0:
+                                case 1:
                                 document.getElementById('nombre').value = fila[campos[j]] +" "+fila[campos[j+1]];
                                 break;
-                                case 2:
+                                case 3:
                                 document.getElementById('fecha').value = cambiarFormato(fila[campos[j]]);
                                 break;
-                                case 3:
+                                case 4:
                                 if((fila[campos[j]]=="M"))
                                 document.getElementById('masculino').checked = true
                                 else
                                 document.getElementById('femenino').checked = true;
                                 break;
-                                case 4:
+                                case 5:
                                 document.getElementById('correo').value = fila[campos[j]];
                                 break;                           
                             }
@@ -168,6 +168,22 @@ function validarbusqueda()
     })
 }
 
+function ActivarInstructor()
+{
+    var url_comple="/ActivarInstructor?correo="+document.getElementById('correo').value;
+    fetch(url+url_comple, {
+        method: 'POST'
+    })
+}
+
+function InactivarInstructor()
+{
+    var url_comple="/InactivarInstructor?correo="+document.getElementById('correo').value;
+    fetch(url+url_comple, {
+        method: 'POST'
+    })
+}
+
 function actualizarInstructor()
 {
     var sex;
@@ -183,7 +199,7 @@ function actualizarInstructor()
                 var intento=0
                 var res = document.getElementById("nombre").value.split(" ");
                 console.log(res[0]+res[1])
-                var url_comple="/actualizaInstruct?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
+                var url_comple="/ActualizarInstructor?nombre="+res[0]+"&apellido="+res[1]+"&fecha="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
                 fetch(url+url_comple, {
                     method: 'POST'
                 })

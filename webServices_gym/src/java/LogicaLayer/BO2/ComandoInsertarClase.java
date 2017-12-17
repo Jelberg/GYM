@@ -9,12 +9,13 @@ import AccesoDatosLayer.BO2.IDaoClase;
 import AccesoDatosLayer.FabricaAbstracta;
 import AccesoDatosLayer.FabricaDaoPostgre;
 import Comun.Dominio.Entidad;
+import LogicaLayer.Comando;
 
 /**
  *
  * @author marvian
  */
-public class ComandoInsertarClase {
+public class ComandoInsertarClase extends Comando {
     private Entidad _clase;
     
     /**

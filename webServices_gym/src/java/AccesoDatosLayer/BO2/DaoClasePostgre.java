@@ -120,8 +120,32 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
      */
     @Override
     public Entidad modificar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        try {
+                       
+            String query = "select * from bo_m02_modifica_clase(?,?)";
+            _conn = getConexion();
+            Clase clase = ( Clase ) ent;
+            PreparedStatement st = _conn.prepareStatement(query);
+            java.lang.reflect.Type type = new TypeToken<Clase[]>(){}.getType();
+            st.setString(1, clase.getNombre());
+            st.setString(2, clase.getDescripcion());
+            st.executeQuery();
+            ent.setMensaje("Se modificó con éxito");
+        }
+        catch (SQLException e){
+            ent.setMensaje( "Error, intente de nuevo" );
+        }
+        catch (ParameterNullException e) {
+            ent.setMensaje( "Error, parametro vacio" );
+        }
+        catch (Exception e) {
+            ent.setMensaje( "Error" );
+        }
+        finally {
+            cerrarConexion( _conn );
+            return ent;
+        }
+    } 
 
     /**
      * Metodo que sera llamado cuando se desee eliminar una clase.
@@ -151,11 +175,73 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
             ent.setMensaje( "Parametro vacio." );
         }
         catch (Exception e) {
-            ent.setMensaje( "Eror." );
+            ent.setMensaje( "Error." );
         }
         finally {
             cerrarConexion( _conn );
             return ent;
         }  
+    }
+
+    @Override
+    public Entidad buscaPorId(Entidad ent) {
+        try{
+            
+            String query = "SELECT * FROM bo_m02_get_clase_por_id(?)";
+            _conn = getConexion();
+            Clase clase = ( Clase ) ent;
+            PreparedStatement st = _conn.prepareStatement(query);
+            ResultSet rs = st.executeQuery(query);
+            java.lang.reflect.Type type = new TypeToken<Clase[]>(){}.getType();
+            while(rs.next()){
+                jsonArray.add(new Clase());
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("cla_id"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("cla_nombre"));
+                jsonArray.get(jsonArray.size() - 1).setDescripcion(rs.getString("cla_descripcion"));
+            }
+                ent.setMensaje( "Se busco correctamente la clase." );
+        }
+        catch(SQLException e) {
+            ent.setMensaje( "Error intente de nuevo." );
+        }
+        catch (ParameterNullException e) {
+            ent.setMensaje( "Parametro vacio." );
+        }
+        catch (Exception e) {
+            ent.setMensaje( "Error." );
+        }
+        finally {
+            cerrarConexion(_conn);
+            return ent;
+        }
+    }
+
+    @Override
+    public Entidad buscaDescripcion(Entidad ent) {
+        try{
+            
+            String query = "SELECT * FROM bo_m02_get_clase(?)";
+             _conn = getConexion();
+            Clase clase = ( Clase ) ent;
+            PreparedStatement st = _conn.prepareStatement(query);
+            java.lang.reflect.Type type = new TypeToken<Clase[]>(){}.getType();
+            st.setString(1, clase.getNombre());
+            st.executeQuery();
+            
+            ent.setMensaje( "Se busco correctamente la clase." );
+        }
+        catch(SQLException e) {
+            ent.setMensaje( "Error intente de nuevo." );
+        }
+        catch (ParameterNullException e) {
+            ent.setMensaje( "Parametro vacio." );
+        }
+        catch (Exception e) {
+            ent.setMensaje( "Error." );
+        }
+        finally {
+            cerrarConexion(_conn);
+            return ent;
+        }
     }
 }

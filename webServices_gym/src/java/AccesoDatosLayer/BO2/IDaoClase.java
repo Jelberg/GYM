@@ -20,5 +20,7 @@ public interface IDaoClase extends IDao {
     public Entidad insertar (Entidad ent);
     public Entidad modificar (Entidad ent);
     public Entidad eliminar (Entidad ent);
+    public Entidad buscaPorId (Entidad ent);
+    public Entidad buscaDescripcion (Entidad ent);
     
 }

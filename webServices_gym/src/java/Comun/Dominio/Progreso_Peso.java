@@ -15,10 +15,19 @@ public class Progreso_Peso extends Entidad{
     private Date _fechaP;
     private String _sobrenombre;
 
-    
+    /**
+     * Constrcutor Progreso Peso
+     */
     public Progreso_Peso(){
     }
     
+    /**
+     * Constructor Progreso Peso
+     * @param id
+     * @param peso
+     * @param fechaP
+     * @param sobrenombre 
+     */
     public Progreso_Peso(int id, int peso, Date fechaP, String sobrenombre) {
         super(id);
         this._peso = peso;
@@ -26,11 +35,20 @@ public class Progreso_Peso extends Entidad{
         this._sobrenombre = sobrenombre;
     }
 
+    /**
+     * Constructor Progreso Peso
+     * @param id
+     * @param peso 
+     */
     Progreso_Peso(int id, int peso) {
         super(id);
         this._peso=peso;
     }
 
+    /**
+     * COnstrcutor Progreso Peso
+     * @param id 
+     */
     Progreso_Peso(int id) {
         super(id);
     }
