@@ -76,11 +76,6 @@ public class BO2_Instructor {
     @Produces("application/json")
     public String getListInstructor(){
 
-        ConfigurarLogger cl = new ConfigurarLogger();
-        Logger logr = cl.getLogr();
-        logr.log(Level.WARNING, "Prueba Log");
-        
-
         CmdGetInstructores cmd = FabricaComando.instanciaGetInstructores();
         cmd.ejecutar();
         _listaInstructores = cmd.getInstructores();

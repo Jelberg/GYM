@@ -4,6 +4,7 @@ import AccesoDatosLayer.DaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
 import Comun.Excepciones.ParameterNullException;
+import Comun.Util.ConfigurarLogger;
 import Comun.Validaciones.ValidationWS;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,6 +24,10 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
 
     private Connection _conn;
     private ArrayList<Instructor> jsonArray;
+    /*ConfigurarLogger cl = new ConfigurarLogger();
+    Logger logr = cl.getLogr();*/
+    //logr.log(Level.WARNING, "Prueba Log");
+        
     
     public DaoInstructorPostgre() {}
     
@@ -47,9 +52,6 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             }
         }
         catch(SQLException e) {
-            System.out.println(e);
-        }
-        catch (ParameterNullException e) {
             System.out.println(e);
         }
         finally {
@@ -81,7 +83,6 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             
         }
         catch (SQLException e){
-            System.out.println("########## INSTRUCTOR REPETIDO");
             System.out.println(e.getMessage());
         }
         finally {

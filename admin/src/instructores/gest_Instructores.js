@@ -168,6 +168,22 @@ function validarbusqueda()
     })
 }
 
+function ActivarInstructor()
+{
+    var url_comple="/ActivarInstructor?correo="+document.getElementById('correo').value;
+    fetch(url+url_comple, {
+        method: 'POST'
+    })
+}
+
+function InactivarInstructor()
+{
+    var url_comple="/InactivarInstructor?correo="+document.getElementById('correo').value;
+    fetch(url+url_comple, {
+        method: 'POST'
+    })
+}
+
 function actualizarInstructor()
 {
     var sex;
