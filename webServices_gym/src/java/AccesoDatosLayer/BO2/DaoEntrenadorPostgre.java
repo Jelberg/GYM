@@ -83,7 +83,22 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
      */
     @Override
     public Entidad eliminar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            Entrenador entrenador = ( Entrenador ) ent;
+            _conn = getConexion();
+            String query = "SELECT * from bo_m02_eliminar_entrenador(?)";
+            PreparedStatement st = _conn.prepareStatement(query);
+            st.setString( 1, entrenador.getCorreo() );
+            ResultSet rs = st.executeQuery();
+            ent.setMensaje( "Entrenador eliminado correctamente." );
+        }
+        catch( SQLException e){
+            ent.setMensaje( "Error de conexion, intente de nuevo." );
+        }
+        finally{
+            cerrarConexion( _conn );
+            return ent;
+        }
     }
     /**
      * Metodo que es llamado cuando se desea actualizar a un entrenador.

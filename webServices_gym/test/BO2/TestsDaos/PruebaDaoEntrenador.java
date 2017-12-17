@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -83,6 +85,11 @@ public class PruebaDaoEntrenador {
     public void pruebaModificarEntrenador(){
         _entModificar = _dao.modificar(_entModificar );
         assertEquals( "Se realizo correctamente la actualizacion." , _entModificar.getMensaje());
+    }
+    @Test
+    public void pruebaEliminarEntrenador(){
+        _entModificar = _dao.eliminar( _entCorreo );
+        assertEquals( "Entrenador eliminado correctamente.", _entModificar.getMensaje() );
     }
     @After
     public void terminarPruebas() throws SQLException{

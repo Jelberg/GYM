@@ -33,6 +33,7 @@ import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
 import LogicaLayer.BO2.CmdActivarInstructor;
 import LogicaLayer.BO2.CmdInactivarInstructor;
+import LogicaLayer.BO2.ComandoEliminaEntrenador;
 import LogicaLayer.BO2.ComandoModificarClase;
 import LogicaLayer.BO2.ComandoModificarEntrenador;
 
@@ -136,6 +137,9 @@ public class FabricaComando {
      */
     public static ComandoConsultaEntrenadores instanciaCmdConsultaEntrenadores(){
         return new ComandoConsultaEntrenadores();
+    }
+    public static ComandoEliminaEntrenador instanciaCmdEliminaEntrenador( Entidad ent){
+        return new ComandoEliminaEntrenador( ent );
     }
     /**
      * Metodo que es llamado cuando se necesita una instancia del comando para
