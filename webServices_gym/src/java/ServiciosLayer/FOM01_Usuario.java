@@ -8,6 +8,7 @@ package ServiciosLayer;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Usuario;
 import Comun.Excepciones.ParameterNullException;
+import Comun.Util.ConfigurarLogger;
 import Comun.Validaciones.ValidationWS;
 import LogicaLayer.FO1.ComandoEliminaUsuario;
 import LogicaLayer.FO1.ComandoGetUsuario;
@@ -19,6 +20,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -32,9 +35,13 @@ import javax.ws.rs.QueryParam;
  */
 @Path("/Registrar_Usuario")
 public class FOM01_Usuario {
+    
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Usuario> listaUsuario;
+    ConfigurarLogger cl = new ConfigurarLogger();
+    Logger logr = cl.getLogr();
+    
 
     public String getResponse() {
         return response;
@@ -56,7 +63,7 @@ public class FOM01_Usuario {
      * Funcion que recibe como parámetro el ID del Usuario,
      * para consultarlo y saber sus datos.
      * @param idUsuario ID del Usuario.
-     * @return Devuelve los datos del cliente en formato json
+     * @return Devuelve los datos del usuario.
      */
     @GET
     @Path("/getUsuario")
@@ -64,6 +71,7 @@ public class FOM01_Usuario {
     public String getUsuario(@QueryParam("idUsuario") int idUsuario){
         
         try{
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("idUsuario", idUsuario);
             }});
@@ -75,9 +83,11 @@ public class FOM01_Usuario {
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return response;
@@ -89,7 +99,7 @@ public class FOM01_Usuario {
      * para consultarlo y saber sus datos.
      * @param nombre del Usuario.
      * @param apellido del Usuario.
-     * @return Devuelve los datos del cliente en formato json
+     * @return Devuelve los datos del usuario.
      */
     @GET
     @Path("/getUsuarioNomApe")
@@ -97,6 +107,7 @@ public class FOM01_Usuario {
     public String getUsuarioNomApe(@QueryParam("nombre") String nombre, 
                                     @QueryParam("apellido") String apellido){
         try{
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("nombre", nombre);
                 put("apellido", apellido);
@@ -109,9 +120,11 @@ public class FOM01_Usuario {
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return response;
@@ -120,8 +133,8 @@ public class FOM01_Usuario {
     
     
     /**
-     * @return Devuelve una lista de usuarios
-    */
+     * @return Devuelve una lista de usuarios.
+     */
     @GET
     @Path("/getListUsuario")
     @Produces("application/json")
@@ -137,8 +150,7 @@ public class FOM01_Usuario {
      * Metodo que recibe como parametros el correo del Usuario
      * para eliminar su cuenta.
      * @param correo correo del Usuario.
-     * @return Devuelve un json con elemento llamado data, 
-     * contiene el mensaje de la peticion
+     * @return Devuelve el mensaje de la peticion.
      */
     @DELETE
     @Path("/eliminaUsuario")
@@ -147,6 +159,7 @@ public class FOM01_Usuario {
 
         Map<String, String> response = new HashMap<String, String>();
         try{
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("correo", correo);
             }});        
@@ -156,9 +169,11 @@ public class FOM01_Usuario {
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return gson.toJson(response);
@@ -179,8 +194,7 @@ public class FOM01_Usuario {
      * @param correo
      * @param entrenador
      * @param codigo
-     * @return Devuelve un json con elemento llamado data, 
-     * contiene el mensaje de la peticion
+     * @return Devuelve el mensaje de la petición.
      */
     @POST
     @Path("/modificaUsuario")
@@ -198,6 +212,7 @@ public class FOM01_Usuario {
                                     @QueryParam("codigo") int codigo) {
         Map<String, String> response = new HashMap<String, String>();
         try {
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("id", id);
                 put("usuario", usuar );
@@ -220,9 +235,11 @@ public class FOM01_Usuario {
         }
         catch (ParameterNullException e) {
             response.put("id", e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("id", e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return gson.toJson(response);

@@ -9,6 +9,7 @@ import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Usuario;
 import Comun.Dominio.Usuario_Amigo;
 import Comun.Excepciones.ParameterNullException;
+import Comun.Util.ConfigurarLogger;
 import Comun.Validaciones.ValidationWS;
 import LogicaLayer.FO1.ComandoEliminaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoGetUsuario;
@@ -19,6 +20,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -32,15 +35,18 @@ import javax.ws.rs.QueryParam;
  */
 @Path("/Usuario_Amigo")
 public class FOM01_Usuario_Amigo {
+    
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Usuario> listaUsuario;
+    ConfigurarLogger cl = new ConfigurarLogger();
+    Logger logr = cl.getLogr();
     
     /**
      * Funcion que recibe como parámetro el ID del Usuario,
      * para consultarlo.
      * @param idUsuario ID del Usuario.
-     * @return Devuelve los datos en formato json
+     * @return Devuelve los datos del usuario.
      */
     @GET
     @Path("/getUsuario_Amigo")
@@ -48,6 +54,7 @@ public class FOM01_Usuario_Amigo {
     public String getUsuario_Amigo(@QueryParam("idUsuario") int idUsuario){
         
         try{
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("idUsuario", idUsuario);
             }});
@@ -59,9 +66,11 @@ public class FOM01_Usuario_Amigo {
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return response;
@@ -80,6 +89,7 @@ public class FOM01_Usuario_Amigo {
     public String getListUsuario_Amigo(@QueryParam("idUsuario") int idUsuario){
         
         try{
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("idUsuario", idUsuario);
             }});
@@ -92,9 +102,11 @@ public class FOM01_Usuario_Amigo {
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return response;
@@ -105,7 +117,7 @@ public class FOM01_Usuario_Amigo {
      * Funcion que es llamada cuando el usuario quiere agregar a un amigo.
      * @param idUsuario ID del Usuario.
      * @param idAmigo ID del Amigo.
-     * @return Devuelve un json con mensaje del estatus de la peticion.
+     * @return Devuelve el mensaje de la peticion.
      */
     @POST
     @Path("/insertaUsuario_Amigo")
@@ -115,6 +127,7 @@ public class FOM01_Usuario_Amigo {
 
         Map<String, String> response = new HashMap<String, String>();
         try {
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("idUsuario", idUsuario );
                 put("idAmigo", idAmigo );
@@ -126,9 +139,11 @@ public class FOM01_Usuario_Amigo {
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return gson.toJson(response);
@@ -140,8 +155,7 @@ public class FOM01_Usuario_Amigo {
      * para eliminar un amigo.
      * @param idUsuario ID del Usuario.
      * @param idAmigo ID del Amigo.
-     * @return Devuelve un json con elemento llamado data, 
-     * contiene el mensaje de la peticion
+     * @return Devuelve el mensaje de la peticion.
      */
     @DELETE
     @Path("/eliminaUsuario_Amigo")
@@ -151,7 +165,7 @@ public class FOM01_Usuario_Amigo {
 
         Map<String, String> response = new HashMap<String, String>();
         try{
-
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("idUsuario", idUsuario);
                 put("idAmigo", idAmigo);
@@ -164,9 +178,11 @@ public class FOM01_Usuario_Amigo {
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return gson.toJson(response);

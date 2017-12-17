@@ -32,6 +32,8 @@ public class BO2_Instructor {
     private String _response;
     private ArrayList<Instructor> _listaInstructores;
     private ArrayList<Instructor> _instructor;
+    ConfigurarLogger cl = new ConfigurarLogger();
+    Logger logr = cl.getLogr();
     
     /**
      * Registra un instructor en la BDD
@@ -61,9 +63,10 @@ public class BO2_Instructor {
         c.ejecutar();
         }
         catch(IllegalArgumentException e){
-            System.out.println("Formato de fecha invalido. Debe ser yyyy-MM-dd ");
+            logr.log(Level.WARNING,
+            "Formato de fecha invalido. Debe ser yyyy-MM-dd "+ e.getMessage());
         } catch (ParseException ex) {
-            Logger.getLogger(BO2_Instructor.class.getName()).log(Level.SEVERE, null, ex);
+            logr.log(Level.WARNING, ex.getMessage());
         }
     }
     
@@ -75,11 +78,6 @@ public class BO2_Instructor {
     @Path("/getListInstructores")
     @Produces("application/json")
     public String getListInstructor(){
-
-        ConfigurarLogger cl = new ConfigurarLogger();
-        Logger logr = cl.getLogr();
-        logr.log(Level.WARNING, "Prueba Log");
-        
 
         CmdGetInstructores cmd = FabricaComando.instanciaGetInstructores();
         cmd.ejecutar();

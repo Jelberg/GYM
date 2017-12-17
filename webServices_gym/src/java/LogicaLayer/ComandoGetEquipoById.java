@@ -3,19 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LogicaLayer.FO4;
 
-import LogicaLayer.Comando;
+package LogicaLayer;
 
 /**
  *
- * @author Elberg
+ * @author Daniel Goncalves
  */
-public class AgregarMedidaComando extends Comando {
+class ComandoGetEquipoById {
 
-    @Override
-    public void ejecutar() {
+    ComandoGetEquipoById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

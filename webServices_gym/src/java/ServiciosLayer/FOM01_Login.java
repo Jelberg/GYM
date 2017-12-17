@@ -8,6 +8,7 @@ package ServiciosLayer;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Usuario;
 import Comun.Excepciones.ParameterNullException;
+import Comun.Util.ConfigurarLogger;
 import Comun.Validaciones.ValidationWS;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
 import LogicaLayer.FO1.ComandoActualizarPassword;
@@ -15,10 +16,13 @@ import LogicaLayer.FO1.ComandoGetCorreo;
 import LogicaLayer.FO1.ComandoIniciarSesion;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.FabricaComando;
+
 import com.google.gson.Gson;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -31,9 +35,27 @@ import javax.ws.rs.QueryParam;
  */
 @Path("/Login")
 public class FOM01_Login {
+    
     private Gson gson = new Gson();
     private String response;
+    ConfigurarLogger cl = new ConfigurarLogger();
+    Logger logr = cl.getLogr();
     
+    /**
+     * Metodo que recibe como parametros los datos del usuario
+     * para registrarlo.
+     * @param nombre
+     * @param apellido
+     * @param fecha
+     * @param sexo
+     * @param correo
+     * @param usuar
+     * @param password
+     * @param estatura
+     * @param telefono
+     * @param entrenador
+     * @return Devuelve el mensaje de la petición.
+     */
     @POST
     @Path("/insertausuario")
     @Produces("application/json")
@@ -48,7 +70,8 @@ public class FOM01_Login {
                                     @QueryParam("telefono") String telefono,
                                     @QueryParam("entrenador") boolean entrenador){
         Map<String, String> response = new HashMap<String, String>();
-        try{    
+        try{
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("nombre", nombre);
             put("apellido", apellido);
@@ -69,9 +92,11 @@ public class FOM01_Login {
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return gson.toJson(response);
@@ -81,10 +106,10 @@ public class FOM01_Login {
     
     /**
      * Funcion que recibe como parámetro el usuario y contraseña del cliente,
-     * para consultarla y saber sus datos.
+     * para iniciar sesión.
      * @param usuar
      * @param password
-     * @return Devuelve el usuario 
+     * @return Devuelve el usuario.
      */
     @GET
     @Path("/IniciarSesion")
@@ -92,7 +117,8 @@ public class FOM01_Login {
     public String iniciarSesion(@QueryParam("usuario") String usuar,
                                 @QueryParam("password") String password) {
         try
-        {
+        { 
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("usuario", usuar);
             put("password", password);
@@ -105,9 +131,11 @@ public class FOM01_Login {
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());    
         }
         finally {
             return response;
@@ -116,9 +144,9 @@ public class FOM01_Login {
     
     /**
      * Funcion que recibe como parámetro el correo,
-     * para actualizar el codigo de recuperar contraseña.
+     * para actualizar el código de recuperar contraseña.
      * @param correo
-     * @return Devuelve el codigo 
+     * @return Devuelve el código.
      */
     @POST
     @Path("/updateCodigo")
@@ -126,7 +154,8 @@ public class FOM01_Login {
     public String updateCod(@QueryParam("correo") String correo){
         
         Map<String, String> response = new HashMap<String, String>();
-        try{    
+        try{
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("correo", correo);
             }});   
@@ -143,14 +172,15 @@ public class FOM01_Login {
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return gson.toJson(response);
-        }
-        
+        }  
     }
     
     /**
@@ -158,7 +188,7 @@ public class FOM01_Login {
      * para actualizar la contraseña.
      * @param correo
      * @param password
-     * @return Devuelve el resultado 
+     * @return Devuelve el resultado.
      */
     @POST
     @Path("/updatePass")
@@ -166,7 +196,8 @@ public class FOM01_Login {
     public String updatePass(@QueryParam("correo") String correo, 
                              @QueryParam("password") String password){
         Map<String, String> response = new HashMap<String, String>();
-        try{    
+        try{
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("correo", correo);
             put("password", password);
@@ -179,9 +210,11 @@ public class FOM01_Login {
         }
         catch (ParameterNullException e) {
             response.put("id","");
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("id","");
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return gson.toJson(response);
@@ -190,9 +223,9 @@ public class FOM01_Login {
     
     /**
      * Funcion que recibe como parámetro el correo del usuario,
-     * para consultarla y saber sus datos.
+     * para consultarlo y saber sus datos.
      * @param correo
-     * @return Devuelve el usuario 
+     * @return Devuelve el usuario .
      */
     @GET
     @Path("/getUsuarioCorreo")
@@ -201,6 +234,7 @@ public class FOM01_Login {
         Map<String, String> response = new HashMap<String, String>();
         try
         {
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("correo", correo);
             }});
@@ -211,13 +245,16 @@ public class FOM01_Login {
             response.put("id",c.getResultado());
         }
         catch (ParameterNullException e) {
-                response.put("error",e.getMessage());
-            }
-            catch (Exception e) {
-                response.put("error",e.getMessage());
-            }
-            finally {
-                return gson.toJson(response);
-            }
+            response.put("error",e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
+        catch (Exception e) {
+            response.put("error",e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());;
+        }
+        finally {
+            return gson.toJson(response);
+        }
+    }
+    
 }

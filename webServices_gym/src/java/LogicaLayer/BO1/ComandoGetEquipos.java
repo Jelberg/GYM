@@ -21,13 +21,23 @@ import java.util.ArrayList;
 public class ComandoGetEquipos extends Comando{
     private Entidad _equipo;
     private ArrayList<Equipo> _listaEquipos;
-    public ComandoGetEquipos(Entidad equipo) {
-        _equipo = equipo;
-    }
+   
+    /**
+     * Builder
+     */
     public ComandoGetEquipos() {}
+    
+    /**
+     * Comando para traer equipos
+     * @return listado de equipos
+     */
     public ArrayList<Equipo> getEquipos(){
         return _listaEquipos;
     }
+    
+    /**
+     * Metodo Ejecucion Comando
+     */
     @Override
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);

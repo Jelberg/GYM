@@ -4,6 +4,7 @@ import AccesoDatosLayer.DaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
 import Comun.Excepciones.ParameterNullException;
+import Comun.Util.ConfigurarLogger;
 import Comun.Validaciones.ValidationWS;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,6 +24,10 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
 
     private Connection _conn;
     private ArrayList<Instructor> jsonArray;
+    ConfigurarLogger cl = new ConfigurarLogger();
+    Logger logr = cl.getLogr();
+    
+        
     
     public DaoInstructorPostgre() {}
     
@@ -45,12 +50,10 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
                 jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("INS_SEXO")));
                 jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("INS_CORREO"));
             }
+            
         }
         catch(SQLException e) {
-            System.out.println(e);
-        }
-        catch (ParameterNullException e) {
-            System.out.println(e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             cerrarConexion( _conn );
@@ -81,8 +84,13 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             
         }
         catch (SQLException e){
-            System.out.println("########## INSTRUCTOR REPETIDO");
-            System.out.println(e.getMessage());
+            logr.log(Level.WARNING, "Error al registrar un instructor en la BDD.\n"
+                    + "Nombre: "+i.getNombre()+"\n"
+                    + "Apellido: "+i.getApellido()+"\n"
+                    + "Fecha de nacimiento: "+ i.getFecha_nac().toString() +"\n"
+                    + "Sexo: "+ i.getSexo()+"\n"
+                    + "Correo: "+ i.getCorreo()+"\n"
+                    +e.getMessage());
         }
         finally {
             cerrarConexion( _conn );
@@ -116,10 +124,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             }
         }
         catch(SQLException e) {
-            e.printStackTrace();
-        }
-        catch (ParameterNullException e) {
-            e.printStackTrace();
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             cerrarConexion( _conn );
@@ -149,10 +154,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             response.put("data", "Se actualizo el instructor");
         }
         catch (SQLException e){
-            response.put("error", e.getMessage());
-        }
-        catch (ParameterNullException e) {
-            response.put("error", e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             cerrarConexion(_conn);
@@ -168,8 +170,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             ResultSet rs = st.executeQuery();
         }
         catch(SQLException e) {
-        }
-        catch (ParameterNullException e) {
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
               cerrarConexion( _conn );
@@ -190,7 +191,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             st = _conn.prepareStatement(query);
             st.executeQuery();
         } catch (SQLException ex) {
-            Logger.getLogger(DaoInstructorPostgre.class.getName()).log(Level.SEVERE, null, ex);
+            logr.log(Level.WARNING, ex.getMessage());
         }
     }
 
@@ -203,7 +204,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
             st = _conn.prepareStatement(query);
             st.executeQuery();
         } catch (SQLException ex) {
-            Logger.getLogger(DaoInstructorPostgre.class.getName()).log(Level.SEVERE, null, ex);
+            logr.log(Level.WARNING, ex.getMessage());
         }
     }
 
