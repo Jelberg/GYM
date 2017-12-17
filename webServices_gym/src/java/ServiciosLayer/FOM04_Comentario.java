@@ -38,7 +38,7 @@ public class FOM04_Comentario{
      */
     @GET
     @Path("/insertarComentario")
-    @Produces("aplicacion/json")
+    @Produces("applicacion/json")
     public String insertarComentario(@QueryParam("id_usuariocomentario") int idUsuario, 
                                 @QueryParam("mensaje") String mensaje){
         Comentario _comentario = (Comentario) FabricaEntidad.InstaciaInsertarComentario(idUsuario,mensaje);
@@ -51,7 +51,7 @@ public class FOM04_Comentario{
     
     @GET
     @Path("/getComentarioProM")
-    @Produces("aplication/json")
+    @Produces("application/json")
     public String obtenerComentariosProgresoMedidas(
                                     @QueryParam("idUsuario") int idusuario,
                                     @QueryParam("idprogresom") int idprogresom){

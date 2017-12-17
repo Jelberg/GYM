@@ -37,4 +37,11 @@ public interface IDaoProgresoMedida extends IDao {
      * @return 
      */
     public String actualizarMedida(Entidad ent);
+    
+    /**
+     * Fima de Metodo para eliminar medida
+     * @param ent
+     * @return 
+     */
+    public String eliminarMedida(Entidad ent);
 }

@@ -11,6 +11,7 @@ import Comun.Dominio.Progreso_Medida;
 import LogicaLayer.Comando;
 import LogicaLayer.FO4.ProgresoMedida.ActualizarMedidaComando;
 import LogicaLayer.FO4.ProgresoMedida.AgregarMedidaComando;
+import LogicaLayer.FO4.ProgresoMedida.ComandoEliminarMedida;
 import LogicaLayer.FO4.ProgresoMedida.ConsultarProgesoMedidasComando;
 import LogicaLayer.FabricaComando;
 import javax.ws.rs.GET;
@@ -78,5 +79,21 @@ public class FOM04_Progreso_Medida {
         _response = _comando.getRespuesta();
         
         return _response;
+    }
+    
+    @GET
+    @Path("/eliminarMedidas")
+    @Produces("application/json")
+    public String eliminarMedida(@QueryParam("id_usuario") int id_usuario,
+                                @QueryParam("tipo_medida") String tipo_medida){
+        Progreso_Medida progreso_Medida = FabricaEntidad.InstanciaEliminarMedida
+                                             (id_usuario, tipo_medida);
+         ComandoEliminarMedida _comando = FabricaComando.instanciaEliminarMedida
+                                         (progreso_Medida);
+         _comando.ejecutar();
+         
+         _response = _comando.obtenerRespuesta();
+         
+         return _response;
     }
 }

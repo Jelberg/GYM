@@ -28,14 +28,24 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
     private String _resp;
     private Gson _gson = new Gson();
     private ArrayList<Progreso_Medida> _jsonArray;
-    private Entidad _progresoMedida;
+    private Progreso_Medida _progresoMedida;
     private ArrayList<Progreso_Medida> _aux;
     
+    /**
+     * Metodo para consultar medidas en la base de datos
+     * @param ent
+     * @return 
+     */
     @Override
     public Entidad consultar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodo para consulat medidas en la base de datos
+     * @param id_usuario
+     * @return 
+     */
     @Override
     public String consultarMedidas(int id_usuario) {
         try{
@@ -68,6 +78,11 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
        
     }
 
+    /**
+     * Metodo para agregar medida en la base de datos
+     * @param ent
+     * @return 
+     */
     @Override
     public String agregarMedida(Entidad ent) {
     
@@ -121,6 +136,39 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
             _st.executeQuery();
             
             return "Medida Cambiada";
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            cerrarConexion(_conn);
+            return null;
+        }
+    }
+
+    /**
+     * Metodo para eliminar medida de la base de datos
+     * @param idMedida
+     * @return 
+     */
+    @Override
+    public String eliminarMedida(Entidad ent) {
+        try {
+            _progresoMedida = (Progreso_Medida) ent;
+            
+            _conn = getConexion();
+            
+            String _query = "SELECT fo_m04_elimina_medidas("+
+                    _progresoMedida.getId()+",'"+
+                    _progresoMedida.getTipo()+"')";
+            
+            PreparedStatement _st = _conn.prepareStatement(_query);
+            
+            _st.executeQuery();
+            
+            return "Medida Eliminar";
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }

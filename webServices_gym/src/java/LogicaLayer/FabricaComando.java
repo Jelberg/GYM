@@ -42,6 +42,7 @@ import LogicaLayer.BO2.ComandoModificarEntrenador;
 import LogicaLayer.F03.ConsultarEjerciciosRealizadosComando;
 import LogicaLayer.FO4.ProgresoMedida.ActualizarMedidaComando;
 import LogicaLayer.FO4.ProgresoMedida.AgregarMedidaComando;
+import LogicaLayer.FO4.ProgresoMedida.ComandoEliminarMedida;
 import LogicaLayer.FO4.ProgresoMedida.ConsultarProgesoMedidasComando;
 
 /**
@@ -311,9 +312,24 @@ public class FabricaComando {
         return new ActualizarMedidaComando(progreso_Medida);
     }
     
+    /**
+     * Instancia del Comando Obtener Comentarios Progreso medida
+     * @param idUsuario
+     * @param idProgresoMedida
+     * @return 
+     */
     public static ComandoObtenerComentariosProgMedidas instanciaObtenerComentariosProgMedida
         (int idUsuario, int idProgresoMedida){
         return new ComandoObtenerComentariosProgMedidas(idUsuario, idProgresoMedida);
+    }
+        
+    /**
+     * Instancia del Comando para Eliminar Medida
+     * @param progreso_Medida
+     * @return 
+     */    
+    public static ComandoEliminarMedida instanciaEliminarMedida(Progreso_Medida progreso_Medida){
+      return new ComandoEliminarMedida(progreso_Medida);
     }
     
      
