@@ -44,6 +44,10 @@ public class TestDaoInstructor {
     }
     
     /**
+     * INICIO DE PRUEBAS DEL DAO PARA GESTIONAR INSTRUCTORES
+     */    
+    
+    /**
      * Prueba la busqueda exitosa de todos los instructores de la BDD
      */
     @Test
