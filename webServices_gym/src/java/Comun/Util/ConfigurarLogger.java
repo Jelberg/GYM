@@ -21,11 +21,11 @@ public class ConfigurarLogger {
     
     private void setProperties(){
         try{
-        String ruta = ("C:\\GOG Games");
+        String ruta = System.getProperty("user.home");
         
         //LogManager.getLogManager().reset();
         logr.setLevel(Level.WARNING);
-        fh = new FileHandler(ruta+"myLogger.log", true);
+        fh = new FileHandler(ruta+"/logGYM/myLogger.log", true);
         fh.setLevel(Level.WARNING);
         logr.addHandler(fh);
             System.out.println(ruta);
