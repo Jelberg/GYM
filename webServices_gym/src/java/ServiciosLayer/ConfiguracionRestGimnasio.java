@@ -32,6 +32,7 @@ public class ConfiguracionRestGimnasio extends Application{
         h.add(FOM01_Usuario_Amigo.class);
         h.add(FOM04_Progreso_Peso.class);
         h.add(FOM04_Comentario.class);
+        h.add(FOM04_Progreso_Peso.class);
 
 
         return h;

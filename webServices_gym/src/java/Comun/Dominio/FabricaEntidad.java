@@ -150,7 +150,8 @@ public class FabricaEntidad {
     return new Progreso_Peso(id);
     }
     
-    static public Comentario InstaciaInsertarComentario(int idUsuario, String mensaje){
+    static public Comentario InstaciaInsertarComentario(int idUsuario, 
+            String mensaje){
     return new Comentario(idUsuario, mensaje);
     }
     
@@ -159,6 +160,9 @@ public class FabricaEntidad {
         return new Progreso_Medida(id, medida, tipo, fechaM, sobreNombre);
     }
     
+    static public Progreso_Peso InstanciaActualizarPeso(int idUsuario, int peso){
+         return new Progreso_Peso(idUsuario, peso);
+    }   
     // Fin de M04        
 
     

@@ -9,6 +9,7 @@ import AccesoDatosLayer.BO2.IDaoInstructor;
 import AccesoDatosLayer.FO1.IDaoUsuario;
 import AccesoDatosLayer.FO1.IDaoUsuarioAmigo;
 import AccesoDatosLayer.FOM04Postgre.IDaoComentario;
+import AccesoDatosLayer.FOM04Postgre.IDaoProgresoPeso;
 
 /**
  *
@@ -37,4 +38,5 @@ public abstract class FabricaAbstracta {
     public abstract IDaoUsuarioAmigo getDaoUsuarioAmigo();
     // gets FO_M05
     public abstract IDaoComentario getDaoComentario();
+    public abstract IDaoProgresoPeso instanciaDaoProgresoPeso();
 }

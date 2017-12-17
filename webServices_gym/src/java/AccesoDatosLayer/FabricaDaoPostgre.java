@@ -81,6 +81,11 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
         return new DaoComentario();
     }
     
+    @Override
+     public IDaoProgresoPeso instanciaDaoProgresoPeso() {
+         return new DaoProgresoPeso();
+     }
+    
     //FIN FO4
 
     
