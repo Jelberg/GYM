@@ -48,5 +48,5 @@ public abstract class FabricaAbstracta {
     public abstract DaoProgresoMedida getDaoProgresoMedida();
     public abstract IDaoComentario getDaoComentario();
     public abstract IDaoProgresoPeso instanciaDaoProgresoPeso();
-    public abstract IDaoMedida instanciaDaoProgresoMedida();
+    public abstract DaoProgresoMedida instanciaDaoProgresoMedida();
 }

@@ -271,18 +271,37 @@ public class FabricaComando {
      }
      
 
-    
+    /**
+     * Instancia del Comando Agregar Medida
+     * @param progreso_Medida
+     * @return 
+     */
     public static AgregarMedidaComando instanciaCmdAgregarMedida (Progreso_Medida progreso_Medida){
         return new AgregarMedidaComando(progreso_Medida);
     }
+    
+    /**
+     * Instncia del Comando Compartir Progreso
+     * @return 
+     */
     public static CompartirProgresoComando instanciaCmdCompartirProgreso (){
         return new CompartirProgresoComando();
     }
     
+    /**
+     * Instancia del Comando Consultar Progreso Medidas
+     * @param id
+     * @return 
+     */
     public static ConsultarProgesoMedidasComando instanciaCmdConsultarProgresoMedidas (int id){
         return new ConsultarProgesoMedidasComando(id);
     }
     
+    /**
+     * Instancia del Comando Actualizar Medidas
+     * @param progreso_Medida
+     * @return 
+     */
     public static ActualizarMedidaComando instanciaCmdActualizarMedidas (Progreso_Medida progreso_Medida){
         return new ActualizarMedidaComando(progreso_Medida);
     }

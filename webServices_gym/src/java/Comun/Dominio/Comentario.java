@@ -32,34 +32,66 @@ public class Comentario extends Entidad {
         this._fecha = _fecha;
     }
 
+    /**
+     * Obtener id de Usuario al cual pertenece el comentario
+     * @return 
+     */
     public int getIdUsuario() {
         return _idUsuario;
     }
 
+    /**
+     * Modificar Id de Usuario al cual pertenece el comentario
+     * @param _id 
+     */
     public void setIdUsuario(int _id) {
         this._idUsuario = _id;
     }
 
+    /**
+     * Obtener Mensaje del comentario
+     * @return 
+     */
     public String getMensaje() {
         return _mensaje;
     }
 
+    /**
+     * Modificar mensaje del comentario
+     * @param _mensaje 
+     */
     public void setMensaje(String _mensaje) {
         this._mensaje = _mensaje;
     }
 
+    /**
+     * Obtener nombre del usuario al que le pertenece el comentario
+     * @return 
+     */
     public String getNombreUsuario() {
         return _NombreUsuario;
     }
 
+    /**
+     * Modificar nombre del usuario al que le pertence el comentario
+     * @param _NombreUsuario 
+     */
     public void setNombreUsuario(String _NombreUsuario) {
         this._NombreUsuario = _NombreUsuario;
     }
 
+    /**
+     * Obtener fecha en al que se hizo el comnetario
+     * @return 
+     */
     public String getFecha() {
         return _fecha;
     }
 
+    /**
+     * Modificar fecha en la que se hizo el comentario
+     * @param _fecha 
+     */
     public void setFecha(String _fecha) {
         this._fecha = _fecha;
     }
