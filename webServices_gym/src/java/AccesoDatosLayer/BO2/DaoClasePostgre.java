@@ -11,6 +11,7 @@ import AccesoDatosLayer.IDao;
 import Comun.Dominio.Clase;
 import Comun.Dominio.Entidad;
 import Comun.Excepciones.ParameterNullException;
+import Comun.Validaciones.ValidationWS;
 import com.google.gson.reflect.TypeToken;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Clase en la cual se manejara el acceso a datos de las clases.
@@ -115,8 +117,33 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
      */
     @Override
     public Entidad modificar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        try {
+                       
+            String query = "select * from bo_m02_modifica_clase(?,?)";
+            _conn = getConexion();
+            Clase clase = ( Clase ) ent;
+            PreparedStatement st = _conn.prepareStatement(query);
+            java.lang.reflect.Type type = new TypeToken<Clase[]>(){}.getType();
+            st.setString(1, clase.getNombre());
+            st.setString(2, clase.getDescripcion());
+            st.executeQuery();
+            ent.setMensaje("Se modificó con éxito");
+        }
+        catch (SQLException e){
+            ent.setMensaje( "Error, intente de nuevo" );
+        }
+        catch (ParameterNullException e) {
+            ent.setMensaje( "Error, parametro vacio" );
+        }
+        catch (Exception e) {
+            ent.setMensaje( "Error" );
+        }
+        finally {
+            cerrarConexion( _conn );
+            return ent;
+        }
+    } 
+
     /**
      * Metodo que sera llamado cuando se desee eliminar una clase.
      * @param ent Recibe un objeto Entidad en el que se encuentra la data
@@ -126,6 +153,30 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
      */
     @Override
     public Entidad eliminar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        try{
+            String query = "SELECT bo_m02_elimina_clase(?)";
+             _conn = getConexion();
+            Clase clase = ( Clase ) ent;
+            PreparedStatement st = _conn.prepareStatement(query);
+            java.lang.reflect.Type type = new TypeToken<Clase[]>(){}.getType();
+            st.setString(1, clase.getNombre());
+            st.executeQuery();
+            
+            ent.setMensaje( "Se elimino correctamente la clase." );
+        }
+        catch(SQLException e) {
+            ent.setMensaje( "Error intente de nuevo." );
+        }
+        catch (ParameterNullException e) {
+            ent.setMensaje( "Parametro vacio." );
+        }
+        catch (Exception e) {
+            ent.setMensaje( "Eror." );
+        }
+        finally {
+            cerrarConexion( _conn );
+            return ent;
+        }  
     }
 }

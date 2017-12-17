@@ -55,6 +55,14 @@ public class FabricaEntidad {
     static public Entidad instanciaInsertarClase(String nombre, String descripcion){
             return new Clase(nombre, descripcion);
     }
+    
+    static public Entidad instanciaEliminaClase(String nombre){
+            return new Clase(nombre);
+    }
+    
+    static public Entidad instanciaModificarClase(String nombre, String descripcion){
+            return new Clase(nombre, descripcion);
+    }
     // Fin de BO2
     
     // Inicia Fabricas de FOM01

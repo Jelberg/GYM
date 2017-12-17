@@ -7,25 +7,25 @@ package LogicaLayer.BO2;
 
 import AccesoDatosLayer.BO2.IDaoClase;
 import AccesoDatosLayer.FabricaAbstracta;
-import AccesoDatosLayer.FabricaDaoPostgre;
 import Comun.Dominio.Entidad;
 
 /**
  *
  * @author marvian
  */
-public class ComandoInsertarClase {
-    private Entidad _clase;
+public class ComandoModificarClase {
+     private Entidad _clase;
     
     /**
      * Constructor de clase.
-     * @param classe Recibe un objeto Entidad con los datos de la clase
-     * a insertar.
+     * @param clase Recibe un objeto Entidad con los datos de la clase
+     * a modificar.
      * @see Entidad.
      */
-    public ComandoInsertarClase( Entidad clase ){
+    public ComandoModificarClase( Entidad clase ){
         this._clase = clase;
     }
+    
     /**
      * Metodo para obtener el mensaje que indica el estatus de la peticion.
      * @return Devuelve un objeto Entidad en el cual se encuentra encapsulado
@@ -41,7 +41,8 @@ public class ComandoInsertarClase {
     public void ejecutar() {
         FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
         IDaoClase dao = fab.instanciaDaoClase();
-        _clase = dao.insertar( _clase );
+        _clase = dao.modificar( _clase );
     }
+    
     
 }

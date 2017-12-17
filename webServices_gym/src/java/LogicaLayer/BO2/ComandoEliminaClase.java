@@ -7,23 +7,22 @@ package LogicaLayer.BO2;
 
 import AccesoDatosLayer.BO2.IDaoClase;
 import AccesoDatosLayer.FabricaAbstracta;
-import AccesoDatosLayer.FabricaDaoPostgre;
 import Comun.Dominio.Entidad;
 
 /**
  *
  * @author marvian
  */
-public class ComandoInsertarClase {
+public class ComandoEliminaClase {
     private Entidad _clase;
     
     /**
      * Constructor de clase.
      * @param classe Recibe un objeto Entidad con los datos de la clase
-     * a insertar.
+     * a eliminar.
      * @see Entidad.
      */
-    public ComandoInsertarClase( Entidad clase ){
+    public ComandoEliminaClase( Entidad clase ){
         this._clase = clase;
     }
     /**
@@ -35,7 +34,7 @@ public class ComandoInsertarClase {
         return _clase;
     }
     /**
-     * Metodo que es llamado para realizar la insercion de la clase.
+     * Metodo que es llamado para realizar la eliminacion de la clase.
      */
     
     public void ejecutar() {
