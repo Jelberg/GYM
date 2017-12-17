@@ -53,14 +53,12 @@ import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
 import LogicaLayer.BO2.CmdActivarInstructor;
 import LogicaLayer.BO2.CmdInactivarInstructor;
-<<<<<<< HEAD
 import LogicaLayer.BO2.ComandoConsultarHorarioClase;
 import LogicaLayer.BO2.ComandoEliminarHorarioClase;
 import LogicaLayer.BO2.ComandoInsertarHorarioClase;
 import LogicaLayer.BO2.ComandoModificarClase;
 import LogicaLayer.BO2.ComandoModificarEntrenador;
 import LogicaLayer.BO2.ComandoModificarHorarioClase;
-=======
 import LogicaLayer.BO2.ComandoEliminaEntrenador;
 import LogicaLayer.BO2.ComandoModificarClase;
 import LogicaLayer.BO2.ComandoModificarEntrenador;
@@ -74,7 +72,6 @@ import LogicaLayer.FO4.ProgresoMedida.ComandoEliminarMedida;
 import LogicaLayer.FO4.ProgresoMedida.ConsultarProgesoMedidasComando;
 import LogicaLayer.BO1.ComandoGetEjercicios;
 import LogicaLayer.BO1.ComandoAgregarEjercicio;
->>>>>>> 019accc191f45d6086da77875bd4fb2a4427479f
 
 /**
  *
