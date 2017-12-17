@@ -5,11 +5,14 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar  color="secondary" >
-    <ion-title>Recuperar Contraseña</ion-title>
+    <button ion-button (click)="volverLogin()"  color="secondary" icon-left>
+        <ion-icon name="md-arrow-back"></ion-icon>
+    </button>
+    <ion-title>
+        Recuperar Contraseña
+    </ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -17,7 +20,7 @@
 
     <ion-card>
       <ion-card-header>
-          Ingrese los datos
+          Ingrese los datos:
       </ion-card-header>
 
       <ion-card-content>
