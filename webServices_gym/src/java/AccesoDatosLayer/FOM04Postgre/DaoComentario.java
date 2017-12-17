@@ -158,7 +158,7 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 _jsonArray.add(new Comentario());
-                _jsonArray.get(_jsonArray.size() - 1).setId(Integer.parseInt(rs.getString(1)));
+                _jsonArray.get(_jsonArray.size() - 1).setIdU(Integer.parseInt(rs.getString(1)));
                 _jsonArray.get(_jsonArray.size() - 1).setMensaje(rs.getString(2));                
                 _jsonArray.get(_jsonArray.size() - 1).setNombreUsuario(rs.getString(3));
                 _jsonArray.get(_jsonArray.size() - 1).setFecha(rs.getString(4));
