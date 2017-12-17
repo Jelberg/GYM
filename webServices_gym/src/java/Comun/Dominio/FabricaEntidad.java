@@ -182,7 +182,7 @@ public class FabricaEntidad {
      * @param tipo
      * @return 
      */
-    static public Entidad InstanciaProgresoMedida(int id, int medida, int tipo){
+    static public Entidad InstanciaProgresoMedida(int id, int medida, String tipo){
         return new Progreso_Medida(id,medida,tipo);
     }
 
@@ -199,7 +199,10 @@ public class FabricaEntidad {
     static public Progreso_Peso InstanciaActualizarPeso(int idUsuario, int peso){
          return new Progreso_Peso(idUsuario, peso);
     }   
-
+    
+    static public Progreso_Medida InstanciaActualizarMedida(int idUsuario, int medida, String tipo_medida){
+        return new Progreso_Medida(idUsuario, medida, tipo_medida);
+    }
     // Fin de M04        
 
     

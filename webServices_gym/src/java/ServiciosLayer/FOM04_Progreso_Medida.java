@@ -7,7 +7,9 @@ package ServiciosLayer;
 
 import Comun.Dominio.Entidad;
 import Comun.Dominio.FabricaEntidad;
+import Comun.Dominio.Progreso_Medida;
 import LogicaLayer.Comando;
+import LogicaLayer.FO4.ActualizarMedidaComando;
 import LogicaLayer.FO4.ProgresoMedida.AgregarMedidaComando;
 import LogicaLayer.FO4.ProgresoMedida.ConsultarProgesoMedidasComando;
 import LogicaLayer.FabricaComando;
@@ -53,12 +55,28 @@ public class FOM04_Progreso_Medida {
     @Produces("application/json")
     public String insertaMedidas(@QueryParam("id_usuario") int id_usuario,
                                  @QueryParam("medida") int medida,
-                                 @QueryParam("tipo_medida") int tipo_medida){
+                                 @QueryParam("tipo_medida") String tipo_medida){
         Entidad en = FabricaEntidad.InstanciaProgresoMedida(id_usuario, medida, tipo_medida);
         Comando comando = FabricaComando.instanciaCmdAgregarMedida(en);
         AgregarMedidaComando cmd = (AgregarMedidaComando) comando;
         cmd.ejecutar();
         _response = cmd.getRespuestaAgregarMedida();
+        return _response;
+    }
+    
+    @POST
+    @Path("/actualizarMedida")
+    @Produces("application/json")
+    public String actualizarMedida(@QueryParam ( "id_usuario" ) int idUsuario,
+                                   @QueryParam ( "tipo_medida" ) String tipo_medida,
+                                   @QueryParam ( "medida" ) int medida){
+        Progreso_Medida _progresoMedida = (Progreso_Medida) 
+                FabricaEntidad.InstanciaActualizarMedida(idUsuario, medida, tipo_medida);
+        ActualizarMedidaComando _comando = FabricaComando.instanciaCmdActualizarMedidas(_progresoMedida);
+        _comando.ejecutar();
+        
+        _response = _comando.getRespuesta();
+        
         return _response;
     }
 }

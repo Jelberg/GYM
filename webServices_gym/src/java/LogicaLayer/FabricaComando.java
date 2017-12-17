@@ -10,6 +10,7 @@ import Comun.Dominio.Comentario;
 
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
+import Comun.Dominio.Progreso_Medida;
 import Comun.Dominio.Progreso_Peso;
 import Comun.Dominio.Usuario;
 import LogicaLayer.FO4.*;
@@ -270,6 +271,9 @@ public class FabricaComando {
      
 
     
+    public static AgregarMedidaComando instanciaCmdAgregarMedida (Progreso_Medida progreso_Medida){
+        return new AgregarMedidaComando(progreso_Medida);
+    }
     public static CompartirProgresoComando instanciaCmdCompartirProgreso (){
         return new CompartirProgresoComando();
     }
@@ -278,8 +282,11 @@ public class FabricaComando {
         return new ConsultarProgesoMedidasComando(id);
     }
     
+    public static ActualizarMedidaComando instanciaCmdActualizarMedidas (Progreso_Medida progreso_Medida){
+        return new ActualizarMedidaComando(progreso_Medida);
+    }
     
-  
+     
     //FIN F04
 
    //fo3
