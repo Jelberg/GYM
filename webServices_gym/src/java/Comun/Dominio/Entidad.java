@@ -12,6 +12,7 @@ package Comun.Dominio;
 public class Entidad {
     private int _id;
     private String _mensaje;
+    
     public Entidad ( int id ){
         _id = id;
     }

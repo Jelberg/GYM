@@ -14,10 +14,17 @@ import AccesoDatosLayer.BO1.DaoMaquinaPostgre;
 import AccesoDatosLayer.BO1.IDaoEquipo;
 import AccesoDatosLayer.BO1.IDaoEjercicio;
 import AccesoDatosLayer.BO1.IDaoMaquina;
+import AccesoDatosLayer.FOM04Postgre.DaoComentario;
 import AccesoDatosLayer.BO2.DaoHorarioClasePostgre;
 import AccesoDatosLayer.BO2.IDaoClase;
 import AccesoDatosLayer.BO2.IDaoEntrenador;
+
+import AccesoDatosLayer.FO3.DaoRutina;
+
+import AccesoDatosLayer.FOM04Postgre.DaoProgresoMedida;
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoPeso;
+import AccesoDatosLayer.FOM04Postgre.IDaoComentario;
+import AccesoDatosLayer.FOM04Postgre.IDaoProgresoMedida;
 import AccesoDatosLayer.FOM04Postgre.IDaoProgresoPeso;
 import AccesoDatosLayer.BO2.IDaoHorarioClase;
 
@@ -88,12 +95,58 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
     // Fin Daos F01
 
     //INICIO FO4
+    
+    /**
+     * Instancia para obtener DaoProgresoPeso
+     * @return 
+     */
+    @Override
     public DaoProgresoPeso getDaoProgresoPeso(){
         return new DaoProgresoPeso();
     }
+   /* @Override
+    publi IDaoComentario getDaoComentario() {
+        return new DaoComentario();
+    }
+    */
+    
+    /**
+     * Instancia DaoProgresoPeso
+     * @return 
+     */
+    @Override
+     public DaoProgresoPeso instanciaDaoProgresoPeso() {
+         return new DaoProgresoPeso();
+     }
+    
+ 
+    
+    /**
+     * Instancia para obtener DaoComentario
+     * @return 
+     */
+    public DaoComentario getDaoComentario() {
+       return new DaoComentario();
+    }
+    
+     @Override
+    public DaoProgresoMedida getDaoProgresoMedida() {
+        return new DaoProgresoMedida();
+         }
 
+    @Override
+    public DaoComentario instanciaDaoComentario() {
+        return new DaoComentario();
+       }
+
+    @Override
+    public DaoProgresoMedida instanciaDaoProgresoMedida() {
+        return new DaoProgresoMedida();
+    }
     
     //FIN FO4
+
+   
 
     
 
