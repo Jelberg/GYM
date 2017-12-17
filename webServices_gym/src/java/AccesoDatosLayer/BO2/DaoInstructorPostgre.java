@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -110,7 +112,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
                 jsonArray.get(jsonArray.size() - 1).setFecha_nac(rs.getDate("fechanac"));
                 jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("sexo")));
                 jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
-                          
+                jsonArray.get(jsonArray.size() - 1).setActivo(rs.getString("activo"));
             }
         }
         catch(SQLException e) {
@@ -177,6 +179,32 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
     @Override
     public Entidad consultar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void activar(String correo) {
+        _conn = getConexion();
+        String query = "select * from bo_m02_activa_instructor('"+correo+"')";
+        PreparedStatement st; 
+        try {
+            st = _conn.prepareStatement(query);
+            st.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoInstructorPostgre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void inactivar(String correo) {
+        _conn = getConexion();
+        String query = "select * from bo_m02_inactiva_instructor('"+correo+"')";
+        PreparedStatement st; 
+        try {
+            st = _conn.prepareStatement(query);
+            st.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoInstructorPostgre.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     

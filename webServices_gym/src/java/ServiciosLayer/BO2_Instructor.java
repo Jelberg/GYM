@@ -127,4 +127,20 @@ public class BO2_Instructor {
         Comando c = FabricaComando.instanciaActualizarInstructor(nombre, apellido, fechanac, sexo, correo);
         c.ejecutar();
     }
+    
+    @POST
+    @Path( "/ActivarInstructor" )
+    public void ActivarInstructor( @QueryParam( "correo" ) String correo){
+     
+        Comando c = FabricaComando.instanciaActivarInstructor(correo);
+        c.ejecutar();
+    }
+    
+    @POST
+    @Path( "/InactivarInstructor" )
+    public void InactivarInstructor( @QueryParam( "correo" ) String correo){
+     
+        Comando c = FabricaComando.instanciaInactivarInstructor(correo);
+        c.ejecutar();
+    }
 }
