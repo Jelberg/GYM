@@ -7,6 +7,7 @@ package AccesoDatosLayer.FOM04Postgre;
 
 import AccesoDatosLayer.IDao;
 import Comun.Dominio.Comentario;
+import Comun.Dominio.Entidad;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +21,9 @@ public interface IDaoComentario extends IDao {
      * @return 
      */
     public ArrayList<Comentario> getComentarios();
+
+    public String insertar(Entidad comentario);
+
     /**
      * Firma de metodos para insertar comentario
      * @param comentario
@@ -31,6 +35,7 @@ public interface IDaoComentario extends IDao {
      * @param comentario
      * @return 
      */
+
     public String eliminar(Comentario comentario);
     /**
      * Firma de metodo para actualizar comentario
@@ -45,5 +50,13 @@ public interface IDaoComentario extends IDao {
      * @return 
      */
     public ArrayList<Comentario> getComentariosProgMedida(int idUsuario,int idProgMedida);
+    
+    /**
+     * Firma de metodo para la consulta de los progresos
+     * @param id
+     * @return 
+     */
+    public String consultaProgresos(int id);
+    
     
 }

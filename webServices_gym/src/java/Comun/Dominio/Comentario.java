@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author marvian
  */
 public class Comentario extends Entidad {
-    private int _idUsuario;
+  
     private String _mensaje;
     private String _NombreUsuario;
     private String _fecha;
@@ -20,38 +20,23 @@ public class Comentario extends Entidad {
     public Comentario(){
     }
 
-    public Comentario(int _idUsuario, String _mensaje) {
-        this._idUsuario = _idUsuario;
+    public Comentario(int _id, String _mensaje) {
+        super(_id);
         this._mensaje = _mensaje;
     }
 
-    public Comentario(int _idUsuario, String _mensaje, String _NombreUsuario, String _fecha) {
-        this._idUsuario = _idUsuario;
+    public Comentario(String _mensaje) {
+        this._mensaje = _mensaje;
+    }
+    
+    public Comentario(int _id, String _mensaje, String _NombreUsuario, String _fecha) {
+        super(_id);
         this._mensaje = _mensaje;
         this._NombreUsuario = _NombreUsuario;
         this._fecha = _fecha;
     }
 
-    /**
-     * Obtener id de Usuario al cual pertenece el comentario
-     * @return 
-     */
-    public int getIdUsuario() {
-        return _idUsuario;
-    }
 
-    /**
-     * Modificar Id de Usuario al cual pertenece el comentario
-     * @param _id 
-     */
-    public void setIdUsuario(int _id) {
-        this._idUsuario = _id;
-    }
-
-    /**
-     * Obtener Mensaje del comentario
-     * @return 
-     */
     public String getMensaje() {
         return _mensaje;
     }

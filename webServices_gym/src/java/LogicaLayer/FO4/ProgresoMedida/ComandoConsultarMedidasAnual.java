@@ -58,7 +58,7 @@ public class ComandoConsultarMedidasAnual extends Comando {
         return _listaProgresoMedida;
     }
     
-    
+
     @Override
     public void ejecutar() {
         FabricaDaoPostgre _fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);

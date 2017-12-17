@@ -40,6 +40,8 @@ import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
 import LogicaLayer.BO2.ComandoModificarEntrenador;
 import LogicaLayer.F03.ConsultarEjerciciosRealizadosComando;
+import LogicaLayer.FO4.Comentarios.AgregarComentarioComando;
+import LogicaLayer.FO4.Comentarios.ConsultarComentarioProgresosComando;
 import LogicaLayer.FO4.ProgresoMedida.ActualizarMedidaComando;
 import LogicaLayer.FO4.ProgresoMedida.AgregarMedidaComando;
 import LogicaLayer.FO4.ProgresoMedida.ComandoConsultarMedidasAnual;
@@ -269,7 +271,7 @@ public class FabricaComando {
      }
 
      /**
-      * Instancia Agregar Comentario Comando
+      * Instancia del comando para los comentarios
       * @param comentario
       * @return 
       */
@@ -280,6 +282,7 @@ public class FabricaComando {
 
     /**
      * Instancia del Comando Agregar Medida
+
      * @param progreso_Medida
      * @return 
      */
@@ -314,7 +317,15 @@ public class FabricaComando {
     }
     
     /**
-     * Instancia del Comando Obtener Comentarios Progreso medida
+     * Instancia de la consulta comentario Progresos comenado 
+     * @param id
+     * @return 
+     */
+    public static ConsultarComentarioProgresosComando instanciaCmdGetComentarioProgresos(int id){
+        return new ConsultarComentarioProgresosComando(id);
+    }
+
+    /** Instancia del Comando Obtener Comentarios Progreso medida
      * @param idUsuario
      * @param idProgresoMedida
      * @return 
@@ -342,7 +353,7 @@ public class FabricaComando {
         (Progreso_Medida progreso_Medida){
         return new ComandoConsultarMedidasAnual(progreso_Medida);
     }
-     
+
     //FIN F04
 
    //fo3
