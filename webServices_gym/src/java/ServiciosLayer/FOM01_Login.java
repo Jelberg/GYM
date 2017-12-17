@@ -105,6 +105,8 @@ public class FOM01_Login {
                                 @QueryParam("password") String password) {
         try
         {
+            
+            logr.log(Level.WARNING, "prueba");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
             put("usuario", usuar);
             put("password", password);
@@ -118,12 +120,11 @@ public class FOM01_Login {
         catch (ParameterNullException e) {
             response = e.getMessage();
             Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
-            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
           Logger.getLogger(FOM01_Login.class.getName()).log(Level.SEVERE, null, e);
-            logr.log(Level.WARNING, e.getMessage());
+            
         }
         finally {
             return response;
