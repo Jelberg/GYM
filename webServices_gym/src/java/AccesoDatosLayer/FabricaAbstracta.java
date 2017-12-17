@@ -8,8 +8,12 @@ import AccesoDatosLayer.BO2.IDaoEntrenador;
 import AccesoDatosLayer.BO2.IDaoInstructor;
 import AccesoDatosLayer.FO1.IDaoUsuario;
 import AccesoDatosLayer.FO1.IDaoUsuarioAmigo;
+
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoMedida;
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoPeso;
+
+import AccesoDatosLayer.FOM04Postgre.IDaoProgresoPeso;
+
 
 /**
  *
@@ -40,5 +44,7 @@ public abstract class FabricaAbstracta {
     //Gets F04
     public abstract DaoProgresoPeso getDaoProgresoPeso();
     public abstract DaoProgresoMedida getDaoProgresoMedida();
-    
+   // public abstract IDaoComentario getDaoComentario();
+    public abstract IDaoProgresoPeso instanciaDaoProgresoPeso();
+
 }

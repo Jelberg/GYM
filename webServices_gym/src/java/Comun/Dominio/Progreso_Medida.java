@@ -17,11 +17,14 @@ public class Progreso_Medida extends Entidad {
     private String _tipo;
     private int _idtipo;
     private Date _fechaM;
+
+
     private String _sobrenombre;
     
     public Progreso_Medida(){
     }
     
+
     public Progreso_Medida(int id){
         super(id);    
     }
@@ -34,6 +37,7 @@ public class Progreso_Medida extends Entidad {
         this._fechaM = fechaM;
         this._sobrenombre = sobrenombre;
     }
+
 
     public Progreso_Medida(int id , int _medida, int _idtipo) {
         super(id);
@@ -48,8 +52,6 @@ public class Progreso_Medida extends Entidad {
     public void setIdtipo(int _idtipo) {
         this._idtipo = _idtipo;
     }
-
- 
 
     /**
      * @return the _medida
@@ -82,14 +84,18 @@ public class Progreso_Medida extends Entidad {
     /**
      * @return the _fechaM
      */
+
     public Date getFechaM() {
+
         return _fechaM;
     }
 
     /**
      * @param _fechaM the _fechaM to set
      */
+
     public void setFechaM(Date _fechaM) {
+
         this._fechaM = _fechaM;
     }
 

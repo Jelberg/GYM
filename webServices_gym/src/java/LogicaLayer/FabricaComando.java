@@ -1,9 +1,13 @@
 package LogicaLayer;
 
+
 import LogicaLayer.FO4.ProgresoPeso.EliminarPesoComando;
 import LogicaLayer.FO4.ProgresoPeso.AgregarPesoComando;
 import LogicaLayer.FO4.ProgresoPeso.ConsultarProgresoPesoComando;
 import LogicaLayer.FO4.ProgresoPeso.ActualizarPesoComando;
+
+import Comun.Dominio.Comentario;
+
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
 import Comun.Dominio.Progreso_Peso;
@@ -207,6 +211,7 @@ public class FabricaComando {
         return new ActualizarPesoComando(pp);
     }
      
+
      /**
       * Instancia del comando Consultar progreso de medidas
       * @param id
@@ -224,6 +229,23 @@ public class FabricaComando {
      public static AgregarMedidaComando instanciaCmdAgregarMedida (Entidad en){
          return new AgregarMedidaComando(en);
      }
+
+     public static AgregarComentarioComando insertarComentarioComando(Comentario comentario){
+         return new AgregarComentarioComando(comentario);
+     }
+     
+
+    
+    public static CompartirProgresoComando instanciaCmdCompartirProgreso (){
+        return new CompartirProgresoComando();
+    }
+    
+    public static ConsultarProgesoMedidasComando instanciaCmdConsultarProgresoMedidas (int id){
+        return new ConsultarProgesoMedidasComando(id);
+    }
+    
+    
+  
     //FIN F04
 
    

@@ -170,6 +170,21 @@ public class FabricaEntidad {
     static public Entidad InstanciaProgresoMedida(int id, int medida, int tipo){
         return new Progreso_Medida(id,medida,tipo);
     }
+
+    static public Comentario InstaciaInsertarComentario(int idUsuario, 
+            String mensaje){
+    return new Comentario(idUsuario, mensaje);
+    }
+    
+    static public Entidad InstanciaProgresoMedida(int id, int medida, 
+            String tipo, Date fechaM, String sobreNombre){
+        return new Progreso_Medida(id, medida, tipo, (java.sql.Date) fechaM, sobreNombre);
+    }
+    
+    static public Progreso_Peso InstanciaActualizarPeso(int idUsuario, int peso){
+         return new Progreso_Peso(idUsuario, peso);
+    }   
+
     // Fin de M04        
 
     
