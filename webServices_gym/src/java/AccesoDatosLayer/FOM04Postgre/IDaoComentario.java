@@ -5,6 +5,7 @@
  */
 package AccesoDatosLayer.FOM04Postgre;
 
+import AccesoDatosLayer.IDao;
 import Comun.Dominio.Comentario;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Leonardo
  */
-public interface IDaoComentario {
+public interface IDaoComentario extends IDao {
     
     public ArrayList<Comentario> getComentarios();
     public String insertar(Comentario comentario);

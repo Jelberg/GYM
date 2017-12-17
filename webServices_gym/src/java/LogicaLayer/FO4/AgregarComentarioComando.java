@@ -34,8 +34,8 @@ public class AgregarComentarioComando extends Comando {
     @Override
     public void ejecutar() {
         FabricaAbstracta _fab = FabricaAbstracta.getFabrica(1);
-       // IDaoComentario _dao = _fab.getDaoComentario();
-        //_response = _dao.insertar(_comentario);
+        IDaoComentario _dao = _fab.getDaoComentario();
+        _response = _dao.insertar(_comentario);
     }
 
 }

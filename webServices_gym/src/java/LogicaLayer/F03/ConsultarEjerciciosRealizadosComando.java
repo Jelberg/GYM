@@ -29,8 +29,8 @@ private static String _resp;
     @Override
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1); 
-        IDaoRutina dao = fab.getDaoRutina();
-        _resp = dao.consultaEjerciciosRealizados(id);
+        //IDaoRutina dao = fab.getDaoRutina();
+        //_resp = dao.consultaEjerciciosRealizados(id);
     }
     
 }

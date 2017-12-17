@@ -28,6 +28,12 @@ public class FOM04_Comentario{
     private ArrayList<Comentario> _listaComentarios = 
             new ArrayList<Comentario>();
 
+    /**
+     * Servicio que recibe y responde las solicitudes de realizar comentario de los usuarios
+     * @param idUsuario
+     * @param mensaje
+     * @return 
+     */
     @POST
     @Path("/insertarComentario")
     @Produces("aplicacion/json")

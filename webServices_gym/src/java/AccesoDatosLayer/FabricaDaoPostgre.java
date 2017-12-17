@@ -109,8 +109,8 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
     }
     //FIN FO4
 
-    public DaoRutina getDaoRutina() {
-        return new DaoRutina();
+    public DaoComentario getDaoComentario() {
+       return new DaoComentario();
     }
 
     
