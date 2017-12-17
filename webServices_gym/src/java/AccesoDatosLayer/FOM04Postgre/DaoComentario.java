@@ -12,6 +12,7 @@ import Comun.Dominio.Entidad;
 import Comun.Excepciones.ParameterNullException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -54,9 +55,38 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
         }
     }
 
+    /**
+     * Metodo para consultar comentarios de acuerdo a la medida
+     * @param ent
+     * @return 
+     */
     @Override
-    public Entidad consultar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Comentario> getComentariosProgMedida(int idUsuario,int idProgMedida) {
+        try {
+            _connection = getConexion();
+            
+            String _query = "SELECT * FROM fo_m04_get_comentarioprom("+
+                            idUsuario+","+idProgMedida+")";
+            
+            PreparedStatement _st = _connection.prepareCall(_query);
+            ResultSet _rs = _st.executeQuery();
+            
+            while(_rs.next()){
+                _jsonArray.add(new Comentario());
+                _jsonArray.get(_jsonArray.size()-1).setNombreUsuario(_rs.getString("nombreUsuario"));
+                _jsonArray.get(_jsonArray.size()-1).setMensaje(_rs.getString("mensaje"));
+            }
+            
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            cerrarConexion(_connection);
+            return _jsonArray;
+        }
     }
 
     @Override
@@ -71,6 +101,11 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
 
     @Override
     public String actualizar(Comentario comentario) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Entidad consultar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

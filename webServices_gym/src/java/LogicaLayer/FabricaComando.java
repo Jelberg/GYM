@@ -311,6 +311,11 @@ public class FabricaComando {
         return new ActualizarMedidaComando(progreso_Medida);
     }
     
+    public static ComandoObtenerComentariosProgMedidas instanciaObtenerComentariosProgMedida
+        (int idUsuario, int idProgresoMedida){
+        return new ComandoObtenerComentariosProgMedidas(idUsuario, idProgresoMedida);
+    }
+    
      
     //FIN F04
 

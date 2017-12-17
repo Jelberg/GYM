@@ -64,7 +64,7 @@ public class FOM04_Progreso_Medida {
         return _response;
     }
     
-    @POST
+    @GET
     @Path("/actualizarMedida")
     @Produces("application/json")
     public String actualizarMedida(@QueryParam ( "id_usuario" ) int idUsuario,
