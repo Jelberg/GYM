@@ -13,9 +13,11 @@ import Comun.Validaciones.ValidationWS;
 import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadores;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
+import LogicaLayer.BO2.ComandoModificarEntrenador;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,15 +104,58 @@ public class BOm02_Entrenador {
             }});
             Entidad entrenador = FabricaEntidad.instanciaEntrenador(nombre, apellido,
                                     Date.valueOf(fecha), sexo, correo, historial);
-            System.out.println(entrenador);
-            
             ComandoInsertarEntrenador cmd = FabricaComando.instanciaCmdInsertarEntrenador(entrenador);
             cmd.ejecutar();
             entrenador = cmd.getMensaje();
             response.put ( "data", entrenador.getMensaje() );
         }
         catch (ParameterNullException e) {
-            response.put("error", e.getMessage());
+            response.put("data", e.getMessage());
+        }
+        finally {
+            return _gson.toJson(response);
+        }
+    }
+    /**
+     * Metodo que recibe como parametros el correo del entrenador
+     * para modificarlo ademas de sus atributos a modificar.
+     * @param nombre Nombre del entrenador,
+     * @param apellido Apellido del entrenador.
+     * @param fecha Fecha de nacimiento del entrenador.
+     * @param sexo Sexo del entrenador.
+     * @param correo Correo del entrenador.
+     * @param historial Historial del entrenador.
+     * @return Devuelve un json con elemento llamado data, 
+     * contiene el mensaje de la peticion
+     */
+    @POST
+    @Path("/modificarEntrenador")
+    @Produces("application/json")
+    public String actualizaInstruct( @QueryParam("nombre") String nombre,
+                                    @QueryParam("apellido") String apellido,
+                                    @QueryParam("fechanac") String fecha,
+                                    @QueryParam("sexo") String sexo,
+                                    @QueryParam("correo") String correo,
+                                    @QueryParam("historial") String historial ){
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("nombre", nombre );
+                put("apellido", apellido );
+                put("fechanac", fecha);
+                put("sexo", sexo );
+                put("correo", correo );
+                put("historial", historial );
+            }});
+            Entidad entrenador = FabricaEntidad.instanciaEntrenador(nombre, apellido,
+                                    Date.valueOf(fecha), sexo, correo, historial);
+            ComandoModificarEntrenador cmd = FabricaComando.instanciaCmdModificarEntrenador( entrenador );
+            cmd.ejecutar();
+            entrenador = cmd.getMensaje();
+            response.put ( "data", entrenador.getMensaje() );
+        }
+        catch (ParameterNullException e) {
+            response.put("data", e.getMessage());
         }
         finally {
             return _gson.toJson(response);

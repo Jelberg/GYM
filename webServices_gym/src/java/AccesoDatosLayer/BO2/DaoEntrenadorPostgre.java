@@ -94,7 +94,27 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
      */
     @Override
     public Entidad modificar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            String query = "select * from bo_m02_actualizar_entrenador(?,?,?,?,?,?)";
+            _conn = getConexion();
+            Entrenador entrenador = ( Entrenador ) ent;
+            PreparedStatement st = _conn.prepareStatement(query); 
+            st.setString( 1, entrenador.getNombre() );
+            st.setString( 2, entrenador.getApellido() );
+            st.setString( 3, String.valueOf( entrenador.getFecha_nac() ));
+            st.setString( 4, entrenador.getSexo() );
+            st.setString( 5, entrenador.getCorreo() );
+            st.setString( 6, entrenador.getHistorial() );
+            st.executeQuery();
+            ent.setMensaje( "Se realizo correctamente la actualizacion." );
+        }
+        catch( SQLException e ){
+            ent.setMensaje( "Error con conexion, intente de nuevo." );
+        }
+        finally{
+            cerrarConexion( _conn );
+            return ent;
+        }
     }
     /**
      * Metodo que es llamado cuando se desea insertar un nuevo entrenador.

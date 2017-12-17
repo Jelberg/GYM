@@ -30,7 +30,7 @@ public abstract class FabricaAbstracta {
     public abstract IDaoMaquina getDaoMaquina();
     // Gets BO2
     public abstract IDaoInstructor getDaoInstructor();
-    public abstract DaoEntrenadorPostgre instanciaDaoEntrenador();
+    public abstract IDaoEntrenador instanciaDaoEntrenador();
     // gets FO1
     public abstract IDaoUsuario getDaoUsuario();
     public abstract IDaoUsuarioAmigo getDaoUsuarioAmigo();
