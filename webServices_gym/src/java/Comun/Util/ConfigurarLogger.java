@@ -21,7 +21,7 @@ public class ConfigurarLogger {
     
     private void setProperties(){
         try{
-        String ruta = System.getProperty("user.home");
+        String ruta = ("C:\\GOG Games");
         
         //LogManager.getLogManager().reset();
         logr.setLevel(Level.WARNING);
