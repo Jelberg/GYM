@@ -14,9 +14,12 @@ import AccesoDatosLayer.BO1.DaoMaquinaPostgre;
 import AccesoDatosLayer.BO1.IDaoEquipo;
 import AccesoDatosLayer.BO1.IDaoEjercicio;
 import AccesoDatosLayer.BO1.IDaoMaquina;
+import AccesoDatosLayer.BO2.DaoHorarioClasePostgre;
+import AccesoDatosLayer.BO2.IDaoClase;
 import AccesoDatosLayer.BO2.IDaoEntrenador;
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoPeso;
 import AccesoDatosLayer.FOM04Postgre.IDaoProgresoPeso;
+import AccesoDatosLayer.BO2.IDaoHorarioClase;
 
 
 /**
@@ -54,9 +57,21 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
         return new DaoEntrenadorPostgre();
     }
     
-    
-    public DaoClasePostgre instanciaDaoClase(){
+    /**
+     * 
+     * @return Retorna objeto del tipo DaoClase.
+     */
+    public IDaoClase instanciaDaoClase(){
         return new DaoClasePostgre();
+    }
+    
+    /**
+     * 
+     * @return Retorna objeto del tipo DaoHorarioClase.
+     */
+    @Override
+    public IDaoHorarioClase instaciaDaoHorarioClase(){
+        return new DaoHorarioClasePostgre();
     }
     // Fin Daos BO2
     
@@ -79,6 +94,8 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
 
     
     //FIN FO4
+
+    
 
     
 }
