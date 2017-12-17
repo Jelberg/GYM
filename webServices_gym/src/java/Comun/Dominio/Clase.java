@@ -23,15 +23,14 @@ public class Clase extends Entidad {
     private int _capacidad;
 
  
-    public Clase(){
-    }
-
     public Clase(String _nombre) {
         this._nombre = _nombre;
     }
-
-    public Clase(int _id, String _nombre, String _descripcion, String _idInstructor, Date _fecha, Date _horaInicio, Date _horaFin, int _capacidad) {
-        this._id = _id;
+    
+    public Clase(int _id, String _nombre, String _descripcion, 
+            String _idInstructor, Date _fecha, Date _horaInicio, Date _horaFin, 
+            int _capacidad) {
+        super (_id);
         this._nombre = _nombre;
         this._descripcion = _descripcion;
         this._Instructor = _idInstructor;
@@ -39,6 +38,14 @@ public class Clase extends Entidad {
         this._horaInicio = _horaInicio;
         this._horaFin = _horaFin;
         this._capacidad = _capacidad;
+    }
+
+    Clase(String nombre, String descripcion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    Clase(String nombre, String descripcion, String Instructor, java.util.Date fecha, java.util.Date horaInicio, java.util.Date horaFin, int capacidad) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getId() {
@@ -105,8 +112,15 @@ public class Clase extends Entidad {
         this._capacidad = _capacidad;
     }
     
+     public Clase() {
+        super();
+    }
     
+    public Clase(int _id) {
+        super(_id);
+    }
     
-    
+  
+  
     
 }

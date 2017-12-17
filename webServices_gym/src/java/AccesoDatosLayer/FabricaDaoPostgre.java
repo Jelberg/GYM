@@ -14,12 +14,14 @@ import AccesoDatosLayer.BO1.DaoMaquinaPostgre;
 import AccesoDatosLayer.BO1.IDaoEquipo;
 import AccesoDatosLayer.BO1.IDaoEjercicio;
 import AccesoDatosLayer.BO1.IDaoMaquina;
+import AccesoDatosLayer.BO2.IDaoEntrenador;
 
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoMedida;
 
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoPeso;
 import AccesoDatosLayer.FOM04Postgre.IDaoComentario;
 import AccesoDatosLayer.FOM04Postgre.IDaoProgresoPeso;
+
 
 /**
  *
@@ -51,7 +53,8 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
      * 
      * @return Retorna objeto del tipo DaoEntrenador.
      */
-    public DaoEntrenadorPostgre instanciaDaoEntrenador(){
+    @Override
+    public IDaoEntrenador instanciaDaoEntrenador(){
         return new DaoEntrenadorPostgre();
     }
     
