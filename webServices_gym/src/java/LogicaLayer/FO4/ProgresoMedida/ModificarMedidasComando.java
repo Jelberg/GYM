@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LogicaLayer.FO4;
+package LogicaLayer.FO4.ProgresoMedida;
 
 import LogicaLayer.Comando;
 
@@ -13,13 +13,17 @@ import LogicaLayer.Comando;
  *
  * @author Leonardo
  */
-public class ConsultarProgresoMedidasComando extends Comando {
-     
-     int _idUsuario;
-     
-     public ConsultarProgresoMedidasComando(int idUsuario){
-         _idUsuario = idUsuario;
-     }
+public class ModificarMedidasComando extends Comando {
+    
+    int _idUsuario;
+    int _medida;
+    int _tipo_medida;
+    
+    public ModificarMedidasComando(int idUsuario, int medida, int tipo_medida){
+        _idUsuario = idUsuario;
+        _medida = medida;
+        _tipo_medida = tipo_medida;
+    }
     
     @Override
     public void ejecutar() {

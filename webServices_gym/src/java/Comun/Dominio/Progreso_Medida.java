@@ -12,18 +12,27 @@ import java.sql.Date;
  * @author marvian
  */
 public class Progreso_Medida extends Entidad {
+   
     private int _id;
     private int _medida;
     private String _tipo;
-    private String _fechaM;
+    private int _idtipo;
+    private Date _fechaM;
+
+
     private String _sobrenombre;
     
     public Progreso_Medida(){
     }
     
+
+    public Progreso_Medida(int id){
+        super(id);    
+    }
+    
     public Progreso_Medida(int id, int medida, String tipo, 
-    String fechaM, String sobrenombre){
-        this._id = id;
+    Date fechaM, String sobrenombre){
+        super(id);
         this._medida = medida;
         this._tipo = tipo;
         this._fechaM = fechaM;
@@ -43,11 +52,12 @@ public class Progreso_Medida extends Entidad {
         return _id;
     }
 
-    /**
-     * @param _id the _id to set
-     */
-    public void setId(int _id) {
-        this._id = _id;
+    public int getIdtipo() {
+        return _idtipo;
+    }
+
+    public void setIdtipo(int _idtipo) {
+        this._idtipo = _idtipo;
     }
 
     /**
@@ -81,14 +91,18 @@ public class Progreso_Medida extends Entidad {
     /**
      * @return the _fechaM
      */
-    public String getFechaM() {
+
+    public Date getFechaM() {
+
         return _fechaM;
     }
 
     /**
      * @param _fechaM the _fechaM to set
      */
-    public void setFechaM(String _fechaM) {
+
+    public void setFechaM(Date _fechaM) {
+
         this._fechaM = _fechaM;
     }
 

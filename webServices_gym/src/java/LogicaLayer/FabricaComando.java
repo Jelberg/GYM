@@ -1,6 +1,13 @@
 package LogicaLayer;
 
+
+import LogicaLayer.FO4.ProgresoPeso.EliminarPesoComando;
+import LogicaLayer.FO4.ProgresoPeso.AgregarPesoComando;
+import LogicaLayer.FO4.ProgresoPeso.ConsultarProgresoPesoComando;
+import LogicaLayer.FO4.ProgresoPeso.ActualizarPesoComando;
+
 import Comun.Dominio.Comentario;
+
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
 import Comun.Dominio.Progreso_Medida;
@@ -29,7 +36,11 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
+import LogicaLayer.BO2.ComandoModificarEntrenador;
+import LogicaLayer.FO4.ProgresoMedida.AgregarMedidaComando;
+import LogicaLayer.FO4.ProgresoMedida.ConsultarProgesoMedidasComando;
 
 /**
  *
@@ -69,9 +80,28 @@ public class FabricaComando {
             nombre, apellido, fecha, sexo, correo);
     }
 
-    //Crear comando para consultar las clases.
+    /**
+     * Metodo llamado para realizar la consulta de todas las clases.
+     * @return Devuelve un comando para realizar la accion.
+     */
     public static ComandoConsultarClase instanciaCmdConsultaClase(){
         return new ComandoConsultarClase();
+    }
+    
+    /**
+     * Metodo llamado para realizar el insert de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoInsertarClase instanciaCmdInsertaClase( Entidad ent){
+        return new ComandoInsertarClase( ent );
+    }
+    
+    /**
+     * Metodo llamado para realizar la eliminacion de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoInsertarClase instanciaCmdEliminaClase( Entidad ent){
+        return new ComandoInsertarClase( ent );
     }
     
     /**
@@ -80,6 +110,18 @@ public class FabricaComando {
      */
     public static ComandoConsultaEntrenadores instanciaCmdConsultaEntrenadores(){
         return new ComandoConsultaEntrenadores();
+    }
+    /**
+     * Metodo que es llamado cuando se necesita una instancia del comando para
+     * realizar actualizaciones a un entrenador.
+     * @param entrenador Recibe un objeto Entidad en el cual estan encapsulados
+     * los datos del entrenador.
+     * @return Devuelve el comando con los datos necesarios para realizar los llamados.
+     * @see Entidad
+     * @see ComandoModificarEntrenador
+     */
+    public static ComandoModificarEntrenador instanciaCmdModificarEntrenador( Entidad entrenador){
+        return new ComandoModificarEntrenador( entrenador );
     }
     
     /**
@@ -203,30 +245,46 @@ public class FabricaComando {
         return new ActualizarPesoComando(pp);
     }
      
+
+     /**
+      * Instancia del comando Consultar progreso de medidas
+      * @param id
+      * @return 
+      */
+     public static ConsultarProgesoMedidasComando instanciaCmdConsutaProgresoMedidas (int id){
+         return new ConsultarProgesoMedidasComando(id);
+     }
+     
+     /**
+      * Instancia Comando agregar media
+      * @param en
+      * @return 
+      */
+     public static AgregarMedidaComando instanciaCmdAgregarMedida (Entidad en){
+         return new AgregarMedidaComando(en);
+     }
+
      public static AgregarComentarioComando insertarComentarioComando(Comentario comentario){
          return new AgregarComentarioComando(comentario);
      }
      
+
     
     public static AgregarMedidaComando instanciaCmdAgregarMedida (Progreso_Medida progreso_Medida){
         return new AgregarMedidaComando(progreso_Medida);
     }
-    
     public static CompartirProgresoComando instanciaCmdCompartirProgreso (){
         return new CompartirProgresoComando();
     }
     
-    public static ConsultarProgresoMedidasComando instanciaCmdConsultarProgresoMedidas (int id){
-        return new ConsultarProgresoMedidasComando(id);
+    public static ConsultarProgesoMedidasComando instanciaCmdConsultarProgresoMedidas (int id){
+        return new ConsultarProgesoMedidasComando(id);
     }
     
     public static ActualizarMedidaComando instanciaCmdActualizarMedidas (Progreso_Medida progreso_Medida){
         return new ActualizarMedidaComando(progreso_Medida);
     }
     
-    
-    
-    //  FO_M05
      
     //FIN F04
 
