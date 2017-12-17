@@ -21,6 +21,14 @@ public class Entrenador extends Persona{
     /**
      * @return the historial
      */
+    public Entrenador( String correo ){
+        super( correo );
+    }
+
+    Entrenador(String nombre, String apellido, Date fecha, String sexo, String correo, String historial) {
+        super( nombre, apellido, fecha, sexo, correo );
+        _historial = historial;
+    }
     public String getHistorial() {
         return _historial;
     }

@@ -15,7 +15,17 @@ import java.util.logging.Logger;
  * @author gilbert
  */
 public abstract class Dao implements IDao{
-    private static Connection _conn = null;    
+    
+    /**
+     * Metodo para devolver una unica instancia de la conexion (Singleton)
+     * @return instancia de la conexion
+     */
+    public abstract Connection getInstancia();
+
+            /*_conInstance = getPostgreBdConnect();
+
+        return _conInstance;*/
+    
     /**
      * Metodo que realiza la conexion con la base de datos
      * @return Conexion hecha a la base de datos
@@ -25,10 +35,9 @@ public abstract class Dao implements IDao{
      * @see Connection
      * @see Statement
      */
-    public static Connection getPostgreBdConnect()
-    {
+    public abstract Connection getConexion();
 
-        try
+        /*try
         {
             Class.forName( Registro.POSTGRE_BD_CLASS_FOR_NAME );
             _conn = DriverManager.getConnection( Registro.POSTGRE_BD_URL, Registro.POSTGRE_BD_USER, Registro.POSTGRE_BD_PASSWORD );
@@ -41,19 +50,18 @@ public abstract class Dao implements IDao{
         {
             e.printStackTrace();
         }
-        return _conn;
-    }
+        return _conn;*/
 
     /**
      * Metodo que cierra la conexion a la base de datos
      */
-    public static void closePostgreConnection( Connection conn )
-    {
+    public abstract void cerrarConexion( Connection conn );
+    /*{
         try {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
 
 }

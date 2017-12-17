@@ -5,7 +5,8 @@
  */
 package Comun.Dominio;
 
-import java.sql.Date;
+//import java.sql.Date;
+import java.util.Date;
 
 /**
  *
@@ -35,9 +36,13 @@ public class FabricaEntidad {
                                     Date fecha_nac, String sexo, String correo){
         return new Instructor(id, nombre, apellido, fecha_nac, sexo, correo);
     }
-    static public Entidad instanciaEntrenador ( int id, String nombre, String apellido,
-                                    Date fecha_nac, String sexo, String correo, String historial ){
-        return new Entrenador( id, nombre, apellido, fecha_nac, sexo, correo, historial );
+    static public Entidad instanciaEntrenadorCorreo( String correo ){
+        return new Entrenador( correo );
+    }
+    static public Entidad instanciaEntrenador( String nombre, String apellido, 
+                                                Date fecha, String sexo, String correo,
+                                                String historial){
+        return new Entrenador( nombre, apellido, fecha, sexo, correo, historial );
     }
     // Fin de BO2
     
@@ -114,9 +119,37 @@ public class FabricaEntidad {
     // Fin de FOM01
     
     // Inicia Fabricas de M04
-    /*static public Entidad InstaciaProgresoPeso(int id, int peso, Date fechaP, String sobrenombre){
-    return new Progreso_Peso(id, peso, fechaP,sobrenombre);
-    }*/
+    /**
+     * Intancia de la clase Progreso_Peso
+     * @param id
+     * @param peso
+     * @param fechaP
+     * @param sobrenombre
+     * @return 
+     */
+    static public Entidad InstaciaProgresoPeso(int id, int peso, Date fechaP, String sobrenombre){
+    return new Progreso_Peso(id, peso, (java.sql.Date) fechaP,sobrenombre);
+    }
+    
+    /**
+     * Instancia del progreso del peso que solo recibe id y peso
+     * @param id
+     * @param peso
+     * @return 
+     */
+    static public Entidad InstaciaProgresoPeso(int id, int peso){
+    return new Progreso_Peso(id, peso);
+    }
+    
+    /**
+     * instancia del progreso del peso que solo recivçbe id
+     * @param id
+     * @return 
+     */
+    static public Entidad InstaciaProgresoPeso(int id){
+    return new Progreso_Peso(id);
+    }
     // Fin de M04        
+
     
 }

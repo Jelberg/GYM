@@ -10,9 +10,14 @@ package Comun.Dominio;
  * @author Elberg
  */
 public class Entidad {
-    int _id;
+    private int _id;
+    private String _mensaje;
     public Entidad ( int id ){
         _id = id;
+    }
+    public Entidad ( int id, String mensaje ){
+        _id = id;
+        _mensaje = mensaje;
     }
     public Entidad(){}
     public int getId() {
@@ -22,5 +27,20 @@ public class Entidad {
     public void setId(int id) {
         this._id = id;
     }
+
+    /**
+     * @return the _mensaje
+     */
+    public String getMensaje() {
+        return _mensaje;
+    }
+
+    /**
+     * @param _mensaje the _mensaje to set
+     */
+    public void setMensaje(String _mensaje) {
+        this._mensaje = _mensaje;
+    }
+    
     
 }

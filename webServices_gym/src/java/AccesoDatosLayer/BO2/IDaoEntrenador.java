@@ -5,6 +5,7 @@
  */
 package AccesoDatosLayer.BO2;
 
+import AccesoDatosLayer.IDao;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Entrenador;
 import java.util.ArrayList;
@@ -13,10 +14,10 @@ import java.util.ArrayList;
  *
  * @author gilbert
  */
-public interface IDaoEntrenador {
+public interface IDaoEntrenador extends IDao{
     public ArrayList<Entrenador> consultarEntrenadores();
     public Entidad eliminar( Entidad ent );
     public Entidad modificar( Entidad ent );
-    public Entidad actualizar( Entidad ent );
+    public Entidad insertar( Entidad ent );
     
 }

@@ -5,13 +5,17 @@
  */
 package AccesoDatosLayer.FOM04Postgre;
 
-
 import AccesoDatosLayer.Dao;
 import AccesoDatosLayer.DaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Progreso_Peso;
 import Comun.Util.CompararProgreso;
 import Comun.Validaciones.ValidationWS;
+import AccesoDatosLayer.DaoPostgre;
+import Comun.Dominio.Entidad;
+import Comun.Dominio.Progreso_Peso;
+import Comun.Excepciones.ParameterNullException;
+import Comun.Util.CompararProgreso;
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +24,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  *
@@ -108,6 +113,53 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
             
         }
         
+    }
+
+    @Override
+    public String eliminarPeso(int id_usuario) {
+        try{
+            _conn = getConexion();
+            String query = "SELECT fo_m04_elimina_progresop(?)";
+            PreparedStatement st = _conn.prepareStatement( query );
+            st.setInt( 1 , id_usuario);
+            ResultSet rs = st.executeQuery();
+            
+            return "PESO ELIMINADO";
+        }
+        catch ( SQLException e ) {
+            return null;
+        }
+        catch ( ParameterNullException e ) {
+            return null;
+        }
+        finally {
+            cerrarConexion( _conn );
+        }
+    
+    }
+
+    @Override
+    public String actualizarPeso(Entidad en) {
+        try {
+            Progreso_Peso pp = (Progreso_Peso) en;
+            _conn = getConexion();
+            String query = "select * from fo_m04_act_progresop(?,?);";
+            PreparedStatement st = _conn.prepareStatement( query );
+            st.setInt( 1 , pp.getId() );
+            st.setInt( 2 , pp.getPeso() );
+            st.executeQuery();
+            return "PESO ACTUALIZADO";
+        }
+        catch (SQLException e){
+            return null;
+        }
+        catch ( ParameterNullException e ) {
+            return null;
+        }
+        finally {
+            cerrarConexion( _conn );
+        }
+    
     }
  
 }

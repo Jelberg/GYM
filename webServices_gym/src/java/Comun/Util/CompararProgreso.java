@@ -44,6 +44,7 @@ public class CompararProgreso {
      * @param idUsuario identificador del usuario
      * @return 
      */
+    
     /*public boolean comprobarInsercion( int idUsuario){
         ArrayList<Progreso_Peso> progresoPeso = new ArrayList<Progreso_Peso>();
         Gson gson = new Gson();
@@ -60,5 +61,9 @@ public class CompararProgreso {
         else{
             return false;
         }
+
     }*/
-}
+
+    }
+
+

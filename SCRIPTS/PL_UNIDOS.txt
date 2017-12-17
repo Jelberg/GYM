@@ -21,22 +21,26 @@ CREATE 	DATABASE gimnasiobd 	WITH OWNER gymucab;*/
  -------------CREATES TABLAS DE LA BASE DE DATOS ORDENADA-----------
 
 CREATE TABLE USUARIO(
-	USU_ID                  	SERIAL ,
-	USU_CEDULA                  	INTEGER NOT NULL,
-	USU_NOMBRE                	VARCHAR(10) NOT NULL,
-	USU_APELLIDO               	VARCHAR(10) NOT NULL,
+	USU_ID                  	SERIAL NOT NULL,
+	USU_USUARIO                  	VARCHAR(14) NOT NULL UNIQUE,
+	USU_PASSWORD                  	VARCHAR(14) NOT NULL,
+	USU_NOMBRE                	VARCHAR(20) NOT NULL,
+	USU_APELLIDO               	VARCHAR(20) NOT NULL,
 	USU_SEXO           		CHAR NOT NULL,
 	USU_FECHA_NAC          		DATE NOT NULL,
 	USU_TELEFONO			VARCHAR(15) NOT NULL,
 	USU_ESTATURA			INTEGER,
 	USU_FOTO			BYTEA,
-	USU_CORREO			VARCHAR(30) NOT NULL,
+	USU_CORREO			VARCHAR(30) NOT NULL UNIQUE,
+	USU_ENTRENADOR                  BOOLEAN NOT NULL,
+	USU_CODIGO			INT,
 CONSTRAINT PK_USU_ID PRIMARY KEY (USU_ID)
 );
 
 CREATE TABLE USUARIO_AMIGO(
   	AMI_USUARIO INTEGER,
   	AMI_AMIGO INTEGER,
+  CONSTRAINT PK_UA_ID PRIMARY KEY (AMI_USUARIO, AMI_AMIGO),
   CONSTRAINT USUARIO_AMIGO_AMI_AMIGO_FKEY FOREIGN KEY (AMI_AMIGO) REFERENCES USUARIO (USU_ID) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT USUARIO_AMIGO_AMI_USUARIO_FKEY FOREIGN KEY (AMI_USUARIO) REFERENCES USUARIO (USU_ID) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
 );
@@ -168,7 +172,8 @@ CREATE TABLE INSTRUCTOR
  	INS_APELLIDO                	CHARACTER VARYING(10) NOT NULL,
  	INS_FECHA_NAC   DATE NOT NULL,
  	INS_SEXO            	CHARACTER(1) NOT NULL,
- 	INS_CORREO                 	CHARACTER VARYING(20) NOT NULL,
+ 	INS_CORREO                 	CHARACTER VARYING(20) NOT NULL UNIQUE,
+    INS_FOTO            	BYTEA,
  	CONSTRAINT INSTRUCTOR_PKEY PRIMARY KEY (INS_ID)
 );
  
@@ -1052,7 +1057,233 @@ LANGUAGE plpgsql;
 ------***** FIN BOM02*****-----
 
 ------*****FOM01*****-----
+-----------------------funcion para iniciar sesion retornando el id del usuario----------
 
+CREATE OR REPLACE FUNCTION fo_m01_iniciarsesion(usu character varying, password character varying)
+  RETURNS TABLE(id int, entrenador boolean)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT usu_id, usu_entrenador
+        FROM usuario
+        WHERE usu_usuario = usu and usu_password=password)
+   LOOP
+    id= var_r.usu_id;
+    entrenador = var_r.usu_entrenador;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--------------------------obtener usuario-----------
+
+
+  CREATE OR REPLACE FUNCTION fo_m01_getusuario(id2 int)
+  RETURNS TABLE(id int, usuario character varying, password character varying, nombre character varying, apellido character varying,
+ fechanac date, sexo char,correo character varying, estatura int, telefono character varying, entrenador boolean, codigo int )
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT usu_id, usu_nombre, usu_apellido, usu_fecha_nac, usu_sexo, usu_correo, usu_usuario, usu_password,
+                usu_telefono,usu_estatura,usu_entrenador,usu_codigo
+        FROM usuario
+        WHERE usu_id = id2)
+   LOOP
+    id= var_r.usu_id;
+    nombre = var_r.usu_nombre;
+    apellido = var_r.usu_apellido;
+    fechanac = var_r.usu_fecha_nac;
+    sexo = var_r.usu_sexo;
+    correo = var_r.usu_correo;
+    usuario = var_r.usu_usuario;
+    password = var_r.usu_password;
+    estatura = var_r.usu_estatura;
+    telefono = var_r.usu_telefono;
+    entrenador = var_r.usu_entrenador;
+    codigo = var_r.usu_codigo;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--------------------------obtener usuario por correo-----------
+
+
+  CREATE OR REPLACE FUNCTION fo_m01_getusuariocorreo(corre character varying)
+  RETURNS TABLE(id int, usuario character varying, password character varying, nombre character varying, apellido character varying,
+ fechanac date, sexo char,correo character varying, estatura int, telefono character varying, entrenador boolean, codigo int )
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT usu_id, usu_nombre, usu_apellido, usu_fecha_nac, usu_sexo, usu_correo, usu_usuario, usu_password,
+                usu_telefono,usu_estatura,usu_entrenador,usu_codigo
+        FROM usuario
+        WHERE usu_correo = corre)
+   LOOP
+    id= var_r.usu_id;
+    nombre = var_r.usu_nombre;
+    apellido = var_r.usu_apellido;
+    fechanac = var_r.usu_fecha_nac;
+    sexo = var_r.usu_sexo;
+    correo = var_r.usu_correo;
+    usuario = var_r.usu_usuario;
+    password = var_r.usu_password;
+    estatura = var_r.usu_estatura;
+    telefono = var_r.usu_telefono;
+    entrenador = var_r.usu_entrenador;
+    codigo = var_r.usu_codigo;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+-------- actualizar codigo para recuperar contrasena-----
+
+
+CREATE OR REPLACE FUNCTION fo_m01_update_codigo (
+    correo character varying,
+    cod int
+    )
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        UPDATE usuario
+        SET usu_codigo = cod
+ 	where usu_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
+-------- actualizar contrasena-----
+
+
+CREATE OR REPLACE FUNCTION fo_m01_update_pass (
+    correo character varying,
+    password character varying
+    )
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        UPDATE usuario
+        SET usu_password = password
+ 	where usu_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
+-----------------------insertar usuario nuevo----------
+
+CREATE OR REPLACE FUNCTION fo_m01_inserta_usuario(
+    nombre character varying,
+    apellido character varying,
+    fecha_nac date, 
+    sexo char,
+    correo character varying,
+    usuario character varying,
+    password character varying,
+    estatura int,
+    telefono character varying,
+    entrenador boolean)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        INSERT INTO usuario(usu_nombre, usu_apellido,usu_fecha_nac, usu_sexo, usu_correo, usu_usuario, usu_password, usu_estatura, usu_telefono, usu_entrenador)
+        VALUES (INITCAP(nombre) , INITCAP(apellido),fecha_nac, sexo, correo, usuario, password, estatura, telefono, entrenador);
+    END; $$
+LANGUAGE plpgsql;
+
+----------------------------Función que elimina la cuenta de un usuario
+ 
+CREATE OR REPLACE FUNCTION fo_m01_elimina_usuario(corre character varying) 
+RETURNS VOID AS $$ 
+DECLARE  
+BEGIN  
+  DELETE FROM USUARIO WHERE USU_CORREO = corre; 
+END $$ 
+  LANGUAGE plpgsql; 
+ 
+---------------------------Función que modifica datos de un usuario
+ 
+CREATE OR REPLACE FUNCTION fo_m01_modifica_usuario(id2 int, nombreUsuario character varying,  
+    password character varying, nombre character varying, 
+    apellido character varying, sexo char, fecha_nac date,  
+    telefono character varying, estatura int, correo character varying,  
+    entrenador boolean, codigo int) 
+  RETURNS void 
+   AS $$ 
+DECLARE 
+BEGIN 
+    UPDATE USUARIO SET usu_usuario = nombreUsuario, usu_password = password,  
+    usu_nombre = nombre, usu_apellido = apellido, usu_sexo = sexo, 
+    usu_fecha_nac = fecha_nac, usu_telefono = telefono, usu_estatura = estatura, 
+    usu_correo = correo, usu_entrenador = entrenador, usu_codigo = codigo 
+    WHERE USU_ID = id2; 
+END; $$ 
+  LANGUAGE plpgsql; 
+ 
+--------------Función que devuelve la lista de amigos de un usuario.
+
+CREATE OR REPLACE FUNCTION fo_m01_get_usuario_amigo(id2 int)
+  RETURNS TABLE(id int, nombre character varying, apellido character varying, usuario character varying, correo character varying)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT u.usu_id, u.usu_nombre, u.usu_apellido, u.usu_usuario, u.usu_correo
+        FROM usuario as u inner join usuario_amigo as am on ami_amigo = usu_id
+        WHERE ami_usuario = id2 )
+   LOOP
+    id = var_r.usu_id;
+    nombre = var_r.usu_nombre;
+    apellido = var_r.usu_apellido;
+    usuario = var_r.usu_usuario;
+    correo = var_r.usu_correo;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--------------Función que devuelve la lista de usuarios por nombre.
+
+CREATE OR REPLACE FUNCTION fo_m01_get_usuarioNA(nombre2 character varying, apellido2 character varying)
+  RETURNS TABLE(id int, nombre character varying, apellido character varying, usuario 	character varying)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT usu_nombre, usu_apellido, usu_usuario, usu_id
+        FROM usuario
+        WHERE usu_nombre = INITCAP(nombre2) and  usu_apellido = INITCAP(apellido2))
+   LOOP
+    nombre = var_r.usu_nombre;
+    apellido = var_r.usu_apellido;
+    usuario = var_r.usu_usuario;
+    id = var_r.usu_id;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+----------------------------Función que agrega un amigo.
+
+CREATE OR REPLACE FUNCTION fo_m01_inserta_usuario_amigo(idUsuario int, idAmigo int)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	INSERT INTO USUARIO_AMIGO (ami_Usuario,ami_Amigo) VALUES ( idUsuario,idAmigo);
+END $$
+  LANGUAGE plpgsql;
+
+----------------------------Función que elimina un amigo.
+
+CREATE OR REPLACE FUNCTION fo_m01_elimina_usuario_amigo(idUsuario int, idAmigo int)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	DELETE FROM USUARIO_AMIGO WHERE ami_usuario = idUsuario and ami_amigo = idAmigo;
+END $$
+  LANGUAGE plpgsql;
 ------***FOM03*****-----
 
 -------Funcion que trae todas las rutinas de un usuario dado el id de usuario
@@ -2004,7 +2235,7 @@ DECLARE
 	end $$
 	LANGUAGE PLPGSQL;
 ---************Esta funcion permitira agregar una reserva******-------
-CREATE OR REPLACE fo_m06_agregar_reserva (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int)
+/*CREATE OR REPLACE fo_m06_agregar_reserva (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int)
 RETURNS VOID AS $$
 DECLARE
 BEGIN
@@ -2012,7 +2243,7 @@ BEGIN
 			values (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int);
 	END $$;
 	LANGUAGE PLPGSQL;
-
+*/
 
 ----******************Esta funcion permite eliminar una reserva******-------------
 CREATE OR REPLACE FUNCTION fo_m06_eliminar_reserva (reserva_id int)
@@ -2240,12 +2471,99 @@ INSERT INTO HORARIO_CLASE(HC_FECHA,HC_DIA,HC_CAPACIDAD,HC_HORA_INICIO,HC_HORA_FI
 (SELECT INS_ID FROM INSTRUCTOR WHERE INS_CORREO='leoher@gmail.com'),(SELECT CLA_ID FROM CLASE WHERE CLA_NOMBRE='Spinning'));
 
 --USUARIO
-insert into usuario (usu_id,usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac,USU_TELEFONO,USU_ESTATURA, USU_FOTO, USU_CORREO) 
-values (1,25530426,'Alexander', 'Pront', 'F','19/08/1996','123',12,null,'mm@gmail.com');
-insert into usuario (usu_id,usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac,USU_TELEFONO,USU_ESTATURA, USU_FOTO, USU_CORREO) 
-values (2,25530426,'Pedro', 'Perez', 'M','19/08/1997','123',12,null,'ppm@gmail.com');
-insert into usuario (usu_id,usu_cedula,usu_nombre,usu_apellido,usu_sexo,usu_fecha_nac,USU_TELEFONO,USU_ESTATURA, USU_FOTO, USU_CORREO) 
-values (3,25530426,'Maria', 'Peraza', 'F','19/08/1998','123',12,null,'mma@gmail.com');
+
+INSERT INTO USUARIO(USU_USUARIO,USU_PASSWORD,USU_NOMBRE,USU_APELLIDO,USU_FECHA_NAC,USU_SEXO,USU_CORREO,USU_TELEFONO,USU_ESTATURA,USU_FOTO,USU_ENTRENADOR)
+VALUES ('jorgepm','123456jp',INITCAP('jorge'),INITCAP('pinto'),'01-12-2001','M','jorgepm22@hotmail.es','04129801370',173,NULL,true);
+INSERT INTO USUARIO(USU_USUARIO,USU_PASSWORD,USU_NOMBRE,USU_APELLIDO,USU_FECHA_NAC,USU_SEXO,USU_CORREO,USU_TELEFONO,USU_ESTATURA,USU_FOTO,USU_ENTRENADOR)
+VALUES ('YessyHeer','hola',INITCAP('Yesimar'),INITCAP('Hernández'),'01-02-1994','F','yyhernandez.13@gmail.com','04265121963',173,NULL,false);
+INSERT INTO USUARIO(USU_USUARIO,USU_PASSWORD,USU_NOMBRE,USU_APELLIDO,USU_FECHA_NAC,USU_SEXO,USU_CORREO,USU_TELEFONO,USU_ESTATURA,USU_FOTO,USU_ENTRENADOR)
+VALUES ('MariVi','mari',INITCAP('María'),INITCAP('Cárdenas'),'01-12-1996','f','mariac@gmail.com','04128574565',150,NULL,true);
+INSERT INTO USUARIO(USU_USUARIO,USU_PASSWORD,USU_NOMBRE,USU_APELLIDO,USU_FECHA_NAC,USU_SEXO,USU_CORREO,USU_TELEFONO,USU_ESTATURA,USU_FOTO,USU_ENTRENADOR)
+VALUES ('JuanMen','juan',INITCAP('Juan'),INITCAP('Mendoza'),'24-12-1975','M','juanmen@hotmail.es','041678524158',180,NULL,true);
+INSERT INTO USUARIO(USU_USUARIO,USU_PASSWORD,USU_NOMBRE,USU_APELLIDO,USU_FECHA_NAC,USU_SEXO,USU_CORREO,USU_TELEFONO,USU_ESTATURA,USU_FOTO,USU_ENTRENADOR)
+VALUES ('JuanaP','juana',INITCAP('Juana'),INITCAP('Pérez'),'15-04-1985','F','juanap@hotmail.es','04148572158',140,NULL,false);
+INSERT INTO USUARIO(USU_USUARIO,USU_PASSWORD,USU_NOMBRE,USU_APELLIDO,USU_FECHA_NAC,USU_SEXO,USU_CORREO,USU_TELEFONO,USU_ESTATURA,USU_FOTO,USU_ENTRENADOR)
+VALUES ('PedroPe','pedro',INITCAP('Pedro'),INITCAP('Pérez'),'05-05-1995','M','pedrope@hotmail.es','04169857123',156,NULL,false);
+INSERT INTO USUARIO(USU_USUARIO,USU_PASSWORD,USU_NOMBRE,USU_APELLIDO,USU_FECHA_NAC,USU_SEXO,USU_CORREO,USU_TELEFONO,USU_ESTATURA,USU_FOTO,USU_ENTRENADOR)
+VALUES ('MariaJo','maria',INITCAP('María José'),INITCAP('Oliveros'),'14-05-1987','f','mariajo@gmail.com','04148526874',173,NULL,false);
+INSERT INTO USUARIO(USU_USUARIO,USU_PASSWORD,USU_NOMBRE,USU_APELLIDO,USU_FECHA_NAC,USU_SEXO,USU_CORREO,USU_TELEFONO,USU_ESTATURA,USU_FOTO,USU_ENTRENADOR)
+VALUES ('VictorC','victor',INITCAP('Victor'),INITCAP('Cámara'),'01-12-2001','M','victorc@hotmail.es','04169857412',143,NULL,false);
+INSERT INTO USUARIO(USU_USUARIO,USU_PASSWORD,USU_NOMBRE,USU_APELLIDO,USU_FECHA_NAC,USU_SEXO,USU_CORREO,USU_TELEFONO,USU_ESTATURA,USU_FOTO,USU_ENTRENADOR)
+VALUES ('JoseMa','jose',INITCAP('JoseMa'),INITCAP('Manrique'),'16-08-1994','M','josema@hotmail.es','04241236510',182,NULL,false);
+
+--AMIGOS
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (1, 2);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (1, 3);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (1, 4);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (1, 5);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (1, 6);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (1, 7);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (1, 8);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (1, 9);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (2, 1);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (2, 3);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (2, 4);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (2, 5);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (2, 6);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (2, 7);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (2, 8);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (2, 9);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (3, 1);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (3, 2);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (3, 4);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (3, 5);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (3, 6);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (3, 7);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (3, 8);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (3, 9);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (4, 1);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (4, 2);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (4, 3);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (4, 5);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (4, 6);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (4, 7);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (4, 8);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (4, 9);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (5, 1);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (5, 2);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (5, 3);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (5, 4);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (5, 6);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (5, 7);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (5, 8);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (5, 9);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (6, 1);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (6, 2);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (6, 3);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (6, 4);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (6, 5);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (6, 7);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (6, 8);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (6, 9);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (7, 1);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (7, 2);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (7, 3);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (7, 4);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (7, 5);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (7, 6);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (7, 8);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (7, 9);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (8, 1);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (8, 2);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (8, 3);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (8, 4);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (8, 5);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (8, 6);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (8, 7);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (8, 9);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (9, 1);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (9, 2);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (9, 3);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (9, 4);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (9, 5);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (9, 6);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (9, 7);
+INSERT INTO public.usuario_amigo(ami_usuario, ami_amigo) VALUES (9, 8);
 
 -----INSERT USUARIO_ENTRENADOR-------
 INSERT INTO USUARIO_ENTRENADOR VALUES ((SELECT USU_ID FROM USUARIO WHERE USU_NOMBRE = 'Alexander' LIMIT 1),(SELECT ENT_ID FROM ENTRENADOR WHERE ENT_NOMBRE = 'Alejandro' LIMIT 1));

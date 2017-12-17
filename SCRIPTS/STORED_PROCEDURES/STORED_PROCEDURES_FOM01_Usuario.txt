@@ -1,11 +1,11 @@
  
 ----------------------------Función que elimina la cuenta de un usuario
  
-CREATE OR REPLACE FUNCTION fo_m01_elimina_usuario(idUsuario int) 
+CREATE OR REPLACE FUNCTION fo_m01_elimina_usuario(corre character varying) 
 RETURNS VOID AS $$ 
 DECLARE  
 BEGIN  
-  DELETE FROM USUARIO WHERE USU_ID = idUsuario; 
+  DELETE FROM USUARIO WHERE USU_CORREO = corre; 
 END $$ 
   LANGUAGE plpgsql; 
  

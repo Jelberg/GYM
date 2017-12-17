@@ -49,7 +49,7 @@ public class DaoMaquinaPostgre extends DaoPostgre implements IDaoMaquina{
     @Override
     public ArrayList<Maquina> consultarMaquinas() {
         try{
-            _conn = Dao.getPostgreBdConnect();
+            _conn = super.getConexion();
             String query = "SELECT maq_id, maq_nombre FROM maquina;";
             jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
@@ -69,7 +69,7 @@ public class DaoMaquinaPostgre extends DaoPostgre implements IDaoMaquina{
         catch (ParameterNullException e) {
         }
         finally {
-            Dao.closePostgreConnection( _conn );
+            super.cerrarConexion(_conn);
             return jsonArray;
         }
     }

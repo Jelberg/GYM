@@ -5,6 +5,7 @@
  */
 package AccesoDatosLayer.BO1;
 
+import AccesoDatosLayer.IDao;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Ejercicio;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author  Luis L
  */
-public interface IDaoEjercicio {
+public interface IDaoEjercicio  extends IDao{
     public ArrayList<Ejercicio> consultarEjercicios();
     public Entidad eliminar( Entidad ent );
     public Entidad modificar( Entidad ent );

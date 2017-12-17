@@ -46,7 +46,7 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
     @Override
     public ArrayList<Ejercicio> consultarEjercicios() {
         try{
-            _conn = Dao.getPostgreBdConnect();
+            _conn = super.getConexion();
             String query = "SELECT eje_id, eje_nombre, eje_grupo_muscular FROM ejercicio;";
             jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
@@ -67,7 +67,7 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
         catch (ParameterNullException e) {
         }
         finally {
-            Dao.closePostgreConnection( _conn );
+            super.cerrarConexion(_conn);
             return jsonArray;
         }
     }
