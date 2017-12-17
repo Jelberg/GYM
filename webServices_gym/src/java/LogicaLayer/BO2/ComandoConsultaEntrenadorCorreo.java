@@ -13,6 +13,7 @@ import Comun.Dominio.FabricaEntidad;
 import LogicaLayer.Comando;
 
 /**
+ *
  * Clase a traves de la cual se realiza el llamado para realizar la consulta
  * de un entrenador por correos
  * @author gilbert

@@ -7,6 +7,7 @@ package LogicaLayer.FO4.Comentarios;
 
 import AccesoDatosLayer.FOM04Postgre.IDaoComentario;
 import AccesoDatosLayer.FabricaAbstracta;
+import AccesoDatosLayer.FabricaDaoPostgre;
 import Comun.Dominio.Comentario;
 import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
@@ -22,19 +23,30 @@ public class AgregarComentarioComando extends Comando {
     private Entidad _comentario;
     private String _response;
     
+
+     /**
+     * Constructor del comentario a ser agregado
+     * @param comentario 
+     */
+    
     public AgregarComentarioComando(Entidad comentario){
-        
+
+   
         this._comentario = comentario;
         
     }
     
+    /**
+     * Metodo para obtener la respuesta obtenida por la BD
+     * @return La respuesta de la BD  ala consulta hecha
+     */
     public String obtenerRespuesta(){
         return _response;
     }
     
     @Override
     public void ejecutar() {
-        FabricaAbstracta _fab = FabricaAbstracta.getFabrica(1);
+        FabricaDaoPostgre _fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1); 
         IDaoComentario _dao = _fab.getDaoComentario();
         _response = _dao.insertar(_comentario);
     }

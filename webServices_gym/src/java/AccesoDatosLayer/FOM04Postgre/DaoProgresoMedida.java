@@ -99,5 +99,33 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
         }
 
     }
+
+    @Override
+    public String actualizarMedida(Entidad ent) {
+         try {
+             Progreso_Medida progreso_Medida = (Progreso_Medida) ent;
+            _conn = getConexion();
+            
+            String _query = "select * from fo_m04_act_medida("+
+                    progreso_Medida.getId()+",'"+
+                    progreso_Medida.getTipo()+"',"+
+                    progreso_Medida.getMedida()+")";
+            
+            PreparedStatement _st = _conn.prepareCall(_query);
+            
+            _st.executeQuery();
+            
+            return "Medida Cambiada";
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        catch (ParameterNullException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            cerrarConexion(_conn);
+            return null;
+        }
+    }
     
 }

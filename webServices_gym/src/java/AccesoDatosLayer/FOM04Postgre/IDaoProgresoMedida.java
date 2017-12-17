@@ -28,4 +28,11 @@ public interface IDaoProgresoMedida extends IDao {
      * @return 
      */
     public String agregarMedida(Entidad ent);
+    
+    /**
+     * Firma de Metodo para actualizar medida
+     * @param ent
+     * @return 
+     */
+    public String actualizarMedida(Entidad ent);
 }

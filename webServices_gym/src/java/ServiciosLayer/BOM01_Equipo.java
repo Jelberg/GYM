@@ -6,11 +6,16 @@
 
 package ServiciosLayer;
 
-import Comun.Dominio.FabricaEntidad;
+import Comun.Dominio.Entidad;
 import Comun.Dominio.Equipo;
+import Comun.Dominio.FabricaEntidad;
 import Comun.Excepciones.ParameterNullException;
 import Comun.Validaciones.ValidationWS;
 import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO1.ComandoAddEquipo;
+import LogicaLayer.BO1.ComandoEliminarEquipo;
+import LogicaLayer.BO1.ComandoUpdateEquipo;
+import LogicaLayer.BO1.ComandoGetEquipoById;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Date;
@@ -61,6 +66,24 @@ public class BOM01_Equipo {
         c.ejecutar();
         listaEquipo = c.getEquipos();
         response = gson.toJson( listaEquipo );
+        return response;
+    }
+    
+    /**
+     * Metodo que busca a un equipo por ID
+     * @param id Identificador equipo.
+     * @return devuelve un JSON con los datos del equipo.
+     */
+    @GET
+    @Path("/getEquipoById")
+    @Produces("application/json")
+    public String getEquipoById( @QueryParam("id") int id ){
+        Entidad _equipo = FabricaEntidad.InstanciaEquipo(id, "");
+        ComandoGetEquipoById cmd = FabricaComando.instanciaGetEquipoById(id);
+        cmd.ejecutar();
+        //_equipo = cmd.ComandoGetEquipoById(id);
+        Entidad ent = ( Equipo ) _equipo;
+        response = gson.toJson( ent );
         return response;
     }
 }

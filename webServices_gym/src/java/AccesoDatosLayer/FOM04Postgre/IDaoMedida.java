@@ -5,18 +5,10 @@
  */
 package AccesoDatosLayer.FOM04Postgre;
 
-import Comun.Dominio.Progreso_Medida;
-import java.util.ArrayList;
-
 /**
  *
  * @author Leonardo
  */
-public interface IDaoMedida {
-    
-    public ArrayList<Progreso_Medida> getMedidas();
-    public String insertar(Progreso_Medida progreso_Medida);
-    public String eliminar(Progreso_Medida progreso_Medida);
-    public String actualizar(Progreso_Medida progreso_Medida);
+public class IDaoMedida {
     
 }

@@ -13,6 +13,7 @@ import LogicaLayer.FO4.ProgresoPeso.ActualizarPesoComando;
 import LogicaLayer.FO4.ProgresoPeso.AgregarPesoComando;
 import LogicaLayer.FO4.ProgresoPeso.ConsultarProgresoPesoComando;
 import LogicaLayer.FO4.ProgresoPeso.EliminarPesoComando;
+
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.util.ArrayList;
@@ -68,7 +69,6 @@ public class FOM04_Progreso_Peso {
         _response = cmd.getResultado();
         return _gson.toJson( _response );
     }
-    
     
     /**
      * Servicio que recibe y responde a la solicitud de eliminacion del peso del usuario

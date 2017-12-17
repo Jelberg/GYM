@@ -18,22 +18,21 @@ import java.util.ArrayList;
  *
  * @author Daniel Goncalves
  */
-public class ComandoGetEquipos extends Comando{
+public class ComandoUpdateEquipo extends Comando{
     private Entidad _equipo;
     private ArrayList<Equipo> _listaEquipos;
    
     /**
      * Builder
      */
-    public ComandoGetEquipos() {}
-    
-    /**
-     * Comando para traer equipos
-     * @return listado de equipos
-     */
-    public ArrayList<Equipo> getEquipos(){
-        return _listaEquipos;
+    public ComandoUpdateEquipo() {}
+
+    public ComandoUpdateEquipo(int id, String nombre) {
+        _equipo.setId(id);
+        _equipo.setMensaje(nombre);
     }
+    
+
     
     /**
      * Metodo Ejecucion Comando
@@ -42,7 +41,7 @@ public class ComandoGetEquipos extends Comando{
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
         IDaoEquipo dao = fab.getDaoEquipo();
-        _listaEquipos = dao.consultarEquipos();
+        _equipo = dao.actualizar(_equipo);
     }
 
 }
