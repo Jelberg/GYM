@@ -7,10 +7,7 @@ package FOM01;
 import Comun.Dominio.Usuario;
 import ServiciosLayer.FOM01_Login;
 import ServiciosLayer.FOM01_Usuario;
-<<<<<<< HEAD
-=======
 import ServiciosLayer.FOM01_Usuario_Amigo;
->>>>>>> f132f001bcd08984c5ab97592f3c00b76ad3affc
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -38,10 +35,7 @@ public class Test_Servicios {
     ResultSet _rs;
     FOM01_Login _loginServicios;
     FOM01_Usuario _usuarioServicios;
-<<<<<<< HEAD
-=======
     FOM01_Usuario_Amigo _usuario_AmigoServicios;
->>>>>>> f132f001bcd08984c5ab97592f3c00b76ad3affc
     Usuario _usuarioDominio;
     ArrayList<Usuario> _arrayUsu;
 
@@ -118,17 +112,6 @@ public class Test_Servicios {
     }
     
     //Prueba para para actualizar el codigo de recuperar contraseña. HABILITARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
-<<<<<<< HEAD
-//    @Test
-//    public void pruebaUpdateCod(){
-//        _loginServicios = new FOM01_Login();
-//        _arrayUsu = new ArrayList<>();
-//        JsonParser parser = new JsonParser();
-//        JsonObject obj = parser.parse(_loginServicios.updateCod("yyhernandez.13@gmail.com"))
-//                                     .getAsJsonObject();
-//        assertEquals("Se actualizo el codigo", obj.get("id").getAsString());
-//    }
-=======
     @Test
     public void pruebaUpdateCod(){
         _loginServicios = new FOM01_Login();
@@ -138,7 +121,6 @@ public class Test_Servicios {
                                      .getAsJsonObject();
         assertNotEquals(0, obj.get("id").getAsInt());
     }
->>>>>>> f132f001bcd08984c5ab97592f3c00b76ad3affc
 
     //Prueba para actualizar la contraseña
     @Test
@@ -174,25 +156,6 @@ public class Test_Servicios {
     }
     
     //Prueba para consultar un usuario por nombre y apellido
-<<<<<<< HEAD
-//    @Test 
-//    public void pruebaGetUsuarioNomApe(){
-//        _usuarioServicios = new FOM01_Usuario();
-//        _arrayUsu = new ArrayList<>();
-//        JsonParser parser = new JsonParser();
-//        JsonObject obj = parser.parse(_usuarioServicios.getUsuarioNomApe("Yesimar", "Hernández")).getAsJsonObject();
-//        assertNotNull("Yesimar","Hernández");
-//    }
-    
-    //Prueba para la lista de Usuarios
-//    @Test 
-//    public void pruebaGetListUsuario(){
-//        _usuarioServicios = new FOM01_Usuario();
-//        _arrayUsu = new ArrayList<>();
-//        JsonParser parser = new JsonParser();
-//        JsonObject obj = parser.parse(_usuarioServicios.getListUsuario()).getAsJsonObject();
-//    }
-=======
     @Test 
     public void pruebaGetUsuarioNomApe(){
         _usuarioServicios = new FOM01_Usuario();
@@ -209,7 +172,6 @@ public class Test_Servicios {
         JsonArray obj = parser.parse(_usuarioServicios.getListUsuario()).getAsJsonArray();
         assertNotNull(obj);
     }
->>>>>>> f132f001bcd08984c5ab97592f3c00b76ad3affc
     
     //Prueba Eliminar Usuario
     @Test
@@ -217,36 +179,12 @@ public class Test_Servicios {
         _usuarioServicios = new FOM01_Usuario();
         _arrayUsu = new ArrayList<>();
         JsonParser parser = new JsonParser();
-<<<<<<< HEAD
-        JsonObject obj = parser.parse(_usuarioServicios.eliminaUsuario("migue@gmail.com")).getAsJsonObject();
-=======
         JsonObject obj = parser.parse(_usuarioServicios.eliminaUsuario("migue@gmail.com"))
                                      .getAsJsonObject();
->>>>>>> f132f001bcd08984c5ab97592f3c00b76ad3affc
         assertEquals("Se eliminó el usuario", obj.get("correo").getAsString());
     }
     
     //Prueba para modificar un usuario
-<<<<<<< HEAD
-//    @Test 
-//    public void pruebaModificaUsuario(){
-//        _usuarioServicios = new FOM01_Usuario();
-//        _arrayUsu = new ArrayList<>();
-//        JsonParser parser = new JsonParser();
-//        JsonObject obj = parser.parse(_usuarioServicios.modificaUsuario(1, "YessyHeer",
-//                "hola", "Yesimar", "Hernández", "F", "04265121963", 173,
-//                "yyhernandez.13@gmail.com", false, 0)).getAsJsonObject();
-//        assertEquals("Se modificó el usuario", obj.get("id").getAsString());
-//    }
-    //Fin Pruebas Usuario
-    
-    //Inicio Pruebas Usuario_Amigo
-    @Test
-    public void pruebaGetUsuarioAmigo(){
-        
-    }
-    //Fin Pruebas Usuario_Amigo
-=======
     @Test 
     public void pruebaModificaUsuario(){
         _usuarioServicios = new FOM01_Usuario();
@@ -299,7 +237,6 @@ public class Test_Servicios {
     }
     //Fin Pruebas Usuario_Amigo
     
->>>>>>> f132f001bcd08984c5ab97592f3c00b76ad3affc
     @After
     public void terminarPrueba(){
         try {      

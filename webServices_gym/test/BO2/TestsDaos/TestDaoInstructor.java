@@ -1,10 +1,6 @@
 package BO2.TestsDaos;
 
 import AccesoDatosLayer.BO2.DaoInstructorPostgre;
-import AccesoDatosLayer.Dao;
-import Comun.Dominio.Instructor;
-import java.sql.Connection;
-import java.util.ArrayList;
 import Comun.Dominio.Instructor;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
@@ -22,12 +18,6 @@ import org.junit.Test;
 public class TestDaoInstructor {
     
     private Connection _conn;
-    DaoInstructorPostgre dip = new DaoInstructorPostgre();
-    
-    @Before
-    public void PrepararPrueba(){
-        try{
-            _conn = getConexion();
     private DaoInstructorPostgre _DaoInstructor = new DaoInstructorPostgre();
     private ArrayList<Instructor> _lista = new ArrayList<>();
     private Instructor _instructor;
@@ -53,10 +43,6 @@ public class TestDaoInstructor {
         }
     }
     
-    @Test
-    public void TestGetInstructores(){
-        ArrayList<Instructor> lista = dip.getInstructores();
-        assertNotNull(lista);
     /**
      * INICIO DE PRUEBAS DEL DAO PARA GESTIONAR INSTRUCTORES
      */    
