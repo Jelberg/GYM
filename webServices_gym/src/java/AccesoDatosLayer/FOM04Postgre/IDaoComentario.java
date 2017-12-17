@@ -21,9 +21,9 @@ public interface IDaoComentario extends IDao {
      * @return 
      */
     public ArrayList<Comentario> getComentarios();
-<<<<<<< HEAD
+
     public String insertar(Entidad comentario);
-=======
+
     /**
      * Firma de metodos para insertar comentario
      * @param comentario
@@ -35,7 +35,7 @@ public interface IDaoComentario extends IDao {
      * @param comentario
      * @return 
      */
->>>>>>> 56d17d0f837f8bcb3d214937cc9fa23f8bba85b7
+
     public String eliminar(Comentario comentario);
     /**
      * Firma de metodo para actualizar comentario

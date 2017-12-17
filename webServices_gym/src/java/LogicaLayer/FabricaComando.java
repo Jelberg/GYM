@@ -316,7 +316,6 @@ public class FabricaComando {
     }
     
     /**
-<<<<<<< HEAD
      * Instancia de la consulta comentario Progresos comenado 
      * @param id
      * @return 
@@ -324,8 +323,8 @@ public class FabricaComando {
     public static ConsultarComentarioProgresosComando instanciaCmdGetComentarioProgresos(int id){
         return new ConsultarComentarioProgresosComando(id);
     }
-=======
-     * Instancia del Comando Obtener Comentarios Progreso medida
+
+    /** Instancia del Comando Obtener Comentarios Progreso medida
      * @param idUsuario
      * @param idProgresoMedida
      * @return 
@@ -344,7 +343,7 @@ public class FabricaComando {
       return new ComandoEliminarMedida(progreso_Medida);
     }
     
->>>>>>> 56d17d0f837f8bcb3d214937cc9fa23f8bba85b7
+
      
     //FIN F04
 
