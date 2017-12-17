@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import static javax.swing.UIManager.put;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -36,7 +37,10 @@ public class BO2_Clase {
     private ArrayList<Clase> _listaClases;
     private Entidad _Clase;
     
-    
+    /**
+     * Metodo que es llamado cuando se desea obtener a todas las clases.
+     * @return devuelve la lista de todas las clases y sus atributos.
+     */
     @GET
     @Path("/getListEntrenador")
     @Produces("application/json")
@@ -48,6 +52,12 @@ public class BO2_Clase {
         return _response;
     }
     
+    /**
+     * Funcion que es llamada cuando el admin desea insertar una clase.
+     * @param nombre Nombre de la clase.
+     * @param descripcion Descripción de la clase.
+     * @return Devuelve un json con mensaje del estatus de la peticion.
+     */
     @POST
     @Path("/insertaClase")
     @Produces("application/json")
@@ -79,5 +89,42 @@ public class BO2_Clase {
         }
     
     }
+    
+    /**
+     * Metodo que recibe como parametros el nombre de la clase
+     * para eliminarla.
+     * @param nombre Nombre de la clase.
+     * @return Devuelve un json con elemento llamado data, 
+     * contiene el mensaje de la peticion
+     */
+    @DELETE
+    @Path("/eliminaClase")
+    @Produces("application/json")
+    public String eliminaClase(@QueryParam("nombre") String nombre){
+
+        Map<String, String> response = new HashMap<String, String>();
+        try{
+
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put("nombre", nombre);
+            }});
+                
+            Entidad clase = FabricaEntidad.instanciaEliminaClase(nombre);
+            
+           
+            }
+        
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            
+            return _gson.toJson(response);
+        }
+    }
+    
  
 }

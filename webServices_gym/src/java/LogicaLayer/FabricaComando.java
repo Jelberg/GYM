@@ -68,12 +68,27 @@ public class FabricaComando {
             nombre, apellido, fecha, sexo, correo);
     }
 
-    //Crear comando para consultar las clases.
+    /**
+     * Metodo llamado para realizar la consulta de todas las clases.
+     * @return Devuelve un comando para realizar la accion.
+     */
     public static ComandoConsultarClase instanciaCmdConsultaClase(){
         return new ComandoConsultarClase();
     }
     
+    /**
+     * Metodo llamado para realizar el insert de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */
     public static ComandoInsertarClase instanciaCmdInsertaClase( Entidad ent){
+        return new ComandoInsertarClase( ent );
+    }
+    
+    /**
+     * Metodo llamado para realizar la eliminacion de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoInsertarClase instanciaCmdEliminaClase( Entidad ent){
         return new ComandoInsertarClase( ent );
     }
     
