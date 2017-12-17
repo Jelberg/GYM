@@ -149,6 +149,27 @@ public class FabricaEntidad {
     static public Entidad InstaciaProgresoPeso(int id){
     return new Progreso_Peso(id);
     }
+    
+    
+    /**
+     * Instancia del progreso medida con solo el id
+     * @param id
+     * @return 
+     */
+    static public Entidad InstanciaProgresoMedida(int id){
+        return new Progreso_Medida(id);
+    }
+    
+    /**
+     * instancia del progreso medida con id, tipo y medida
+     * @param id
+     * @param medida
+     * @param tipo
+     * @return 
+     */
+    static public Entidad InstanciaProgresoMedida(int id, int medida, int tipo){
+        return new Progreso_Medida(id,medida,tipo);
+    }
     // Fin de M04        
 
     
