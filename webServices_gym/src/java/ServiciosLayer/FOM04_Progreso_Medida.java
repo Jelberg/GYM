@@ -9,7 +9,7 @@ import Comun.Dominio.Entidad;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Progreso_Medida;
 import LogicaLayer.Comando;
-import LogicaLayer.FO4.ActualizarMedidaComando;
+import LogicaLayer.FO4.ProgresoMedida.ActualizarMedidaComando;
 import LogicaLayer.FO4.ProgresoMedida.AgregarMedidaComando;
 import LogicaLayer.FO4.ProgresoMedida.ConsultarProgesoMedidasComando;
 import LogicaLayer.FabricaComando;

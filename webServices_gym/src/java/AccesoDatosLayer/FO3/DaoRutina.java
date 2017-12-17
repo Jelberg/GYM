@@ -8,6 +8,7 @@ package AccesoDatosLayer.FO3;
 import AccesoDatosLayer.DaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Rutina;
+import Comun.Excepciones.ParameterNullException;
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.ResultSet;

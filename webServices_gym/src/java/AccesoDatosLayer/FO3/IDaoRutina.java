@@ -5,10 +5,12 @@
  */
 package AccesoDatosLayer.FO3;
 
+import AccesoDatosLayer.IDao;
+
 /**
  *
  * @author Elberg
  */
-public class IDaoRutina {
-    
+public interface IDaoRutina extends IDao {
+    public String consultaEjerciciosRealizados(int id);
 }
