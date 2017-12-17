@@ -6,7 +6,6 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
-import ServiciosLayer.BOm02_Entrenador;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

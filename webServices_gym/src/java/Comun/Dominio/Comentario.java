@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author marvian
  */
 public class Comentario extends Entidad {
-    private int _idUsuario;
+  
     private String _mensaje;
     private String _NombreUsuario;
     private String _fecha;
@@ -20,24 +20,20 @@ public class Comentario extends Entidad {
     public Comentario(){
     }
 
-    public Comentario(int _idUsuario, String _mensaje) {
-        this._idUsuario = _idUsuario;
+    public Comentario(int _id, String _mensaje) {
+        super(_id);
         this._mensaje = _mensaje;
     }
 
-    public Comentario(int _idUsuario, String _mensaje, String _NombreUsuario, String _fecha) {
-        this._idUsuario = _idUsuario;
+    public Comentario(String _mensaje) {
+        this._mensaje = _mensaje;
+    }
+    
+    public Comentario(int _id, String _mensaje, String _NombreUsuario, String _fecha) {
+        super(_id);
         this._mensaje = _mensaje;
         this._NombreUsuario = _NombreUsuario;
         this._fecha = _fecha;
-    }
-
-    public int getIdUsuario() {
-        return _idUsuario;
-    }
-
-    public void setIdUsuario(int _id) {
-        this._idUsuario = _id;
     }
 
     public String getMensaje() {

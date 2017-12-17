@@ -186,6 +186,10 @@ public class FabricaEntidad {
         return new Progreso_Medida(id,medida,tipo);
     }
 
+    static public Entidad InstanciaComentario(){
+        return new Comentario();
+    }
+    
     static public Comentario InstaciaInsertarComentario(int idUsuario, 
             String mensaje){
     return new Comentario(idUsuario, mensaje);

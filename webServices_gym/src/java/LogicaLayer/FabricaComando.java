@@ -1,6 +1,7 @@
 package LogicaLayer;
 
 
+import LogicaLayer.FO4.Comentarios.AgregarComentarioComando;
 import LogicaLayer.FO4.ProgresoPeso.EliminarPesoComando;
 import LogicaLayer.FO4.ProgresoPeso.AgregarPesoComando;
 import LogicaLayer.FO4.ProgresoPeso.ConsultarProgresoPesoComando;
@@ -266,15 +267,28 @@ public class FabricaComando {
          return new AgregarMedidaComando(en);
      }
 
+     /**
+      * Instancia del comando para los comentarios
+      * @param comentario
+      * @return 
+      */
      public static AgregarComentarioComando insertarComentarioComando(Comentario comentario){
          return new AgregarComentarioComando(comentario);
      }
      
-
-    
+    /**
+     * Instancia del comando para agregar medida
+     * @param progreso_Medida
+     * @return 
+     */
     public static AgregarMedidaComando instanciaCmdAgregarMedida (Progreso_Medida progreso_Medida){
         return new AgregarMedidaComando(progreso_Medida);
     }
+    
+    /**
+     * Instancia del comendo para compartir el progreso 
+     * @return 
+     */
     public static CompartirProgresoComando instanciaCmdCompartirProgreso (){
         return new CompartirProgresoComando();
     }
