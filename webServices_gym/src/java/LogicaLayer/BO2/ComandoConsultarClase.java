@@ -14,6 +14,7 @@ import LogicaLayer.Comando;
 import java.util.ArrayList;
 
 /**
+ *
  * Clase a traves de la cual se realizan los llamados para consultar clases.
  * @author marvian
  */
@@ -31,6 +32,10 @@ public class ComandoConsultarClase extends Comando {
         _clase = clase;
     }
     public ComandoConsultarClase() {}
+    public ArrayList<Clase> consultarEntrenadores(){
+        return _listaClase;
+    }
+
     public ArrayList<Clase> consultarClase(){
         return _listaClase;
     }
