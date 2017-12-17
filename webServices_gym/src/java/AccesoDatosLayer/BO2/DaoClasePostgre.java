@@ -117,8 +117,33 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
      */
     @Override
     public Entidad modificar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        try {
+                       
+            String query = "select * from bo_m02_modifica_clase(?,?)";
+            _conn = getConexion();
+            Clase clase = ( Clase ) ent;
+            PreparedStatement st = _conn.prepareStatement(query);
+            java.lang.reflect.Type type = new TypeToken<Clase[]>(){}.getType();
+            st.setString(1, clase.getNombre());
+            st.setString(2, clase.getDescripcion());
+            st.executeQuery();
+            ent.setMensaje("Se modificó con éxito");
+        }
+        catch (SQLException e){
+            ent.setMensaje( "Error, intente de nuevo" );
+        }
+        catch (ParameterNullException e) {
+            ent.setMensaje( "Error, parametro vacio" );
+        }
+        catch (Exception e) {
+            ent.setMensaje( "Error" );
+        }
+        finally {
+            cerrarConexion( _conn );
+            return ent;
+        }
+    } 
+
     /**
      * Metodo que sera llamado cuando se desee eliminar una clase.
      * @param ent Recibe un objeto Entidad en el que se encuentra la data

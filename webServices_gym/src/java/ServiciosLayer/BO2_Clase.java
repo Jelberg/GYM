@@ -120,11 +120,41 @@ public class BO2_Clase {
         catch (Exception e) {
             response.put("error", e.getMessage());
         }
-        finally {
-            
+        finally {            
             return _gson.toJson(response);
         }
     }
     
+    /**
+     * Funcion que modifica alguna clase.
+     * @param nombre Nombre de la clase.
+     * @param descripcion Descripción de la clase.
+     * @return Devuelve un json con un mensaje al usuario sobre el estatus
+     * de la petición.
+     */
+    @POST
+    @Path("/modificaClase")
+    @Produces("application/json")
+    public String modificaClase( @QueryParam ( "nombre" ) String nombre,
+                                   @QueryParam ( "descripcion" ) String descripcion){
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put ( "nombre" , nombre );
+                put( "descripcion" , descripcion );
+            }});
+            
+            Entidad clase = FabricaEntidad.instanciaModificarClase(nombre, descripcion);
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            return _gson.toJson(response);
+        }
+    } 
  
 }

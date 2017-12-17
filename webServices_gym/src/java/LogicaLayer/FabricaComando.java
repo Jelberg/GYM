@@ -29,6 +29,7 @@ import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.BO1.ComandoGetEquipos;
 import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
+import LogicaLayer.BO2.ComandoModificarClase;
 
 /**
  *
@@ -90,6 +91,14 @@ public class FabricaComando {
      */
     public static ComandoInsertarClase instanciaCmdEliminaClase( Entidad ent){
         return new ComandoInsertarClase( ent );
+    }
+    
+    /**
+     * Metodo llamado para realizar la modificacion de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoModificarClase instanciaCmdModificarClase( Entidad ent){
+        return new ComandoModificarClase( ent );
     }
     
     /**
