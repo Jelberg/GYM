@@ -4,14 +4,16 @@
  * and open the template in the editor.
  */
 package AccesoDatosLayer.FO1;
-import AccesoDatosLayer.Dao;
 import AccesoDatosLayer.DaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Usuario;
 import Comun.Excepciones.ParameterNullException;
+import Comun.Util.ConfigurarLogger;
 import java.sql.*;
 import java.util.ArrayList;
 import com.google.gson.Gson;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Miguel
@@ -21,10 +23,13 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Usuario> jsonArray;
+    ConfigurarLogger cl = new ConfigurarLogger();
+    Logger logr = cl.getLogr();
     
     @Override     
     public String getUsuario( Usuario u){
         try{
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "SELECT * FROM fo_m01_getusuario("+u.getId()+")";
             jsonArray = new ArrayList<>();
@@ -49,12 +54,15 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
         }
         catch(SQLException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             cerrarConexion(conn);
@@ -66,6 +74,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     public String IniciarSesion(Usuario u){
         
         try{
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "SELECT * FROM fo_m01_iniciarsesion('"+u.getUsuario()+"','"+u.getPassword()+"')";
             jsonArray = new ArrayList<>();
@@ -80,12 +89,15 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
         }
         catch(SQLException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             cerrarConexion(conn);
@@ -98,6 +110,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     public String get_Usuariocorreo(Usuario u)
     {int x=0;
         try{
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "SELECT * FROM fo_m01_getusuariocorreo('"+u.getCorreo()+"')";
             jsonArray = new ArrayList<>();
@@ -126,12 +139,15 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
         }
         catch(SQLException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             cerrarConexion(conn);
@@ -143,6 +159,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     @Override
     public String Insertar(  Usuario u ){
         try {
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "select * from fo_m01_inserta_usuario('"+u.getNombre()+"', '"+u.getApellido()+"', '"+u.getFecha_nac()+"', '"+u.getSexo()+"', '"+u.getCorreo()+"', '"+u.getUsuario()+"', '"+u.getPassword()+ "', "+u.getEstatura()+", '"+u.getTelefono()+"','"+u.isEntrenador()+"')";
             PreparedStatement st = conn.prepareStatement(query);
@@ -155,11 +172,13 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
                     else
                         if (e.getMessage().regionMatches(0, "ERROR: llave duplicada viola restricción de unicidad «usuario_usu_correo_key»", 0, 77))
                         return ("correo duplicado");
-                        else return e.getMessage();
+                        else return  e.getMessage();
+          
             
         }
         catch (ParameterNullException e) {
          return e.getMessage();
+          
         }
         catch (Exception e) {
          return e.getMessage();
@@ -172,6 +191,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     @Override
     public String updateCodigo(Usuario u ){
         try {
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "select * from fo_m01_update_codigo('"+u.getCorreo()+"','"+u.getCodigo()+"')";
             PreparedStatement st = conn.prepareStatement(query); 
@@ -179,7 +199,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
             return("Se actualizo el codigo");
         }
         catch (SQLException e){
-            return e.getMessage();           
+            return e.getMessage();   
         }
         catch (ParameterNullException e) {
          return e.getMessage();
@@ -196,6 +216,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     public String updatePassword( Usuario u)
     {
         try {
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "select * from fo_m01_update_pass('"+u.getCorreo()+"','"+u.getPassword()+"')";
             PreparedStatement st = conn.prepareStatement(query); 
@@ -226,6 +247,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     @Override
     public String modificaUsuario(Usuario u) {
         try {
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "select * from fo_m01_modifica_usuario('"+u.getId()+"','"+u.getUsuario()+"','"+u.getPassword()+"','"+u.getNombre()+"','"+u.getApellido()+"','"+u.getSexo()+"','"+u.getTelefono()+"','"+u.getEstatura()+"','"+u.getCorreo()+"','"+u.isEntrenador()+"','"+u.getCodigo()+"')";
             PreparedStatement st = conn.prepareStatement(query); 
@@ -263,6 +285,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     public String getUsuarioNomApe( Usuario u){
         
         try{
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "SELECT * FROM fo_m01_get_usuarioNA('"+u.getNombre()+"','"+u.getApellido()+"')";
             jsonArray = new ArrayList<>();
@@ -280,12 +303,15 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
         }
         catch(SQLException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             cerrarConexion(conn);
@@ -304,6 +330,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     @Override
     public ArrayList<Usuario> getListUsuario() {
         try{
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "SELECT * FROM USUARIO";
             jsonArray = new ArrayList<>();
@@ -332,9 +359,11 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             cerrarConexion(conn);
@@ -352,6 +381,7 @@ public class DaoUsuarioPostgre extends DaoPostgre implements IDaoUsuario{
     @Override
     public String eliminaUsuario(String s) {
         try{
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "SELECT fo_m01_elimina_usuario(?)";
             PreparedStatement st = conn.prepareStatement(query);
