@@ -75,7 +75,7 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
     @Override
     public Entidad consultarID(int id) {
         try{
-            _conn = Dao.getPostgreBdConnect();
+            _conn = super.getConexion();
             String query = "SELECT eje_id, eje_nombre, eje_grupo_muscular FROM ejercicio WHERE eje_id = " + id + ";";
             PreparedStatement st = _conn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
@@ -83,7 +83,7 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
             //Verifico si ResultSet esta lleno
             if(rs.first())
             {
-                Dao.closePostgreConnection( _conn );
+                super.cerrarConexion(_conn );
                 return(new Ejercicio(rs.getInt("EJE_ID"),rs.getString("EQU_NOMBRE"),rs.getString("EJE_GRUPO_MUSCULAR")));                       
             }            
         }
@@ -93,7 +93,7 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
         catch (ParameterNullException e) {
         }
         finally {
-            Dao.closePostgreConnection( _conn );
+            super.cerrarConexion(_conn );
             return null;
         }
     } 
@@ -102,7 +102,7 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
     public Entidad agregar(Entidad _ent) {
         Ejercicio ent = (Ejercicio) _ent; 
         try {
-            _conn = Dao.getPostgreBdConnect();       
+            _conn = super.getConexion();       
             
             String query = "select * bo_m01_insertar_ejercicio(?,?,?);";
             PreparedStatement st = _conn.prepareStatement( query );
@@ -119,7 +119,7 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
             System.out.println(e.getMessage());
         }
         finally {
-            Dao.closePostgreConnection( _conn );
+            super.cerrarConexion(_conn );
             return null;
         }
     
