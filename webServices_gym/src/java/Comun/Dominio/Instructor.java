@@ -16,6 +16,7 @@ import java.util.Date;
 public class Instructor extends Persona implements Serializable {
     
     private Image foto;
+    private String activo;
 
  
     
@@ -37,5 +38,15 @@ public class Instructor extends Persona implements Serializable {
     public void setFoto(Image foto) {
         this.foto = foto;
     }
+
+    public String getActivo() {
+        return activo;
+    }
+
+    public void setActivo(String activo) {
+        this.activo = activo;
+    }
+    
+    
     
 }
