@@ -24,9 +24,9 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
 
     private Connection _conn;
     private ArrayList<Instructor> jsonArray;
-    /*ConfigurarLogger cl = new ConfigurarLogger();
-    Logger logr = cl.getLogr();*/
-    //logr.log(Level.WARNING, "Prueba Log");
+    ConfigurarLogger cl = new ConfigurarLogger();
+    Logger logr = cl.getLogr();
+    
         
     
     public DaoInstructorPostgre() {}
@@ -50,6 +50,7 @@ public class DaoInstructorPostgre extends DaoPostgre implements IDaoInstructor{
                 jsonArray.get(jsonArray.size() - 1).setSexo((rs.getString("INS_SEXO")));
                 jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("INS_CORREO"));
             }
+            logr.log(Level.WARNING, "Prueba Log");
         }
         catch(SQLException e) {
             System.out.println(e);

@@ -5,6 +5,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  *
@@ -25,8 +26,12 @@ public class ConfigurarLogger {
         
         //LogManager.getLogManager().reset();
         logr.setLevel(Level.WARNING);
-        fh = new FileHandler(ruta+"myLogger.log", true);
+        fh = new FileHandler(ruta+"/LogGym/myLogger.log", true);
+
         fh.setLevel(Level.WARNING);
+        SimpleFormatter simpleFormatter = new SimpleFormatter();
+        fh.setFormatter(simpleFormatter);
+        
         logr.addHandler(fh);
             System.out.println(ruta);
         }
