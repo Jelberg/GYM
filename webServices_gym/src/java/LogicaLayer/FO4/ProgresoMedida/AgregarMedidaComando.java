@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LogicaLayer.FO4;
+package LogicaLayer.FO4.ProgresoMedida;
 
-import AccesoDatosLayer.FOM04Postgre.IDaoProgresoPeso;
+import AccesoDatosLayer.FOM04Postgre.IDaoProgresoMedida;
 import AccesoDatosLayer.FabricaAbstracta;
 import AccesoDatosLayer.FabricaDaoPostgre;
 import Comun.Dominio.Entidad;
@@ -15,31 +15,30 @@ import LogicaLayer.Comando;
  *
  * @author Elberg
  */
-public class ActualizarPesoComando extends Comando {
-    private Entidad pp;
+public class AgregarMedidaComando extends Comando {
+    private Entidad _pm;
     private static String _respuesta;
 
     /**
-     * Contructor Para actualizar Peso
-     * @param pp 
+     * Constructor para agregar medida de comando
+     * @param _pm 
      */
-    public ActualizarPesoComando(Entidad pp) {
-        this.pp = pp;
+    public AgregarMedidaComando(Entidad _pm) {
+        this._pm = _pm;
     }
- 
+
     /**
-     * Metodo estatico que retorna la respuesta de la actualizacion del peso
+     * Metodo estatico que guarda la respuesta de la consulta
      * @return 
      */
-    public static String getRespuestActulizaPeso(){
+    public static String getRespuestaAgregarMedida(){
         return _respuesta;
     }
-    
     @Override
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1); 
-        IDaoProgresoPeso dao = fab.getDaoProgresoPeso(); 
-        _respuesta= dao.actualizarPeso(pp);
+        IDaoProgresoMedida dao = fab.getDaoProgresoMedida();
+        _respuesta = dao.agregarMedida(_pm);
     }
-      
+
 }
