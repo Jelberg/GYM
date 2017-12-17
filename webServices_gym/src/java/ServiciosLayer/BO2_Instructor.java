@@ -76,11 +76,6 @@ public class BO2_Instructor {
     @Produces("application/json")
     public String getListInstructor(){
 
-        ConfigurarLogger cl = new ConfigurarLogger();
-        Logger logr = cl.getLogr();
-        logr.log(Level.WARNING, "Prueba Log");
-        
-
         CmdGetInstructores cmd = FabricaComando.instanciaGetInstructores();
         cmd.ejecutar();
         _listaInstructores = cmd.getInstructores();
@@ -125,6 +120,22 @@ public class BO2_Instructor {
         @QueryParam( "correo" ) String correo){
      
         Comando c = FabricaComando.instanciaActualizarInstructor(nombre, apellido, fechanac, sexo, correo);
+        c.ejecutar();
+    }
+    
+    @POST
+    @Path( "/ActivarInstructor" )
+    public void ActivarInstructor( @QueryParam( "correo" ) String correo){
+     
+        Comando c = FabricaComando.instanciaActivarInstructor(correo);
+        c.ejecutar();
+    }
+    
+    @POST
+    @Path( "/InactivarInstructor" )
+    public void InactivarInstructor( @QueryParam( "correo" ) String correo){
+     
+        Comando c = FabricaComando.instanciaInactivarInstructor(correo);
         c.ejecutar();
     }
 }
