@@ -70,6 +70,28 @@ CREATE OR REPLACE FUNCTION bo_m02_actualiza_instructor (
     END; $$
 LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION bo_m02_inactiva_instructor (
+    correo character varying)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        UPDATE instructor
+        SET ins_activo = 'no'
+ 	where ins_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION bo_m02_activa_instructor (
+    correo character varying)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        UPDATE instructor
+        SET ins_activo = 'si'
+ 	where ins_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
 
 -----------------------------------FIN INSTRUCTOR------------------------------------------
 
