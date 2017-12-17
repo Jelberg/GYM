@@ -5,8 +5,12 @@
  */
 package AccesoDatosLayer.FOM04Postgre;
 
-
-
+import AccesoDatosLayer.Dao;
+import AccesoDatosLayer.DaoPostgre;
+import Comun.Dominio.Entidad;
+import Comun.Dominio.Progreso_Peso;
+import Comun.Util.CompararProgreso;
+import Comun.Validaciones.ValidationWS;
 import AccesoDatosLayer.DaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Progreso_Peso;
@@ -18,6 +22,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**

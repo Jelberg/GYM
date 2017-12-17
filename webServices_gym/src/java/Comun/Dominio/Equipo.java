@@ -7,7 +7,7 @@ package Comun.Dominio;
 
 /**
  *
- * @author Luis L
+ * @author Daniel Goncalves
  */
 public class Equipo extends Entidad {
 

@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
+
+ *
  * Clase en la cual se manejara el acceso a datos de las clases.
  * @author marvian
  */
@@ -74,6 +76,7 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
             return jsonArray;
         }
     }
+
     /**
      * Metodo que sera llamado cuando se desee agregar una nueva clase.
      * @param ent REcibe un objeto de tipo Entidad en el cual se encuentran 
@@ -119,6 +122,7 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
     public Entidad modificar(Entidad ent) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     /**
      * Metodo que sera llamado cuando se desee eliminar una clase.
      * @param ent Recibe un objeto Entidad en el que se encuentra la data
