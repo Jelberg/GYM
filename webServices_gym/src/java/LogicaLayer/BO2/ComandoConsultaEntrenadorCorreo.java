@@ -47,7 +47,7 @@ public class ComandoConsultaEntrenadorCorreo extends Comando{
     @Override
     public void ejecutar() {
         FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
-        DaoEntrenadorPostgre dao = fab.instanciaDaoEntrenador();
+        IDaoEntrenador dao = fab.instanciaDaoEntrenador();
         _entrenador = dao.consultar( _entrenador );
     }
     

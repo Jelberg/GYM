@@ -9,6 +9,7 @@ import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Usuario;
 import Comun.Dominio.Usuario_Amigo;
 import Comun.Excepciones.ParameterNullException;
+import Comun.Util.ConfigurarLogger;
 import Comun.Validaciones.ValidationWS;
 import LogicaLayer.FO1.ComandoEliminaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoGetUsuario;
@@ -19,6 +20,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -35,6 +38,8 @@ public class FOM01_Usuario_Amigo {
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Usuario> listaUsuario;
+    ConfigurarLogger cl = new ConfigurarLogger();
+    Logger logr = cl.getLogr();
     
     /**
      * Funcion que recibe como parámetro el ID del Usuario,
@@ -59,9 +64,13 @@ public class FOM01_Usuario_Amigo {
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+             Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return response;
@@ -92,9 +101,13 @@ public class FOM01_Usuario_Amigo {
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return response;
@@ -126,9 +139,13 @@ public class FOM01_Usuario_Amigo {
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
+            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
+            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return gson.toJson(response);
@@ -164,9 +181,13 @@ public class FOM01_Usuario_Amigo {
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
+            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
+            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             return gson.toJson(response);
