@@ -83,10 +83,8 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
     public DaoProgresoPeso getDaoProgresoPeso(){
         return new DaoProgresoPeso();
     }
-
-
    /* @Override
-    public IDaoComentario getDaoComentario() {
+    publi IDaoComentario getDaoComentario() {
         return new DaoComentario();
     }
     */
@@ -105,11 +103,14 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
     public DaoProgresoMedida getDaoProgresoMedida(){
         return new DaoProgresoMedida();
     }
-    //FIN FO4
-
+    
     public DaoComentario getDaoComentario() {
        return new DaoComentario();
     }
+    
+    //FIN FO4
+
+    
 
     
 

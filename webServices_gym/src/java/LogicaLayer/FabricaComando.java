@@ -266,6 +266,11 @@ public class FabricaComando {
          return new AgregarMedidaComando(en);
      }
 
+     /**
+      * Instancia Agregar Comentario Comando
+      * @param comentario
+      * @return 
+      */
      public static AgregarComentarioComando insertarComentarioComando(Comentario comentario){
          return new AgregarComentarioComando(comentario);
      }

@@ -24,6 +24,11 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
     private Connection _connection;
     private ArrayList<Comentario> _jsonArray;
     
+    /**
+     * Metodo para insertar comentarios en la base de datos
+     * @param comentario
+     * @return 
+     */
     @Override
     public String insertar(Comentario comentario){
         try {

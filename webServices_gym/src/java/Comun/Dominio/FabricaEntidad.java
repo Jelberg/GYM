@@ -192,7 +192,7 @@ public class FabricaEntidad {
      * @param mensaje
      * @return 
      */
-    static public Comentario InstaciaInsertarComentario(int idUsuario, 
+    static public Entidad InstaciaInsertarComentario(int idUsuario, 
             String mensaje){
     return new Comentario(idUsuario, mensaje);
     }
