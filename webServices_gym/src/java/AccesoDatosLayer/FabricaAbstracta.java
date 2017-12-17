@@ -8,6 +8,7 @@ import AccesoDatosLayer.BO2.IDaoEntrenador;
 import AccesoDatosLayer.BO2.IDaoInstructor;
 import AccesoDatosLayer.FO1.IDaoUsuario;
 import AccesoDatosLayer.FO1.IDaoUsuarioAmigo;
+import AccesoDatosLayer.FOM04Postgre.IDaoComentario;
 
 /**
  *
@@ -34,4 +35,6 @@ public abstract class FabricaAbstracta {
     // gets FO1
     public abstract IDaoUsuario getDaoUsuario();
     public abstract IDaoUsuarioAmigo getDaoUsuarioAmigo();
+    // gets FO_M05
+    public abstract IDaoComentario getDaoComentario();
 }

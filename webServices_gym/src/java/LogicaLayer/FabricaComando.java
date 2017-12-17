@@ -1,5 +1,6 @@
 package LogicaLayer;
 
+import Comun.Dominio.Comentario;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
 import Comun.Dominio.Progreso_Peso;
@@ -200,6 +201,11 @@ public class FabricaComando {
      public static ActualizarPesoComando instanciaCmdActializarProgresoPeso (Entidad pp){
         return new ActualizarPesoComando(pp);
     }
+     
+     public static AgregarComentarioComando insertarComentarioComando(Comentario comentario){
+         return new AgregarComentarioComando(comentario);
+     }
+     
     //FIN F04
 
    

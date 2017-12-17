@@ -149,6 +149,11 @@ public class FabricaEntidad {
     static public Entidad InstaciaProgresoPeso(int id){
     return new Progreso_Peso(id);
     }
+    
+    static public Comentario InstaciaInsertarComentario(int idUsuario, String mensaje){
+    return new Comentario(idUsuario, mensaje);
+    }
+    
     // Fin de M04        
 
     
