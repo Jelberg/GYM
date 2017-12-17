@@ -10,6 +10,7 @@ import AccesoDatosLayer.DaoPostgre;
 import Comun.Dominio.Comentario;
 import Comun.Dominio.Entidad;
 import Comun.Excepciones.ParameterNullException;
+import Comun.Util.ConfigurarLogger;
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +18,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,7 +31,19 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
     private ArrayList<Comentario> _jsonArray;
     private Gson _gson = new Gson();
     private String _response;
+    ConfigurarLogger _cl;
+    Logger _logger;
     
+    public DaoComentario(){
+        _cl = new ConfigurarLogger();
+        _logger = _cl.getLogr();
+    }
+    
+    /**
+     * Metodo para insertar comentarios en la BD
+     * @param _comentario
+     * @return 
+     */
     @Override
     public String insertar(Entidad _comentario){
         try {
@@ -44,14 +59,15 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
             
             return "Comentario Agregado";
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            _logger.log(Level.SEVERE, "Error en conexion a la BD: {0}",e.getMessage());
+            return null;
         }
         catch (ParameterNullException e){
-            System.out.println(e.getMessage());
+            _logger.log(Level.SEVERE, "Parametro Nulo: {0}",e.getMessage());
+            return null;
         }
         finally{
             cerrarConexion(_connection);
-            return null;
         }
     }
 
@@ -76,36 +92,59 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
                 _jsonArray.get(_jsonArray.size()-1).setNombreUsuario(_rs.getString("nombreUsuario"));
                 _jsonArray.get(_jsonArray.size()-1).setMensaje(_rs.getString("mensaje"));
             }
-            
+            return _jsonArray;
         } catch(SQLException e) {
-            System.out.println(e.getMessage());
+            _logger.log(Level.SEVERE, "Error en conexion a la BD: {0}",e.getMessage());
+            return null;
         }
         catch (ParameterNullException e) {
-            System.out.println(e.getMessage());
+            _logger.log(Level.SEVERE, "Parametro Nulo: {0}",e.getMessage());
+            return null;
         }
         finally {
             cerrarConexion(_connection);
-            return _jsonArray;
+            
         }
     }
 
+    /**
+     * Metodo para obtener comentarios de la BD
+     * @return 
+     */
     @Override
     public ArrayList<Comentario> getComentarios() {
+        _logger.log(Level.INFO, "Metodo aun no funcional");
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodo para eliminar comentarios de la BD
+     * @param comentario
+     * @return 
+     */
     @Override
     public String eliminar(Comentario comentario) {
+        _logger.log(Level.INFO, "Metodo aun no funcional");
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodos para modificar comentarios en la BD
+     * @param comentario
+     * @return 
+     */
     @Override
     public String actualizar(Comentario comentario) {
+        _logger.log(Level.INFO, "Metodo aun no funcional");
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodo para consultar Progresos en la BD
+     * @param id
+     * @return 
+     */
     @Override
-
     public String consultaProgresos(int id) {
         try{
             _connection = getConexion();
@@ -143,10 +182,12 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
             return _response;
         }
         catch(SQLException e) {
+            _logger.log(Level.SEVERE, "Error con la conexion a BD: {0}",e.getMessage());
             _response = e.getMessage();
              return null;
         }
         catch (ParameterNullException e) {
+            _logger.log(Level.SEVERE, "Parametro Nulo: {0}",e.getMessage());
             _response = e.getMessage();
             return null;
         }
@@ -155,14 +196,24 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
         }
     }
 
-  
-
+    /**
+     * Metodos para consultar comentarios en la BD
+     * @param ent
+     * @return 
+     */
     public Entidad consultar(Entidad ent) {
+        _logger.log(Level.INFO, "Metodo aun no funcional");
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodo para insertar comentarios en la BD
+     * @param comentario
+     * @return 
+     */
     @Override
     public String insertar(Comentario comentario) {
+        _logger.log(Level.INFO, "Metodo aun no funcional");
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
