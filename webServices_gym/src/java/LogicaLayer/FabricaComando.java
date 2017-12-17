@@ -27,6 +27,8 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO2.ComandoBuscaClasePorId;
+import LogicaLayer.BO2.ComandoClaseConsultaDescripcion;
 import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
 import LogicaLayer.BO2.CmdActivarInstructor;
@@ -110,6 +112,22 @@ public class FabricaComando {
      */
     public static ComandoModificarClase instanciaCmdModificarClase( Entidad ent){
         return new ComandoModificarClase( ent );
+    }
+    
+    /**
+     * Metodo llamado para realizar la modificacion de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoBuscaClasePorId instanciaCmdBuscaClasePorId(){
+        return new ComandoBuscaClasePorId();
+    }
+    
+    /**
+     * Metodo llamado para realizar la modificacion de una clase.
+     * @return Devuelve un comando para realizar la accion.
+     */    
+    public static ComandoClaseConsultaDescripcion instanciaCmdClaseConsultaDescripcion(){
+        return new ComandoClaseConsultaDescripcion();
     }
     
     /**
@@ -253,6 +271,8 @@ public class FabricaComando {
         return new ActualizarPesoComando(pp);
     }
     //FIN F04
+
+   
 
    
     

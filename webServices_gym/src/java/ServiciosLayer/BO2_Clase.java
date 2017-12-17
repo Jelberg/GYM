@@ -10,6 +10,8 @@ import Comun.Dominio.Entidad;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Excepciones.ParameterNullException;
 import Comun.Validaciones.ValidationWS;
+import LogicaLayer.BO2.ComandoBuscaClasePorId;
+import LogicaLayer.BO2.ComandoClaseConsultaDescripcion;
 import LogicaLayer.BO2.ComandoConsultarClase;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
@@ -42,9 +44,9 @@ public class BO2_Clase {
      * @return devuelve la lista de todas las clases y sus atributos.
      */
     @GET
-    @Path("/getListEntrenador")
+    @Path("/getListClase")
     @Produces("application/json")
-    public String getListaEntrenador(){
+    public String getListaClase(){
         ComandoConsultarClase cmd = FabricaComando.instanciaCmdConsultaClase();
         cmd.ejecutar();
         _listaClases = cmd.consultarClase();
@@ -156,5 +158,34 @@ public class BO2_Clase {
             return _gson.toJson(response);
         }
     } 
+    
+    /**
+     * Funcion que recibe como parámetro el nombre de la clase,
+     * para consultarla y saber su descripción.
+     * @param nombre Nombre de la clase.
+     * @return Devuelve la clase y su descripción en formato json
+     */
+    @GET
+    @Path("/getClase")
+    @Produces("application/json")
+    public String buscaDescripcion(@QueryParam("nombre") String nombre){
+    
+        ComandoClaseConsultaDescripcion cmd = FabricaComando.instanciaCmdClaseConsultaDescripcion();
+        cmd.ejecutar();
+        _listaClases = cmd.consultarDescripcionClase();
+        _response = _gson.toJson( _listaClases);
+        return _response;
+    }
+    
+    @GET
+    @Path("/getClaseId")
+    @Produces("application/json")
+    public String buscaPorId(@QueryParam("id") int id){
+        ComandoBuscaClasePorId cmd = FabricaComando.instanciaCmdBuscaClasePorId();
+        cmd.ejecutar();
+        _listaClases = cmd.consultarBuscaClasePorId();
+        _response = _gson.toJson( _listaClases);
+        return _response;
+        }
  
 }
