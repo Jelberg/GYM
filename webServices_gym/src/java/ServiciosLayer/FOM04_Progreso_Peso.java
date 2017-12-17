@@ -9,6 +9,8 @@ import Comun.Dominio.Entidad;
 import Comun.Dominio.FabricaEntidad;
 import Comun.Dominio.Progreso_Peso;
 import LogicaLayer.Comando;
+import LogicaLayer.FO4.AgregarPesoComando;
+import LogicaLayer.FO4.ConsultarProgresoPesoComando;
 import LogicaLayer.FO4.ActualizarPesoComando;
 import LogicaLayer.FO4.AgregarPesoComando;
 import LogicaLayer.FO4.ConsultarProgresoPesoComando;
@@ -68,7 +70,6 @@ public class FOM04_Progreso_Peso {
         _response = cmd.getResultado();
         return _gson.toJson( _response );
     }
-    
     
     /**
      * Servicio que recibe y responde a la solicitud de eliminacion del peso del usuario

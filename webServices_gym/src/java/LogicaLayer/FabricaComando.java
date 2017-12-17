@@ -33,6 +33,11 @@ import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.FO4.*;
 import LogicaLayer.BO1.ComandoGetEquipoById;
+import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO1.ComandoGetEjercicios;
+import LogicaLayer.BO1.ComandoAgregarEjercicio;
+import LogicaLayer.BO2.ComandoInsertarEntrenador;
+
 
 /**
  *
@@ -46,7 +51,7 @@ public class FabricaComando {
     public static ComandoGetEquipos instanciaGetEquipos(){
         return new ComandoGetEquipos();
     }
-    
+
     // Crear comando para agregar un equipo.
     public static ComandoAddEquipo instanciaAddEquipo (Entidad ent){
         return new ComandoAddEquipo(ent);
@@ -68,6 +73,17 @@ public class FabricaComando {
         return new ComandoUpdateEquipo(id, nombre);
     }
 
+    // Crear comando para leer lista de ejercicio.
+    public static ComandoGetEjercicios instanciaGetEjercicios(){
+        return new ComandoGetEjercicios();
+    }
+    
+    // Crear comando para agregar un ejercicio
+
+    public static Comando AgregarEjercicio (Entidad ent){
+        return new ComandoAgregarEjercicio(ent);
+    }
+    
     // Fin Comandos BO1
     
     // Comandos BO2

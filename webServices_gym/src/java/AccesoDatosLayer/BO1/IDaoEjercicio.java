@@ -12,12 +12,14 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Daniel Goncalves
+ * @author  Luis L
  */
 public interface IDaoEjercicio  extends IDao{
     public ArrayList<Ejercicio> consultarEjercicios();
     public Entidad eliminar( Entidad ent );
     public Entidad modificar( Entidad ent );
-    public Entidad actualizar( Entidad ent );
+    public Entidad agregar( Entidad ent );
+    public Entidad consultarID (int id);
+    
     
 }

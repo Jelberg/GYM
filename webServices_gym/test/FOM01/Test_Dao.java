@@ -5,6 +5,8 @@
  */
 package FOM01;
 
+<<<<<<< HEAD
+=======
 import AccesoDatosLayer.FO1.DaoUsuarioPostgre;
 import AccesoDatosLayer.FO1.DaoUsuarioAmigoPostgre;
 import Comun.Dominio.Usuario;
@@ -22,11 +24,15 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
+>>>>>>> f132f001bcd08984c5ab97592f3c00b76ad3affc
 /**
  *
  * @author Laura
  */
 public class Test_Dao {
+<<<<<<< HEAD
+    
+=======
       private Connection _conn;
     private final DaoUsuarioPostgre _daousuario = new DaoUsuarioPostgre();
     private final DaoUsuarioAmigoPostgre _daoamigo = new DaoUsuarioAmigoPostgre();
@@ -218,4 +224,5 @@ public class Test_Dao {
         }
         catch (Exception e){}   
     }
+>>>>>>> f132f001bcd08984c5ab97592f3c00b76ad3affc
 }
