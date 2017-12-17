@@ -6,7 +6,6 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
-import ServiciosLayer.BOm02_Entrenador;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,6 +30,11 @@ public class ConfiguracionRestGimnasio extends Application{
         h.add(FOM01_Usuario.class);
         h.add(FOM01_Usuario_Amigo.class);
         h.add(FOM04_Progreso_Peso.class);
+        h.add(FOM04_Progreso_Medida.class);
+
+        h.add(FOM03_Rutina.class);
+
+        h.add(FOM04_Comentario.class);
 
 
         return h;

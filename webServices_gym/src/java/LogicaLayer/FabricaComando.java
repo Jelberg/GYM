@@ -1,8 +1,18 @@
 package LogicaLayer;
 
+
+import LogicaLayer.FO4.Comentarios.AgregarComentarioComando;
+import LogicaLayer.FO4.ProgresoPeso.EliminarPesoComando;
+import LogicaLayer.FO4.ProgresoPeso.AgregarPesoComando;
+import LogicaLayer.FO4.ProgresoPeso.ConsultarProgresoPesoComando;
+import LogicaLayer.FO4.ProgresoPeso.ActualizarPesoComando;
+
+import Comun.Dominio.Comentario;
+
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Equipo;
 import Comun.Dominio.Instructor;
+import Comun.Dominio.Progreso_Medida;
 import Comun.Dominio.Progreso_Peso;
 import Comun.Dominio.Usuario;
 import Comun.Dominio.Usuario_Amigo;
@@ -39,6 +49,10 @@ import LogicaLayer.BO1.ComandoAgregarEjercicio;
 import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
 import LogicaLayer.BO2.ComandoModificarEntrenador;
+import LogicaLayer.F03.ConsultarEjerciciosRealizadosComando;
+import LogicaLayer.FO4.ProgresoMedida.ActualizarMedidaComando;
+import LogicaLayer.FO4.ProgresoMedida.AgregarMedidaComando;
+import LogicaLayer.FO4.ProgresoMedida.ConsultarProgesoMedidasComando;
 
 
 /**
@@ -275,8 +289,82 @@ public class FabricaComando {
      public static ActualizarPesoComando instanciaCmdActializarProgresoPeso (Entidad pp){
         return new ActualizarPesoComando(pp);
     }
+     
+
+     /**
+      * Instancia del comando Consultar progreso de medidas
+      * @param id
+      * @return 
+      */
+     public static ConsultarProgesoMedidasComando instanciaCmdConsutaProgresoMedidas (int id){
+         return new ConsultarProgesoMedidasComando(id);
+     }
+     
+     /**
+      * Instancia Comando agregar media
+      * @param en
+      * @return 
+      */
+     public static AgregarMedidaComando instanciaCmdAgregarMedida (Entidad en){
+         return new AgregarMedidaComando(en);
+     }
+
+     /**
+      * Instancia del comando para los comentarios
+      * @param comentario
+      * @return 
+      */
+     public static AgregarComentarioComando insertarComentarioComando(Comentario comentario){
+         return new AgregarComentarioComando(comentario);
+     }
+     
+
+    /**
+     * Instancia del Comando Agregar Medida
+
+     * @param progreso_Medida
+     * @return 
+     */
+    public static AgregarMedidaComando instanciaCmdAgregarMedida (Progreso_Medida progreso_Medida){
+        return new AgregarMedidaComando(progreso_Medida);
+    }
+    
+    /**
+<<<<<<< HEAD
+     * Instancia del comendo para compartir el progreso 
+=======
+     * Instncia del Comando Compartir Progreso
+>>>>>>> 26c1fad20856f98136bf2ff295589bc176d5b3cb
+     * @return 
+     */
+    public static CompartirProgresoComando instanciaCmdCompartirProgreso (){
+        return new CompartirProgresoComando();
+    }
+    
+    /**
+     * Instancia del Comando Consultar Progreso Medidas
+     * @param id
+     * @return 
+     */
+    public static ConsultarProgesoMedidasComando instanciaCmdConsultarProgresoMedidas (int id){
+        return new ConsultarProgesoMedidasComando(id);
+    }
+    
+    /**
+     * Instancia del Comando Actualizar Medidas
+     * @param progreso_Medida
+     * @return 
+     */
+    public static ActualizarMedidaComando instanciaCmdActualizarMedidas (Progreso_Medida progreso_Medida){
+        return new ActualizarMedidaComando(progreso_Medida);
+    }
+    
+     
     //FIN F04
 
-   
+   //fo3
+    public static ConsultarEjerciciosRealizadosComando instanciaCmdConsultaEjerciciosH(int id){
+        return new ConsultarEjerciciosRealizadosComando(id);
+    }
     
 }

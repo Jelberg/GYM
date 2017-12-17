@@ -164,6 +164,80 @@ public class FabricaEntidad {
     static public Entidad InstaciaProgresoPeso(int id){
     return new Progreso_Peso(id);
     }
+    
+    
+    /**
+     * Instancia del progreso medida con solo el id
+     * @param id
+     * @return 
+     */
+    static public Entidad InstanciaProgresoMedida(int id){
+        return new Progreso_Medida(id);
+    }
+    
+    /**
+     * instancia del progreso medida con id, tipo y medida
+     * @param id
+     * @param medida
+     * @param tipo
+     * @return 
+     */
+    static public Entidad InstanciaProgresoMedida(int id, int medida, String tipo){
+        return new Progreso_Medida(id,medida,tipo);
+    }
+
+
+    static public Entidad InstanciaComentario(){
+        return new Comentario();
+    }
+    
+
+    /**
+     * Instancia del comentario
+     * @param idUsuario
+     * @param mensaje
+     * @return 
+     */
+
+    static public Comentario InstaciaInsertarComentario(int idUsuario, 
+            String mensaje){
+    return new Comentario(idUsuario, mensaje);
+    }
+    
+    /**
+     * Instancia del Progreso de Medida
+     * @param id
+     * @param medida
+     * @param tipo
+     * @param fechaM
+     * @param sobreNombre
+     * @return 
+     */
+    static public Entidad InstanciaProgresoMedida(int id, int medida, 
+            String tipo, Date fechaM, String sobreNombre){
+        return new Progreso_Medida(id, medida, tipo, (java.sql.Date) fechaM, sobreNombre);
+    }
+    
+    /**
+     * Instancia del Progreso peso a Actualizar
+     * @param idUsuario
+     * @param peso
+     * @return 
+     */
+    static public Progreso_Peso InstanciaActualizarPeso(int idUsuario, int peso){
+         return new Progreso_Peso(idUsuario, peso);
+    }   
+    
+    /**
+     * Instancia del Progreso Medida a actualizar
+     * @param idUsuario
+     * @param medida
+     * @param tipo_medida
+     * @return 
+     */
+    static public Progreso_Medida InstanciaActualizarMedida(int idUsuario, int medida, String tipo_medida){
+        return new Progreso_Medida(idUsuario, medida, tipo_medida);
+    }
     // Fin de M04        
 
     

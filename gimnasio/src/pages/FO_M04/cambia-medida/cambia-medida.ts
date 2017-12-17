@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserServiceProvider } from '../../../providers/user-service/user-service';
 import { ToastController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -10,12 +11,15 @@ import { ToastController } from 'ionic-angular';
 })
 export class CambiaMedidaPage {
 
-  Escapula: number;
+  Escapula: string;
   Tricep: number;
   Abdomen: number;
   Cuadricep: number;
+  radioopen : boolean;
+  medida: any[]=[];
   constructor(public navCtrl: NavController, public navParams: NavParams,
-               private userService: UserServiceProvider, public toastCtrl: ToastController)
+               private userService: UserServiceProvider, public toastCtrl: ToastController,
+               public alertCtrl: AlertController)
   {  	
 
   }
@@ -27,49 +31,70 @@ export class CambiaMedidaPage {
 
   //Metodo para hacer el llamado al servicio e insertar en la base de datos
   public cargarMedida():void{
+    if (!(this.Escapula) || !(this.Tricep) || !( this.Abdomen ) || !( this.Cuadricep ) )
+    {
+     this.mensajeerror("Debe llenar todos los campos")
+    }
+    else {
     console.log( this.Escapula );
     let urlPeticion = "F0M04_Progreso_Medida/insertaMedidas?id_usuario=1&medida="+this.Escapula+"&tipo_medida="+1;
-    this.userService.postDato( urlPeticion ).subscribe( data => {
+    this.userService.getDato( urlPeticion ).subscribe( data => {
       let i: number = 0;
-      let mensaje: string = "";
-      while ( i < data.lenght ){
-        mensaje = data[i].data;
-      }
+      while ( i < data.length ){
+      this.medida[i] = data[i];
+      i++;}
+      console.log(this.medida[0]);
       
-    })
+  },
+      (error) =>{
+        //console.log(error);
+      
+      
+    });
     console.log( this.Tricep );
     let urlPeticion1 = "F0M04_Progreso_Medida/insertaMedidas?id_usuario=1&medida="+this.Tricep+"&tipo_medida="+2;
-    this.userService.postDato( urlPeticion1 ).subscribe( data => {
+    this.userService.getDato( urlPeticion1 ).subscribe( data => {
       let i: number = 0;
-      let mensaje: string = "";
-      while ( i < data.lenght ){
-        mensaje = data[i].data;
-      }
+      while ( i < data.length ){
+      this.medida[i] = data[i];
+      i++;}
+      console.log(this.medida[0]);
+      
+  },
+      (error) =>{
+        //console.log(error);
       
     });
 
     console.log( this.Abdomen );
     let urlPeticion2 = "F0M04_Progreso_Medida/insertaMedidas?id_usuario=1&medida="+this.Abdomen+"&tipo_medida="+3;
-    this.userService.postDato( urlPeticion2 ).subscribe( data => {
+    this.userService.getDato( urlPeticion2 ).subscribe( data => {
       let i: number = 0;
-      let mensaje: string = "";
-      while ( i < data.lenght ){
-        mensaje = data[i].data;
-      }
+      while ( i < data.length ){
+      this.medida[i] = data[i];
+      i++;}
+      console.log(this.medida[0]);
+      
+  },
+      (error) =>{
+        //console.log(error);
       
     });
 
     console.log( this.Cuadricep );
     let urlPeticion3 = "F0M04_Progreso_Medida/insertaMedidas?id_usuario=1&medida="+this.Cuadricep+"&tipo_medida="+4;
-    this.userService.postDato( urlPeticion3 ).subscribe( datas => {
-      let mensaje: string = "";
-      let keys = Object.keys(datas);
-      let key: string = "";
-      key = keys[0];
-      mensaje = datas[key];
-      this.abrirToast( mensaje );
+    this.userService.getDato( urlPeticion3 ).subscribe( datas => {
+      let i: number = 0;
+      while ( i < datas.length ){
+      this.medida[i] = datas[i];
+      i++;}
+      console.log(this.medida[0]);
+      
+  },
+      (error) =>{
+        //console.log(error);
     });
-    
+  }
   }
 
  
@@ -185,4 +210,17 @@ export class CambiaMedidaPage {
     toast.present();
   }
 
+  /* metodo que muestra un  mensaje de error */
+mensajeerror( mensaje )
+{
+  let alert = this.alertCtrl.create();
+  alert.setTitle('Error'); 
+  alert.setMessage(mensaje)
+  alert.addButton({
+    text: 'OK',
+  });
+  alert.present().then(() => {
+    this.radioopen=true;
+  })
+}
 }
