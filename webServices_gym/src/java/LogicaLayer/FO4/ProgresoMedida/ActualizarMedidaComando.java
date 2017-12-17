@@ -5,7 +5,6 @@
  */
 package LogicaLayer.FO4.ProgresoMedida;
 
-import AccesoDatosLayer.FOM04Postgre.IDaoMedida;
 import AccesoDatosLayer.FOM04Postgre.IDaoProgresoMedida;
 import AccesoDatosLayer.FOM04Postgre.IDaoProgresoPeso;
 import AccesoDatosLayer.FabricaAbstracta;
@@ -41,7 +40,7 @@ public class ActualizarMedidaComando extends Comando {
     @Override
     public void ejecutar(){
         FabricaDaoPostgre _fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
-        IDaoProgresoMedida _dao = _fab.instanciaDaoProgresoMedida();
+        IDaoProgresoMedida _dao = _fab.getDaoProgresoMedida();
         _response = _dao.actualizarMedida(_progreso_medida);
     }
     

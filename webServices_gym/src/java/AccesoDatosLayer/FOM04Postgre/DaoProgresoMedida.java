@@ -100,6 +100,11 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
 
     }
 
+    /**
+     * Metodo Actualizar Medida en la base de datos
+     * @param ent
+     * @return 
+     */
     @Override
     public String actualizarMedida(Entidad ent) {
          try {

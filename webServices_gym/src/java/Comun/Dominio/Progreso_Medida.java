@@ -22,14 +22,28 @@ public class Progreso_Medida extends Entidad {
 
     private String _sobrenombre;
     
+    /**
+     * Constrcutor Progreso_Medida
+     */
     public Progreso_Medida(){
     }
     
-
+    /**
+     * Constrcutor Progreso Medida
+     * @param id 
+     */
     public Progreso_Medida(int id){
         super(id);    
     }
     
+    /**
+     * COnstrcutor Progreso Medida
+     * @param id
+     * @param medida
+     * @param tipo
+     * @param fechaM
+     * @param sobrenombre 
+     */
     public Progreso_Medida(int id, int medida, String tipo, 
     Date fechaM, String sobrenombre){
         super(id);
@@ -39,6 +53,12 @@ public class Progreso_Medida extends Entidad {
         this._sobrenombre = sobrenombre;
     }
 
+    /**
+     * Constrcutor Progreso Medida
+     * @param _id
+     * @param _medida
+     * @param _tipo 
+     */
     public Progreso_Medida(int _id, int _medida, String _tipo) {
         this._id = _id;
         this._medida = _medida;

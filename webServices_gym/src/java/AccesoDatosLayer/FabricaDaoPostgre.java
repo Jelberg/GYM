@@ -22,6 +22,7 @@ import AccesoDatosLayer.FO3.DaoRutina;
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoMedida;
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoPeso;
 import AccesoDatosLayer.FOM04Postgre.IDaoComentario;
+import AccesoDatosLayer.FOM04Postgre.IDaoProgresoMedida;
 import AccesoDatosLayer.FOM04Postgre.IDaoProgresoPeso;
 
 
@@ -102,22 +103,13 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
      public DaoProgresoPeso instanciaDaoProgresoPeso() {
          return new DaoProgresoPeso();
      }
-
-     /**
-      * Instancia para obtener Dao ProgresoMedida
-      * @return 
-      */
-    @Override
-    public DaoProgresoMedida instanciaDaoProgresoMedida() {
-        return new DaoProgresoMedida();
-    }
     
     /**
      * Instancia pra obtener DaoProgreosMedida
      * @return 
      */
     @Override
-    public DaoProgresoMedida getDaoProgresoMedida(){
+    public IDaoProgresoMedida getDaoProgresoMedida(){
         return new DaoProgresoMedida();
     }
     
@@ -129,7 +121,10 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
        return new DaoComentario();
     }
     
+    
     //FIN FO4
+
+    
 
     
 
