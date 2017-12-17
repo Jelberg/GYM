@@ -443,3 +443,32 @@ $BODY$;
 
 ALTER FUNCTION public.bo_m01_getallequipments()
     OWNER TO gymucab;	
+	
+---- OBTENER EQUIPO
+
+CREATE OR REPLACE FUNCTION public.bo_m01_get_equipo(nombre character varying)
+    RETURNS TABLE(id integer, nombre character varying) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+
+DECLARE
+   var_r    record;
+BEGIN 
+    FOR var_r IN(select equ_id, equ_nombre
+from equipo
+where equ_nombre = nombre)
+   LOOP
+    id = var_r.equ_id;
+    nombre = var_r.equ_nombre;
+    RETURN NEXT;
+   END LOOP;        
+END; 
+
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_getallequipments()
+    OWNER TO gymucab;	

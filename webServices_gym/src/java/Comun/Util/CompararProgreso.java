@@ -37,6 +37,13 @@ public class CompararProgreso {
         return aux;
     }
     
+    /**
+     * Funcion que se llama para comprobar que el usuario no tenga ningun
+     * registro de pesos en el dia actual, retorna verdadero si el usuario
+     * ya posee un registro, falso de lo contrario.
+     * @param idUsuario identificador del usuario
+     * @return 
+     */
     
     /*public boolean comprobarInsercion( int idUsuario){
         ArrayList<Progreso_Peso> progresoPeso = new ArrayList<Progreso_Peso>();
@@ -54,6 +61,9 @@ public class CompararProgreso {
         else{
             return false;
         }
+
+    }*/
+
     }
-*/
-}
+
+

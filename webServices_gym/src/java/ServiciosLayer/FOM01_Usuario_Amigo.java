@@ -35,6 +35,7 @@ import javax.ws.rs.QueryParam;
  */
 @Path("/Usuario_Amigo")
 public class FOM01_Usuario_Amigo {
+    
     private Gson gson = new Gson();
     private String response;
     private ArrayList<Usuario> listaUsuario;
@@ -45,7 +46,7 @@ public class FOM01_Usuario_Amigo {
      * Funcion que recibe como parámetro el ID del Usuario,
      * para consultarlo.
      * @param idUsuario ID del Usuario.
-     * @return Devuelve los datos en formato json
+     * @return Devuelve los datos del usuario.
      */
     @GET
     @Path("/getUsuario_Amigo")
@@ -53,6 +54,7 @@ public class FOM01_Usuario_Amigo {
     public String getUsuario_Amigo(@QueryParam("idUsuario") int idUsuario){
         
         try{
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("idUsuario", idUsuario);
             }});
@@ -64,12 +66,10 @@ public class FOM01_Usuario_Amigo {
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
-             Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
             logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
-            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
             logr.log(Level.WARNING, e.getMessage());
         }
         finally {
@@ -89,6 +89,7 @@ public class FOM01_Usuario_Amigo {
     public String getListUsuario_Amigo(@QueryParam("idUsuario") int idUsuario){
         
         try{
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("idUsuario", idUsuario);
             }});
@@ -101,12 +102,10 @@ public class FOM01_Usuario_Amigo {
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
-            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
             logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
-            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
             logr.log(Level.WARNING, e.getMessage());
         }
         finally {
@@ -118,7 +117,7 @@ public class FOM01_Usuario_Amigo {
      * Funcion que es llamada cuando el usuario quiere agregar a un amigo.
      * @param idUsuario ID del Usuario.
      * @param idAmigo ID del Amigo.
-     * @return Devuelve un json con mensaje del estatus de la peticion.
+     * @return Devuelve el mensaje de la peticion.
      */
     @POST
     @Path("/insertaUsuario_Amigo")
@@ -128,6 +127,7 @@ public class FOM01_Usuario_Amigo {
 
         Map<String, String> response = new HashMap<String, String>();
         try {
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("idUsuario", idUsuario );
                 put("idAmigo", idAmigo );
@@ -139,12 +139,10 @@ public class FOM01_Usuario_Amigo {
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
-            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
             logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
-            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
             logr.log(Level.WARNING, e.getMessage());
         }
         finally {
@@ -157,8 +155,7 @@ public class FOM01_Usuario_Amigo {
      * para eliminar un amigo.
      * @param idUsuario ID del Usuario.
      * @param idAmigo ID del Amigo.
-     * @return Devuelve un json con elemento llamado data, 
-     * contiene el mensaje de la peticion
+     * @return Devuelve el mensaje de la peticion.
      */
     @DELETE
     @Path("/eliminaUsuario_Amigo")
@@ -168,7 +165,7 @@ public class FOM01_Usuario_Amigo {
 
         Map<String, String> response = new HashMap<String, String>();
         try{
-
+            logr.log(Level.WARNING, "Error");
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
                 put("idUsuario", idUsuario);
                 put("idAmigo", idAmigo);
@@ -181,12 +178,10 @@ public class FOM01_Usuario_Amigo {
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
-            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
             logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
-            Logger.getLogger(FOM01_Usuario_Amigo.class.getName()).log(Level.SEVERE, null, e);
             logr.log(Level.WARNING, e.getMessage());
         }
         finally {

@@ -5,20 +5,21 @@
  */
 package AccesoDatosLayer.FO1;
 
-import AccesoDatosLayer.Dao;
 import AccesoDatosLayer.DaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Usuario;
 import Comun.Dominio.Usuario_Amigo;
 import Comun.Excepciones.ParameterNullException;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import Comun.Util.ConfigurarLogger;
 
 /**
  *
@@ -30,6 +31,8 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
     private String response;
     private ArrayList<Usuario> jsonArray2;
     private ArrayList<Usuario> jsonArray;
+    ConfigurarLogger cl = new ConfigurarLogger();
+    Logger logr = cl.getLogr();
 
     @Override
     public Entidad consultar(Entidad ent) {
@@ -44,6 +47,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
     @Override
     public String insertaUsuario_Amigo(Usuario_Amigo ua) {
         try {
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "select * from fo_m01_inserta_usuario_amigo('"+ua.getAmi_usuario()+"', '"+ua.getAmi_amigo()+"')";
             PreparedStatement st = conn.prepareStatement(query);
@@ -73,6 +77,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
     @Override
     public String getUsuario_Amigo(Usuario_Amigo ua) {
         try{
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "SELECT * FROM fo_m01_get_usuario_amigo("+ua.getAmi_usuario()+")";
             jsonArray2 = new ArrayList<>();
@@ -90,12 +95,15 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
         }
         catch(SQLException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (ParameterNullException e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             response = e.getMessage();
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             cerrarConexion(conn);
@@ -113,6 +121,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
     @Override
     public String eliminaUsuario_Amigo(Usuario_Amigo ua) {
         try{
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "SELECT fo_m01_elimina_usuario_amigo(?,?)";
             PreparedStatement st = conn.prepareStatement(query);
@@ -147,6 +156,7 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
     public ArrayList<Usuario> getListUsuario_Amigo(int idUsuario) {
         
         try{
+            logr.log(Level.WARNING, "Error");
             conn = getConexion();
             String query = "SELECT * FROM fo_m01_get_usuario_amigo("+idUsuario+")";
             jsonArray = new ArrayList<>();
@@ -165,14 +175,17 @@ public class DaoUsuarioAmigoPostgre extends DaoPostgre implements IDaoUsuarioAmi
         catch(SQLException e) {
             jsonArray.add(new Usuario());
             jsonArray.get(jsonArray.size() - 1).setNombre(e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (ParameterNullException e) {
             jsonArray.add(new Usuario());
             jsonArray.get(jsonArray.size() - 1).setNombre(e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         catch (Exception e) {
             jsonArray.add(new Usuario());
             jsonArray.get(jsonArray.size() - 1).setNombre(e.getMessage());
+            logr.log(Level.WARNING, e.getMessage());
         }
         finally {
             cerrarConexion(conn);

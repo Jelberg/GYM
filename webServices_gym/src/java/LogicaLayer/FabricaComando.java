@@ -1,31 +1,51 @@
 package LogicaLayer;
 
+
+import LogicaLayer.FO4.Comentarios.CompartirProgresoComando;
+import LogicaLayer.FO4.Comentarios.ComandoObtenerComentariosProgMedidas;
+import LogicaLayer.FO4.ProgresoPeso.EliminarPesoComando;
+import LogicaLayer.FO4.ProgresoPeso.AgregarPesoComando;
+import LogicaLayer.FO4.ProgresoPeso.ConsultarProgresoPesoComando;
+import LogicaLayer.FO4.ProgresoPeso.ActualizarPesoComando;
+
+import Comun.Dominio.Comentario;
+
 import Comun.Dominio.Entidad;
+import Comun.Dominio.Equipo;
 import Comun.Dominio.Instructor;
+import Comun.Dominio.Progreso_Medida;
 import Comun.Dominio.Progreso_Peso;
 import Comun.Dominio.Usuario;
-import LogicaLayer.FO4.*;
+
 import LogicaLayer.BO2.CmdActualizarInstructor;
 import Comun.Dominio.Usuario_Amigo;
+import LogicaLayer.BO1.ComandoAddEquipo;
+import LogicaLayer.BO1.ComandoEliminarEquipo;
+import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO1.ComandoUpdateEquipo;
+import LogicaLayer.BO2.CmdActualizarInstructor;
+import LogicaLayer.BO2.CmdGetInstructorPorCorreo;
+import LogicaLayer.BO2.CmdGetInstructores;
+import LogicaLayer.BO2.CmdRegistrarInstructor;
 import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadores;
 import LogicaLayer.BO2.ComandoConsultarClase;
-import LogicaLayer.BO2.CmdGetInstructorPorCorreo;
+import LogicaLayer.BO2.ComandoInsertarEntrenador;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
 import LogicaLayer.FO1.ComandoActualizarPassword;
-import LogicaLayer.FO1.ComandoGetCorreo;
-import LogicaLayer.FO1.ComandoIniciarSesion;
-import LogicaLayer.BO2.CmdGetInstructores;
-import LogicaLayer.BO2.CmdRegistrarInstructor;
 import LogicaLayer.FO1.ComandoEliminaUsuario;
 import LogicaLayer.FO1.ComandoEliminaUsuario_Amigo;
+import LogicaLayer.FO1.ComandoGetCorreo;
 import LogicaLayer.FO1.ComandoGetUsuario;
 import LogicaLayer.FO1.ComandoGetUsuarioNomApe;
+import LogicaLayer.FO1.ComandoIniciarSesion;
 import LogicaLayer.FO1.ComandoInsertaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoListaUsuario;
 import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
+import LogicaLayer.FO4.*;
+import LogicaLayer.BO1.ComandoGetEquipoById;
 import LogicaLayer.BO1.ComandoGetEquipos;
 import LogicaLayer.BO2.ComandoBuscaClasePorId;
 import LogicaLayer.BO2.ComandoClaseConsultaDescripcion;
@@ -36,6 +56,16 @@ import LogicaLayer.BO2.CmdInactivarInstructor;
 import LogicaLayer.BO2.ComandoEliminaEntrenador;
 import LogicaLayer.BO2.ComandoModificarClase;
 import LogicaLayer.BO2.ComandoModificarEntrenador;
+import LogicaLayer.F03.ConsultarEjerciciosRealizadosComando;
+import LogicaLayer.FO4.Comentarios.AgregarComentarioComando;
+import LogicaLayer.FO4.Comentarios.ConsultarComentarioProgresosComando;
+import LogicaLayer.FO4.ProgresoMedida.ActualizarMedidaComando;
+import LogicaLayer.FO4.ProgresoMedida.AgregarMedidaComando;
+import LogicaLayer.FO4.ProgresoMedida.ComandoConsultarMedidasAnual;
+import LogicaLayer.FO4.ProgresoMedida.ComandoEliminarMedida;
+import LogicaLayer.FO4.ProgresoMedida.ConsultarProgesoMedidasComando;
+import LogicaLayer.BO1.ComandoGetEjercicios;
+import LogicaLayer.BO1.ComandoAgregarEjercicio;
 
 /**
  *
@@ -50,6 +80,38 @@ public class FabricaComando {
         return new ComandoGetEquipos();
     }
 
+    // Crear comando para agregar un equipo.
+    public static ComandoAddEquipo instanciaAddEquipo (Entidad ent){
+        return new ComandoAddEquipo(ent);
+    }
+    
+    // Crear comando para eliminar un equipo.
+    public static ComandoEliminarEquipo instanciaEliminarEquipo (Entidad ent){
+        return new ComandoEliminarEquipo(ent);
+    }
+    
+    // Crear comando para buscar un equipo dado su id.
+    public static ComandoGetEquipoById instanciaGetEquipoById(int id){
+        return new ComandoGetEquipoById(id);
+    }
+    
+    // Crear comando para actualizar un equipo.
+    public static ComandoUpdateEquipo instanciaUpdateEquipo(int id,
+    String nombre){
+        return new ComandoUpdateEquipo(id, nombre);
+    }
+
+    // Crear comando para leer lista de ejercicio.
+    public static ComandoGetEjercicios instanciaGetEjercicios(){
+        return new ComandoGetEjercicios();
+    }
+    
+    // Crear comando para agregar un ejercicio
+
+    public static Comando AgregarEjercicio (Entidad ent){
+        return new ComandoAgregarEjercicio(ent);
+    }
+    
     // Fin Comandos BO1
     
     // Comandos BO2
@@ -274,6 +336,110 @@ public class FabricaComando {
      public static ActualizarPesoComando instanciaCmdActializarProgresoPeso (Entidad pp){
         return new ActualizarPesoComando(pp);
     }
+     
+
+     /**
+      * Instancia del comando Consultar progreso de medidas
+      * @param id
+      * @return 
+      */
+     public static ConsultarProgesoMedidasComando instanciaCmdConsutaProgresoMedidas (int id){
+         return new ConsultarProgesoMedidasComando(id);
+     }
+     
+     /**
+      * Instancia Comando agregar media
+      * @param en
+      * @return 
+      */
+     public static AgregarMedidaComando instanciaCmdAgregarMedida (Entidad en){
+         return new AgregarMedidaComando(en);
+     }
+
+     /**
+      * Instancia del comando para los comentarios
+      * @param comentario
+      * @return 
+      */
+     public static AgregarComentarioComando insertarComentarioComando(Comentario comentario){
+         return new AgregarComentarioComando(comentario);
+     }
+     
+
+    /**
+     * Instancia del Comando Agregar Medida
+
+     * @param progreso_Medida
+     * @return 
+     */
+    public static AgregarMedidaComando instanciaCmdAgregarMedida (Progreso_Medida progreso_Medida){
+        return new AgregarMedidaComando(progreso_Medida);
+    }
+    
+    /**
+     * Instncia del Comando Compartir Progreso
+     * @return 
+     */
+    public static CompartirProgresoComando instanciaCmdCompartirProgreso (){
+        return new CompartirProgresoComando();
+    }
+    
+    /**
+     * Instancia del Comando Consultar Progreso Medidas
+     * @param id
+     * @return 
+     */
+    public static ConsultarProgesoMedidasComando instanciaCmdConsultarProgresoMedidas (int id){
+        return new ConsultarProgesoMedidasComando(id);
+    }
+    
+    /**
+     * Instancia del Comando Actualizar Medidas
+     * @param progreso_Medida
+     * @return 
+     */
+    public static ActualizarMedidaComando instanciaCmdActualizarMedidas (Progreso_Medida progreso_Medida){
+        return new ActualizarMedidaComando(progreso_Medida);
+    }
+    
+    /**
+     * Instancia de la consulta comentario Progresos comenado 
+     * @param id
+     * @return 
+     */
+    public static ConsultarComentarioProgresosComando instanciaCmdGetComentarioProgresos(int id){
+        return new ConsultarComentarioProgresosComando(id);
+    }
+
+    /** Instancia del Comando Obtener Comentarios Progreso medida
+     * @param idUsuario
+     * @param idProgresoMedida
+     * @return 
+     */
+    public static ComandoObtenerComentariosProgMedidas instanciaObtenerComentariosProgMedida
+        (int idUsuario, int idProgresoMedida){
+        return new ComandoObtenerComentariosProgMedidas(idUsuario, idProgresoMedida);
+    }
+        
+    /**
+     * Instancia del Comando para Eliminar Medida
+     * @param progreso_Medida
+     * @return 
+     */    
+    public static ComandoEliminarMedida instanciaEliminarMedida(Progreso_Medida progreso_Medida){
+      return new ComandoEliminarMedida(progreso_Medida);
+    }
+    
+    /**
+     * Instancia del Comando Consultar Medidas Anuales
+     * @param progreso_Medida
+     * @return 
+     */
+    public static ComandoConsultarMedidasAnual instanciaObtenerMedidasAnual
+        (Progreso_Medida progreso_Medida){
+        return new ComandoConsultarMedidasAnual(progreso_Medida);
+    }
+
     //FIN F04
 
    

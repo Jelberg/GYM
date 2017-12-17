@@ -11,11 +11,13 @@ import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
 
 /**
+ *
  * Clase a traves de la cual se realizan las inserciones de entrenadores.
  * @author gilbert
  */
 public class ComandoInsertarEntrenador extends Comando{
     private Entidad _entrenador;
+    
     /**
      * Constructor de clase.
      * @param entrenador Recibe un objeto Entidad con los datos del entrenador

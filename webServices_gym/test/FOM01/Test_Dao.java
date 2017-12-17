@@ -28,7 +28,8 @@ import org.junit.Test;
  * @author Laura
  */
 public class Test_Dao {
-      private Connection _conn;
+
+    private Connection _conn;
     private final DaoUsuarioPostgre _daousuario = new DaoUsuarioPostgre();
     private final DaoUsuarioAmigoPostgre _daoamigo = new DaoUsuarioAmigoPostgre();
     private Usuario _usuario;
