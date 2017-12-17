@@ -30,6 +30,7 @@ import LogicaLayer.BO1.ComandoGetEquipos;
 import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
 import LogicaLayer.BO2.ComandoModificarClase;
+import LogicaLayer.BO2.ComandoModificarEntrenador;
 
 /**
  *
@@ -107,6 +108,18 @@ public class FabricaComando {
      */
     public static ComandoConsultaEntrenadores instanciaCmdConsultaEntrenadores(){
         return new ComandoConsultaEntrenadores();
+    }
+    /**
+     * Metodo que es llamado cuando se necesita una instancia del comando para
+     * realizar actualizaciones a un entrenador.
+     * @param entrenador Recibe un objeto Entidad en el cual estan encapsulados
+     * los datos del entrenador.
+     * @return Devuelve el comando con los datos necesarios para realizar los llamados.
+     * @see Entidad
+     * @see ComandoModificarEntrenador
+     */
+    public static ComandoModificarEntrenador instanciaCmdModificarEntrenador( Entidad entrenador){
+        return new ComandoModificarEntrenador( entrenador );
     }
     
     /**
