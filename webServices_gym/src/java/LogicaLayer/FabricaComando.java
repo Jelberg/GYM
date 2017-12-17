@@ -194,10 +194,34 @@ public class FabricaComando {
         return new AgregarPesoComando(pp);
     }
     
+    /**
+     * instancia del comando para consultar el progreso del peso
+     * @param pp
+     * @return 
+     */
      public static ConsultarProgresoPesoComando instanciaCmdConsultarProgresoPeso (int pp){
         return new ConsultarProgresoPesoComando(pp);
     }
     
+     /**
+      * Instancia del comando para eliminar el peso
+      * @param id
+      * @return 
+      */
+     public static EliminarPesoComando instanciaCmdEliminarProgresoPeso (int id){
+        return new EliminarPesoComando(id);
+    }
+     
+     /**
+      * instancia del comando para la actualizacion del peso del usuario
+      * @param pp
+      * @return 
+      */
+     public static ActualizarPesoComando instanciaCmdActializarProgresoPeso (Entidad pp){
+        return new ActualizarPesoComando(pp);
+    }
     //FIN F04
+
+   
     
 }

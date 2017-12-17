@@ -112,15 +112,15 @@ public class Test_Servicios {
     }
     
     //Prueba para para actualizar el codigo de recuperar contraseña. HABILITARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
-//    @Test
-//    public void pruebaUpdateCod(){
-//        _loginServicios = new FOM01_Login();
-//        _arrayUsu = new ArrayList<>();
-//        JsonParser parser = new JsonParser();
-//        JsonObject obj = parser.parse(_loginServicios.updateCod("yyhernandez.13@gmail.com"))
-//                                     .getAsJsonObject();
-//        assertEquals("Se actualizo el codigo", obj.get("id").getAsString());
-//    }
+    @Test
+    public void pruebaUpdateCod(){
+        _loginServicios = new FOM01_Login();
+        _arrayUsu = new ArrayList<>();
+        JsonParser parser = new JsonParser();
+        JsonObject obj = parser.parse(_loginServicios.updateCod("yyhernandez.13@gmail.com"))
+                                     .getAsJsonObject();
+        assertNotEquals(0, obj.get("id").getAsInt());
+    }
 
     //Prueba para actualizar la contraseña
     @Test
@@ -193,7 +193,7 @@ public class Test_Servicios {
         JsonObject obj = parser.parse(_usuarioServicios.modificaUsuario(1, "YessyHeer",
                 "hola", "Yesimar", "Hernández", "F", "04265121963", 173,
                 "yyhernandez.13@gmail.com", false, 0)).getAsJsonObject();
-        assertEquals("Se modificó el usuario", obj.get("id").getAsString());
+        assertEquals("Se actualizo el usuario", obj.get("id").getAsString());
     }
     //Fin Pruebas Usuario
     
