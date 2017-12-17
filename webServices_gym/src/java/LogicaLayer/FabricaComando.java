@@ -3,6 +3,7 @@ package LogicaLayer;
 import Comun.Dominio.Comentario;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Instructor;
+import Comun.Dominio.Progreso_Medida;
 import Comun.Dominio.Progreso_Peso;
 import Comun.Dominio.Usuario;
 import LogicaLayer.FO4.*;
@@ -207,8 +208,8 @@ public class FabricaComando {
      }
      
     
-    public static AgregarMedidaComando instanciaCmdAgregarMedida (int id, int medida, int tipo_medida){
-        return new AgregarMedidaComando(id, medida, tipo_medida);
+    public static AgregarMedidaComando instanciaCmdAgregarMedida (Progreso_Medida progreso_Medida){
+        return new AgregarMedidaComando(progreso_Medida);
     }
     
     public static CompartirProgresoComando instanciaCmdCompartirProgreso (){
@@ -219,9 +220,11 @@ public class FabricaComando {
         return new ConsultarProgresoMedidasComando(id);
     }
     
-    public static ModificarMedidasComando instanciaCmdModificarMedidas (int id, int medida, int tipo_medida){
-        return new ModificarMedidasComando(id, medida, tipo_medida);
+    public static ActualizarMedidaComando instanciaCmdActualizarMedidas (Progreso_Medida progreso_Medida){
+        return new ActualizarMedidaComando(progreso_Medida);
     }
+    
+    
     
     //  FO_M05
      

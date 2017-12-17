@@ -6,6 +6,7 @@
 package LogicaLayer.FO4;
 
 import Comun.Dominio.Entidad;
+import Comun.Dominio.Progreso_Medida;
 import LogicaLayer.Comando;
 
 /**
@@ -14,14 +15,10 @@ import LogicaLayer.Comando;
  */
 public class AgregarMedidaComando extends Comando {
 
-    int _idUsuario;
-    int _medida;
-    int _tipo_medida;
+    Progreso_Medida _progreso_medida;
     
-    public AgregarMedidaComando (int idUsuario, int medida, int tipo_medida){
-        _idUsuario= idUsuario;
-        _medida = medida;
-        _tipo_medida = tipo_medida;
+    public AgregarMedidaComando (Progreso_Medida progreso_Medida){
+        this._progreso_medida = progreso_Medida;
     }
     
     @Override
