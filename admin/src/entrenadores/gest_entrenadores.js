@@ -102,7 +102,7 @@ function ValidateEmail(mail)
 
 function llevaratabla()
 {
-    document.location.href="./Entrenadores.html"
+    document.location.href="./entrenadores.html"
     
 }
 
