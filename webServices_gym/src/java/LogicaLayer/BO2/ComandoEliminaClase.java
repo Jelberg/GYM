@@ -8,12 +8,13 @@ package LogicaLayer.BO2;
 import AccesoDatosLayer.BO2.IDaoClase;
 import AccesoDatosLayer.FabricaAbstracta;
 import Comun.Dominio.Entidad;
+import LogicaLayer.Comando;
 
 /**
  *
  * @author marvian
  */
-public class ComandoEliminaClase {
+public class ComandoEliminaClase extends Comando {
     private Entidad _clase;
     
     /**
