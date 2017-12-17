@@ -16,4 +16,6 @@ public interface IDaoInstructor extends IDao {
     public void insertar (Instructor i);
     public void eliminar( String correo );
     public void actualizar(String nombre, String apellido, String fecha, String sexo, String correo);
+    public void activar(String correo);
+    public void inactivar(String correo);
 }

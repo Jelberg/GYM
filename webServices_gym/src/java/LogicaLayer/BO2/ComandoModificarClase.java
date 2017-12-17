@@ -14,18 +14,19 @@ import LogicaLayer.Comando;
  *
  * @author marvian
  */
-public class ComandoEliminaClase extends Comando {
-    private Entidad _clase;
+public class ComandoModificarClase extends Comando {
+     private Entidad _clase;
     
     /**
      * Constructor de clase.
-     * @param classe Recibe un objeto Entidad con los datos de la clase
-     * a eliminar.
+     * @param clase Recibe un objeto Entidad con los datos de la clase
+     * a modificar.
      * @see Entidad.
      */
-    public ComandoEliminaClase( Entidad clase ){
+    public ComandoModificarClase( Entidad clase ){
         this._clase = clase;
     }
+    
     /**
      * Metodo para obtener el mensaje que indica el estatus de la peticion.
      * @return Devuelve un objeto Entidad en el cual se encuentra encapsulado
@@ -35,13 +36,14 @@ public class ComandoEliminaClase extends Comando {
         return _clase;
     }
     /**
-     * Metodo que es llamado para realizar la eliminacion de la clase.
+     * Metodo que es llamado para realizar la insercion de la clase.
      */
     
     public void ejecutar() {
         FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
         IDaoClase dao = fab.instanciaDaoClase();
-        _clase = dao.insertar( _clase );
+        _clase = dao.modificar( _clase );
     }
+    
     
 }

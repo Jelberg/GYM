@@ -12,7 +12,7 @@ import java.sql.Time;
  *
  * @author marvian
  */
-public class Horario_Clase extends Entidad {
+public class HorarioClase extends Entidad {
     private int id;
     private Date fecha;
     private String dia;
@@ -25,7 +25,7 @@ public class Horario_Clase extends Entidad {
     private String instructor;
     private String Descripcion;
 
-    public Horario_Clase(int _id, Date _fecha, String _dia, int _capacidad, Time _horaInicio, Time _horaFin, String _status, int _duracion, String _nombreclase, String _instructor) {
+    public HorarioClase(int _id, Date _fecha, String _dia, int _capacidad, Time _horaInicio, Time _horaFin, String _status, int _duracion, String _nombreclase, String _instructor) {
         this.id = _id;
         this.fecha = _fecha;
         this.dia = _dia;
@@ -38,7 +38,7 @@ public class Horario_Clase extends Entidad {
         this.instructor = _instructor;
     }
 
-    public Horario_Clase(){
+    public HorarioClase(){
     }
 
     public int getId() {

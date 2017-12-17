@@ -29,12 +29,12 @@ import { ListaCriticasPage } from '../pages/FO_M05/lista-criticas/lista-criticas
 })
 export class MyApp {
   @ViewChild('NAV') nav: Nav;
-  rootPage:any =  SeleccionarProgresoPage;
+  rootPage:any = IniciarsesionPage;
   public pages: Array< { titulo: string, component: any, icon:string } >;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
 
-    this.rootPage =  SeleccionarProgresoPage;
+    this.rootPage = IniciarsesionPage;
     /* En el bloque de abajo, pueden agregar la pagina inicial de su modulo
       a la que se accedera desde el menu lateral */
     this.pages = [
