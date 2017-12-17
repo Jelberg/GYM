@@ -45,7 +45,6 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.FO4.*;
-import LogicaLayer.BO1.ComandoGetEquipoById;
 import LogicaLayer.BO1.ComandoGetEquipos;
 import LogicaLayer.BO2.ComandoBuscaClasePorId;
 import LogicaLayer.BO2.ComandoClaseConsultaDescripcion;
@@ -80,8 +79,8 @@ public class FabricaComando {
     }
 
     // Crear comando para agregar un equipo.
-    public static ComandoAddEquipo instanciaAddEquipo (Entidad ent){
-        return new ComandoAddEquipo(ent);
+    public static ComandoAddEquipo instanciaAddEquipo ( Entidad ent ){
+        return new ComandoAddEquipo( ent );
     }
     
     // Crear comando para eliminar un equipo.
