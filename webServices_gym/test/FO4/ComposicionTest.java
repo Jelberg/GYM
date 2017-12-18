@@ -10,10 +10,12 @@ import FO4.TestAccesoDatos.TestDaoComentario;
 import FO4.TestAccesoDatos.TestDaoMedida;
 import FO4.TestAccesoDatos.TestDaoPeso;
 import FO4.TestDominio.Progreso_MedidaTest;
+import FO4.TestDominio.Progreso_PesoTest;
 import FO4.TestExcepciones.TestAgregarPesoExcepcion;
 
 import FO4.TestServicios.FOM04Comentario;
 import FO4.TestServicios.FOM04Medida;
+import FO4.TestServicios.FOM04Peso;
 
 import FO4.TestsComandos.PruebaComandoActualizarMedida;
 import FO4.TestsComandos.PruebaComandoActualizarPeso;
@@ -52,7 +54,9 @@ import org.junit.runners.Suite;
     TestDaoMedida.class,
     TestDaoComentario.class,
     TestAgregarPesoExcepcion.class,
-    Progreso_MedidaTest.class})
+    Progreso_MedidaTest.class,
+    FOM04Peso.class,
+    Progreso_PesoTest.class})
 
 
 public class ComposicionTest {

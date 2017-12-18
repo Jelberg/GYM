@@ -44,16 +44,6 @@ public class FOM01_Login {
     /**
      * Metodo que recibe como parametros los datos del usuario
      * para registrarlo.
-     * @param nombre
-     * @param apellido
-     * @param fecha
-     * @param sexo
-     * @param correo
-     * @param usuar
-     * @param password
-     * @param estatura
-     * @param telefono
-     * @param entrenador
      * @return Devuelve el mensaje de la petición.
      */
     @POST
@@ -224,7 +214,7 @@ public class FOM01_Login {
     /**
      * Funcion que recibe como parámetro el correo del usuario,
      * para consultarlo y saber sus datos.
-     * @param correo
+  
      * @return Devuelve el usuario .
      */
     @GET

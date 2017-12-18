@@ -21,7 +21,7 @@ public class ComandoModificarClase extends Comando {
      * Constructor de clase.
      * @param clase Recibe un objeto Entidad con los datos de la clase
      * a modificar.
-     * @see Entidad.
+   
      */
     public ComandoModificarClase( Entidad clase ){
         this._clase = clase;

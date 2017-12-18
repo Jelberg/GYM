@@ -26,9 +26,6 @@ public abstract class Dao implements IDao{
     /**
      * Metodo que realiza la conexion con la base de datos
      * @return Conexion hecha a la base de datos
-     * @throws ClassNotFoundException Si la clase no es encontrada
-     * @throws SQLException Problemas con sql
-     * @throws Exception
      * @see Connection
      * @see Statement
      */
