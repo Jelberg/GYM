@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package LogicaLayer.BO1;
 
 import AccesoDatosLayer.BO1.IDaoEquipo;
-import AccesoDatosLayer.DaoPostgre;
 import AccesoDatosLayer.FabricaAbstracta;
 import AccesoDatosLayer.FabricaDaoPostgre;
 import Comun.Dominio.Entidad;
@@ -20,20 +20,37 @@ import java.util.ArrayList;
  */
 public class ComandoGetEquipoById extends Comando{
     private Entidad _equipo;
-    private int _id;
-   
+    
     /**
      * Builder
      */
     public ComandoGetEquipoById() {}
     
-    /**
+        /**
      * Builder
-     * @param id
-     * @param nombre 
      */
-    public ComandoGetEquipoById(int id){
+    public ComandoGetEquipoById(Entidad ent) {
+        _equipo.setId(ent.getId());
+        _equipo.setMensaje(ent.getMensaje());
+    }
+    
+        public Entidad ComandoGetEquipoById(int id) {
         _equipo.setId(id);
+        return _equipo;
+    }
+        
+    public  ComandoGetEquipoById(int id) {
+        _equipo.setId(id);
+
+    }
+    
+    
+    /**
+     * Comando para traer equipo por ID
+     * @return equipo
+     */
+    public Entidad getEquipos(){
+        return _equipo;
     }
     
     /**
@@ -43,6 +60,7 @@ public class ComandoGetEquipoById extends Comando{
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
         IDaoEquipo dao = fab.getDaoEquipo();
-        _equipo = dao.consultarEquipoPorId(_id);
-    }   
+        _equipo = dao.consultarEquipoPorId(_equipo.getId());
+    }
+    
 }

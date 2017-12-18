@@ -79,7 +79,7 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
     public Entidad consultarEquipoPorId(int id) {
         try{
             _conn = super.getConexion();
-            String query = "SELECT equ_id, equ_nombre FROM bo_m01_getequipo(" + id + ");";
+            String query = "SELECT id, nombre FROM bo_m01_getequipo(" + id + ");";
             PreparedStatement st = _conn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
             
@@ -110,7 +110,7 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
     public Entidad eliminar(Entidad ent) {
         try{
             _conn = getConexion(); 
-            String query = "SELECT * from bo_m01_eliminar_equipo("+ent.getId()+");";
+            String query = "SELECT * FROM bo_m01_eliminar_equipo("+ent.getId()+");";
             PreparedStatement st = _conn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
             ent.setMensaje( "Se ha eliminado correctamente." );
@@ -134,7 +134,7 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
     @Override
     public Entidad agregar(Entidad ent) {
         try{
-            String query = "select * from bo_m01_agregar_equipo(" +
+            String query = "SELECT * FROM bo_m01_agregar_equipo(" +
                             ent.getId() + "," +
                             ent.getMensaje() + ");";
             _conn = getConexion();

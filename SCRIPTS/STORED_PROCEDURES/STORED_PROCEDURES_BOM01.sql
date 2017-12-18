@@ -325,7 +325,7 @@ ALTER FUNCTION public.bo_m01_insertar_ejercicio_maquina(character varying, chara
 
 ---- INSERTA EQUIPO
 
-CREATE OR REPLACE FUNCTION public.bo_m01_insertar_equipo(
+CREATE OR REPLACE FUNCTION public.bo_m01_agregar_equipo(
 	nombre character varying)
     RETURNS void
     LANGUAGE 'plpgsql'
@@ -342,7 +342,7 @@ BEGIN
 END 
 $BODY$;
 
-ALTER FUNCTION public.bo_m01_insertar_equipo(character varying)
+ALTER FUNCTION public.bo_m01_agregar_equipo(character varying)
     OWNER TO gymucab;
 
 
@@ -371,7 +371,7 @@ ALTER FUNCTION public.bo_m01_insertar_maquina(character varying)
 
 
 ---- MODIFICAR EQUIPO
-CREATE OR REPLACE FUNCTION public.bo_m01_modificar_equipo(
+CREATE OR REPLACE FUNCTION public.bo_m01_actualizar_equipo(
 	id integer,
 	nombre character varying)
     RETURNS void
@@ -388,7 +388,7 @@ AS $BODY$
     END; 
 $BODY$;
 
-ALTER FUNCTION public.bo_m01_modificar_equipo(integer, character varying)
+ALTER FUNCTION public.bo_m01_actualizar_equipo(integer, character varying)
     OWNER TO gymucab;
 
 
@@ -446,7 +446,7 @@ ALTER FUNCTION public.bo_m01_getallequipments()
 	
 ---- OBTENER EQUIPO
 
-CREATE OR REPLACE FUNCTION public.bo_m01_get_equipo(nombre character varying)
+CREATE OR REPLACE FUNCTION public.bo_m01_getequipo(nombre character varying)
     RETURNS TABLE(id integer, nombre character varying) 
     LANGUAGE 'plpgsql'
 
