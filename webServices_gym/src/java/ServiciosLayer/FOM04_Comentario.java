@@ -65,7 +65,7 @@ public class FOM04_Comentario{
         
         _response = _comando.obtenerRespuesta();
         
-        return _response;
+        return _gson.toJson(_response);
 
     }
      
