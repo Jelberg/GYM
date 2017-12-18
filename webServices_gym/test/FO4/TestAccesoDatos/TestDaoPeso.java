@@ -28,9 +28,7 @@ import org.junit.Test;
 public class TestDaoPeso  {
     private DaoProgresoPeso _pp = new DaoProgresoPeso();
     private Entidad en;
-    Connection _conn;
-    ResultSet _rs;
-    Gson _gson = new Gson();
+   
 
  
        
