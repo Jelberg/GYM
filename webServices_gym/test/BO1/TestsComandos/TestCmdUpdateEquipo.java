@@ -9,6 +9,7 @@ import AccesoDatosLayer.BO1.DaoEquipoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.FabricaEntidad;
 import LogicaLayer.BO1.ComandoAddEquipo;
+import LogicaLayer.BO1.ComandoUpdateEquipo;
 import LogicaLayer.FabricaComando;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,12 +21,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Clase Pruebas Comando Agregar Equipo
+ * Clase Pruebas Comando Update Equipo
  * @author Daniel Goncalves
  */
-public class TestCmdAddEquipo {
+public class TestCmdUpdateEquipo {
     Entidad _equipo;
-    ComandoAddEquipo _cmd;
+    ComandoAddEquipo _cmdAdd;
+    ComandoUpdateEquipo _cmdUpdate;
     DaoEquipoPostgre _dao = new DaoEquipoPostgre();
     Connection _conn = _dao.getInstancia();
     ResultSet _rs;
@@ -33,13 +35,15 @@ public class TestCmdAddEquipo {
     @Before
     public void iniciarPrueba(){
         _equipo = FabricaEntidad.InstanciaEquipo(9999, "Prueba Equipo");
+        _cmdAdd = FabricaComando.instanciaAddEquipo(_equipo);
+        _cmdAdd.ejecutar();
     }
     @Test
     public void pruebaCmdInsert(){
-        _cmd = FabricaComando.instanciaAddEquipo(_equipo);
-        _cmd.ejecutar();
-        _equipo = _cmd.getMensaje();
-        assertEquals( "Se ha agregado correctamente.", _equipo.getMensaje() );
+        _cmdUpdate = FabricaComando.instanciaUpdateEquipo( 9999, "Prueba Equipo 2") ;
+        _cmdUpdate.ejecutar();
+        _equipo = _cmdUpdate.getMensaje();
+        assertEquals( "Se ha actualizado correctamente.", _equipo.getMensaje() );
     }
     @After
     public void terminarPrueba() throws SQLException{

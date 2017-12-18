@@ -29,7 +29,7 @@ export class ProgresoPesoPage {
   y trae lo correspondiste al peso del usuario
   */
   getProgreso(){
-    let urlPeticion: string = "F0M04_Progreso_Peso/getProgresoP?id_usuario=1";
+    let urlPeticion: string = "F0M04_Progreso_Peso/getProgresoP?id_usuario="+localStorage.getItem("id");
     this.userService.getDato( urlPeticion ).subscribe(data => {
       let i: number = 0;
       while ( i < data.length ){
