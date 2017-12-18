@@ -42,100 +42,20 @@ file.reference.hamcrest-core-1.3.jar=../lib/hamcrest-core-1.3.jar
 file.reference.hamcrest-library-1.3.jar=../lib/hamcrest-library-1.3.jar
 file.reference.postgresql-9.3-1101.jdbc41.jar=../lib/postgresql-9.3-1101.jdbc41.jar
 
-
-
-
-
-
-
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ca0cf6124fa0872e2b3d523d5b0cca7a985c0001
-=======
->>>>>>> 756a14382f8dbaa5a60c0335f892c49ef446e425
->>>>>>> 301684b5678ed2418453dab6578639862c9ec7e4
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 9d1249f214c35a5dd3ef4b3e9f909960bfccbdcd
-=======
->>>>>>> 3372abb9599e619ac3e1118132806a486579c3be
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> c8c5b91ff38cc6e15d7f73a6c7558a701ec4e3f5
->>>>>>> ca0cf6124fa0872e2b3d523d5b0cca7a985c0001
-=======
->>>>>>> c8c5b91ff38cc6e15d7f73a6c7558a701ec4e3f5
-=======
->>>>>>> 756a14382f8dbaa5a60c0335f892c49ef446e425
->>>>>>> 301684b5678ed2418453dab6578639862c9ec7e4
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-j2ee.platform.classpath=
->>>>>>> 77726f31435c3df02a55cfad5324775e9a46b705
->>>>>>> 87964da693a1b6aa519624607d11f081946d9cc2
->>>>>>> e43cbe585566a97742acf5281bcfc95927b17bd9
-<<<<<<< HEAD
-j2ee.platform.classpath=
-j2ee.platform.classpath=
-j2ee.platform.classpath=
-=======
 j2ee.platform.classpath=${j2ee.server.home}/modules/endorsed/javax.annotation-api.jar:${j2ee.server.home}/modules/endorsed/jaxb-api.jar:${j2ee.server.home}/modules/endorsed/webservices-api-osgi.jar:${j2ee.server.home}/modules/bean-validator.jar:${j2ee.server.home}/modules/cdi-api.jar:${j2ee.server.home}/modules/javax.batch-api.jar:${j2ee.server.home}/modules/javax.ejb-api.jar:${j2ee.server.home}/modules/javax.el.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent-api.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent.jar:${j2ee.server.home}/modules/javax.enterprise.deploy-api.jar:${j2ee.server.home}/modules/javax.faces.jar:${j2ee.server.home}/modules/javax.inject.jar:${j2ee.server.home}/modules/javax.interceptor-api.jar:${j2ee.server.home}/modules/javax.jms-api.jar:${j2ee.server.home}/modules/javax.json.jar:${j2ee.server.home}/modules/javax.mail.jar:${j2ee.server.home}/modules/javax.management.j2ee-api.jar:${j2ee.server.home}/modules/javax.persistence.jar:${j2ee.server.home}/modules/javax.resource-api.jar:${j2ee.server.home}/modules/javax.security.auth.message-api.jar:${j2ee.server.home}/modules/javax.security.jacc-api.jar:${j2ee.server.home}/modules/javax.servlet-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl.jar:${j2ee.server.home}/modules/javax.transaction-api.jar:${j2ee.server.home}/modules/javax.websocket-api.jar:${j2ee.server.home}/modules/javax.ws.rs-api.jar:${j2ee.server.home}/modules/javax.xml.registry-api.jar:${j2ee.server.home}/modules/javax.xml.rpc-api.jar:${j2ee.server.home}/modules/jaxb-osgi.jar:${j2ee.server.home}/modules/webservices-osgi.jar:${j2ee.server.home}/modules/weld-osgi-bundle.jar:${j2ee.server.middleware}/mq/lib/jaxm-api.jar
->>>>>>> a0a6053781e64acdef20779d94f452d65649bde8
-j2ee.platform.classpath=
-j2ee.platform.classpath=
-j2ee.platform.classpath=
-<<<<<<< HEAD
+
 j2ee.platform.classpath=${j2ee.server.home}/modules/endorsed/javax.annotation-api.jar:${j2ee.server.home}/modules/endorsed/jaxb-api.jar:${j2ee.server.home}/modules/endorsed/webservices-api-osgi.jar:${j2ee.server.home}/modules/bean-validator.jar:${j2ee.server.home}/modules/cdi-api.jar:${j2ee.server.home}/modules/javax.batch-api.jar:${j2ee.server.home}/modules/javax.ejb-api.jar:${j2ee.server.home}/modules/javax.el.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent-api.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent.jar:${j2ee.server.home}/modules/javax.enterprise.deploy-api.jar:${j2ee.server.home}/modules/javax.faces.jar:${j2ee.server.home}/modules/javax.inject.jar:${j2ee.server.home}/modules/javax.interceptor-api.jar:${j2ee.server.home}/modules/javax.jms-api.jar:${j2ee.server.home}/modules/javax.json.jar:${j2ee.server.home}/modules/javax.mail.jar:${j2ee.server.home}/modules/javax.management.j2ee-api.jar:${j2ee.server.home}/modules/javax.persistence.jar:${j2ee.server.home}/modules/javax.resource-api.jar:${j2ee.server.home}/modules/javax.security.auth.message-api.jar:${j2ee.server.home}/modules/javax.security.jacc-api.jar:${j2ee.server.home}/modules/javax.servlet-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl.jar:${j2ee.server.home}/modules/javax.transaction-api.jar:${j2ee.server.home}/modules/javax.websocket-api.jar:${j2ee.server.home}/modules/javax.ws.rs-api.jar:${j2ee.server.home}/modules/javax.xml.registry-api.jar:${j2ee.server.home}/modules/javax.xml.rpc-api.jar:${j2ee.server.home}/modules/jaxb-osgi.jar:${j2ee.server.home}/modules/webservices-osgi.jar:${j2ee.server.home}/modules/weld-osgi-bundle.jar:${j2ee.server.middleware}/mq/lib/jaxm-api.jar
-=======
+
 j2ee.platform.classpath=${j2ee.server.home}/modules/endorsed/webservices-api-osgi.jar:${j2ee.server.home}/modules/endorsed/javax.annotation-api.jar:${j2ee.server.home}/modules/endorsed/jaxb-api.jar:${j2ee.server.home}/modules/javax.faces.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent-api.jar:${j2ee.server.home}/modules/javax.ejb-api.jar:${j2ee.server.home}/modules/javax.transaction-api.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent.jar:${j2ee.server.home}/modules/javax.servlet-api.jar:${j2ee.server.home}/modules/javax.interceptor-api.jar:${j2ee.server.home}/modules/javax.management.j2ee-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jar:${j2ee.server.home}/modules/javax.ws.rs-api.jar:${j2ee.server.home}/modules/javax.resource-api.jar:${j2ee.server.home}/modules/webservices-osgi.jar:${j2ee.server.home}/modules/javax.xml.registry-api.jar:${j2ee.server.home}/modules/javax.jms-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp-api.jar:${j2ee.server.home}/modules/javax.mail.jar:${j2ee.server.home}/modules/jaxb-osgi.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl.jar:${j2ee.server.home}/modules/javax.websocket-api.jar:${j2ee.server.home}/modules/cdi-api.jar:${j2ee.server.home}/modules/javax.security.jacc-api.jar:${j2ee.server.home}/modules/bean-validator.jar:${j2ee.server.home}/modules/javax.batch-api.jar:${j2ee.server.home}/modules/javax.el.jar:${j2ee.server.home}/modules/javax.inject.jar:${j2ee.server.home}/modules/javax.persistence.jar:${j2ee.server.home}/modules/javax.xml.rpc-api.jar:${j2ee.server.home}/modules/javax.security.auth.message-api.jar:${j2ee.server.home}/modules/weld-osgi-bundle.jar:${j2ee.server.home}/modules/javax.json.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl-api.jar:${j2ee.server.home}/modules/javax.enterprise.deploy-api.jar:${j2ee.server.middleware}/mq/lib/jaxm-api.jar
->>>>>>> 7b5ef195d190a6c9238f058d8d7ea7a6cbdf4d4d
-j2ee.platform.classpath=
-j2ee.platform.classpath=
-j2ee.platform.classpath=
-<<<<<<< HEAD
-j2ee.platform.classpath=
-=======
+
 j2ee.platform.classpath=${j2ee.server.home}/modules/endorsed/javax.annotation-api.jar:${j2ee.server.home}/modules/endorsed/jaxb-api.jar:${j2ee.server.home}/modules/endorsed/webservices-api-osgi.jar:${j2ee.server.home}/modules/bean-validator.jar:${j2ee.server.home}/modules/cdi-api.jar:${j2ee.server.home}/modules/javax.batch-api.jar:${j2ee.server.home}/modules/javax.ejb-api.jar:${j2ee.server.home}/modules/javax.el.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent-api.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent.jar:${j2ee.server.home}/modules/javax.enterprise.deploy-api.jar:${j2ee.server.home}/modules/javax.faces.jar:${j2ee.server.home}/modules/javax.inject.jar:${j2ee.server.home}/modules/javax.interceptor-api.jar:${j2ee.server.home}/modules/javax.jms-api.jar:${j2ee.server.home}/modules/javax.json.jar:${j2ee.server.home}/modules/javax.mail.jar:${j2ee.server.home}/modules/javax.management.j2ee-api.jar:${j2ee.server.home}/modules/javax.persistence.jar:${j2ee.server.home}/modules/javax.resource-api.jar:${j2ee.server.home}/modules/javax.security.auth.message-api.jar:${j2ee.server.home}/modules/javax.security.jacc-api.jar:${j2ee.server.home}/modules/javax.servlet-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl.jar:${j2ee.server.home}/modules/javax.transaction-api.jar:${j2ee.server.home}/modules/javax.websocket-api.jar:${j2ee.server.home}/modules/javax.ws.rs-api.jar:${j2ee.server.home}/modules/javax.xml.registry-api.jar:${j2ee.server.home}/modules/javax.xml.rpc-api.jar:${j2ee.server.home}/modules/jaxb-osgi.jar:${j2ee.server.home}/modules/webservices-osgi.jar:${j2ee.server.home}/modules/weld-osgi-bundle.jar:${j2ee.server.middleware}/mq/lib/jaxm-api.jar
-j2ee.platform.classpath=
-j2ee.platform.classpath=
-<<<<<<< HEAD
+
 j2ee.platform.classpath=${j2ee.server.home}/modules/endorsed/javax.annotation-api.jar:${j2ee.server.home}/modules/endorsed/webservices-api-osgi.jar:${j2ee.server.home}/modules/endorsed/jaxb-api.jar:${j2ee.server.home}/modules/javax.enterprise.deploy-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl-api.jar:${j2ee.server.home}/modules/javax.inject.jar:${j2ee.server.home}/modules/cdi-api.jar:${j2ee.server.home}/modules/javax.el.jar:${j2ee.server.home}/modules/javax.xml.registry-api.jar:${j2ee.server.home}/modules/javax.management.j2ee-api.jar:${j2ee.server.home}/modules/javax.transaction-api.jar:${j2ee.server.home}/modules/javax.ws.rs-api.jar:${j2ee.server.home}/modules/javax.security.auth.message-api.jar:${j2ee.server.home}/modules/weld-osgi-bundle.jar:${j2ee.server.home}/modules/javax.servlet.jsp-api.jar:${j2ee.server.home}/modules/javax.ejb-api.jar:${j2ee.server.home}/modules/javax.batch-api.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent.jar:${j2ee.server.home}/modules/javax.websocket-api.jar:${j2ee.server.home}/modules/javax.json.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jar:${j2ee.server.home}/modules/javax.servlet-api.jar:${j2ee.server.home}/modules/webservices-osgi.jar:${j2ee.server.home}/modules/jaxb-osgi.jar:${j2ee.server.home}/modules/javax.interceptor-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl.jar:${j2ee.server.home}/modules/javax.security.jacc-api.jar:${j2ee.server.home}/modules/javax.mail.jar:${j2ee.server.home}/modules/javax.xml.rpc-api.jar:${j2ee.server.home}/modules/javax.resource-api.jar:${j2ee.server.home}/modules/javax.jms-api.jar:${j2ee.server.home}/modules/javax.persistence.jar:${j2ee.server.home}/modules/javax.faces.jar:${j2ee.server.home}/modules/bean-validator.jar:${j2ee.server.middleware}/mq/lib/jaxm-api.jar
-<<<<<<< HEAD
-j2ee.platform.classpath=
-=======
-=======
-j2ee.platform.classpath=
->>>>>>> 85a55a34c748ac63b2f247de0a1a9eba98099e6f
-<<<<<<< HEAD
->>>>>>> f132f001bcd08984c5ab97592f3c00b76ad3affc
-j2ee.platform.classpath=
-=======
->>>>>>> 1513afcd57fbe8b84d2deabeab513f11de3006ba
-<<<<<<< HEAD
+
 j2ee.platform.classpath=${j2ee.server.home}/modules/endorsed/javax.annotation-api.jar:${j2ee.server.home}/modules/endorsed/webservices-api-osgi.jar:${j2ee.server.home}/modules/endorsed/jaxb-api.jar:${j2ee.server.home}/modules/javax.enterprise.deploy-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl-api.jar:${j2ee.server.home}/modules/javax.inject.jar:${j2ee.server.home}/modules/cdi-api.jar:${j2ee.server.home}/modules/javax.el.jar:${j2ee.server.home}/modules/javax.xml.registry-api.jar:${j2ee.server.home}/modules/javax.management.j2ee-api.jar:${j2ee.server.home}/modules/javax.transaction-api.jar:${j2ee.server.home}/modules/javax.ws.rs-api.jar:${j2ee.server.home}/modules/javax.security.auth.message-api.jar:${j2ee.server.home}/modules/weld-osgi-bundle.jar:${j2ee.server.home}/modules/javax.servlet.jsp-api.jar:${j2ee.server.home}/modules/javax.ejb-api.jar:${j2ee.server.home}/modules/javax.batch-api.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent.jar:${j2ee.server.home}/modules/javax.websocket-api.jar:${j2ee.server.home}/modules/javax.json.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jar:${j2ee.server.home}/modules/javax.servlet-api.jar:${j2ee.server.home}/modules/webservices-osgi.jar:${j2ee.server.home}/modules/jaxb-osgi.jar:${j2ee.server.home}/modules/javax.interceptor-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl.jar:${j2ee.server.home}/modules/javax.security.jacc-api.jar:${j2ee.server.home}/modules/javax.mail.jar:${j2ee.server.home}/modules/javax.xml.rpc-api.jar:${j2ee.server.home}/modules/javax.resource-api.jar:${j2ee.server.home}/modules/javax.jms-api.jar:${j2ee.server.home}/modules/javax.persistence.jar:${j2ee.server.home}/modules/javax.faces.jar:${j2ee.server.home}/modules/bean-validator.jar:${j2ee.server.middleware}/mq/lib/jaxm-api.jar
-=======
-<<<<<<< HEAD
->>>>>>> develop
-=======
-<<<<<<< HEAD
+
 j2ee.platform.classpath=${j2ee.server.home}/modules/endorsed/grizzly-npn-bootstrap.jar:${j2ee.server.home}/modules/endorsed/javax.annotation-api.jar:${j2ee.server.home}/modules/endorsed/jaxb-api.jar:${j2ee.server.home}/modules/endorsed/webservices-api-osgi.jar:${j2ee.server.home}/modules/bean-validator.jar:${j2ee.server.home}/modules/cdi-api.jar:${j2ee.server.home}/modules/javax.batch-api.jar:${j2ee.server.home}/modules/javax.ejb-api.jar:${j2ee.server.home}/modules/javax.el.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent-api.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent.jar:${j2ee.server.home}/modules/javax.enterprise.deploy-api.jar:${j2ee.server.home}/modules/javax.faces.jar:${j2ee.server.home}/modules/javax.inject.jar:${j2ee.server.home}/modules/javax.interceptor-api.jar:${j2ee.server.home}/modules/javax.jms-api.jar:${j2ee.server.home}/modules/javax.json.bind-api.jar:${j2ee.server.home}/modules/javax.json.jar:${j2ee.server.home}/modules/javax.mail.jar:${j2ee.server.home}/modules/javax.management.j2ee-api.jar:${j2ee.server.home}/modules/javax.persistence.jar:${j2ee.server.home}/modules/javax.resource-api.jar:${j2ee.server.home}/modules/javax.security.auth.message-api.jar:${j2ee.server.home}/modules/javax.security.enterprise-api.jar:${j2ee.server.home}/modules/javax.security.enterprise.jar:${j2ee.server.home}/modules/javax.security.jacc-api.jar:${j2ee.server.home}/modules/javax.servlet-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl.jar:${j2ee.server.home}/modules/javax.transaction-api.jar:${j2ee.server.home}/modules/javax.websocket-api.jar:${j2ee.server.home}/modules/javax.ws.rs-api.jar:${j2ee.server.home}/modules/javax.xml.registry-api.jar:${j2ee.server.home}/modules/javax.xml.rpc-api.jar:${j2ee.server.home}/modules/jaxb-osgi.jar:${j2ee.server.home}/modules/webservices-osgi.jar:${j2ee.server.home}/modules/weld-osgi-bundle.jar:${j2ee.server.middleware}/mq/lib/jaxm-api.jar
-=======
-j2ee.platform.classpath=
->>>>>>> cbcc3be797758a1a1cb85a885974f5e07bbed384
->>>>>>> 86ee95f1c828990276dd47ac4f148339231b6515
->>>>>>> 019accc191f45d6086da77875bd4fb2a4427479f
+
 j2ee.platform.embeddableejb.classpath=${j2ee.server.home}/lib/embedded/glassfish-embedded-static-shell.jar
 j2ee.platform.wscompile.classpath=${j2ee.server.home}/modules/webservices-osgi.jar
 j2ee.platform.wsgen.classpath=${j2ee.server.home}/modules/webservices-osgi.jar:${j2ee.server.home}/modules/endorsed/webservices-api-osgi.jar:${j2ee.server.home}/modules/jaxb-osgi.jar:${j2ee.server.home}/modules/endorsed/jaxb-api.jar
@@ -239,15 +159,13 @@ file.reference.hamcrest-core-1.3.jar=../lib/hamcrest-core-1.3.jar
 file.reference.hamcrest-library-1.3.jar=../lib/hamcrest-library-1.3.jar
 file.reference.postgresql-9.3-1101.jdbc41.jar=../lib/postgresql-9.3-1101.jdbc41.jar
 j2ee.platform.classpath=${j2ee.server.home}/modules/endorsed/webservices-api-osgi.jar:${j2ee.server.home}/modules/endorsed/javax.annotation-api.jar:${j2ee.server.home}/modules/endorsed/jaxb-api.jar:${j2ee.server.home}/modules/javax.faces.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent-api.jar:${j2ee.server.home}/modules/javax.ejb-api.jar:${j2ee.server.home}/modules/javax.transaction-api.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent.jar:${j2ee.server.home}/modules/javax.servlet-api.jar:${j2ee.server.home}/modules/javax.interceptor-api.jar:${j2ee.server.home}/modules/javax.management.j2ee-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jar:${j2ee.server.home}/modules/javax.ws.rs-api.jar:${j2ee.server.home}/modules/javax.resource-api.jar:${j2ee.server.home}/modules/webservices-osgi.jar:${j2ee.server.home}/modules/javax.xml.registry-api.jar:${j2ee.server.home}/modules/javax.jms-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp-api.jar:${j2ee.server.home}/modules/javax.mail.jar:${j2ee.server.home}/modules/jaxb-osgi.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl.jar:${j2ee.server.home}/modules/javax.websocket-api.jar:${j2ee.server.home}/modules/cdi-api.jar:${j2ee.server.home}/modules/javax.security.jacc-api.jar:${j2ee.server.home}/modules/bean-validator.jar:${j2ee.server.home}/modules/javax.batch-api.jar:${j2ee.server.home}/modules/javax.el.jar:${j2ee.server.home}/modules/javax.inject.jar:${j2ee.server.home}/modules/javax.persistence.jar:${j2ee.server.home}/modules/javax.xml.rpc-api.jar:${j2ee.server.home}/modules/javax.security.auth.message-api.jar:${j2ee.server.home}/modules/weld-osgi-bundle.jar:${j2ee.server.home}/modules/javax.json.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl-api.jar:${j2ee.server.home}/modules/javax.enterprise.deploy-api.jar:${j2ee.server.middleware}/mq/lib/jaxm-api.jar
-<<<<<<< HEAD
+
 j2ee.platform.classpath=${j2ee.server.home}/modules/endorsed/javax.annotation-api.jar:${j2ee.server.home}/modules/endorsed/jaxb-api.jar:${j2ee.server.home}/modules/endorsed/webservices-api-osgi.jar:${j2ee.server.home}/modules/bean-validator.jar:${j2ee.server.home}/modules/cdi-api.jar:${j2ee.server.home}/modules/javax.batch-api.jar:${j2ee.server.home}/modules/javax.ejb-api.jar:${j2ee.server.home}/modules/javax.el.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent-api.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent.jar:${j2ee.server.home}/modules/javax.enterprise.deploy-api.jar:${j2ee.server.home}/modules/javax.faces.jar:${j2ee.server.home}/modules/javax.inject.jar:${j2ee.server.home}/modules/javax.interceptor-api.jar:${j2ee.server.home}/modules/javax.jms-api.jar:${j2ee.server.home}/modules/javax.json.jar:${j2ee.server.home}/modules/javax.mail.jar:${j2ee.server.home}/modules/javax.management.j2ee-api.jar:${j2ee.server.home}/modules/javax.persistence.jar:${j2ee.server.home}/modules/javax.resource-api.jar:${j2ee.server.home}/modules/javax.security.auth.message-api.jar:${j2ee.server.home}/modules/javax.security.jacc-api.jar:${j2ee.server.home}/modules/javax.servlet-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl.jar:${j2ee.server.home}/modules/javax.transaction-api.jar:${j2ee.server.home}/modules/javax.websocket-api.jar:${j2ee.server.home}/modules/javax.ws.rs-api.jar:${j2ee.server.home}/modules/javax.xml.registry-api.jar:${j2ee.server.home}/modules/javax.xml.rpc-api.jar:${j2ee.server.home}/modules/jaxb-osgi.jar:${j2ee.server.home}/modules/webservices-osgi.jar:${j2ee.server.home}/modules/weld-osgi-bundle.jar:${j2ee.server.middleware}/mq/lib/jaxm-api.jar
-=======
-<<<<<<< HEAD
+
 j2ee.platform.classpath=${j2ee.server.home}/modules/endorsed/javax.annotation-api.jar:${j2ee.server.home}/modules/endorsed/webservices-api-osgi.jar:${j2ee.server.home}/modules/endorsed/jaxb-api.jar:${j2ee.server.home}/modules/javax.enterprise.deploy-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl-api.jar:${j2ee.server.home}/modules/javax.inject.jar:${j2ee.server.home}/modules/cdi-api.jar:${j2ee.server.home}/modules/javax.el.jar:${j2ee.server.home}/modules/javax.xml.registry-api.jar:${j2ee.server.home}/modules/javax.management.j2ee-api.jar:${j2ee.server.home}/modules/javax.transaction-api.jar:${j2ee.server.home}/modules/javax.ws.rs-api.jar:${j2ee.server.home}/modules/javax.security.auth.message-api.jar:${j2ee.server.home}/modules/weld-osgi-bundle.jar:${j2ee.server.home}/modules/javax.servlet.jsp-api.jar:${j2ee.server.home}/modules/javax.ejb-api.jar:${j2ee.server.home}/modules/javax.batch-api.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent.jar:${j2ee.server.home}/modules/javax.websocket-api.jar:${j2ee.server.home}/modules/javax.json.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jar:${j2ee.server.home}/modules/javax.servlet-api.jar:${j2ee.server.home}/modules/webservices-osgi.jar:${j2ee.server.home}/modules/jaxb-osgi.jar:${j2ee.server.home}/modules/javax.interceptor-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl.jar:${j2ee.server.home}/modules/javax.security.jacc-api.jar:${j2ee.server.home}/modules/javax.mail.jar:${j2ee.server.home}/modules/javax.xml.rpc-api.jar:${j2ee.server.home}/modules/javax.resource-api.jar:${j2ee.server.home}/modules/javax.jms-api.jar:${j2ee.server.home}/modules/javax.persistence.jar:${j2ee.server.home}/modules/javax.faces.jar:${j2ee.server.home}/modules/bean-validator.jar:${j2ee.server.middleware}/mq/lib/jaxm-api.jar
-=======
+
 j2ee.platform.classpath=${j2ee.server.home}/modules/endorsed/javax.annotation-api.jar:${j2ee.server.home}/modules/endorsed/jaxb-api.jar:${j2ee.server.home}/modules/endorsed/webservices-api-osgi.jar:${j2ee.server.home}/modules/bean-validator.jar:${j2ee.server.home}/modules/cdi-api.jar:${j2ee.server.home}/modules/javax.batch-api.jar:${j2ee.server.home}/modules/javax.ejb-api.jar:${j2ee.server.home}/modules/javax.el.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent-api.jar:${j2ee.server.home}/modules/javax.enterprise.concurrent.jar:${j2ee.server.home}/modules/javax.enterprise.deploy-api.jar:${j2ee.server.home}/modules/javax.faces.jar:${j2ee.server.home}/modules/javax.inject.jar:${j2ee.server.home}/modules/javax.interceptor-api.jar:${j2ee.server.home}/modules/javax.jms-api.jar:${j2ee.server.home}/modules/javax.json.jar:${j2ee.server.home}/modules/javax.mail.jar:${j2ee.server.home}/modules/javax.management.j2ee-api.jar:${j2ee.server.home}/modules/javax.persistence.jar:${j2ee.server.home}/modules/javax.resource-api.jar:${j2ee.server.home}/modules/javax.security.auth.message-api.jar:${j2ee.server.home}/modules/javax.security.jacc-api.jar:${j2ee.server.home}/modules/javax.servlet-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl-api.jar:${j2ee.server.home}/modules/javax.servlet.jsp.jstl.jar:${j2ee.server.home}/modules/javax.transaction-api.jar:${j2ee.server.home}/modules/javax.websocket-api.jar:${j2ee.server.home}/modules/javax.ws.rs-api.jar:${j2ee.server.home}/modules/javax.xml.registry-api.jar:${j2ee.server.home}/modules/javax.xml.rpc-api.jar:${j2ee.server.home}/modules/jaxb-osgi.jar:${j2ee.server.home}/modules/webservices-osgi.jar:${j2ee.server.home}/modules/weld-osgi-bundle.jar:${j2ee.server.middleware}/mq/lib/jaxm-api.jar
->>>>>>> 77726f31435c3df02a55cfad5324775e9a46b705
->>>>>>> develop
+
 
 j2ee.platform.embeddableejb.classpath=${j2ee.server.home}/lib/embedded/glassfish-embedded-static-shell.jar
 #Sun Nov 05 15:18:22 VET 2017

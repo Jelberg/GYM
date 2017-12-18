@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * @author marvian
  */
 public class DaoHorarioClasePostgre extends DaoPostgre implements IDaoHorarioClase {
-    private Connection _conn;
+    private Connection _conn = getInstancia();
     private ArrayList<HorarioClase> jsonArray;
     
     public DaoHorarioClasePostgre() {}
@@ -105,20 +105,13 @@ public class DaoHorarioClasePostgre extends DaoPostgre implements IDaoHorarioCla
     @Override
     public Entidad eliminar(Entidad ent) {
      try{
-         String query = "SELECT bo_m02_elimina_horario_clase(?,?,?,?,?,?,?)";
-            _conn = getConexion();
-            HorarioClase horarioclase = ( HorarioClase ) ent;
-            PreparedStatement st = _conn.prepareStatement(query);
-                st.setInt(1, horarioclase.getNombreclase());
-                st.setInt(2, horarioclase.getInstructor());
-                st.setDate(3, horarioclase.getFecha());
-                st.setString(4, horarioclase.getDia());
-                st.setInt(5, horarioclase.getCapacidad());
-                st.setTime(6, horarioclase.getHoraInicio());
-                st.setTime(7, horarioclase.getHoraFin());
-            ResultSet rs = st.executeQuery();
-            
-            ent.setMensaje( "Se ha Eliminado correctamente." );
+        HorarioClase horarioclase = ( HorarioClase ) ent;
+        _conn = getConexion();
+        String query = "SELECT * from bo_m02_elimina_horario_clase(?)";
+        PreparedStatement st = _conn.prepareStatement(query);
+        st.setInt(1, horarioclase.getId());
+        ResultSet rs = st.executeQuery();
+        ent.setMensaje( "Se ha Eliminado correctamente." );
         }
         catch (SQLException e){
             ent.setMensaje( "Error, intente de nuevo" );
@@ -148,8 +141,8 @@ public class DaoHorarioClasePostgre extends DaoPostgre implements IDaoHorarioCla
             while(rs.next()){
                 jsonArray.add(new HorarioClase());
                 jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
-                jsonArray.get(jsonArray.size() - 1).setNombreclase(rs.getInt("nombreclase"));
-                jsonArray.get(jsonArray.size() - 1).setInstructor(rs.getInt("instructor"));
+                jsonArray.get(jsonArray.size() - 1).setNombreConsulta(rs.getString("nombreclase"));
+                jsonArray.get(jsonArray.size() - 1).setInstructorConsulta(rs.getString("instructor"));
                 jsonArray.get(jsonArray.size() - 1).setFecha(rs.getDate("fecha"));
                 jsonArray.get(jsonArray.size() - 1).setDia(rs.getString("dia"));
                 jsonArray.get(jsonArray.size() - 1).setCapacidad(rs.getInt("capacidad"));

@@ -33,7 +33,6 @@ public class ConfigurarLogger {
         fh.setFormatter(simpleFormatter);
         
         logr.addHandler(fh);
-            System.out.println(ruta);
         }
         catch(IOException e){
             logr.log(Level.SEVERE, "Error archivo logger", e);
