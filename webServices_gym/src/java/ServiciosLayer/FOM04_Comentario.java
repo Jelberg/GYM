@@ -26,7 +26,6 @@ import javax.ws.rs.GET;
 
 
 
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -47,16 +46,21 @@ public class FOM04_Comentario{
      * @param id_usuariocomentario
      * @param mensaje
      * @param jsonMedida 
-     * @return Devuelve un json con elemento llamado data, el cual contiene el mensaje de la peticion
+     * @return Devuelve un json con elemento llamado data, el cual 
+     * contiene el mensaje de la peticion
      */
     @GET
     @Path("/insertaComentario")
     @Produces("aplicacion/json")
-    public String insertaComentario(@QueryParam("id_usuariocomentario") int id_usuariocomentario,
+    public String insertaComentario
+        (@QueryParam("id_usuariocomentario") int id_usuariocomentario,
                                     @QueryParam("mensaje") String mensaje){
-        Entidad en = FabricaEntidad.InstaciaInsertarComentario(id_usuariocomentario,mensaje);
+        Entidad en = 
+                FabricaEntidad.InstaciaInsertarComentario
+                                        (id_usuariocomentario,mensaje);
         Comentario comentario = (Comentario) en;
-        AgregarComentarioComando _comando = FabricaComando.insertarComentarioComando(comentario);
+        AgregarComentarioComando _comando = 
+                FabricaComando.insertarComentarioComando(comentario);
         _comando.ejecutar();
         
         _response = _comando.obtenerRespuesta();
@@ -66,17 +70,21 @@ public class FOM04_Comentario{
     }
      
     /**
-     * Funcion que recibe como parametro el id del progreso correspondiente a medidas
+     * Funcion que recibe como parametro el id del progreso 
+     * correspondiente a medidas
      * y el id usuario
      * @param usuario_id
-     * @return Devuelve los comentarios correspondientes a ese progreso de medidas
+     * @return Devuelve los comentarios correspondientes a ese 
+     * progreso de medidas
      */
     @GET
     @Path("/getProgresos")
     @Produces("application/json")
     public String getProgresos(@QueryParam("usuario_id") int usuario_id){
-        Comando comando = FabricaComando.instanciaCmdGetComentarioProgresos(usuario_id);
-        ConsultarComentarioProgresosComando cmd = (ConsultarComentarioProgresosComando) comando;
+        Comando comando = 
+                FabricaComando.instanciaCmdGetComentarioProgresos(usuario_id);
+        ConsultarComentarioProgresosComando cmd = 
+                (ConsultarComentarioProgresosComando) comando;
         cmd.ejecutar();
         _response = cmd.getResultadoComentarioProgresos();
         
@@ -84,7 +92,8 @@ public class FOM04_Comentario{
     }
  
     /**
-     * Servicio que obtiene los comentarios hechos a un progrso de medida particular
+     * Servicio que obtiene los comentarios hechos a un progrso 
+     * de medida particular
      * @param idusuario
      * @param idprogresom
      * @return 

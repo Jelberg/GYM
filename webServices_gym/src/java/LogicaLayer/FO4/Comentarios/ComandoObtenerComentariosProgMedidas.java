@@ -43,7 +43,8 @@ public class ComandoObtenerComentariosProgMedidas extends Comando {
     public void ejecutar() {
         FabricaAbstracta _fab = FabricaAbstracta.getFabrica(1);
         IDaoComentario _dao = _fab.getDaoComentario();
-        this._listaComentario = _dao.getComentariosProgMedida(_idUsuario,_idProgresoMedida);
+        this._listaComentario = 
+                _dao.getComentariosProgMedida(_idUsuario,_idProgresoMedida);
     }
     
 }

@@ -18,14 +18,8 @@ import AccesoDatosLayer.FOM04Postgre.DaoComentario;
 import AccesoDatosLayer.BO2.DaoHorarioClasePostgre;
 import AccesoDatosLayer.BO2.IDaoClase;
 import AccesoDatosLayer.BO2.IDaoEntrenador;
-
-import AccesoDatosLayer.FO3.DaoRutina;
-
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoMedida;
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoPeso;
-import AccesoDatosLayer.FOM04Postgre.IDaoComentario;
-import AccesoDatosLayer.FOM04Postgre.IDaoProgresoMedida;
-import AccesoDatosLayer.FOM04Postgre.IDaoProgresoPeso;
 import AccesoDatosLayer.BO2.IDaoHorarioClase;
 
 
@@ -42,9 +36,11 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
     public IDaoEquipo getDaoEquipo(){
         return new DaoEquipoPostgre();
     }
+    @Override
     public IDaoEjercicio getDaoEjercicio(){
         return new DaoEjercicioPostgre();
     }
+    @Override
     public IDaoMaquina getDaoMaquina(){
         return new DaoMaquinaPostgre();
     }
@@ -68,6 +64,7 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
      * 
      * @return Retorna objeto del tipo DaoClase.
      */
+    @Override
     public IDaoClase instanciaDaoClase(){
         return new DaoClasePostgre();
     }
@@ -125,20 +122,33 @@ public class FabricaDaoPostgre extends FabricaAbstracta {
      * Instancia para obtener DaoComentario
      * @return 
      */
+    @Override
     public DaoComentario getDaoComentario() {
        return new DaoComentario();
     }
     
+    /**
+     * Intancia para obtener DaoProgresoMedida
+     * @return 
+     */
      @Override
     public DaoProgresoMedida getDaoProgresoMedida() {
         return new DaoProgresoMedida();
          }
 
+    /**
+     * Instancia para obtener DaoComentario
+     * @return 
+     */
     @Override
     public DaoComentario instanciaDaoComentario() {
         return new DaoComentario();
        }
 
+    /**
+     * Instancia para obtener DaoProgresoMedida
+     * @return 
+     */
     @Override
     public DaoProgresoMedida instanciaDaoProgresoMedida() {
         return new DaoProgresoMedida();
