@@ -310,7 +310,7 @@ ADD COLUMN CRI_ID_USUARIO INTEGER;
 -------***********************************************************--------------------
 ------*****BOM01*****-----
 
-  --- BACKOFFICE M01----
+--- BACKOFFICE M01----
 ----------------------
 
 
@@ -322,7 +322,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_eliminar_equipo(
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE  
+    VOLATILE 
 AS $BODY$
 
     DECLARE
@@ -345,7 +345,6 @@ CREATE OR REPLACE FUNCTION public.bo_m01_eliminar_maquina(
 
     COST 100
     VOLATILE 
-     
 AS $BODY$
 
     DECLARE
@@ -535,7 +534,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_insertar_ejercicio(
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
 DECLARE 
@@ -568,7 +567,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_insertar_ejercicio_equipo(
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
 DECLARE
@@ -609,7 +608,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_insertar_ejercicio_maquina(
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
 DECLARE
@@ -636,14 +635,14 @@ ALTER FUNCTION public.bo_m01_insertar_ejercicio_maquina(character varying, chara
 
 ---- INSERTA EQUIPO
 
-CREATE OR REPLACE FUNCTION public.bo_m01_insertar_equipo(
+CREATE OR REPLACE FUNCTION public.bo_m01_agregar_equipo(
 	nombre character varying)
     RETURNS void
     LANGUAGE 'plpgsql'
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
 DECLARE 
@@ -653,7 +652,7 @@ BEGIN
 END 
 $BODY$;
 
-ALTER FUNCTION public.bo_m01_insertar_equipo(character varying)
+ALTER FUNCTION public.bo_m01_agregar_equipo(character varying)
     OWNER TO gymucab;
 
 
@@ -667,7 +666,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_insertar_maquina(
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
 DECLARE 
@@ -682,7 +681,7 @@ ALTER FUNCTION public.bo_m01_insertar_maquina(character varying)
 
 
 ---- MODIFICAR EQUIPO
-CREATE OR REPLACE FUNCTION public.bo_m01_modificar_equipo(
+CREATE OR REPLACE FUNCTION public.bo_m01_actualizar_equipo(
 	id integer,
 	nombre character varying)
     RETURNS void
@@ -690,7 +689,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_modificar_equipo(
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
     DECLARE
@@ -699,11 +698,12 @@ AS $BODY$
     END; 
 $BODY$;
 
-ALTER FUNCTION public.bo_m01_modificar_equipo(integer, character varying)
+ALTER FUNCTION public.bo_m01_actualizar_equipo(integer, character varying)
     OWNER TO gymucab;
 
 
 ---- MODIFICAR MAQUINA
+
 CREATE OR REPLACE FUNCTION public.bo_m01_modificar_maquina(
 	id integer,
 	nombre character varying)
@@ -712,7 +712,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_modificar_maquina(
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
     DECLARE
@@ -722,6 +722,65 @@ AS $BODY$
 $BODY$;
 
 ALTER FUNCTION public.bo_m01_modificar_maquina(integer, character varying)
+    OWNER TO gymucab;
+	
+
+---- OBTENER TODOS LOS EQUIPOS
+
+CREATE OR REPLACE FUNCTION public.bo_m01_getallequipments()
+    RETURNS TABLE(id integer, nombre character varying) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+
+DECLARE
+   var_r    record;
+BEGIN 
+    FOR var_r IN(select equ_id, equ_nombre
+from 
+	equipo)
+   LOOP
+    id = var_r.equ_id;
+    nombre = var_r.equ_nombre;
+    RETURN NEXT;
+   END LOOP;        
+END; 
+
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_getallequipments()
+    OWNER TO gymucab;	
+	
+---- OBTENER EQUIPO
+
+CREATE OR REPLACE FUNCTION public.bo_m01_getequipo(nombreBuscado character varying)
+    RETURNS TABLE(id integer, nombre character varying) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+
+DECLARE
+   var_r    record;
+BEGIN 
+    FOR var_r IN(select equ_id, equ_nombre
+from equipo
+where equ_nombre = nombreBuscado)
+   LOOP
+    id = var_r.equ_id;
+    nombre = var_r.equ_nombre;
+    RETURN NEXT;
+   END LOOP;        
+END; 
+
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_getallequipments()
     OWNER TO gymucab;
 ------*****BOM01*****-----
 
