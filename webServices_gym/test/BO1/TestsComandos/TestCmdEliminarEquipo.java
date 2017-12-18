@@ -9,23 +9,23 @@ import AccesoDatosLayer.BO1.DaoEquipoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.FabricaEntidad;
 import LogicaLayer.BO1.ComandoAddEquipo;
+import LogicaLayer.BO1.ComandoEliminarEquipo;
 import LogicaLayer.FabricaComando;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Clase Pruebas Comando Agregar Equipo
+ * Clase Pruebas Comando Eliminar Equipo
  * @author Daniel Goncalves
  */
-public class TestCmdAddEquipo {
+public class TestCmdEliminarEquipo {
     Entidad _equipo;
-    ComandoAddEquipo _cmd;
+    ComandoEliminarEquipo _cmdEli;
+    ComandoAddEquipo _cmdAdd;
     DaoEquipoPostgre _dao = new DaoEquipoPostgre();
     Connection _conn = _dao.getInstancia();
     ResultSet _rs;
@@ -33,21 +33,13 @@ public class TestCmdAddEquipo {
     @Before
     public void iniciarPrueba(){
         _equipo = FabricaEntidad.InstanciaEquipo(9999, "Prueba Equipo");
+		_cmdAdd = FabricaComando.instanciaAddEquipo(_equipo);
+		_cmdAdd.ejecutar();
     }
     @Test
-    public void pruebaCmdInsert(){
-        _cmd = FabricaComando.instanciaAddEquipo(_equipo);
-        _cmd.ejecutar();
-        _equipo = _cmd.getMensaje();
-        assertEquals( "Se ha agregado correctamente.", _equipo.getMensaje() );
-    }
-    @After
-    public void terminarPrueba() throws SQLException{
-        String eliminarEnt = "select * from bo_m01_eliminar_equipo(9999)";
-        _conn = _dao.getInstancia();
-        _st = _conn.createStatement();
-        _rs = _st.executeQuery( eliminarEnt );
-        _dao.cerrarConexion( _conn );
-    }
-    
+    public void pruebaCmdEliminar(){
+		_cmdEli = FabricaComando.instanciaEliminarEquipo(_equipo);
+        _equipo = _cmdEli.getMensaje();
+        assertEquals( "Se ha eliminado correctamente.", _equipo.getMensaje() );
+    }    
 }
