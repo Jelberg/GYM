@@ -5,39 +5,34 @@
  */
 package LogicaLayer.BO2;
 
-import AccesoDatosLayer.BO2.IDaoClase;
+import AccesoDatosLayer.BO2.IDaoHorarioClase;
 import AccesoDatosLayer.FabricaAbstracta;
 import AccesoDatosLayer.FabricaDaoPostgre;
-import Comun.Dominio.Clase;
 import Comun.Dominio.Entidad;
+import Comun.Dominio.HorarioClase;
 import LogicaLayer.Comando;
 import java.util.ArrayList;
 
 /**
  *
- * Clase a traves de la cual se realizan los llamados para consultar clases.
  * @author marvian
  */
-public class ComandoConsultarClase extends Comando {
+public class ComandoConsultarHorarioClase extends Comando {
     
-    private Entidad _clase;
-    private ArrayList<Clase> _listaClase;
+    private Entidad _horarioClase;
+    private ArrayList<HorarioClase> _listaHorarioClase;
     /**
      * Constructor de clase con una Entidad que es recibida por quien lo llama.
      * @param clase Entidad que tiene los datos necesarios para realizar la 
      * accion.
      * @see Clase
      */
-    public ComandoConsultarClase(Entidad clase) {
-        _clase = clase;
+    public ComandoConsultarHorarioClase(Entidad horarioclase) {
+        _horarioClase= horarioclase;
     }
-    public ComandoConsultarClase() {}
-    public ArrayList<Clase> consultarEntrenadores(){
-        return _listaClase;
-    }
-
-    public ArrayList<Clase> consultarClase(){
-        return _listaClase;
+    public ComandoConsultarHorarioClase() {}
+    public ArrayList<HorarioClase> consultarHorarioClase(){
+        return _listaHorarioClase;
     }
     /**
      * Metodo que es llamado para ejecutar los llamados y asi realizar la accion
@@ -46,7 +41,8 @@ public class ComandoConsultarClase extends Comando {
     @Override
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
-        IDaoClase dao = fab.instanciaDaoClase();
-        _listaClase = dao.consultarClases();}
+        IDaoHorarioClase dao = fab.instaciaDaoHorarioClase();
+        _listaHorarioClase = dao.consultarHorarioClase();
+    }
     
 }

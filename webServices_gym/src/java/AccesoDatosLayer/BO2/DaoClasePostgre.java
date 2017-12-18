@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
+
+ *
  * Clase en la cual se manejara el acceso a datos de las clases.
  * @author marvian
  */
@@ -62,6 +64,8 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
             
         }
         catch(SQLException e) {
+            jsonArray.add( new Clase());
+            jsonArray.get(0).setMensaje( "Error con la conexion, intente de nuevo." );
         }
         catch (ParameterNullException e) {
            
@@ -74,6 +78,7 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
             return jsonArray;
         }
     }
+
     /**
      * Metodo que sera llamado cuando se desee agregar una nueva clase.
      * @param ent REcibe un objeto de tipo Entidad en el cual se encuentran 

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package AccesoDatosLayer.BO1;
-import AccesoDatosLayer.Dao;
+
 import AccesoDatosLayer.DaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Equipo;
@@ -20,15 +20,28 @@ import java.util.ArrayList;
  * @author Daniel Goncalves
  */
 public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
+    
     private Connection _conn;
     private ArrayList<Equipo> jsonArray;
+    
+    /**
+     * Builder
+     */
     public DaoEquipoPostgre() {}
     
+    /**
+     * Override Consultar Entidad de IDAO
+     * @param ent
+     * @return Entidad
+     */
     @Override
     public Entidad consultar(Entidad ent) {
         return ent;
     }
-
+    /**
+     * Devuelve listado de Equipos
+     * @return lista Equipos
+     */
     @Override
     public ArrayList<Equipo> consultarEquipos() {
         try{
@@ -42,7 +55,7 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
             while(rs.next()){
                 jsonArray.add(new Equipo());
                 jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
-                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));                          
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));                         
             }
             
         }
@@ -57,11 +70,16 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
         }
     }
     
+    /**
+     * Consulta Equipo por ID
+     * @param id ID de Equipo a buscar
+     * @return Entidad Objeto Resultado
+     */
     @Override
     public Entidad consultarEquipoPorId(int id) {
         try{
             _conn = super.getConexion();
-            String query = "SELECT equ_id, equ_nombre FROM equipo WHERE equ_id = " + id + ";";
+            String query = "SELECT equ_id, equ_nombre FROM bo_m01_getequipo(" + id + ");";
             PreparedStatement st = _conn.prepareStatement(query);
             ResultSet rs = st.executeQuery();
             
@@ -83,18 +101,78 @@ public class DaoEquipoPostgre extends DaoPostgre implements IDaoEquipo{
         }
     } 
 
+    /**
+     * Eliminar Equipo
+     * @param ent Entidad a eliminar
+     * @return Entidad Eliminada
+     */
     @Override
     public Entidad eliminar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            _conn = getConexion(); 
+            String query = "SELECT * from bo_m01_eliminar_equipo("+ent.getId()+");";
+            PreparedStatement st = _conn.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            ent.setMensaje( "Se ha eliminado correctamente." );
+        }
+        catch(SQLException e) {
+            ent.setMensaje( "Error al insertar, intente de nuevo." );
+        }
+        catch (ParameterNullException e) {
+        }
+        finally {
+              cerrarConexion( _conn );
+              return ent;
+        }
     }
 
+    /**
+     * Agregar Equipo
+     * @param ent Entidad a agregar
+     * @return Entidad agregada
+     */
     @Override
     public Entidad agregar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            String query = "select * from bo_m01_agregar_equipo(" +
+                            ent.getId() + "," +
+                            ent.getMensaje() + ");";
+            _conn = getConexion();
+            PreparedStatement st = _conn.prepareStatement(query); 
+            st.executeQuery();
+            ent.setMensaje( "Se ha agregado correctamente." );
+        }
+        catch(SQLException e) {
+            ent.setMensaje( "Error al insertar, intente de nuevo." );
+        }
+        finally {
+            cerrarConexion( _conn );
+            return ent;
+        }
     }
 
+    /**
+     * Actualizar Equipo
+     * @param ent Equipo a actualizar
+     * @return Equipo actualizado
+     */
     @Override
-    public Entidad actualizar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Entidad actualizar(Entidad ent) {        
+        try{
+          String query = "select * from bo_m01_actualizar_equipo(" +
+                          ent.getId() + "," +
+                          ent.getMensaje() + ");";
+          _conn = getConexion();
+          PreparedStatement st = _conn.prepareStatement(query); 
+          st.executeQuery();
+          ent.setMensaje( "Se ha actualizado correctamente." );
+        }
+        catch(SQLException e) {
+            ent.setMensaje( "Error al actualizar, intente de nuevo." );
+        }
+        finally {
+          cerrarConexion( _conn );
+          return ent;
+        }
     }
 }

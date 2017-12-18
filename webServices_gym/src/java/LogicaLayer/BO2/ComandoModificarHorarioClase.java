@@ -5,27 +5,26 @@
  */
 package LogicaLayer.BO2;
 
-import AccesoDatosLayer.BO2.IDaoEntrenador;
+import AccesoDatosLayer.BO2.IDaoHorarioClase;
 import AccesoDatosLayer.FabricaAbstracta;
 import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
 
 /**
  *
- * Clase a traves de la cual se realizan las inserciones de entrenadores.
- * @author gilbert
+ * @author marvian
  */
-public class ComandoInsertarEntrenador extends Comando{
-    private Entidad _entrenador;
+public class ComandoModificarHorarioClase extends Comando {
+    private Entidad _horarioClase;
     
     /**
      * Constructor de clase.
-     * @param entrenador Recibe un objeto Entidad con los datos del entrenador
-     * a insertar.
+     * @param clase Recibe un objeto Entidad con los datos del horarioclase
+     * a modificar.
      * @see Entidad.
      */
-    public ComandoInsertarEntrenador( Entidad entrenador ){
-        this._entrenador = entrenador;
+    public ComandoModificarHorarioClase( Entidad horarioClase ){
+        this._horarioClase = horarioClase;
     }
     /**
      * Metodo para obtener el mensaje que indica el estatus de la peticion.
@@ -33,16 +32,16 @@ public class ComandoInsertarEntrenador extends Comando{
      * el mensaje dele estatus.
      */
     public Entidad getMensaje(){
-        return _entrenador;
+        return _horarioClase;
     }
     /**
-     * Metodo que es llamado para realizar la insercion del entrenador.
+     * Metodo que es llamado para realizar la insercion del horarioclase.
      */
-    @Override
+    
     public void ejecutar() {
         FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
-        IDaoEntrenador dao = fab.instanciaDaoEntrenador();
-        _entrenador = dao.insertar( _entrenador );
+        IDaoHorarioClase dao = fab.instaciaDaoHorarioClase();
+        _horarioClase = dao.insertar( _horarioClase );
     }
     
 }

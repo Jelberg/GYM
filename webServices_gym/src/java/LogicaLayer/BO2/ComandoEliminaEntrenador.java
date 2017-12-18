@@ -11,38 +11,30 @@ import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
 
 /**
- *
- * Clase a traves de la cual se realizan las inserciones de entrenadores.
+ * Clase a traves de la cual se realizan los llamados necesarios para eliminar
+ * a un entrenador.
  * @author gilbert
  */
-public class ComandoInsertarEntrenador extends Comando{
+public class ComandoEliminaEntrenador extends Comando{
     private Entidad _entrenador;
-    
     /**
-     * Constructor de clase.
-     * @param entrenador Recibe un objeto Entidad con los datos del entrenador
-     * a insertar.
-     * @see Entidad.
+     * Constructor de clase con objeto entidad.
+     * @param entrenador Objeto de tipo entidad en el cual se encuentran 
+     * encapsulados los datos necesarios para eliminar a un entrenador.
      */
-    public ComandoInsertarEntrenador( Entidad entrenador ){
+    public ComandoEliminaEntrenador( Entidad entrenador ){
         this._entrenador = entrenador;
     }
-    /**
-     * Metodo para obtener el mensaje que indica el estatus de la peticion.
-     * @return Devuelve un objeto Entidad en el cual se encuentra encapsulado
-     * el mensaje dele estatus.
-     */
     public Entidad getMensaje(){
         return _entrenador;
     }
-    /**
-     * Metodo que es llamado para realizar la insercion del entrenador.
-     */
+
     @Override
     public void ejecutar() {
         FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
         IDaoEntrenador dao = fab.instanciaDaoEntrenador();
-        _entrenador = dao.insertar( _entrenador );
+        _entrenador = dao.eliminar( _entrenador );
     }
+    
     
 }

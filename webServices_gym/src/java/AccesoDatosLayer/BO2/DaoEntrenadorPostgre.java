@@ -11,6 +11,7 @@ import AccesoDatosLayer.IDao;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Entrenador;
 import Comun.Excepciones.ParameterNullException;
+import Comun.Util.ConfigurarLogger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +19,8 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Clase que es utilizada para el manejo de la interaccion con la base de datos
@@ -27,6 +30,8 @@ import java.util.Date;
 public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
     private Connection _conn = getInstancia();
     private ArrayList<Entrenador> jsonArray;
+    ConfigurarLogger cl = new ConfigurarLogger();
+    Logger logr = cl.getLogr();
     public DaoEntrenadorPostgre(){}
     /**
      * Metodo que es llamado cuando se desea consultar a un enrenador en particular
@@ -62,10 +67,11 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
                 jsonArray.get(jsonArray.size() - 1).setCorreo(rs.getString("correo"));
                 jsonArray.get(jsonArray.size() - 1).setHistorial(rs.getString("historial"));           
                 }
+            logr.log(Level.WARNING, "CONSULTA CORREO CORRECTA");
             
         }
         catch(SQLException e) {
-            
+            logr.log(Level.WARNING, "ERROR, FALLO CON SQL.");
         }
         finally {
             cerrarConexion( _conn );
@@ -83,7 +89,26 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
      */
     @Override
     public Entidad eliminar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            Entrenador entrenador = ( Entrenador ) ent;
+            _conn = getConexion();
+            String query = "SELECT * from bo_m02_eliminar_entrenador(?)";
+            PreparedStatement st = _conn.prepareStatement(query);
+            st.setString( 1, entrenador.getCorreo() );
+            ResultSet rs = st.executeQuery();
+            ent.setMensaje( "Entrenador eliminado correctamente." );
+            logr.log(Level.WARNING, "ELIMINADO EL ENTRENADOR " + entrenador.getCorreo() );
+        }
+        catch( SQLException e){
+            Entrenador entrenador = ( Entrenador ) ent;
+            ent.setMensaje( "Error de conexion, intente de nuevo." );
+            logr.log(Level.WARNING, "ERROR AL ELIMINAR A: " + entrenador.getCorreo() );
+            logr.log(Level.WARNING, "ERROR CON SQL" + e);
+        }
+        finally{
+            cerrarConexion( _conn );
+            return ent;
+        }
     }
     /**
      * Metodo que es llamado cuando se desea actualizar a un entrenador.
@@ -107,8 +132,12 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
             st.setString( 6, entrenador.getHistorial() );
             st.executeQuery();
             ent.setMensaje( "Se realizo correctamente la actualizacion." );
+            logr.log(Level.WARNING, "MODIFICADO EL ENTRENADOR " + entrenador.getNombre() );
         }
         catch( SQLException e ){
+            Entrenador entrenador = ( Entrenador ) ent;
+            logr.log(Level.WARNING, "ERROR CON SQL" + e);
+            logr.log(Level.WARNING, "NO FUE MODIFICADO EL ENTRENADOR " + entrenador.getNombre() );
             ent.setMensaje( "Error con conexion, intente de nuevo." );
         }
         finally{
@@ -138,8 +167,12 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
             st.setString( 6, entrenador.getHistorial() );
             st.executeQuery();
             ent.setMensaje( "Se ha insertado correctamente." );
+            logr.log(Level.WARNING, "INSERTADO EL ENTRENADOR " + entrenador.getNombre() );
         }
         catch(SQLException e) {
+            Entrenador entrenador = ( Entrenador ) ent;
+            logr.log(Level.WARNING, "ERROR CON SQL" + e);
+            logr.log(Level.WARNING, "NO FUE INSERTADO EL ENTRENADOR " + entrenador.getNombre() );
             ent.setMensaje( "Error con la conexion, intente de nuevo." );
         }
         finally {
@@ -172,9 +205,11 @@ public class DaoEntrenadorPostgre extends DaoPostgre implements IDaoEntrenador{
                 jsonArray.get(jsonArray.size() - 1).setHistorial(rs.getString("ENT_HISTORIAL"));
                           
             }
-            
+            logr.log(Level.WARNING, "CONSULTA REALIZADA EXITOSAMENTE.");
         }
         catch(SQLException e) {
+            logr.log(Level.WARNING, "ERROR CON SQL" + e);
+            logr.log(Level.WARNING, "CONSULTA REALIZADA SIN EXITO.");
             jsonArray.add( new Entrenador() );
             jsonArray.get(0).setMensaje( "Error con la conexion, intente de nuevo." );
         }

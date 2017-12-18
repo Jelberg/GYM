@@ -13,8 +13,6 @@ public class Ejercicio extends Entidad {
     private int _id;
     private String _nombre;
     private String _grupomuscular;
-    private String _maquina;
-    private String _equipo;
 
     /**
      * @return the _id
@@ -50,7 +48,7 @@ public class Ejercicio extends Entidad {
      * @return the _grupomuscular
      */
 
-    public String getGrupomuscular() {
+    public String getGrupoMuscular() {
         return _grupomuscular;
     }
 
@@ -58,46 +56,16 @@ public class Ejercicio extends Entidad {
      * @param _grupomuscular the _grupomuscular to set
      */
 
-    public void setGrupomuscular(String _grupomuscular) {
+    public void setGrupoMuscular(String _grupomuscular) {
         this._grupomuscular = _grupomuscular;
     }
 
-    /**
-     * @return the _maquina
-     */
-    public String getMaquina() {
-        return _maquina;
-    }
-
-    /**
-     * @param _maquina the _maquina to set
-     */
-
-    public void setMaquina(String _maquina) {
-        this._maquina = _maquina;
-    }
-
-    /**
-     * @return the _equipo
-     */
-
-    public String getEquipo() {
-        return _equipo;
-    }
-
-    /**
-     * @param _equipo the _equipo to set
-     */
-    public void setEquipo(String _equipo) {
-        this._equipo = _equipo;
-    }
     
-    public Ejercicio (int _id, String _nombre, String _grupomuscular, String _maquina, String _equipo){
+    
+    public Ejercicio (int _id, String _nombre, String _grupomuscular){
         this._id=_id;
         this._nombre=_nombre;
         this._grupomuscular=_grupomuscular;
-        this._maquina=_maquina;
-        this._equipo=_maquina;
     }
     
     public Ejercicio (int _id){
