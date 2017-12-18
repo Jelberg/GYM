@@ -9,6 +9,8 @@ package FO4;
 import FO4.TestAccesoDatos.TestDaoComentario;
 import FO4.TestAccesoDatos.TestDaoMedida;
 import FO4.TestAccesoDatos.TestDaoPeso;
+import FO4.TestDominio.Progreso_MedidaTest;
+import FO4.TestExcepciones.TestAgregarPesoExcepcion;
 
 import FO4.TestServicios.FOM04Comentario;
 import FO4.TestServicios.FOM04Medida;
@@ -47,7 +49,9 @@ import org.junit.runners.Suite;
                       PruebaComandoEliminarPeso.class,
                       PruebaComandoInsertarComentario.class,
                       TestDaoMedida.class,
-                      TestDaoComentario.class})
+                      TestDaoComentario.class,
+    TestAgregarPesoExcepcion.class,
+    Progreso_MedidaTest.class})
 
 
 public class ComposicionTest {

@@ -11,6 +11,9 @@ import Comun.Dominio.FabricaEntidad;
 import Comun.Excepciones.ParameterNullException;
 import Comun.Validaciones.ValidationWS;
 import LogicaLayer.BO2.ComandoConsultarHorarioClase;
+import LogicaLayer.BO2.ComandoEliminarHorarioClase;
+import LogicaLayer.BO2.ComandoInsertarHorarioClase;
+import LogicaLayer.BO2.ComandoModificarHorarioClase;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Date;
@@ -30,6 +33,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author marvian
  */
+@Path("/BOM02_Horario_Clase")
 public class BO2_HorarioClase {
     
     private Gson _gson = new Gson();
@@ -72,9 +76,9 @@ public class BO2_HorarioClase {
     public String insertaHorario_Clase(@QueryParam("fecha") Date fecha,
                                  @QueryParam("dia") String dia,
                                  @QueryParam("capacidad") int capacidad,
-                                 @QueryParam("hora_inicio") Time hora_inicio,
-                                 @QueryParam("hora_fin") Time hora_fin,
-                                 @QueryParam("status") char status,
+                                 @QueryParam("hora_inicio") String hora_inicio,
+                                 @QueryParam("hora_fin") String hora_fin,
+                                 @QueryParam("status") String status,
                                  @QueryParam("duracion") int duracion,
                                  @QueryParam("nombreclase") int nombreclase,
                                  @QueryParam("instructor") int instructor){
@@ -94,7 +98,11 @@ public class BO2_HorarioClase {
             }});
                 
             Entidad horarioClase = FabricaEntidad.instanciaConsultarHorarioClase(fecha, dia, capacidad,
-                    hora_inicio,hora_fin,status,duracion,nombreclase,instructor);
+                    Time.valueOf(hora_inicio),Time.valueOf(hora_fin),status,duracion,nombreclase,instructor);
+            ComandoInsertarHorarioClase cmd = FabricaComando.instanciaCmdInsertaHorarioClase(horarioClase);
+            cmd.ejecutar();
+            horarioClase = cmd.getMensaje();
+            response.put ( "data", horarioClase.getMensaje() );
             
             response.put("data", "Se insertó el horario");
         }
@@ -126,31 +134,22 @@ public class BO2_HorarioClase {
     @DELETE
     @Path("/eliminaHorario_Clase")
     @Produces("application/json")
-    public String eliminaHorario_Clase(@QueryParam("nombreclase") int nombreclase,
-                                 @QueryParam("instructor") int instructor,
-                                 @QueryParam("fecha") Date fecha,
-                                 @QueryParam("dia") String dia,
-                                 @QueryParam("capacidad") int capacidad,
-                                 @QueryParam("hora_inicio") Time hora_inicio,
-                                 @QueryParam("hora_fin") Time hora_fin){
+    public String eliminaHorario_Clase(@QueryParam("id") int id){
 
         Map<String, String> response = new HashMap<String, String>();
         try{
 
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("nombreclase", nombreclase);
-                put("instructor", instructor);
-                put("fecha", fecha );
-                put("dia", dia );
-                put("capacidad", capacidad );
-                put("hora_inicio", hora_inicio );
-                put("hora_fin", hora_fin );
+                put("id", id);
             }});
             
-            Entidad horarioClase = FabricaEntidad.instanciaEliminarClase(nombreclase,instructor,
-                    fecha, dia, capacidad, hora_inicio,hora_fin);
+            Entidad horarioClase = FabricaEntidad.instanciaEliminarHorarioClase(id);
+            ComandoEliminarHorarioClase cmd = FabricaComando.instanciaCmdEliminarHorarioClase(horarioClase);
+            cmd.ejecutar();
+            horarioClase = cmd.getMensaje();
+            response.put ( "data", horarioClase.getMensaje() );
                 
-            response.put("data", "Se elimino el horario");
+            
         }
         
        
@@ -199,8 +198,12 @@ public class BO2_HorarioClase {
                 put("hora_fin", hora_fin );
             }});
             
-            Entidad horarioClase = FabricaEntidad.instanciaModificarClase(nombreclase,instructor,
+            Entidad horarioClase = FabricaEntidad.instanciaModificarHorarioClase(nombreclase,instructor,
                     fecha, dia, capacidad, hora_inicio,hora_fin);
+            ComandoModificarHorarioClase cmd = FabricaComando.instanciaCmdModificarHorarioClase(horarioClase);
+            cmd.ejecutar();
+            horarioClase = cmd.getMensaje();
+            response.put ( "data", horarioClase.getMensaje() );
             
             response.put("data", "Se modificó con éxito");
         }

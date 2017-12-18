@@ -6,8 +6,6 @@
 package FO4.TestAccesoDatos;
 
 import AccesoDatosLayer.FOM04Postgre.DaoComentario;
-import AccesoDatosLayer.FOM04Postgre.DaoProgresoMedida;
-import Comun.Dominio.Comentario;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.FabricaEntidad;
 import static org.junit.Assert.assertEquals;

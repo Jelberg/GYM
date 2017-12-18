@@ -5,20 +5,10 @@
  */
 package FO4.TestAccesoDatos;
 
-import AccesoDatosLayer.DaoPostgre;
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoPeso;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.FabricaEntidad;
-import com.google.gson.Gson;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import junit.framework.Assert;
-import junit.framework.TestCase;
-import org.junit.After;
 import static org.junit.Assert.assertEquals;
-import org.junit.Before;
 import org.junit.Test;
 
 /**

@@ -7,7 +7,6 @@ package FO4.TestsComandos;
 
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoPeso;
 import Comun.Dominio.Progreso_Peso;
-import LogicaLayer.FO4.ProgresoPeso.ActualizarPesoComando;
 import LogicaLayer.FO4.ProgresoPeso.AgregarPesoComando;
 import LogicaLayer.FabricaComando;
 import java.sql.Connection;

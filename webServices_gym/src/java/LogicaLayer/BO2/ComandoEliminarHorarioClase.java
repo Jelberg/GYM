@@ -41,7 +41,7 @@ public class ComandoEliminarHorarioClase extends Comando {
     public void ejecutar() {
         FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
         IDaoHorarioClase dao = fab.instaciaDaoHorarioClase();
-        _horarioClase = dao.insertar( _horarioClase );
+        _horarioClase = dao.eliminar(_horarioClase );
     }
     
 }

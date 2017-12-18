@@ -5,11 +5,8 @@
  */
 package FO4.TestsComandos;
 
-import AccesoDatosLayer.FOM04Postgre.DaoProgresoMedida;
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoPeso;
-import Comun.Dominio.Progreso_Medida;
 import Comun.Dominio.Progreso_Peso;
-import LogicaLayer.FO4.ProgresoMedida.ActualizarMedidaComando;
 import LogicaLayer.FO4.ProgresoPeso.ActualizarPesoComando;
 import LogicaLayer.FabricaComando;
 import java.sql.Connection;
@@ -37,7 +34,8 @@ public class PruebaComandoActualizarPeso {
     @Test
     public void pruebaActualizarPeso(){
         _progreso_peso = new Progreso_Peso(1,12);
-        _comando = FabricaComando.instanciaCmdActializarProgresoPeso(_progreso_peso);
+        _comando = FabricaComando.instanciaCmdActializarProgresoPeso
+        (_progreso_peso);
         _comando.ejecutar();
         _respuesta = _comando.getRespuestActulizaPeso();
         Assert.assertEquals(_respuesta,"PESO ACTUALIZADO");
@@ -47,7 +45,8 @@ public class PruebaComandoActualizarPeso {
     @Test
     public void pruebaUsuarioInexistente(){
         _progreso_peso = new Progreso_Peso(0,12);
-        _comando = FabricaComando.instanciaCmdActializarProgresoPeso(_progreso_peso);
+        _comando = FabricaComando.instanciaCmdActializarProgresoPeso
+        (_progreso_peso);
         _comando.ejecutar();
         _respuesta = _comando.getRespuestActulizaPeso();
         Assert.assertNull(_respuesta);
@@ -57,7 +56,8 @@ public class PruebaComandoActualizarPeso {
     @Test
     public void pruebaPesoNegativo(){
         _progreso_peso = new Progreso_Peso(1,-1);
-        _comando = FabricaComando.instanciaCmdActializarProgresoPeso(_progreso_peso);
+        _comando = FabricaComando.instanciaCmdActializarProgresoPeso
+        (_progreso_peso);
         _comando.ejecutar();
         _respuesta = _comando.getRespuestActulizaPeso();
         Assert.assertNull(_respuesta);

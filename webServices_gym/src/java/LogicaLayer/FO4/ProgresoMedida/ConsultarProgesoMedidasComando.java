@@ -29,7 +29,8 @@ public class ConsultarProgesoMedidasComando extends Comando {
     }
     
     /**
-     * Metodo estatico que guarda la consulta en un string de la consulta de las medidas
+     * Metodo estatico que guarda la consulta en un string de la 
+     * consulta de las medidas
      * @return 
      */
     public static String getResultadoConsultaMedidas(){
@@ -38,7 +39,8 @@ public class ConsultarProgesoMedidasComando extends Comando {
     
     @Override
     public void ejecutar() {
-        FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1); 
+        FabricaDaoPostgre fab = 
+                (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1); 
         IDaoProgresoMedida dao = fab.getDaoProgresoMedida();
         _resultado = dao.consultarMedidas(_id);
     }

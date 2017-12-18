@@ -8,7 +8,6 @@ package LogicaLayer.FO4.ProgresoPeso;
 import AccesoDatosLayer.FOM04Postgre.IDaoProgresoPeso;
 import AccesoDatosLayer.FabricaAbstracta;
 import AccesoDatosLayer.FabricaDaoPostgre;
-import Comun.Dominio.Entidad;
 import LogicaLayer.Comando;
 
 /**
@@ -38,7 +37,8 @@ public class ConsultarProgresoPesoComando extends Comando {
 
     @Override
     public void ejecutar() {
-        FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
+        FabricaDaoPostgre fab = 
+                (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
         IDaoProgresoPeso dao = fab.getDaoProgresoPeso();
         _respuesta = dao.consultarProgresoPeso(_idUsuario);
     }

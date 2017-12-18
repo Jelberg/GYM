@@ -36,7 +36,8 @@ public class AgregarMedidaComando extends Comando {
     }
     @Override
     public void ejecutar() {
-        FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1); 
+        FabricaDaoPostgre fab = 
+                (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1); 
         IDaoProgresoMedida dao = fab.getDaoProgresoMedida();
         _respuesta = dao.agregarMedida(_pm);
     }
