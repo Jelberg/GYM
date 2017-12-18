@@ -8,6 +8,13 @@ package FO4;
 
 import FO4.TestAccesoDatos.TestDaoMedida;
 import FO4.TestAccesoDatos.TestDaoPeso;
+import FO4.TestsComandos.PruebaComandoActualizarMedida;
+import FO4.TestsComandos.PruebaComandoActualizarPeso;
+import FO4.TestsComandos.PruebaComandoAgregarMedida;
+import FO4.TestsComandos.PruebaComandoAgregarPeso;
+import FO4.TestsComandos.PruebaComandoEliminarMedida;
+import FO4.TestsComandos.PruebaComandoEliminarPeso;
+import FO4.TestsComandos.PruebaComandoInsertarComentario;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -19,7 +26,13 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ TestDaoPeso.class,
-                      TestDaoMedida.class})
+                      TestDaoMedida.class,PruebaComandoActualizarMedida.class,
+                      PruebaComandoActualizarPeso.class,
+                      PruebaComandoAgregarMedida.class,
+                      PruebaComandoAgregarPeso.class,
+                      PruebaComandoEliminarMedida.class,
+                      PruebaComandoEliminarPeso.class,
+                      PruebaComandoInsertarComentario.class})
 
 public class ComposicionTest {
 }
