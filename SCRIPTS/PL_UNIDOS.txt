@@ -1692,6 +1692,20 @@ END; $$
   LANGUAGE plpgsql;
   
 
+CREATE OR REPLACE FUNCTION fo_m04_inserta_progreso_compartido(
+    mensaje character varying,
+    usuario INT)
+  RETURNS void
+   AS $$
+    DECLARE
+	fecha_actual DATE;
+    BEGIN
+	fecha_actual  := current_date;
+        INSERT INTO comentario (com_mensaje, com_fecha, fk_usuario) VALUES
+        ( mensaje, fecha_actual, usuario );
+    END; $$
+  LANGUAGE plpgsql;
+
 --Este solo devuelve las medidas de ese usuario en esa fecha.
 CREATE OR REPLACE FUNCTION fo_m04_get_progresom(usuario_id int)
   RETURNS TABLE(medida INT, tipo character varying, fecha date)

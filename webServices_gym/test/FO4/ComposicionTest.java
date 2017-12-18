@@ -6,6 +6,7 @@
 package FO4;
 
 
+import FO4.TestAccesoDatos.TestDaoComentario;
 import FO4.TestAccesoDatos.TestDaoMedida;
 import FO4.TestAccesoDatos.TestDaoPeso;
 import org.junit.runner.RunWith;
@@ -19,7 +20,8 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ TestDaoPeso.class,
-                      TestDaoMedida.class})
+                      TestDaoMedida.class,
+                      TestDaoComentario.class})
 
 public class ComposicionTest {
 }
