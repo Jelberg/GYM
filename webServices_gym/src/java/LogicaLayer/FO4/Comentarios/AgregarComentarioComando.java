@@ -46,7 +46,8 @@ public class AgregarComentarioComando extends Comando {
     
     @Override
     public void ejecutar() {
-        FabricaDaoPostgre _fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1); 
+        FabricaDaoPostgre _fab = 
+                (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1); 
         IDaoComentario _dao = _fab.getDaoComentario();
         _response = _dao.insertar(_comentario);
     }

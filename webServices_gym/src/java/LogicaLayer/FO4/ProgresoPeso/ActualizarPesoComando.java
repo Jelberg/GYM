@@ -37,7 +37,8 @@ public class ActualizarPesoComando extends Comando {
     
     @Override
     public void ejecutar() {
-        FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1); 
+        FabricaDaoPostgre fab = 
+                (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1); 
         IDaoProgresoPeso dao = fab.getDaoProgresoPeso(); 
         _respuesta= dao.actualizarPeso(pp);
     }

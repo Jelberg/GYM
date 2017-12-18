@@ -5,25 +5,21 @@
  */
 package AccesoDatosLayer.FOM04Postgre;
 
-import AccesoDatosLayer.Dao;
 import AccesoDatosLayer.DaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Progreso_Peso;
-import Comun.Util.CompararProgreso;
-import Comun.Validaciones.ValidationWS;
-import AccesoDatosLayer.DaoPostgre;
-import Comun.Dominio.Entidad;
-import Comun.Dominio.Progreso_Peso;
+import Comun.Excepciones.FO4.AgregarPesoExcepcion;
 import Comun.Excepciones.ParameterNullException;
 import Comun.Util.CompararProgreso;
+import Comun.Util.ConfigurarLogger;
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -37,7 +33,16 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
     private ArrayList<Progreso_Peso> _jsonArray;
     private Entidad _progresoPeso;
     private ArrayList<Progreso_Peso> _aux;
+    ConfigurarLogger _cl;
+    Logger _logger;
     
+    /**
+     * Constructor de Dao Progreso Peso
+     */
+    public DaoProgresoPeso(){
+        _cl = new ConfigurarLogger();
+         _logger = _cl.getLogr();
+    }
     
     /**
      * Metodo Para acceder a la BD que consulta el progreso del peso
@@ -50,7 +55,8 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
     }
 
     /**
-     * Realiza la consulta a la bd y usa el stored procedure para el prgreso del peso
+     * Realiza la consulta a la bd y usa el stored procedure para el 
+     * prgreso del peso
      * @param id_usuario
      * @return ArrayList del tipo progreso_peso 
      */
@@ -66,26 +72,31 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
             
             while( rs.next() ){
                 _jsonArray.add( new Progreso_Peso() );
-                _jsonArray.get( _jsonArray.size() - 1 ).setPeso( rs.getInt( "peso" ) );
-                _jsonArray.get( _jsonArray.size() - 1 ).setFechaP(rs.getDate( "fecha" ) );
-                _jsonArray.get( _jsonArray.size() - 1 ).setId( rs.getInt( "id" ) );
+                _jsonArray.get( _jsonArray.size() - 1 ).setPeso
+                                                        ( rs.getInt( "peso" ) );
+                _jsonArray.get( _jsonArray.size() - 1 ).setFechaP
+                                                       (rs.getDate( "fecha" ) );
+                _jsonArray.get( _jsonArray.size() - 1 ).setId
+                                                        ( rs.getInt( "id" ) );
             }
             
             _aux = CompararProgreso.compararProgresoPeso( _jsonArray );
             _resp = _gson.toJson(_aux);
-            
+            return _resp;
         }
         catch ( SQLException e ) {
-            
+            _logger.log(Level.SEVERE, "Error con la conexion a BD: {0}", 
+                    e.getMessage());
+            return null;
         }
         finally {
             cerrarConexion( _conn );
-            return _resp;
         } 
     }
 
     /**
      * Conexion a la base de datos para agregar peso al usuario
+     * @param _pp
      * @return 
      */
     @Override
@@ -105,16 +116,37 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
         }
         catch (SQLException e){
             //response.put( "error", e.getMessage() );
-            return null;
+            _logger.log(Level.SEVERE, "Error con la conexion a BD: {0}",
+                    e.getMessage());
+            try {
+                 AgregarPesoExcepcion _error = new AgregarPesoExcepcion(e,DaoProgresoPeso.class.getSimpleName(), e.getMessage());
+                 throw _error;
+             } catch (AgregarPesoExcepcion ex) {
+                 Logger.getLogger(DaoProgresoPeso.class.getName()).log(Level.SEVERE, null, ex);
+             }
+            
+        }
+        catch(Exception e){
+             try {
+                 AgregarPesoExcepcion _error = new AgregarPesoExcepcion(e,DaoProgresoPeso.class.getSimpleName(), e.getMessage());
+                 throw _error;
+             } catch (AgregarPesoExcepcion ex) {
+                 Logger.getLogger(DaoProgresoPeso.class.getName()).log(Level.SEVERE, null, ex);
+             }
         }
         
         finally {
             cerrarConexion( _conn );
             
         }
-        
+        return null;
     }
 
+    /**
+     * Metodo para eliminar el peso del usuario de la base de datos
+     * @param id_usuario
+     * @return 
+     */
     @Override
     public String eliminarPeso(int id_usuario) {
         try{
@@ -127,9 +159,12 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
             return "PESO ELIMINADO";
         }
         catch ( SQLException e ) {
+            _logger.log(Level.SEVERE, "Error con la conexion a BD: {0}",
+                    e.getMessage());
             return null;
         }
         catch ( ParameterNullException e ) {
+            _logger.log(Level.SEVERE, "Parametro Nulo: {0}", e.getMessage());
             return null;
         }
         finally {
@@ -138,6 +173,11 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
     
     }
 
+    /**
+     * Metodo para actualizar peso en la base de datos
+     * @param en
+     * @return 
+     */
     @Override
     public String actualizarPeso(Entidad en) {
         try {
@@ -151,9 +191,12 @@ public class DaoProgresoPeso extends DaoPostgre implements IDaoProgresoPeso{
             return "PESO ACTUALIZADO";
         }
         catch (SQLException e){
+            _logger.log(Level.SEVERE, "Error con la conexion a BD: {0}",
+                    e.getMessage());
             return null;
         }
         catch ( ParameterNullException e ) {
+            _logger.log(Level.SEVERE, "Parametro Nulo: {0}", e.getMessage());
             return null;
         }
         finally {

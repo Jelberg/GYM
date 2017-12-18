@@ -18,9 +18,8 @@ public class Entrenador extends Persona{
         _historial = historial;
     }
     public Entrenador(){}
-    /**
-     * @return the historial
-     */
+    
+    
     public Entrenador( String correo ){
         super( correo );
     }

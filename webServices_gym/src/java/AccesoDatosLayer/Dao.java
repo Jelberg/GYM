@@ -5,10 +5,7 @@
  */
 package AccesoDatosLayer;
 
-import Comun.Dominio.Registro;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -29,9 +26,6 @@ public abstract class Dao implements IDao{
     /**
      * Metodo que realiza la conexion con la base de datos
      * @return Conexion hecha a la base de datos
-     * @throws ClassNotFoundException Si la clase no es encontrada
-     * @throws SQLException Problemas con sql
-     * @throws Exception
      * @see Connection
      * @see Statement
      */
@@ -40,7 +34,8 @@ public abstract class Dao implements IDao{
         /*try
         {
             Class.forName( Registro.POSTGRE_BD_CLASS_FOR_NAME );
-            _conn = DriverManager.getConnection( Registro.POSTGRE_BD_URL, Registro.POSTGRE_BD_USER, Registro.POSTGRE_BD_PASSWORD );
+            _conn = DriverManager.getConnection( Registro.POSTGRE_BD_URL, 
+            Registro.POSTGRE_BD_USER, Registro.POSTGRE_BD_PASSWORD );
         }
         catch (ClassNotFoundException e)
         {

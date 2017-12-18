@@ -183,17 +183,6 @@ public class FOM01_Usuario {
     /**
      * Metodo que recibe como parametros los datos del usuario
      * para modificarlo.
-     * @param id
-     * @param usuar
-     * @param password
-     * @param nombre
-     * @param apellido
-     * @param sexo
-     * @param telefono
-     * @param estatura
-     * @param correo
-     * @param entrenador
-     * @param codigo
      * @return Devuelve el mensaje de la petición.
      */
     @POST

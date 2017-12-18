@@ -18,7 +18,6 @@ import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -34,7 +33,8 @@ public class FOM04_Progreso_Medida {
     Gson _gson = new Gson();
     
     /**
-     * Servicio que recibe y responde la consulta para obtener el progreso de las medidas del usuario
+     * Servicio que recibe y responde la consulta para obtener el 
+     * progreso de las medidas del usuario
      * @param id_usuario
      * @return 
      */
@@ -42,8 +42,10 @@ public class FOM04_Progreso_Medida {
     @Path("/getProgresoM")
     @Produces("application/json")
     public String getProgresoM (@QueryParam("id_usuario") Integer id_usuario){
-        Comando comando = FabricaComando.instanciaCmdConsutaProgresoMedidas(id_usuario);
-        ConsultarProgesoMedidasComando cmd = (ConsultarProgesoMedidasComando) comando;
+        Comando comando = 
+                FabricaComando.instanciaCmdConsutaProgresoMedidas(id_usuario);
+        ConsultarProgesoMedidasComando cmd = 
+                (ConsultarProgesoMedidasComando) comando;
         cmd.ejecutar();
         _response = cmd.getResultadoConsultaMedidas();
         return  _response ;
@@ -61,13 +63,15 @@ public class FOM04_Progreso_Medida {
     @Produces("application/json")
     public String insertaMedidas(@QueryParam("id_usuario") int id_usuario,
                                  @QueryParam("medida") int medida,
-                                 @QueryParam("tipo_medida") String tipo_medida){
-        Entidad en = FabricaEntidad.InstanciaProgresoMedida(id_usuario, medida, tipo_medida);
+                                 @QueryParam("tipo_medida") int tipo_medida){
+        Entidad en = 
+                FabricaEntidad.InstanciaProgresoMedida
+                                (id_usuario, medida, tipo_medida);
         Comando comando = FabricaComando.instanciaCmdAgregarMedida(en);
         AgregarMedidaComando cmd = (AgregarMedidaComando) comando;
         cmd.ejecutar();
         _response = cmd.getRespuestaAgregarMedida();
-        return _response;
+        return _gson.toJson(_response);
     }
     
     /**
@@ -78,19 +82,21 @@ public class FOM04_Progreso_Medida {
      * @return 
      */
     @GET
-    @Path("/actualizarMedida")
+    @Path("/actualizaMedida")
     @Produces("application/json")
     public String actualizarMedida(@QueryParam ( "id_usuario" ) int idUsuario,
-                                   @QueryParam ( "tipo_medida" ) String tipo_medida,
-                                   @QueryParam ( "medida" ) int medida){
+                            @QueryParam ( "tipo_medida" ) String tipo_medida,
+                            @QueryParam ( "medida" ) int medida){
         Progreso_Medida _progresoMedida = (Progreso_Medida) 
-                FabricaEntidad.InstanciaActualizarMedida(idUsuario, medida, tipo_medida);
-        ActualizarMedidaComando _comando = FabricaComando.instanciaCmdActualizarMedidas(_progresoMedida);
+                FabricaEntidad.InstanciaActualizarMedida
+                                    (idUsuario, medida, tipo_medida);
+        ActualizarMedidaComando _comando = 
+                FabricaComando.instanciaCmdActualizarMedidas(_progresoMedida);
         _comando.ejecutar();
         
         _response = _comando.getRespuesta();
         
-        return _response;
+        return _gson.toJson(_response);
     }
     
     /**
@@ -112,7 +118,7 @@ public class FOM04_Progreso_Medida {
          
          _response = _comando.obtenerRespuesta();
          
-         return _response;
+         return _gson.toJson(_response);
     }
     
     /**
@@ -123,7 +129,8 @@ public class FOM04_Progreso_Medida {
     @GET
     @Path("/getMedidasDelAno")
     @Produces("aplication/json")
-    public String obtenerMedidasDelAno(@QueryParam("sobrenombre") String sobrenombre){
+    public String obtenerMedidasDelAno(@QueryParam("sobrenombre") 
+                                        String sobrenombre){
         Progreso_Medida _progreso_medida = 
                 FabricaEntidad.InstanciaConsultarMedidasAnuales(sobrenombre);
         ComandoConsultarMedidasAnual _comando = 

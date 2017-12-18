@@ -37,7 +37,8 @@ public class ConsultarComentarioProgresosComando extends Comando {
 
     @Override
     public void ejecutar() {
-        FabricaDaoPostgre _fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
+        FabricaDaoPostgre _fab = 
+                (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
         IDaoComentario _dao = _fab.instanciaDaoComentario();
         _respuesta = _dao.consultaProgresos(_id);
     }

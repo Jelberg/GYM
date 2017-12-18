@@ -20,9 +20,9 @@ public class ComandoInsertarClase extends Comando {
     
     /**
      * Constructor de clase.
-     * @param classe Recibe un objeto Entidad con los datos de la clase
+     * @param clase Recibe un objeto Entidad con los datos de la clase
      * a insertar.
-     * @see Entidad.
+   
      */
     public ComandoInsertarClase( Entidad clase ){
         this._clase = clase;

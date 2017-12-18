@@ -6,6 +6,7 @@
 package Comun.Dominio;
 
 //import java.sql.Date;
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -51,7 +52,9 @@ public class FabricaEntidad {
       fecha, horaInicio, horaFin, capacidad);
     
     }
-    
+    static public Entidad instanciaClaseId( int id ){
+        return new Clase(id);
+    }
     static public Entidad instanciaInsertarClase(String nombre, String descripcion){
             return new Clase(nombre, descripcion);
     }
@@ -62,6 +65,22 @@ public class FabricaEntidad {
     
     static public Entidad instanciaModificarClase(String nombre, String descripcion){
             return new Clase(nombre, descripcion);
+    }
+    
+    static public Entidad instanciaConsultarHorarioClase(Date fecha, String dia, int capacidad,
+                    Time hora_inicio, Time hora_fin, String status, int duracion,
+                    int nombreclase,int instructor){
+            return new HorarioClase(fecha, dia, capacidad,
+                    hora_inicio,hora_fin,status,duracion,nombreclase,instructor);         
+    }
+    
+    public static Entidad instanciaEliminarHorarioClase(int id) {
+        return new HorarioClase(id);
+    }
+    
+    public static Entidad instanciaModificarHorarioClase(int nombreclase, int instructor, java.sql.Date fecha, String dia, int capacidad, Time hora_inicio, Time hora_fin) {
+        return new HorarioClase(nombreclase, instructor, fecha, dia, capacidad,
+        hora_inicio, hora_fin);
     }
     // Fin de BO2
     
@@ -191,6 +210,17 @@ public class FabricaEntidad {
     }
 
     /**
+     * Instancia progreso medida con idtipo de tipo int 
+     * @param id
+     * @param medida
+     * @param tipo
+     * @return 
+     */
+    
+    static public Entidad InstanciaProgresoMedida(int id, int medida, int tipo){
+        return new Progreso_Medida(id,medida,tipo);
+    }
+    /**
      * Instancia del comentario
      * @param idUsuario
      * @param mensaje
@@ -256,6 +286,8 @@ public class FabricaEntidad {
     } 
     
     // Fin de M04        
+
+    
 
     
 }

@@ -39,7 +39,8 @@ public class ActualizarMedidaComando extends Comando {
     
     @Override
     public void ejecutar(){
-        FabricaDaoPostgre _fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
+        FabricaDaoPostgre _fab = 
+                (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
         IDaoProgresoMedida _dao = _fab.getDaoProgresoMedida();
         _response = _dao.actualizarMedida(_progreso_medida);
     }

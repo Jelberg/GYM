@@ -31,8 +31,8 @@ public class ComandoClaseConsultaDescripcion extends Comando {
         _clase = clase;
     }
     public ComandoClaseConsultaDescripcion() {}
-    public ArrayList<Clase> consultarDescripcionClase(){
-        return _listaClase;
+    public Entidad consultarDescripcionClase(){
+        return _clase;
     }
     /**
      * Metodo que es llamado para ejecutar los llamados y asi realizar la accion
@@ -41,7 +41,8 @@ public class ComandoClaseConsultaDescripcion extends Comando {
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
         IDaoClase dao = fab.instanciaDaoClase();
-        _listaClase = dao.consultarClases();}
+        _clase = dao.buscaDescripcion(_clase);
+    }
     
     
 }

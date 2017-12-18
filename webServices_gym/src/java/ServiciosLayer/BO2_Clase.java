@@ -13,6 +13,9 @@ import Comun.Validaciones.ValidationWS;
 import LogicaLayer.BO2.ComandoBuscaClasePorId;
 import LogicaLayer.BO2.ComandoClaseConsultaDescripcion;
 import LogicaLayer.BO2.ComandoConsultarClase;
+import LogicaLayer.BO2.ComandoEliminaClase;
+import LogicaLayer.BO2.ComandoInsertarClase;
+import LogicaLayer.BO2.ComandoModificarClase;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Date;
@@ -33,6 +36,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author marvian
  */
+@Path("/BOM02_Clase")
 public class BO2_Clase {
     private Gson _gson = new Gson();
     private String _response;
@@ -75,12 +79,15 @@ public class BO2_Clase {
             }});
             
             Entidad clase = FabricaEntidad.instanciaInsertarClase(nombre, descripcion);
-            
+            ComandoInsertarClase cmd = FabricaComando.instanciaCmdInsertaClase( clase );
+            cmd.ejecutar();
+            clase = cmd.getMensaje();
+            response.put ( "data", clase.getMensaje() );
            
             }
         
         catch (ParameterNullException e) {
-            response.put("error", e.getMessage());
+            response.put("error, parametro vacio", e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
@@ -112,7 +119,11 @@ public class BO2_Clase {
             }});
                 
             Entidad clase = FabricaEntidad.instanciaEliminaClase(nombre);
+            ComandoEliminaClase cmd = FabricaComando.instanciaCmdEliminaClase(clase);
+            cmd.ejecutar();
+            clase = cmd.getMensaje();
             
+            response.put ( "data", clase.getMensaje() );
            
             }
         
@@ -147,6 +158,10 @@ public class BO2_Clase {
             }});
             
             Entidad clase = FabricaEntidad.instanciaModificarClase(nombre, descripcion);
+            ComandoModificarClase cmd = FabricaComando.instanciaCmdModificarClase(clase);
+            cmd.ejecutar();
+            clase = cmd.getMensaje();
+            response.put ( "data", clase.getMensaje() );
         }
         catch (ParameterNullException e) {
             response.put("error", e.getMessage());
@@ -169,23 +184,51 @@ public class BO2_Clase {
     @Path("/getClase")
     @Produces("application/json")
     public String buscaDescripcion(@QueryParam("nombre") String nombre){
-    
-        ComandoClaseConsultaDescripcion cmd = FabricaComando.instanciaCmdClaseConsultaDescripcion();
-        cmd.ejecutar();
-        _listaClases = cmd.consultarDescripcionClase();
-        _response = _gson.toJson( _listaClases);
-        return _response;
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put ( "nombre" , nombre );
+            }});
+            Entidad clase = FabricaEntidad.instanciaEliminaClase(nombre);
+            ComandoClaseConsultaDescripcion cmd = FabricaComando.instanciaCmdClaseConsultaDescripcion(clase);
+            cmd.ejecutar();
+            _Clase = cmd.consultarDescripcionClase();
+            
+        }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            return _gson.toJson(_Clase);
+        }
     }
     
     @GET
     @Path("/getClaseId")
     @Produces("application/json")
     public String buscaPorId(@QueryParam("id") int id){
-        ComandoBuscaClasePorId cmd = FabricaComando.instanciaCmdBuscaClasePorId();
-        cmd.ejecutar();
-        _listaClases = cmd.consultarBuscaClasePorId();
-        _response = _gson.toJson( _listaClases);
-        return _response;
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
+                put ( "id" , id );
+            }});
+            Entidad clase = FabricaEntidad.instanciaClaseId(id);
+            ComandoBuscaClasePorId cmd = FabricaComando.instanciaCmdBuscaClasePorId(clase);
+            cmd.ejecutar();
+            _Clase = cmd.consultarBuscaClasePorId();
         }
+        catch (ParameterNullException e) {
+            response.put("error", e.getMessage());
+        }
+        catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        finally {
+            return _gson.toJson(_Clase);
+        }
+    }
  
 }

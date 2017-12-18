@@ -33,7 +33,8 @@ public class FOM04_Progreso_Peso {
     
     
     /**
-     * Servicio que recibe y responde a la solicitud de consulta del progreso del peso
+     * Servicio que recibe y responde a la solicitud de consulta del 
+     * progreso del peso
      * @param id_usuario
      * @return 
      */
@@ -41,8 +42,10 @@ public class FOM04_Progreso_Peso {
     @Path( "/getProgresoP" )
     @Produces( "application/json" )
     public String getProgresoP( @QueryParam( "id_usuario" ) int id_usuario ){
-        Comando comando = FabricaComando.instanciaCmdConsultarProgresoPeso(id_usuario);
-        ConsultarProgresoPesoComando cmd = (ConsultarProgresoPesoComando) comando;
+        Comando comando = FabricaComando.instanciaCmdConsultarProgresoPeso
+                            (id_usuario);
+        ConsultarProgresoPesoComando cmd =
+                (ConsultarProgresoPesoComando) comando;
         cmd.ejecutar();
         _response = cmd.getResultadoConsultaProgresoPeso();
         return  _response ;
@@ -50,7 +53,8 @@ public class FOM04_Progreso_Peso {
     }
     
     /**
-     * Servicio que recibe y responde a la solicitud de insercion del peso del usuario
+     * Servicio que recibe y responde a la solicitud de insercion del 
+     * peso del usuario
      * @param id_usuario
      * @param peso
      * @return 
@@ -61,7 +65,8 @@ public class FOM04_Progreso_Peso {
     @Produces( "application/json" )
     public String insertaPeso( @QueryParam ( "id_usuario" ) int id_usuario,
                                @QueryParam ( "peso" ) int peso ){
-        Entidad progresoPeso = FabricaEntidad.InstaciaProgresoPeso(id_usuario, peso);
+        Entidad progresoPeso = FabricaEntidad.InstaciaProgresoPeso
+                                (id_usuario, peso);
         Comando comando = FabricaComando.instanciaCmdAgregarPeso(progresoPeso);
         AgregarPesoComando cmd = (AgregarPesoComando) comando;
         cmd.ejecutar();
@@ -70,7 +75,8 @@ public class FOM04_Progreso_Peso {
     }
     
     /**
-     * Servicio que recibe y responde a la solicitud de eliminacion del peso del usuario
+     * Servicio que recibe y responde a la solicitud de eliminacion del 
+     * peso del usuario
      * @param id_usuario
      * @return 
      */
@@ -78,7 +84,8 @@ public class FOM04_Progreso_Peso {
     @Path( "/eliminarPeso" )
     @Produces( "application/json" )
     public String eliminaPeso(@QueryParam( "id_usuario" ) int id_usuario) {
-        Comando comando = FabricaComando.instanciaCmdEliminarProgresoPeso(id_usuario);
+        Comando comando = 
+                FabricaComando.instanciaCmdEliminarProgresoPeso(id_usuario);
         EliminarPesoComando cmd = (EliminarPesoComando) comando;
         cmd.ejecutar();
         _response = cmd.getRespuestaEliminarPeso();
@@ -86,7 +93,8 @@ public class FOM04_Progreso_Peso {
     }
     
     /**
-     * Servicio que recibe y responde a la solicitud de actualizacion del peso del usuario
+     * Servicio que recibe y responde a la solicitud de actualizacion del 
+     * peso del usuario
      * @param id_usuario
      * @param peso
      * @return 
@@ -96,8 +104,10 @@ public class FOM04_Progreso_Peso {
     @Produces( "application/json" )
     public String actualizarPeso ( @QueryParam ( "id_usuario" ) int id_usuario,
                                    @QueryParam ( "peso" ) int peso){
-        Entidad progresoPeso = FabricaEntidad.InstaciaProgresoPeso(id_usuario, peso);
-        Comando comando = FabricaComando.instanciaCmdActializarProgresoPeso(progresoPeso);
+        Entidad progresoPeso = 
+                FabricaEntidad.InstaciaProgresoPeso(id_usuario, peso);
+        Comando comando = 
+                FabricaComando.instanciaCmdActializarProgresoPeso(progresoPeso);
         ActualizarPesoComando cmd = (ActualizarPesoComando) comando;
         cmd.ejecutar();
         _response = cmd.getRespuestActulizaPeso();

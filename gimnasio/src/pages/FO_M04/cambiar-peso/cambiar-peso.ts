@@ -28,7 +28,7 @@ export class CambiarPesoPage {
    public cargarPeso():void{
     console.log( this.nuevoPeso );
     this.abrirToast("Peso Agregado");
-    let urlPeticion = "F0M04_Progreso_Peso/insertaProgresoPeso?id_usuario=1&peso="+this.nuevoPeso;
+    let urlPeticion = "F0M04_Progreso_Peso/insertaProgresoPeso?id_usuario="+localStorage.getItem("id")+"&peso="+this.nuevoPeso;
     this.userService.getDato(urlPeticion).subscribe(data => {    
       let i: number = 0;
       while ( i < data.length ){
@@ -63,7 +63,7 @@ export class CambiarPesoPage {
   public eliminarPeso():void {
     console.log( this.nuevoPeso );
     this.abrirToast("Peso Eliminado");
-    let urlPeticion = "F0M04_Progreso_Peso/eliminarPeso?id_usuario=1";
+    let urlPeticion = "F0M04_Progreso_Peso/eliminarPeso?id_usuario="+localStorage.getItem("id");
     this.userService.getDato( urlPeticion ).subscribe( datas => {
       let i: number = 0;
       while ( i < datas.length ){
@@ -80,7 +80,7 @@ export class CambiarPesoPage {
   public refrescarPeso():void {
     this.abrirToast("Peso Actualizado");
     console.log( this.nuevoPeso );
-    let urlPeticion = "F0M04_Progreso_Peso/actualizaProgresoPeso?id_usuario=1&peso="+this.nuevoPeso;
+    let urlPeticion = "F0M04_Progreso_Peso/actualizaProgresoPeso?id_usuario="+localStorage.getItem("id")+"&peso="+this.nuevoPeso;
     this.userService.getDato( urlPeticion ).subscribe( data => {
       let i: number = 0;
       //this.abrirToast("Peso Actualizado");

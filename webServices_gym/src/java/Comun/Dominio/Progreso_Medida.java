@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class Progreso_Medida extends Entidad {
    
-    private int _id;
+    
     private int _medida;
     private String _tipo;
     private int _idtipo;
@@ -60,9 +60,21 @@ public class Progreso_Medida extends Entidad {
      * @param _tipo 
      */
     public Progreso_Medida(int _id, int _medida, String _tipo) {
-        this._id = _id;
+        super(_id);
         this._medida = _medida;
         this._tipo = _tipo;
+    }
+    
+    /**
+     * Constructor Progreso Medida
+     * @param _id
+     * @param _medida
+     * @param _tipo 
+     */
+    public Progreso_Medida(int _id, int _medida, int _tipo) {
+        super(_id);
+        this._medida = _medida;
+        this._idtipo = _tipo;
     }
     
     /**
@@ -71,10 +83,14 @@ public class Progreso_Medida extends Entidad {
      * @param _tipo 
      */
     public Progreso_Medida(int _id, String _tipo){
-        this._id = _id;
+        super(_id);
         this._tipo = _tipo;
     }
 
+    /**
+     * Constructor Progreso Medida
+     * @param sobrenombre 
+     */
     public Progreso_Medida(String sobrenombre){
         this._sobrenombre = sobrenombre;
     }
@@ -82,9 +98,7 @@ public class Progreso_Medida extends Entidad {
     /**
      * @return the _id
      */
-    public int getId() {
-        return _id;
-    }
+   
 
     public int getIdtipo() {
         return _idtipo;
