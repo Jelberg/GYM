@@ -5,15 +5,12 @@
  */
 package Comun.Excepciones.FO4;
 
-import java.sql.SQLException;
-
 /**
  *
  * @author Elberg
  */
-public class AgregarPesoExcepcion extends Exception{
-    
-    private int _code=5010;
+public class AgregarMedidaExcepcion extends Exception {
+    private int _code=5020;
     private String _clase;
     private String _especificacion;
 
@@ -23,7 +20,7 @@ public class AgregarPesoExcepcion extends Exception{
      * @param _clase
      * @param _especificacion 
      */
-    public AgregarPesoExcepcion(Exception _error, String _clase, String _especificacion) {
+    public AgregarMedidaExcepcion(Exception _error, String _clase, String _especificacion) {
         super(_error);
         this._clase = _clase;
         this._especificacion = _especificacion;
@@ -35,8 +32,6 @@ public class AgregarPesoExcepcion extends Exception{
      */
     @Override
     public String toString() {
-        return "AgregarPesoExepcion{" + "_code=" + _code + ", _clase=" + _clase + ", _especificacion=" + _especificacion + '}';
+        return "AgregarMedidaExepcion{" + "_code=" + _code + ", _clase=" + _clase + ", _especificacion=" + _especificacion + '}';
     }
-    
-    
 }
