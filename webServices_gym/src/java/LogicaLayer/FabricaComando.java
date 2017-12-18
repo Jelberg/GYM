@@ -50,6 +50,24 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.FO4.*;
+import LogicaLayer.BO1.ComandoGetEquipoById;
+import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO2.ComandoBuscaClasePorId;
+import LogicaLayer.BO2.ComandoClaseConsultaDescripcion;
+import LogicaLayer.BO2.ComandoInsertarClase;
+import LogicaLayer.BO2.ComandoInsertarEntrenador;
+import LogicaLayer.BO2.CmdActivarInstructor;
+import LogicaLayer.BO2.CmdInactivarInstructor;
+import LogicaLayer.BO2.ComandoConsultarHorarioClase;
+import LogicaLayer.BO2.ComandoEliminarHorarioClase;
+import LogicaLayer.BO2.ComandoInsertarHorarioClase;
+import LogicaLayer.BO2.ComandoModificarClase;
+import LogicaLayer.BO2.ComandoModificarEntrenador;
+import LogicaLayer.BO2.ComandoModificarHorarioClase;
+import LogicaLayer.BO2.ComandoEliminaEntrenador;
+import LogicaLayer.BO2.ComandoModificarClase;
+import LogicaLayer.BO2.ComandoModificarEntrenador;
+import LogicaLayer.F03.ConsultarEjerciciosRealizadosComando;
 import LogicaLayer.FO4.Comentarios.AgregarComentarioComando;
 import LogicaLayer.FO4.Comentarios.ComandoObtenerComentariosProgMedidas;
 import LogicaLayer.FO4.Comentarios.CompartirProgresoComando;
@@ -199,6 +217,38 @@ public class FabricaComando {
      */    
     public static ComandoClaseConsultaDescripcion instanciaCmdClaseConsultaDescripcion(){
         return new ComandoClaseConsultaDescripcion();
+    }
+    
+    /**
+     * Metodo llamado para realizar el insert de un horarioclase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoInsertarHorarioClase instanciaCmdInsertaHorarioClase( Entidad ent){
+        return new ComandoInsertarHorarioClase( ent );
+    }
+    
+    /**
+     * Metodo llamado para realizar la modificacion de un horarioclase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoModificarHorarioClase instanciaCmdModificarHorarioClase( Entidad ent){
+        return new ComandoModificarHorarioClase( ent );
+    }
+    
+    /**
+     * Metodo llamado para realizar la eliminacion de un horarioclase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoEliminarHorarioClase instanciaCmdEliminarHorarioClase( Entidad ent){
+        return new ComandoEliminarHorarioClase( ent );
+    }
+    
+    /**
+     * Metodo llamado para realizar la consulta de un horarioclase.
+     * @return Devuelve un comando para realizar la accion.
+     */
+    public static ComandoConsultarHorarioClase instanciaCmdConsultarHorarioClase(){
+        return new ComandoConsultarHorarioClase();
     }
     
     /**

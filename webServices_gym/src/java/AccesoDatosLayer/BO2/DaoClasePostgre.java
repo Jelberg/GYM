@@ -64,6 +64,8 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
             
         }
         catch(SQLException e) {
+            jsonArray.add( new Clase());
+            jsonArray.get(0).setMensaje( "Error con la conexion, intente de nuevo." );
         }
         catch (ParameterNullException e) {
            
