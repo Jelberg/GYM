@@ -6,13 +6,10 @@
 package LogicaLayer.BO1;
 
 import AccesoDatosLayer.BO1.IDaoEquipo;
-import AccesoDatosLayer.DaoPostgre;
 import AccesoDatosLayer.FabricaAbstracta;
 import AccesoDatosLayer.FabricaDaoPostgre;
 import Comun.Dominio.Entidad;
-import Comun.Dominio.Equipo;
 import LogicaLayer.Comando;
-import java.util.ArrayList;
 
 /**
  *
@@ -31,6 +28,10 @@ public class ComandoEliminarEquipo extends Comando{
         _equipo.setMensaje(nombre);
     }
     
+        public Entidad getMensaje(){
+        return _equipo;
+    }
+        
     public ComandoEliminarEquipo (Entidad ent){
         _equipo.setId(ent.getId());
         _equipo.setMensaje(ent.getMensaje());
