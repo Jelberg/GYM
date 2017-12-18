@@ -24,6 +24,8 @@ public class HorarioClase extends Entidad {
     private int nombreclase;
     private int instructor;
     private String Descripcion;
+    private String nombreConsulta;
+    private String instructorConsulta;
 
     public HorarioClase(int _id, Date _fecha, String _dia, int _capacidad, 
             Time _horaInicio, Time _horaFin, String _status, int _duracion, 
@@ -44,14 +46,17 @@ public class HorarioClase extends Entidad {
     public HorarioClase(){
         super();
     }
+    public HorarioClase(int id){
+        super(id);
+    }
 
-    HorarioClase(String nombre, String descripcion) {
+    public HorarioClase(String nombre, String descripcion) {
         super ();
         this.nombreclase = nombreclase;
         this.Descripcion = descripcion;
     }
 
-    HorarioClase(java.util.Date fecha, String dia, int capacidad, 
+    public HorarioClase(java.util.Date fecha, String dia, int capacidad, 
             Time hora_inicio, Time hora_fin, String status, int duracion, 
             int nombreclase, int instructor) {
        super ();
@@ -76,6 +81,20 @@ public class HorarioClase extends Entidad {
         this.capacidad = capacidad;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
+    }
+    public HorarioClase(java.util.Date fecha, String dia, int capacidad, 
+            Time hora_inicio, Time hora_fin, String status, int duracion, 
+            String nombreclase, String instructor) {
+       super ();
+       this.fecha = (Date) fecha;
+       this.dia = dia;
+       this.capacidad = capacidad;
+       this.horaInicio = horaInicio;
+       this.horaFin = horaFin;
+       this.status = status;
+       this.duracion = duracion;
+       this.nombreConsulta = nombreclase;
+       this.instructorConsulta = instructor;
     }
 
     public int getId() {
@@ -164,6 +183,34 @@ public class HorarioClase extends Entidad {
 
     public void setDescripcion(String Descripcion) {
         this.Descripcion = Descripcion;
+    }
+
+    /**
+     * @return the nombreConsulta
+     */
+    public String getNombreConsulta() {
+        return nombreConsulta;
+    }
+
+    /**
+     * @param nombreConsulta the nombreConsulta to set
+     */
+    public void setNombreConsulta(String nombreConsulta) {
+        this.nombreConsulta = nombreConsulta;
+    }
+
+    /**
+     * @return the instructorConsulta
+     */
+    public String getInstructorConsulta() {
+        return instructorConsulta;
+    }
+
+    /**
+     * @param instructorConsulta the instructorConsulta to set
+     */
+    public void setInstructorConsulta(String instructorConsulta) {
+        this.instructorConsulta = instructorConsulta;
     }
     
     

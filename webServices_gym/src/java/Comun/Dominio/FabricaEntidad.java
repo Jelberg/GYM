@@ -74,10 +74,8 @@ public class FabricaEntidad {
                     hora_inicio,hora_fin,status,duracion,nombreclase,instructor);         
     }
     
-    public static Entidad instanciaEliminarHorarioClase(int nombreclase, int instructor, java.sql.Date fecha, 
-            String dia, int capacidad, Time hora_inicio, Time hora_fin) {
-        return new HorarioClase(nombreclase, instructor, fecha, dia, capacidad,
-        hora_inicio, hora_fin);
+    public static Entidad instanciaEliminarHorarioClase(int id) {
+        return new HorarioClase(id);
     }
     
     public static Entidad instanciaModificarHorarioClase(int nombreclase, int instructor, java.sql.Date fecha, String dia, int capacidad, Time hora_inicio, Time hora_fin) {

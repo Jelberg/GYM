@@ -76,8 +76,8 @@ public class BO2_HorarioClase {
     public String insertaHorario_Clase(@QueryParam("fecha") Date fecha,
                                  @QueryParam("dia") String dia,
                                  @QueryParam("capacidad") int capacidad,
-                                 @QueryParam("hora_inicio") Time hora_inicio,
-                                 @QueryParam("hora_fin") Time hora_fin,
+                                 @QueryParam("hora_inicio") String hora_inicio,
+                                 @QueryParam("hora_fin") String hora_fin,
                                  @QueryParam("status") String status,
                                  @QueryParam("duracion") int duracion,
                                  @QueryParam("nombreclase") int nombreclase,
@@ -98,7 +98,7 @@ public class BO2_HorarioClase {
             }});
                 
             Entidad horarioClase = FabricaEntidad.instanciaConsultarHorarioClase(fecha, dia, capacidad,
-                    hora_inicio,hora_fin,status,duracion,nombreclase,instructor);
+                    Time.valueOf(hora_inicio),Time.valueOf(hora_fin),status,duracion,nombreclase,instructor);
             ComandoInsertarHorarioClase cmd = FabricaComando.instanciaCmdInsertaHorarioClase(horarioClase);
             cmd.ejecutar();
             horarioClase = cmd.getMensaje();
@@ -134,35 +134,22 @@ public class BO2_HorarioClase {
     @DELETE
     @Path("/eliminaHorario_Clase")
     @Produces("application/json")
-    public String eliminaHorario_Clase(@QueryParam("nombreclase") int nombreclase,
-                                 @QueryParam("instructor") int instructor,
-                                 @QueryParam("fecha") Date fecha,
-                                 @QueryParam("dia") String dia,
-                                 @QueryParam("capacidad") int capacidad,
-                                 @QueryParam("hora_inicio") Time hora_inicio,
-                                 @QueryParam("hora_fin") Time hora_fin){
+    public String eliminaHorario_Clase(@QueryParam("id") int id){
 
         Map<String, String> response = new HashMap<String, String>();
         try{
 
             ValidationWS.validarParametrosNotNull(new HashMap<String, Object>(){ {
-                put("nombreclase", nombreclase);
-                put("instructor", instructor);
-                put("fecha", fecha );
-                put("dia", dia );
-                put("capacidad", capacidad );
-                put("hora_inicio", hora_inicio );
-                put("hora_fin", hora_fin );
+                put("id", id);
             }});
             
-            Entidad horarioClase = FabricaEntidad.instanciaEliminarHorarioClase(nombreclase,instructor,
-                    fecha, dia, capacidad, hora_inicio,hora_fin);
+            Entidad horarioClase = FabricaEntidad.instanciaEliminarHorarioClase(id);
             ComandoEliminarHorarioClase cmd = FabricaComando.instanciaCmdEliminarHorarioClase(horarioClase);
             cmd.ejecutar();
             horarioClase = cmd.getMensaje();
             response.put ( "data", horarioClase.getMensaje() );
                 
-            response.put("data", "Se elimino el horario");
+            
         }
         
        
