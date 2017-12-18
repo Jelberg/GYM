@@ -169,7 +169,7 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
 
     /**
      * Metodo para eliminar medida de la base de datos
-     * @param idMedida
+     * @param ent
      * @return 
      */
     @Override

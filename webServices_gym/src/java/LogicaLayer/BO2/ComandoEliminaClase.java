@@ -19,9 +19,9 @@ public class ComandoEliminaClase extends Comando {
     
     /**
      * Constructor de clase.
-     * @param classe Recibe un objeto Entidad con los datos de la clase
+     * @param clase Recibe un objeto Entidad con los datos de la clase
      * a eliminar.
-     * @see Entidad.
+     
      */
     public ComandoEliminaClase( Entidad clase ){
         this._clase = clase;

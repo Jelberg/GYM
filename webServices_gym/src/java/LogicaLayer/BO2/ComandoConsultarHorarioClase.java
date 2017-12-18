@@ -23,9 +23,9 @@ public class ComandoConsultarHorarioClase extends Comando {
     private ArrayList<HorarioClase> _listaHorarioClase;
     /**
      * Constructor de clase con una Entidad que es recibida por quien lo llama.
-     * @param clase Entidad que tiene los datos necesarios para realizar la 
+     * @param horarioclase Entidad que tiene los datos necesarios para realizar la 
      * accion.
-     * @see Clase
+   
      */
     public ComandoConsultarHorarioClase(Entidad horarioclase) {
         _horarioClase= horarioclase;

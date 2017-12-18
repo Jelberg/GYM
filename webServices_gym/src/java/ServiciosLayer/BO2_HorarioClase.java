@@ -121,13 +121,7 @@ public class BO2_HorarioClase {
     /**
      * Metodo que recibe como parametros los siguientes campos
      * para eliminar el horario de esa clase con ese instructor ese día y a esa hora.
-     * @param nombreclase Nombre de la clase.
-     * @param instructor Identificador del instructor.
-     * @param fecha Fecha de la clase (dd/mm/aaaa).
-     * @param dia Día de la clase (lunes, martes, ... ).
-     * @param capacidad Capacidad de alumnos en la clase.
-     * @param hora_inicio Hora que inicia la clase.
-     * @param hora_fin Hora que finaliza la clase.
+     * @param id.
      * @return Devuelve un json con elemento llamado data, 
      * contiene el mensaje de la peticion
      */

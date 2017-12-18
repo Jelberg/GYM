@@ -19,9 +19,9 @@ public class ComandoModificarHorarioClase extends Comando {
     
     /**
      * Constructor de clase.
-     * @param clase Recibe un objeto Entidad con los datos del horarioclase
+     * @param horarioClase Recibe un objeto Entidad con los datos del horarioclase
      * a modificar.
-     * @see Entidad.
+  
      */
     public ComandoModificarHorarioClase( Entidad horarioClase ){
         this._horarioClase = horarioClase;

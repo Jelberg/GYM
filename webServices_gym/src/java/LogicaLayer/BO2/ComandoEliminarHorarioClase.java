@@ -19,9 +19,9 @@ public class ComandoEliminarHorarioClase extends Comando {
     
     /**
      * Constructor de clase.
-     * @param clase Recibe un objeto Entidad con los datos del horarioclase
+     * @param horarioClase Recibe un objeto Entidad con los datos del horarioclase
      * a insertar.
-     * @see Entidad.
+ 
      */
     public ComandoEliminarHorarioClase( Entidad horarioClase ){
         this._horarioClase = horarioClase;
