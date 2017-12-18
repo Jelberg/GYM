@@ -30,16 +30,10 @@ public class PruebaComandoInsertarComentario {
     Comentario _comentario;
     String _respuesta;
     Connection _conn;
-    DaoComentario _dao;
+    DaoComentario _dao = new DaoComentario();
     ResultSet _rs;
     Statement _st;
     
-    @Before
-    public void iniciarPrueba(){
-        
-        _dao = new DaoComentario();
-        
-    }
     
     @Test
     public void pruebaInsertarComentario(){
