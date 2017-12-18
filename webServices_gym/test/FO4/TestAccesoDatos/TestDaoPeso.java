@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.junit.After;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,34 +25,33 @@ import org.junit.Test;
  *
  * @author Elberg
  */
-public class TestDaoPeso extends TestCase {
+public class TestDaoPeso  {
     private DaoProgresoPeso _pp = new DaoProgresoPeso();
     private Entidad en;
-    private String _resp;
+    Connection _conn;
     ResultSet _rs;
     Gson _gson = new Gson();
-    
-    public TestDaoPeso(String method){
-        super(method);
-    }
-    
-    @Before
-    public void setup() throws SQLException{
-        _resp = null;
-        Connection _conn = _pp.getConexion();
-    
-    }
-    
-    @After
-    public void terdown() throws SQLException{
-        _resp = null;
-        _pp.eliminarPeso(1);
-    }
+
+ 
        
     @Test
     public void agregarPesoTest(){
-        en = FabricaEntidad.InstaciaProgresoPeso(9999, 12345);
-        _resp  = _pp.agregarPeso(en);
-        assertNotNull(_resp);
+        en = FabricaEntidad.InstaciaProgresoPeso(1, 12);
+        String _resp  = _pp.agregarPeso(en);
+        
+        assertEquals("PESO AGREGADO",_resp);
+    }
+    
+    @Test
+    public void actualizarPesoTest(){
+        en = FabricaEntidad.InstaciaProgresoPeso(1, 13);
+        String _resp = _pp.actualizarPeso(en);
+        assertEquals("PESO ACTUALIZADO",_resp);
+    }
+    
+    @Test
+    public void eliminarPesoTest(){
+        String _resp = _pp.eliminarPeso(1);
+        assertEquals("PESO ELIMINADO",_resp);
     }
 }
