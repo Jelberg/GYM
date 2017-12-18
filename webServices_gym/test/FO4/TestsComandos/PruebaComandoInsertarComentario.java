@@ -18,6 +18,7 @@ import java.sql.Statement;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -34,7 +35,7 @@ public class PruebaComandoInsertarComentario {
     ResultSet _rs;
     Statement _st;
     
-    
+    @Ignore
     @Test
     public void pruebaInsertarComentario(){
         _comentario = new Comentario(9999, "COMENTARIO AÑADIDO");
