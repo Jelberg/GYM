@@ -80,7 +80,7 @@ public class BO2_Clase {
             }
         
         catch (ParameterNullException e) {
-            response.put("error", e.getMessage());
+            response.put("error, parametro vacio", e.getMessage());
         }
         catch (Exception e) {
             response.put("error", e.getMessage());
