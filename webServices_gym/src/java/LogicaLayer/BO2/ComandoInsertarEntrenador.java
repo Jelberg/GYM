@@ -22,7 +22,7 @@ public class ComandoInsertarEntrenador extends Comando{
      * Constructor de clase.
      * @param entrenador Recibe un objeto Entidad con los datos del entrenador
      * a insertar.
-     * @see Entidad.
+     * 
      */
     public ComandoInsertarEntrenador( Entidad entrenador ){
         this._entrenador = entrenador;

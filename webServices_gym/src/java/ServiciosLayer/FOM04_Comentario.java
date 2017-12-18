@@ -43,9 +43,8 @@ public class FOM04_Comentario{
 
      /**
      * Funcion que permite ingresar comentarios a un progreso
-     * @param id_usuariocomentario
-     * @param mensaje
-     * @param jsonMedida 
+     * @param id_usuariocomentario id del usuario
+     * @param mensaje mensaje del usuario
      * @return Devuelve un json con elemento llamado data, el cual 
      * contiene el mensaje de la peticion
      */
