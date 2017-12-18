@@ -108,29 +108,6 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
         }
     }
 
-
-    /**
-     * Metodo para eliminar comentarios de la BD
-     * @param comentario
-     * @return 
-     */
-    @Override
-    public String eliminar(Comentario comentario) {
-        _logger.log(Level.INFO, "Metodo aun no funcional");
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * Metodos para modificar comentarios en la BD
-     * @param comentario
-     * @return 
-     */
-    @Override
-    public String actualizar(Comentario comentario) {
-        _logger.log(Level.INFO, "Metodo aun no funcional");
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * Metodo para consultar Progresos en la BD
      * @param id
@@ -188,16 +165,12 @@ public class DaoComentario extends DaoPostgre implements IDaoComentario{
         }
     }
 
-    /**
-     * Metodos para consultar comentarios en la BD
-     * @param ent
-     * @return 
-     */
+    @Override
     public Entidad consultar(Entidad ent) {
-        _logger.log(Level.INFO, "Metodo aun no funcional");
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+   
 
     
 }
