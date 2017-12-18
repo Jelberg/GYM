@@ -32,7 +32,9 @@ public class ComandoUpdateEquipo extends Comando{
         _equipo.setMensaje(nombre);
     }
     
-
+            public Entidad getMensaje(){
+        return _equipo;
+    }
     
     /**
      * Metodo Ejecucion Comando
