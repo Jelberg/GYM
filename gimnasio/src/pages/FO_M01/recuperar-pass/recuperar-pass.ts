@@ -41,11 +41,14 @@ export class RecuperarPassPage {
   volver() {
     this.navCtrl.pop();
   }
+
   ionViewDidLoad() {
     this.Nuevacontrasena();
-
   }
 
+  volverLogin() {
+    this.navCtrl.setRoot(IniciarsesionPage);
+  }
 
   confirmarpas(){
     if (this.password==this.password2)
@@ -122,18 +125,7 @@ export class RecuperarPassPage {
     //  this.mensajeerror("Correo erroneo")
     //  this.navCtrl.setRoot(IniciarsesionPage);
     //}
-
-
-
-
-
-
-
-
   }
-
-
-  
 
   cambiarContrasena()
   {
@@ -178,7 +170,7 @@ export class RecuperarPassPage {
 
 
   //Valida que el correo este metido en el sistema
-  validarCorreo(correo, callback )
+  validarCorreo(correo, callback)
   {
         
         let url = "Login/getUsuarioCorreo?correo="+correo;
@@ -215,11 +207,6 @@ export class RecuperarPassPage {
       console.log(this.radioopen)
       return this.radioopen;
 }
-
-
-
-
-
 
   irahomeusuario() {
     this.navCtrl.setRoot(HomePage);
