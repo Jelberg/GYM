@@ -49,7 +49,7 @@ foo(){
 y mes en el que se ejecuto
 */ 
 getDatosEjercicio(){
-  let urlPeticion: string = "FOM03_Rutina/getEjercicios6meses?idUsuario=1&ejercicio="+this.listaRecibida;
+  let urlPeticion: string = "FOM03_Rutina/getEjercicios6meses?idUsuario="+localStorage.getItem("id")+"&ejercicio="+this.listaRecibida;
    this.userService.getDato( urlPeticion ).subscribe(data => {
       let i: number = 0;
       while ( i < data.length ){

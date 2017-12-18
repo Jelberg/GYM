@@ -9,6 +9,7 @@ import AccesoDatosLayer.DaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Progreso_Medida;
 import Comun.Excepciones.ParameterNullException;
+import Comun.Util.ConfigurarLogger;
 import Comun.Validaciones.ValidationWS;
 import com.google.gson.Gson;
 import java.sql.Connection;
@@ -19,6 +20,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,6 +34,13 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
     private ArrayList<Progreso_Medida> _jsonArray;
     private Progreso_Medida _progresoMedida;
     private ArrayList<Progreso_Medida> _aux;
+    ConfigurarLogger _cl;
+    Logger _logger;
+    
+    public DaoProgresoMedida(){
+        _cl = new ConfigurarLogger();
+         _logger = _cl.getLogr();
+    }
     
     /**
      * Metodo para consultar medidas en la base de datos
@@ -39,6 +49,7 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
      */
     @Override
     public Entidad consultar(Entidad ent) {
+        _logger.log(Level.SEVERE, "Metodo aun no Funcional");
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -68,9 +79,11 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
             return _resp;
         }
         catch(SQLException e) {
+            _logger.log(Level.SEVERE, "Error de Conexion con BD: {0}", e.getMessage());
             return null;
         }
         catch (ParameterNullException e) {
+            _logger.log(Level.SEVERE, "Parametro Nulo: {0}", e.getMessage());
             return null;
         }
         finally {
@@ -103,11 +116,11 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
                 
         }
         catch (SQLException e){
-           
+           _logger.log(Level.SEVERE, "Error de Conexion con BD: {0}", e.getMessage());
             return null;
         }
         catch (ParameterNullException e) {
-            
+            _logger.log(Level.SEVERE, "Parametro Nulo: {0}", e.getMessage());
             return null;
         }
         finally {
@@ -116,6 +129,11 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
 
     }
 
+    /**
+     * Metodo para actualizar medida en la base de datos
+     * @param ent
+     * @return 
+     */
     @Override
     public String actualizarMedida(Entidad ent) {
          try {
@@ -133,14 +151,15 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
             
             return "Medida Cambiada";
         } catch (SQLException e){
-            System.out.println(e.getMessage());
+            _logger.log(Level.SEVERE, "Error de Conexion con BD: {0}", e.getMessage());
+            return null;
         }
         catch (ParameterNullException e) {
-            System.out.println(e.getMessage());
+            _logger.log(Level.SEVERE, "Parametro Nulo: {0}", e.getMessage());
+            return null;
         }
         finally {
             cerrarConexion(_conn);
-            return null;
         }
     }
 
@@ -166,14 +185,15 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
             
             return "Medida Eliminar";
         } catch (SQLException e){
-            System.out.println(e.getMessage());
+            _logger.log(Level.SEVERE, "Error de Conexion con BD: {0}", e.getMessage());
+            return null;
         }
         catch (ParameterNullException e) {
-            System.out.println(e.getMessage());
+            _logger.log(Level.SEVERE, "Parametro Nulo: {0}", e.getMessage());
+            return null;
         }
         finally {
             cerrarConexion(_conn);
-            return null;
         }
     }
 
@@ -212,15 +232,17 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
                     }
                 }
             }
+            return _jsonArray;
         } catch (SQLException e){
-            System.out.println(e.getMessage());
+            _logger.log(Level.SEVERE, "Parametro Nulo: {0}", e.getMessage());
+            return null;
         }
         catch (ParameterNullException e) {
-            System.out.println(e.getMessage());
+            _logger.log(Level.SEVERE, "Parametro Nulo: {0}", e.getMessage());
+            return null;
         }
         finally {
             cerrarConexion(_conn);
-            return _jsonArray;
         }
     }
 }
