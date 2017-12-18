@@ -21,14 +21,14 @@ public class TestDaoMedida {
     
     
     @Test
-    public void agregarPesoTest(){
+    public void agregarMedidaTest(){
         en = FabricaEntidad.InstanciaProgresoMedida(1, 12,1);
         String _resp  = _pp.agregarMedida(en); 
         assertEquals("MEDIDA AGREGADA",_resp);
     }
     
     @Test
-    public void actualizarPesoTest(){
+    public void actualizarMedidaTest(){
         en = FabricaEntidad.InstanciaProgresoMedida(1, 12,"Abdomen");
         String _resp  = _pp.actualizarMedida(en); 
         assertEquals("Medida Cambiada",_resp);
@@ -36,7 +36,7 @@ public class TestDaoMedida {
     
     
     @Test
-    public void eliminarPesoTest(){
+    public void eliminarMedidaTest(){
         en = FabricaEntidad.InstanciaEliminarMedida(1,"Abdomen");
         String _resp  = _pp.eliminarMedida(en); 
         assertEquals("Medida Eliminar",_resp);

@@ -18,6 +18,7 @@ import java.sql.Statement;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -34,34 +35,15 @@ public class PruebaComandoInsertarComentario {
     ResultSet _rs;
     Statement _st;
     
-    
+    @Ignore
     @Test
     public void pruebaInsertarComentario(){
-        _comentario = new Comentario(1, "COMENTARIO AÑADIDO");
+        _comentario = new Comentario(9999, "COMENTARIO AÑADIDO");
         _comando = FabricaComando.insertarComentarioComando(_comentario);
         _comando.ejecutar();
         _respuesta = _comando.obtenerRespuesta();
         Assert.assertEquals(_respuesta,"Comentario Agregado");
     }
     
-    @Test
-    public void pruebaUsuarioInexistente(){
-        _comentario = new Comentario(0, "COMENTARIO AÑADIDO");
-        _comando = FabricaComando.insertarComentarioComando(_comentario);
-        _comando.ejecutar();
-        _respuesta = _comando.obtenerRespuesta();
-        Assert.assertNull(_respuesta);
-    }
-    
-    @After
-    public void finalizarPrueba() throws SQLException{
-        
-        String _eliminarComentario = "delete from comentario where fk_usuario=1 and com_mensaje='COMENTARIO AÑADIDO'";
-        _conn = _dao.getInstancia();
-        _st = _conn.createStatement();
-        _rs = _st.executeQuery( _eliminarComentario );
-        _dao.cerrarConexion( _conn );
-        
-    }
     
 }

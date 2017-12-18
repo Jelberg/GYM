@@ -40,7 +40,7 @@ public class Progreso_Peso extends Entidad{
      * @param id
      * @param peso 
      */
-    Progreso_Peso(int id, int peso) {
+    public Progreso_Peso(int id, int peso) {
         super(id);
         this._peso=peso;
     }
@@ -49,7 +49,7 @@ public class Progreso_Peso extends Entidad{
      * COnstrcutor Progreso Peso
      * @param id 
      */
-    Progreso_Peso(int id) {
+    public Progreso_Peso(int id) {
         super(id);
     }
 
