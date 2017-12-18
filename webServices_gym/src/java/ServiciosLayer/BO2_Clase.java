@@ -33,6 +33,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author marvian
  */
+@Path("/BOM02_Clase")
 public class BO2_Clase {
     private Gson _gson = new Gson();
     private String _response;

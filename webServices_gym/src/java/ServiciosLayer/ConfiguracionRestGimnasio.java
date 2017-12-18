@@ -26,6 +26,8 @@ public class ConfiguracionRestGimnasio extends Application{
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
         h.add(BOm02_Entrenador.class);
+        h.add(BO2_Clase.class);
+        h.add(BO2_HorarioClase.class);
         h.add(BO2_Instructor.class);
         h.add(FOM01_Login.class);
         h.add(FOM01_Usuario.class);

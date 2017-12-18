@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class Clase extends Entidad {
     
-    private int _id;
+    
     private String _nombre;
     private String _descripcion;
     private String _Instructor;
@@ -59,13 +59,7 @@ public class Clase extends Entidad {
         this._capacidad = _capacidad;
     }
 
-    public int getId() {
-        return _id;
-    }
-
-    public void setId(int _id) {
-        this._id = _id;
-    }
+    
 
     public String getNombre() {
         return _nombre;

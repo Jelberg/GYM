@@ -30,6 +30,7 @@ import javax.ws.rs.QueryParam;
  *
  * @author marvian
  */
+@Path("/BOM02_Horario_Clase")
 public class BO2_HorarioClase {
     
     private Gson _gson = new Gson();
