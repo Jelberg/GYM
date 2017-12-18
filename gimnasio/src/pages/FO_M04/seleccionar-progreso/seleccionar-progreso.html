@@ -20,20 +20,21 @@
 
        <ion-list>
         <ion-item class="centro espacio">
-          <ion-img class="imagen centro" src="../assets/imgs/bascula.png" (click)="openTabsPesoPage()"></ion-img>
-          <br>
-          Progreso de Peso
+          <button ion-button icon-only (click)="openTabsPesoPage()">
+           
+              <h2>Progreso de Peso</h2>
+              
+          </button>
         </ion-item>
-        <ion-item class="centro espacio" >
-          <ion-img class="imagen centro" src="../assets/imgs/cinta.jpg" (click)="openProgresoMedidasPage()"></ion-img>  
-          <br>
-          Progreso de Medidas
-        </ion-item>
-        <ion-item class="centro" >
-          <ion-img class="imagen centro" src="../assets/imgs/ejercicios.png" (click)="openListaEjercicioPage()"></ion-img>
-          <br>
-          Progreso de Ejercicios
-        </ion-item>
+
+        <ion-item class="centro espacio">
+            <button ion-button icon-only (click)="openProgresoMedidasPage()">
+             
+                <h2>Progreso de Medidas</h2>
+                
+            </button>
+          </ion-item>
+        
        </ion-list>
                 
 
