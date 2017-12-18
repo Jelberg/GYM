@@ -210,6 +210,17 @@ public class FabricaEntidad {
     }
 
     /**
+     * Instancia progreso medida con idtipo de tipo int 
+     * @param id
+     * @param medida
+     * @param tipo
+     * @return 
+     */
+    
+    static public Entidad InstanciaProgresoMedida(int id, int medida, int tipo){
+        return new Progreso_Medida(id,medida,tipo);
+    }
+    /**
      * Instancia del comentario
      * @param idUsuario
      * @param mensaje

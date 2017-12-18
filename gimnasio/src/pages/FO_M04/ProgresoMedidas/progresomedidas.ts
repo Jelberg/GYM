@@ -35,7 +35,7 @@ export class ProgresoMedidasPage {
 
   //Metodo para traer los datos del servicio que serviran para la grafica
   getProgreso(){
-    let urlPeticion: string = "F0M04_Progreso_Medida/getProgresoM?id_usuario=1";
+    let urlPeticion: string = "F0M04_Progreso_Medida/getProgresoM?id_usuario="+localStorage.getItem("id");
     this.userService.getDato( urlPeticion ).subscribe(data => {
 
       let posicionEscapula: number = 0;

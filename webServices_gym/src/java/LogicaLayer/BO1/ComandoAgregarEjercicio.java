@@ -6,13 +6,11 @@
 package LogicaLayer.BO1;
 
 import AccesoDatosLayer.BO1.IDaoEjercicio;
-import AccesoDatosLayer.DaoPostgre;
 import AccesoDatosLayer.FabricaAbstracta;
 import AccesoDatosLayer.FabricaDaoPostgre;
 import Comun.Dominio.Entidad;
 import Comun.Dominio.Ejercicio;
 import LogicaLayer.Comando;
-import java.util.ArrayList;
 
 /**
  *
