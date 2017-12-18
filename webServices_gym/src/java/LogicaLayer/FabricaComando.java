@@ -11,10 +11,12 @@ import Comun.Dominio.Usuario;
 import Comun.Dominio.Usuario_Amigo;
 import LogicaLayer.BO1.ComandoAddEquipo;
 import LogicaLayer.BO1.ComandoAgregarEjercicio;
+import LogicaLayer.BO1.ComandoEliminarEjercicio;
 import LogicaLayer.BO1.ComandoEliminarEquipo;
 import LogicaLayer.BO1.ComandoGetEjercicios;
 import LogicaLayer.BO1.ComandoGetEquipoById;
 import LogicaLayer.BO1.ComandoGetEquipos;
+import LogicaLayer.BO1.ComandoModificarEjercicio;
 import LogicaLayer.BO1.ComandoUpdateEquipo;
 import LogicaLayer.BO2.CmdActivarInstructor;
 import LogicaLayer.BO2.CmdActualizarInstructor;
@@ -27,10 +29,12 @@ import LogicaLayer.BO2.ComandoClaseConsultaDescripcion;
 import LogicaLayer.BO2.ComandoConsultaEntrenadorCorreo;
 import LogicaLayer.BO2.ComandoConsultaEntrenadores;
 import LogicaLayer.BO2.ComandoConsultarClase;
+import LogicaLayer.BO2.ComandoEliminaEntrenador;
 import LogicaLayer.BO2.ComandoInsertarClase;
 import LogicaLayer.BO2.ComandoInsertarEntrenador;
 import LogicaLayer.BO2.ComandoModificarClase;
 import LogicaLayer.BO2.ComandoModificarEntrenador;
+import LogicaLayer.F03.ConsultarEjerciciosRealizadosComando;
 import LogicaLayer.F03.ConsultarEjerciciosRealizadosComando;
 import LogicaLayer.FO1.ComandoActualizarCodigo;
 import LogicaLayer.FO1.ComandoActualizarPassword;
@@ -46,18 +50,6 @@ import LogicaLayer.FO1.ComandoListaUsuario_Amigo;
 import LogicaLayer.FO1.ComandoModificaUsuario;
 import LogicaLayer.FO1.IngresarUsuario;
 import LogicaLayer.FO4.*;
-import LogicaLayer.BO1.ComandoGetEquipoById;
-import LogicaLayer.BO1.ComandoGetEquipos;
-import LogicaLayer.BO2.ComandoBuscaClasePorId;
-import LogicaLayer.BO2.ComandoClaseConsultaDescripcion;
-import LogicaLayer.BO2.ComandoInsertarClase;
-import LogicaLayer.BO2.ComandoInsertarEntrenador;
-import LogicaLayer.BO2.CmdActivarInstructor;
-import LogicaLayer.BO2.CmdInactivarInstructor;
-import LogicaLayer.BO2.ComandoEliminaEntrenador;
-import LogicaLayer.BO2.ComandoModificarClase;
-import LogicaLayer.BO2.ComandoModificarEntrenador;
-import LogicaLayer.F03.ConsultarEjerciciosRealizadosComando;
 import LogicaLayer.FO4.Comentarios.AgregarComentarioComando;
 import LogicaLayer.FO4.Comentarios.ComandoObtenerComentariosProgMedidas;
 import LogicaLayer.FO4.Comentarios.CompartirProgresoComando;
@@ -106,6 +98,7 @@ public class FabricaComando {
         return new ComandoUpdateEquipo(id, nombre);
     }
 
+
     // Crear comando para leer lista de ejercicio.
     public static ComandoGetEjercicios instanciaGetEjercicios(){
         return new ComandoGetEjercicios();
@@ -113,8 +106,18 @@ public class FabricaComando {
     
     // Crear comando para agregar un ejercicio
 
-    public static Comando AgregarEjercicio (Entidad ent){
+    public static ComandoAgregarEjercicio AgregarEjercicio (Entidad ent){
         return new ComandoAgregarEjercicio(ent);
+    }
+    
+    //Crear comando para eliminar un ejercicio
+    
+    public static ComandoEliminarEjercicio EliminarEjercicio (Entidad ent){
+        return new ComandoEliminarEjercicio(ent);
+    }
+    
+    public static ComandoModificarEjercicio ModificarEjercicio (Entidad ent){
+        return new ComandoModificarEjercicio(ent);        
     }
     
     // Fin Comandos BO1
