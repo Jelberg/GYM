@@ -52,7 +52,9 @@ public class FabricaEntidad {
       fecha, horaInicio, horaFin, capacidad);
     
     }
-    
+    static public Entidad instanciaClaseId( int id ){
+        return new Clase(id);
+    }
     static public Entidad instanciaInsertarClase(String nombre, String descripcion){
             return new Clase(nombre, descripcion);
     }

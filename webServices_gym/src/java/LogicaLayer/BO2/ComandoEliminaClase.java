@@ -41,7 +41,7 @@ public class ComandoEliminaClase extends Comando {
     public void ejecutar() {
         FabricaAbstracta fab = FabricaAbstracta.getFabrica(1);
         IDaoClase dao = fab.instanciaDaoClase();
-        _clase = dao.insertar( _clase );
+        _clase = dao.eliminar(_clase );
     }
     
 }

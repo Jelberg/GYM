@@ -27,11 +27,11 @@ public class ComandoBuscaClasePorId {
      * @see Clase
      */
     public ComandoBuscaClasePorId(Entidad clase) {
-        _clase = clase;
+        this._clase = clase;
     }
     public ComandoBuscaClasePorId() {}
-    public ArrayList<Clase> consultarBuscaClasePorId(){
-        return _listaClase;
+    public Entidad consultarBuscaClasePorId(){
+        return _clase;
     }
     /**
      * Metodo que es llamado para ejecutar los llamados y asi realizar la accion
@@ -40,7 +40,8 @@ public class ComandoBuscaClasePorId {
     public void ejecutar() {
         FabricaDaoPostgre fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
         IDaoClase dao = fab.instanciaDaoClase();
-        _listaClase = dao.consultarClases();}
+        _clase = dao.buscaPorId(_clase);
+    }
     
     
 }

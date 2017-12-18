@@ -30,6 +30,7 @@ import java.util.HashMap;
 public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
     private Connection _conn;
     private ArrayList<Clase> jsonArray;
+    private ArrayList<Entidad> listaClase;
     public DaoClasePostgre() {}
     /**
      * Metodo que sera llamado cuando se desee consular las clases.
@@ -192,16 +193,17 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
             String query = "SELECT * FROM bo_m02_get_clase_por_id(?)";
             _conn = getConexion();
             Clase clase = ( Clase ) ent;
+            jsonArray = new ArrayList<>();
+            jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
-            ResultSet rs = st.executeQuery(query);
-            java.lang.reflect.Type type = new TypeToken<Clase[]>(){}.getType();
+            st.setInt(1, ent.getId() );
+            ResultSet rs = st.executeQuery();
             while(rs.next()){
                 jsonArray.add(new Clase());
-                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("cla_id"));
-                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("cla_nombre"));
-                jsonArray.get(jsonArray.size() - 1).setDescripcion(rs.getString("cla_descripcion"));
+                jsonArray.get(jsonArray.size() - 1).setId(rs.getInt("id"));
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
+                jsonArray.get(jsonArray.size() - 1).setDescripcion(rs.getString("descripcion"));
             }
-                ent.setMensaje( "Se busco correctamente la clase." );
         }
         catch(SQLException e) {
             ent.setMensaje( "Error intente de nuevo." );
@@ -214,7 +216,7 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
         }
         finally {
             cerrarConexion(_conn);
-            return ent;
+            return jsonArray.get(0);
         }
     }
 
@@ -225,11 +227,16 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
             String query = "SELECT * FROM bo_m02_get_clase(?)";
              _conn = getConexion();
             Clase clase = ( Clase ) ent;
+            jsonArray = new ArrayList<>();
             PreparedStatement st = _conn.prepareStatement(query);
             java.lang.reflect.Type type = new TypeToken<Clase[]>(){}.getType();
             st.setString(1, clase.getNombre());
-            st.executeQuery();
-            
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                jsonArray.add(new Clase());
+                jsonArray.get(jsonArray.size() - 1).setNombre(rs.getString("nombre"));
+                jsonArray.get(jsonArray.size() - 1).setDescripcion(rs.getString("descripcion"));
+            }
             ent.setMensaje( "Se busco correctamente la clase." );
         }
         catch(SQLException e) {
@@ -243,7 +250,7 @@ public class DaoClasePostgre extends DaoPostgre implements IDaoClase {
         }
         finally {
             cerrarConexion(_conn);
-            return ent;
+            return jsonArray.get(0);
         }
     }
 }

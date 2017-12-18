@@ -72,6 +72,7 @@ import LogicaLayer.FO4.ProgresoMedida.ComandoEliminarMedida;
 import LogicaLayer.FO4.ProgresoMedida.ConsultarProgesoMedidasComando;
 import LogicaLayer.BO1.ComandoGetEjercicios;
 import LogicaLayer.BO1.ComandoAgregarEjercicio;
+import LogicaLayer.BO2.ComandoEliminaClase;
 
 /**
  *
@@ -171,8 +172,8 @@ public class FabricaComando {
      * Metodo llamado para realizar la eliminacion de una clase.
      * @return Devuelve un comando para realizar la accion.
      */
-    public static ComandoInsertarClase instanciaCmdEliminaClase( Entidad ent){
-        return new ComandoInsertarClase( ent );
+    public static ComandoEliminaClase instanciaCmdEliminaClase( Entidad ent){
+        return new ComandoEliminaClase( ent );
     }
     
     /**
@@ -187,16 +188,16 @@ public class FabricaComando {
      * Metodo llamado para realizar la modificacion de una clase.
      * @return Devuelve un comando para realizar la accion.
      */
-    public static ComandoBuscaClasePorId instanciaCmdBuscaClasePorId(){
-        return new ComandoBuscaClasePorId();
+    public static ComandoBuscaClasePorId instanciaCmdBuscaClasePorId(Entidad clase){
+        return new ComandoBuscaClasePorId(clase);
     }
     
     /**
      * Metodo llamado para realizar la modificacion de una clase.
      * @return Devuelve un comando para realizar la accion.
      */    
-    public static ComandoClaseConsultaDescripcion instanciaCmdClaseConsultaDescripcion(){
-        return new ComandoClaseConsultaDescripcion();
+    public static ComandoClaseConsultaDescripcion instanciaCmdClaseConsultaDescripcion(Entidad clase){
+        return new ComandoClaseConsultaDescripcion(clase);
     }
     
     /**

@@ -23,8 +23,8 @@ public class Clase extends Entidad {
     private int _capacidad;
 
  
-    public Clase(String _nombre) {
-        this._nombre = _nombre;
+    public Clase(String nombre) {
+        this._nombre = nombre;
     }
     
     public Clase(int _id, String _nombre, String _descripcion, 
@@ -42,8 +42,8 @@ public class Clase extends Entidad {
 
     Clase(String nombre, String descripcion) {
         super();
-        this._nombre = _nombre;
-        this._descripcion = _descripcion;
+        this._nombre = nombre;
+        this._descripcion = descripcion;
     }
 
     Clase(String nombre, String descripcion, String Instructor, 

@@ -1,8 +1,8 @@
 ------------------------------------------CLASE-------------------------------------------
 --------------Función que devuelve la clase buscado por su id.
 
-CREATE OR REPLACE FUNCTION bo_m02_get_clase_por_id(idclase INTERGER)
-  RETURNS TABLE(nombre character varying, descripcion character varying)
+CREATE OR REPLACE FUNCTION bo_m02_get_clase_por_id(idclase INTEGER)
+  RETURNS TABLE(id integer, nombre character varying, descripcion character varying)
    AS $$
 DECLARE
    var_r    record;
@@ -11,6 +11,7 @@ BEGIN
         FROM clase
         WHERE cla_id = idclase)
    LOOP
+    id = var_r.cla_id;
     nombre = var_r.cla_nombre;
     descripcion = var_r.cla_descripcion;
     RETURN NEXT;
