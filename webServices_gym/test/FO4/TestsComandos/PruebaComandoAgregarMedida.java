@@ -5,21 +5,14 @@
  */
 package FO4.TestsComandos;
 
-import AccesoDatosLayer.FOM04Postgre.DaoComentario;
 import AccesoDatosLayer.FOM04Postgre.DaoProgresoMedida;
-import Comun.Dominio.Comentario;
 import Comun.Dominio.Progreso_Medida;
-import LogicaLayer.FO4.Comentarios.AgregarComentarioComando;
 import LogicaLayer.FO4.ProgresoMedida.AgregarMedidaComando;
 import LogicaLayer.FabricaComando;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 

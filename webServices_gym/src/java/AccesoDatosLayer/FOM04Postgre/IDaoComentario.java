@@ -21,12 +21,14 @@ public interface IDaoComentario extends IDao {
 
     
     /**
-     * Firma de metodo para obtener una lista de los comentarios por idProgMedida
+     * Firma de metodo para obtener una lista de los comentarios 
+     * por idProgMedida
      * @param idUsuario
      * @param idProgMedida
      * @return 
      */
-    public ArrayList<Comentario> getComentariosProgMedida(int idUsuario,int idProgMedida);
+    public ArrayList<Comentario> getComentariosProgMedida
+                                (int idUsuario,int idProgMedida);
     
     /**
      * Firma de metodo para la consulta de los progresos

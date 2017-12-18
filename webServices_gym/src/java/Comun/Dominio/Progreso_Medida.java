@@ -65,6 +65,12 @@ public class Progreso_Medida extends Entidad {
         this._tipo = _tipo;
     }
     
+    /**
+     * Constructor Progreso Medida
+     * @param _id
+     * @param _medida
+     * @param _tipo 
+     */
     public Progreso_Medida(int _id, int _medida, int _tipo) {
         super(_id);
         this._medida = _medida;
@@ -81,6 +87,10 @@ public class Progreso_Medida extends Entidad {
         this._tipo = _tipo;
     }
 
+    /**
+     * Constructor Progreso Medida
+     * @param sobrenombre 
+     */
     public Progreso_Medida(String sobrenombre){
         this._sobrenombre = sobrenombre;
     }

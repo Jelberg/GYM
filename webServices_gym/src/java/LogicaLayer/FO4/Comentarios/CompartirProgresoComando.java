@@ -21,6 +21,9 @@ public class CompartirProgresoComando extends Comando {
     ConfigurarLogger _cl;
     Logger _logger;
     
+    /**
+     * Constructor Progreso Compartir Comando
+     */
     public CompartirProgresoComando(){
          _cl = new ConfigurarLogger();
          _logger = _cl.getLogr();
@@ -29,7 +32,8 @@ public class CompartirProgresoComando extends Comando {
     @Override
     public void ejecutar() {
         _logger.log(Level.INFO, "Comando aun no Funcional");
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
+        //To change body of generated methods, choose Tools | Templates.
     }
 
 }

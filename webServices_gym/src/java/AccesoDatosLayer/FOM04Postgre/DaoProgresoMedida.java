@@ -10,7 +10,6 @@ import Comun.Dominio.Entidad;
 import Comun.Dominio.Progreso_Medida;
 import Comun.Excepciones.ParameterNullException;
 import Comun.Util.ConfigurarLogger;
-import Comun.Validaciones.ValidationWS;
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.Date;
@@ -18,8 +17,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,7 +47,8 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
     @Override
     public Entidad consultar(Entidad ent) {
         _logger.log(Level.SEVERE, "Metodo aun no Funcional");
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -70,16 +68,20 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
             //La variable donde se almacena el resultado de la consulta.
             while(rs.next()){
                 _jsonArray.add(new Progreso_Medida());
-                _jsonArray.get(_jsonArray.size() - 1).setMedida(rs.getInt("medida"));
-                _jsonArray.get(_jsonArray.size() - 1).setTipo(rs.getString("tipo"));
-                _jsonArray.get(_jsonArray.size() - 1).setFechaM(rs.getDate("fecha"));
+                _jsonArray.get(_jsonArray.size() - 1).setMedida
+                                                        (rs.getInt("medida"));
+                _jsonArray.get(_jsonArray.size() - 1).setTipo
+                                                        (rs.getString("tipo"));
+                _jsonArray.get(_jsonArray.size() - 1).setFechaM
+                                                        (rs.getDate("fecha"));
             
             }
             _resp = _gson.toJson(_jsonArray);
             return _resp;
         }
         catch(SQLException e) {
-            _logger.log(Level.SEVERE, "Error de Conexion con BD: {0}", e.getMessage());
+            _logger.log(Level.SEVERE, "Error de Conexion con BD: {0}", 
+                    e.getMessage());
             return null;
         }
         catch (ParameterNullException e) {
@@ -116,7 +118,8 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
                 
         }
         catch (SQLException e){
-           _logger.log(Level.SEVERE, "Error de Conexion con BD: {0}", e.getMessage());
+           _logger.log(Level.SEVERE, "Error de Conexion con BD: {0}", 
+                   e.getMessage());
             return null;
         }
         catch (ParameterNullException e) {
@@ -151,7 +154,8 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
             
             return "Medida Cambiada";
         } catch (SQLException e){
-            _logger.log(Level.SEVERE, "Error de Conexion con BD: {0}", e.getMessage());
+            _logger.log(Level.SEVERE, "Error de Conexion con BD: {0}",
+                    e.getMessage());
             return null;
         }
         catch (ParameterNullException e) {
@@ -185,7 +189,8 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
             
             return "Medida Eliminar";
         } catch (SQLException e){
-            _logger.log(Level.SEVERE, "Error de Conexion con BD: {0}", e.getMessage());
+            _logger.log(Level.SEVERE, "Error de Conexion con BD: {0}", 
+                    e.getMessage());
             return null;
         }
         catch (ParameterNullException e) {
@@ -224,11 +229,14 @@ public class DaoProgresoMedida extends DaoPostgre implements IDaoProgresoMedida{
                 _jsonArray.add(new Progreso_Medida());
                 if(_rs.wasNull()){
                     _jsonArray.get(_jsonArray.size() - 1).setMedida(0);
-                    _jsonArray.get(_jsonArray.size() - 1).setFechaM(Date.valueOf(fechaini));
+                    _jsonArray.get(_jsonArray.size() - 1).setFechaM
+                                                        (Date.valueOf(fechaini));
                 }else{
                     while (_rs.next()) {
-                        _jsonArray.get(_jsonArray.size() - 1).setMedida(_rs.getInt("medida"));
-                        _jsonArray.get(_jsonArray.size() - 1).setFechaM(Date.valueOf(fechaini));
+                        _jsonArray.get(_jsonArray.size() - 1).setMedida
+                                                        (_rs.getInt("medida"));
+                        _jsonArray.get(_jsonArray.size() - 1).setFechaM
+                                                    (Date.valueOf(fechaini));
                     }
                 }
             }

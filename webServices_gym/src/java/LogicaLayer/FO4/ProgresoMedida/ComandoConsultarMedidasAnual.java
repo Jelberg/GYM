@@ -40,11 +40,13 @@ public class ComandoConsultarMedidasAnual extends Comando {
         _fecha = _fecha.with(TemporalAdjusters.firstDayOfMonth());
         
         Date _FechaIni = Date.valueOf(_fecha);
-        Date _FechaFin = Date.valueOf(_fecha.with(TemporalAdjusters.lastDayOfMonth()));
+        Date _FechaFin = 
+                Date.valueOf(_fecha.with(TemporalAdjusters.lastDayOfMonth()));
         
         _fecha = _fecha.minusMonths(1);
         _FechaIni = Date.valueOf(_fecha);
-        _FechaFin = Date.valueOf(_fecha.with(TemporalAdjusters.lastDayOfMonth()));
+        _FechaFin = 
+                Date.valueOf(_fecha.with(TemporalAdjusters.lastDayOfMonth()));
         
         _fechainicio = _sdf.format(_FechaIni);
         _fechafin = _sdf.format(_FechaFin);
@@ -61,9 +63,11 @@ public class ComandoConsultarMedidasAnual extends Comando {
 
     @Override
     public void ejecutar() {
-        FabricaDaoPostgre _fab = (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
+        FabricaDaoPostgre _fab = 
+                (FabricaDaoPostgre) FabricaAbstracta.getFabrica(1);
         IDaoProgresoMedida _dao = _fab.getDaoProgresoMedida();
-        this._listaProgresoMedida = _dao.getMedidasAnuales(_progreso_medida,_fechainicio,_fechafin);
+        this._listaProgresoMedida = 
+                _dao.getMedidasAnuales(_progreso_medida,_fechainicio,_fechafin);
     }
     
 }
