@@ -1692,6 +1692,20 @@ END; $$
   LANGUAGE plpgsql;
   
 
+CREATE OR REPLACE FUNCTION fo_m04_inserta_progreso_compartido(
+    mensaje character varying,
+    usuario INT)
+  RETURNS void
+   AS $$
+    DECLARE
+	fecha_actual DATE;
+    BEGIN
+	fecha_actual  := current_date;
+        INSERT INTO comentario (com_mensaje, com_fecha, fk_usuario) VALUES
+        ( mensaje, fecha_actual, usuario );
+    END; $$
+  LANGUAGE plpgsql;
+
 --Este solo devuelve las medidas de ese usuario en esa fecha.
 CREATE OR REPLACE FUNCTION fo_m04_get_progresom(usuario_id int)
   RETURNS TABLE(medida INT, tipo character varying, fecha date)
@@ -1726,7 +1740,7 @@ CREATE OR REPLACE FUNCTION fo_m04_elimina_medidas (usuario_id int, tipo_medida v
 	fecha_actual := current_date;
 	mes := (select EXTRACT(MONTH FROM fecha_actual) );
 	id_medida := ( SELECT MED_ID FROM MEDIDA WHERE med_tipo = tipo_medida  );
-	id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = usuario_id and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) );	
+	id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = usuario_id and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) limit 1);	
         DELETE FROM progreso_medida
         WHERE pm_id = id_pm;
     END; $$
@@ -1761,8 +1775,8 @@ DECLARE
 BEGIN
      fecha_actual := current_date;
      mes := (select EXTRACT(MONTH FROM fecha_actual) );
-    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE med_tipo = tipo_medida  );
-    id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = id_usuario and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) );	
+    id_medida := ( SELECT MED_ID FROM MEDIDA WHERE med_tipo = tipo_medida );
+    id_pm := ( select pm_id from progreso_medida where fk_medida = id_medida and fk_usuario = id_usuario and mes = ( SELECT EXTRACT(MONTH FROM pm_fecha)) limit 1);	
     UPDATE PROGRESO_MEDIDA SET  PM_MEDIDA = medida
     WHERE PM_ID = id_pm;
 END; $$
@@ -2497,7 +2511,7 @@ INSERT INTO HORARIO_CLASE(HC_FECHA,HC_DIA,HC_CAPACIDAD,HC_HORA_INICIO,HC_HORA_FI
 --USUARIO
 
 INSERT INTO USUARIO(USU_USUARIO,USU_PASSWORD,USU_NOMBRE,USU_APELLIDO,USU_FECHA_NAC,USU_SEXO,USU_CORREO,USU_TELEFONO,USU_ESTATURA,USU_FOTO,USU_ENTRENADOR)
-VALUES ('jorgepm','123456jp',INITCAP('jorge'),INITCAP('pinto'),'01-12-2001','M','jorgepm22@hotmail.es','04129801370',173,NULL,true);
+VALUES ('jorge','123456',INITCAP('jorge'),INITCAP('pinto'),'01-12-2001','M','jorgepm22@hotmail.es','04129801370',173,NULL,true);
 INSERT INTO USUARIO(USU_USUARIO,USU_PASSWORD,USU_NOMBRE,USU_APELLIDO,USU_FECHA_NAC,USU_SEXO,USU_CORREO,USU_TELEFONO,USU_ESTATURA,USU_FOTO,USU_ENTRENADOR)
 VALUES ('YessyHeer','hola',INITCAP('Yesimar'),INITCAP('Hernández'),'01-02-1994','F','yyhernandez.13@gmail.com','04265121963',173,NULL,false);
 INSERT INTO USUARIO(USU_USUARIO,USU_PASSWORD,USU_NOMBRE,USU_APELLIDO,USU_FECHA_NAC,USU_SEXO,USU_CORREO,USU_TELEFONO,USU_ESTATURA,USU_FOTO,USU_ENTRENADOR)

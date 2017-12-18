@@ -7,10 +7,7 @@ package Comun.Dominio;
 
 import java.io.Serializable;
 
-/**
- *
- * @author marvian
- */
+
 public class Comentario extends Entidad implements Serializable {
     private int _idU;
     private String _mensajeC;

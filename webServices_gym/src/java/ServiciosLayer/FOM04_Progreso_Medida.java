@@ -61,13 +61,13 @@ public class FOM04_Progreso_Medida {
     @Produces("application/json")
     public String insertaMedidas(@QueryParam("id_usuario") int id_usuario,
                                  @QueryParam("medida") int medida,
-                                 @QueryParam("tipo_medida") String tipo_medida){
+                                 @QueryParam("tipo_medida") int tipo_medida){
         Entidad en = FabricaEntidad.InstanciaProgresoMedida(id_usuario, medida, tipo_medida);
         Comando comando = FabricaComando.instanciaCmdAgregarMedida(en);
         AgregarMedidaComando cmd = (AgregarMedidaComando) comando;
         cmd.ejecutar();
         _response = cmd.getRespuestaAgregarMedida();
-        return _response;
+        return _gson.toJson(_response);
     }
     
     /**
@@ -78,7 +78,7 @@ public class FOM04_Progreso_Medida {
      * @return 
      */
     @GET
-    @Path("/actualizarMedida")
+    @Path("/actualizaMedida")
     @Produces("application/json")
     public String actualizarMedida(@QueryParam ( "id_usuario" ) int idUsuario,
                                    @QueryParam ( "tipo_medida" ) String tipo_medida,
@@ -90,7 +90,7 @@ public class FOM04_Progreso_Medida {
         
         _response = _comando.getRespuesta();
         
-        return _response;
+        return _gson.toJson(_response);
     }
     
     /**
@@ -112,7 +112,7 @@ public class FOM04_Progreso_Medida {
          
          _response = _comando.obtenerRespuesta();
          
-         return _response;
+         return _gson.toJson(_response);
     }
     
     /**

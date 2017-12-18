@@ -16,7 +16,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.ws.rs.PUT;
 
 /**
  *
@@ -35,12 +34,52 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
 
     @Override
     public Entidad eliminar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Ejercicio _ent = (Ejercicio) ent;
+        try{
+            _conn = getConexion();
+            String query = "SELECT bo_m01_eliminar_ejercicio(?)";
+            PreparedStatement st = _conn.prepareStatement( query );
+            st.setInt( 1 , _ent.getId());
+            ResultSet rs = st.executeQuery();
+            //response.put("Se ha eliminado un ejercicio");
+            
+        }
+        catch ( SQLException e ) {
+            return null;
+        }
+        catch ( ParameterNullException e ) {
+            return null;
+        }
+        finally {
+            cerrarConexion( _conn );
+            return null;
+        }
+    
     }
+    
 
     @Override
     public Entidad modificar(Entidad ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       try {
+            Ejercicio ejercicio = (Ejercicio) ent;
+            _conn = getConexion();
+            String query = "select * from fo_m04_act_progresop(?,?);";
+            PreparedStatement st = _conn.prepareStatement( query );
+            st.setInt( 1 , ejercicio.getId() );
+            st.setString( 2 , ejercicio.getNombre() );
+            st.setString(3, ejercicio.getGrupoMuscular());
+            st.executeQuery();
+        }
+        catch (SQLException e){
+            return null;
+        }
+        catch ( ParameterNullException e ) {
+            return null;
+        }
+        finally {
+            cerrarConexion( _conn );
+            return null;
+        }
     }
 
     @Override
@@ -84,7 +123,7 @@ public class DaoEjercicioPostgre extends DaoPostgre implements IDaoEjercicio{
             if(rs.first())
             {
                 super.cerrarConexion(_conn );
-                return(new Ejercicio(rs.getInt("EJE_ID"),rs.getString("EQU_NOMBRE"),rs.getString("EJE_GRUPO_MUSCULAR")));                       
+                return(new Ejercicio(rs.getInt("EJE_ID"),rs.getString("EJE_NOMBRE"),rs.getString("EJE_GRUPO_MUSCULAR")));                       
             }            
         }
         catch(SQLException e) {

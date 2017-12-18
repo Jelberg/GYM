@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import java.sql.Date;
@@ -72,6 +73,22 @@ public class BOM01_Ejercicio {
                 Comando c = FabricaComando.AgregarEjercicio(ejercicio);
                 c.ejecutar();
     }
+    
+    @DELETE
+    @Path("/EliminarEjercicio")
+    public void EliminarEjercicio (@QueryParam ("id_ejer") int _id) {
+           Entidad ejercicio = FabricaEntidad.InstanciaEjercicio(_id,null,null);
+           Comando c = FabricaComando.EliminarEjercicio(ejercicio);
+           c.ejecutar();
+    }
+    @POST
+    @Path("/ModificarEjercicio")
+    public void ModificarEjercicio (@QueryParam ("id_ejer") int _id , @QueryParam ("nombre")   String _nombre, @QueryParam("grupo,") String _grupom){
+                Entidad ejercicio = FabricaEntidad.InstanciaEjercicio (_id,_nombre,_grupom);
+                Comando c = FabricaComando.AgregarEjercicio(ejercicio);
+                c.ejecutar();
+    }
+    
     
     
     
