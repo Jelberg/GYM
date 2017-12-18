@@ -11,6 +11,9 @@ import Comun.Dominio.FabricaEntidad;
 import Comun.Excepciones.ParameterNullException;
 import Comun.Validaciones.ValidationWS;
 import LogicaLayer.BO2.ComandoConsultarHorarioClase;
+import LogicaLayer.BO2.ComandoEliminarHorarioClase;
+import LogicaLayer.BO2.ComandoInsertarHorarioClase;
+import LogicaLayer.BO2.ComandoModificarHorarioClase;
 import LogicaLayer.FabricaComando;
 import com.google.gson.Gson;
 import java.sql.Date;
@@ -96,6 +99,10 @@ public class BO2_HorarioClase {
                 
             Entidad horarioClase = FabricaEntidad.instanciaConsultarHorarioClase(fecha, dia, capacidad,
                     hora_inicio,hora_fin,status,duracion,nombreclase,instructor);
+            ComandoInsertarHorarioClase cmd = FabricaComando.instanciaCmdInsertaHorarioClase(horarioClase);
+            cmd.ejecutar();
+            horarioClase = cmd.getMensaje();
+            response.put ( "data", horarioClase.getMensaje() );
             
             response.put("data", "Se insertó el horario");
         }
@@ -150,6 +157,10 @@ public class BO2_HorarioClase {
             
             Entidad horarioClase = FabricaEntidad.instanciaEliminarHorarioClase(nombreclase,instructor,
                     fecha, dia, capacidad, hora_inicio,hora_fin);
+            ComandoEliminarHorarioClase cmd = FabricaComando.instanciaCmdEliminarHorarioClase(horarioClase);
+            cmd.ejecutar();
+            horarioClase = cmd.getMensaje();
+            response.put ( "data", horarioClase.getMensaje() );
                 
             response.put("data", "Se elimino el horario");
         }
@@ -202,6 +213,10 @@ public class BO2_HorarioClase {
             
             Entidad horarioClase = FabricaEntidad.instanciaModificarHorarioClase(nombreclase,instructor,
                     fecha, dia, capacidad, hora_inicio,hora_fin);
+            ComandoModificarHorarioClase cmd = FabricaComando.instanciaCmdModificarHorarioClase(horarioClase);
+            cmd.ejecutar();
+            horarioClase = cmd.getMensaje();
+            response.put ( "data", horarioClase.getMensaje() );
             
             response.put("data", "Se modificó con éxito");
         }
