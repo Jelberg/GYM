@@ -45,7 +45,7 @@ public class PruebaComandoEliminarPeso {
         _st.executeQuery( _eliminarMedida );
         _dao.cerrarConexion( _conn );
     }
-    
+    @Ignore
     @Test
     public void pruebaEliminarMedida(){
         _comando = FabricaComando.instanciaCmdEliminarProgresoPeso(9999);
