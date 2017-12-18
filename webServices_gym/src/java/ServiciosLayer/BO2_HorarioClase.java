@@ -74,7 +74,7 @@ public class BO2_HorarioClase {
                                  @QueryParam("capacidad") int capacidad,
                                  @QueryParam("hora_inicio") Time hora_inicio,
                                  @QueryParam("hora_fin") Time hora_fin,
-                                 @QueryParam("status") char status,
+                                 @QueryParam("status") String status,
                                  @QueryParam("duracion") int duracion,
                                  @QueryParam("nombreclase") int nombreclase,
                                  @QueryParam("instructor") int instructor){
@@ -147,7 +147,7 @@ public class BO2_HorarioClase {
                 put("hora_fin", hora_fin );
             }});
             
-            Entidad horarioClase = FabricaEntidad.instanciaEliminarClase(nombreclase,instructor,
+            Entidad horarioClase = FabricaEntidad.instanciaEliminarHorarioClase(nombreclase,instructor,
                     fecha, dia, capacidad, hora_inicio,hora_fin);
                 
             response.put("data", "Se elimino el horario");
@@ -199,7 +199,7 @@ public class BO2_HorarioClase {
                 put("hora_fin", hora_fin );
             }});
             
-            Entidad horarioClase = FabricaEntidad.instanciaModificarClase(nombreclase,instructor,
+            Entidad horarioClase = FabricaEntidad.instanciaModificarHorarioClase(nombreclase,instructor,
                     fecha, dia, capacidad, hora_inicio,hora_fin);
             
             response.put("data", "Se modificó con éxito");

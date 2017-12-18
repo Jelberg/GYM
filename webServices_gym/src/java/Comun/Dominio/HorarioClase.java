@@ -25,7 +25,9 @@ public class HorarioClase extends Entidad {
     private int instructor;
     private String Descripcion;
 
-    public HorarioClase(int _id, Date _fecha, String _dia, int _capacidad, Time _horaInicio, Time _horaFin, String _status, int _duracion, int _nombreclase, int _instructor) {
+    public HorarioClase(int _id, Date _fecha, String _dia, int _capacidad, 
+            Time _horaInicio, Time _horaFin, String _status, int _duracion, 
+            int _nombreclase, int _instructor, String _descripcion) {
         this.id = _id;
         this.fecha = _fecha;
         this.dia = _dia;
@@ -36,21 +38,44 @@ public class HorarioClase extends Entidad {
         this.duracion = _duracion;
         this.nombreclase = _nombreclase;
         this.instructor = _instructor;
+        this.Descripcion = _descripcion;
     }
 
     public HorarioClase(){
+        super();
     }
 
     HorarioClase(String nombre, String descripcion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        super ();
+        this.nombreclase = nombreclase;
+        this.Descripcion = descripcion;
     }
 
-    HorarioClase(java.util.Date fecha, String dia, int capacidad, Time hora_inicio, Time hora_fin, char status, int duracion, int nombreclase, int instructor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    HorarioClase(java.util.Date fecha, String dia, int capacidad, 
+            Time hora_inicio, Time hora_fin, String status, int duracion, 
+            int nombreclase, int instructor) {
+       super ();
+       this.fecha = (Date) fecha;
+       this.dia = dia;
+       this.capacidad = capacidad;
+       this.horaInicio = horaInicio;
+       this.horaFin = horaFin;
+       this.status = status;
+       this.duracion = duracion;
+       this.nombreclase = nombreclase;
+       this.instructor = instructor;
     }
 
-    HorarioClase(int nombreclase, int instructor, Date fecha, String dia, int capacidad, Time hora_inicio, Time hora_fin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    HorarioClase(int nombreclase, int instructor, Date fecha, String dia, 
+            int capacidad, Time hora_inicio, Time hora_fin) {
+        super();
+        this.nombreclase = nombreclase;
+        this.instructor = instructor;
+        this.fecha = fecha;
+        this.dia = dia;
+        this.capacidad = capacidad;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
     }
 
     public int getId() {

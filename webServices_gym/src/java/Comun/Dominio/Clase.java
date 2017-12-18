@@ -41,11 +41,22 @@ public class Clase extends Entidad {
     }
 
     Clase(String nombre, String descripcion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        super();
+        this._nombre = _nombre;
+        this._descripcion = _descripcion;
     }
 
-    Clase(String nombre, String descripcion, String Instructor, java.util.Date fecha, java.util.Date horaInicio, java.util.Date horaFin, int capacidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    Clase(String nombre, String descripcion, String Instructor, 
+            java.util.Date fecha, java.util.Date horaInicio, 
+            java.util.Date horaFin, int capacidad) {
+        super();
+        this._nombre = _nombre;
+        this._descripcion = _descripcion;
+        this._Instructor = _Instructor;
+        this._fecha = _fecha;
+        this._horaInicio = _horaInicio;
+        this._horaFin = _horaFin;
+        this._capacidad = _capacidad;
     }
 
     public int getId() {
