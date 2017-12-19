@@ -1,16 +1,17 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/Instruct";
+var url="http://localhost:8080/webServices_gym/instructor";
+//var url="http://localhost:8080/ServiciosGimnasio/Instruct";
 var correo_busqueda= document.getElementById("correo");
 var x=0
 window.onload = function busquedainstructor()
 {
     variable=localStorage.getItem("id");
-    console.log(variable);
     if (variable)
         {
 
-            var url_comple="/getInstruct?correo="+variable;
+            var url_comple="/getInstructorPorCorreo?correo="+variable;
+            //var url_comple="/getInstruct?correo="+variable;
             fetch(url+url_comple)
             .then((respuesta) => 
             {            
@@ -27,7 +28,7 @@ window.onload = function busquedainstructor()
                     fila =respuesta[i];
                     for (var j = 0; j < ncampos; j++)
                     {
-                        if (j!=0)
+                        if (j!=6)
                         {
                             console.log(fila[campos[j]]);
                             switch(j) {
@@ -97,7 +98,7 @@ function insertarInstructor()
                     var intento=0
                     var res = document.getElementById("nombre").value.split(" ");
                     console.log(res[0]+res[1])
-                    var url_comple="/insertaInstruct?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
+                    var url_comple="/RegistrarInstructor?nombre="+res[0]+"&apellido="+res[1]+"&fecha="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
                     fetch(url+url_comple, {
                         method: 'POST'
                     })
@@ -167,6 +168,22 @@ function validarbusqueda()
     })
 }
 
+function ActivarInstructor()
+{
+    var url_comple="/ActivarInstructor?correo="+document.getElementById('correo').value;
+    fetch(url+url_comple, {
+        method: 'POST'
+    })
+}
+
+function InactivarInstructor()
+{
+    var url_comple="/InactivarInstructor?correo="+document.getElementById('correo').value;
+    fetch(url+url_comple, {
+        method: 'POST'
+    })
+}
+
 function actualizarInstructor()
 {
     var sex;
@@ -182,7 +199,7 @@ function actualizarInstructor()
                 var intento=0
                 var res = document.getElementById("nombre").value.split(" ");
                 console.log(res[0]+res[1])
-                var url_comple="/actualizaInstruct?nombre="+res[0]+"&apellido="+res[1]+"&fechanac="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
+                var url_comple="/ActualizarInstructor?nombre="+res[0]+"&apellido="+res[1]+"&fecha="+document.getElementById('fecha').value+"&sexo="+sex+"&correo="+document.getElementById('correo').value;
                 fetch(url+url_comple, {
                     method: 'POST'
                 })

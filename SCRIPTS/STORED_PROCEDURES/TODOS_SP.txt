@@ -1,4 +1,4 @@
---***************************************BOM02********************************************
+﻿--***************************************BOM02********************************************
 ------------------------------------------CLASE-------------------------------------------
 
 --------------Funci�n que devuelve la descripci�n de la clase consultada.
@@ -49,7 +49,7 @@ CREATE OR REPLACE FUNCTION bo_m02_modifica_clase(nombreclase character varying, 
    AS $$
 DECLARE
 BEGIN
-    UPDATE CLASE SET (CLA_NOMBRE = nombreclase, CLA_DESCRIPCION = descripcion)
+    UPDATE CLASE SET CLA_NOMBRE = nombreclase, CLA_DESCRIPCION = descripcion
     WHERE CLA_NOMBRE = nombreclase;
 END; $$
   LANGUAGE plpgsql;
@@ -118,9 +118,9 @@ CREATE OR REPLACE FUNCTION bo_m02_modifica_horario_clase(nombreclase int, instru
    AS $$
 DECLARE
 BEGIN
-    UPDATE HORARIO_CLASE SET (fk_clase=nombreclase and fk_instructor=instructor
+    UPDATE HORARIO_CLASE SET fk_clase=nombreclase and fk_instructor=instructor
 					and Hc_fecha=fecha and HC_dia=dia and HC_capacidad=capacidad
-					and HC_Hora_inicio=hora_inicio and HC_Hora_Fin=hora_fin)
+					and HC_Hora_inicio=hora_inicio and HC_Hora_Fin=hora_fin
     WHERE (fk_Clase = nombreclase and fk_Instructor = instructor);
 END; $$
   LANGUAGE plpgsql;
@@ -155,8 +155,8 @@ END; $$
 
 --------------------Funcion que inserta un entrenador--------------------
 
-CREATE OR REPLACE FUNCTION bo_m02_insertar_entrenador(nombre, apellido,
- fechanac, sexo, correo, historial)
+CREATE OR REPLACE FUNCTION bo_m02_insertar_entrenador(nombre character varying, apellido character varying,
+ fechanac character varying, sexo char, correo character varying, historial character varying)
 RETURNS VOID AS $$
 DECLARE 
 BEGIN 
@@ -177,7 +177,7 @@ CREATE OR REPLACE FUNCTION bo_m02_actualizar_entrenador(
     DECLARE
     BEGIN
         UPDATE entrenador
-        SET ent_nombre = nombre , ent_apellido = apellido, ent_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ent_sexo = sexo, ent_historial = historial;
+        SET ent_nombre = nombre , ent_apellido = apellido, ent_fecha_nac = to_date(fecha_nac,'dd/mm/yyyy'), ent_sexo = sexo, ent_historial = historial
  	where ent_correo = correo;
     END; $$
 LANGUAGE plpgsql;
@@ -195,7 +195,7 @@ LANGUAGE plpgsql;
 
 --------Este agrega un turno al entrenador---------------------------------
 
-CREATE OR REPLACE FUNCTION bo_m02_insertar_turno(id_entrenador in, id_turno int)
+CREATE OR REPLACE FUNCTION bo_m02_insertar_turno(id_entrenador int, id_turno int)
 RETURNS VOID AS $$
 DECLARE 
 BEGIN 
@@ -281,6 +281,240 @@ LANGUAGE plpgsql;
 
 -----------------------------------FIN INSTRUCTOR------------------------------------------
 
+
+******************************************FOM01*********************************
+
+-----------------------funcion para iniciar sesion retornando el id del usuario----------
+
+CREATE OR REPLACE FUNCTION fo_m01_iniciarsesion(usu character varying, password character varying)
+  RETURNS TABLE(id int, entrenador boolean)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT usu_id, usu_entrenador
+        FROM usuario
+        WHERE usu_usuario = usu and usu_password=password)
+   LOOP
+    id= var_r.usu_id;
+    entrenador = var_r.usu_entrenador;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--------------------------obtener usuario-----------
+
+
+  CREATE OR REPLACE FUNCTION fo_m01_getusuario(id2 int)
+  RETURNS TABLE(id int, usuario character varying, password character varying, nombre character varying, apellido character varying,
+ fechanac date, sexo char,correo character varying, estatura int, telefono character varying, entrenador boolean, codigo int )
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT usu_id, usu_nombre, usu_apellido, usu_fecha_nac, usu_sexo, usu_correo, usu_usuario, usu_password,
+                usu_telefono,usu_estatura,usu_entrenador,usu_codigo
+        FROM usuario
+        WHERE usu_id = id2)
+   LOOP
+    id= var_r.usu_id;
+    nombre = var_r.usu_nombre;
+    apellido = var_r.usu_apellido;
+    fechanac = var_r.usu_fecha_nac;
+    sexo = var_r.usu_sexo;
+    correo = var_r.usu_correo;
+    usuario = var_r.usu_usuario;
+    password = var_r.usu_password;
+    estatura = var_r.usu_estatura;
+    telefono = var_r.usu_telefono;
+    entrenador = var_r.usu_entrenador;
+    codigo = var_r.usu_codigo;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--------------------------obtener usuario por correo-----------
+
+
+  CREATE OR REPLACE FUNCTION fo_m01_getusuariocorreo(corre character varying)
+  RETURNS TABLE(id int, usuario character varying, password character varying, nombre character varying, apellido character varying,
+ fechanac date, sexo char,correo character varying, estatura int, telefono character varying, entrenador boolean, codigo int )
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT usu_id, usu_nombre, usu_apellido, usu_fecha_nac, usu_sexo, usu_correo, usu_usuario, usu_password,
+                usu_telefono,usu_estatura,usu_entrenador,usu_codigo
+        FROM usuario
+        WHERE usu_correo = corre)
+   LOOP
+    id= var_r.usu_id;
+    nombre = var_r.usu_nombre;
+    apellido = var_r.usu_apellido;
+    fechanac = var_r.usu_fecha_nac;
+    sexo = var_r.usu_sexo;
+    correo = var_r.usu_correo;
+    usuario = var_r.usu_usuario;
+    password = var_r.usu_password;
+    estatura = var_r.usu_estatura;
+    telefono = var_r.usu_telefono;
+    entrenador = var_r.usu_entrenador;
+    codigo = var_r.usu_codigo;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+-------- actualizar codigo para recuperar contrasena-----
+
+
+CREATE OR REPLACE FUNCTION fo_m01_update_codigo (
+    correo character varying,
+    cod int
+    )
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        UPDATE usuario
+        SET usu_codigo = cod
+ 	where usu_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
+-------- actualizar contrasena-----
+
+
+CREATE OR REPLACE FUNCTION fo_m01_update_pass (
+    correo character varying,
+    password character varying
+    )
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        UPDATE usuario
+        SET usu_password = password
+ 	where usu_correo = correo;
+    END; $$
+LANGUAGE plpgsql;
+
+-----------------------insertar usuario nuevo----------
+
+CREATE OR REPLACE FUNCTION fo_m01_inserta_usuario(
+    nombre character varying,
+    apellido character varying,
+    fecha_nac date, 
+    sexo char,
+    correo character varying,
+    usuario character varying,
+    password character varying,
+    estatura int,
+    telefono character varying,
+    entrenador boolean)
+	RETURNS void AS $$
+    DECLARE
+    BEGIN
+        INSERT INTO usuario(usu_nombre, usu_apellido,usu_fecha_nac, usu_sexo, usu_correo, usu_usuario, usu_password, usu_estatura, usu_telefono, usu_entrenador)
+        VALUES (INITCAP(nombre) , INITCAP(apellido),fecha_nac, sexo, correo, usuario, password, estatura, telefono, entrenador);
+    END; $$
+LANGUAGE plpgsql;
+
+ 
+----------------------------Función que elimina la cuenta de un usuario
+ 
+CREATE OR REPLACE FUNCTION fo_m01_elimina_usuario(corre character varying) 
+RETURNS VOID AS $$ 
+DECLARE  
+BEGIN  
+  DELETE FROM USUARIO WHERE USU_CORREO = corre; 
+END $$ 
+  LANGUAGE plpgsql; 
+ 
+---------------------------Función que modifica datos de un usuario
+ 
+CREATE OR REPLACE FUNCTION fo_m01_modifica_usuario(id int, usuar character varying,  
+    password character varying, nombre character varying, 
+    apellido character varying, sexo char,  
+    telefono character varying, estatura int, correo character varying,  
+    entrenador boolean, codigo int) 
+  RETURNS void 
+   AS $$ 
+DECLARE 
+BEGIN 
+    UPDATE USUARIO SET usu_usuario = usuar, usu_password = password,  
+    usu_nombre = nombre, usu_apellido = apellido, usu_sexo = sexo, 
+    usu_telefono = telefono, usu_estatura = estatura, 
+    usu_correo = correo, usu_entrenador = entrenador, usu_codigo = codigo 
+    WHERE USU_ID = id; 
+END; $$ 
+  LANGUAGE plpgsql; 
+ 
+
+--------------Función que devuelve la lista de amigos de un usuario.
+
+CREATE OR REPLACE FUNCTION fo_m01_get_usuario_amigo(id2 int)
+  RETURNS TABLE(id int, nombre character varying, apellido character varying, usuario character varying, correo character varying)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT u.usu_id, u.usu_nombre, u.usu_apellido, u.usu_usuario, u.usu_correo
+        FROM usuario as u inner join usuario_amigo as am on ami_amigo = usu_id
+        WHERE ami_usuario = id2 )
+   LOOP
+    id = var_r.usu_id;
+    nombre = var_r.usu_nombre;
+    apellido = var_r.usu_apellido;
+    usuario = var_r.usu_usuario;
+    correo = var_r.usu_correo;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+--------------Función que devuelve la lista de usuarios por nombre.
+
+CREATE OR REPLACE FUNCTION fo_m01_get_usuarioNA(nombre2 character varying, apellido2 character varying)
+  RETURNS TABLE(id int, nombre character varying, apellido character varying, usuario 	character varying)
+   AS $$
+DECLARE
+   var_r    record;
+BEGIN
+   FOR var_r IN(SELECT usu_nombre, usu_apellido, usu_usuario, usu_id
+        FROM usuario
+        WHERE usu_nombre = INITCAP(nombre2) and  usu_apellido = INITCAP(apellido2))
+   LOOP
+    nombre = var_r.usu_nombre;
+    apellido = var_r.usu_apellido;
+    usuario = var_r.usu_usuario;
+    id = var_r.usu_id;
+    RETURN NEXT;
+   END LOOP;
+END; $$
+  LANGUAGE plpgsql;
+
+----------------------------Función que agrega un amigo.
+
+CREATE OR REPLACE FUNCTION fo_m01_inserta_usuario_amigo(idUsuario int, idAmigo int)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	INSERT INTO USUARIO_AMIGO (ami_Usuario,ami_Amigo) VALUES ( idUsuario,idAmigo);
+END $$
+  LANGUAGE plpgsql;
+
+----------------------------Función que elimina un amigo.
+
+CREATE OR REPLACE FUNCTION fo_m01_elimina_usuario_amigo(idUsuario int, idAmigo int)
+RETURNS VOID AS $$
+DECLARE 
+BEGIN 
+	DELETE FROM USUARIO_AMIGO WHERE ami_usuario = idUsuario and ami_amigo = idAmigo;
+END $$
+  LANGUAGE plpgsql;
+
+****************************************FIN FOM01*******************************
 
 --********************************************FOM03*********************************************
 -------Funcion que trae todas las rutinas de un usuario dado el id de usuario
@@ -1015,13 +1249,14 @@ CREATE OR REPLACE FUNCTION fo_m06_get_reserva (usu_id int)
 	AS $$
 DECLARE
 	_reservas record;
-	FOR _reservas IN (SELECT * ent_nombre,res_fecha_ini,ent_fecha_fin from Entrenador,Reserva
+    Begin
+	FOR _reservas IN (SELECT ent_nombre,res_fecha_ini,ent_fecha_fin from Entrenador,Reserva
 			where ent_id=fk_entrenador and usu_id=fk_usuario)
 
 	loop
-		entrenador_nombre:=_reserva.ent_nombre;
-		fechai:=_reserva.ent_fecha_ini;
-		fechaf:=_reserva.ent_fecha_fin:
+		nombre_ent:=_reserva.ent_nombre;
+		fecha_ini:=_reserva.ent_fecha_ini;
+		fecha_fin:=_reserva.ent_fecha_fin;
 		return next;
 	end loop;
 	end $$
@@ -1029,19 +1264,19 @@ DECLARE
 
 -------Esta funcion permitira agregar una reserva-----------
 
-CREATE OR REPLACE fo_m06_agregar_reserva (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int)
+CREATE OR REPLACE FUNCTION fo_m06_agregar_reserva (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int)
 RETURNS VOID AS $$
 DECLARE
 BEGIN
-	INSERT INTO reserva(res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int) 
-			values (res_id integer,res_fecha_ini date,res_fecha_fin date,id_usuario int,id_entrenador int);
-	END $$;
+	INSERT INTO reserva(res_id,res_fecha_ini,res_fecha_fin,id_usuario,id_entrenador) 
+			values (res_id,res_fecha_ini,res_fecha_fin,id_usuario,id_entrenador);
+	END $$
 	LANGUAGE PLPGSQL;
 
 
 
 
-  --- BACKOFFICE M01----
+--- BACKOFFICE M01----
 ----------------------
 
 
@@ -1053,7 +1288,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_eliminar_equipo(
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE  
+    VOLATILE 
 AS $BODY$
 
     DECLARE
@@ -1076,7 +1311,6 @@ CREATE OR REPLACE FUNCTION public.bo_m01_eliminar_maquina(
 
     COST 100
     VOLATILE 
-     
 AS $BODY$
 
     DECLARE
@@ -1266,7 +1500,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_insertar_ejercicio(
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
 DECLARE 
@@ -1299,7 +1533,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_insertar_ejercicio_equipo(
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
 DECLARE
@@ -1340,7 +1574,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_insertar_ejercicio_maquina(
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
 DECLARE
@@ -1367,14 +1601,14 @@ ALTER FUNCTION public.bo_m01_insertar_ejercicio_maquina(character varying, chara
 
 ---- INSERTA EQUIPO
 
-CREATE OR REPLACE FUNCTION public.bo_m01_insertar_equipo(
+CREATE OR REPLACE FUNCTION public.bo_m01_agregar_equipo(
 	nombre character varying)
     RETURNS void
     LANGUAGE 'plpgsql'
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
 DECLARE 
@@ -1384,7 +1618,7 @@ BEGIN
 END 
 $BODY$;
 
-ALTER FUNCTION public.bo_m01_insertar_equipo(character varying)
+ALTER FUNCTION public.bo_m01_agregar_equipo(character varying)
     OWNER TO gymucab;
 
 
@@ -1398,7 +1632,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_insertar_maquina(
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
 DECLARE 
@@ -1413,7 +1647,7 @@ ALTER FUNCTION public.bo_m01_insertar_maquina(character varying)
 
 
 ---- MODIFICAR EQUIPO
-CREATE OR REPLACE FUNCTION public.bo_m01_modificar_equipo(
+CREATE OR REPLACE FUNCTION public.bo_m01_actualizar_equipo(
 	id integer,
 	nombre character varying)
     RETURNS void
@@ -1421,7 +1655,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_modificar_equipo(
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
     DECLARE
@@ -1430,11 +1664,12 @@ AS $BODY$
     END; 
 $BODY$;
 
-ALTER FUNCTION public.bo_m01_modificar_equipo(integer, character varying)
+ALTER FUNCTION public.bo_m01_actualizar_equipo(integer, character varying)
     OWNER TO gymucab;
 
 
 ---- MODIFICAR MAQUINA
+
 CREATE OR REPLACE FUNCTION public.bo_m01_modificar_maquina(
 	id integer,
 	nombre character varying)
@@ -1443,7 +1678,7 @@ CREATE OR REPLACE FUNCTION public.bo_m01_modificar_maquina(
 
     COST 100
     VOLATILE 
-     
+    --ROWS 0
 AS $BODY$
 
     DECLARE
@@ -1453,4 +1688,63 @@ AS $BODY$
 $BODY$;
 
 ALTER FUNCTION public.bo_m01_modificar_maquina(integer, character varying)
+    OWNER TO gymucab;
+	
+
+---- OBTENER TODOS LOS EQUIPOS
+
+CREATE OR REPLACE FUNCTION public.bo_m01_getallequipments()
+    RETURNS TABLE(id integer, nombre character varying) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+
+DECLARE
+   var_r    record;
+BEGIN 
+    FOR var_r IN(select equ_id, equ_nombre
+from 
+	equipo)
+   LOOP
+    id = var_r.equ_id;
+    nombre = var_r.equ_nombre;
+    RETURN NEXT;
+   END LOOP;        
+END; 
+
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_getallequipments()
+    OWNER TO gymucab;	
+	
+---- OBTENER EQUIPO
+
+CREATE OR REPLACE FUNCTION public.bo_m01_getequipo(nombreBuscado character varying)
+    RETURNS TABLE(id integer, nombre character varying) 
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+    ROWS 1000
+AS $BODY$
+
+DECLARE
+   var_r    record;
+BEGIN 
+    FOR var_r IN(select equ_id, equ_nombre
+from equipo
+where equ_nombre = nombreBuscado)
+   LOOP
+    id = var_r.equ_id;
+    nombre = var_r.equ_nombre;
+    RETURN NEXT;
+   END LOOP;        
+END; 
+
+$BODY$;
+
+ALTER FUNCTION public.bo_m01_getallequipments()
     OWNER TO gymucab;

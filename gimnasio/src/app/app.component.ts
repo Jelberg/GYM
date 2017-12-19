@@ -12,6 +12,7 @@ import { ReservasPage } from '../pages/FO_M05/reservas/reservas';
 import { AmigosPage } from '../pages/FO_M01/amigos/amigos';
 import { CrearusuarioPage } from '../pages/FO_M01/crearusuario/crearusuario';
 import { IniciarsesionPage } from '../pages/FO_M01/iniciarsesion/iniciarsesion';
+import { RecuperarPassPage } from '../pages/FO_M01/recuperar-pass/recuperar-pass';
 import { PerfilPage} from '../pages/FO_M01/perfil/perfil'
 import { ClasesParticipadasPage} from '../pages/FO_M05/clases-participadas/clases-participadas';
 import { ListaClasesPage} from '../pages/FO_M05/lista-clases/lista-clases';
@@ -38,11 +39,11 @@ export class MyApp {
       a la que se accedera desde el menu lateral */
     this.pages = [
       {titulo: "Inicio", component: HomePage, icon: "home"},
-      {titulo: "perfil", component: PerfilPage, icon: "person"},
-      {titulo: "amigos", component: AmigosPage, icon: "people"},
+      {titulo: "Perfil", component: PerfilPage, icon: "person"},
+      {titulo: "Amigos", component: AmigosPage, icon: "people"},
       {titulo: "Progreso", component: SeleccionarProgresoPage, icon: "stats"},
       {titulo: "Plan", component: WorkoutPlansPage, icon: "list"},
-      { titulo: "Rutinas", component: RutinaPage, icon: "body"},
+      {titulo: "Rutinas", component: RutinaPage, icon: "body"},
       {titulo: 'Clases',component: ListaClasesPage, icon: 'bicycle'},
      
       {titulo: 'Clases Participadas',component:ClasesParticipadasPage, icon: 'done-all'},

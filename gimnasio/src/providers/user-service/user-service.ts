@@ -14,7 +14,7 @@ import 'rxjs/add/operator/do';
 export class UserServiceProvider {
   private id: string;
 
-  private URL: string = "http://localhost:8080/ServiciosGimnasio/"
+  private URL: string = "http://localhost:8080/webServices_gym/"
   //private URL: string = "http://localhost:8080/web/"
  //private URL: string = "http://190.79.86.82:8080/web/"
 
@@ -34,6 +34,20 @@ export class UserServiceProvider {
     .map( this.datosMapa )
     .do( this.p ) 
   }
+  // FO_M01
+  postDato2 ( urlComplementaria: string ) {
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json' );
+    let options = new RequestOptions({ headers: headers });
+ 
+    let postParams = {
+      mansaje:"alo"
+    }
+    return this.http.post ( this.URL+urlComplementaria, (postParams), options )
+    .map( this.datosMapa )
+    .do( this.p ) 
+  }
+
   deleteDato ( urlComplementaria: string ){
     return this.http.delete( this.URL+urlComplementaria, null )
     .map( this.datosMapa )
