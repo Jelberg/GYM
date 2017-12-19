@@ -96,6 +96,14 @@ public class TestDaoClase {
          assertEquals(DescripcionModificada, "descripcion2");
          
     }
+    
+    @Test
+    public void TestConsultarDescripcion(){
+        _DaoClase.insertar(_clase);
+        _lista =  _DaoClase.consultarClases();
+        String Descripcion = _lista.get(_lista.size()-1).getDescripcion();
+        assertEquals(_clase.getDescripcion(), Descripcion);
+    }
             
     
     @Ignore
