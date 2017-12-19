@@ -58,9 +58,10 @@ public class Test_Dao {
         try{
             _conn = _daousuario.getConexion();
             _usuario = new Usuario("amarillo","laliq",64,"04245689190",2334,false,123,"Laura", "Quinones",parseFecha("14/09/1993"),"F", "lvqp.93@gmail.com");
-            _usuario1 = new Usuario("amarillo","laliq",64,"04245689190",2334,false,111,"Laura", "Quinones",parseFecha("14/09/1993"),"F", "lvqp.93@gmail.com");
-           _usuarioamigo = new Usuario_Amigo(123,111);
+            _usuario1 = new Usuario("amarillo","laliqui",63,"04245689191",2335,false,111,"Vanessaa", "Perez",parseFecha("14/09/1993"),"F", "lvq.93@gmail.com");
            _daousuario.Insertar(_usuario);  
+           _daousuario.Insertar(_usuario1);  
+           // _usuarioamigo = new Usuario_Amigo(123,111);
         }
         catch(Exception e){
             e.printStackTrace();
@@ -168,7 +169,7 @@ public class Test_Dao {
       
         @Test
       public void TestInsertarAmigo(){
-          _usuarioamigo = new Usuario_Amigo(123,111);
+         // _usuarioamigo = new Usuario_Amigo(123,111);
           _respuesta =  _daoamigo.insertaUsuario_Amigo(_usuarioamigo);
           assertEquals(_respuesta,"Se agregó el amigo");
        
