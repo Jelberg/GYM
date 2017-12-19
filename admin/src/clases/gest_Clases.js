@@ -1,12 +1,12 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/BOM02_Clase";
+var url="http://localhost:8080/build/BOM02_Clase";
 var correo_busqueda= document.getElementById("correo");
-
+var variable;
 window.onload = function busquedainstructor()
 {
     variable=localStorage.getItem("id");
-    console.log(variable);
+    //console.log(variable);
     if (variable)
         {
 
@@ -15,10 +15,10 @@ window.onload = function busquedainstructor()
             .then((respuesta) => 
             {            
                 return respuesta.json();
-            } ).then((respuesta) => 
+            }).then((respuesta) => 
             {
                 
-                var fila= respuesta[0];
+                var fila= respuesta;
                 var campos = Object.keys(fila);
                 var ncampos =campos.length;
                 var nregistros = respuesta.length;
@@ -58,7 +58,7 @@ function async(params){
 
 function llevaratabla()
 {
-    document.location.href="./Clases.html"
+    document.location.href="./clases.html"
     
 }
 
@@ -69,17 +69,18 @@ function buscarclase(nombre)
     .then((respuesta) => 
     {            
         return respuesta.json();
-    } ).then((respuesta) => 
+    }).then((respuesta) => 
     {
         
-        var fila= respuesta[0];
+        var fila= respuesta;
         console.log(fila)
         if (fila)
         {
         alert("Eliminado Correctamente")
         }
-        else
-        alert("No se encontro la clase")
+        else{
+        alert("No se encontro la clase");
+        }
     })
 }
 
@@ -93,7 +94,7 @@ function buscarclasemodi(nombre)
     } ).then((respuesta) => 
     {
         
-        var fila= respuesta[0];
+        var fila= respuesta;
         console.log(fila)
         if (fila)
         {
@@ -105,22 +106,20 @@ function buscarclasemodi(nombre)
 }
 function insertarClase()
 {
-    {
+    
         if ((document.getElementById("nombre").value) &&  (document.getElementById("descripcio").value))
                 {
                     var intento=0
                     var res = document.getElementById("nombre").value.split(" ");
-                    console.log(res[0]+res[1])
                     var url_comple="/insertaClase?nombre="+document.getElementById("nombre").value+"&descripcion="+document.getElementById("descripcio").value
                     fetch(url+url_comple, {
                         method: 'POST'
                     })
-                    .then(response =>{
-                        
-                        return response.json()
-                    }).then(response =>{
+                    .then((response) =>{
+                        return response.json();
+                    }).then((response) =>{
                         var fila= response;
-                        console.log(fila)
+                        //console.log(fila)
                         if(fila.error)
                         alert("Ya existe una clase con ese nombre")
                         else
@@ -132,7 +131,7 @@ function insertarClase()
 
         else
         alert("Debe Llenar todas las casillas")
-    }
+    
     
     
 }

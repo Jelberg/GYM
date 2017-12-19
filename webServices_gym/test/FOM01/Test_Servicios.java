@@ -190,9 +190,9 @@ public class Test_Servicios {
         _usuarioServicios = new FOM01_Usuario();
         _arrayUsu = new ArrayList<>();
         JsonParser parser = new JsonParser();
-        JsonObject obj = parser.parse(_usuarioServicios.modificaUsuario(1, "YessyHeer",
+        JsonObject obj = parser.parse(_usuarioServicios.modificaUsuario(1, "Yesi",
                 "hola", "Yesimar", "Hernández", "F", "04265121963", 173,
-                "yyhernandez.13@gmail.com", false, 0)).getAsJsonObject();
+                "ha@gmail.com", false, 0)).getAsJsonObject();
         assertEquals("Se actualizo el usuario", obj.get("id").getAsString());
     }
     //Fin Pruebas Usuario

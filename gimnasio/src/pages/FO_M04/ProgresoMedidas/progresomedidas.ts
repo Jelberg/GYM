@@ -84,7 +84,7 @@ export class ProgresoMedidasPage {
   ];
 
 
-  public lineChartLabels:Array<any> = ["Septiembre", "Octubre", "Noviembre", "Diciembre", "Enero"];
+  public lineChartLabels:Array<any> = ["Enero","Febrero","Marzo","Abril","Mayo"];
   
   public lineChartOptions:any = {
     responsive: true
@@ -99,7 +99,7 @@ export class ProgresoMedidasPage {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     },
-    { // dark grey
+    { // dark greyionic 
       backgroundColor: 'rgba(77,83,96,0.2)',
       borderColor: 'rgba(77,83,96,1)',
       pointBackgroundColor: 'rgba(77,83,96,1)',
