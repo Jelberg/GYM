@@ -1,6 +1,6 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js";
 type="text/javascript"; 
-var url="http://localhost:8080/ServiciosGimnasio/BOM02_Clase";
+var url="http://localhost:8080/build/BOM02_Clase";
 var busqueda= document.getElementById("clase_nombre");
 var boton= document.getElementById("consulta");
 var variable;
@@ -80,12 +80,13 @@ function buscarClase()
         } ).then((respuesta) => 
         {
         var contenido= "<link rel='stylesheet' href='../css/styles.css'><link rel='stylesheet' href='./style.css'><link rel='stylesheet' href='../css/font-awesome/css/font-awesome.min.css'><div class='row'><div class='content'><div class='w3-row' ><table class='table table-bordered table-striped'><thead ><tr style='border: 1px solid black; background-color: #008080;'>";
-        var fila= respuesta[0];
-        console.log(fila)
+        var fila= respuesta;
+        console.log(fila);
         if (fila)
         {
         
                 var campos = Object.keys(fila);
+                console.log(campos);
                 var ncampos =campos.length;
                 for (var i = 0; i < ncampos; i++)
                 {
@@ -98,12 +99,14 @@ function buscarClase()
                     }
                 }
                 contenido += "<th><font color ='white'>Acciones</font></th></tr></thead><tbody>"
-                var nregistros = respuesta.length;
+                var nregistros = 1;
+                console.log(nregistros);
                 for(var i = 0; i< nregistros; i++)
                     {
                        
-                        {
-                            fila =respuesta[i];
+                        
+                            fila =respuesta;
+                            console.log(fila)
                             contenido += "<tr>";
                             for (var j = 0; j < ncampos; j++)
                             {
@@ -117,7 +120,7 @@ function buscarClase()
                             contenido += "<td class='tcenter'><a><i class='fa fa-pencil-square-o' onClick='crud(this)' aria-hidden='true' ></i></a></td>";
                         
                             contenido += "</tr>";
-                        }
+                        
                     }
                     contenido += "</tbody></table></div></div></div>"
                     document.getElementById("tabla").innerHTML = contenido;
