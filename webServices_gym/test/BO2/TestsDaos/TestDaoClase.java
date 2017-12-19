@@ -30,6 +30,8 @@ public class TestDaoClase {
     @After
     public void LimpiarBdd(){
         _DaoClase.eliminar(_clase);
+        _clase.setNombre("prueba");
+        _clase.setDescripcion("descripcion");
     }
     
     @Test
@@ -48,21 +50,19 @@ public class TestDaoClase {
         assertEquals(TamañoInicial+1, TamañoFinal);
     }
     
-    @Ignore
     @Test
     public void TestInsertarClase(){
-        
         _DaoClase.insertar(_clase);
-        Entidad ent = _DaoClase.consultar(_clase);
-        Clase clase = ( Clase ) ent;
+        _lista =  _DaoClase.consultarClases();
         
         _DaoClase.eliminar(_clase);
-        
-        assertEquals (clase.getNombre(), _clase.getNombre());
+
+        String nombre = _lista.get(_lista.size()-1).getNombre();
+        assertEquals(nombre, _clase.getNombre());
     }
     
     @Test
-    public void EliminarClase(){
+    public void TestEliminarClase(){
         
         _lista = _DaoClase.consultarClases();
         int TamañoInicial = _lista.size();
@@ -82,4 +82,32 @@ public class TestDaoClase {
         
     }
     
+    @Test
+    public void TestModificarClase(){
+         _DaoClase.insertar(_clase);
+         
+         _clase.setDescripcion("descripcion2");
+         Entidad ent = ( Entidad ) _clase;
+         _DaoClase.modificar(ent);
+         
+         _lista =  _DaoClase.consultarClases();
+         String DescripcionModificada = _lista.get(_lista.size()-1).getDescripcion();
+         
+         assertEquals(DescripcionModificada, "descripcion2");
+         
+    }
+            
+    
+    @Ignore
+    @Test
+    public void TestConsultarClaseEspecifica(){
+        
+        _DaoClase.insertar(_clase);
+        Entidad ent = _DaoClase.consultar(_clase);
+        Clase clase = ( Clase ) ent;
+        
+        _DaoClase.eliminar(_clase);
+        
+        assertEquals (clase.getNombre(), _clase.getNombre());
+    }
 }
