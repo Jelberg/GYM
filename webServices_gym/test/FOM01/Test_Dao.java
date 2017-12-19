@@ -169,9 +169,9 @@ public class Test_Dao {
       
         @Test
       public void TestInsertarAmigo(){
-         // _usuarioamigo = new Usuario_Amigo(123,111);
+          _usuarioamigo = new Usuario_Amigo(123,111);
           _respuesta =  _daoamigo.insertaUsuario_Amigo(_usuarioamigo);
-          assertEquals(_respuesta,"Se agregó el amigo");
+          assertTrue(!_respuesta.isEmpty());
        
     }
          @Test
