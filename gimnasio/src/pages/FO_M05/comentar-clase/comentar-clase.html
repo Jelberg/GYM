@@ -24,14 +24,14 @@
       <ion-list>
           <ion-item>
             
-              <ion-range min="0" max="10" pin="true" [(ngModel)]="contrast" color="secondary">
+              <ion-range min="0" max="10" pin="true" [(ngModel)]="nuevaValoracion" color="secondary">
                 <ion-icon range-left small name="star-outline"></ion-icon>
                 <ion-icon range-right name="star-outline"></ion-icon>
               </ion-range>
             </ion-item>
             <ion-item>
               <ion-label floating>Comentario</ion-label>
-              <ion-input type="textarea" ></ion-input>
+              <ion-input type="textarea" name = "nuevoComentario" [(ngModel)]="nuevoComentario"></ion-input>
             </ion-item>
           
             <ion-item>

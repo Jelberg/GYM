@@ -19,6 +19,8 @@ import { UserServiceProvider } from '../../../providers/user-service/user-servic
 export class ComentarClasePage {
   _id : string;
   comentario : any []=[];
+  nuevoComentario : string;
+  nuevaValoracion : number;
   
   @ViewChild('NAV') nav:Nav;
   constructor(
@@ -44,7 +46,7 @@ export class ComentarClasePage {
       buttons: ['OK']
     });
     alert.present();
-
+    this.comentarClase();
     /* HAY QUE ROOTEARLO A LA PAGINA ANTERIOR */
   }
 
@@ -69,7 +71,10 @@ export class ComentarClasePage {
    */
   public comentarClase():void{
     //ARREGKAR LA CONSULTA
-    let url = "FOM05_Critica/insertarCritica?referencia="+this._id+"&comentario=&valoracion=";
+    console.log(this.nuevoComentario);
+    console.log(this.nuevaValoracion);
+    let url = "FOM05_Critica/insertarCritica?referencia="+this._id+"&comentario="+this.nuevoComentario+"&valoracion="+this.nuevaValoracion+"&idu=1";
+    console.log(url);
     this.userService.getDato(url).subscribe(data => {    
         let i: number = 0;
         while ( i < data.length ){
